@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ПроЗахист - магазин систем безпеки</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif; /* Применяем Open Sans для всего текста */
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient( to right, rgba(7, 7, 7, 0.95), rgba(148, 148, 148, 0.95));
+            padding: 0px;
+            color: white;
+            text-align: left;
+            z-index: 1000; /* Убедитесь, что шапка перекрывает остальной контент */
+            
+
+        }
+        .toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: 9999;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+        .container {
+            margin-top: 50px; /* Отступ для компенсации фиксированной шапки */
+        }
+        #main-banner {
+            background: url('fon4.jpg') no-repeat center;
+            background-size: cover;
+            height: 300px;
+            text-align: center;
+            color: white;
+            padding-top: 200px;
+            text-shadow: 2px 2px 4px #000;
+        }
+        #products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: space-around;
+        }
+        .product-item {
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            width: calc(16.5% - 10px);
+            box-sizing: border-box;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+        .product-item:hover {
+            transform: scale(1.02);
+        }
+        .product-item img {
+            width: 100%;
+            height: auto;
+        }
+        .product-price {
+            font-size: 1.2em;
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease; /* Плавное изменение размеров и цвета */
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        .cart {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 1100; /* Убедитесь, что это значение выше, чем у шапки */
+        }
+        .cart-content {
+            display: none;
+            position: fixed;
+            right: 20px;
+            top: 100px;
+            background-color: rgba(255, 255, 255, 0.9); /* черный цвет с 50% прозрачности */
+            color: black;
+            padding: 20px;
+            border-radius: 8px;
+            width: 350px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1100; /* Убедитесь, что значение выше, чем у шапки */
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .checkout-button, .cancel-button {
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            min-width: 100px;
+            text-align: center;
+        }
+        .checkout-button {
+            background-color: #4CAF50;
+        }
+        .cancel-button {
+            background-color: #f35363;
+        }
+        .checkout-button:hover {
+            background-color: #367c39;
+        }
+        .cancel-button:hover {
+            background-color: #d44150;
+        }
+        /* Стили для корзины и кнопок +, - */
+        .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        }
+        .quantity-control {
+        display: flex;
+        align-items: center;
+        }
+        .quantity-btn {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin: 0 5px;
+    }
+    .quantity-btn:hover {
+        background-color: #0056b3;
+    }
+    .quantity {
+        font-size: 18px;
+        padding: 0 10px;
+    }
+        /* Мобильная версия */
+        @media (max-width: 768px) {
+            #main-banner {
+                height: 200px;
+                padding-top: 100px;
+            }
+
+            #products {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .product-item {
+                width: 90%;
+            }
+
+            .cart {
+                top: 15px;
+                right: 10px;
+                padding: 8px;
+                font-size: 0.8em;
+            }
+
+            .cart-content {
+                width: 80%;
+                right: 5%;
+                top: 60px;
+            }
+
+            header h1 {
+                font-size: 1.0em;
+                padding: 10px;
+            }
+
+            .btn {
+                padding: 8px 16px;
+                font-size: 0.9em;
+            }
+
+            footer {
+                font-size: 0.9em;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1> ПроЗахист - охоронні системи </h1>
+</header>
+
+
+<section id="main-banner">
+    <h1>Відчуйте безпеку з ПроЗахист</h1>
+    <p>Ми пропонуємо надійні рішення для самостійного налаштування</p>
+</section>
+<div id="toast" class="toast"></div>
+<!-- Корзина -->
+<div class="cart" onclick="toggleCart()">🛒 Кошик (<span id="cart-count">0</span>)</div>
+<div class="cart-content" id="cart-content">
+    <h2>Мій кошик</h2>
+    <div id="cart-items"></div>
+    <p class="total-price">Сума: <span id="total-price">0</span> грн</p>
+    <p id="stock-warning" style="color:red; font-weight: bold;"></p> <!-- Здесь будет выводиться сообщение -->
+
+    <div class="button-row">
+        <a href="checkout.html" class="checkout-button">Оформити замовлення</a>
+        <button class="cancel-button" onclick="clearCart(); toggleCart()">Скасувати</button>
+    </div>
+</div>
+
+<div class="container">
+    <h2 style="text-align: center; margin-bottom: 40px; margin-top: 80px;"> Внутрішні Wi-Fi відеокамери</h2>
+    <section id="products">
+        <div class="product-item" onclick="openProductDetails('details1(IPC-TA22CP-G).html')">
+            <img src="images/IPC-TA22CP-G.png" alt="Відеокамера 1">
+            <h3>Поворотна камера IMOU IPC-TA22CP-G</h3>
+            <p>Поворотна PT камера, з функцією розумного відстеження</p>
+            <p class="product-price">1900.00 грн</p>
+            <button class="btn" onclick="addToCart(event, { id:'IPC-TA22CP-G', name: 'IPC-TA22CP-G', price: 1900 })">Додати у кошик</button>
+        </div>
+        <div class="product-item" onclick="openProductDetails('details2(IPC-C22EP-A).html')">
+            <img src="images/IPC-C22EP-A.png" alt="Відеокамера 2">
+            <h3>Внутрішня камера IMOU IPC-C22EP-A</h3>
+            <p>Компактна камера з двостороннім аудіозв'язком</p>
+            <p class="product-price">2090.00 грн</p>
+            <button class="btn" onclick="addToCart(event, { id:'IPC-C22EP-A', name: 'IPC-C22EP-A', price: 2090 })">Додати у кошик</button>
+        </div>
+        <div class="product-item" onclick="openProductDetails('details3(IPC-K2EP-3H1W).html')">
+            <img src="images/IPC-K2EP-3H1W.png" alt="Відеокамера 3">
+            <h3>Поворотна камера IMOU IPC-K2EP-3H1W</h3>
+            <p>Поворотна PT камера, з функцією розумного відстеження</p>
+            <p class="product-price">2100.00 грн</p>
+            <button class="btn" onclick="addToCart(event, { id:'IPC-K2EP-3H1W', name: 'IPC-K2EP-3H1W', price: 2100 })">Додати у кошик</button>
+        </div>
+        <div class="product-item" onclick="openProductDetails('details4(IPC-T22EP-C).html')">
+            <img src="images/IPC-T22EP-C.png" alt="Відеокамера 4">
+            <h3>Купольна камера IMOU IPC-T22EP-C</h3>
+            <p>Купольна Wi-Fi камера з мікрофоном</p>
+            <p class="product-price">2350.00 грн</p>
+            <button class="btn" onclick="addToCart(event, { id:'IPC-T22EP-C', name: 'IPC-T22EP-C', price: 2350 })">Додати у кошик</button>
+        </div>
+        <div class="product-item" onclick="openProductDetails('details5(IPC-K22P).html')">
+            <img src="images/IPC-K22P.png" alt="Відеокамера 5">
+            <h3>IP-камера IPC-K22P</h3>
+            <p>Wi-Fi камера вбудований мікрофон, вбудований динамік з виходами тривоги</p>
+            <p class="product-price">2795.00 грн</p>
+            <button class="btn" onclick="addToCart(event, {id:'IPC-K22P', name: 'IPC-K22P', price: 2795 })">Додати у кошик</button>
+        </div>
+        <div class="product-item" onclick="openProductDetails('details6(IPC-K2EP-5H2W).html')">
+            <img src="images/IPC-K2EP-5H2W.png" alt="Відеокамера 6">
+            <h3>Поворотна камера IMOU IPC-K2EP-5H2W</h3>
+            <p>Поворотна PT камера, з функцією розумного відстеження</p>
+            <p class="product-price">2795.00 грн</p>
+            <button class="btn" onclick="addToCart(event, {id:'IPC-K2EP-5H2W', name: 'IPC-K2EP-5H2W', price: 2795 })">Додати у кошик</button>
+        </div>
+        <h2 style="text-align: center; margin-bottom: 10px; margin-top: 60px;">Зовнішні Wi-Fi відеокамери</h2>
+        <section id="products">
+            <div class="product-item" onclick="openProductDetails('details1(Камера IMOU IPC-C22EP-A).html')">
+                <img src="IPC-C22EP-A.png" alt="Відеокамера 1">
+                <h3>Внутрішня Wi-Fi Камера IMOU IPC-C22EP-A</h3>
+                <p>Висока якість зображення, легке встановлення, доступна ціна</p>
+                <p class="product-price">2090.00 грн</p>
+                <button class="btn" onclick="addToCart(event, { name: 'Камера IMOU IPC-C22EP-A', price: 2090.00 })">Додати у кошик</button>
+            </div>
+            <div class="product-item" onclick="openProductDetails('details2.html')">
+                <img src="Ajax TurretCam w.png" alt="Відеокамера 2">
+                <h3>IP-камера AJAX</h3>
+                <p>Професійне обладнання для перегляду архіву та в реальному часі</p>
+                <p class="product-price">3000 грн</p>
+                <button class="btn" onclick="addToCart(event, { name: 'IP-камера AJAX', price: 3000 })">Додати у кошик</button>
+            </div>
+            <div class="product-item" onclick="openProductDetails('details3.html')">
+                <img src="Ajax TurretCam w.png" alt="Відеокамера 2">
+                <h3>IP-камера AJAX</h3>
+                <p>Професійне обладнання для перегляду архіву та в реальному часі</p>
+                <p class="product-price">3000 грн</p>
+                <button class="btn" onclick="addToCart(event, { name: 'IP-камера AJAX', price: 3000 })">Додати у кошик</button>
+            </div>
+            <div class="product-item" onclick="openProductDetails('details4.html')">
+                <img src="Ajax TurretCam w.png" alt="Відеокамера 2">
+                <h3>IP-камера AJAX</h3>
+                <p>Професійне обладнання для перегляду архіву та в реальному часі</p>
+                <p class="product-price">3000 грн</p>
+                <button class="btn" onclick="addToCart(event, { name: 'IP-камера AJAX', price: 3000 })">Додати у кошик</button>
+            </div>
+            <div class="product-item" onclick="openProductDetails('details5.html')">
+                <img src="Ajax TurretCam w.png" alt="Відеокамера 2">
+                <h3>IP-камера AJAX</h3>
+                <p>Професійне обладнання для перегляду архіву та в реальному часі</p>
+                <p class="product-price">3000 грн</p>
+                <button class="btn" onclick="addToCart(event, { name: 'IP-камера AJAX', price: 3000 })">Додати у кошик</button>
+            </div>
+            <div class="product-item" onclick="openProductDetails('details6.html')">
+                <img src="Ajax TurretCam w.png" alt="Відеокамера 2">
+                <h3>IP-камера AJAX</h3>
+                <p>Професійне обладнання для перегляду архіву та в реальному часі</p>
+                <p class="product-price">3000 грн</p>
+                <button class="btn" onclick="addToCart(event, { name: 'IP-камера AJAX', price: 3000 })">Додати у кошик</button>
+            </div>
+            <h2 style="text-align: center; margin-bottom: 40px;">Охоронна сигналізація для самостійного підключення</h2>
+    </section>
+</div>
+
+<footer>
+    <p>&copy; 2024 ПроЗахист. Всі права захищені.</p>
+</footer>
+
+<script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    updateCart();
+
+    function addToCart(event, item) {
+        event.stopPropagation();
+        const existingItem = cart.find(cartItem => cartItem.name === item.name);
+        
+        if (existingItem) {
+            existingItem.quantity++;
+        } else {
+            item.quantity = 1; // Добавляем свойство quantity при первом добавлении товара
+            cart.push(item);
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCart();
+        alert(`${item.name} додано до кошика!`);
+    }
+
+    function updateCart() {
+    const cartItems = document.getElementById('cart-items');
+    const totalPriceElement = document.getElementById('total-price');
+    const cartCountElement = document.getElementById('cart-count');
+    cartItems.innerHTML = '';
+    let total = 0;
+    let totalQuantity = 0; // Переменная для подсчета общего количества товаров
+
+    cart.forEach(item => {
+        total += item.price * item.quantity;
+        totalQuantity += item.quantity; // Добавляем количество каждого товара к общему количеству
+
+        const cartItem = document.createElement('div');
+        cartItem.classList.add('cart-item');
+        cartItem.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" style="width: 30px; height: auto; margin-right: 5px;">
+            <span>${item.name} - ${item.price} грн</span>
+            <div class="quantity-control">
+                <button class="quantity-btn" onclick="decreaseQuantity('${item.name}', event)">-</button>
+                <span class="quantity">${item.quantity}</span>
+                <button class="quantity-btn" onclick="increaseQuantity('${item.name}', event)">+</button>
+            </div>
+        `;
+        cartItems.appendChild(cartItem);
+    });
+
+    totalPriceElement.textContent = total;
+    cartCountElement.textContent = totalQuantity; // Обновляем элемент с общим количеством товаров
+
+    // Предупреждение, если товаров больше 10
+    const stockWarning = document.getElementById('stock-warning');
+    if (totalQuantity > 10) {
+        stockWarning.textContent = "Увага! Обмежена кількість товару в наявності!";
+    } else {
+        stockWarning.textContent = "";
+    }
+    }
+    function increaseQuantity(name, event) {
+        event.stopPropagation();  // Останавливаем всплытие события, чтобы корзина не закрылась
+        const item = cart.find(cartItem => cartItem.name === name);
+        if (item) {
+            item.quantity++;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCart();
+        }
+    }
+    function displayCartItems() {
+    const cartItemsContainer = document.getElementById('cart-items');
+    cartItemsContainer.innerHTML = '';
+    cart.forEach(item => {
+        const cartItem = document.createElement('div');
+        cartItem.classList.add('cart-item');
+        
+        // Добавляем мини-изображение перед названием
+        const imageElement = document.createElement('img');
+        imageElement.src = `images/${item.imageName}`; // Укажите путь к мини-изображению
+        imageElement.style.width = '8px'; // Настройте размер миниатюры
+        imageElement.style.height = 'auto';
+        imageElement.style.marginRight = '10px'; // Отступ от текста
+        
+        const itemInfo = document.createElement('span');
+        itemInfo.textContent = `${item.name} - ${item.price} грн x ${item.quantity}`;
+
+        cartItem.appendChild(imageElement);
+        cartItem.appendChild(itemInfo);
+        
+        cartItemsContainer.appendChild(cartItem);
+    });
+    }
+
+    function decreaseQuantity(name, event) {
+        event.stopPropagation();  // Останавливаем всплытие события, чтобы корзина не закрылась
+        const item = cart.find(cartItem => cartItem.name === name);
+        if (item) {
+            if (item.quantity > 1) {
+                item.quantity--;
+            } else {
+                cart = cart.filter(cartItem => cartItem.name !== name);
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCart();
+        }
+    }
+    // Функция для отображения всплывающего сообщения
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        
+        // Автоматически скрываем сообщение через 3 секунды
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+    function addToCart(event, item) {
+    event.stopPropagation();
+    const existingItem = cart.find(cartItem => cartItem.name === item.name);
+    
+    if (existingItem) {
+        existingItem.quantity++;
+    } else {
+        item.quantity = 1;
+        item.image = 'images/' + item.name + '.png'; // Указываем путь к изображению на основе имени товара
+        cart.push(item);
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCart();
+    showToast(`${item.name} додано до кошика!`); // Используем showToast вместо alert
+}
+function clearCart() {
+    cart = []; // Очищаем массив корзины
+    localStorage.removeItem('cart'); // Удаляем из localStorage
+    updateCart(); // Обновляем отображение корзины
+    showToast('Кошик очищено'); // Вызываем всплывающее сообщение с измененным текстом
+}
+    function toggleCart() {
+        const cartContent = document.getElementById('cart-content');
+        const isHidden = getComputedStyle(cartContent).display === 'none';
+        cartContent.style.display = isHidden ? 'block' : 'none';
+    }
+
+    function openProductDetails(pageUrl) {
+        window.location.href = pageUrl;
+    }
+
+    document.addEventListener('click', function(event) {
+        const cartContent = document.getElementById('cart-content');
+        const cartButton = document.querySelector('.cart');
+        if (!cartContent.contains(event.target) && !cartButton.contains(event.target)) {
+            cartContent.style.display = 'none';
+        }
+    });
+</script>
+</body>
+</html>
