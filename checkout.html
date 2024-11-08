@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформлення замовлення - ПроЗахист</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 33%;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .total-price {
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .submit-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1.1em;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Оформлення замовлення</h1>
+        
+        <h2>Ваше замовлення</h2>
+        <div id="cart-items"></div>
+        <p class="total-price">Загальна сума: <span id="total-price">0</span> грн</p>
+        
+        <h2>Контактні дані</h2>
+        <form id="checkout-form">
+            <div class="form-group">
+                <label for="name">Прізвище, Ім'я</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Телефон</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Місто та номер відділення "Нової Пошти"</label>
+                <textarea id="address" name="address" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="submit-button">Підтвердити замовлення</button>
+        </form>
+    </div>
+    
+    <script>
+    // Имитируем корзину из localStorage (если бы корзина сохранялась)
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let totalPrice = localStorage.getItem('totalPrice') || 0;
+    
+    // Функция для отображения заказа
+    function displayOrder() {
+        const orderItemsContainer = document.getElementById('cart-items');
+        const totalPriceElement = document.getElementById('total-price');
+        orderItemsContainer.innerHTML = '';
+        
+        let total = 0;
+        cart.forEach(item => {
+            total += item.price * item.quantity; // Суммируем стоимость с учетом количества
+            const itemElement = document.createElement('div');
+            itemElement.classList.add('cart-item');
+            itemElement.textContent = `${item.name} - ${item.price} грн x ${item.quantity}`;
+            orderItemsContainer.appendChild(itemElement);
+        });
+    
+        totalPriceElement.textContent = total; // Обновляем общую сумму
+    }
+    
+    // Функция для оформления заказа и отправки данных на сервер
+    function placeOrder(event) {
+        event.preventDefault(); // Останавливаем стандартное поведение формы
+    
+        // Собираем данные из формы
+        const name = document.getElementById("name").value;
+        const phone = document.getElementById("phone").value;
+        const address = document.getElementById("address").value;
+        const cart = localStorage.getItem('cart'); // Получаем корзину из localStorage
+    
+        // Отправляем данные на сервер
+        fetch('send_order.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&address=${encodeURIComponent(address)}&cart=${encodeURIComponent(cart)}`
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert('Ваше замовлення підтверджено! Дякуємо за покупку.');
+            localStorage.removeItem('cart'); // Очистить корзину после оформления
+            window.location.href = 'index.html'; // Перенаправление на главную страницу или страницу спасибо
+        })
+        .catch(error => {
+            alert('Произошла ошибка при отправке заказа.');
+        });
+    }
+    
+    // Обработка отправки формы
+    document.getElementById('checkout-form').addEventListener('submit', placeOrder);
+    
+    // Отображаем товары и сумму
+    displayOrder();
+    </script>
+    
+    </body>
+    </html>

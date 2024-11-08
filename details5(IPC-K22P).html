@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Деталі товару - 2Мп IP відеокамера Imou c Wi-Fi IPC-K22P (2.8мм)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 9999;
+        }
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            opacity: 0; /* Начальное значение для анимации */
+            animation: fadeIn 3.0s forwards; /* Плавное появление */
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        .product-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .product-image {
+            flex: 1;
+            cursor: pointer;
+        }
+        .product-image img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+        .product-info {
+            flex: 2;
+        }
+        .product-info h2 {
+            margin-top: 0;
+        }
+        .product-price {
+            font-size: 1.8em;
+            color: red;
+            margin: 10px 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px; /* Отступ сверху для кнопки */
+            text-align: center; /* Центрируем текст в кнопке */
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .product-description {
+        white-space: pre-line;
+        line-height: 1.4; /* Увеличивает расстояние между строками */
+        font-size: 1.0rem; /* Уменьшает размер текста */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="product-details">
+        <div class="product-image">
+            <img src="images/IPC-K22P.png" alt="IP-Камера IMOU" onclick="openModal('images/IPC-K22P.png')">
+        </div>
+        <div id="toast" class="toast"></div>
+        <div class="product-info">
+            <h2>Wi-Fi відеокамера Imou IPC-K22P</h2>
+            2 МП IP відеокамера з Wi-Fi модулем; Матриця: 1 / 2.7 "CMOS; Стиснення: H.265; Об'єктив f = 2.8мм (кут огляду 102 °); Запис: 2Мп - 25к / с; інтерфейси: micro SD слот до 256GB, вбудований мікрофон, вбудований динамік, тривога 1вх / 1вих; ІК підсвічування 10м; DC12В / 2.9Вт, ф79х91х128 мм
+            <p class="product-description"> 
+                
+                Характеристики: 
+
+Матриця	1 / 2.7 "CMOS
+Макс. роздільна здатність	1920х1080
+Тип підсвічування	ІК
+Дальність підсвічування	10 м
+Дальність PIR	10 м
+Тип об'єктива	фіксований
+Фокусна відстань	2.8 мм
+Апертура	F2.0
+Кути огляду	H: 102 °; V: 54 °; D: 120 °
+Відео компресія	H.265
+Підтримка роздільної здатності	1920х1080, 1280х960, 640х480
+Частота кадрів (головний потік)	25 к / c
+Метод зберігання	SD-карта до 256 Гб
+Програмне забезпечення	Imou, DMSS
+Мобільні платформи	iOS, Android
+Аудіо інтерфейси	Вбудований мікрофон, вбудований динамік
+Інтерфейси тривоги	1вх / 1вих
+Мережеві інтерфейси	RJ-45, Wi-Fi
+Локальна пам'ять	SD-карта до 256 Гб
+Кнопка скидання	є
+Живлення	DC 12В
+Потужність споживання	2.9 Вт
+Робоча температура	-10 ° C до + 45 ° C
+Розміри	79 х 91 х 128 мм
+Вага	170 г
+Матеріал	пластик
+Строк гарантії	12 міс.
+            </p>
+            <p class="product-price">2795.00 грн</p>
+            <button class="btn" onclick="addToCartFromProductPage({ id: 'IPC-K22P', name: 'IPC-K22P', price: 2795, image: 'images/IPC-K22P.png' })">Додати у кошик</button>
+        </div>
+    </div>
+</div>
+
+<div id="modal" class="modal" onclick="closeModal()">
+    <img id="modal-img" src=""/>
+</div>
+<script>
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => {
+    toast.classList.remove("show");
+    }, 3000); // Время отображения сообщения 3 секунды
+    }
+    
+    function addToCartFromProductPage(item) {
+    const existingItem = cart.find(cartItem => cartItem.id === item.id);
+
+    if (existingItem) {
+        existingItem.quantity++;
+    } else {
+        item.quantity = 1;
+        cart.push(item);
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    showToast(`${item.name} додано до кошика!`);
+}
+function openModal(imageSrc) {
+    document.getElementById("modal-img").src = imageSrc;
+    document.getElementById("modal").style.display = "flex";
+    }
+    
+    function closeModal() {
+    document.getElementById("modal").style.display = "none";
+    }
+    </script>
+</body>
+</html>
