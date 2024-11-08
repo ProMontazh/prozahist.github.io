@@ -66,34 +66,34 @@
             background-color: #45a049;
         }
 
-        /* Медиа-запрос для мобильных устройств */
         @media (max-width: 768px) {
-            .container {
-                width: 90%;
-                padding: 15px;
-            }
-            h1 {
-                font-size: 1.6em;
-            }
-            .cart-item {
-                flex-direction: column;
-                text-align: left;
-            }
-            .total-price {
-                font-size: 1.2em;
-                text-align: right; /* Загальная сума будет справа на мобильной версии */
-            }
-            .submit-button {
-                font-size: 1.4em;
-                padding: 8px;
-            }
+        .container {
+            width: 90%;
+            padding: 15px;
         }
+        h1 {
+            font-size: 1.5em;
+            font-weight: bold; /* Сделать текст жирным на мобильной версии */
+        }
+        .cart-item {
+            flex-direction: column;
+            text-align: left;
+        }
+        .total-price {
+            font-size: 1em;
+            text-align: right; /* Загальна сума будет справа на мобильной версии */
+        }
+        .submit-button {
+            font-size: 1em;
+            padding: 8px;
+        }
+    }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Оформлення замовлення:</h1>
+        <h1>Оформлення замовлення</h1>
         
         <h2>Ваше замовлення</h2>
         <div id="cart-items"></div>
