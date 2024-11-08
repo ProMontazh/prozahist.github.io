@@ -64,6 +64,27 @@
         }
         .submit-button:hover {
             background-color: #45a049;
+             /* Медиа-запрос для мобильных устройств */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                padding: 15px;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            .cart-item {
+                flex-direction: column;
+                text-align: left;
+            }
+            .total-price {
+                font-size: 1em;
+                text-align: center;
+            }
+            .submit-button {
+                font-size: 1em;
+                padding: 8px;
+            }
         }
     </style>
 </head>
