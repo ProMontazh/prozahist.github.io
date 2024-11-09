@@ -164,20 +164,22 @@
     }
 
     function addToCartFromProductPage(item) {
-        const existingItem = cart.find(cartItem => cartItem.id === item.id);
-
-        if (existingItem) {
-            existingItem.quantity++;
-        } else {
-            item.quantity = 1;
-            cart.push(item);
-        }
-
-        localStorage.setItem('cart', JSON.stringify(cart));
-        showToast(`${item.name} додано до кошика!`);
-        // Генерируем событие для обновления корзины на других страницах
-        window.dispatchEvent(new Event("storage"));
+    const existingItem = cart.find(cartItem => cartItem.id === item.id);
+    
+    if (existingItem) {
+        existingItem.quantity++;
+    } else {
+        item.quantity = 1;
+        cart.push(item);
     }
+    
+    localStorage.setItem("cart", JSON.stringify(cart));
+    showToast(`${item.name} додано до кошика!`);
+
+    // Генерируем событие для обновления корзины на других страницах
+    window.dispatchEvent(new Event("storage"));
+   }
+
 
     function openModal(imageSrc) {
         document.getElementById("modal-img").src = imageSrc;
