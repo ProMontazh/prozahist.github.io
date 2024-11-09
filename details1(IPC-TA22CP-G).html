@@ -190,6 +190,14 @@
         document.getElementById("modal").style.display = "none";
     }
     document.dispatchEvent(new CustomEvent('cartUpdated', { detail: updatedCart }));
+    let cartNeedsReload = true;
+
+function renderCart() {
+  if (cartNeedsReload) {
+    // Здесь можно обновить данные корзины
+    cartNeedsReload = false; // сбрасываем флаг после обновления
+  }
+}
 </script>
 </body>
 </html>
