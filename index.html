@@ -501,13 +501,13 @@
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCart();
     showToast(`${item.name} додано до кошика!`); // Используем showToast вместо alert
-}
-function clearCart() {
+    }
+    function clearCart() {
     cart = []; // Очищаем массив корзины
     localStorage.removeItem('cart'); // Удаляем из localStorage
     updateCart(); // Обновляем отображение корзины
     showToast('Кошик очищено'); // Вызываем всплывающее сообщение с измененным текстом
-}
+    }
     function toggleCart() {
         const cartContent = document.getElementById('cart-content');
         const isHidden = getComputedStyle(cartContent).display === 'none';
@@ -517,13 +517,22 @@ function clearCart() {
     function openProductDetails(pageUrl) {
         window.location.href = pageUrl;
     }
+    window.addEventListener("storage", (event) => {
+    if (event.key === "cart") {
+        updateCartDisplay(); // функция для обновления корзины на странице
+    }
+    });
 
+    function updateCartDisplay() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    // Здесь добавьте код для обновления корзины, например, обновление количества товаров или рендеринг корзины
+    }
     document.addEventListener('click', function(event) {
-        const cartContent = document.getElementById('cart-content');
-        const cartButton = document.querySelector('.cart');
-        if (!cartContent.contains(event.target) && !cartButton.contains(event.target)) {
-            cartContent.style.display = 'none';
-        }
+    const cartContent = document.getElementById('cart-content');
+    const cartButton = document.querySelector('.cart');
+    if (!cartContent.contains(event.target) && !cartButton.contains(event.target)) {
+    cartContent.style.display = 'none';
+    }
     });
 </script>
 </body>
