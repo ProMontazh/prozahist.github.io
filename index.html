@@ -534,6 +534,11 @@
     cartContent.style.display = 'none';
     }
     });
+    document.addEventListener('cartUpdated', (event) => {
+    const updatedCart = event.detail;
+    updateCartDisplay(updatedCart); // функция обновления корзины
+    });
+
 </script>
 </body>
 </html>
