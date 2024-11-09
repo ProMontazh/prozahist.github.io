@@ -175,6 +175,8 @@
 
         localStorage.setItem('cart', JSON.stringify(cart));
         showToast(`${item.name} додано до кошика!`);
+        // Генерируем событие для обновления корзины на других страницах
+        window.dispatchEvent(new Event("storage"));
     }
 
     function openModal(imageSrc) {
@@ -185,6 +187,7 @@
     function closeModal() {
         document.getElementById("modal").style.display = "none";
     }
+    
 </script>
 </body>
 </html>
