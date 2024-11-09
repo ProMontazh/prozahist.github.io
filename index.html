@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <title>ПроЗахист - магазин систем безпеки</title>
     <style>
         body {
+            font-family: 'Roboto', sans-serif;
             font-family: 'Open Sans', sans-serif; /* Применяем Open Sans для всего текста */
             margin: 0;
             padding: 0;
@@ -22,7 +24,7 @@
             color: white;
             text-align: left;
             z-index: 1000; /* Убедитесь, что шапка перекрывает остальной контент */
-            
+
 
         }
         .toast {
@@ -199,6 +201,7 @@
         /* Мобильная версия */
         @media (max-width: 768px){
             body {
+            font-family: 'Roboto', sans-serif;
             font-family: 'Open Sans', sans-serif; /* Применяем Open Sans для всего текста */
             }
             #main-banner {
@@ -373,20 +376,13 @@
 </footer>
 
 <script>
-   let cartNeedsReload = true;
-
-function renderCart() {
-  if (cartNeedsReload) {
-    // Здесь можно обновить данные корзины
-    cartNeedsReload = false; // сбрасываем флаг после обновления
-  }
-}
-
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    updateCart();
 
     function addToCart(event, item) {
         event.stopPropagation();
-        const existingItem = cart.find(cartItem => cartItem.id === item.id);
-        
+        const existingItem = cart.find(cartItem => cartItem.name === item.name);
+
         if (existingItem) {
             existingItem.quantity++;
         } else {
@@ -396,7 +392,7 @@ function renderCart() {
 
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCart();
-        alert(`${item.id} додано до кошика!`);
+        alert(`${item.name} додано до кошика!`);
     }
 
     function updateCart() {
@@ -451,20 +447,20 @@ function renderCart() {
     cart.forEach(item => {
         const cartItem = document.createElement('div');
         cartItem.classList.add('cart-item');
-        
+
         // Добавляем мини-изображение перед названием
         const imageElement = document.createElement('img');
         imageElement.src = `images/${item.imageName}`; // Укажите путь к мини-изображению
         imageElement.style.width = '8px'; // Настройте размер миниатюры
         imageElement.style.height = 'auto';
         imageElement.style.marginRight = '10px'; // Отступ от текста
-        
+
         const itemInfo = document.createElement('span');
         itemInfo.textContent = `${item.name} - ${item.price} грн x ${item.quantity}`;
 
         cartItem.appendChild(imageElement);
         cartItem.appendChild(itemInfo);
-        
+
         cartItemsContainer.appendChild(cartItem);
     });
     }
@@ -487,7 +483,7 @@ function renderCart() {
         const toast = document.getElementById('toast');
         toast.textContent = message;
         toast.classList.add('show');
-        
+
         // Автоматически скрываем сообщение через 3 секунды
         setTimeout(() => {
             toast.classList.remove('show');
@@ -495,8 +491,8 @@ function renderCart() {
     }
     function addToCart(event, item) {
     event.stopPropagation();
-    const existingItem = cart.find(cartItem => cartItem.name === item.id);
-    
+    const existingItem = cart.find(cartItem => cartItem.name === item.name);
+
     if (existingItem) {
         existingItem.quantity++;
     } else {
@@ -508,13 +504,13 @@ function renderCart() {
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCart();
     showToast(`${item.name} додано до кошика!`); // Используем showToast вместо alert
-    }
-    function clearCart() {
+}
+function clearCart() {
     cart = []; // Очищаем массив корзины
     localStorage.removeItem('cart'); // Удаляем из localStorage
     updateCart(); // Обновляем отображение корзины
     showToast('Кошик очищено'); // Вызываем всплывающее сообщение с измененным текстом
-    }
+}
     function toggleCart() {
         const cartContent = document.getElementById('cart-content');
         const isHidden = getComputedStyle(cartContent).display === 'none';
@@ -524,28 +520,14 @@ function renderCart() {
     function openProductDetails(pageUrl) {
         window.location.href = pageUrl;
     }
-    window.addEventListener("storage", (event) => {
-    if (event.key === "cart") {
-        updateCartDisplay(); // функция для обновления корзины на странице
-    }
-    });
 
-    function updateCartDisplay() {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    // Здесь добавьте код для обновления корзины, например, обновление количества товаров или рендеринг корзины
-    }
     document.addEventListener('click', function(event) {
-    const cartContent = document.getElementById('cart-content');
-    const cartButton = document.querySelector('.cart');
-    if (!cartContent.contains(event.target) && !cartButton.contains(event.target)) {
-    cartContent.style.display = 'none';
-    }
+        const cartContent = document.getElementById('cart-content');
+        const cartButton = document.querySelector('.cart');
+        if (!cartContent.contains(event.target) && !cartButton.contains(event.target)) {
+            cartContent.style.display = 'none';
+        }
     });
-    document.addEventListener('cartUpdated', (event) => {
-    const updatedCart = event.detail;
-    updateCartDisplay(updatedCart); // функция обновления корзины
-    });
-
 </script>
 </body>
 </html>
