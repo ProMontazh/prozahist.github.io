@@ -373,8 +373,15 @@
 </footer>
 
 <script>
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    updateCart();
+   let cartNeedsReload = true;
+
+function renderCart() {
+  if (cartNeedsReload) {
+    // Здесь можно обновить данные корзины
+    cartNeedsReload = false; // сбрасываем флаг после обновления
+  }
+}
+
 
     function addToCart(event, item) {
         event.stopPropagation();
