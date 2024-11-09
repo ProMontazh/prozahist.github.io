@@ -189,7 +189,7 @@
     function closeModal() {
         document.getElementById("modal").style.display = "none";
     }
-    
+    document.dispatchEvent(new CustomEvent('cartUpdated', { detail: updatedCart }));
 </script>
 </body>
 </html>
