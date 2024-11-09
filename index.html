@@ -389,7 +389,7 @@
 
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCart();
-        alert(`${item.name} додано до кошика!`);
+        alert(`${item.id} додано до кошика!`);
     }
 
     function updateCart() {
@@ -488,7 +488,7 @@
     }
     function addToCart(event, item) {
     event.stopPropagation();
-    const existingItem = cart.find(cartItem => cartItem.name === item.name);
+    const existingItem = cart.find(cartItem => cartItem.name === item.id);
     
     if (existingItem) {
         existingItem.quantity++;
