@@ -12,122 +12,117 @@
             padding: 0;
             background-color: #f4f4f4;
         }
+        
         .toast {
-    position: fixed;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 1.0em;
-    white-space: nowrap; /* Устанавливаем текст в одну строчку */        
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.5s;
-    z-index: 9999;
-    }
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 1.0em;
+            white-space: nowrap;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 9999;
+        }
+
         .toast.show {
             visibility: visible;
             opacity: 1;
         }
+
         .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
+            max-width: 100%;
             padding: 20px;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            opacity: 0; /* Начальное значение для анимации */
-            animation: fadeIn 3.0s forwards; /* Плавное появление */
+            opacity: 0;
+            animation: fadeIn 3.0s forwards;
         }
+
         @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
-        .product-details {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .product-image {
-            flex: 1;
-            cursor: pointer;
-        }
-        .product-image img {
-            width: 100%;
-            max-width: 400px;
-            height: auto;
-            transition: transform 0.3s ease;
-        }
-        .product-info {
-            flex: 2;
-        }
-        .product-info h2 {
+
+        .product-title {
+            text-align: center;
+            font-size: 2em;
             margin-top: 0;
         }
+
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 10px;
+            scroll-behavior: smooth;
+        }
+
+        .carousel img {
+            width: 100%;
+            max-width: 400px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .carousel img:hover {
+            transform: scale(1.05);
+        }
+
+        .product-description {
+            max-width: 100%;
+            margin-top: 20px;
+            font-size: 1.0rem;
+            line-height: 1.6;
+        }
+
         .product-price {
             font-size: 1.8em;
             color: red;
+            text-align: center;
             margin: 10px 0;
         }
+
         .btn {
-            display: inline-block;
+            display: block;
+            width: fit-content;
             padding: 10px 20px;
             background-color: #007bff;
             color: white;
             text-decoration: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 20px; /* Отступ сверху для кнопки */
-            text-align: center; /* Центрируем текст в кнопке */
+            margin: 20px auto;
+            text-align: center;
         }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .modal img {
-            max-width: 90%;
-            max-height: 90%;
-        }
+
         .btn:hover {
             background-color: #0056b3;
-        }
-        .product-description {
-        white-space: pre-line;
-        line-height: 1.4; /* Увеличивает расстояние между строками */
-        font-size: 1.0rem; /* Уменьшает размер текста */
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="product-details">
-        <div class="product-image">
-            <img src="images/IPC-TA22CP-G.png" alt="IP-Камера IMOU" onclick="openModal('images/IPC-TA22CP-G.png')">
-            <img src="images/IPC-TA22CP-G_1.png" alt="IP-Камера IMOU - вид сбоку" style="margin-top: 10px;" onclick="openModal('images/IPC-TA22CP-G_1.png')">
-        </div>
-        <div id="toast" class="toast"></div>
-        <div class="product-info">
-            <h2>Wi-Fi відеокамера Imou IPC-TA22CP-G</h2>
-            Завдяки 1080P Full HD-моніторингу в реальному часі та функціям панорамування 0~355° та нахилу -5~80° Ranger 2C гарантує, що кожен куточок вашого будинку повністю під контролем. Функція виявлення людей швидко знаходить цільові об'єкти на зображеннях і негайно надсилає повідомлення вам. Режим конфіденційності допомагає захистити ваше особисте життя, коли ви вдома, а функція розумного відстеження дозволяє камері стежити за об'єктами, коли вона виявляє рух.
-            <p class="product-description"> 
-                
-                Характеристики: 
+    <h2 class="product-title">Wi-Fi відеокамера Imou IPC-TA22CP-G</h2>
+    
+    <div class="carousel">
+        <img src="images/IPC-TA22CP-G.png" alt="IP-Камера IMOU" onclick="openModal('images/IPC-TA22CP-G.png')">
+        <img src="images/IPC-TA22CP-G_1.png" alt="IP-Камера IMOU - вид сбоку" onclick="openModal('images/IPC-TA22CP-G_1.png')">
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <div class="product-description">
+        Завдяки 1080P Full HD-моніторингу в реальному часі та функціям панорамування 0~355° та нахилу -5~80° Ranger 2C гарантує, що кожен куточок вашого будинку повністю під контролем. Функція виявлення людей швидко знаходить цільові об'єкти на зображеннях і негайно надсилає повідомлення вам. Режим конфіденційності допомагає захистити ваше особисте життя, коли ви вдома, а функція розумного відстеження дозволяє камері стежити за об'єктами, коли вона виявляє рух.
+        <br><br>
+        Характеристики:
 
                 Матриця	1/2.8” 2Мп CMOS
                 Регулювання по осях	поворот на 355 °, нахил -5 ~ 80 °
@@ -147,19 +142,17 @@
                 Розмір упаковки (Ш х В х Г)	90 x 95 x 185 мм
                 Вага брутто	0.4 кг
                 Строк гарантії	12 міс.
-            </p>
-            <p class="product-price">1900.00 грн</p>
-            <button class="btn" onclick="addToCartFromProductPage({ id: 'IPC-TA22CP-G', name: 'IPC-TA22CP-G', price: 1900, image: 'images/IPC-TA22CP-G.png' })">Додати у кошик</button>
+            </div>
 
-        </div>
-    </div>
+    <p class="product-price">1900.00 грн</p>
+    <button class="btn" onclick="addToCartFromProductPage({ id: 'IPC-TA22CP-G', name: 'IPC-TA22CP-G', price: 1900, image: 'images/IPC-TA22CP-G.png' })">Додати у кошик</button>
 </div>
 
 <div id="modal" class="modal" onclick="closeModal()">
     <img id="modal-img" src=""/>
 </div>
+
 <script>
-    // Получаем корзину из localStorage при загрузке
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     function showToast(message) {
@@ -168,23 +161,19 @@
         toast.classList.add("show");
         setTimeout(() => {
             toast.classList.remove("show");
-        }, 3000); // Время отображения сообщения 3 секунды
+        }, 3000);
     }
-    
+
     function addToCartFromProductPage(item) {
-        // Проверяем, существует ли товар в корзине по его id
         const existingItem = cart.find(cartItem => cartItem.id === item.id);
 
         if (existingItem) {
-            // Если товар уже есть, увеличиваем количество
             existingItem.quantity++;
         } else {
-            // Если товара нет, добавляем его в корзину с количеством 1
             item.quantity = 1;
             cart.push(item);
         }
 
-        // Сохраняем обновленную корзину в localStorage
         localStorage.setItem('cart', JSON.stringify(cart));
         showToast(`${item.name} додано до кошика!`);
     }
@@ -193,7 +182,7 @@
         document.getElementById("modal-img").src = imageSrc;
         document.getElementById("modal").style.display = "flex";
     }
-    
+
     function closeModal() {
         document.getElementById("modal").style.display = "none";
     }
