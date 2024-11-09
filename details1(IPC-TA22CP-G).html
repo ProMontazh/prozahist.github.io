@@ -12,10 +12,10 @@
             padding: 0;
             background-color: #f4f4f4;
         }
-        
+
         .toast {
             position: fixed;
-            top: 45%;
+            top: 20%;
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: rgba(0, 0, 0, 0.7);
@@ -110,8 +110,8 @@
 <body>
 
 <div class="container">
-    <h2 class="product-title">Відеокамера Imou IPC-TA22CP-G</h2>
-    
+    <h2 class="product-title">Wi-Fi відеокамера Imou IPC-TA22CP-G</h2>
+
     <div class="carousel">
         <img src="images/IPC-TA22CP-G.png" alt="IP-Камера IMOU" onclick="openModal('images/IPC-TA22CP-G.png')">
         <img src="images/IPC-TA22CP-G_1.png" alt="IP-Камера IMOU - вид сбоку" onclick="openModal('images/IPC-TA22CP-G_1.png')">
@@ -164,22 +164,18 @@
     }
 
     function addToCartFromProductPage(item) {
-    const existingItem = cart.find(cartItem => cartItem.id === item.id);
-    
-    if (existingItem) {
-        existingItem.quantity++;
-    } else {
-        item.quantity = 1;
-        cart.push(item);
+        const existingItem = cart.find(cartItem => cartItem.id === item.id);
+
+        if (existingItem) {
+            existingItem.quantity++;
+        } else {
+            item.quantity = 1;
+            cart.push(item);
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        showToast(`${item.name} додано до кошика!`);
     }
-    
-    localStorage.setItem("cart", JSON.stringify(cart));
-    showToast(`${item.name} додано до кошика!`);
-
-    // Генерируем событие для обновления корзины на других страницах
-    window.dispatchEvent(new Event("storage"));
-   }
-
 
     function openModal(imageSrc) {
         document.getElementById("modal-img").src = imageSrc;
@@ -189,9 +185,6 @@
     function closeModal() {
         document.getElementById("modal").style.display = "none";
     }
-    document.dispatchEvent(new CustomEvent('cartUpdated', { detail: updatedCart }));
-    let cartNeedsReload = true;
-
 </script>
 </body>
 </html>
