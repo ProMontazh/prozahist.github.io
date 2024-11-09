@@ -378,7 +378,7 @@
 
     function addToCart(event, item) {
         event.stopPropagation();
-        const existingItem = cart.find(cartItem => cartItem.name === item.name);
+        const existingItem = cart.find(cartItem => cartItem.id === item.id);
         
         if (existingItem) {
             existingItem.quantity++;
