@@ -231,14 +231,14 @@
                 right: 5%;
                 top: 60px;
             }
-            .cart-popup { /* мій кошик */
-            width: 95%; /* Увеличиваем ширину */
-            max-width: 95vw; /* Ограничиваем ширину относительно экрана */
-            padding: 20px; /* Дополнительный отступ */
-            /* Выровняем по центру */
-            margin-left: auto;
-            margin-right: auto;
-            }
+            .cart-popup {
+    width: 100vw; /* Занимает полную ширину экрана */
+    max-width: none; /* Снимаем ограничение ширины */
+    left: 0; /* Привязываем к левой стороне экрана */
+    right: 0; /* Привязываем к правой стороне экрана */
+    padding: 20px; /* Отступы внутри окна */
+    box-sizing: border-box; /* Учитываем padding в ширине */
+  }
             header h1 {
                 font-size: 1.0em;
                 padding: 10px;
