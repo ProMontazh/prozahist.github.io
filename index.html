@@ -237,15 +237,26 @@
                 align-items: center;
             }
 
-            .category-list {
-        flex-direction: column;
+            .category-list button {
+        width: 100%; /* Кнопки категорий также на всю ширину */
+        padding: 12px;
+        font-size: 1em;
+        box-sizing: border-box;
     }
-
+    .category-items {
+        width: 100%; /* Занимаем всю ширину экрана */
+        padding: 0 10px; /* Немного внутреннего отступа */
+    }
     .product-item {
-        width: 100%;
-        margin-bottom: 15px;
+        width: 100%; /* Занимаем всю ширину экрана */
+        margin-bottom: 20px; /* Добавляем отступ между элементами */
+        box-sizing: border-box; /* Учитываем padding в ширине */
     }
-        .cart {
+    .cart {
+        font-size: 12px;
+        padding: 5px;
+    }
+            .cart {
                 top: 15px;
                 right: 10px;
                 padding: 8px;
