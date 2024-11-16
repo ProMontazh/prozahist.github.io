@@ -89,18 +89,6 @@
             font-weight: bold;
             margin-top: 10px;
         }
-        .product-container {
-            display: none; /* Скрываем товар по умолчанию */
-            padding: 10px;
-            border: 1px solid #ccc;
-            margin-top: 10px;
-        }
-
-        .product-title {
-            cursor: pointer;
-            color: blue;
-            text-decoration: underline;
-        }
         .btn {
             display: inline-block;
             padding: 10px 20px;
@@ -542,13 +530,6 @@ function clearCart() {
         if (!cartContent.contains(event.target) && !cartButton.contains(event.target)) {
             cartContent.style.display = 'none';
         }
-        const title = document.querySelector('.product-title');
-        const productContainer = document.querySelector('.product-container');
-
-        title.addEventListener('click', () => {
-            const isVisible = productContainer.style.display === 'block';
-            productContainer.style.display = isVisible ? 'none' : 'block';
-            title.textContent = isVisible ? 'Показать товар' : 'Скрыть товар';
     });
 </script>
 </body>
