@@ -22,9 +22,10 @@
             color: white;
             text-align: left;
             z-index: 1000; /* Убедитесь, что шапка перекрывает остальной контент */
-
-
-        }
+       }
+        .hidden {
+    display: none;
+         }
         .toast {
     position: fixed;
     top: 45%;
@@ -282,7 +283,7 @@
 </div>
 
 <div class="container">
-    <h2 style="text-align: center; margin-bottom: 40px; margin-top: 80px;"> Внутрішні Wi-Fi відеокамери</h2>
+    <h2 class="hidden" style="text-align: center; margin-bottom: 40px; margin-top: 80px;">Внутрішні Wi-Fi відеокамери</h2>
     <section id="products">
         <div class="product-item" onclick="openProductDetails('details1(IPC-TA22CP-G).html')">
             <img src="images/IPC-TA22CP-G.png" alt="Відеокамера 1">
@@ -326,8 +327,9 @@
             <p class="product-price">2795.00 грн</p>
             <button class="btn" onclick="addToCart(event, {id:'IPC-K2EP-5H2W', name: 'IPC-K2EP-5H2W', price: 2795 })">Додати у кошик</button>
         </div>
-        <h2 style="text-align: center; margin-bottom: 10px; margin-top: 60px;">Зовнішні Wi-Fi відеокамери</h2>
-        <section id="products">
+         </section>
+         <h2 class="hidden" style="text-align: center; margin-bottom: 10px; margin-top: 60px;">Зовнішні Wi-Fi відеокамери</h2>
+    <section id="products">
             <div class="product-item" onclick="openProductDetails('details1(Камера IMOU IPC-C22EP-A).html')">
                 <img src="IPC-C22EP-A.png" alt="Відеокамера 1">
                 <h3>Внутрішня Wi-Fi Камера IMOU IPC-C22EP-A</h3>
@@ -370,7 +372,9 @@
                 <p class="product-price">3000 грн</p>
                 <button class="btn" onclick="addToCart(event, { name: 'IP-камера AJAX', price: 3000 })">Додати у кошик</button>
             </div>
-            <h2 style="text-align: center; margin-bottom: 40px;">Охоронна сигналізація для самостійного підключення</h2>
+         </section>
+            <h2 class="hidden" style="text-align: center; margin-bottom: 40px; margin-top: 80px;">Охоронна сигналізація для самостійного підключення</h2>
+    <section id="products">
     </section>
 </div>
 
@@ -530,6 +534,15 @@ function clearCart() {
         if (!cartContent.contains(event.target) && !cartButton.contains(event.target)) {
             cartContent.style.display = 'none';
         }
+        function showHeading(selector) {
+    const heading = document.querySelector(selector);
+    if (heading) {
+        heading.classList.remove('hidden');
+    }
+}
+
+// Пример: показать заголовок "Внутрішні Wi-Fi відеокамери"
+showHeading('h2:nth-of-type(1)');
     });
 </script>
 </body>
