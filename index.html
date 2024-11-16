@@ -237,10 +237,19 @@
                 align-items: center;
             }
 
-            .product-item {
-                width: 90%;
-            }
+            .category-list {
+        flex-direction: column;
+    }
 
+    .product-item {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .cart {
+        font-size: 12px;
+        padding: 5px;
+    }
             .cart {
                 top: 15px;
                 right: 10px;
@@ -563,12 +572,23 @@ function clearCart() {
         window.location.href = pageUrl;
     }
 
-    document.addEventListener('click', function(event) {
-        const cartContent = document.getElementById('cart-content');
-        const cartButton = document.querySelector('.cart');
-        if (!cartContent.contains(event.target) && !cartButton.contains(event.target)) {
-            cartContent.style.display = 'none';
-        }
+    document.addEventListener("DOMContentLoaded", () => {
+        const buttons = document.querySelectorAll(".category");
+        const categories = document.querySelectorAll(".category-items");
+
+        buttons.forEach(button => {
+            button.addEventListener("click", () => {
+                const category = button.dataset.category;
+                
+                categories.forEach(item => {
+                    if (item.id === category) {
+                        item.style.display = "block";
+                    } else {
+                        item.style.display = "none";
+                    }
+                });
+            });
+        });
     });
     document.querySelectorAll('.category').forEach(button => {
   button.addEventListener('click', function() {
