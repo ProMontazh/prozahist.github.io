@@ -199,6 +199,23 @@
         font-size: 18px;
         padding: 0 10px;
     }
+        .category-items {
+    display: none; /* Скрываем все категории по умолчанию */
+}
+
+.category-list button {
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.product-item {
+    margin-bottom: 20px;
+}
+
+.hidden {
+    display: none; /* Класс для скрытия товаров */
+}
         /* Мобильная версия */
         @media (max-width: 768px){
             body {
@@ -282,8 +299,17 @@
 </div>
 
 <div class="container">
-    <h2 style="text-align: center; margin-bottom: 40px; margin-top: 80px;"> Внутрішні Wi-Fi відеокамери</h2>
+    <h2 style="text-align: center; margin-bottom: 40px; margin-top: 80px;"> Виберіть категорію</h2>
+    <!-- Секция категорий -->
+    <div class="category-list">
+        <button class="category" data-category="wifi-indoor-cameras">Внутрішні Wi-Fi відеокамери</button>
+        <button class="category" data-category="wifi-outdoor-cameras">Зовнішні Wi-Fi відеокамери</button>
+        <button class="category" data-category="alarm-systems">Охоронна сигналізація</button>
+    </div>
+     <!-- Секция для товаров -->
     <section id="products">
+        <!-- Внутрішні Wi-Fi відеокамери -->
+        <div class="category-items" id="wifi-indoor-cameras">
         <div class="product-item" onclick="openProductDetails('details1(IPC-TA22CP-G).html')">
             <img src="images/IPC-TA22CP-G.png" alt="Відеокамера 1">
             <h3>Поворотна камера IMOU IPC-TA22CP-G</h3>
@@ -326,7 +352,8 @@
             <p class="product-price">2795.00 грн</p>
             <button class="btn" onclick="addToCart(event, {id:'IPC-K2EP-5H2W', name: 'IPC-K2EP-5H2W', price: 2795 })">Додати у кошик</button>
         </div>
-        <h2 style="text-align: center; margin-bottom: 10px; margin-top: 60px;">Зовнішні Wi-Fi відеокамери</h2>
+        <!-- Зовнішні Wi-Fi відеокамери -->
+        <div class="category-items" id="wifi-outdoor-cameras">
         <section id="products">
             <div class="product-item" onclick="openProductDetails('details1(Камера IMOU IPC-C22EP-A).html')">
                 <img src="IPC-C22EP-A.png" alt="Відеокамера 1">
@@ -370,7 +397,7 @@
                 <p class="product-price">3000 грн</p>
                 <button class="btn" onclick="addToCart(event, { name: 'IP-камера AJAX', price: 3000 })">Додати у кошик</button>
             </div>
-            <h2 style="text-align: center; margin-bottom: 40px;">Охоронна сигналізація для самостійного підключення</h2>
+            <div class="category-items" id="alarm-systems">
     </section>
 </div>
 
@@ -530,6 +557,22 @@ function clearCart() {
         if (!cartContent.contains(event.target) && !cartButton.contains(event.target)) {
             cartContent.style.display = 'none';
         }
+        document.querySelectorAll('.category').forEach(button => {
+  button.addEventListener('click', function() {
+    const category = this.getAttribute('data-category');
+    
+    // Скрыть все категории
+    document.querySelectorAll('.category-items').forEach(section => {
+      section.style.display = 'none'; // скрыть все категории
+    });
+
+    // Показать выбранную категорию
+    document.getElementById(category).style.display = 'block';
+  });
+});
+
+// По умолчанию показываем первую категорию
+document.querySelector('.category').click();
     });
 </script>
 </body>
