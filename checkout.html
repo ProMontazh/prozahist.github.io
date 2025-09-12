@@ -107,7 +107,7 @@ document.getElementById('checkout-form').addEventListener('submit', function(e){
         headers: { 'Accept': 'application/json' }
     }).then(response => {
         if (response.ok) {
-            showToast('Ваше замовлення підтверджено!');
+            showToast('Ваше замовлення підтверджено! Дякуемо!');
             localStorage.removeItem('cart');
             displayOrder();
             form.reset();
@@ -138,4 +138,5 @@ function showToast(message) {
 
 </body>
 </html>
+
 
