@@ -44,7 +44,7 @@
             display: block;
             font-weight: bold;
         }
-        .form-group input, .form-group textarea {
+        .form-group input {
             width: 100%;
             padding: 8px;
             margin-top: 5px;
@@ -68,27 +68,27 @@
         }
 
         @media (max-width: 768px) {
-        .container {
-            width: 90%;
-            padding: 15px;
+            .container {
+                width: 90%;
+                padding: 15px;
+            }
+            h1 {
+                font-size: 1.6em;
+                font-weight: bold;
+            }
+            .cart-item {
+                flex-direction: column;
+                text-align: left;
+            }
+            .total-price {
+                font-size: 1.1em;
+                text-align: right;
+            }
+            .submit-button {
+                font-size: 1.5em;
+                padding: 8px;
+            }
         }
-        h1 {
-            font-size: 1.6em;
-            font-weight: bold; /* Сделать текст жирным на мобильной версии */
-        }
-        .cart-item {
-            flex-direction: column;
-            text-align: left;
-        }
-        .total-price {
-            font-size: 1.1em;
-            text-align: right; /* Загальна сума будет справа на мобильной версии */
-        }
-        .submit-button {
-            font-size: 1.5em;
-            padding: 8px;
-        }
-    }
     </style>
 </head>
 <body>
@@ -111,23 +111,20 @@
                 <input type="tel" id="phone" name="phone" required>
            </div>
            <div class="form-group">
-           <label for="city">Місто</label>
-           <input type="text" id="city" name="city" required>
+               <label for="city">Місто</label>
+               <input type="text" id="city" name="city" required>
            </div>
            <div class="form-group">
-           <label for="branch">Номер відділення "Нової Пошти"</label>
-           <input type="text" id="branch" name="branch" required>
+               <label for="branch">Номер відділення "Нової Пошти"</label>
+               <input type="text" id="branch" name="branch" required>
            </div>
             <button type="submit" class="submit-button">Підтвердити замовлення</button>
         </form>
     </div>
     
     <script>
-    // Имитируем корзину из localStorage (если бы корзина сохранялась)
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let totalPrice = localStorage.getItem('totalPrice') || 0;
     
-    // Функция для отображения заказа
     function displayOrder() {
         const orderItemsContainer = document.getElementById('cart-items');
         const totalPriceElement = document.getElementById('total-price');
@@ -135,53 +132,48 @@
         
         let total = 0;
         cart.forEach(item => {
-            total += item.price * item.quantity; // Суммируем стоимость с учетом количества
+            total += item.price * item.quantity;
             const itemElement = document.createElement('div');
             itemElement.classList.add('cart-item');
             itemElement.textContent = `${item.name} - ${item.price} грн x ${item.quantity}`;
             orderItemsContainer.appendChild(itemElement);
         });
     
-        totalPriceElement.textContent = total; // Обновляем общую сумму
+        totalPriceElement.textContent = total;
     }
     
-    // Функция для оформления заказа и отправки данных на сервер
     function placeOrder(event) {
-        event.preventDefault(); // Останавливаем стандартное поведение формы
+        event.preventDefault();
     
-        // Собираем данные из формы
         const name = document.getElementById("name").value;
         const phone = document.getElementById("phone").value;
-        const address = document.getElementById("address").value;
-        const cart = localStorage.getItem('cart'); // Получаем корзину из localStorage
+        const city = document.getElementById("city").value;
+        const branch = document.getElementById("branch").value;
+        const cartData = localStorage.getItem('cart');
     
-        // Отправляем данные на сервер
         fetch('send_order.php', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: `name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&address=${encodeURIComponent(address)}&cart=${encodeURIComponent(cart)}`
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&city=${encodeURIComponent(city)}&branch=${encodeURIComponent(branch)}&cart=${encodeURIComponent(cartData)}`
         })
         .then(response => response.text())
         .then(data => {
-            alert('Ваше замовлення підтверджено! Дякуємо за покупку.');
-            localStorage.removeItem('cart'); // Очистить корзину после оформления
-            window.location.href = 'index.html'; // Перенаправление на главную страницу или страницу спасибо
+            if (data.trim() === "success") {
+                alert('Ваше замовлення підтверджено! Дякуємо за покупку.');
+                localStorage.removeItem('cart');
+                window.location.href = 'index.html';
+            } else {
+                alert('Сталася помилка при відправці замовлення.');
+            }
         })
         .catch(error => {
-            alert('Произошла ошибка при отправке заказа.');
+            alert('Помилка з’єднання із сервером.');
         });
     }
     
-    // Обработка отправки формы
     document.getElementById('checkout-form').addEventListener('submit', placeOrder);
-    
-    // Отображаем товары и сумму
     displayOrder();
     </script>
     
 </body>
 </html>
-
-
