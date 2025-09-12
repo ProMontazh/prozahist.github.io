@@ -17,26 +17,33 @@ h1 { text-align:center; }
 .submit-button { width:100%; padding:10px; background:#4CAF50; color:#fff; font-size:1.1em; font-weight:bold; border:none; border-radius:5px; cursor:pointer; }
 .submit-button:hover { background:#45a049; }
 
-/* Полупрозрачный оверлей */
+/* Оверлей и сообщение */
 .toast-overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5); /* просвечивающий фон */
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
+  position: fixed;
+  top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.4);
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  opacity:0;
+  visibility:hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  z-index:10000;
 }
+
+.toast-overlay.show {
+  opacity:1;
+  visibility:visible;
+}
+
 .toast-message {
-    background: #4CAF50;
-    color: #fff;
-    padding: 20px 30px;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 1.3em;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  background:#4CAF50;
+  color:#fff;
+  padding:20px 40px;
+  border-radius:8px;
+  font-size:1.5em;
+  text-align:center;
+  font-weight:bold;
 }
 
 @media(max-width:768px) {
@@ -73,16 +80,13 @@ h1 { text-align:center; }
         </div>
         <div class="form-group">
             <label for="branch">Номер відділення "Нової Пошти"</label>
-            <input type="tel" id="branch" name="branch" required pattern="[0-9]*" inputmode="numeric">
+            <input type="tel" id="branch" name="branch" required placeholder="000">
         </div>
-        <!-- Скрытое поле для корзины -->
         <input type="hidden" id="cart-data" name="cart">
-        
         <button type="submit" class="submit-button">Підтвердити замовлення</button>
     </form>
 </div>
 
-<!-- Оверлей с сообщением -->
 <div class="toast-overlay" id="toast">
     <div class="toast-message">Ваше замовлення підтверджено! Дякуємо!</div>
 </div>
@@ -102,13 +106,11 @@ function displayOrder() {
         const subtotal = item.price * item.quantity;
         total += subtotal;
 
-        // Вывод на страницу
         const itemElement = document.createElement('div');
         itemElement.classList.add('cart-item');
         itemElement.textContent = `${item.name} — ${item.price} грн × ${item.quantity} = ${subtotal} грн`;
         orderItemsContainer.appendChild(itemElement);
 
-        // Для письма
         cartText += `${item.name} — ${item.price} грн × ${item.quantity} = ${subtotal} грн\n`;
     });
 
@@ -118,45 +120,51 @@ function displayOrder() {
 
 displayOrder();
 
+// Авто-переход между полями при Enter
+const formFields = ['name','phone','city','branch'];
+formFields.forEach((id,index)=>{
+    const field = document.getElementById(id);
+    field.addEventListener('keydown', function(e){
+        if(e.key==="Enter"){
+            e.preventDefault();
+            const nextField = formFields[index+1];
+            if(nextField) document.getElementById(nextField).focus();
+        }
+    });
+});
+
 // Отправка формы через fetch
 document.getElementById('checkout-form').addEventListener('submit', function(e){
     e.preventDefault();
-
     const form = e.target;
     const data = new FormData(form);
 
     fetch(form.action, {
         method: form.method,
         body: data,
-        headers: { 'Accept': 'application/json' }
-    }).then(response => {
-        if (response.ok) {
-            showToast('Ваше замовлення підтверджено! Дякуємо!');
+        headers: {'Accept':'application/json'}
+    }).then(response=>{
+        if(response.ok){
+            showToast();
             localStorage.removeItem('cart');
             displayOrder();
             form.reset();
-
-            // Автоперенаправление через 3 секунды
-            setTimeout(() => {
-                window.location.href = "index.html";
-            }, 3000);
-        } else {
-            response.json().then(data => {
-                alert(data["error"] || "Сталася помилка при відправці замовлення.");
+            setTimeout(()=>{ window.location.href="index.html"; },3000);
+        }else{
+            response.json().then(data=>{
+                alert(data.error || "Сталася помилка при відправці замовлення.");
             });
         }
-    }).catch(error => {
+    }).catch(error=>{
         alert("Помилка з’єднання із сервером.");
     });
 });
 
-// Функция показа оверлея с сообщением
-function showToast(message) {
+// Плавное появление сообщения
+function showToast(){
     const toast = document.getElementById('toast');
-    const msgBox = toast.querySelector('.toast-message');
-    msgBox.textContent = message;
-    toast.style.display = 'flex';
-    setTimeout(() => { toast.style.display = 'none'; }, 2500);
+    toast.classList.add('show');
+    setTimeout(()=>{ toast.classList.remove('show'); }, 2500);
 }
 </script>
 
