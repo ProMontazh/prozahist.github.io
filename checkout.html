@@ -111,6 +111,12 @@ document.getElementById('checkout-form').addEventListener('submit', function(e){
             localStorage.removeItem('cart');
             displayOrder();
             form.reset();
+
+            // ⏳ Автоматический редирект через 3 секунды
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 3000);
+
         } else {
             response.json().then(data => {
                 alert(data["error"] || "Сталася помилка при відправці замовлення.");
