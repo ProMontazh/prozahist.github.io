@@ -1,179 +1,140 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <title>Оформлення замовлення - ПроЗахист</title>
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .container {
-            width: 33%;
-            margin: auto;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-        h1 {
-            text-align: center;
-        }
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            margin: 15px 0;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-        .total-price {
-            font-size: 1.2em;
-            font-weight: bold;
-            text-align: right;
-            margin-top: 10px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            font-weight: bold;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            box-sizing: border-box;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .submit-button {
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            font-size: 1.1em;
-            font-weight: bold;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .submit-button:hover {
-            background-color: #45a049;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                width: 90%;
-                padding: 15px;
-            }
-            h1 {
-                font-size: 1.6em;
-                font-weight: bold;
-            }
-            .cart-item {
-                flex-direction: column;
-                text-align: left;
-            }
-            .total-price {
-                font-size: 1.1em;
-                text-align: right;
-            }
-            .submit-button {
-                font-size: 1.5em;
-                padding: 8px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<title>Оформлення замовлення - ПроЗахист</title>
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+    .container {
+        width: 33%;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        border-radius: 8px;
+    }
+    h1, h2 {
+        text-align: center;
+    }
+    .cart-item {
+        display: flex;
+        justify-content: space-between;
+        margin: 15px 0;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+    .total-price {
+        font-size: 1.2em;
+        font-weight: bold;
+        text-align: right;
+        margin-top: 10px;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .form-group label {
+        display: block;
+        font-weight: bold;
+    }
+    .form-group input, .form-group textarea {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    .submit-button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 1.1em;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .submit-button:hover {
+        background-color: #45a049;
+    }
+    @media (max-width: 768px) {
+        .container { width: 90%; padding: 15px; }
+        h1 { font-size: 1.6em; font-weight: bold; }
+        .cart-item { flex-direction: column; text-align: left; }
+        .total-price { font-size: 1.1em; text-align: right; }
+        .submit-button { font-size: 1.5em; padding: 8px; }
+    }
+</style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Оформлення замовлення</h1>
-        
-        <h2>Ваше замовлення</h2>
-        <div id="cart-items"></div>
-        <p class="total-price">Загальна сума: <span id="total-price">0</span> грн</p>
-        
-        <h2>Контактні дані</h2>
-        <form id="checkout-form">
-            <div class="form-group">
-                <label for="name">Прізвище, Ім'я</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-                <label for="phone">Телефон отримувача</label>
-                <input type="tel" id="phone" name="phone" required>
-           </div>
-           <div class="form-group">
-               <label for="city">Місто</label>
-               <input type="text" id="city" name="city" required>
-           </div>
-           <div class="form-group">
-               <label for="branch">Номер відділення "Нової Пошти"</label>
-               <input type="text" id="branch" name="branch" required>
-           </div>
-            <button type="submit" class="submit-button">Підтвердити замовлення</button>
-        </form>
-    </div>
+<div class="container">
+    <h1>Оформлення замовлення</h1>
     
-    <script>
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    <h2>Ваше замовлення</h2>
+    <div id="cart-items"></div>
+    <p class="total-price">Загальна сума: <span id="total-price">0</span> грн</p>
     
-    function displayOrder() {
-        const orderItemsContainer = document.getElementById('cart-items');
-        const totalPriceElement = document.getElementById('total-price');
-        orderItemsContainer.innerHTML = '';
-        
-        let total = 0;
-        cart.forEach(item => {
-            total += item.price * item.quantity;
-            const itemElement = document.createElement('div');
-            itemElement.classList.add('cart-item');
-            itemElement.textContent = `${item.name} - ${item.price} грн x ${item.quantity}`;
-            orderItemsContainer.appendChild(itemElement);
-        });
+    <h2>Контактні дані</h2>
+    <form id="checkout-form" action="https://formspree.io/f/xrbadqqk" method="POST">
+        <div class="form-group">
+            <label for="name">Прізвище, Ім'я</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Телефон отримувача</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div class="form-group">
+            <label for="city">Місто</label>
+            <input type="text" id="city" name="city" required>
+        </div>
+        <div class="form-group">
+            <label for="branch">Номер відділення "Нової Пошти"</label>
+            <input type="text" id="branch" name="branch" required>
+        </div>
+        <input type="hidden" name="cart" id="cart-input">
+        <button type="submit" class="submit-button">Підтвердити замовлення</button>
+    </form>
+</div>
+
+<script>
+// Получаем корзину из localStorage
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+// Отображение товаров и суммы
+function displayOrder() {
+    const orderItemsContainer = document.getElementById('cart-items');
+    const totalPriceElement = document.getElementById('total-price');
+    orderItemsContainer.innerHTML = '';
     
-        totalPriceElement.textContent = total;
-    }
+    let total = 0;
+    cart.forEach(item => {
+        total += item.price * item.quantity;
+        const itemElement = document.createElement('div');
+        itemElement.classList.add('cart-item');
+        itemElement.textContent = `${item.name} - ${item.price} грн × ${item.quantity}`;
+        orderItemsContainer.appendChild(itemElement);
+    });
     
-    function placeOrder(event) {
-        event.preventDefault();
-    
-        const name = document.getElementById("name").value;
-        const phone = document.getElementById("phone").value;
-        const city = document.getElementById("city").value;
-        const branch = document.getElementById("branch").value;
-        const cartData = localStorage.getItem('cart');
-    
-        fetch('send_order.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: `name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&city=${encodeURIComponent(city)}&branch=${encodeURIComponent(branch)}&cart=${encodeURIComponent(cartData)}`
-        })
-        .then(response => response.text())
-        .then(data => {
-            if (data.trim() === "success") {
-                alert('Ваше замовлення підтверджено! Дякуємо за покупку.');
-                localStorage.removeItem('cart');
-                window.location.href = 'index.html';
-            } else {
-                alert('Сталася помилка при відправці замовлення.');
-            }
-        })
-        .catch(error => {
-            alert('Помилка з’єднання із сервером.');
-        });
-    }
-    
-    document.getElementById('checkout-form').addEventListener('submit', placeOrder);
-    displayOrder();
-    </script>
-    
+    totalPriceElement.textContent = total;
+}
+
+// При отправке формы добавляем корзину в скрытое поле
+document.getElementById('checkout-form').addEventListener('submit', function(){
+    document.getElementById('cart-input').value = JSON.stringify(cart);
+});
+
+displayOrder();
+</script>
+
 </body>
 </html>
