@@ -168,7 +168,7 @@ function displayOrder() {
         // Знижка плавно за 3 секунды
         const line2 = createLine(`Знижка ${discountPercent}%: -${discountAmount} грн`, "green");
         totalPriceElement.appendChild(line2);
-        setTimeout(()=> line2.classList.add('show'), 1000);
+        setTimeout(()=> line2.classList.add('show'), 2000);
 
         // До сплати через 1 сек после окончания анимации скидки
         const line3 = createLine(`До сплати: 0 грн`);
@@ -229,6 +229,7 @@ function showToast(){
 
 </body>
 </html>
+
 
 
 
