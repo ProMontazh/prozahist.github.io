@@ -22,9 +22,11 @@
             color: white;
             text-align: left;
             z-index: 1000; /* Убедитесь, что шапка перекрывает остальной контент */
-
-
-        }
+         }
+        header .logo svg {
+    height: 60px;  /* подгоняем размер */
+    width: auto;
+    }
         .toast {
     position: fixed;
     top: 45%;
@@ -258,7 +260,24 @@
 <body>
 
 <header>
-    <h1> ПроЗахист - охоронні системи </h1>
+     <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="220" height="70" viewBox="0 0 600 200">
+          <!-- Текст ПРО (красным) -->
+          <text x="40" y="100" font-family="Arial, sans-serif" font-weight="bold" font-size="72" fill="#d00000">
+            ПРО
+          </text>
+          
+          <!-- Текст ЗАХИСТ (чёрным) -->
+          <text x="200" y="100" font-family="Arial, sans-serif" font-weight="bold" font-size="72" fill="#111">
+            ЗАХИСТ
+          </text>
+          
+          <!-- Слоган -->
+          <text x="40" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="32" fill="#333">
+            МАГАЗИН СИСТЕМ БЕЗПЕКИ
+          </text>
+        </svg>
+    </div>
 </header>
 
 
@@ -534,3 +553,4 @@ function clearCart() {
 </script>
 </body>
 </html>
+
