@@ -17,17 +17,13 @@ h1 { text-align:center; }
 .submit-button { width:100%; padding:10px; background:#4CAF50; color:#fff; font-size:1.1em; font-weight:bold; border:none; border-radius:5px; cursor:pointer; }
 .submit-button:hover { background:#45a049; }
 
-/* Анимация появления */
-.fade-in {
+/* Плавное появление без подпрыгивания */
+.fade-line {
   opacity: 0;
-  transform: translateY(10px);
-  animation: fadeInUp 0.6s forwards;
+  transition: opacity 1s ease;
 }
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.fade-line.show {
+  opacity: 1;
 }
 
 /* Оверлей и сообщение */
@@ -45,13 +41,21 @@ h1 { text-align:center; }
 }
 .toast-overlay.show { opacity:1; visibility:visible; }
 .toast-message {
-  background:#4CAF50; color:#fff; padding:20px 40px;
-  border-radius:8px; font-size:1.5em; text-align:center;
-  font-weight:bold; transform: scale(0.7);
+  background:#4CAF50;
+  color:#fff;
+  padding:20px 40px;
+  border-radius:8px;
+  font-size:1.5em;
+  text-align:center;
+  font-weight:bold;
+  transform: scale(0.7);
   transition: transform 0.6s ease, opacity 0.6s ease;
   opacity:0;
 }
-.toast-overlay.show .toast-message { transform: scale(1); opacity:1; }
+.toast-overlay.show .toast-message {
+  transform: scale(1);
+  opacity:1;
+}
 
 @media(max-width:768px) {
     .container { width:90%; padding:15px; }
@@ -69,7 +73,7 @@ h1 { text-align:center; }
     
     <h2>Ваше замовлення</h2>
     <div id="cart-items"></div>
-    <div class="total-price" id="total-price">Загальна сума: 0 грн</div>
+    <div class="total-price" id="total-price"></div>
     
     <h2>Контактні дані</h2>
     <form id="checkout-form" action="https://formspree.io/f/xrbadqqk" method="POST">
@@ -116,6 +120,7 @@ function displayOrder() {
     const orderItemsContainer = document.getElementById('cart-items');
     const totalPriceElement = document.getElementById('total-price');
     orderItemsContainer.innerHTML = '';
+    totalPriceElement.innerHTML = '';
 
     let total = 0;
     let cartText = "";
@@ -137,34 +142,29 @@ function displayOrder() {
     const discountAmount = (total * discountPercent) / 100;
     const finalTotal = total - discountAmount;
 
-    totalPriceElement.innerHTML = ""; // очищаем
-
-    // Появление по очереди
-    setTimeout(()=>{
-        const totalDiv = document.createElement('div');
-        totalDiv.classList.add('fade-in');
-        totalDiv.textContent = `Загальна сума: ${total} грн`;
-        totalPriceElement.appendChild(totalDiv);
-    },0);
+    // Пошаговый показ строк
+    const line1 = document.createElement('div');
+    line1.classList.add('fade-line');
+    line1.textContent = `Загальна сума: ${total} грн`;
+    totalPriceElement.appendChild(line1);
+    setTimeout(()=> line1.classList.add('show'), 100);
 
     if (discountPercent > 0) {
-        setTimeout(()=>{
-            const discountDiv = document.createElement('div');
-            discountDiv.classList.add('fade-in');
-            discountDiv.style.color="green";
-            discountDiv.style.fontWeight="bold";
-            discountDiv.textContent = `Знижка ${discountPercent}%: -${discountAmount} грн`;
-            totalPriceElement.appendChild(discountDiv);
-        },1000);
+        const line2 = document.createElement('div');
+        line2.classList.add('fade-line');
+        line2.style.color = "green";
+        line2.style.fontWeight = "bold";
+        line2.textContent = `Знижка ${discountPercent}%: -${discountAmount} грн`;
+        totalPriceElement.appendChild(line2);
+        setTimeout(()=> line2.classList.add('show'), 1100);
 
-        setTimeout(()=>{
-            const finalDiv = document.createElement('div');
-            finalDiv.classList.add('fade-in');
-            finalDiv.style.fontSize="1.2em";
-            finalDiv.style.fontWeight="bold";
-            finalDiv.textContent = `До сплати: ${finalTotal} грн`;
-            totalPriceElement.appendChild(finalDiv);
-        },2000);
+        const line3 = document.createElement('div');
+        line3.classList.add('fade-line');
+        line3.style.fontSize = "1.0em";
+        line3.style.fontWeight = "bold";
+        line3.textContent = `До сплати: ${finalTotal} грн`;
+        totalPriceElement.appendChild(line3);
+        setTimeout(()=> line3.classList.add('show'), 2100);
     }
 
     // Передаём в письмо
@@ -218,7 +218,7 @@ document.getElementById('checkout-form').addEventListener('submit', function(e){
     });
 });
 
-// Плавное появление сообщения с масштабированием
+// Плавное появление сообщения
 function showToast(){
     const toast = document.getElementById('toast');
     toast.classList.add('show');
