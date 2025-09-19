@@ -17,8 +17,8 @@ h1 { text-align:center; }
 .submit-button { width:100%; padding:10px; background:#4CAF50; color:#fff; font-size:1.1em; font-weight:bold; border:none; border-radius:5px; cursor:pointer; }
 .submit-button:hover { background:#45a049; }
 
-/* Плавное появление строк */
-.fade-line { opacity:0; transition: opacity 1s ease; }
+/* Плавное появление */
+.fade-line { opacity:0; transition: opacity 3s ease; }
 .fade-line.show { opacity:1; }
 
 .toast-overlay {
@@ -82,7 +82,7 @@ h1 { text-align:center; }
         </div>
         <div class="form-group">
             <label for="branch">Номер відділення "Нової Пошти"</label>
-            <input type="tel" id="branch" name="branch" required>
+            <input type="tel" id="branch" name="branch" required placeholder="000">
         </div>
         <input type="hidden" id="cart-data" name="cart">
         <button type="submit" class="submit-button">Підтвердити замовлення</button>
@@ -142,22 +142,25 @@ function displayOrder() {
     const discountAmount = (total * discountPercent) / 100;
     const finalTotal = total - discountAmount;
 
+    // Загальна сума сразу
     const line1 = createLine(`Загальна сума: ${total} грн`);
+    line1.classList.add('show');
     totalPriceElement.appendChild(line1);
-    setTimeout(()=> line1.classList.add('show'), 100);
 
     if (discountPercent > 0) {
+        // Появление скидки за 3 секунды
         const line2 = createLine(`Знижка ${discountPercent}%: -${discountAmount} грн`, "green", "bold");
         totalPriceElement.appendChild(line2);
-        setTimeout(()=> line2.classList.add('show'), 1100);
+        setTimeout(()=> line2.classList.add('show'), 100);
 
+        // Появление До сплати через 2 сек после окончания скидки
         const line3 = createLine(`До сплати: ${finalTotal} грн`, "#000", "bold", "1.1em");
         totalPriceElement.appendChild(line3);
         setTimeout(()=>{
             line3.classList.add('show');
             document.getElementById('cash-sound').currentTime = 0;
             document.getElementById('cash-sound').play();
-        }, 2100);
+        }, 3100 + 2000); // 3 сек на анимацию + 2 сек пауза
     }
 
     document.getElementById('cart-data').value =
