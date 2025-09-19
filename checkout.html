@@ -160,13 +160,13 @@ function displayOrder() {
     const finalTotal = total - discountAmount;
 
     // Загальна сума сразу
-    const line1 = createLine(`Загальна сума: ${total} грн`);
+    const line1 = createLine(`Загальна сума: ${total.toFixed(2)} грн`);
     line1.classList.add('show');
     totalPriceElement.appendChild(line1);
 
     if (discountPercent > 0) {
         // Знижка плавно за 3 секунды
-        const line2 = createLine(`Знижка:  - ${discountAmount} грн`, "green");
+        const line2 = createLine(`Знижка:  - ${discountAmount.toFixed(2)} грн`, "green");
         totalPriceElement.appendChild(line2);
         setTimeout(()=> line2.classList.add('show'), 3000);
 
@@ -184,7 +184,7 @@ function displayOrder() {
         cartText +
         `\nЗагальна сума: ${total} грн` +
         (discountPercent > 0
-            ? `\nЗнижка ${discountPercent}%: -${discountAmount} грн\nДо сплати: ${finalTotal} грн`
+            ? `\nЗнижка ${discountPercent}%: -${discountAmount} грн\nДо сплати: ${finalTotal.toFixed(2)} грн`
             : "");
 }
 
@@ -230,6 +230,7 @@ function showToast(){
 
 </body>
 </html>
+
 
 
 
