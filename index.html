@@ -124,7 +124,7 @@
 
     display: flex;              /* включаем flex */
     align-items: center;        /* выравнивание по вертикали */
-    gap: 5px;                   /* расстояние между иконкой и текстом */
+    gap: 6px;                   /* расстояние между иконкой и текстом */
     font-size: 16px;            /* выровненный размер текста */
 }
         .cart-content {
@@ -206,9 +206,6 @@
         font-size: 18px;
         padding: 0 10px;
     }
-      
-    
-</style>
         /* Мобильная версия */
         @media (max-width: 768px){
             body {
@@ -274,19 +271,25 @@
           <text x="40" y="100" font-family="Arial, sans-serif" font-weight="bold" font-size="72" fill="#d00000">
             ПРО
           </text>
-          
+
           <!-- Текст ЗАХИСТ (чёрным) -->
           <text x="200" y="100" font-family="Arial, sans-serif" font-weight="bold" font-size="72" fill="#000000">
             ЗАХИСТ
           </text>
-          
+
           <!-- Слоган (светлый серый) -->
           <text x="40" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="32" fill="#bbbbbb">
             МАГАЗИН СИСТЕМ БЕЗПЕКИ
           </text>
         </svg>
     </div>
-    
+    <style>
+    /* Подсветка при наведении на логотип */
+    .logo-svg:hover #slogan {
+        fill: #ffffff; /* белый при наведении */
+        transition: fill 0.5s ease;
+    }
+</style>
 </header>
 
 
@@ -562,13 +565,3 @@ function clearCart() {
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
