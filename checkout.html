@@ -17,18 +17,39 @@ h1 { text-align:center; }
 .submit-button { width:100%; padding:10px; background:#4CAF50; color:#fff; font-size:1.1em; font-weight:bold; border:none; border-radius:5px; cursor:pointer; }
 .submit-button:hover { background:#45a049; }
 
-.fade-line { opacity:0; transition: opacity 1s ease; font-size:1.2em; font-weight:bold; }
+/* Плавное появление */
+.fade-line {
+  opacity:0;
+  transition: opacity 3s ease;
+  font-size:1.2em;
+  font-weight:bold;
+}
 .fade-line.show { opacity:1; }
 
 .toast-overlay {
-  position: fixed; top:0; left:0; width:100%; height:100%;
-  background: rgba(0,0,0,0.4); display:flex; justify-content: center; align-items: center;
-  opacity:0; visibility:hidden; transition: opacity 0.6s ease, visibility 0.6s ease; z-index:10000;
+  position: fixed;
+  top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.4);
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  opacity:0;
+  visibility:hidden;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+  z-index:10000;
 }
 .toast-overlay.show { opacity:1; visibility:visible; }
 .toast-message {
-  background:#4CAF50; color:#fff; padding:20px 40px; border-radius:8px; font-size:1.5em;
-  text-align:center; font-weight:bold; opacity:0; transform: scale(0.7); transition: transform 0.6s ease, opacity 0.6s ease;
+  background:#4CAF50;
+  color:#fff;
+  padding:20px 40px;
+  border-radius:8px;
+  font-size:1.5em;
+  text-align:center;
+  font-weight:bold;
+  opacity:0;
+  transform: scale(0.7);
+  transition: transform 0.6s ease, opacity 0.6s ease;
 }
 .toast-overlay.show .toast-message { opacity:1; transform: scale(1); }
 
@@ -66,7 +87,7 @@ h1 { text-align:center; }
         </div>
         <div class="form-group">
             <label for="branch">Номер відділення "Нової Пошти"</label>
-            <input type="tel" id="branch" name="branch" required>
+            <input type="tel" id="branch" name="branch" required placeholder="000">
         </div>
         <input type="hidden" id="cart-data" name="cart">
         <button type="submit" class="submit-button">Підтвердити замовлення</button>
@@ -97,30 +118,25 @@ function createLine(text, color="#000") {
     line.classList.add('fade-line');
     line.textContent = text;
     line.style.color = color;
-    line.style.fontSize = "1.2em";
+    line.style.fontSize = "1.2em"; // одинаковый размер
     line.style.fontWeight = "bold";
     return line;
 }
 
-function animateNumber(element, start, end, duration, prefix="") {
+function animateNumber(element, start, end, duration) {
     const range = end - start;
     let startTime = null;
-    return new Promise(resolve=>{
-        function step(timestamp) {
-            if (!startTime) startTime = timestamp;
-            const progress = Math.min((timestamp - startTime)/duration, 1);
-            element.textContent = `${prefix}${Math.round(start + range*progress)} грн`;
-            if (progress < 1) window.requestAnimationFrame(step);
-            else {
-                if(prefix==="До сплати: ") document.getElementById('cash-sound').play();
-                resolve();
-            }
-        }
-        window.requestAnimationFrame(step);
-    });
+    function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime)/duration, 1);
+        element.textContent = `До сплати: ${Math.round(start + range*progress)} грн`;
+        if (progress < 1) window.requestAnimationFrame(step);
+        else document.getElementById('cash-sound').play();
+    }
+    window.requestAnimationFrame(step);
 }
 
-async function displayOrder() {
+function displayOrder() {
     const orderItemsContainer = document.getElementById('cart-items');
     const totalPriceElement = document.getElementById('total-price');
     orderItemsContainer.innerHTML = '';
@@ -143,21 +159,24 @@ async function displayOrder() {
     const discountAmount = (total * discountPercent) / 100;
     const finalTotal = total - discountAmount;
 
-    // Загальна сума
-    const line1 = createLine(`Загальна сума: 0 грн`);
+    // Загальна сума сразу
+    const line1 = createLine(`Загальна сума: ${total} грн`);
+    line1.classList.add('show');
     totalPriceElement.appendChild(line1);
-    await animateNumber(line1, 0, total, 1500, "Загальна сума: ");
 
     if (discountPercent > 0) {
-        // Знижка
-        const line2 = createLine(`Знижка 0 грн`, "green");
+        // Знижка плавно за 3 секунды
+        const line2 = createLine(`Знижка ${discountPercent}%: -${discountAmount} грн`, "green");
         totalPriceElement.appendChild(line2);
-        await animateNumber(line2, 0, discountAmount, 3000, `Знижка ${discountPercent}%: -`);
+        setTimeout(()=> line2.classList.add('show'), 100);
 
-        // До сплати
+        // До сплати через 2 сек после окончания анимации скидки
         const line3 = createLine(`До сплати: 0 грн`);
         totalPriceElement.appendChild(line3);
-        await animateNumber(line3, 0, finalTotal, 1500, "До сплати: ");
+        setTimeout(()=>{
+            line3.classList.add('show');
+            animateNumber(line3, 0, finalTotal, 1500);
+        }, 3100 + 2000); 
     }
 
     document.getElementById('cart-data').value =
