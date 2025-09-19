@@ -70,7 +70,7 @@ h1 { text-align:center; }
     
     <h2>Ваше замовлення</h2>
     <div id="cart-items"></div>
-    <p class="total-price">Загальна сума: <span id="total-price">0</span> грн</p>
+    <p class="total-price" id="total-price">Загальна сума: 0 грн</p>
     
     <h2>Контактні дані</h2>
     <form id="checkout-form" action="https://formspree.io/f/xrbadqqk" method="POST">
@@ -102,6 +102,16 @@ h1 { text-align:center; }
 <script>
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+// Функция расчёта скидки
+function calculateDiscount(total) {
+    let discount = 0;
+    if (total >= 1000 && total < 2000) discount = 5;
+    else if (total >= 2000 && total < 5000) discount = 7;
+    else if (total >= 5000 && total < 15000) discount = 10;
+    else if (total >= 15000) discount = 15;
+    return discount;
+}
+
 function displayOrder() {
     const orderItemsContainer = document.getElementById('cart-items');
     const totalPriceElement = document.getElementById('total-price');
@@ -122,8 +132,30 @@ function displayOrder() {
         cartText += `${item.name} — ${item.price} грн × ${item.quantity} = ${subtotal} грн\n`;
     });
 
-    totalPriceElement.textContent = total;
-    document.getElementById('cart-data').value = cartText + `\nЗагальна сума: ${total} грн`;
+    // Считаем скидку
+    const discountPercent = calculateDiscount(total);
+    const discountAmount = (total * discountPercent) / 100;
+    const finalTotal = total - discountAmount;
+
+    // Отображение
+    let priceHtml = `Загальна сума: ${total} грн`;
+    if (discountPercent > 0) {
+        priceHtml = `
+            <div>Загальна сума: ${total} грн</div>
+            <div style="color:green; font-weight:bold;">Знижка ${discountPercent}%: -${discountAmount} грн</div>
+            <div style="font-size:1.3em; font-weight:bold;">До оплати: ${finalTotal} грн</div>
+        `;
+    }
+
+    totalPriceElement.innerHTML = priceHtml;
+
+    // Передаём в письмо
+    document.getElementById('cart-data').value =
+        cartText +
+        `\nЗагальна сума: ${total} грн` +
+        (discountPercent > 0
+            ? `\nЗнижка ${discountPercent}%: -${discountAmount} грн\nДо оплати: ${finalTotal} грн`
+            : "");
 }
 
 displayOrder();
