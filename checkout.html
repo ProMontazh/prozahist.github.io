@@ -105,10 +105,10 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
 // Функция расчёта скидки
 function calculateDiscount(total) {
     let discount = 0;
-    if (total >= 1000 && total < 2000) discount = 5;
-    else if (total >= 2000 && total < 5000) discount = 7;
-    else if (total >= 5000 && total < 15000) discount = 10;
-    else if (total >= 15000) discount = 15;
+    if (total >= 2000 && total < 5000) discount = 5;
+    else if (total >= 5000 && total < 10000) discount = 7;
+    else if (total >= 10000 && total < 20000) discount = 10;
+    else if (total >= 20000) discount = 15;
     return discount;
 }
 
@@ -143,7 +143,7 @@ function displayOrder() {
         priceHtml = `
             <div>Загальна сума: ${total} грн</div>
             <div style="color:green; font-weight:bold;">Знижка ${discountPercent}%: -${discountAmount} грн</div>
-            <div style="font-size:1.3em; font-weight:bold;">До оплати: ${finalTotal} грн</div>
+            <div style="font-size:1.1em; font-weight:bold;">До оплати: ${finalTotal} грн</div>
         `;
     }
 
@@ -210,3 +210,4 @@ function showToast(){
 
 </body>
 </html>
+
