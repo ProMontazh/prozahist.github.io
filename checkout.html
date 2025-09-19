@@ -17,7 +17,20 @@ h1 { text-align:center; }
 .submit-button { width:100%; padding:10px; background:#4CAF50; color:#fff; font-size:1.1em; font-weight:bold; border:none; border-radius:5px; cursor:pointer; }
 .submit-button:hover { background:#45a049; }
 
-/* Оверлей и сообщение с плавным масштабированием */
+/* Анимация появления */
+.fade-in {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.6s forwards;
+}
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Оверлей и сообщение */
 .toast-overlay {
   position: fixed;
   top:0; left:0; width:100%; height:100%;
@@ -30,29 +43,15 @@ h1 { text-align:center; }
   transition: opacity 0.6s ease, visibility 0.6s ease;
   z-index:10000;
 }
-
-.toast-overlay.show {
-  opacity:1;
-  visibility:visible;
-}
-
+.toast-overlay.show { opacity:1; visibility:visible; }
 .toast-message {
-  background:#4CAF50;
-  color:#fff;
-  padding:20px 40px;
-  border-radius:8px;
-  font-size:1.5em;
-  text-align:center;
-  font-weight:bold;
-  transform: scale(0.7);
+  background:#4CAF50; color:#fff; padding:20px 40px;
+  border-radius:8px; font-size:1.5em; text-align:center;
+  font-weight:bold; transform: scale(0.7);
   transition: transform 0.6s ease, opacity 0.6s ease;
   opacity:0;
 }
-
-.toast-overlay.show .toast-message {
-  transform: scale(1);
-  opacity:1;
-}
+.toast-overlay.show .toast-message { transform: scale(1); opacity:1; }
 
 @media(max-width:768px) {
     .container { width:90%; padding:15px; }
@@ -70,7 +69,7 @@ h1 { text-align:center; }
     
     <h2>Ваше замовлення</h2>
     <div id="cart-items"></div>
-    <p class="total-price" id="total-price">Загальна сума: 0 грн</p>
+    <div class="total-price" id="total-price">Загальна сума: 0 грн</div>
     
     <h2>Контактні дані</h2>
     <form id="checkout-form" action="https://formspree.io/f/xrbadqqk" method="POST">
@@ -88,7 +87,7 @@ h1 { text-align:center; }
         </div>
         <div class="form-group">
             <label for="branch">Номер відділення "Нової Пошти"</label>
-            <input type="tel" id="branch" name="branch" required placeholder="000">
+            <input type="tel" id="branch" name="branch" required>
         </div>
         <input type="hidden" id="cart-data" name="cart">
         <button type="submit" class="submit-button">Підтвердити замовлення</button>
@@ -138,17 +137,35 @@ function displayOrder() {
     const discountAmount = (total * discountPercent) / 100;
     const finalTotal = total - discountAmount;
 
-    // Отображение
-    let priceHtml = `Загальна сума: ${total} грн`;
-    if (discountPercent > 0) {
-        priceHtml = `
-            <div>Загальна сума: ${total} грн</div>
-            <div style="color:green; font-weight:bold;">Знижка ${discountPercent}%: -${discountAmount} грн</div>
-            <div style="font-size:1.0em; font-weight:bold;">До сплати: ${finalTotal} грн</div>
-        `;
-    }
+    totalPriceElement.innerHTML = ""; // очищаем
 
-    totalPriceElement.innerHTML = priceHtml;
+    // Появление по очереди
+    setTimeout(()=>{
+        const totalDiv = document.createElement('div');
+        totalDiv.classList.add('fade-in');
+        totalDiv.textContent = `Загальна сума: ${total} грн`;
+        totalPriceElement.appendChild(totalDiv);
+    },0);
+
+    if (discountPercent > 0) {
+        setTimeout(()=>{
+            const discountDiv = document.createElement('div');
+            discountDiv.classList.add('fade-in');
+            discountDiv.style.color="green";
+            discountDiv.style.fontWeight="bold";
+            discountDiv.textContent = `Знижка ${discountPercent}%: -${discountAmount} грн`;
+            totalPriceElement.appendChild(discountDiv);
+        },1000);
+
+        setTimeout(()=>{
+            const finalDiv = document.createElement('div');
+            finalDiv.classList.add('fade-in');
+            finalDiv.style.fontSize="1.2em";
+            finalDiv.style.fontWeight="bold";
+            finalDiv.textContent = `До сплати: ${finalTotal} грн`;
+            totalPriceElement.appendChild(finalDiv);
+        },2000);
+    }
 
     // Передаём в письмо
     document.getElementById('cart-data').value =
@@ -211,7 +228,3 @@ function showToast(){
 
 </body>
 </html>
-
-
-
-
