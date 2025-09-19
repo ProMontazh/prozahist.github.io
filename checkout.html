@@ -66,11 +66,11 @@ h1 { text-align:center; }
 
 <div class="container">
     <h1>Оформлення замовлення</h1>
-    
+
     <h2>Ваше замовлення</h2>
     <div id="cart-items"></div>
     <div class="total-price" id="total-price"></div>
-    
+
     <h2>Контактні дані</h2>
     <form id="checkout-form" action="https://formspree.io/f/xrbadqqk" method="POST">
         <div class="form-group">
@@ -171,13 +171,16 @@ function displayOrder() {
         setTimeout(()=> line2.classList.add('show'), 3000);
 
         // До сплати через 1 сек после окончания анимации скидки
-const line3 = createLine(`До сплати: ${total} грн`);
-totalPriceElement.appendChild(line3);
-setTimeout(()=>{
-    line3.classList.add('show');
-    animateNumber(line3, total, finalTotal, 1500);
-}, 4000); // пример задержки
-document.getElementById('cart-data').value =
+        const line3 = createLine(`До сплати: 0 грн`);
+        totalPriceElement.appendChild(line3);
+        setTimeout(()=>{
+            line3.classList.add('show');
+            animateNumber(line3, 0, finalTotal, 1500);
+        }, 1000 + 2000); 
+    
+    }
+
+    document.getElementById('cart-data').value =
         cartText +
         `\nЗагальна сума: ${total} грн` +
         (discountPercent > 0
@@ -227,11 +230,3 @@ function showToast(){
 
 </body>
 </html>
-
-
-
-
-
-
-
-
