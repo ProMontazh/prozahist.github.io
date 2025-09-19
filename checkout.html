@@ -105,11 +105,11 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 function calculateDiscount(total) {
     let discount = 0;
-    if (total >= 5000 && total < 10000) discount = 5;
-    else if (total >= 10000 && total < 20000) discount = 7;
-    else if (total >= 20000 && total < 50000) discount = 10;
-    else if (total >= 50000 && total < 90000) discount = 12;
-    else if (total >= 90000) discount = 15;
+    if (total >= 3000 && total < 10000) discount = 3;
+    else if (total >= 10000 && total < 20000) discount = 5;
+    else if (total >= 20000 && total < 50000) discount = 7;
+    else if (total >= 50000 && total < 90000) discount = 10;
+    else if (total >= 90000) discount = 12;
     return discount;
 }
 
@@ -230,5 +230,6 @@ function showToast(){
 
 </body>
 </html>
+
 
 
