@@ -143,7 +143,7 @@ function displayOrder() {
         priceHtml = `
             <div>Загальна сума: ${total} грн</div>
             <div style="color:green; font-weight:bold;">Знижка ${discountPercent}%: -${discountAmount} грн</div>
-            <div style="font-size:1.0em; font-weight:bold;">До оплати: ${finalTotal} грн</div>
+            <div style="font-size:1.0em; font-weight:bold;">До сплати: ${finalTotal} грн</div>
         `;
     }
 
@@ -154,7 +154,7 @@ function displayOrder() {
         cartText +
         `\nЗагальна сума: ${total} грн` +
         (discountPercent > 0
-            ? `\nЗнижка ${discountPercent}%: -${discountAmount} грн\nДо оплати: ${finalTotal} грн`
+            ? `\nЗнижка ${discountPercent}%: -${discountAmount} грн\nДо сплати: ${finalTotal} грн`
             : "");
 }
 
@@ -210,5 +210,6 @@ function showToast(){
 
 </body>
 </html>
+
 
 
