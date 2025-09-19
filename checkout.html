@@ -166,7 +166,7 @@ function displayOrder() {
 
     if (discountPercent > 0) {
         // Знижка плавно за 3 секунды
-        const line2 = createLine(`Знижка:  -${discountAmount} грн`, "green");
+        const line2 = createLine(`Знижка:  - ${discountAmount} грн`, "green");
         totalPriceElement.appendChild(line2);
         setTimeout(()=> line2.classList.add('show'), 3000);
 
@@ -230,6 +230,7 @@ function showToast(){
 
 </body>
 </html>
+
 
 
 
