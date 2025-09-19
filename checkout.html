@@ -18,7 +18,12 @@ h1 { text-align:center; }
 .submit-button:hover { background:#45a049; }
 
 /* Плавное появление */
-.fade-line { opacity:0; transition: opacity 3s ease; }
+.fade-line {
+  opacity:0;
+  transition: opacity 3s ease;
+  font-size:1.2em;   /* одинаковый размер для всех строк */
+  font-weight:bold;
+}
 .fade-line.show { opacity:1; }
 
 .toast-overlay {
@@ -93,7 +98,6 @@ h1 { text-align:center; }
     <div class="toast-message">Ваше замовлення підтверджено! Дякуємо!</div>
 </div>
 
-<!-- Кассовый звук -->
 <audio id="cash-sound" src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_86d5e5cd4c.mp3?filename=cash-register-1-5931.mp3"></audio>
 
 <script>
@@ -109,13 +113,11 @@ function calculateDiscount(total) {
     return discount;
 }
 
-function createLine(text, color="#000", weight="normal", size="1em") {
+function createLine(text, color="#000") {
     const line = document.createElement('div');
     line.classList.add('fade-line');
     line.textContent = text;
     line.style.color = color;
-    line.style.fontWeight = weight;
-    line.style.fontSize = size;
     return line;
 }
 
@@ -148,19 +150,19 @@ function displayOrder() {
     totalPriceElement.appendChild(line1);
 
     if (discountPercent > 0) {
-        // Появление скидки за 3 секунды
-        const line2 = createLine(`Знижка ${discountPercent}%: -${discountAmount} грн`, "green", "bold");
+        // Знижка плавно за 3 секунды
+        const line2 = createLine(`Знижка ${discountPercent}%: -${discountAmount} грн`, "green");
         totalPriceElement.appendChild(line2);
         setTimeout(()=> line2.classList.add('show'), 100);
 
-        // Появление До сплати через 2 сек после окончания скидки
-        const line3 = createLine(`До сплати: ${finalTotal} грн`, "#000", "bold", "1.1em");
+        // До сплати через 2 сек после окончания анимации скидки
+        const line3 = createLine(`До сплати: ${finalTotal} грн`);
         totalPriceElement.appendChild(line3);
         setTimeout(()=>{
             line3.classList.add('show');
             document.getElementById('cash-sound').currentTime = 0;
             document.getElementById('cash-sound').play();
-        }, 3100 + 1000); // 3 сек на анимацию + 2 сек пауза
+        }, 3100 + 2000); // 3 сек на анимацию + 2 сек пауза
     }
 
     document.getElementById('cart-data').value =
@@ -185,7 +187,7 @@ displayOrder();
     });
 });
 
-// Отправка формы через fetch
+// Отправка формы
 document.getElementById('checkout-form').addEventListener('submit', function(e){
     e.preventDefault();
     const form = e.target;
@@ -204,7 +206,6 @@ document.getElementById('checkout-form').addEventListener('submit', function(e){
         }).catch(()=> alert("Помилка з’єднання із сервером."));
 });
 
-// Плавное появление сообщения
 function showToast(){
     const toast = document.getElementById('toast');
     toast.classList.add('show');
@@ -214,5 +215,3 @@ function showToast(){
 
 </body>
 </html>
-
-
