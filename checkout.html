@@ -170,13 +170,13 @@ function displayOrder() {
         totalPriceElement.appendChild(line2);
         setTimeout(()=> line2.classList.add('show'), 100);
 
-        // До сплати через 2 сек после окончания анимации скидки
+        // До сплати через 1 сек после окончания анимации скидки
         const line3 = createLine(`До сплати: 0 грн`);
         totalPriceElement.appendChild(line3);
         setTimeout(()=>{
             line3.classList.add('show');
             animateNumber(line3, 0, finalTotal, 1500);
-        }, 3100 + 2000); 
+        }, 3100 + 1000); 
     }
 
     document.getElementById('cart-data').value =
@@ -229,5 +229,6 @@ function showToast(){
 
 </body>
 </html>
+
 
 
