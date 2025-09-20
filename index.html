@@ -389,23 +389,7 @@
        <!-- Секции товаров -->
     <section id="indoor" class="products" style="display: none;">
         <h2 style="text-align: center; margin:40px 0;">Внутрішні Wi-Fi відеокамери</h2>
-        <!-- карточки товаров -->
-    </section>
-
-    <section id="outdoor" class="products" style="display: none;">
-        <h2 style="text-align: center; margin:40px 0;">Зовнішні Wi-Fi відеокамери</h2>
-        <!-- карточки товаров -->
-    </section>
-
-    <section id="alarm" class="products" style="display: none;">
-        <h2 style="text-align: center; margin:40px 0;">Охоронна сигналізація</h2>
-        <!-- карточки товаров -->
-    </section>
-
-</div>
-<div class="container">
-    <h2 style="text-align: center; margin-bottom: 40px; margin-top: 80px;"> Внутрішні Wi-Fi відеокамери</h2>
-    <section id="products">
+        <section id="products">
         <div class="product-item" onclick="openProductDetails('details1(IPC-TA22CP-G).html')">
             <img src="images/IPC-TA22CP-G.png" alt="Відеокамера 1">
             <h3>Поворотна камера IMOU IPC-TA22CP-G</h3>
@@ -448,6 +432,22 @@
             <p class="product-price">2795.00 грн</p>
             <button class="btn" onclick="addToCart(event, {id:'IPC-K2EP-5H2W', name: 'IPC-K2EP-5H2W', price: 2795 })">Додати у кошик</button>
         </div>
+    </section>
+
+    <section id="outdoor" class="products" style="display: none;">
+        <h2 style="text-align: center; margin:40px 0;">Зовнішні Wi-Fi відеокамери</h2>
+        <!-- карточки товаров -->
+    </section>
+
+    <section id="alarm" class="products" style="display: none;">
+        <h2 style="text-align: center; margin:40px 0;">Охоронна сигналізація</h2>
+        <!-- карточки товаров -->
+    </section>
+
+</div>
+<div class="container">
+    <h2 style="text-align: center; margin-bottom: 40px; margin-top: 80px;"> Внутрішні Wi-Fi відеокамери</h2>
+    
         <h2 style="text-align: center; margin-bottom: 10px; margin-top: 60px;">Зовнішні Wi-Fi відеокамери</h2>
         <section id="products">
             <div class="product-item" onclick="openProductDetails('details1(Камера IMOU IPC-C22EP-A).html')">
@@ -667,6 +667,7 @@ function clearCart() {
 </script>
 </body>
 </html>
+
 
 
 
