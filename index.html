@@ -315,97 +315,26 @@
 </div>
 
 <div class="container">
-    <h2 style="text-align: center; margin-bottom: 40px; margin-top: 80px;"> Внутрішні Wi-Fi відеокамери</h2>
-    <section id="products">
-        <div class="product-item" onclick="openProductDetails('details1(IPC-TA22CP-G).html')">
-            <img src="images/IPC-TA22CP-G.png" alt="Відеокамера 1">
-            <h3>Поворотна камера IMOU IPC-TA22CP-G</h3>
-            <p>Поворотна PTZ камера, з функцією розумного відстеження</p>
-            <p class="product-price">1900.00 грн</p>
-            <button class="btn" onclick="addToCart(event, { id:'IPC-TA22CP-G', name: 'IPC-TA22CP-G', price: 1900 })">Додати у кошик</button>
+    <h2 style="text-align:center; margin-top:80px;">Категорії товарів</h2>
+    <div id="categories" style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
+        <div class="category" data-category="internal" style="text-align:center; cursor:pointer;">
+            <img src="images/internal.png" alt="Внутрішні камери" style="width:150px; height:150px;">
+            <p>Внутрішні Wi-Fi камери</p>
         </div>
-        <div class="product-item" onclick="openProductDetails('details2(IPC-C22EP-A).html')">
-            <img src="images/IPC-C22EP-A.png" alt="Відеокамера 2">
-            <h3>Внутрішня камера IMOU IPC-C22EP-A</h3>
-            <p>Компактна камера з двостороннім аудіозв'язком</p>
-            <p class="product-price">2090.00 грн</p>
-            <button class="btn" onclick="addToCart(event, { id:'IPC-C22EP-A', name: 'IPC-C22EP-A', price: 2090 })">Додати у кошик</button>
+        <div class="category" data-category="external" style="text-align:center; cursor:pointer;">
+            <img src="images/external.png" alt="Зовнішні камери" style="width:150px; height:150px;">
+            <p>Зовнішні Wi-Fi камери</p>
         </div>
-        <div class="product-item" onclick="openProductDetails('details3(IPC-K2EP-3H1W).html')">
-            <img src="images/IPC-K2EP-3H1W.png" alt="Відеокамера 3">
-            <h3>Поворотна камера IMOU IPC-K2EP-3H1W</h3>
-            <p>Поворотна PTZ камера, з функцією розумного відстеження</p>
-            <p class="product-price">2100.00 грн</p>
-            <button class="btn" onclick="addToCart(event, { id:'IPC-K2EP-3H1W', name: 'IPC-K2EP-3H1W', price: 2100 })">Додати у кошик</button>
+        <div class="category" data-category="alarm" style="text-align:center; cursor:pointer;">
+            <img src="images/alarm.png" alt="Охоронна сигналізація" style="width:150px; height:150px;">
+            <p>Охоронна сигналізація</p>
         </div>
-        <div class="product-item" onclick="openProductDetails('details4(IPC-T22EP-C).html')">
-            <img src="images/IPC-T22EP-C.png" alt="Відеокамера 4">
-            <h3>Купольна камера IMOU IPC-T22EP-C</h3>
-            <p>Купольна Wi-Fi камера з роздільною здатністью 2МП та мікрофоном</p>
-            <p class="product-price">2350.00 грн</p>
-            <button class="btn" onclick="addToCart(event, { id:'IPC-T22EP-C', name: 'IPC-T22EP-C', price: 2350 })">Додати у кошик</button>
-        </div>
-        <div class="product-item" onclick="openProductDetails('details5(IPC-K22P).html')">
-            <img src="images/IPC-K22P.png" alt="Відеокамера 5">
-            <h3>IP-камера IPC-K22P</h3>
-            <p>Wi-Fi камера вбудований мікрофон, вбудований динамік з виходами тривоги</p>
-            <p class="product-price">2795.00 грн</p>
-            <button class="btn" onclick="addToCart(event, {id:'IPC-K22P', name: 'IPC-K22P', price: 2795 })">Додати у кошик</button>
-        </div>
-        <div class="product-item" onclick="openProductDetails('details6(IPC-K2EP-5H2W).html')">
-            <img src="images/IPC-K2EP-5H2W.png" alt="Відеокамера 6">
-            <h3>Поворотна камера IMOU IPC-K2EP-5H2W</h3>
-            <p>Поворотна PTZ камера, з функцією розумного відстеження</p>
-            <p class="product-price">2795.00 грн</p>
-            <button class="btn" onclick="addToCart(event, {id:'IPC-K2EP-5H2W', name: 'IPC-K2EP-5H2W', price: 2795 })">Додати у кошик</button>
-        </div>
-        <h2 style="text-align: center; margin-bottom: 10px; margin-top: 60px;">Зовнішні Wi-Fi відеокамери</h2>
-        <section id="products">
-            <div class="product-item" onclick="openProductDetails('details1(Камера IMOU IPC-C22EP-A).html')">
-                <img src="IPC-C22EP-A.png" alt="Відеокамера 1">
-                <h3>Внутрішня Wi-Fi Камера IMOU IPC-C22EP-A</h3>
-                <p>Висока якість зображення, легке встановлення, доступна ціна</p>
-                <p class="product-price">2090.00 грн</p>
-                <button class="btn" onclick="addToCart(event, { name: 'Камера IMOU IPC-C22EP-A', price: 2090.00 })">Додати у кошик</button>
-            </div>
-            <div class="product-item" onclick="openProductDetails('details2.html')">
-                <img src="Ajax TurretCam w.png" alt="Відеокамера 2">
-                <h3>IP-камера AJAX</h3>
-                <p>Професійне обладнання для перегляду архіву та в реальному часі</p>
-                <p class="product-price">3000 грн</p>
-                <button class="btn" onclick="addToCart(event, { name: 'IP-камера AJAX', price: 3000 })">Додати у кошик</button>
-            </div>
-            <div class="product-item" onclick="openProductDetails('details3.html')">
-                <img src="Ajax TurretCam w.png" alt="Відеокамера 2">
-                <h3>IP-камера AJAX</h3>
-                <p>Професійне обладнання для перегляду архіву та в реальному часі</p>
-                <p class="product-price">3000 грн</p>
-                <button class="btn" onclick="addToCart(event, { name: 'IP-камера AJAX', price: 3000 })">Додати у кошик</button>
-            </div>
-            <div class="product-item" onclick="openProductDetails('details4.html')">
-                <img src="Ajax TurretCam w.png" alt="Відеокамера 2">
-                <h3>IP-камера AJAX</h3>
-                <p>Професійне обладнання для перегляду архіву та в реальному часі</p>
-                <p class="product-price">3000 грн</p>
-                <button class="btn" onclick="addToCart(event, { name: 'IP-камера AJAX', price: 3000 })">Додати у кошик</button>
-            </div>
-            <div class="product-item" onclick="openProductDetails('details5.html')">
-                <img src="Ajax TurretCam w.png" alt="Відеокамера 2">
-                <h3>IP-камера AJAX</h3>
-                <p>Професійне обладнання для перегляду архіву та в реальному часі</p>
-                <p class="product-price">3000 грн</p>
-                <button class="btn" onclick="addToCart(event, { name: 'IP-камера AJAX', price: 3000 })">Додати у кошик</button>
-            </div>
-            <div class="product-item" onclick="openProductDetails('details6.html')">
-                <img src="Ajax TurretCam w.png" alt="Відеокамера 2">
-                <h3>IP-камера AJAX</h3>
-                <p>Професійне обладнання для перегляду архіву та в реальному часі</p>
-                <p class="product-price">3000 грн</p>
-                <button class="btn" onclick="addToCart(event, { name: 'IP-камера AJAX', price: 3000 })">Додати у кошик</button>
-            </div>
-            <h2 style="text-align: center; margin-bottom: 40px;">Охоронна сигналізація</h2>
-    </section>
+    </div>
+
+    <h2 id="products-title" style="text-align:center; margin-top:40px; display:none;">Товари</h2>
+    <section id="products" style="display:flex; flex-wrap:wrap; justify-content:center; gap:20px; display:none;"></section>
 </div>
+
 
 <footer>
     <p>&copy; 2024 ПроЗахист. Всі права захищені.</p>
@@ -565,8 +494,54 @@ function clearCart() {
         }
     });
 </script>
+    <script>
+const productsData = {
+    internal: [
+        {name:"IPC-TA22CP-G", price:1900, img:"images/IPC-TA22CP-G.png"},
+        {name:"IPC-C22EP-A", price:2090, img:"images/IPC-C22EP-A.png"},
+        {name:"IPC-K2EP-3H1W", price:2100, img:"images/IPC-K2EP-3H1W.png"},
+        {name:"IPC-T22EP-C", price:2350, img:"images/IPC-T22EP-C.png"},
+        {name:"IPC-K22P", price:2795, img:"images/IPC-K22P.png"},
+        {name:"IPC-K2EP-5H2W", price:2795, img:"images/IPC-K2EP-5H2W.png"}
+    ],
+    external: [
+        {name:"IPC-C22EP-A", price:2090, img:"images/IPC-C22EP-A.png"},
+        {name:"Ajax TurretCam", price:3000, img:"images/Ajax TurretCam w.png"}
+        // добавь остальные внешние камеры
+    ],
+    alarm: [
+        {name:"Сигналізація A", price:5000, img:"images/alarm1.png"},
+        {name:"Сигналізація B", price:6000, img:"images/alarm2.png"}
+    ]
+};
+
+document.querySelectorAll('.category').forEach(cat => {
+    cat.addEventListener('click', () => {
+        const catName = cat.dataset.category;
+        const productsContainer = document.getElementById('products');
+        const productsTitle = document.getElementById('products-title');
+
+        productsContainer.innerHTML = '';
+        productsContainer.style.display = 'flex';
+        productsTitle.style.display = 'block';
+
+        productsData[catName].forEach(p => {
+            const div = document.createElement('div');
+            div.className = 'product-item';
+            div.innerHTML = `
+                <img src="${p.img}" alt="${p.name}">
+                <h3>${p.name}</h3>
+                <p class="product-price">${p.price.toFixed(2)} грн</p>
+                <button class="btn" onclick="addToCart(event, {name:'${p.name}', price:${p.price}, image:'${p.img}'})">Додати у кошик</button>
+            `;
+            productsContainer.appendChild(div);
+        });
+    });
+});
+</script>
 </body>
 </html>
+
 
 
 
