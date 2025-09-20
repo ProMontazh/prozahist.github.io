@@ -3,131 +3,153 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Каталог товарів - ПроЗахист</title>
+<title>ПроЗахист - Категорії</title>
 <style>
 body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f4f4f4; }
-.container { width:90%; margin:auto; padding:20px; }
-h1 { text-align:center; margin:20px 0; }
+.container { width:90%; max-width:1200px; margin:auto; padding:20px; }
+h1 { text-align:center; margin-bottom:30px; }
 
-/* Категории и товары */
-.categories, .products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  margin-bottom: 30px;
-}
-.category, .product {
-  background:#fff;
-  border-radius:10px;
-  padding:15px;
-  text-align:center;
-  box-shadow:0 2px 6px rgba(0,0,0,0.1);
-  cursor:pointer;
-  transition: transform 0.2s ease;
-}
-.category:hover, .product:hover { transform: scale(1.03); }
+.categories, .products { display:flex; flex-wrap: wrap; justify-content: center; gap:20px; }
+.category, .product { width:200px; border:1px solid #ddd; border-radius:8px; overflow:hidden; text-align:center; background:#fff; transition: transform 0.3s; }
+.category:hover, .product:hover { transform: scale(1.05); }
+.category img, .product img { width:100%; height:150px; object-fit:cover; }
+.category-name, .product-name { padding:10px; font-weight:bold; }
+.product-price { padding-bottom:10px; color:#4CAF50; font-weight:bold; }
+.add-btn { padding:8px 10px; margin-bottom:10px; background:#4CAF50; color:#fff; border:none; border-radius:5px; cursor:pointer; }
+.add-btn:hover { background:#45a049; }
 
-.category img, .product img {
-  max-width:100%;
-  height:180px;
-  object-fit:cover;
+.back-btn { margin:20px auto; display:block; padding:10px 20px; background:#4CAF50; color:#fff; border:none; border-radius:5px; cursor:pointer; font-size:1em; }
+.back-btn:hover { background:#45a049; }
+
+.hidden { display:none; }
+
+/* Тост */
+.toast-overlay {
+  position: fixed;
+  top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.4);
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  opacity:0;
+  visibility:hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  z-index:10000;
+}
+.toast-overlay.show { opacity:1; visibility:visible; }
+.toast-message {
+  background:#4CAF50;
+  color:#fff;
+  padding:20px 40px;
   border-radius:8px;
-}
-button {
-  background:#4CAF50; color:#fff; border:none; padding:10px 15px;
-  border-radius:6px; cursor:pointer; margin-top:10px;
-}
-button:hover { background:#45a049; }
-.back-button {
-  display:inline-block; margin:15px 0; padding:10px 20px;
-  background:#333; color:#fff; border:none; border-radius:6px; cursor:pointer;
+  font-size:1.2em;
+  text-align:center;
+  font-weight:bold;
 }
 </style>
 </head>
 <body>
 
 <div class="container">
-  <h1>Каталог товарів</h1>
+    <h1>ПроЗахист</h1>
 
-  <!-- Категории -->
-  <div class="categories" id="categories">
-    <div class="category" onclick="showProducts('indoor')">
-      <img src="images/indoor.jpg" alt="Внутрішні камери">
-      <h3>Внутрішні камери</h3>
+    <!-- Категории -->
+    <div class="categories" id="categories">
+        <div class="category" data-category="internal">
+            <img src="images/internal.jpg" alt="Внутрішні камери">
+            <div class="category-name">Внутрішні камери</div>
+        </div>
+        <div class="category" data-category="external">
+            <img src="images/external.jpg" alt="Зовнішні камери">
+            <div class="category-name">Зовнішні камери</div>
+        </div>
+        <div class="category" data-category="alarm">
+            <img src="images/alarm.jpg" alt="Охоронна сигналізація">
+            <div class="category-name">Охоронна сигналізація</div>
+        </div>
     </div>
-    <div class="category" onclick="showProducts('outdoor')">
-      <img src="images/outdoor.jpg" alt="Зовнішні камери">
-      <h3>Зовнішні камери</h3>
-    </div>
-    <div class="category" onclick="showProducts('alarm')">
-      <img src="images/alarm.jpg" alt="Охоронна сигналізація">
-      <h3>Охоронна сигналізація</h3>
-    </div>
-  </div>
 
-  <!-- Товары -->
-  <div class="products" id="products" style="display:none;"></div>
+    <!-- Товары -->
+    <div class="products hidden" id="products"></div>
 
-  <button class="back-button" id="backBtn" style="display:none;" onclick="showCategories()">⬅ Назад до категорій</button>
+    <button class="back-btn hidden" id="backBtn">Назад до категорій</button>
+</div>
+
+<!-- Тост -->
+<div class="toast-overlay" id="toast">
+  <div class="toast-message" id="toastMessage">Товар додано до кошика!</div>
 </div>
 
 <script>
-// 📌 База товаров
-const productsData = {
-  indoor: [
-    { name: "Камера внутрішня A1", price: 2500, img: "images/indoor1.jpg" },
-    { name: "Камера внутрішня A2", price: 3200, img: "images/indoor2.jpg" }
-  ],
-  outdoor: [
-    { name: "Камера зовнішня B1", price: 4200, img: "images/outdoor1.jpg" },
-    { name: "Камера зовнішня B2", price: 5100, img: "images/outdoor2.jpg" }
-  ],
-  alarm: [
-    { name: "Сигналізація S1", price: 6000, img: "images/alarm1.jpg" },
-    { name: "Сигналізація S2", price: 7500, img: "images/alarm2.jpg" }
-  ]
+const productData = {
+    internal: [
+        {name: "Камера внутрішня 1", price: 2500, img:"images/internal1.jpg"},
+        {name: "Камера внутрішня 2", price: 3000, img:"images/internal2.jpg"}
+    ],
+    external: [
+        {name: "Камера зовнішня 1", price: 4000, img:"images/external1.jpg"},
+        {name: "Камера зовнішня 2", price: 4500, img:"images/external2.jpg"}
+    ],
+    alarm: [
+        {name: "Сигналізація 1", price: 3500, img:"images/alarm1.jpg"},
+        {name: "Сигналізація 2", price: 3800, img:"images/alarm2.jpg"}
+    ]
 };
 
-// 📌 Показ товаров категории
+const categories = document.getElementById("categories");
+const products = document.getElementById("products");
+const backBtn = document.getElementById("backBtn");
+const toast = document.getElementById("toast");
+
+document.querySelectorAll(".category").forEach(cat => {
+    cat.addEventListener("click", () => {
+        const catKey = cat.dataset.category;
+        showProducts(catKey);
+    });
+});
+
 function showProducts(category) {
-  document.getElementById('categories').style.display = 'none';
-  document.getElementById('products').style.display = 'grid';
-  document.getElementById('backBtn').style.display = 'inline-block';
-
-  const container = document.getElementById('products');
-  container.innerHTML = "";
-
-  productsData[category].forEach(p => {
-    const div = document.createElement("div");
-    div.classList.add("product");
-    div.innerHTML = `
-      <img src="${p.img}" alt="${p.name}">
-      <h4>${p.name}</h4>
-      <p><b>${p.price.toFixed(2)} грн</b></p>
-      <button onclick="addToCart('${p.name}', ${p.price})">У кошик</button>
-    `;
-    container.appendChild(div);
-  });
+    products.innerHTML = "";
+    productData[category].forEach(item => {
+        const div = document.createElement("div");
+        div.classList.add("product");
+        div.innerHTML = `
+            <img src="${item.img}" alt="${item.name}">
+            <div class="product-name">${item.name}</div>
+            <div class="product-price">${item.price} грн</div>
+            <button class="add-btn">Додати в кошик</button>
+        `;
+        // Добавление в корзину
+        div.querySelector(".add-btn").addEventListener("click", () => {
+            addToCart(item);
+        });
+        products.appendChild(div);
+    });
+    categories.classList.add("hidden");
+    products.classList.remove("hidden");
+    backBtn.classList.remove("hidden");
 }
 
-// 📌 Назад к категориям
-function showCategories() {
-  document.getElementById('categories').style.display = 'grid';
-  document.getElementById('products').style.display = 'none';
-  document.getElementById('backBtn').style.display = 'none';
+backBtn.addEventListener("click", () => {
+    products.classList.add("hidden");
+    backBtn.classList.add("hidden");
+    categories.classList.remove("hidden");
+});
+
+function addToCart(item) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    // Если товар уже есть, увеличиваем количество
+    const existing = cart.find(p => p.name === item.name);
+    if(existing) existing.quantity++;
+    else cart.push({...item, quantity:1});
+    localStorage.setItem("cart", JSON.stringify(cart));
+    showToast("Товар додано до кошика!");
 }
 
-// 📌 Добавление в корзину
-function addToCart(name, price) {
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  const existing = cart.find(item => item.name === name);
-  if (existing) {
-    existing.quantity += 1;
-  } else {
-    cart.push({ name, price, quantity: 1 });
-  }
-  localStorage.setItem('cart', JSON.stringify(cart));
-  alert(`${name} додано в кошик!`);
+function showToast(message) {
+    document.getElementById("toastMessage").textContent = message;
+    toast.classList.add("show");
+    setTimeout(()=>{ toast.classList.remove("show"); }, 2000);
 }
 </script>
 
