@@ -313,7 +313,23 @@
         <button class="cancel-button" onclick="clearCart(); toggleCart()">Скасувати</button>
     </div>
 </div>
+<div class="container">
 
+    <!-- Категории -->
+    <div class="categories">
+        <div class="category-card" onclick="toggleCategory('indoor')">
+            <img src="images/indoor-category.jpg" alt="Внутрішні Wi-Fi відеокамери">
+            <h3>Внутрішні Wi-Fi відеокамери</h3>
+        </div>
+        <div class="category-card" onclick="toggleCategory('outdoor')">
+            <img src="images/outdoor-category.jpg" alt="Зовнішні Wi-Fi відеокамери">
+            <h3>Зовнішні Wi-Fi відеокамери</h3>
+        </div>
+        <div class="category-card" onclick="toggleCategory('alarm')">
+            <img src="images/alarm-category.jpg" alt="Охоронна сигналізація">
+            <h3>Охоронна сигналізація</h3>
+        </div>
+    </div>
 <div class="container">
     <h2 style="text-align: center; margin-bottom: 40px; margin-top: 80px;"> Внутрішні Wi-Fi відеокамери</h2>
     <section id="products">
@@ -567,6 +583,7 @@ function clearCart() {
 </script>
 </body>
 </html>
+
 
 
 
