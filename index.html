@@ -634,9 +634,21 @@ function clearCart() {
             cartContent.style.display = 'none';
         }
     });
+    function toggleCategory(categoryId) {
+    document.querySelectorAll('.products').forEach(section => {
+        section.style.display = 'none';
+    });
+
+    const target = document.getElementById(categoryId);
+    if (target) {
+        target.style.display = 'block';
+        target.scrollIntoView({ behavior: 'smooth' });
+    }
+}
 </script>
 </body>
 </html>
+
 
 
 
