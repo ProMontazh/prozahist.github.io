@@ -111,6 +111,44 @@
             padding: 8px;
             margin-top: 18px;
         }
+        category-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+}
+
+.category-card {
+    width: 200px;
+    height: 200px;
+    background: #f8f8f8;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.category-card img {
+    max-width: 80px;
+    margin-bottom: 15px;
+}
+
+.category-card span {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
         .cart {
     position: fixed;
     top: 14px;
@@ -599,6 +637,7 @@ function clearCart() {
 </script>
 </body>
 </html>
+
 
 
 
