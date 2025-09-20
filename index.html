@@ -111,12 +111,31 @@
             padding: 8px;
             margin-top: 18px;
         }
-        category-buttons {
+       .category-buttons {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 20px;
     margin: 40px 0;
     flex-wrap: wrap;
+}
+
+.category-button {
+    flex: 1 1 200px; /* каждая кнопка будет минимум 200px */
+    max-width: 250px;
+    text-align: center;
+}
+
+/* 📱 На телефонах (до 768px ширины) категории будут в колонку */
+@media (max-width: 768px) {
+    .category-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .category-button {
+        max-width: 100%;
+    }
 }
 
 .category-card {
@@ -648,6 +667,7 @@ function clearCart() {
 </script>
 </body>
 </html>
+
 
 
 
