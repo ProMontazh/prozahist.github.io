@@ -1,538 +1,237 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <!-- Микроразметка организации -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "ProМонтаж",
-    "image": "https://promontazh.github.io/logo.jpg",
-    "description": "Профессиональная установка видеонаблюдения в Харькове. Монтаж камер, охранной сигнализации и домофонов.",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "просп. Науки, 10",
-      "addressLocality": "Харьков",
-      "addressCountry": "UA"
-    },
-    "telephone": "+380935016040",
-    "url": "https://promontazh.github.io/",
-    "priceRange": "$$",
-    "openingHours": "Mo-Su 10:00-17:00",
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 49.9935,
-      "longitude": 36.2304
-    }
-  }
-  </script>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Встановлення охоронних систем м. Харків. Монтаж відеоспостереження, сигналізації, домофонів та контролю доступу. 093-501-60-40. Харьков. Монтаж видеонаблюдения, сигнализации, домофонов и контроля доступа.">
-    <meta name="keywords" content="установка видеонаблюдения харьков, монтаж видеонаблюдения харьков, установка камер, установка домофона, установить видеонаблюдение харьков, установить охранную сигнализацию харьков, установка сигнализации харьков, монтаж охранной сигнализации, монтаж домофона харьков, установить домофон харьков, промонтаж, монтажник видеонаблюдения харьков, установщик домофонов харьков, монтаж відеоспостереження Харків, охоронна сигналізація Харків, система контролю доступу, встановлення домофонів, промонтаж Харків">
-    <!-- Канонический адрес -->
-    <link rel="canonical" href="https://promontazh.pp.ua/" />
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <title>ProМонтаж – встановлення систем безпеки. Відеоспостереження, охоронної сигналізації, систем контролю та управління доступу</title>
-    <style>
-        body {
-            font-family: 'Open Sans', sans-serif; /* Применяем Open Sans для всего текста */
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            }
-    header {
-    background: linear-gradient(to right, #222222, #dadada); /* Градиентный фон */
-    color: white;
-    margin: 0px;    
-    padding: 5px 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    }
-    .logo {
-    position: absolute;
-    top: 5px;
-    right: 1px;
-    width: 46px; /* Размер логотипа, можно изменить по необходимости */
-    height: auto;
-    } 
-        /* Анімація для плавної появи тексту */
-        @keyframes fadeInText {
-            20% {
-                opacity: 0;
-                transform: translateY(15%); /* Легке зміщення вгору для ефекту */
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0); /* Повертаємо на місце */
-            }
-        }
-        /* Застосування анімації до назви компанії */
-        .company-name {
-            font-size: 2.3rem;
-            margin: 0;
-            opacity: 0; /* Спочатку невидимий */
-            animation: fadeInText 4.5s ease-in-out forwards; /* Плавна поява протягом 5 секунд */
-        }
-        /* Анімація для появи телефонів справа наліво */
-        @keyframes slideInFromRight {
-            20% {
-                opacity: 1;
-                transform: translateX(5%); /* Починаємо справа за межами екрана */
-            }
-            100% {
-                opacity: 1;
-                transform: translateX(0); /* Телефони переміщуються на своє місце */
-            }
-        }
-        /* Застосування анімації до телефонів з затримкою */
-        .company-phone {
-            font-size: 1.0rem; /* Зменшено розмір шрифту */
-            margin-top: 4px;
-            color: #f44336; /* Червоний колір */
-            font-weight: bold; /* Жирний шрифт */
-            opacity: 0; /* Спочатку невидимий */
-            animation: slideInFromRight 2s ease-in-out forwards; /* Анімація появи справа наліво */
-            animation-delay: 7.5s; /* Затримка 6 секунди */
-        }
-        .company-phone a {
-            color: #f44336; /* Червоний колір для посилань */
-            text-decoration: none;
-        }
-        .company-description {
-            font-size: 0.8rem; /* Зменшено розмір шрифту */
-            margin-top: 8px;
-            color: white; /* Білий колір тексту */
-        }
-        .red {
-            color: #f44336;
-        }
-        .black {
-            color: black;
-        }
-        .hero {
-            background-color: rgba(0, 0, 0, 0.05); /* Полупрозрачный черный фон */
-            background-image: url('fonkh.jpg'); /* Фонове зображення */
-            background-size: cover; /* Розмір фону */
-            background-position: center; /* Центрування фону */
-            height: 30vh; /* Висота 33% від висоти вікна */
-            text-align: center;
-            color: rgb(29, 29, 29);
-            position: relative;
-            animation: fadeIn 3s ease-in-out;
-            padding: 40px; /* Відступи всередині секції */
-            }
-        @media (max-width: 768px) {
-               .hero {
-                background-image: url('fonkh.jpg'); /* Фонове зображення для мобільної версії */
-                background-size: cover;
-                background-position: center; /* Центрування фону */
-                height: 37vh; /* Висота 33% від висоти вікна */
-                padding: 20px; /* Відступи всередині секції */
-                margin-top: 0px; /* Поднимаем заголовок на 20px */
-                font-size: 1.4rem; /* Можно увеличить размер шрифта для лучшей видимости на мобильных устройствах */
-                }
-            }
-     @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-    .hero h2 {
-    font-size: 1.6rem;
-    margin: 35px 0 10px; /* Уменьшаем верхний отступ */
-    position: relative;
-    top: 0px; /* Поднимаем заголовок выше */
-    display: inline-block;
-    padding: 10px 20px; /* Внутренние отступы для текста */
-    background-color: rgba(255, 255, 255, 0.2); /* Полупрозрачный белый фон */
-    backdrop-filter: blur(2px); /* Размытие фона */
-    border-radius: 10px; /* Скругленные углы */
-    animation: slideDown 1s ease-in-out;
-        }
-         @keyframes slideDown {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        .hero p {
-            font-size: 1.0rem;
-            font-family: 'Open Sans', sans-serif; /* Новый шрифт */
-            color: white; /* Изменяем цвет текста на белый */
-            margin-top: 10px;
-            animation: slideUp 1.5s ease-in-out;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); /* Добавлена тень */
-            }
-            @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        .btn {
-            background-color: #f44336;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            margin-top: 20px;
-            margin-bottom: 50px; /* Увеличиваем расстояние снизу */
-            animation: pulse 4s ease-in-out infinite; /* Анимация биения сердца */
-            animation-delay: 8.5s; /* Задержка перед началом пульсации */
-            text-decoration: none; /* Убираем подчеркивание для ссылок */
-            display: inline-block; /* Для того, чтобы стили кнопки применялись к ссылке */
-        }
-        @keyframes pulse {
-           0% { transform: scale(1); }
-          37% { transform: scale(1.025); }
-          40% { transform: scale(1.05); }
-          49% { transform: scale(1.042); }
-          52% { transform: scale(1.055); }
-         100% { transform: scale(1); }
-        }
-        .btn:hover {
-            background-color: #d32f2f;
-        }
-        .about {
-    position: relative; /* Обязательное позиционирование для псевдоэлемента */
-    color: black; /* Цвет текста */
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Добавлена тень */        
-    padding: 60px 20px;
-    z-index: 1; /* Размещаем контент над фоном */
-    overflow: hidden; /* Скрываем фон, выходящий за границы секции */
-}
-.about::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('fon6.jpg'); /* Второй фон */
-    background-size: cover;
-    background-position: center;
-    opacity:0.0; /* Полупрозрачность фона */
-    filter: blur(0.8px); /* Размытие фона */
-    z-index: -1; /* Размещаем фон за контентом секции */
-}
-#projects-header:hover {
-  transform: scale(1.1);
-  transition: transform 0.3s ease;
-}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<title>Оформлення замовлення - ПроЗахист</title>
+<style>
+body { font-family: 'Roboto', sans-serif; margin:0; padding:0; background:#f4f4f4; }
+.container { width:33%; margin:auto; padding:20px; background:#fff; box-shadow:0 0 10px rgba(0,0,0,0.1); border-radius:8px; margin-top:20px; }
+h1 { text-align:center; }
+.cart-item { display:flex; justify-content:space-between; margin:15px 0; padding:10px; border-bottom:1px solid #ddd; }
+.total-price { font-size:1.2em; font-weight:bold; text-align:right; margin-top:10px; }
+.form-group { margin-bottom:15px; }
+.form-group label { display:block; font-weight:bold; }
+.form-group input { width:100%; padding:8px; margin-top:5px; box-sizing:border-box; border:1px solid #ddd; border-radius:4px; }
+.submit-button { width:100%; padding:10px; background:#4CAF50; color:#fff; font-size:1.1em; font-weight:bold; border:none; border-radius:5px; cursor:pointer; }
+.submit-button:hover { background:#45a049; }
 
-/* Основной контейнер галереи */
-#projects-gallery {
-  opacity: 0;
-  visibility: hidden;
-  height: 0;
-  overflow: hidden;
-  transition: opacity 0.5s ease, transform 0.5s ease, height 0.5s ease;
-  margin: 0 auto; /* Центрируем галерею */
+/* Плавное появление */
+.fade-line {
+  opacity:0;
+  transition: opacity 3s ease;
+  font-size:1.2em;
+  font-weight:bold;
 }
-#projects-gallery.visible {
-  opacity: 1;
-  visibility: visible;
-  height: auto;
-  transform: translateY(0);
-}
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  padding: 0; /* Убираем отступы по краям */
-  margin: 0; /* Убираем отступы по краям */
-}
-.gallery-image {
-  flex: 1 1 auto;
-  width: calc(50% - 5px); /* По 2 изображения в строке */
-  height: auto;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  opacity: 0;
-  transform: scale(0.9);
-}
-.gallery-image.visible {
-  opacity: 1;
-  transform: scale(1);
-}
-@media (min-width: 768px) {
-  .gallery-image {
-    width: calc(10% - 8px); /* 5 изображений в строке на десктопе */
-  }
-}
-/* Модальное окно */
-.modal {
-  display: none;
+.fade-line.show { opacity:1; }
+
+.toast-overlay {
   position: fixed;
-  z-index: 1000;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
+  top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.4);
+  display:flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-  cursor: pointer;
+  opacity:0;
+  visibility:hidden;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+  z-index:10000;
 }
-.modal-content {
-  display: block;
-  margin: 0 auto;
-  width: auto;
-  max-width: 90vw;
-  max-height: 90vh;
-  object-fit: contain;
-  transition: transform 0.3s ease;
+.toast-overlay.show { opacity:1; visibility:visible; }
+.toast-message {
+  background:#4CAF50;
+  color:#fff;
+  padding:20px 40px;
+  border-radius:8px;
+  font-size:1.5em;
+  text-align:center;
+  font-weight:bold;
+  opacity:0;
+  transform: scale(0.7);
+  transition: transform 0.6s ease, opacity 0.6s ease;
 }
-.services {
-  padding: 60px 20px;
-  text-align: center;
-  background-color: white; /* Белый фон для секций */
-}
-.service-item {
-  margin-bottom: 10px; /* Уменьшенный отступ между услугами */
-}
-.service-item h3 {
-  cursor: pointer;
-  transition: transform 0.3s ease-in-out;
-  margin-bottom: 5px; /* Уменьшаем отступ между заголовком и описанием */
-}
-.service-item h3:hover {
-  transform: scale(1.1);
-}
-/* Описание услуг изначально скрыто */
-.service-item p {
-  opacity: 0;
-  max-height: 0;
-  transform: translateY(0px);
-  overflow: hidden;
-  transition: none;
-  margin: 0;
-  display: block;
-}
+.toast-overlay.show .toast-message { opacity:1; transform: scale(1); }
 
-.service-item.active p {
-  opacity: 1;
-  max-height: 300px;
-  transform: translateY(0);
-  transition: opacity 5s ease, max-height 0s ease, transform 0s ease;
+@media(max-width:768px) {
+    .container { width:90%; padding:15px; }
+    h1 { font-size:1.6em; font-weight:bold; }
+    .cart-item { flex-direction:column; text-align:left; }
+    .total-price { font-size:1.1em; text-align:right; }
+    .submit-button { font-size:1.5em; padding:8px; }
 }
-footer {
-  background: linear-gradient(to left, #222222, #dadada); /* Градиентный фон */
-  color: white;
-  padding: 0px 0px; /* Исправленные отступы */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 10px; /* Отступы между элементами в футере */
-  text-align: center;
-  width: 100%; /* Растягиваем футер на всю ширину страницы */
-}
-.messenger-icons {
-  margin-top: 30px 0; /* Уменьшенный отступ сверху */
-}
-.messenger-icons img {
-  width: 40px;
-  margin: 0 10px; /* Уменьшенный отступ между иконками */
-  transition: transform 0.3s;
-}
-.messenger-icons img:hover {
-  transform: scale(1.2);
-}
-        /* Анимация появления слева */
-@keyframes slideInFromLeft {
-    0% {
-        opacity: 0;
-        transform: translateX(-5%); /* Начинаем за пределами экрана слева */
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0); /* Элемент возвращается на свое место */
-    }
-}
-/* Применение анимации с разной задержкой для каждого элемента */
-.service-item {
-    opacity: 0; /* Изначально элементы невидимы */
-    animation: slideInFromLeft 1s ease-in-out forwards; /* Анимация появления */
-}
-.service-item:nth-child(1) {
-    animation-delay: 0.0s; /* Задержка для первого элемента */
-}
-.service-item:nth-child(2) {
-    animation-delay: 4.0s; /* Задержка для второго элемента */
-}
-.service-item:nth-child(3) {
-    animation-delay: 5.2s; /* Задержка для третьего элемента */
-}
-.service-item:nth-child(4) {
-    animation-delay: 6.4s; /* Задержка для четвертого элемента */
-}
-.projects-inner {
-
-  margin: 0 auto;
-  padding: 0 5px;
-  box-sizing: border-box;
-}
-
-
-   </style>
+</style>
 </head>
 <body>
-<header>
-  <div>
-      <h1 class="company-name"><span class="red">Pro</span><span class="black">Монтаж</span></h1>
-      <p class="company-description"> Встановлення охоронних систем </p>
-      <p class="company-phone">
-          <a href="tel:+380935016040">093-501-60-40,</a>
-          <a href="tel:+380674188932"><span class="black">067-418-89-32</span></a>
-      </p>
-  </div>
-  <img src="Logo.png" alt="ПроМонтаж" class="logo">
-</header>
-<section class="hero">
-    <h2>Захисти свій дім та бізнес разом з <span class="red">Pro</span><span class="black">Монтаж</span></h2>
-    <p>Надійні рішення для вашої безпеки</p>
-    <a href="https://t.me/+380935016040" class="btn" target="_blank">Отримати консультацію</a>
-</section>
-<section class="services">
-    <h2>Встановлюємо</h2>
-    <div class="service-item">
-        <h3>Відеоспостереження</h3>
-        <p>Сучасні системи Dahua, IMOU, Hikvision дозволяють здійснювати відеоконтроль з будь-якої точки світу .</p>
-    </div>
-    <div class="service-item"> 
-        <h3>Системи контролю доступу</h3>
-        <p>Cистеми ZKTeko, Atis, SEVEN дозволяють обмежити доступ сторонніх осіб до ваших приміщень.</p>
-    </div>
-    <div class="service-item">
-        <h3>Охоронну сигналізацію</h3>
-        <p>Комплексні системи охорони Ajax, захистять від несанкціонованого проникнення та збережуть майно.</p>
-    </div>
-    <section id="projects">
-    <div class="projects-inner">
-  <h2 id="projects-header" class="clickable">Наші проекти:</h2>
-  <div id="projects-gallery" class="hidden">
-    <img src="Установка контроля доступа.jpg" class="gallery-image" alt="Установка контроля доступа">
-    <img src="Монтаж замка магнитного.jpg" class="gallery-image" alt="Монтаж замка магнитного">
-    <img src="Установка видеокамеры на столб.jpg" class="gallery-image" alt="Установка видеокамеры на столб">
-    <img src="004.jpeg" class="gallery-image" alt="Проект 4">
-    <img src="005.jpeg" class="gallery-image" alt="Проект 5">
-    <img src="006.jpeg" class="gallery-image" alt="Проект 6">
-    <img src="007.jpeg" class="gallery-image" alt="Проект 7">
-    <img src="008.jpeg" class="gallery-image" alt="Проект 8">
-    <img src="009.jpeg" class="gallery-image" alt="Проект 9">
-    <img src="010.jpeg" class="gallery-image" alt="Проект 10">
-    <img src="011.jpeg" class="gallery-image" alt="Проект 11">
-    <img src="012.jpeg" class="gallery-image" alt="Проект 12">
-    <img src="013.jpeg" class="gallery-image" alt="Проект 13">
-    <img src="014.jpeg" class="gallery-image" alt="Проект 14">
-    <img src="015.jpeg" class="gallery-image" alt="Проект 15">
-    <img src="016.jpeg" class="gallery-image" alt="Проект 16">
-    <img src="017.jpeg" class="gallery-image" alt="Проект 17">
-    <img src="018.jpeg" class="gallery-image" alt="Проект 18">
-    <img src="019.jpeg" class="gallery-image" alt="Проект 19">
-    <img src="020.jpeg" class="gallery-image" alt="Проект 20">
-    <img src="021.jpeg" class="gallery-image" alt="Проект 21">
-    <img src="022.jpeg" class="gallery-image" alt="Проект 22">
-    <img src="023.jpg" class="gallery-image" alt="Проект 23">
-    <img src="024.jpg" class="gallery-image" alt="Проект 24">
-    <img src="025.jpg" class="gallery-image" alt="Проект 25">
-    <img src="026.jpg" class="gallery-image" alt="Проект 26">
-    <img src="027.jpg" class="gallery-image" alt="Проект 27">
-    <img src="028.jpg" class="gallery-image" alt="Проект 28">
-    <img src="037.jpg" class="gallery-image" alt="Проект 29">
-    <img src="036.jpg" class="gallery-image" alt="Проект 30">
-</div>
-</div>
-          <!-- Modal -->
-<div class="modal">
-    <span class="close">&times;</span>
-     <img class="modal-content" src="modal-content" alt="Изображение">
-</div>
-</section>
-<section class="about">
-    <h2>О компанії <span class="red">Pro</span><span class="black">Монтаж</span></h2>
-    <p>Ми пропонуємо комплексні рішення для бізнесу та приватних клієнтів, гарантуючи високу якість та надійність.</p>
-</section>
-<section class="contact">
-    <h2>Контакти:</h2>
-    <p class="company-phone">
-        <a href="tel:+380935016040">(093) 501-60-40</a>, 
-        <a href="tel:+380662904960">(067) 418-89-32</a>
-    </p>
-    <div class="messenger-icons">
-        <a href="https://wa.me/380935016040"><img src="WhatsApp.png" alt="WhatsApp"></a>
-        <a href="https://t.me/+380935016040"><img src="Telegram.png" alt="Telegram"></a>
-        <a href="viber://add?number=380674188932"><img src="Viber.png" alt="Viber"></a>
-    </div>
-    <a href="mailto:promontazh.kharkiv@ukr.net?subject=Запит%20на%20послугу&body=" class="btn">promontazh.kharkiv@ukr.net</a>
-</section>
-</section>
-    <section>
-<iframe 
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d274732.06859969975!2d36.064236445640055!3d50.00644977534205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4127a117aa4b5e7f%3A0x70286c7a86b0df27!2z0KXQvtC70YzQutC-!5e0!3m2!1suk!2sua!4v1691147600000!5m2!1suk!2sua" 
-    width="100%" height="130" style="border:0;" allowfullscreen="" loading="lazy">
-</iframe>
-</section>
-<footer>
-  <p>&copy; 2025 <span class="red">Pro</span><span class="black">Монтаж.</span> Всі права захищені.</p>
-</footer>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const serviceItems = document.querySelectorAll(".service-item");
-  const gallery = document.getElementById("projects-gallery");
-  const projectsHeader = document.getElementById("projects-header");
-  const images = document.querySelectorAll(".gallery-image");
-  const modal = document.querySelector(".modal");
-  const modalImg = document.querySelector(".modal-content");
-// Переключение услуг
-  serviceItems.forEach((item) => {
-    const header = item.querySelector("h3");
-    header.addEventListener("click", () => {
-      if (item.classList.contains("active")) {
-        item.classList.remove("active"); // Сворачиваем текущую услугу
-      } else {
-        serviceItems.forEach((i) => i.classList.remove("active")); // Сворачиваем все услуги
-        item.classList.add("active"); // Разворачиваем текущую
-      }
-    });
-  });
-// Открытие галереи
-  if (projectsHeader && gallery) {
-    projectsHeader.addEventListener("click", () => {
-      gallery.classList.toggle("visible");
 
-      if (gallery.classList.contains("visible")) {
-        images.forEach((img, index) => {
-          setTimeout(() => {
-            img.classList.add("visible");
-          }, index * 100);
-        });
-      } else {
-        images.forEach((img) => img.classList.remove("visible"));
-      }
+<div class="container">
+    <h1>Оформлення замовлення</h1>
+
+    <h2>Ваше замовлення</h2>
+    <div id="cart-items"></div>
+    <div class="total-price" id="total-price"></div>
+
+    <h2>Контактні дані</h2>
+    <form id="checkout-form" action="https://formspree.io/f/xrbadqqk" method="POST">
+        <div class="form-group">
+            <label for="name">Прізвище, Ім'я</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Телефон отримувача</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div class="form-group">
+            <label for="city">Місто</label>
+            <input type="text" id="city" name="city" required>
+        </div>
+        <div class="form-group">
+            <label for="branch">Номер відділення "Нової Пошти"</label>
+            <input type="tel" id="branch" name="branch" required>
+        </div>
+        <input type="hidden" id="cart-data" name="cart">
+        <button type="submit" class="submit-button">Підтвердити замовлення</button>
+    </form>
+</div>
+
+<div class="toast-overlay" id="toast">
+    <div class="toast-message">Ваше замовлення підтверджено! Дякуємо!</div>
+</div>
+
+<audio id="cash-sound" src="https://cdn.pixabay.com/download/audio/2021/08/04/audio_86d5e5cd4c.mp3?filename=cash-register-1-5931.mp3"></audio>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+function calculateDiscount(total) {
+    let discount = 0;
+    if (total >= 3000 && total < 10000) discount = 3;
+    else if (total >= 10000 && total < 20000) discount = 5;
+    else if (total >= 20000 && total < 50000) discount = 7;
+    else if (total >= 50000 && total < 90000) discount = 10;
+    else if (total >= 90000) discount = 12;
+    if (total >= 500 && total < 5000) discount = 3;
+    else if (total >= 5000 && total < 15000) discount = 5;
+    else if (total >= 15000 && total < 30000) discount = 7;
+    else if (total >= 30000 && total < 60000) discount = 10;
+    else if (total >= 60000) discount = 12;
+    return discount;
+}
+
+function createLine(text, color="#000") {
+    const line = document.createElement('div');
+    line.classList.add('fade-line');
+    line.textContent = text;
+    line.style.color = color;
+    line.style.fontSize = "1.0em"; // одинаковый размер
+    line.style.fontWeight = "bold";
+    return line;
+}
+
+function animateNumber(element, start, end, duration) {
+    const range = end - start;
+    let startTime = null;
+    function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime)/duration, 1);
+        element.textContent = `До сплати: ${Math.round(start + range*progress).toFixed(2)} грн`;
+        if (progress < 1) window.requestAnimationFrame(step);
+        else document.getElementById('cash-sound').play();
+    }
+    window.requestAnimationFrame(step);
+}
+
+function displayOrder() {
+    const orderItemsContainer = document.getElementById('cart-items');
+    const totalPriceElement = document.getElementById('total-price');
+    orderItemsContainer.innerHTML = '';
+    totalPriceElement.innerHTML = '';
+
+    let total = 0;
+    let cartText = "";
+
+    cart.forEach(item => {
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
+        const itemElement = document.createElement('div');
+        itemElement.classList.add('cart-item');
+        itemElement.textContent = `${item.name} — ${item.price} грн × ${item.quantity} = ${subtotal} грн`;
+        orderItemsContainer.appendChild(itemElement);
+        cartText += `${item.name} — ${item.price} грн × ${item.quantity} = ${subtotal} грн\n`;
     });
-  }
-// Открытие изображения в модальном окне
-  if (images && modal && modalImg) {
-    images.forEach((img) => {
-      img.addEventListener("click", (e) => {
-        e.stopPropagation(); // Предотвращаем закрытие модального окна при клике на изображение
-        modal.style.display = "flex";
-        modalImg.src = img.src;
-        modalImg.style.transform = "scale(1)";
-      });
+
+    const discountPercent = calculateDiscount(total);
+    const discountAmount = (total * discountPercent) / 100;
+    const finalTotal = total - discountAmount;
+
+    // Загальна сума сразу
+    const line1 = createLine(`Загальна сума: ${total.toFixed(2)} грн`);
+    line1.classList.add('show');
+    totalPriceElement.appendChild(line1);
+
+    if (discountPercent > 0) {
+        // Знижка плавно за 3 секунды
+        const line2 = createLine(`Знижка:  - ${discountAmount.toFixed(2)} грн`, "green");
+        totalPriceElement.appendChild(line2);
+        setTimeout(()=> line2.classList.add('show'), 3000);
+
+        // До сплати через 1 сек после окончания анимации скидки
+        const line3 = createLine(`До сплати: 0 грн`);
+        totalPriceElement.appendChild(line3);
+        setTimeout(()=>{
+            line3.classList.add('show');
+            animateNumber(line3, 0, finalTotal, 1500);
+        }, 3000 + 2000); 
+
+    }
+
+    document.getElementById('cart-data').value =
+        cartText +
+        `\nЗагальна сума: ${total} грн` +
+        (discountPercent > 0
+            ? `\nЗнижка ${discountPercent}%: -${discountAmount} грн\nДо сплати: ${finalTotal.toFixed(2)} грн`
+            : "");
+}
+
+displayOrder();
+
+// Авто-переход между полями при Enter
+['name','phone','city','branch'].forEach((id,index)=>{
+    const field = document.getElementById(id);
+    field.addEventListener('keydown', function(e){
+        if(e.key==="Enter"){
+            e.preventDefault();
+            const nextField = ['name','phone','city','branch'][index+1];
+            if(nextField) document.getElementById(nextField).focus();
+        }
     });
-  }
-// Закрытие модального окна
-  if (modal) {
-    modal.addEventListener("click", () => {
-      modal.style.display = "none";
-      modalImg.style.transform = "scale(0.8)";
-    });
-  }
 });
 
+// Отправка формы
+document.getElementById('checkout-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    fetch(form.action, { method: form.method, body: data, headers: {'Accept':'application/json'} })
+        .then(response=>{
+            if(response.ok){
+                showToast();
+                localStorage.removeItem('cart');
+                displayOrder();
+                form.reset();
+                setTimeout(()=>{ window.location.href="index.html"; },3000);
+            } else {
+                response.json().then(data=> alert(data.error || "Сталася помилка при відправці замовлення."));
+            }
+        }).catch(()=> alert("Помилка з’єднання із сервером."));
+});
+
+function showToast(){
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(()=>{ toast.classList.remove('show'); }, 2500);
+}
 </script>
+
 </body>
 </html>
