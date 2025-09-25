@@ -106,7 +106,7 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
 // Функция расчета процента скидки
 function calculateDiscount(total) {
     let discount = 0;
-    if (total >= 500 && total < 5000) discount = 3;
+    if (total >= 1000 && total < 5000) discount = 3;
     else if (total >= 5000 && total < 15000) discount = 5;
     else if (total >= 15000 && total < 30000) discount = 7;
     else if (total >= 30000 && total < 60000) discount = 10;
@@ -171,7 +171,7 @@ function displayOrder() {
 
     if (discountPercent > 0) {
         // Скидка плавно через 2 секунды
-        const discountLine = createLine(`Знижка: -${discountAmount.toFixed(2)} грн`, "green");
+        const discountLine = createLine(`Знижка: - ${discountAmount.toFixed(2)} грн`, "green");
         totalPriceElement.appendChild(discountLine);
         setTimeout(() => discountLine.classList.add('show'), 2000);
 
@@ -241,6 +241,7 @@ function showToast(){
 </script>
 </body>
 </html>
+
 
 
 
