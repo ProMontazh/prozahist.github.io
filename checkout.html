@@ -67,8 +67,6 @@ h1 { text-align:center; }
 <div class="container">
     <h1>Оформлення замовлення</h1>
 
-    <h2>Ваше замовлення</h2>
-    <div id="cart-items"></div>
     <div class="total-price" id="total-price"></div>
 
     <h2>Контактні дані</h2>
@@ -103,6 +101,28 @@ h1 { text-align:center; }
 <script>
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+// Генерация порядкового номера заказа с обнулением после 99
+function getDailyOrderNumber() {
+    const today = new Date().toISOString().slice(0,10); // yyyy-mm-dd
+    let ordersData = JSON.parse(localStorage.getItem('dailyOrders') || '{}');
+    if (!ordersData.date || ordersData.date !== today) {
+        ordersData = { date: today, number: 0 };
+    }
+    ordersData.number = (ordersData.number % 99) + 1;
+    localStorage.setItem('dailyOrders', JSON.stringify(ordersData));
+    return ordersData.number;
+}
+
+// Формируем номер заказа: NN-ддммгг
+function generateOrderNumber() {
+    const orderNum = getDailyOrderNumber();
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2,'0');
+    const month = String(now.getMonth()+1).padStart(2,'0');
+    const year = String(now.getFullYear()).slice(-2);
+    return `${String(orderNum).padStart(2,'0')}-${day}${month}${year}`;
+}
+
 function calculateDiscount(total) {
     let discount = 0;
     if (total >= 500 && total < 5000) discount = 3;
@@ -118,6 +138,8 @@ function createLine(text, color="#000") {
     line.classList.add('fade-line');
     line.textContent = text;
     line.style.color = color;
+    line.style.fontSize = "1.0em"; 
+    line.style.fontWeight = "bold";
     return line;
 }
 
@@ -134,27 +156,9 @@ function animateNumber(element, start, end, duration) {
     window.requestAnimationFrame(step);
 }
 
-// Генерация номера заказа
-function generateOrderNumber() {
-    const today = new Date();
-    const day = String(today.getDate()).padStart(2,'0');
-    const month = String(today.getMonth()+1).padStart(2,'0');
-    const year = String(today.getFullYear()).slice(-2);
-
-    const storageKey = `orderCount-${day}${month}${year}`;
-    let orderCount = parseInt(localStorage.getItem(storageKey)) || 0;
-    orderCount = orderCount < 99 ? orderCount + 1 : 1;
-    localStorage.setItem(storageKey, orderCount);
-
-    return `${String(orderCount).padStart(2,'0')}-${day}${month}${year}`;
-}
-
 function displayOrder() {
-    const orderItemsContainer = document.getElementById('cart-items');
     const totalPriceElement = document.getElementById('total-price');
     const cartDataField = document.getElementById('cart-data');
-
-    orderItemsContainer.innerHTML = '';
     totalPriceElement.innerHTML = '';
 
     let total = 0;
@@ -163,10 +167,6 @@ function displayOrder() {
     cart.forEach(item => {
         const subtotal = item.price * item.quantity;
         total += subtotal;
-        const itemElement = document.createElement('div');
-        itemElement.classList.add('cart-item');
-        itemElement.textContent = `${item.name} — ${item.price} грн × ${item.quantity} = ${subtotal} грн`;
-        orderItemsContainer.appendChild(itemElement);
         cartText += `${item.name} — ${item.price} грн × ${item.quantity} = ${subtotal} грн\n`;
     });
 
@@ -174,13 +174,13 @@ function displayOrder() {
     const discountAmount = (total * discountPercent) / 100;
     const finalTotal = total - discountAmount;
 
-    // Номер заказа
+    // "Ваше замовлення №NN-ддммгг"
     const orderNumber = generateOrderNumber();
-    const orderNumberElement = document.createElement('div');
-    orderNumberElement.textContent = `Ваше замовлення №${orderNumber}`;
-    orderNumberElement.style.fontWeight = "bold";
-    orderNumberElement.style.marginBottom = "10px";
-    totalPriceElement.appendChild(orderNumberElement);
+    const orderHeader = document.createElement('div');
+    orderHeader.textContent = `Ваше замовлення №${orderNumber}`;
+    orderHeader.style.fontWeight = "bold";
+    orderHeader.style.marginBottom = "10px";
+    totalPriceElement.appendChild(orderHeader);
 
     // Сумма заказа сразу
     const totalLine = createLine(`Загальна сума: ${total.toFixed(2)} грн`);
@@ -193,7 +193,7 @@ function displayOrder() {
         totalPriceElement.appendChild(discountLine);
         setTimeout(()=> discountLine.classList.add('show'), 2000);
 
-        // Итог к оплате после скидки с анимацией через 4с
+        // Итог к оплате через 4с
         const finalLine = createLine(`До сплати: 0 грн`);
         totalPriceElement.appendChild(finalLine);
         setTimeout(()=>{
@@ -202,7 +202,6 @@ function displayOrder() {
         }, 4000);
     }
 
-    // Записываем в скрытое поле
     cartDataField.value =
         `Номер замовлення: ${orderNumber}\n` +
         cartText +
@@ -251,6 +250,5 @@ function showToast(){
     setTimeout(()=>{ toast.classList.remove('show'); }, 2500);
 }
 </script>
-
 </body>
 </html>
