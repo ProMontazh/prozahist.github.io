@@ -159,35 +159,34 @@ function displayOrder() {
     const discountAmount = (total * discountPercent) / 100;
     const finalTotal = total - discountAmount;
 
-    // Загальна сума сразу
-    const line1 = createLine(`Загальна сума: ${total.toFixed(2)} грн`);
-    line1.classList.add('show');
-    totalPriceElement.appendChild(line1);
-
     if (discountPercent > 0) {
-        // Знижка плавно за 3 секунды
-        const line2 = createLine(`Знижка:  - ${discountAmount.toFixed(2)} грн`, "green");
-        totalPriceElement.appendChild(line2);
-        setTimeout(()=> line2.classList.add('show'), 3000);
+        // Сначала показываем скидку с плавным появлением через 2 секунды
+        const discountLine = createLine(`Знижка: -${discountAmount.toFixed(2)} грн`, "green");
+        totalPriceElement.appendChild(discountLine);
+        setTimeout(() => discountLine.classList.add('show'), 2000);
 
-        // До сплати через 1 сек после окончания анимации скидки
-        const line3 = createLine(`До сплати: 0 грн`);
-        totalPriceElement.appendChild(line3);
-        setTimeout(()=>{
-            line3.classList.add('show');
-            animateNumber(line3, 0, finalTotal, 1500);
-        }, 3000 + 2000); 
-
+        // Через 2.5 секунды показываем итоговую сумму с анимацией
+        const totalLine = createLine(`До сплати: 0 грн`);
+        totalPriceElement.appendChild(totalLine);
+        setTimeout(() => {
+            totalLine.classList.add('show');
+            animateNumber(totalLine, 0, finalTotal, 2000);
+        }, 2500); // небольшая задержка после появления скидки
+    } else {
+        // Если скидки нет, сразу анимируем итог
+        const totalLine = createLine(`До сплати: 0 грн`);
+        totalPriceElement.appendChild(totalLine);
+        totalLine.classList.add('show');
+        animateNumber(totalLine, 0, finalTotal, 2000);
     }
 
     document.getElementById('cart-data').value =
         cartText +
-        `\nЗагальна сума: ${total} грн` +
+        `\nЗагальна сума: ${total.toFixed(2)} грн` +
         (discountPercent > 0
-            ? `\nЗнижка ${discountPercent}%: -${discountAmount} грн\nДо сплати: ${finalTotal.toFixed(2)} грн`
+            ? `\nЗнижка ${discountPercent}%: -${discountAmount.toFixed(2)} грн\nДо сплати: ${finalTotal.toFixed(2)} грн`
             : "");
 }
-
 displayOrder();
 
 // Авто-переход между полями при Enter
@@ -230,4 +229,5 @@ function showToast(){
 
 </body>
 </html>
+
 
