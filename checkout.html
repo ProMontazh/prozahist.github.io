@@ -103,6 +103,7 @@ h1 { text-align:center; }
 <script>
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+// Функция расчета процента скидки
 function calculateDiscount(total) {
     let discount = 0;
     if (total >= 500 && total < 5000) discount = 3;
@@ -113,16 +114,18 @@ function calculateDiscount(total) {
     return discount;
 }
 
+// Создание элемента с плавным появлением
 function createLine(text, color="#000") {
     const line = document.createElement('div');
     line.classList.add('fade-line');
     line.textContent = text;
     line.style.color = color;
-    line.style.fontSize = "1.0em"; // одинаковый размер
+    line.style.fontSize = "1.0em";
     line.style.fontWeight = "bold";
     return line;
 }
 
+// Анимация увеличения числа
 function animateNumber(element, start, end, duration) {
     const range = end - start;
     let startTime = null;
@@ -136,6 +139,7 @@ function animateNumber(element, start, end, duration) {
     window.requestAnimationFrame(step);
 }
 
+// Отображение заказа
 function displayOrder() {
     const orderItemsContainer = document.getElementById('cart-items');
     const totalPriceElement = document.getElementById('total-price');
@@ -145,6 +149,7 @@ function displayOrder() {
     let total = 0;
     let cartText = "";
 
+    // Список товаров
     cart.forEach(item => {
         const subtotal = item.price * item.quantity;
         total += subtotal;
@@ -159,27 +164,32 @@ function displayOrder() {
     const discountAmount = (total * discountPercent) / 100;
     const finalTotal = total - discountAmount;
 
+    // Сумма без скидки (всегда)
+    const totalLine = createLine(`Загальна сума: ${total.toFixed(2)} грн`);
+    totalLine.classList.add('show');
+    totalPriceElement.appendChild(totalLine);
+
     if (discountPercent > 0) {
-        // Сначала показываем скидку с плавным появлением через 2 секунды
+        // Скидка плавно через 2 секунды
         const discountLine = createLine(`Знижка: -${discountAmount.toFixed(2)} грн`, "green");
         totalPriceElement.appendChild(discountLine);
         setTimeout(() => discountLine.classList.add('show'), 2000);
 
-        // Через 2.5 секунды показываем итоговую сумму с анимацией
-        const totalLine = createLine(`До сплати: 0 грн`);
-        totalPriceElement.appendChild(totalLine);
+        // Итоговая сумма анимируется после появления скидки
+        const finalLine = createLine(`До сплати: 0 грн`);
+        totalPriceElement.appendChild(finalLine);
         setTimeout(() => {
-            totalLine.classList.add('show');
-            animateNumber(totalLine, 0, finalTotal, 2000);
-        }, 2500); // небольшая задержка после появления скидки
+            finalLine.classList.add('show');
+            animateNumber(finalLine, 0, finalTotal, 2000);
+        }, 4500); // 2 сек + небольшой буфер для плавности
     } else {
-        // Если скидки нет, сразу анимируем итог
-        const totalLine = createLine(`До сплати: 0 грн`);
-        totalPriceElement.appendChild(totalLine);
-        totalLine.classList.add('show');
-        animateNumber(totalLine, 0, finalTotal, 2000);
+        // Если скидки нет
+        const finalLine = createLine(`До сплати: ${total.toFixed(2)} грн`);
+        finalLine.classList.add('show');
+        totalPriceElement.appendChild(finalLine);
     }
 
+    // Сохраняем данные для формы
     document.getElementById('cart-data').value =
         cartText +
         `\nЗагальна сума: ${total.toFixed(2)} грн` +
@@ -187,6 +197,8 @@ function displayOrder() {
             ? `\nЗнижка ${discountPercent}%: -${discountAmount.toFixed(2)} грн\nДо сплати: ${finalTotal.toFixed(2)} грн`
             : "");
 }
+
+// Вызов отображения заказа при загрузке
 displayOrder();
 
 // Авто-переход между полями при Enter
@@ -220,14 +232,15 @@ document.getElementById('checkout-form').addEventListener('submit', function(e){
         }).catch(()=> alert("Помилка з’єднання із сервером."));
 });
 
+// Показ уведомления
 function showToast(){
     const toast = document.getElementById('toast');
     toast.classList.add('show');
     setTimeout(()=>{ toast.classList.remove('show'); }, 2500);
 }
 </script>
-
 </body>
 </html>
+
 
 
