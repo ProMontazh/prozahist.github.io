@@ -20,7 +20,7 @@ h1 { text-align:center; }
 /* Плавное появление */
 .fade-line {
   opacity:0;
-  transition: opacity 1.5s ease;
+  transition: opacity 2s ease;
   font-size:1.2em;
   font-weight:bold;
 }
@@ -67,6 +67,8 @@ h1 { text-align:center; }
 <div class="container">
     <h1>Оформлення замовлення</h1>
 
+    <h2 id="order-header">Ваше замовлення</h2>
+    <div id="cart-items"></div>
     <div class="total-price" id="total-price"></div>
 
     <h2>Контактні дані</h2>
@@ -101,9 +103,9 @@ h1 { text-align:center; }
 <script>
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// Генерация порядкового номера заказа с обнулением после 99
+// Порядковый номер заказа с обнулением после 99
 function getDailyOrderNumber() {
-    const today = new Date().toISOString().slice(0,10); // yyyy-mm-dd
+    const today = new Date().toISOString().slice(0,10); 
     let ordersData = JSON.parse(localStorage.getItem('dailyOrders') || '{}');
     if (!ordersData.date || ordersData.date !== today) {
         ordersData = { date: today, number: 0 };
@@ -157,16 +159,25 @@ function animateNumber(element, start, end, duration) {
 }
 
 function displayOrder() {
+    const orderItemsContainer = document.getElementById('cart-items');
     const totalPriceElement = document.getElementById('total-price');
     const cartDataField = document.getElementById('cart-data');
+
+    orderItemsContainer.innerHTML = '';
     totalPriceElement.innerHTML = '';
 
     let total = 0;
     let cartText = "";
 
+    // Список товаров
     cart.forEach(item => {
         const subtotal = item.price * item.quantity;
         total += subtotal;
+        const itemElement = document.createElement('div');
+        itemElement.classList.add('cart-item');
+        itemElement.textContent = `${item.name} — ${item.price} грн × ${item.quantity} = ${subtotal} грн`;
+        orderItemsContainer.appendChild(itemElement);
+
         cartText += `${item.name} — ${item.price} грн × ${item.quantity} = ${subtotal} грн\n`;
     });
 
@@ -174,13 +185,9 @@ function displayOrder() {
     const discountAmount = (total * discountPercent) / 100;
     const finalTotal = total - discountAmount;
 
-    // "Ваше замовлення №NN-ддммгг"
+    // Номер заказа сразу после "Ваше замовлення"
     const orderNumber = generateOrderNumber();
-    const orderHeader = document.createElement('div');
-    orderHeader.textContent = `Ваше замовлення №${orderNumber}`;
-    orderHeader.style.fontWeight = "bold";
-    orderHeader.style.marginBottom = "10px";
-    totalPriceElement.appendChild(orderHeader);
+    document.getElementById('order-header').textContent = `Ваше замовлення №${orderNumber}`;
 
     // Сумма заказа сразу
     const totalLine = createLine(`Загальна сума: ${total.toFixed(2)} грн`);
@@ -250,5 +257,6 @@ function showToast(){
     setTimeout(()=>{ toast.classList.remove('show'); }, 2500);
 }
 </script>
+
 </body>
 </html>
