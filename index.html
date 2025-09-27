@@ -61,13 +61,12 @@
             padding-top: 200px;
             text-shadow: 2px 2px 4px #000;
         }
-        #products {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
-            justify-content: space-around;
-        }
+        products {
+    display: flex;
+    flex-wrap: wrap;  /* позволяет перенос */
+    gap: 20px;
+    justify-content: center;
+}
         .product-item {
             background-color: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -664,6 +663,7 @@ function clearCart() {
 </script>
 </body>
 </html>
+
 
 
 
