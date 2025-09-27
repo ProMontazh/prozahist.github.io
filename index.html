@@ -293,17 +293,15 @@
   margin-top: 10px;
   font-weight: bold;
 }
-@media(max-width:768px){
+/* На мобиле по 2 в ряд */
+@media(max-width:768px) {
   .category-buttons {
-    flex-wrap: wrap;       /* перенос строк */
-    flex-direction: row;   /* ставим обратно в ряд */
-    justify-content: center;
+    flex-direction: row !important;  /* сбиваем column */
   }
   .category-card {
-    flex: 1 1 45%;   /* по 2 в ряд */
-    max-width: 45%;
+    flex: 1 1 45% !important;
+    max-width: 45% !important;
   }
-}
 
 
         
@@ -659,6 +657,7 @@ function clearCart() {
 </script>
 </body>
 </html>
+
 
 
 
