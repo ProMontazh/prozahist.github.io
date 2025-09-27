@@ -277,31 +277,38 @@
   padding: 15px;
   text-align: center;
   cursor: pointer;
-  width: 200px;
+  width: 200px;  /* фиксированная ширина на ПК */
   transition: transform 0.3s;
 }
+
 .category-card:hover {
   transform: scale(1.05);
 }
+
 .category-card img {
   width: 100%;
   height: auto;
   border-radius: 8px;
 }
+
 .category-card span {
   display: block;
   margin-top: 10px;
   font-weight: bold;
 }
+
 /* На мобиле по 2 в ряд */
-@media(max-width:768px) {
+@media (max-width:768px) {
   .category-buttons {
-    flex-direction: row !important;  /* сбиваем column */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
   }
   .category-card {
-    flex: 1 1 45% !important;
+    width: 45% !important;   /* вместо 200px */
     max-width: 45% !important;
   }
+}
 
 
         
@@ -657,6 +664,7 @@ function clearCart() {
 </script>
 </body>
 </html>
+
 
 
 
