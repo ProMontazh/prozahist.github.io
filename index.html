@@ -260,7 +260,10 @@
             }
 
         }
-        .category-buttons {
+
+
+        
+.category-buttons {
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -300,6 +303,8 @@
   }
 }
 
+
+        
         </style>
 </head>
 <body>
@@ -627,10 +632,25 @@ function clearCart() {
         if (!cartContent.contains(event.target) && !cartButton.contains(event.target)) {
             cartContent.style.display = 'none';
         }
+
+
+        
+  function toggleCategory(catId){
+  document.querySelectorAll('.products').forEach(s=>s.style.display='none');
+  const target = document.getElementById(catId);
+  if(target){
+    target.style.display='block';
+    target.scrollIntoView({behavior:'smooth'});
+  }
+}
+
+
+        
     });
 </script>
 </body>
 </html>
+
 
 
 
