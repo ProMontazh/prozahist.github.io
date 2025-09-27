@@ -68,7 +68,7 @@
             margin-top: 20px;
             justify-content: space-around;
         }
-        
+
         .product-item {
             background-color: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -279,7 +279,6 @@
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   padding: 0px;
-    padding-bottom: 40px; /* чтобы текст был видимым */
   text-align: center;
   cursor: pointer;
   flex: 1 1 calc(16.66% - 20px); /* 6 карточек в ряд */
@@ -301,13 +300,13 @@
 
 .category-card span {
   position: absolute;       /* Располагаем текст поверх изображения */
-  bottom: 5px;                /* Внизу карточки */
+  bottom: 0;                /* Внизу карточки */
   left: 0;
   width: 100%;
-  padding: 5px 10px;
-  color: #808080;     /* серый цвет текста */
+  padding: 10px;
+  color: white;
   font-weight: bold;
-  background: none; /* прозрачный фон под текст */
+  background: rgba(0,0,0,0.5); /* Полупрозрачный фон под текст */
   text-align: center;
   box-sizing: border-box;
   font-size: 1em;
@@ -676,9 +675,3 @@ function clearCart() {
 </script>
 </body>
 </html>
-
-
-
-
-
-
