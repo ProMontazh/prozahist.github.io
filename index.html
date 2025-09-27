@@ -273,6 +273,8 @@
 }
 
 .category-card {
+    position: relative;       /* Важно для абсолютного позиционирования текста */
+    overflow: hidden;         /* Чтобы текст не выходил за границы */
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -291,14 +293,23 @@
 
 .category-card img {
   width: 100%;
-  height: auto;
-  border-radius: 8px;
+  height: 100%;             /* Занимает всю карточку */
+  object-fit: cover;        /* Кадрирует изображение, сохраняя пропорции */
+  display: block;
 }
 
 .category-card span {
-  display: block;
-  margin-top: 10px;
+  position: absolute;       /* Располагаем текст поверх изображения */
+  bottom: 0;                /* Внизу карточки */
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  color: white;
   font-weight: bold;
+  background: rgba(0,0,0,0.5); /* Полупрозрачный фон под текст */
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 1em;
 }
 
 /* На мобиле по 2 в ряд */
@@ -664,4 +675,5 @@ function clearCart() {
 </script>
 </body>
 </html>
+
 
