@@ -295,11 +295,13 @@
 }
 @media(max-width:768px){
   .category-buttons {
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;       /* перенос строк */
+    flex-direction: row;   /* ставим обратно в ряд */
+    justify-content: center;
   }
   .category-card {
-    width: 90%;
+    flex: 1 1 45%;   /* по 2 в ряд */
+    max-width: 45%;
   }
 }
 
@@ -657,6 +659,7 @@ function clearCart() {
 </script>
 </body>
 </html>
+
 
 
 
