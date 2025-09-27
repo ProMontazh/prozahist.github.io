@@ -61,12 +61,14 @@
             padding-top: 200px;
             text-shadow: 2px 2px 4px #000;
         }
-        products {
-    display: flex;
-    flex-wrap: wrap;  /* позволяет перенос */
-    gap: 20px;
-    justify-content: center;
-}
+        #products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: space-around;
+        }
+        
         .product-item {
             background-color: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -261,7 +263,7 @@
         }
 
 
-        
+
 .category-buttons {
   display: flex;
   justify-content: center;
@@ -310,7 +312,7 @@
 }
 
 
-        
+
         </style>
 </head>
 <body>
@@ -394,7 +396,7 @@
 </div>
 
 
-    
+
 <div class="container">
     <h2 style="text-align: center; margin-bottom: 40px; margin-top: 80px;"> Внутрішні Wi-Fi відеокамери</h2>
     <section id="products">
@@ -485,7 +487,7 @@
                 <button class="btn" onclick="addToCart(event, { name: 'IP-камера AJAX', price: 3000 })">Додати у кошик</button>
             </div>
             <h2 style="text-align: center; margin-bottom: 40px;">Охоронна сигналізація</h2>
-          
+
     </section>
 
 </div>
@@ -647,7 +649,7 @@ function clearCart() {
         }
 
 
-        
+
   function toggleCategory(catId){
   document.querySelectorAll('.products').forEach(s=>s.style.display='none');
   const target = document.getElementById(catId);
@@ -658,93 +660,8 @@ function clearCart() {
 }
 
 
-        
+
     });
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
