@@ -253,11 +253,7 @@ document.getElementById('checkout-form').addEventListener('submit', function(e){
             }
         }).catch(()=> alert("Помилка з’єднання із сервером."));
 });
-else {
-    const sound = document.getElementById('cash-sound');
-    sound.volume = 0.5; // громкость 50%
-    sound.play();
-}
+
 function showToast(){
     const toast = document.getElementById('toast');
     toast.classList.add('show');
@@ -267,6 +263,7 @@ function showToast(){
 
 </body>
 </html>
+
 
 
 
