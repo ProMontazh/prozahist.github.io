@@ -156,9 +156,12 @@ function animateNumber(element, start, end, duration) {
         const progress = Math.min((timestamp - startTime)/duration, 1);
         element.textContent = `До сплати: ${Math.round(start + range*progress).toFixed(2)} грн`;
         if (progress < 1) window.requestAnimationFrame(step);
-        else document.getElementById('cash-sound').play();
-    }
-    window.requestAnimationFrame(step);
+        else {
+    const sound = document.getElementById('cash-sound');
+    sound.volume = 0.5; // громкость 50%
+    sound.play();
+}
+window.requestAnimationFrame(step);
 }
 
 function displayOrder() {
@@ -263,6 +266,7 @@ function showToast(){
 
 </body>
 </html>
+
 
 
 
