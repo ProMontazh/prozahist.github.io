@@ -207,13 +207,13 @@ function displayOrder() {
         totalPriceElement.appendChild(discountLine);
         setTimeout(()=> discountLine.classList.add('show'), 2000);
 
-        // Итог к оплате через 2с
+        // Итог к оплате через 3с
         const finalLine = createLine(`До сплати: 0 грн`);
         totalPriceElement.appendChild(finalLine);
         setTimeout(()=>{
             finalLine.classList.add('show');
             animateNumber(finalLine, 0, finalTotal, 1500);
-        }, 2000);
+        }, 3000);
     }
 
     cartDataField.value =
@@ -267,6 +267,7 @@ function showToast(){
 
 </body>
 </html>
+
 
 
 
