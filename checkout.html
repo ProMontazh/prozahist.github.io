@@ -203,7 +203,7 @@ function displayOrder() {
 
     if(discountPercent > 0){
         // Скидка плавно с задержкой 2с
-        const discountLine = createLine(`Знижка: -${discountAmount.toFixed(2)} грн`, "green");
+        const discountLine = createLine(`Знижка: - ${discountAmount.toFixed(2)} грн`, "green");
         totalPriceElement.appendChild(discountLine);
         setTimeout(()=> discountLine.classList.add('show'), 2000);
 
@@ -267,6 +267,7 @@ function showToast(){
 
 </body>
 </html>
+
 
 
 
