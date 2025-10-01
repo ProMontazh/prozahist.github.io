@@ -537,21 +537,7 @@
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCart();
 
-    function addToCart(event, item) {
-        event.stopPropagation();
-        const existingItem = cart.find(cartItem => cartItem.name === item.name);
-
-        if (existingItem) {
-            existingItem.quantity++;
-        } else {
-            item.quantity = 1; // Добавляем свойство quantity при первом добавлении товара
-            cart.push(item);
-        }
-
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCart();
-        alert(`${item.name} додано до кошика!`);
-    }
+    
 
     function updateCart() {
     const cartItems = document.getElementById('cart-items');
@@ -703,6 +689,7 @@ function clearCart() {
 </script>
 </body>
 </html>
+
 
 
 
