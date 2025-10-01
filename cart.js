@@ -139,9 +139,6 @@ function toggleCart() {
 function openProductDetails(pageUrl) {
     window.location.href = pageUrl;
 }
-function addToCartFromProductPage(product) {
-    addToCart(new Event('click'), product);
-}
 
 // --- Закрытие корзины при клике вне ---
 document.addEventListener('click', function(event) {
