@@ -149,44 +149,9 @@
 <div id="modal" class="modal" onclick="closeModal()">
     <img id="modal-img" src=""/>
 </div>
-
-<script>
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-    function showToast(message) {
-        const toast = document.getElementById("toast");
-        toast.textContent = message;
-        toast.classList.add("show");
-        setTimeout(() => {
-            toast.classList.remove("show");
-        }, 3000);
-    }
-
-    function addToCartFromProductPage(item) {
-        const existingItem = cart.find(cartItem => cartItem.id === item.id);
-
-        if (existingItem) {
-            existingItem.quantity++;
-        } else {
-            item.quantity = 1;
-            cart.push(item);
-        }
-
-        localStorage.setItem('cart', JSON.stringify(cart));
-        showToast(`${item.name} додано до кошика!`);
-    }
-
-    function openModal(imageSrc) {
-        document.getElementById("modal-img").src = imageSrc;
-        document.getElementById("modal").style.display = "flex";
-    }
-
-    function closeModal() {
-        document.getElementById("modal").style.display = "none";
-    }
-</script>
-     <script src="cart.js"></script>
+ <script src="cart.js"></script>
 </body>
 </html>
+
 
 
