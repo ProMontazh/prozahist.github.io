@@ -137,5 +137,5 @@ function clearCart() {
         }
 
     // При загрузке страницы сразу рисуем корзину
-    renderCart();
+    updateCart();
 });
