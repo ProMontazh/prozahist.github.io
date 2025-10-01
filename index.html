@@ -550,9 +550,26 @@
 
     });
 </script>
-    <script src="cart.js"></script>
+    <!-- Корзина -->
+<div class="cart-container">
+    <button class="cart" onclick="toggleCart()">🛒 Кошик (<span id="cart-count">0</span>)</button>
+    <div id="cart-content" style="display: none;">
+        <div id="cart-items"></div>
+        <p>Загальна сума: <span id="total-price">0 грн</span></p>
+        <p id="stock-warning" style="color: red;"></p>
+        <button onclick="clearCart()">Очистити кошик</button>
+    </div>
+</div>
+
+<!-- Всплывающее сообщение -->
+<div id="toast" class="toast"></div>
+
+<!-- Скрипт корзины -->
+<script src="cart.js"></script>
+
 </body>
 </html>
+
 
 
 
