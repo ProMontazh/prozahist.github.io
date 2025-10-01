@@ -1,96 +1,110 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-<title>Деталі товару - Wi-Fi камера IMOU Ranger 2C</title>
-<style>
-body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
-.toast {
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 1em;
-    white-space: nowrap;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.5s;
-    z-index: 9999;
-}
-.toast.show {
-    visibility: visible;
-    opacity: 1;
-}
-.container {
-    max-width: 100%;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    animation: fadeIn 1s forwards;
-}
-@keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
-.product-title {
-    text-align: center;
-    font-size: 2em;
-}
-.carousel {
-    display: flex;
-    overflow-x: auto;
-    gap: 10px;
-    padding: 10px;
-    scroll-behavior: smooth;
-}
-.carousel img {
-    width: 100%;
-    max-width: 400px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: transform 0.3s ease;
-}
-.carousel img:hover {
-    transform: scale(1.05);
-}
-.product-description {
-    margin-top: 20px;
-    font-size: 1rem;
-    line-height: 1.6;
-}
-.product-price {
-    font-size: 1.8em;
-    color: red;
-    text-align: center;
-    margin: 10px 0;
-}
-.btn {
-    display: block;
-    width: fit-content;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 20px auto;
-    text-align: center;
-}
-.btn:hover {
-    background-color: #0056b3;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>Деталі товару - 2Мп Wi-Fi PT камера IMOU Imou Ranger 2C (IPC-TA22CP-G)</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .toast {
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 1.0em;
+            white-space: nowrap;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 9999;
+        }
+
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 100%;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            animation: fadeIn 3.0s forwards;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .product-title {
+            text-align: center;
+            font-size: 2em;
+            margin-top: 0;
+        }
+
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 10px;
+            scroll-behavior: smooth;
+        }
+
+        .carousel img {
+            width: 100%;
+            max-width: 400px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .carousel img:hover {
+            transform: scale(1.05);
+        }
+
+        .product-description {
+            max-width: 100%;
+            margin-top: 20px;
+            font-size: 1.0rem;
+            line-height: 1.6;
+        }
+
+        .product-price {
+            font-size: 1.8em;
+            color: red;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .btn {
+            display: block;
+            width: fit-content;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
 
@@ -99,63 +113,77 @@ body {
 
     <div class="carousel">
         <img src="images/IPC-TA22CP-G.png" alt="IP-Камера IMOU" onclick="openModal('images/IPC-TA22CP-G.png')">
-        <img src="images/IPC-TA22CP-G_1.png" alt="IP-Камера IMOU - вид збоку" onclick="openModal('images/IPC-TA22CP-G_1.png')">
+        <img src="images/IPC-TA22CP-G_1.png" alt="IP-Камера IMOU - вид сбоку" onclick="openModal('images/IPC-TA22CP-G_1.png')">
     </div>
 
     <div id="toast" class="toast"></div>
 
     <div class="product-description">
-        Завдяки 1080P Full HD-моніторингу в реальному часі та функціям панорамування 0~355° та нахилу -5~80° Ranger 2C гарантує, що кожен куточок вашого будинку під контролем. Функція виявлення людей швидко знаходить цільові об'єкти на зображеннях і надсилає повідомлення вам.
+        Завдяки 1080P Full HD-моніторингу в реальному часі та функціям панорамування 0~355° та нахилу -5~80° Ranger 2C гарантує, що кожен куточок вашого будинку повністю під контролем. Функція виявлення людей швидко знаходить цільові об'єкти на зображеннях і негайно надсилає повідомлення вам. Режим конфіденційності допомагає захистити ваше особисте життя, коли ви вдома, а функція розумного відстеження дозволяє камері стежити за об'єктами, коли вона виявляє рух.
         <br><br>
         Характеристики:
         <ul>
             <li>Матриця: 1/2.8” 2Мп CMOS</li>
-            <li>Регулювання по осях: поворот 355°, нахил -5 ~ 80°</li>
+            <li>Регулювання по осях: поворот на 355 °, нахил -5 ~ 80 °</li>
             <li>Фокусна відстань: 3.6 мм</li>
             <li>Відео компресія: H.265/H.264</li>
-            <li>Частота кадрів: 1920 x 1080 25 к/с</li>
-            <li>Micro SD до 256 ГБ</li>
-            <li>Вбудований мікрофон та динамік</li>
-            <li>Цифрове збільшення 16х</li>
-            <li>Wi-Fi: IEEE802.11b/g/n</li>
-            <li>Живлення 5В/1A, Потужність 3.5 Вт</li>
-            <li>Робоча температура -10°C~+45°C</li>
-            <li>Розміри 106.1 × 77.4× 77.4 мм</li>
-            <li>Вага 219 г</li>
-            <li>Гарантія 12 міс.</li>
-        </ul>
+            <li>Частота кадрів (головний потік)	1920 x 1080 25 к/с</li>
+            <li>Метод зберігання	Micro SD до 256 ГБ</li>
+            <li>Аудіо інтерфейси	вбудований мікрофон та динамік</li>
+            <li>Цифрове збільшення	16х</li>
+            <li>Мережеві інтерфейси	Wi-Fi:IEEE802.11b/g/n</li>
+            <li>Живлення	5В/1A</li>
+            <li>Потужність споживання	3.5 Вт</li>
+            <li>Робоча температура	-10°C~+45°C</li>
+            <li>Розміри	106.1 × 77.4× 77.4 мм</li>
+            <li>Вага	219 г</li>
+            <li>Розмір упаковки (Ш х В х Г)	90 x 95 x 185 мм</li>
+            <li>Вага брутто	0.4 кг</li>
+            <li>Строк гарантії	12 міс.</li>
+            </ul>
     </div>
-
-    <p class="product-price">1900.00 грн</p>
-
-    <button class="btn" id="add-to-cart-btn">Додати у кошик</button>
+ <p class="product-price">1900.00 грн</p>
+    <button class="btn" onclick="addToCartFromProductPage({ id: 'IPC-TA22CP-G', name: 'IPC-TA22CP-G', price: 1900, image: 'images/IPC-TA22CP-G.png' })">Додати у кошик</button>
 </div>
 
 <div id="modal" class="modal" onclick="closeModal()">
     <img id="modal-img" src=""/>
 </div>
 
-<script src="cart.js"></script>
 <script>
-    // Подключаем кнопку после загрузки cart.js
-    const addBtn = document.getElementById('add-to-cart-btn');
-    addBtn.addEventListener('click', function(event){
-        const product = { name: 'IPC-TA22CP-G', price: 1900, image: 'images/IPC-TA22CP-G.png' };
-        addToCart(event, product);
-    });
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    // Функции модального окна
-    function openModal(src){
-        const modal = document.getElementById('modal');
-        const modalImg = document.getElementById('modal-img');
-        modalImg.src = src;
-        modal.style.display = 'block';
+    function showToast(message) {
+        const toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.classList.add("show");
+        setTimeout(() => {
+            toast.classList.remove("show");
+        }, 3000);
     }
-    function closeModal(){
-        const modal = document.getElementById('modal');
-        modal.style.display = 'none';
+
+    function addToCartFromProductPage(item) {
+        const existingItem = cart.find(cartItem => cartItem.id === item.id);
+
+        if (existingItem) {
+            existingItem.quantity++;
+        } else {
+            item.quantity = 1;
+            cart.push(item);
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        showToast(`${item.name} додано до кошика!`);
+    }
+
+    function openModal(imageSrc) {
+        document.getElementById("modal-img").src = imageSrc;
+        document.getElementById("modal").style.display = "flex";
+    }
+
+    function closeModal() {
+        document.getElementById("modal").style.display = "none";
     }
 </script>
-
 </body>
 </html>
