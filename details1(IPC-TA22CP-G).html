@@ -143,15 +143,22 @@
             </ul>
     </div>
  <p class="product-price">1900.00 грн</p>
-    <button class="btn" onclick="addToCartFromProductPage({ id: 'IPC-TA22CP-G', name: 'IPC-TA22CP-G', price: 1900, image: 'images/IPC-TA22CP-G.png' })">Додати у кошик</button>
-</div>
+    <button class="btn" onclick="addToCart(event, { 
+    id: 'IPC-TA22CP-G', 
+    name: 'IPC-TA22CP-G', 
+    price: 1900, 
+    image: 'images/IPC-TA22CP-G.png' 
+})">Додати у кошик</button>
 
+<!-- Всплывающее сообщение -->
+<div id="toast" class="toast"></div>
 <div id="modal" class="modal" onclick="closeModal()">
     <img id="modal-img" src=""/>
 </div>
  <script src="cart.js"></script>
 </body>
 </html>
+
 
 
 
