@@ -6,104 +6,21 @@
 <title>Деталі товару - ПроЗахист</title>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
 <style>
-    body {
-        font-family: 'Open Sans', sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-    }
-    header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background: linear-gradient(to right, rgba(7, 7, 7, 0.95), rgba(148, 148, 148, 0.95));
-        padding: 0px;
-        color: white;
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-    }
-    header .logo svg {
-        height: 65px;
-        width: auto;
-        margin-left: 15px;
-    }
-    .container {
-        margin-top: 120px; /* компенсируем фиксированную шапку */
-        padding: 20px;
-        max-width: 1200px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .product-detail {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        background-color: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .product-detail img {
-        max-width: 100%;
-        border-radius: 10px;
-        flex: 1 1 400px;
-        object-fit: cover;
-    }
-    .product-info {
-        flex: 1 1 400px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-    .product-info h1 {
-        font-size: 1.8em;
-        margin-bottom: 15px;
-    }
-    .product-info p {
-        margin-bottom: 10px;
-        line-height: 1.4;
-    }
-    .product-price {
-        font-size: 1.5em;
-        font-weight: bold;
-        color: red;
-        margin: 15px 0;
-    }
-    .btn {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: white;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: transform 0.3s ease, background-color 0.3s ease;
-        text-align: center;
-    }
-    .btn:hover {
-        background-color: #0056b3;
-    }
-    .toast {
-        position: fixed;
-        top: 45%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: rgba(0,0,0,0.4);
-        color: white;
-        padding: 8px 12px;
-        border-radius: 5px;
-        font-size: 1.0em;
-        white-space: nowrap;
-        visibility: hidden;
-        opacity: 0;
-        transition: opacity 0.5s;
-        z-index: 9999;
-    }
-    .toast.show {
-        visibility: visible;
-        opacity: 1;
-    }
+/* Стили аналогичные основному сайту */
+body { font-family: 'Open Sans', sans-serif; margin:0; padding:0; background:#f4f4f4; }
+header { position: fixed; top:0; left:0; width:100%; background: linear-gradient(to right, rgba(7,7,7,0.95), rgba(148,148,148,0.95)); z-index:1000; display:flex; align-items:center; }
+header .logo svg { height:65px; width:auto; margin-left:15px; }
+.container { margin-top:120px; padding:20px; max-width:1200px; margin-left:auto; margin-right:auto; }
+.product-detail { display:flex; flex-wrap:wrap; gap:20px; background:white; padding:20px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.1); }
+.product-detail img { max-width:100%; border-radius:10px; flex:1 1 400px; object-fit:cover; }
+.product-info { flex:1 1 400px; display:flex; flex-direction:column; justify-content:space-between; }
+.product-info h1 { font-size:1.8em; margin-bottom:15px; }
+.product-info p { margin-bottom:10px; line-height:1.4; }
+.product-price { font-size:1.5em; font-weight:bold; color:red; margin:15px 0; }
+.btn { display:inline-block; padding:10px 20px; background-color:#007bff; color:white; border-radius:5px; cursor:pointer; text-align:center; transition: transform 0.3s ease, background-color 0.3s ease; }
+.btn:hover { background-color:#0056b3; }
+.toast { position: fixed; top:45%; left:50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.4); color:white; padding:8px 12px; border-radius:5px; font-size:1em; white-space:nowrap; visibility:hidden; opacity:0; transition: opacity 0.5s; z-index:9999; }
+.toast.show { visibility:visible; opacity:1; }
 </style>
 </head>
 <body>
@@ -125,7 +42,7 @@
             <h1>Поворотна камера IMOU IPC-TA22CP-G</h1>
             <p>Поворотна PTZ камера з функцією розумного відстеження та високою роздільною здатністю.</p>
             <p class="product-price">1900.00 грн</p>
-            <button class="btn" onclick="addToCart({id:'IPC-TA22CP-G', name:'Поворотна камера IMOU IPC-TA22CP-G', price:1900, image:'images/IPC-TA22CP-G.png'})">Додати у кошик</button>
+            <button class="btn" onclick="addToCart(event)">Додати у кошик</button>
         </div>
     </div>
 </div>
@@ -133,20 +50,32 @@
 <div id="toast" class="toast"></div>
 
 <script>
+// Получаем корзину из localStorage или создаем новую
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-function addToCart(item){
-    const existing = cart.find(i => i.id === item.id);
-    if(existing){
-        existing.quantity++;
+// Данные текущего товара
+const currentItem = {
+    id: 'IPC-TA22CP-G',
+    name: 'Поворотна камера IMOU IPC-TA22CP-G',
+    price: 1900,
+    image: 'images/IPC-TA22CP-G.png'
+};
+
+// Добавление товара в корзину
+function addToCart(event){
+    event.stopPropagation();
+    const existingItem = cart.find(i => i.name === currentItem.name);
+    if(existingItem){
+        existingItem.quantity++;
     } else {
-        item.quantity = 1;
-        cart.push(item);
+        currentItem.quantity = 1;
+        cart.push({...currentItem}); // копируем объект
     }
     localStorage.setItem('cart', JSON.stringify(cart));
-    showToast(`${item.name} додано до кошика!`);
+    showToast(`${currentItem.name} додано до кошика!`);
 }
 
+// Всплывающее сообщение
 function showToast(message){
     const toast = document.getElementById('toast');
     toast.textContent = message;
