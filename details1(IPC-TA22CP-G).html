@@ -143,7 +143,7 @@
             </ul>
     </div>
  <p class="product-price">1900.00 грн</p>
-    <button class="btn" onclick="addToCartFromProductPage({ id: 'IPC-TA22CP-G', name: 'IPC-TA22CP-G', price: 1900, image: 'images/IPC-TA22CP-G.png' })">Додати у кошик</button>
+    <button class="add-to-cart-btn", data-id='IPC-TA22CP-G', data-name='IPC-TA22CP-G', data-price=1900, data-image='images/IPC-TA22CP-G.png'>Додати у кошик</button>
 </div>
 
 <div id="modal" class="modal" onclick="closeModal()">
@@ -184,6 +184,22 @@
     function closeModal() {
         document.getElementById("modal").style.display = "none";
     }
+    document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.add-to-cart-btn');
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = {
+                id: btn.dataset.id,
+                name: btn.dataset.name,
+                price: parseFloat(btn.dataset.price),
+                image: btn.dataset.image
+            };
+            addToCart(item);
+        });
+    });
+});
+
 </script>
 </body>
 </html>
+
