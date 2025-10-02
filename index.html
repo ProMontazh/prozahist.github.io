@@ -686,9 +686,22 @@ function clearCart() {
 
 
     });
+    document.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("refresh") === "true") {
+        localStorage.setItem("refresh", "1");
+        window.location.href = "index.html"; // убираем параметр
+    }
+    if (localStorage.getItem("refresh") === "1") {
+        localStorage.removeItem("refresh");
+        location.reload(); // перезагружаем страницу
+    }
+});
+
 </script>
 </body>
 </html>
+
 
 
 
