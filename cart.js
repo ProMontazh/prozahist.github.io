@@ -147,4 +147,5 @@ document.addEventListener('click', function(event) {
     if (cartContent && cartButton && !cartContent.contains(event.target) && !cartButton.contains(event.target)) {
         cartContent.style.display = 'none';
     }
+    updateCart(); // сразу обновляем корзину при загрузке
 });
