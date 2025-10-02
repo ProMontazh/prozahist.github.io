@@ -162,6 +162,7 @@
         }, 3000);
     }
 
+
     function addToCartFromProductPage(item) {
         const existingItem = cart.find(cartItem => cartItem.id === item.id);
 
@@ -184,7 +185,12 @@
     function closeModal() {
         document.getElementById("modal").style.display = "none";
     }
+    function goBack() {
+    window.location.href = "index.html?refresh=true";
+}
+
 </script>
 </body>
 </html>
+
 
