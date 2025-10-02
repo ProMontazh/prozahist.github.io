@@ -150,61 +150,12 @@
     <img id="modal-img" src=""/>
 </div>
 
-<script>
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-    function showToast(message) {
-        const toast = document.getElementById("toast");
-        toast.textContent = message;
-        toast.classList.add("show");
-        setTimeout(() => {
-            toast.classList.remove("show");
-        }, 3000);
-    }
-
-    function addToCart(item) {
-        const existingItem = cart.find(cartItem => cartItem.id === item.id);
-
-        if (existingItem) {
-            existingItem.quantity++;
-        } else {
-            item.quantity = 1;
-            cart.push(item);
-        }
-
-        localStorage.setItem('cart', JSON.stringify(cart));
-        showToast(`${item.name} додано до кошика!`);
-    }
-
-    function openModal(imageSrc) {
-        document.getElementById("modal-img").src = imageSrc;
-        document.getElementById("modal").style.display = "flex";
-    }
-
-    function closeModal() {
-        document.getElementById("modal").style.display = "none";
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        const buttons = document.querySelectorAll('.add-to-cart-btn');
-        buttons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const item = {
-                    id: btn.dataset.id,
-                    name: btn.dataset.name,
-                    price: parseFloat(btn.dataset.price),
-                    image: btn.dataset.image
-                };
-                addToCart(item);
-            });
-        });
-    });
-</script>
-
+ <script src="cart.js"></script>
 
 
 </body>
 </html>
+
 
 
 
