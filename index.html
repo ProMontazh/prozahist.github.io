@@ -703,9 +703,7 @@ const ctx = canvas.getContext('2d');
 canvas.style.position = 'fixed';
 canvas.style.top = 0;
 canvas.style.left = 0;
-canvas.style.width = '100%';
-canvas.style.height = '100%';
-canvas.style.zIndex = '-1'; // фон за всем контентом
+canvas.style.zIndex = '-1';
 canvas.style.background = 'radial-gradient(ellipse at center, #020111 0%, #000010 100%)';
 
 function resize() {
@@ -718,22 +716,24 @@ resize();
 // Создаём звёзды
 const stars = [];
 const numStars = 200;
-
 for (let i = 0; i < numStars; i++) {
   stars.push({
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
     size: Math.random() * 1.5 + 0.5,
     alpha: Math.random(),
-    delta: (Math.random() * 0.015) + 0.005
+    delta: (Math.random() * 0.015) + 0.005,
+    speed: Math.random() * 0.05 + 0.01
   });
 }
 
-// Создаём падающие звёзды
+// Падающие звёзды
 let shootingStars = [];
-
+let shootingStarTimer = 0;
 function createShootingStar() {
-  if (Math.random() < 0.01) { // редкие падающие звезды
+  shootingStarTimer++;
+  if (shootingStarTimer > 200 && Math.random() < 0.2) {
+    shootingStarTimer = 0;
     shootingStars.push({
       x: Math.random() * canvas.width,
       y: 0,
@@ -745,23 +745,29 @@ function createShootingStar() {
   }
 }
 
-// Рисуем мягкую туманность
+// Туманность
 let angle = 0;
 function drawNebula() {
-  const gradient = ctx.createRadialGradient(
-    canvas.width / 2, canvas.height / 2, 0,
-    canvas.width / 2, canvas.height / 2, canvas.width / 1.2
-  );
-  gradient.addColorStop(0, `rgba(60, 60, 120, 0.12)`);
-  gradient.addColorStop(0.5, `rgba(40, 40, 80, 0.1)`);
-  gradient.addColorStop(1, `rgba(10, 10, 40, 0.05)`);
-  ctx.save();
-  ctx.translate(canvas.width / 2, canvas.height / 2);
-  ctx.rotate(angle);
-  ctx.translate(-canvas.width / 2, -canvas.height / 2);
-  ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.restore();
+  const gradients = [
+    {radius: canvas.width / 1.2, color1: "rgba(60, 60, 120, 0.12)", color2: "rgba(10, 10, 40, 0.05)", speed: 0.0003},
+    {radius: canvas.width / 1.5, color1: "rgba(80, 80, 150, 0.08)", color2: "rgba(10, 10, 40, 0.02)", speed: -0.0002}
+  ];
+  gradients.forEach(g => {
+    const gradient = ctx.createRadialGradient(
+      canvas.width / 2, canvas.height / 2, 0,
+      canvas.width / 2, canvas.height / 2, g.radius
+    );
+    gradient.addColorStop(0, g.color1);
+    gradient.addColorStop(1, g.color2);
+
+    ctx.save();
+    ctx.translate(canvas.width / 2, canvas.height / 2);
+    ctx.rotate(angle * g.speed * 1000);
+    ctx.translate(-canvas.width / 2, -canvas.height / 2);
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.restore();
+  });
   angle += 0.0003;
 }
 
@@ -775,6 +781,10 @@ function animate() {
   for (let s of stars) {
     s.alpha += s.delta;
     if (s.alpha <= 0 || s.alpha >= 1) s.delta = -s.delta;
+
+    s.x += s.speed;
+    if (s.x > canvas.width) s.x = 0;
+
     ctx.beginPath();
     ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
     ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha})`;
@@ -807,6 +817,7 @@ animate();
 
 </body>
 </html>
+
 
 
 
