@@ -749,8 +749,8 @@ function createShootingStar() {
 let angle = 0;
 function drawNebula() {
   const gradients = [
-    {radius: canvas.width / 1.2, color1: "rgba(60, 60, 120, 0.12)", color2: "rgba(10, 10, 40, 0.05)", speed: 0.0003},
-    {radius: canvas.width / 1.5, color1: "rgba(80, 80, 150, 0.08)", color2: "rgba(10, 10, 40, 0.02)", speed: -0.0002}
+    {radius: canvas.width / 1.2, color1: "rgba(60, 60, 120, 0.12)", color2: "rgba(10, 10, 40, 0.05)", speed: 0.00003},
+    {radius: canvas.width / 1.5, color1: "rgba(80, 80, 150, 0.08)", color2: "rgba(10, 10, 40, 0.02)", speed: -0.00002}
   ];
   gradients.forEach(g => {
     const gradient = ctx.createRadialGradient(
@@ -817,6 +817,7 @@ animate();
 
 </body>
 </html>
+
 
 
 
