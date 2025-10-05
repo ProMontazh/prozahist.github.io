@@ -61,23 +61,24 @@
             padding-top: 130px;
             text-shadow: 2px 2px 4px #000;
         }
-       #products {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 10px;
-    margin-top: 20px;
-}
+        #products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: space-around;
+        }
 
         .product-item {
-    flex: 0 0 calc(16.66% - 10px); /* 6 элементов в ряд */
-    box-sizing: border-box;
-    background-color: white;
-    padding: 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            width: calc(16.5% - 10px);
+            box-sizing: border-box;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
         .product-item:hover {
             transform: scale(1.02);
         }
@@ -326,10 +327,12 @@
   font-size: 0.8em;
 }
 
+/* На мобиле по 2 в ряд */
 @media (max-width:768px) {
-    .product-item {
-        flex: 1 1 calc(50% - 10px); /* 2 в ряд на мобиле */
-    }
+  .category-card {
+    flex: 1 1 calc(50% - 15px); 
+    max-width: calc(50% - 15px);
+  }
 }
 
 
@@ -431,7 +434,7 @@
 <!-- Категорія: Внутрішні Wi-Fi камери -->
 <section id="indoor" class="products" style="display: none;">
     <h2 style="text-align: center; margin-bottom: 40px; margin-top: 80px;">Внутрішні Wi-Fi відеокамери</h2>
-    
+
     <div class="product-item" onclick="openProductDetails('details1(IPC-TA22CP-G).html')">
         <img src="images/IPC-TA22CP-G.png" alt="Відеокамера 1">
         <h3>Поворотна камера IMOU IPC-TA22CP-G</h3>
@@ -514,7 +517,7 @@
     <!-- Категорія: Зовнішні Wi-Fi камери -->
         <section id="outdoor" class="products" style="display: none;">
     <h2 style="text-align: center; margin-bottom: 40px; margin-top: 80px;">Зовнішні Wi-Fi відеокамери</h2>
-    
+
     <div class="product-item" onclick="openProductDetails('details1(IPC-TA22CP-G).html')">
         <img src="images/IPC-TA22CP-G.png" alt="Відеокамера 1">
         <h3>Поворотна камера IMOU IPC-TA22CP-G</h3>
@@ -747,9 +750,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
