@@ -745,31 +745,6 @@ function createShootingStar() {
   }
 }
 
-// Туманность
-let angle = 0;
-function drawNebula() {
-  const gradients = [
-    {radius: canvas.width / 1.2, color1: "rgba(60, 60, 120, 0.12)", color2: "rgba(10, 10, 40, 0.05)", speed: 0.000003},
-    {radius: canvas.width / 1.5, color1: "rgba(80, 80, 150, 0.08)", color2: "rgba(10, 10, 40, 0.02)", speed: -0.000002}
-  ];
-  gradients.forEach(g => {
-    const gradient = ctx.createRadialGradient(
-      canvas.width / 2, canvas.height / 2, 0,
-      canvas.width / 2, canvas.height / 2, g.radius
-    );
-    gradient.addColorStop(0, g.color1);
-    gradient.addColorStop(1, g.color2);
-
-    ctx.save();
-    ctx.translate(canvas.width / 2, canvas.height / 2);
-    ctx.rotate(angle * g.speed * 1000);
-    ctx.translate(-canvas.width / 2, -canvas.height / 2);
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.restore();
-  });
-  angle += 0.0000000001;
-}
 
 // Анимация
 function animate() {
@@ -817,6 +792,7 @@ animate();
 
 </body>
 </html>
+
 
 
 
