@@ -719,115 +719,11 @@ function clearCart() {
   </style>
 </head>
 <body>
-  <canvas id="space"></canvas>
 
-  <script>
-    const canvas = document.getElementById("space");
-    const ctx = canvas.getContext("2d");
-    let w, h, stars = [], meteors = [];
-
-    function resize() {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-      stars = [];
-      const count = Math.floor((w * h) / 1200);
-      for (let i = 0; i < count; i++) {
-        stars.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          r: Math.random() * 1.5 + 0.6,
-          a: Math.random() * Math.PI * 2,
-          alpha: 0.6 + Math.random() * 0.4,
-          layer: Math.floor(Math.random() * 3) + 1, // слой глубины
-          glow: 3 + Math.random() * 3
-        });
-      }
-    }
-    window.addEventListener("resize", resize);
-    resize();
-
-    let angle = 0;
-    function drawNebula() {
-      const gradient = ctx.createRadialGradient(w/2, h/2, 0, w/2, h/2, Math.max(w,h)/1.3);
-      gradient.addColorStop(0, "rgba(140,180,255,0.25)");
-      gradient.addColorStop(0.4, "rgba(100,120,255,0.12)");
-      gradient.addColorStop(0.8, "rgba(180,100,255,0.08)");
-      gradient.addColorStop(1, "rgba(0,0,0,0)");
-      ctx.save();
-      ctx.translate(w/2, h/2);
-      ctx.rotate(angle);
-      ctx.fillStyle = gradient;
-      ctx.fillRect(-w, -h, w*2, h*2);
-      ctx.restore();
-      angle += 0.00015;
-    }
-
-    // движение звёзд (параллакс)
-    let offsetX = 0, offsetY = 0;
-    function drawStars() {
-      offsetX += 0.02;
-      offsetY += 0.01;
-      for (let s of stars) {
-        const parallax = s.layer * 0.3;
-        const x = (s.x + offsetX * parallax) % w;
-        const y = (s.y + offsetY * parallax) % h;
-        const pulse = Math.sin(s.a += 0.003) * 0.3 + 0.7;
-        const radius = s.r * pulse;
-
-        ctx.beginPath();
-        ctx.shadowColor = "rgba(255,255,255,0.9)";
-        ctx.shadowBlur = s.glow;
-        ctx.arc(x, y, radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
-        ctx.fill();
-      }
-    }
-
-    // падающие звёзды
-    function createMeteor() {
-      if (Math.random() < 0.015) {
-        meteors.push({
-          x: Math.random() * w,
-          y: Math.random() * h * 0.4,
-          len: 80 + Math.random() * 120,
-          speed: 6 + Math.random() * 4,
-          opacity: 1
-        });
-      }
-    }
-    function drawMeteors() {
-      for (let i = meteors.length - 1; i >= 0; i--) {
-        const m = meteors[i];
-        const grad = ctx.createLinearGradient(m.x, m.y, m.x - m.len, m.y - m.len);
-        grad.addColorStop(0, `rgba(255,255,255,${m.opacity})`);
-        grad.addColorStop(1, "rgba(255,255,255,0)");
-        ctx.beginPath();
-        ctx.strokeStyle = grad;
-        ctx.lineWidth = 2;
-        ctx.moveTo(m.x, m.y);
-        ctx.lineTo(m.x - m.len, m.y - m.len);
-        ctx.stroke();
-
-        m.x += m.speed;
-        m.y += m.speed;
-        m.opacity -= 0.02;
-        if (m.opacity <= 0) meteors.splice(i, 1);
-      }
-    }
-
-    function animate() {
-      ctx.clearRect(0, 0, w, h);
-      drawNebula();
-      drawStars();
-      createMeteor();
-      drawMeteors();
-      requestAnimationFrame(animate);
-    }
-
-    animate();
   </script>
 </body>
 </html>
+
 
 
 
