@@ -80,12 +80,24 @@
     background-color: white;
     padding: 15px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    flex: 0 0 calc((100% - 5*15px)/6); /* 6 карточек в ряд */
+    flex: 0 0 calc((100% - 5*15px)/6); /* 6 карточек в ряд на десктопе */
     min-width: 150px;
     box-sizing: border-box;
     cursor: pointer;
-    transition: transform 0.1s;
+    transition: transform 0.3s;
+
+    display: flex;            /* включаем flex */
+    flex-direction: column;   /* расположение сверху вниз */
+    align-items: center;      /* выравнивание по центру */
+    text-align: center;       /* текст тоже по центру */
 }
+
+.product-item img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px; /* отступ под изображением */
+}
+
 
 .product-item:hover {
     transform: scale(1.03);
@@ -766,6 +778,7 @@
 
 </body>
 </html>
+
 
 
 
