@@ -72,14 +72,15 @@
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    justify-content: space-between;
+    justify-content: space-around; /* или space-evenly */
 }
 
 .product-item {
     background-color: white;
     padding: 15px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    flex: 1 1 calc(16.66% - 10px); /* 6 товаров в ряд */
+    flex: 1 1 16%;
+    min-width: 150px; /* чтобы не слишком сжималось на маленьких экранах */
     box-sizing: border-box;
     cursor: pointer;
     transition: transform 0.3s;
@@ -764,6 +765,7 @@
 
 </body>
 </html>
+
 
 
 
