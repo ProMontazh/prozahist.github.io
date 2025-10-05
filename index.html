@@ -805,7 +805,7 @@ function animate() {
 
     s.x += s.speed;
     s.y += s.speed * Math.tan(s.angle);
-    s.opacity -= 0.02;
+    s.opacity -= 0.002;
 
     if (s.opacity <= 0) shootingStars.splice(i, 1);
   }
@@ -817,6 +817,7 @@ animate();
 
 </body>
 </html>
+
 
 
 
