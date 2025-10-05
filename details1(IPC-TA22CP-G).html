@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <title>Деталі товару - 2Мп Wi-Fi PT камера IMOU Imou Ranger 2C (IPC-TA22CP-G)</title>
+    <title>Imou IPC-TA22CP-G — 2Мп Wi-Fi PT камера</title>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -35,7 +35,8 @@
         }
 
         .container {
-            max-width: 100%;
+            max-width: 1000px;
+            margin: 20px auto;
             padding: 20px;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -81,6 +82,15 @@
             line-height: 1.6;
         }
 
+        .product-description ul {
+            padding-left: 20px;
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+        .product-description li {
+            margin-bottom: 6px;
+        }
+
         .product-price {
             font-size: 1.8em;
             color: red;
@@ -99,10 +109,50 @@
             cursor: pointer;
             margin: 20px auto;
             text-align: center;
+            border: none;
         }
 
         .btn:hover {
             background-color: #0056b3;
+        }
+
+        /* ----- Модальное окно ----- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+
+        .modal .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+            padding: 10px;
+        }
+
+        .modal .arrow.left {
+            left: 20px;
+        }
+
+        .modal .arrow.right {
+            right: 20px;
         }
     </style>
 </head>
@@ -127,31 +177,39 @@
             <li>Регулювання по осях: поворот на 355 °, нахил -5 ~ 80 °</li>
             <li>Фокусна відстань: 3.6 мм</li>
             <li>Відео компресія: H.265/H.264</li>
-            <li>Частота кадрів (головний потік)	1920 x 1080 25 к/с</li>
-            <li>Метод зберігання	Micro SD до 256 ГБ</li>
-            <li>Аудіо інтерфейси	вбудований мікрофон та динамік</li>
-            <li>Цифрове збільшення	16х</li>
-            <li>Мережеві інтерфейси	Wi-Fi:IEEE802.11b/g/n</li>
-            <li>Живлення	5В/1A</li>
-            <li>Потужність споживання	3.5 Вт</li>
-            <li>Робоча температура	-10°C~+45°C</li>
-            <li>Розміри	106.1 × 77.4× 77.4 мм</li>
-            <li>Вага	219 г</li>
-            <li>Розмір упаковки (Ш х В х Г)	90 x 95 x 185 мм</li>
-            <li>Вага брутто	0.4 кг</li>
-            <li>Строк гарантії	12 міс.</li>
-            </ul>
+            <li>Частота кадрів (головний потік) 1920 x 1080 25 к/с</li>
+            <li>Метод зберігання Micro SD до 256 ГБ</li>
+            <li>Аудіо інтерфейси вбудований мікрофон та динамік</li>
+            <li>Цифрове збільшення 16х</li>
+            <li>Мережеві інтерфейси Wi-Fi: IEEE802.11b/g/n</li>
+            <li>Живлення 5В/1A</li>
+            <li>Потужність споживання 3.5 Вт</li>
+            <li>Робоча температура -10°C~+45°C</li>
+            <li>Розміри 106.1 × 77.4× 77.4 мм</li>
+            <li>Вага 219 г</li>
+            <li>Розмір упаковки (Ш х В х Г) 90 x 95 x 185 мм</li>
+            <li>Вага брутто 0.4 кг</li>
+            <li>Строк гарантії 12 міс.</li>
+        </ul>
     </div>
- <p class="product-price">1900.00 грн</p>
+
+    <p class="product-price">1900.00 грн</p>
     <button class="btn" onclick="addToCartFromProductPage({ id: 'IPC-TA22CP-G', name: 'IPC-TA22CP-G', price: 1900, image: 'images/IPC-TA22CP-G.png' })">Додати у кошик</button>
 </div>
 
 <div id="modal" class="modal" onclick="closeModal()">
+    <span class="arrow left" onclick="event.stopPropagation(); prevImage()">&#10094;</span>
     <img id="modal-img" src=""/>
+    <span class="arrow right" onclick="event.stopPropagation(); nextImage()">&#10095;</span>
 </div>
 
 <script>
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const images = [
+        "images/IPC-TA22CP-G.png",
+        "images/IPC-TA22CP-G_1.png"
+    ];
+    let currentIndex = 0;
 
     function showToast(message) {
         const toast = document.getElementById("toast");
@@ -164,19 +222,18 @@
 
     function addToCartFromProductPage(item) {
         const existingItem = cart.find(cartItem => cartItem.id === item.id);
-
         if (existingItem) {
             existingItem.quantity++;
         } else {
             item.quantity = 1;
             cart.push(item);
         }
-
         localStorage.setItem('cart', JSON.stringify(cart));
         showToast(`${item.name} додано до кошика!`);
     }
 
     function openModal(imageSrc) {
+        currentIndex = images.indexOf(imageSrc);
         document.getElementById("modal-img").src = imageSrc;
         document.getElementById("modal").style.display = "flex";
     }
@@ -184,6 +241,33 @@
     function closeModal() {
         document.getElementById("modal").style.display = "none";
     }
+
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        document.getElementById("modal-img").src = images[currentIndex];
+    }
+
+    function prevImage() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        document.getElementById("modal-img").src = images[currentIndex];
+    }
+
+    // свайп на мобильных
+    let startX = 0;
+    const modal = document.getElementById("modal");
+
+    modal.addEventListener("touchstart", (e) => {
+        startX = e.touches[0].clientX;
+    });
+
+    modal.addEventListener("touchend", (e) => {
+        let endX = e.changedTouches[0].clientX;
+        if (endX - startX > 50) {
+            prevImage();
+        } else if (startX - endX > 50) {
+            nextImage();
+        }
+    });
 </script>
 </body>
 </html>
