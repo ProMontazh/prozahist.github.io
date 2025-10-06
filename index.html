@@ -385,62 +385,50 @@
 <body>
 
 <header>
-  <div class="logo">
-    <svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200">
-      <!-- Текст ПРО (красным) -->
-      <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#800000">
-        ПРО
-      </text>
+   <div class="logo">
+  <svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200">
+    <!-- Текст ПРО (красным) -->
+    <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#800000">
+      ПРО
+    </text>
 
-      <!-- Текст ЗАХИСТ (серым) -->
-      <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#808080">
-        ЗАХИСТ
-      </text>
+    <!-- Текст ЗАХИСТ (серым) -->
+    <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#808080">
+      ЗАХИСТ
+    </text>
 
-      <!-- Домик справа -->
-      <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10"/>
-      <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10"/>
-      <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10"/>
-      <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10"/>
+    <!-- Слоган с эффектом свечения -->
+    <defs>
+      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
 
-      <!-- Слоган с эффектом пробегающей тени -->
-      <text id="slogan" x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="29">
-        ІНТЕРНЕТ-МАГАЗИН СИСТЕМ БЕЗПЕКИ
-      </text>
+      <linearGradient id="shine-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#bbbbbb" />
+        <stop offset="50%" stop-color="#ffffff" stop-opacity="0.8">
+          <animate attributeName="offset" values="-1;2" dur="2.5s" repeatCount="indefinite" />
+        </stop>
+        <stop offset="100%" stop-color="#bbbbbb" />
+      </linearGradient>
+    </defs>
 
-      <!-- Градиент для свечения -->
-      <defs>
-        <linearGradient id="shine-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#bbbbbb"/>
-          <stop offset="50%" stop-color="#ffffff"/>
-          <stop offset="100%" stop-color="#bbbbbb"/>
-        </linearGradient>
-      </defs>
-    </svg>
-  </div>
-</header>
+    <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="29" fill="url(#shine-gradient)" filter="url(#glow)">
+      ІНТЕРНЕТ-МАГАЗИН СИСТЕМ БЕЗПЕКИ
+    </text>
 
-<style>
-/* Движущаяся тень для слогана внутри SVG */
-#slogan {
-  fill: url(#shine-gradient);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  animation: shine 2.5s linear infinite;
-}
+    <!-- Домик справа -->
+    <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10"/>
+    <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10"/>
+    <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10"/>
+    <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10"/>
+  </svg>
+</div>
 
-/* Анимация градиента */
-@keyframes shine {
-  0% { fill: url(#shine-gradient); }
-  50% { fill: url(#shine-gradient); }
-  100% { fill: url(#shine-gradient); }
-}
-
-/* Альтернатива с фильтром для свечения */
-#slogan {
-  filter: drop-shadow(2px 2px 2px #fff);
-}
-</style>
+ 
 
 <section id="main-banner">
     <h1><span class="red">ПРО</span><span class="black">ЗАХИСТ</span></h1> 
@@ -786,47 +774,38 @@
     });
 
     // Переключение категорий
-// Переключение категорий
-function toggleCategory(catId, pushHistory = true) {
+
+function toggleCategory(catId) {
+    // скрыть все товары
     document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
+
+    // показать выбранную категорию
     const block = document.getElementById(catId);
     if (block) {
         block.style.display = 'block';
         block.scrollIntoView({ behavior: 'smooth' });
 
-        if (pushHistory) {
-            history.pushState({ category: catId }, '', '#' + catId);
-        }
+        // записываем в историю
+        history.pushState({ category: catId }, '', '#' + catId);
     }
 }
 
-// Обработка кнопки "Назад"
+// обработка кнопки "Назад" в браузере
 window.addEventListener('popstate', (event) => {
-    // Если есть сохранённая категория в state, переключаемся на неё
     if (event.state && event.state.category) {
-        toggleCategory(event.state.category, false);
+        // показать категорию, куда вернулись
+        document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
+        document.getElementById(event.state.category).style.display = 'block';
     } else {
-        // Если state пустой (возврат на главную), обновляем страницу
-        location.reload();
+        // если вернулись на начальный экран — скрыть все товары
+        document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
+        // и пролистать к блоку категорий
+        document.getElementById('categories').scrollIntoView({ behavior: 'smooth' });
     }
 });
 
-// При загрузке страницы открываем категорию по хэшу
+// при загрузке сразу открывать категорию по хэшу (если есть)
 window.addEventListener('DOMContentLoaded', () => {
-    updateCart(); // обновляем корзину
-
-    if (location.hash) {
-        const catId = location.hash.substring(1);
-        if (document.getElementById(catId)) {
-            toggleCategory(catId, false);
-        }
-    }
-});
-
-    // Сначала обновляем корзину из localStorage
-    updateCart();
-
-    // Открываем категорию, если есть хэш
     if (location.hash) {
         const catId = location.hash.substring(1);
         if (document.getElementById(catId)) {
@@ -834,7 +813,6 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
-
 
 
     // Логика авто-обновления
@@ -853,9 +831,3 @@ window.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
-
-
-
-
-
-
