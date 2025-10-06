@@ -786,30 +786,43 @@
     });
 
     // Переключение категорий
-
-function toggleCategory(catId) {
-    // скрыть все товары
+// Переключение категорий
+function toggleCategory(catId, pushHistory = true) {
     document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-
-    // показать выбранную категорию
     const block = document.getElementById(catId);
     if (block) {
         block.style.display = 'block';
         block.scrollIntoView({ behavior: 'smooth' });
 
-        // записываем в историю
-        history.pushState({ category: catId }, '', '#' + catId);
+        if (pushHistory) {
+            history.pushState({ category: catId }, '', '#' + catId);
+        }
     }
 }
 
-// Обработка кнопки "Назад" в браузере
+// Обработка кнопки "Назад"
 window.addEventListener('popstate', (event) => {
-    // Перезагрузить страницу при возврате назад
-    location.reload();
+    // Если есть сохранённая категория в state, переключаемся на неё
+    if (event.state && event.state.category) {
+        toggleCategory(event.state.category, false);
+    } else {
+        // Если state пустой (возврат на главную), обновляем страницу
+        location.reload();
+    }
 });
 
-// При загрузке страницы отображаем категорию по хэшу (если есть)
+// При загрузке страницы открываем категорию по хэшу
 window.addEventListener('DOMContentLoaded', () => {
+    updateCart(); // обновляем корзину
+
+    if (location.hash) {
+        const catId = location.hash.substring(1);
+        if (document.getElementById(catId)) {
+            toggleCategory(catId, false);
+        }
+    }
+});
+
     // Сначала обновляем корзину из localStorage
     updateCart();
 
@@ -840,6 +853,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+
 
 
 
