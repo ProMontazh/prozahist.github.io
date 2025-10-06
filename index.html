@@ -802,22 +802,18 @@ function toggleCategory(catId) {
     }
 }
 
-// обработка кнопки "Назад" в браузере
+// Обработка кнопки "Назад" в браузере
 window.addEventListener('popstate', (event) => {
-    if (event.state && event.state.category) {
-        // показать категорию, куда вернулись
-        document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-        document.getElementById(event.state.category).style.display = 'block';
-    } else {
-        // если вернулись на начальный экран — скрыть все товары
-        document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-        // и пролистать к блоку категорий
-        document.getElementById('categories').scrollIntoView({ behavior: 'smooth' });
-    }
+    // Перезагрузить страницу при возврате назад
+    location.reload();
 });
 
-// при загрузке сразу открывать категорию по хэшу (если есть)
+// При загрузке страницы отображаем категорию по хэшу (если есть)
 window.addEventListener('DOMContentLoaded', () => {
+    // Сначала обновляем корзину из localStorage
+    updateCart();
+
+    // Открываем категорию, если есть хэш
     if (location.hash) {
         const catId = location.hash.substring(1);
         if (document.getElementById(catId)) {
@@ -825,6 +821,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
 
 
     // Логика авто-обновления
@@ -843,6 +840,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+
 
 
 
