@@ -807,6 +807,69 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// ✅ Показ выбранной категории
+function toggleCategory(catId) {
+    // скрыть все товары
+    document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
+
+    // показать выбранную категорию
+    const block = document.getElementById(catId);
+    if (block) {
+        block.style.display = 'block';
+        block.scrollIntoView({ behavior: 'smooth' });
+
+        // записываем в историю
+        history.pushState({ category: catId }, '', '#' + catId);
+    }
+
+    // обновляем корзину
+    updateCartUI();
+}
+
+// ✅ Обновление корзины (счётчик и т.д.)
+function updateCartUI() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    const cartCounterEl = document.getElementById("cart-count"); // элемент счётчика корзины
+    if (cartCounterEl) {
+        cartCounterEl.textContent = cartCount;
+    }
+}
+
+// ✅ Обработка кнопки "Назад/Вперёд"
+window.addEventListener('popstate', (event) => {
+    if (event.state && event.state.category) {
+        // показать категорию, куда вернулись
+        document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
+        document.getElementById(event.state.category).style.display = 'block';
+    } else {
+        // если вернулись на начальный экран — скрыть все товары
+        document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
+        // и пролистать к блоку категорий
+        const catBlock = document.getElementById('categories');
+        if (catBlock) {
+            catBlock.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    // 🔄 всегда обновляем корзину при переходе назад/вперёд
+    updateCartUI();
+});
+
+// ✅ При загрузке страницы сразу открывать категорию по хэшу (если есть)
+window.addEventListener('DOMContentLoaded', () => {
+    if (location.hash) {
+        const catId = location.hash.substring(1);
+        if (document.getElementById(catId)) {
+            toggleCategory(catId);
+        }
+    }
+    // обновить корзину при первой загрузке
+    updateCartUI();
+});
+
+
 
     // Логика авто-обновления
     document.addEventListener("DOMContentLoaded", () => {
@@ -824,6 +887,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+
 
 
 
