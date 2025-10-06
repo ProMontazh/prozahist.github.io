@@ -397,8 +397,18 @@
       ЗАХИСТ
     </text>
 
-    <!-- Слоган с анимацией тени -->
-    <text id="slogan" x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="29" fill="#bbbbbb">
+    <!-- Слоган с эффектом скользящего света -->
+    <defs>
+      <linearGradient id="shine-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#bbbbbb" />
+        <stop offset="50%" stop-color="#ffffff" stop-opacity="0.8">
+          <animate attributeName="offset" values="-1;2" dur="2.5s" repeatCount="indefinite" />
+        </stop>
+        <stop offset="100%" stop-color="#bbbbbb" />
+      </linearGradient>
+    </defs>
+
+    <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="29" fill="url(#shine-gradient)">
       ІНТЕРНЕТ-МАГАЗИН СИСТЕМ БЕЗПЕКИ
     </text>
 
@@ -410,27 +420,6 @@
   </svg>
 </div>
 
-<style>
-  /* Анимация "света", пробегающего по слогану */
-  #slogan {
-    fill: #bbbbbb;
-    /* создаем маску света через фильтр */
-    filter: drop-shadow(0 0 0 #ffffff);
-    animation: shine 2.5s infinite;
-  }
-
-  @keyframes shine {
-    0% {
-      filter: drop-shadow(-100px 0 0 #ffffff);
-    }
-    50% {
-      filter: drop-shadow(300px 0 15px #ffffff);
-    }
-    100% {
-      filter: drop-shadow(-100px 0 0 #ffffff);
-    }
-  }
-</style>
 
 </header>
 
@@ -836,4 +825,5 @@ window.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+
 
