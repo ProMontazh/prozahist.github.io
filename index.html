@@ -385,7 +385,7 @@
 <body>
 
 <header>
-    <div class="logo">
+   <div class="logo">
   <svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200">
     <!-- Текст ПРО (красным) -->
     <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#800000">
@@ -397,8 +397,16 @@
       ЗАХИСТ
     </text>
 
-    <!-- Слоган с эффектом скользящего света -->
+    <!-- Слоган с эффектом свечения -->
     <defs>
+      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+
       <linearGradient id="shine-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
         <stop offset="0%" stop-color="#bbbbbb" />
         <stop offset="50%" stop-color="#ffffff" stop-opacity="0.8">
@@ -408,7 +416,7 @@
       </linearGradient>
     </defs>
 
-    <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="29" fill="url(#shine-gradient)">
+    <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="29" fill="url(#shine-gradient)" filter="url(#glow)">
       ІНТЕРНЕТ-МАГАЗИН СИСТЕМ БЕЗПЕКИ
     </text>
 
@@ -420,10 +428,7 @@
   </svg>
 </div>
 
-
 </header>
-
-
 <section id="main-banner">
     <h1><span class="red">ПРО</span><span class="black">ЗАХИСТ</span></h1> 
     <p><span class="black">Надійна безпека за доступною ціною</span></p>
@@ -825,5 +830,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+
 
 
