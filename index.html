@@ -767,14 +767,46 @@
     });
 
     // Переключение категорий
-    function toggleCategory(catId) {
+ 
+function toggleCategory(catId) {
+    // скрыть все товары
+    document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
+
+    // показать выбранную категорию
+    const block = document.getElementById(catId);
+    if (block) {
+        block.style.display = 'block';
+        block.scrollIntoView({ behavior: 'smooth' });
+
+        // записываем в историю
+        history.pushState({ category: catId }, '', '#' + catId);
+    }
+}
+
+// обработка кнопки "Назад" в браузере
+window.addEventListener('popstate', (event) => {
+    if (event.state && event.state.category) {
+        // показать категорию, куда вернулись
         document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-        const target = document.getElementById(catId);
-        if (target) {
-            target.style.display = 'block';
-            target.scrollIntoView({ behavior: 'smooth' });
+        document.getElementById(event.state.category).style.display = 'block';
+    } else {
+        // если вернулись на начальный экран — скрыть все товары
+        document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
+        // и пролистать к блоку категорий
+        document.getElementById('categories').scrollIntoView({ behavior: 'smooth' });
+    }
+});
+
+// при загрузке сразу открывать категорию по хэшу (если есть)
+window.addEventListener('DOMContentLoaded', () => {
+    if (location.hash) {
+        const catId = location.hash.substring(1);
+        if (document.getElementById(catId)) {
+            toggleCategory(catId);
         }
     }
+});
+
 
     // Логика авто-обновления
     document.addEventListener("DOMContentLoaded", () => {
@@ -792,6 +824,7 @@
 
 </body>
 </html>
+
 
 
 
