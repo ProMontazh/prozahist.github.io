@@ -385,50 +385,42 @@
 <body>
 
 <header>
-   <div class="logo">
-  <svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200">
-    <!-- Текст ПРО (красным) -->
-    <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#800000">
-      ПРО
-    </text>
+     <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="220" height="70" viewBox="0 0 600 200">
+          <!-- Текст ПРО (красным) -->
+          <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#800000">
+            ПРО
+          </text>
 
-    <!-- Текст ЗАХИСТ (серым) -->
-    <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#808080">
-      ЗАХИСТ
-    </text>
+          <!-- Текст ЗАХИСТ (чёрным) -->
+          <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#808080">
+            ЗАХИСТ
+          </text>
 
-    <!-- Слоган с эффектом свечения -->
-    <defs>
-      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-        <feGaussianBlur stdDeviation="3" result="blur"/>
-        <feMerge>
-          <feMergeNode in="blur"/>
-          <feMergeNode in="SourceGraphic"/>
-        </feMerge>
-      </filter>
+          <!-- Слоган (светлый серый) -->
+          <!-- Слоган -->
+          <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="29" fill="#bbbbbb">
+          ІНТЕРНЕТ-МАГАЗИН СИСТЕМ БЕЗПЕКИ
+          </text>
+<!-- Домик справа от слова ПРОЗАХИСТ -->
+  <!-- Крыша (две красные линии, чуть ниже относительно текста) -->
+  <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10"/>
+  <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10"/>
 
-      <linearGradient id="shine-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#bbbbbb" />
-        <stop offset="50%" stop-color="#ffffff" stop-opacity="0.8">
-          <animate attributeName="offset" values="-1;2" dur="2.5s" repeatCount="indefinite" />
-        </stop>
-        <stop offset="100%" stop-color="#bbbbbb" />
-      </linearGradient>
-    </defs>
+  <!-- Стены (без линии пола) -->
+  <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10"/>
+  <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10"/>
+        </svg>
+    </div>
+    <style>
+    /* Подсветка при наведении на логотип */
+    .logo-svg:hover #slogan {
+        fill: #ffffff; /* белый при наведении */
+        transition: fill 0.5s ease;
+    }
+</style>
+</header>
 
-    <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="29" fill="url(#shine-gradient)" filter="url(#glow)">
-      ІНТЕРНЕТ-МАГАЗИН СИСТЕМ БЕЗПЕКИ
-    </text>
-
-    <!-- Домик справа -->
-    <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10"/>
-    <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10"/>
-    <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10"/>
-    <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10"/>
-  </svg>
-</div>
-
- 
 
 <section id="main-banner">
     <h1><span class="red">ПРО</span><span class="black">ЗАХИСТ</span></h1> 
@@ -483,7 +475,8 @@
 
 <!-- Категорія: Внутрішні Wi-Fi камери -->
 <section id="indoor" class="products" style="display: none;">
- <h2 style="text-align: center; margin-bottom: 40px; margin-top: 80px;">Внутрішні Wi-Fi відеокамери</h2>
+ <button class="back-btn" onclick="showCategories()">← Назад до категорій</button>
+   <h2 style="text-align: center; margin-bottom: 40px; margin-top: 80px;">Внутрішні Wi-Fi відеокамери</h2>
      <div class="products-container">
     <div class="product-item" onclick="openProductDetails('details1(IPC-TA22CP-G).html')">
         <img src="images/IPC-TA22CP-G.png" alt="Відеокамера 1">
@@ -774,46 +767,14 @@
     });
 
     // Переключение категорий
-
-function toggleCategory(catId) {
-    // скрыть все товары
-    document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-
-    // показать выбранную категорию
-    const block = document.getElementById(catId);
-    if (block) {
-        block.style.display = 'block';
-        block.scrollIntoView({ behavior: 'smooth' });
-
-        // записываем в историю
-        history.pushState({ category: catId }, '', '#' + catId);
-    }
-}
-
-// обработка кнопки "Назад" в браузере
-window.addEventListener('popstate', (event) => {
-    if (event.state && event.state.category) {
-        // показать категорию, куда вернулись
+    function toggleCategory(catId) {
         document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-        document.getElementById(event.state.category).style.display = 'block';
-    } else {
-        // если вернулись на начальный экран — скрыть все товары
-        document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-        // и пролистать к блоку категорий
-        document.getElementById('categories').scrollIntoView({ behavior: 'smooth' });
-    }
-});
-
-// при загрузке сразу открывать категорию по хэшу (если есть)
-window.addEventListener('DOMContentLoaded', () => {
-    if (location.hash) {
-        const catId = location.hash.substring(1);
-        if (document.getElementById(catId)) {
-            toggleCategory(catId);
+        const target = document.getElementById(catId);
+        if (target) {
+            target.style.display = 'block';
+            target.scrollIntoView({ behavior: 'smooth' });
         }
     }
-});
-
 
     // Логика авто-обновления
     document.addEventListener("DOMContentLoaded", () => {
@@ -831,3 +792,50 @@ window.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
