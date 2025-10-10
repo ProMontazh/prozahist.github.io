@@ -739,17 +739,25 @@
     showToast(`${item.name} додано до кошика!`);
   };
 
-  window.addToCartFromProductPage = function(item) {
-    const existingItem = cart.find(ci => ci.id === item.id);
-    if (existingItem) existingItem.quantity++;
-    else {
-      item.quantity = 1;
-      cart.push(item);
-    }
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCart();
-    showToast(`${item.name} додано до кошика!`);
-  };
+  window.addToCartFromProductPage = function(event, item) {
+  event.stopPropagation(); // теперь реально останавливаем всплытие
+  const existingItem = cart.find(ci => ci.id === item.id);
+  if (existingItem) existingItem.quantity++;
+  else {
+    item.quantity = 1;
+    cart.push(item);
+  }
+  localStorage.setItem('cart', JSON.stringify(cart));
+  updateCart();
+
+  const toast = document.getElementById('toast');
+  if (toast) {
+    toast.textContent = `${item.name} додано до кошика!`;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+  }
+};
+
 
   window.clearCart = function () {
     cart = [];
@@ -867,6 +875,7 @@
 
 </body>
 </html>
+
 
 
 
