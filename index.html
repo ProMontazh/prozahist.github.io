@@ -816,10 +816,59 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     updateCart();
 });
+    // === Запоминаем, с какого товара пользователь перешёл на страницу деталей ===
+function openProductDetails(pageUrl, productId) {
+    localStorage.setItem('lastCategory', currentCategory || '');
+    localStorage.setItem('lastProductId', productId);
+    localStorage.setItem('scrollPosition', window.scrollY);
+    window.location.href = pageUrl;
+}
+
+// === После возврата — восстанавливаем прокрутку и подсвечиваем товар ===
+window.addEventListener('pageshow', (event) => {
+    updateCart();
+
+    if (event.persisted || performance.getEntriesByType('navigation')[0].type === 'back_forward') {
+        if (!sessionStorage.getItem('reloadedAfterBack')) {
+            sessionStorage.setItem('reloadedAfterBack', 'true');
+            location.reload();
+        }
+    } else {
+        sessionStorage.removeItem('reloadedAfterBack');
+    }
+
+    const lastCategory = localStorage.getItem('lastCategory');
+    if (lastCategory && document.getElementById(lastCategory)) {
+        document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
+        document.getElementById(lastCategory).style.display = 'block';
+        currentCategory = lastCategory;
+        localStorage.removeItem('lastCategory');
+    }
+
+    // 🔹 Восстанавливаем позицию прокрутки
+    const lastProductId = localStorage.getItem('lastProductId');
+    const lastScroll = localStorage.getItem('scrollPosition');
+    if (lastProductId) {
+        const product = document.getElementById(lastProductId);
+        if (product) {
+            setTimeout(() => {
+                product.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                product.classList.add('highlight-product');
+                setTimeout(() => product.classList.remove('highlight-product'), 2000);
+            }, 500);
+        } else if (lastScroll) {
+            window.scrollTo({ top: parseInt(lastScroll), behavior: 'smooth' });
+        }
+        localStorage.removeItem('lastProductId');
+        localStorage.removeItem('scrollPosition');
+    }
+});
+
 </script>
 
 </body>
 </html>
+
 
 
 
