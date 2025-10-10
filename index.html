@@ -865,6 +865,24 @@ window.addEventListener('popstate', (event) => {
     cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCart();
 });
+    // --- Добавление из страницы деталей товара ---
+window.addToCartFromProductPage = function(item) {
+  const existingItem = cart.find(ci => ci.id === item.id);
+  if (existingItem) existingItem.quantity++;
+  else {
+    item.quantity = 1;
+    cart.push(item);
+  }
+  localStorage.setItem('cart', JSON.stringify(cart));
+  updateCart(); // обновляем корзину сразу
+  const toast = document.getElementById('toast');
+  if (toast) {
+    toast.textContent = `${item.name} додано до кошика!`;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+  }
+};
+
 window.updateCart = updateCart;
 })();
 </script>
@@ -889,3 +907,4 @@ window.updateCart = updateCart;
 
 </body>
 </html>
+
