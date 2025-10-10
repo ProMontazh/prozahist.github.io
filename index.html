@@ -764,20 +764,27 @@
   // --- КАТЕГОРИИ и HISTORY ---
   let currentCategory = null;
 
-  const categoriesBlock = document.getElementById('categories');
-  const mainBanner = document.getElementById('main-banner');
-
+  // toggleCategory(catId, push=true)
   window.toggleCategory = function (catId, push = true) {
     document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
     const target = document.getElementById(catId);
     if (!target) return;
     target.style.display = 'block';
-    target.scrollIntoView({ behavior: 'smooth' });
     currentCategory = catId;
 
-    // Скрываем категории и баннер при входе в категорию
-    if (categoriesBlock) categoriesBlock.style.display = 'none';
+    // Скрываем категории и баннер
+    const categories = document.getElementById('categories');
+    const mainBanner = document.getElementById('main-banner');
+    if (categories) categories.style.display = 'none';
     if (mainBanner) mainBanner.style.display = 'none';
+
+    // Прокрутка к началу категории с учетом шапки
+    setTimeout(() => {
+      const headerOffset = 80; // высота шапки
+      const elementPosition = target.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    }, 50);
 
     if (push) {
       history.pushState({ category: catId }, '', '#' + catId);
@@ -800,9 +807,14 @@
     window.location.href = pageUrl;
   };
 
-  // --- popstate ---
   window.addEventListener('popstate', (event) => {
     const state = event.state;
+
+    // Показываем только шапку и футер
+    const categories = document.getElementById('categories');
+    const mainBanner = document.getElementById('main-banner');
+    if (categories) categories.style.display = 'none';
+    if (mainBanner) mainBanner.style.display = 'none';
 
     document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
 
@@ -811,43 +823,44 @@
       if (target) {
         target.style.display = 'block';
         currentCategory = state.category;
-        if (categoriesBlock) categoriesBlock.style.display = 'none';
-        if (mainBanner) mainBanner.style.display = 'none';
       }
     } else {
       currentCategory = null;
-      if (categoriesBlock) categoriesBlock.style.display = 'block';
-      if (mainBanner) mainBanner.style.display = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCart();
   });
 
-  // --- pageshow ---
   window.addEventListener('pageshow', (event) => {
     cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCart();
 
     const lastCategory = localStorage.getItem('lastCategory');
-    const lastProductId = localStorage.getItem('lastProductId');
-    const lastScroll = parseInt(localStorage.getItem('lastScroll') || '0', 10);
-
     if (lastCategory && document.getElementById(lastCategory)) {
       document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
       document.getElementById(lastCategory).style.display = 'block';
       currentCategory = lastCategory;
-      if (categoriesBlock) categoriesBlock.style.display = 'none';
+
+      // Скрываем категории и баннер
+      const categories = document.getElementById('categories');
+      const mainBanner = document.getElementById('main-banner');
+      if (categories) categories.style.display = 'none';
       if (mainBanner) mainBanner.style.display = 'none';
     }
+
+    const lastProductId = localStorage.getItem('lastProductId');
+    const lastScroll = parseInt(localStorage.getItem('lastScroll') || '0', 10);
 
     if (lastProductId) {
       setTimeout(() => {
         let el = document.querySelector(`img[src*="${lastProductId}"]`);
         if (el) el = el.closest('.product-item');
         if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          const headerOffset = 80;
+          const elementPosition = el.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.scrollY - headerOffset;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
           el.classList.add('highlight-product');
           setTimeout(() => el.classList.remove('highlight-product'), 2000);
         } else if (!isNaN(lastScroll) && lastScroll > 0) {
@@ -883,6 +896,7 @@
 
 </body>
 </html>
+
 
 
 
