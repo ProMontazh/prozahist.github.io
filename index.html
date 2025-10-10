@@ -343,13 +343,15 @@
     flex-wrap: wrap;
     gap: 15px; /* минимальный промежуток между карточками */
     margin: 0px 0;
-    min-height: 400px; /* растягивается по контенту */
-    padding-bottom: 60px; /* дополнительный отступ снизу */
+    
     background-image: url('images/fon_for_category.png'); /* путь к картинке */
     background-size: cover; /* растянуть на весь блок */
     background-position: center;
     padding: 10px;
-    border-radius: 0px;
+    padding: 60px 10px; /* ⬅ увеличен верхний и нижний отступ фона */
+    border-radius: 0;
+    min-height: 450px; /* ⬅ минимальная высота блока (фон останется даже без контента) */
+    
 }
 
 .category-buttons {
@@ -903,6 +905,7 @@
 
 </body>
 </html>
+
 
 
 
