@@ -57,7 +57,7 @@
         #main-banner {
             background: url('images/fon_for_category.png') no-repeat center;
             background-size: cover;
-            height: 180px;
+            height: 290px;
             text-align: center;
             color: white;
             padding-top: 130px;
@@ -343,16 +343,11 @@
     flex-wrap: wrap;
     gap: 15px; /* минимальный промежуток между карточками */
     margin: 0px 0;
-    
     background-image: url('images/fon_for_category.png'); /* путь к картинке */
     background-size: cover; /* растянуть на весь блок */
     background-position: center;
-
-    /* Увеличиваем фон */
-    padding: 120px 10px; /* верх/низ фона больше */
-    border-radius: 0;
-    min-height: 600px; /* фон стал выше */*/
-    
+    padding: 10px;
+    border-radius: 0px;
 }
 
 .category-buttons {
@@ -364,48 +359,44 @@
 }
 
 .category-card {
-    position: relative;
-    overflow: hidden;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    cursor: pointer;
-    flex: 1 1 calc(16.66% - 20px); /* 6 карточек в ряд */
-    max-width: calc(16.66% - 20px);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    /* Для квадратной формы через padding hack */
-    width: 100%;
+    position: relative;       /* Важно для абсолютного позиционирования текста */
+    overflow: hidden;         /* Чтобы текст не выходил за границы */
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 0px;
+  text-align: center;
+  cursor: pointer;
+  flex: 1 1 calc(16.66% - 20px); /* 6 карточек в ряд */
+  max-width: calc(16.66% - 20px);
+  transition: transform 0.3s;
+  box-sizing: border-box;
 }
-.category-card::before {
-    content: "";
-    display: block;
-    padding-top: 100%; /* создаёт квадрат */
+
+.category-card:hover {
+  transform: scale(1.05);
 }
+
 .category-card img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.category-card span {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 10px;
-    color: #bbbbbb;
-    font-weight: bold;
-    background: none;
-    text-align: center;
-    font-size: 0.8em;
+  width: 100%;
+  height: 100%;             /* Занимает всю карточку */
+  object-fit: cover;        /* Кадрирует изображение, сохраняя пропорции */
+  display: block;
 }
 
+.category-card span {
+  position: absolute;       /* Располагаем текст поверх изображения */
+  bottom: 0;                /* Внизу карточки */
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  color: #bbbbbb;     /* серый цвет текста */
+  font-weight: bold;
+  background: none; /* прозрачный фон под текст */
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 0.8em;
+}
 
 /* На мобиле по 2 в ряд */
 @media (max-width:768px) {
@@ -910,10 +901,4 @@
 
 </body>
 </html>
-
-
-
-
-
-
 
