@@ -696,16 +696,20 @@
 
     const stockWarning = document.getElementById('stock-warning');
     if (stockWarning) stockWarning.textContent = totalQuantity > 10 ? "Увага! Обмежена кількість товару в наявності!" : "";
+
+    // --- футер ---
+    const footer = document.querySelector('footer');
+    if (footer) {
+      footer.style.position = document.body.scrollHeight <= window.innerHeight ? 'fixed' : 'static';
+      footer.style.bottom = '0';
+      footer.style.width = '100%';
+    }
   }
 
   window.increaseQuantity = function (id, event) {
     event.stopPropagation();
     const item = cart.find(i => i.id === id);
-    if (item) {
-      item.quantity++;
-      localStorage.setItem('cart', JSON.stringify(cart));
-      updateCart();
-    }
+    if (item) { item.quantity++; localStorage.setItem('cart', JSON.stringify(cart)); updateCart(); }
   };
 
   window.decreaseQuantity = function (id, event) {
@@ -731,181 +735,93 @@
     if (event && event.stopPropagation) event.stopPropagation();
     const existingItem = cart.find(ci => ci.id === item.id);
     if (existingItem) existingItem.quantity++;
-    else {
-      item.quantity = 1;
-      cart.push(item);
-    }
+    else { item.quantity = 1; cart.push(item); }
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCart();
     showToast(`${item.name} додано до кошика!`);
   };
 
-  window.clearCart = function () {
-    cart = [];
-    localStorage.removeItem('cart');
-    updateCart();
-    showToast('Кошик очищено');
-  };
-
-  window.toggleCart = function () {
-    const cartContent = document.getElementById('cart-content');
-    if (!cartContent) return;
-    const isHidden = getComputedStyle(cartContent).display === 'none';
-    cartContent.style.display = isHidden ? 'block' : 'none';
-  };
+  window.clearCart = function () { cart = []; localStorage.removeItem('cart'); updateCart(); showToast('Кошик очищено'); };
+  window.toggleCart = function () { const cartContent = document.getElementById('cart-content'); if (!cartContent) return; cartContent.style.display = getComputedStyle(cartContent).display==='none'?'block':'none'; };
 
   document.addEventListener('click', (ev) => {
     const cartContent = document.getElementById('cart-content');
     const cartButton = document.querySelector('.cart');
     if (!cartContent || !cartButton) return;
-    if (!cartContent.contains(ev.target) && !cartButton.contains(ev.target)) {
-      cartContent.style.display = 'none';
-    }
+    if (!cartContent.contains(ev.target) && !cartButton.contains(ev.target)) cartContent.style.display = 'none';
   });
 
   // --- КАТЕГОРИИ и HISTORY ---
   let currentCategory = null;
 
-  // toggleCategory(catId, push=true)
   window.toggleCategory = function (catId, push = true) {
     document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
     const target = document.getElementById(catId);
     if (!target) return;
     target.style.display = 'block';
-    target.scrollIntoView({ behavior: 'smooth' });
+    const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+    window.scrollTo({ top: target.offsetTop - headerHeight, behavior: 'smooth' });
     currentCategory = catId;
-    if (push) {
-      history.pushState({ category: catId }, '', '#' + catId);
-    }
+    if (push) history.pushState({ category: catId }, '', '#' + catId);
   };
 
-  // --- ВСПОМОГАТЕЛЬ: извлечь id товара из ссылки detailsX(...).html или из имени файла ---
   function extractProductIdFromUrl(url) {
     if (!url) return '';
-    // ищем текст в скобках: details1(ID).html
     const m = url.match(/\(([^)]+)\)/);
     if (m && m[1]) return m[1];
-    // иначе имя файла без расширения
     const filename = url.split('/').pop().split('?')[0].split('#')[0];
     return filename.replace(/\.[^.]+$/, '') || filename;
   }
 
-  // --- Переход на страницу товара (не нужно менять карточки) ---
-  // Вызов: onclick="openProductDetails('details1(IPC-TA22CP-G).html')"
   window.openProductDetails = function (pageUrl) {
-    // запомним категорию и позицию и id товара (если можно извлечь из URL)
     const prodId = extractProductIdFromUrl(pageUrl);
     if (currentCategory) localStorage.setItem('lastCategory', currentCategory);
     if (prodId) localStorage.setItem('lastProductId', prodId);
     localStorage.setItem('lastScroll', String(window.scrollY || 0));
-    // переходим
     window.location.href = pageUrl;
   };
 
-  // --- popstate (нажатие Назад / Вперёд) ---
   window.addEventListener('popstate', (event) => {
     const state = event.state;
-    if (state && state.category) {
-      document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-      const target = document.getElementById(state.category);
-      if (target) {
-        target.style.display = 'block';
-        currentCategory = state.category;
-      }
-    } else {
-      // если state нет — скрываем категории (главная)
-      document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-      currentCategory = null;
-    }
-    // всегда обновляем корзину при навигации назад/вперёд
+    if (state && state.category) { document.querySelectorAll('.products').forEach(s=>s.style.display='none'); const t=document.getElementById(state.category); if(t) t.style.display='block'; currentCategory = state.category; }
+    else { document.querySelectorAll('.products').forEach(s=>s.style.display='none'); currentCategory=null; }
     cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCart();
   });
 
-  // --- pageshow: при возврате из истории (bfcache) или простом показе страницы ---
-  window.addEventListener('pageshow', (event) => {
-    // обновляем корзину (в т.ч. после добавления в деталях)
+  window.addEventListener('pageshow', () => {
     cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCart();
 
-    // Восстанавливаем категорию: сначала lastCategory, иначе хеш
-    const lastCategory = localStorage.getItem('lastCategory');
-    if (lastCategory && document.getElementById(lastCategory)) {
-      document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-      document.getElementById(lastCategory).style.display = 'block';
-      currentCategory = lastCategory;
-    } else if (location.hash) {
-      const catFromHash = location.hash.substring(1);
-      if (document.getElementById(catFromHash)) {
-        document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-        document.getElementById(catFromHash).style.display = 'block';
-        currentCategory = catFromHash;
-      }
-    }
+    const lastCategory = localStorage.getItem('lastCategory') || location.hash.substring(1);
+    if (lastCategory && document.getElementById(lastCategory)) { document.querySelectorAll('.products').forEach(s=>s.style.display='none'); document.getElementById(lastCategory).style.display='block'; currentCategory = lastCategory; }
 
-    // Восстановим позицию/прокрутку к товару (по lastProductId или lastScroll)
     const lastProductId = localStorage.getItem('lastProductId');
-    const lastScroll = parseInt(localStorage.getItem('lastScroll') || '0', 10);
+    const lastScroll = parseInt(localStorage.getItem('lastScroll')||'0',10);
 
     if (lastProductId) {
-      // попытка найти карточку по image src содержащему id
-      setTimeout(() => {
-        let el = null;
-        // 1) ищем изображение, имя которого содержит id
-        el = document.querySelector(`img[src*="${lastProductId}"]`);
-        if (el) el = el.closest('.product-item');
-        // 2) либо элемент с id == lastProductId
-        if (!el) el = document.getElementById(lastProductId);
-        // 3) fallback — скролл по координате
-        if (el) {
-          try {
-            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            el.classList.add('highlight-product');
-            setTimeout(() => el.classList.remove('highlight-product'), 2000);
-          } catch (e) {
-            if (lastScroll) window.scrollTo({ top: lastScroll, behavior: 'smooth' });
-          }
-        } else if (!isNaN(lastScroll) && lastScroll > 0) {
-          window.scrollTo({ top: lastScroll, behavior: 'smooth' });
-        }
-        // очистим временные значения
-        localStorage.removeItem('lastProductId');
-        localStorage.removeItem('lastScroll');
-        localStorage.removeItem('lastCategory');
-      }, 120);
-    } else if (!isNaN(lastScroll) && lastScroll > 0) {
-      // если нет id, но есть сохранённая прокрутка
-      setTimeout(() => {
-        window.scrollTo({ top: lastScroll, behavior: 'smooth' });
-        localStorage.removeItem('lastScroll');
-      }, 120);
-    }
+      setTimeout(()=>{
+        let el = document.querySelector(`img[src*="${lastProductId}"]`)?.closest('.product-item') || document.getElementById(lastProductId);
+        if(el){ const headerHeight = document.querySelector('header')?.offsetHeight||0; const y=el.getBoundingClientRect().top + window.scrollY - headerHeight - 10; window.scrollTo({top:y,behavior:'smooth'}); el.classList.add('highlight-product'); setTimeout(()=>el.classList.remove('highlight-product'),2000); }
+        else if(!isNaN(lastScroll) && lastScroll>0) window.scrollTo({top:lastScroll,behavior:'smooth'});
+        localStorage.removeItem('lastProductId'); localStorage.removeItem('lastScroll'); localStorage.removeItem('lastCategory');
+      },120);
+    } else if(!isNaN(lastScroll) && lastScroll>0) setTimeout(()=>window.scrollTo({top:lastScroll,behavior:'smooth'}),120);
   });
 
-  // --- Инициализация при первой загрузке ---
   window.addEventListener('DOMContentLoaded', () => {
-    // если в адресе есть хеш — покажем категорию без лишнего пуша
-    if (location.hash) {
-      const catId = location.hash.substring(1);
-      if (document.getElementById(catId)) {
-        // показываем без пуша (пользователь попал по ссылке)
-        toggleCategory(catId, false);
-        // ставим state, чтобы popstate мог вернуть на эту категорию
-        history.replaceState({ category: catId }, '', '#' + catId);
-      }
-    }
-    // обновляем корзину
+    if(location.hash){ const catId = location.hash.substring(1); if(document.getElementById(catId)) { toggleCategory(catId,false); history.replaceState({category:catId}, '', '#' + catId); } }
     cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCart();
   });
 
-  // экспорт updateCart в window, если нужно вызвать вручную
   window.updateCart = updateCart;
 })();
 </script>
 
 </body>
 </html>
+
 
 
 
