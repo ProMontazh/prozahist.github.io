@@ -787,8 +787,17 @@ window.addEventListener('popstate', (event) => {
 
 // === Возврат со страницы деталей ===
 window.addEventListener('pageshow', (event) => {
-    // Обновляем корзину, даже если страница взята из кэша
     updateCart();
+
+    // Проверяем, что это возврат назад из страницы деталей
+    if (event.persisted || performance.getEntriesByType('navigation')[0].type === 'back_forward') {
+        if (!sessionStorage.getItem('reloadedAfterBack')) {
+            sessionStorage.setItem('reloadedAfterBack', 'true');
+            location.reload(); // жёсткое обновление корзины и категорий
+        }
+    } else {
+        sessionStorage.removeItem('reloadedAfterBack');
+    }
 
     const lastCategory = localStorage.getItem('lastCategory');
     if (lastCategory && document.getElementById(lastCategory)) {
@@ -811,6 +820,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+
 
 
 
