@@ -764,6 +764,7 @@
   // --- КАТЕГОРИИ и HISTORY ---
   let currentCategory = null;
 
+  // toggleCategory(catId, push=true)
   window.toggleCategory = function (catId, push = true) {
     document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
     const target = document.getElementById(catId);
@@ -771,14 +772,19 @@
     target.style.display = 'block';
     currentCategory = catId;
 
-    // Скрываем баннер и категории
-    const banner = document.getElementById('main-banner');
-    if (banner) banner.style.display = 'none';
-    const categoryButtons = document.getElementById('categories');
-    if (categoryButtons) categoryButtons.style.display = 'none';
+    // Скрываем категории и баннер
+    const categories = document.getElementById('categories');
+    const mainBanner = document.getElementById('main-banner');
+    if (categories) categories.style.display = 'none';
+    if (mainBanner) mainBanner.style.display = 'none';
 
-    // Скроллим к началу категории
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Прокрутка к началу категории с учетом шапки
+    setTimeout(() => {
+      const headerOffset = 80; // высота шапки
+      const elementPosition = target.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    }, 50);
 
     if (push) {
       history.pushState({ category: catId }, '', '#' + catId);
@@ -803,25 +809,25 @@
 
   window.addEventListener('popstate', (event) => {
     const state = event.state;
-    const banner = document.getElementById('main-banner');
-    const categoryButtons = document.getElementById('categories');
+
+    // Показываем только шапку и футер
+    const categories = document.getElementById('categories');
+    const mainBanner = document.getElementById('main-banner');
+    if (categories) categories.style.display = 'none';
+    if (mainBanner) mainBanner.style.display = 'none';
+
+    document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
 
     if (state && state.category) {
-      document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
       const target = document.getElementById(state.category);
       if (target) {
         target.style.display = 'block';
         currentCategory = state.category;
-        if (banner) banner.style.display = 'none';
-        if (categoryButtons) categoryButtons.style.display = 'none';
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     } else {
-      document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
       currentCategory = null;
-      if (banner) banner.style.display = 'block';
-      if (categoryButtons) categoryButtons.style.display = 'flex';
     }
+
     cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCart();
   });
@@ -830,31 +836,49 @@
     cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCart();
 
-    // Восстанавливаем категорию, но показываем с начала
     const lastCategory = localStorage.getItem('lastCategory');
-    let categoryToShow = lastCategory || (location.hash ? location.hash.substring(1) : null);
-    if (categoryToShow && document.getElementById(categoryToShow)) {
+    if (lastCategory && document.getElementById(lastCategory)) {
       document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-      const container = document.getElementById(categoryToShow);
-      container.style.display = 'block';
-      currentCategory = categoryToShow;
+      document.getElementById(lastCategory).style.display = 'block';
+      currentCategory = lastCategory;
 
-      // Скрываем баннер и кнопки категорий
-      const banner = document.getElementById('main-banner');
-      if (banner) banner.style.display = 'none';
-      const categoryButtons = document.getElementById('categories');
-      if (categoryButtons) categoryButtons.style.display = 'none';
+      // Скрываем категории и баннер
+      const categories = document.getElementById('categories');
+      const mainBanner = document.getElementById('main-banner');
+      if (categories) categories.style.display = 'none';
+      if (mainBanner) mainBanner.style.display = 'none';
+    }
 
-      container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const lastProductId = localStorage.getItem('lastProductId');
+    const lastScroll = parseInt(localStorage.getItem('lastScroll') || '0', 10);
 
-      localStorage.removeItem('lastProductId');
-      localStorage.removeItem('lastScroll');
-      localStorage.removeItem('lastCategory');
+    if (lastProductId) {
+      setTimeout(() => {
+        let el = document.querySelector(`img[src*="${lastProductId}"]`);
+        if (el) el = el.closest('.product-item');
+        if (el) {
+          const headerOffset = 80;
+          const elementPosition = el.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.scrollY - headerOffset;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+          el.classList.add('highlight-product');
+          setTimeout(() => el.classList.remove('highlight-product'), 2000);
+        } else if (!isNaN(lastScroll) && lastScroll > 0) {
+          window.scrollTo({ top: lastScroll, behavior: 'smooth' });
+        }
+        localStorage.removeItem('lastProductId');
+        localStorage.removeItem('lastScroll');
+        localStorage.removeItem('lastCategory');
+      }, 120);
+    } else if (!isNaN(lastScroll) && lastScroll > 0) {
+      setTimeout(() => {
+        window.scrollTo({ top: lastScroll, behavior: 'smooth' });
+        localStorage.removeItem('lastScroll');
+      }, 120);
     }
   });
 
   window.addEventListener('DOMContentLoaded', () => {
-    // если есть хеш — показываем категорию
     if (location.hash) {
       const catId = location.hash.substring(1);
       if (document.getElementById(catId)) {
@@ -872,6 +896,7 @@
 
 </body>
 </html>
+
 
 
 
