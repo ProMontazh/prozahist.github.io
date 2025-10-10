@@ -828,36 +828,38 @@
   });
 
   // --- pageshow ---
-  window.addEventListener('pageshow', () => {
+window.addEventListener('popstate', (event) => {
+    const state = event.state;
+    const categories = document.getElementById('categories');
+    const mainBanner = document.getElementById('main-banner');
+
+    document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
+
+    let catId = null;
+
+    if (state && state.category) {
+        catId = state.category;
+    } else if (location.hash) {
+        catId = location.hash.substring(1);
+    }
+
+    if (catId && document.getElementById(catId)) {
+        const target = document.getElementById(catId);
+        target.style.display = 'block';
+        target.classList.add('fade-in');
+        currentCategory = catId;
+        if (categories) categories.style.display = 'none';
+        if (mainBanner) mainBanner.style.display = 'none';
+    } else {
+        currentCategory = null;
+        if (categories) categories.style.display = 'flex';
+        if (mainBanner) mainBanner.style.display = 'block';
+    }
+
     cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCart();
-
-    const lastCategory = localStorage.getItem('lastCategory');
-    if (lastCategory && document.getElementById(lastCategory)) {
-      document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-      const el = document.getElementById(lastCategory);
-      el.style.display = 'block';
-      el.classList.add('fade-in');
-      currentCategory = lastCategory;
-      if (document.getElementById('categories')) document.getElementById('categories').style.display = 'none';
-      if (document.getElementById('main-banner')) document.getElementById('main-banner').style.display = 'none';
-    }
-  });
-
-  // --- Инициализация ---
-  window.addEventListener('DOMContentLoaded', () => {
-    if (location.hash) {
-      const catId = location.hash.substring(1);
-      if (document.getElementById(catId)) {
-        toggleCategory(catId, false);
-        history.replaceState({ category: catId }, '', '#' + catId);
-      }
-    }
-    cart = JSON.parse(localStorage.getItem('cart')) || [];
-    updateCart();
-  });
-
-  window.updateCart = updateCart;
+});
+window.updateCart = updateCart;
 })();
 </script>
 
@@ -881,6 +883,7 @@
 
 </body>
 </html>
+
 
 
 
