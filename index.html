@@ -715,9 +715,9 @@
         <img src="${item.image}" alt="${item.name}" style="width:30px;height:auto;margin-right:5px;">
         <span>${item.name} - ${item.price} грн</span>
         <div class="quantity-control">
-          <button class="quantity-btn" data-id="${item.id}" data-action="decrease">-</button>
+          <button class="quantity-btn" onclick="decreaseQuantity('${item.id}', event)">-</button>
           <span class="quantity">${item.quantity}</span>
-          <button class="quantity-btn" data-id="${item.id}" data-action="increase">+</button>
+          <button class="quantity-btn" onclick="increaseQuantity('${item.id}', event)">+</button>
         </div>
       `;
       cartItems.appendChild(cartItem);
@@ -728,31 +728,26 @@
     stockWarning.textContent = totalQuantity > 10 ? "Увага! Обмежена кількість товару в наявності!" : "";
   }
 
-  // Добавление/удаление товаров
-  function changeQuantity(id, action) {
+  window.increaseQuantity = function(id, event) {
+    event.stopPropagation();
     const item = cart.find(i => i.id === id);
-    if (!item) return;
+    if (item) {
+      item.quantity++;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCart();
+    }
+  };
 
-    if (action === 'increase') item.quantity++;
-    if (action === 'decrease') {
+  window.decreaseQuantity = function(id, event) {
+    event.stopPropagation();
+    const item = cart.find(i => i.id === id);
+    if (item) {
       if (item.quantity > 1) item.quantity--;
       else cart = cart.filter(i => i.id !== id);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCart();
     }
-
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCart();
-  }
-
-  // Обработчики кнопок в корзине
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.quantity-btn');
-    if (btn) {
-      const id = btn.dataset.id;
-      const action = btn.dataset.action;
-      changeQuantity(id, action);
-      e.stopPropagation();
-    }
-  });
+  };
 
   function showToast(message) {
     const toast = document.getElementById('toast');
@@ -763,11 +758,26 @@
   }
 
   window.addToCart = function(event, item) {
-    if (event) event.stopPropagation();
-    const existing = cart.find(i => i.id === item.id);
-    if (existing) existing.quantity++;
-    else { item.quantity = 1; cart.push(item); }
+    if (event && event.stopPropagation) event.stopPropagation();
+    const existingItem = cart.find(ci => ci.id === item.id);
+    if (existingItem) existingItem.quantity++;
+    else {
+      item.quantity = 1;
+      cart.push(item);
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCart();
+    showToast(`${item.name} додано до кошика!`);
+  };
 
+  window.addToCartFromProductPage = function(event, item) {
+    event.stopPropagation();
+    const existingItem = cart.find(ci => ci.id === item.id);
+    if (existingItem) existingItem.quantity++;
+    else {
+      item.quantity = 1;
+      cart.push(item);
+    }
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCart();
     showToast(`${item.name} додано до кошика!`);
@@ -783,16 +793,15 @@
   window.toggleCart = function() {
     const cartContent = document.getElementById('cart-content');
     if (!cartContent) return;
-    cartContent.style.display = getComputedStyle(cartContent).display === 'none' ? 'block' : 'none';
+    const isHidden = getComputedStyle(cartContent).display === 'none';
+    cartContent.style.display = isHidden ? 'block' : 'none';
   };
 
-  // Закрытие корзины при клике вне
   document.addEventListener('click', (ev) => {
     const cartContent = document.getElementById('cart-content');
     const cartButton = document.querySelector('.cart');
     if (!cartContent || !cartButton) return;
-
-    if (!ev.target.closest('.cart') && !ev.target.closest('.cart-content')) {
+    if (!cartContent.contains(ev.target) && !cartButton.contains(ev.target)) {
       cartContent.style.display = 'none';
     }
   });
@@ -809,6 +818,7 @@
     target.classList.add('fade-in');
     currentCategory = catId;
 
+    // Скрываем только блок категорий и баннер
     const categories = document.getElementById('categories');
     const mainBanner = document.getElementById('main-banner');
     if (categories) categories.style.display = 'none';
@@ -820,13 +830,16 @@
     }
   };
 
-  // Подключение категорий через JS вместо onclick
-  document.querySelectorAll('.category-card').forEach(card => {
-    card.addEventListener('click', () => toggleCategory(card.id || card.dataset.category));
-  });
+  function extractProductIdFromUrl(url) {
+    if (!url) return '';
+    const m = url.match(/\(([^)]+)\)/);
+    if (m && m[1]) return m[1];
+    const filename = url.split('/').pop().split('?')[0].split('#')[0];
+    return filename.replace(/\.[^.]+$/, '') || filename;
+  }
 
   window.openProductDetails = function(pageUrl) {
-    const prodId = pageUrl.match(/\(([^)]+)\)/)?.[1] || '';
+    const prodId = extractProductIdFromUrl(pageUrl);
     if (currentCategory) localStorage.setItem('lastCategory', currentCategory);
     if (prodId) localStorage.setItem('lastProductId', prodId);
     localStorage.setItem('lastScroll', String(window.scrollY || 0));
@@ -838,7 +851,10 @@
     const mainBanner = document.getElementById('main-banner');
     document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
 
-    let catId = state?.category || location.hash.substring(1);
+    let catId = null;
+    if (state && state.category) catId = state.category;
+    else if (location.hash) catId = location.hash.substring(1);
+
     if (catId && document.getElementById(catId)) {
       const target = document.getElementById(catId);
       target.style.display = 'block';
@@ -885,6 +901,7 @@
 
 </body>
 </html>
+
 
 
 
