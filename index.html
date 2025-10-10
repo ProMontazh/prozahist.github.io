@@ -646,11 +646,23 @@
     <p>&copy; 2024 ПроЗахист. Всі права захищені.</p>
 </footer>
 
-<script>
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-updateCart();
+<!-- вставьте этот CSS в <head> -->
+<style>
+/* подсветка возвращённой карточки */
+.highlight-product {
+  outline: 3px solid #ff4747;
+  border-radius: 8px;
+  transition: outline 0.2s ease;
+}
+</style>
 
-function updateCart() {
+<!-- замените текущий <script> на этот -->
+<script>
+(() => {
+  // --- КОРЗИНА ---
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  function updateCart() {
     const cartItems = document.getElementById('cart-items');
     const totalPriceElement = document.getElementById('total-price');
     const cartCountElement = document.getElementById('cart-count');
@@ -662,196 +674,239 @@ function updateCart() {
     let totalQuantity = 0;
 
     cart.forEach(item => {
-        total += item.price * item.quantity;
-        totalQuantity += item.quantity;
+      total += item.price * item.quantity;
+      totalQuantity += item.quantity;
 
-        const cartItem = document.createElement('div');
-        cartItem.classList.add('cart-item');
-        cartItem.innerHTML = `
-            <img src="${item.image}" alt="${item.name}" style="width:30px;height:auto;margin-right:5px;">
-            <span>${item.name} - ${item.price} грн</span>
-            <div class="quantity-control">
-                <button class="quantity-btn" onclick="decreaseQuantity('${item.id}', event)">-</button>
-                <span class="quantity">${item.quantity}</span>
-                <button class="quantity-btn" onclick="increaseQuantity('${item.id}', event)">+</button>
-            </div>
-        `;
-        cartItems.appendChild(cartItem);
+      const cartItem = document.createElement('div');
+      cartItem.className = 'cart-item';
+      cartItem.innerHTML = `
+        <img src="${item.image}" alt="${item.name}" style="width:30px;height:auto;margin-right:5px;">
+        <span>${item.name} - ${item.price} грн</span>
+        <div class="quantity-control">
+          <button class="quantity-btn" onclick="decreaseQuantity('${item.id}', event)">-</button>
+          <span class="quantity">${item.quantity}</span>
+          <button class="quantity-btn" onclick="increaseQuantity('${item.id}', event)">+</button>
+        </div>
+      `;
+      cartItems.appendChild(cartItem);
     });
 
     totalPriceElement.textContent = total;
     cartCountElement.textContent = totalQuantity;
 
     const stockWarning = document.getElementById('stock-warning');
-    if (stockWarning) {
-        stockWarning.textContent = totalQuantity > 10
-            ? "Увага! Обмежена кількість товару в наявності!"
-            : "";
-    }
-}
+    if (stockWarning) stockWarning.textContent = totalQuantity > 10 ? "Увага! Обмежена кількість товару в наявності!" : "";
+  }
 
-function increaseQuantity(id, event) {
+  window.increaseQuantity = function (id, event) {
     event.stopPropagation();
     const item = cart.find(i => i.id === id);
     if (item) {
-        item.quantity++;
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCart();
+      item.quantity++;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCart();
     }
-}
+  };
 
-function decreaseQuantity(id, event) {
+  window.decreaseQuantity = function (id, event) {
     event.stopPropagation();
     const item = cart.find(i => i.id === id);
     if (item) {
-        if (item.quantity > 1) item.quantity--;
-        else cart = cart.filter(i => i.id !== id);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCart();
+      if (item.quantity > 1) item.quantity--;
+      else cart = cart.filter(i => i.id !== id);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCart();
     }
-}
+  };
 
-function showToast(message) {
+  function showToast(message) {
     const toast = document.getElementById('toast');
+    if (!toast) return;
     toast.textContent = message;
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 3000);
-}
+  }
 
-function addToCart(event, item) {
-    event.stopPropagation();
-    const existingItem = cart.find(cartItem => cartItem.id === item.id);
+  window.addToCart = function (event, item) {
+    if (event && event.stopPropagation) event.stopPropagation();
+    const existingItem = cart.find(ci => ci.id === item.id);
     if (existingItem) existingItem.quantity++;
     else {
-        item.quantity = 1;
-        cart.push(item);
+      item.quantity = 1;
+      cart.push(item);
     }
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCart();
     showToast(`${item.name} додано до кошика!`);
-}
+  };
 
-function clearCart() {
+  window.clearCart = function () {
     cart = [];
     localStorage.removeItem('cart');
     updateCart();
     showToast('Кошик очищено');
-}
+  };
 
-function toggleCart() {
+  window.toggleCart = function () {
     const cartContent = document.getElementById('cart-content');
+    if (!cartContent) return;
     const isHidden = getComputedStyle(cartContent).display === 'none';
     cartContent.style.display = isHidden ? 'block' : 'none';
-}
+  };
 
-document.addEventListener('click', (event) => {
+  document.addEventListener('click', (ev) => {
     const cartContent = document.getElementById('cart-content');
     const cartButton = document.querySelector('.cart');
-    if (!cartContent.contains(event.target) && !cartButton.contains(event.target)) {
-        cartContent.style.display = 'none';
+    if (!cartContent || !cartButton) return;
+    if (!cartContent.contains(ev.target) && !cartButton.contains(ev.target)) {
+      cartContent.style.display = 'none';
     }
-});
+  });
 
-// === Категории ===
-let currentCategory = null;
-function toggleCategory(catId) {
+  // --- КАТЕГОРИИ и HISTORY ---
+  let currentCategory = null;
+
+  // toggleCategory(catId, push=true)
+  window.toggleCategory = function (catId, push = true) {
     document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-    const block = document.getElementById(catId);
-    if (block) {
-        currentCategory = catId;
-        block.style.display = 'block';
-        block.scrollIntoView({ behavior: 'smooth' });
-        history.pushState({ category: catId }, '', '#' + catId);
+    const target = document.getElementById(catId);
+    if (!target) return;
+    target.style.display = 'block';
+    target.scrollIntoView({ behavior: 'smooth' });
+    currentCategory = catId;
+    if (push) {
+      history.pushState({ category: catId }, '', '#' + catId);
     }
-}
+  };
 
-// === Детали товара ===
-function openProductDetails(pageUrl) {
-    localStorage.setItem('lastCategory', currentCategory || '');
+  // --- ВСПОМОГАТЕЛЬ: извлечь id товара из ссылки detailsX(...).html или из имени файла ---
+  function extractProductIdFromUrl(url) {
+    if (!url) return '';
+    // ищем текст в скобках: details1(ID).html
+    const m = url.match(/\(([^)]+)\)/);
+    if (m && m[1]) return m[1];
+    // иначе имя файла без расширения
+    const filename = url.split('/').pop().split('?')[0].split('#')[0];
+    return filename.replace(/\.[^.]+$/, '') || filename;
+  }
+
+  // --- Переход на страницу товара (не нужно менять карточки) ---
+  // Вызов: onclick="openProductDetails('details1(IPC-TA22CP-G).html')"
+  window.openProductDetails = function (pageUrl) {
+    // запомним категорию и позицию и id товара (если можно извлечь из URL)
+    const prodId = extractProductIdFromUrl(pageUrl);
+    if (currentCategory) localStorage.setItem('lastCategory', currentCategory);
+    if (prodId) localStorage.setItem('lastProductId', prodId);
+    localStorage.setItem('lastScroll', String(window.scrollY || 0));
+    // переходим
     window.location.href = pageUrl;
-}
+  };
 
-// === Кнопка Назад ===
-window.addEventListener('popstate', (event) => {
-    if (event.state && event.state.category) {
-        document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-        document.getElementById(event.state.category).style.display = 'block';
-        currentCategory = event.state.category;
-        updateCart();
+  // --- popstate (нажатие Назад / Вперёд) ---
+  window.addEventListener('popstate', (event) => {
+    const state = event.state;
+    if (state && state.category) {
+      document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
+      const target = document.getElementById(state.category);
+      if (target) {
+        target.style.display = 'block';
+        currentCategory = state.category;
+      }
     } else {
-        document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-        currentCategory = null;
-        location.reload();
+      // если state нет — скрываем категории (главная)
+      document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
+      currentCategory = null;
     }
-});
+    // всегда обновляем корзину при навигации назад/вперёд
+    cart = JSON.parse(localStorage.getItem('cart')) || [];
+    updateCart();
+  });
 
-// === Возврат со страницы деталей ===
-window.addEventListener('pageshow', (event) => {
+  // --- pageshow: при возврате из истории (bfcache) или простом показе страницы ---
+  window.addEventListener('pageshow', (event) => {
+    // обновляем корзину (в т.ч. после добавления в деталях)
+    cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCart();
 
-    // Проверяем, что это возврат назад из страницы деталей
-    if (event.persisted || performance.getEntriesByType('navigation')[0].type === 'back_forward') {
-        if (!sessionStorage.getItem('reloadedAfterBack')) {
-            sessionStorage.setItem('reloadedAfterBack', 'true');
-            location.reload(); // жёсткое обновление корзины и категорий
-        }
-    } else {
-        sessionStorage.removeItem('reloadedAfterBack');
-    }
-
+    // Восстанавливаем категорию: сначала lastCategory, иначе хеш
     const lastCategory = localStorage.getItem('lastCategory');
     if (lastCategory && document.getElementById(lastCategory)) {
+      document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
+      document.getElementById(lastCategory).style.display = 'block';
+      currentCategory = lastCategory;
+    } else if (location.hash) {
+      const catFromHash = location.hash.substring(1);
+      if (document.getElementById(catFromHash)) {
         document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-        document.getElementById(lastCategory).style.display = 'block';
-        currentCategory = lastCategory;
-        localStorage.removeItem('lastCategory');
+        document.getElementById(catFromHash).style.display = 'block';
+        currentCategory = catFromHash;
+      }
     }
-});
 
-// === Инициализация ===
-window.addEventListener('DOMContentLoaded', () => {
+    // Восстановим позицию/прокрутку к товару (по lastProductId или lastScroll)
+    const lastProductId = localStorage.getItem('lastProductId');
+    const lastScroll = parseInt(localStorage.getItem('lastScroll') || '0', 10);
+
+    if (lastProductId) {
+      // попытка найти карточку по image src содержащему id
+      setTimeout(() => {
+        let el = null;
+        // 1) ищем изображение, имя которого содержит id
+        el = document.querySelector(`img[src*="${lastProductId}"]`);
+        if (el) el = el.closest('.product-item');
+        // 2) либо элемент с id == lastProductId
+        if (!el) el = document.getElementById(lastProductId);
+        // 3) fallback — скролл по координате
+        if (el) {
+          try {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            el.classList.add('highlight-product');
+            setTimeout(() => el.classList.remove('highlight-product'), 2000);
+          } catch (e) {
+            if (lastScroll) window.scrollTo({ top: lastScroll, behavior: 'smooth' });
+          }
+        } else if (!isNaN(lastScroll) && lastScroll > 0) {
+          window.scrollTo({ top: lastScroll, behavior: 'smooth' });
+        }
+        // очистим временные значения
+        localStorage.removeItem('lastProductId');
+        localStorage.removeItem('lastScroll');
+        localStorage.removeItem('lastCategory');
+      }, 120);
+    } else if (!isNaN(lastScroll) && lastScroll > 0) {
+      // если нет id, но есть сохранённая прокрутка
+      setTimeout(() => {
+        window.scrollTo({ top: lastScroll, behavior: 'smooth' });
+        localStorage.removeItem('lastScroll');
+      }, 120);
+    }
+  });
+
+  // --- Инициализация при первой загрузке ---
+  window.addEventListener('DOMContentLoaded', () => {
+    // если в адресе есть хеш — покажем категорию без лишнего пуша
     if (location.hash) {
-        const catId = location.hash.substring(1);
-        if (document.getElementById(catId)) toggleCategory(catId);
+      const catId = location.hash.substring(1);
+      if (document.getElementById(catId)) {
+        // показываем без пуша (пользователь попал по ссылке)
+        toggleCategory(catId, false);
+        // ставим state, чтобы popstate мог вернуть на эту категорию
+        history.replaceState({ category: catId }, '', '#' + catId);
+      }
     }
+    // обновляем корзину
+    cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCart();
-});
-    // === Запоминаем, с какого товара пользователь перешёл на страницу деталей ===
-function openProductDetails(pageUrl, productId) {
-    localStorage.setItem('lastCategory', currentCategory || '');
-    localStorage.setItem('lastProductId', productId);
-    localStorage.setItem('scrollPosition', window.scrollY);
-    window.location.href = pageUrl;
-}
+  });
 
-// === После возврата — восстанавливаем прокрутку и подсвечиваем товар ===
-window.addEventListener('pageshow', (event) => {
-    updateCart();
-
-    if (event.persisted || performance.getEntriesByType('navigation')[0].type === 'back_forward') {
-        if (!sessionStorage.getItem('reloadedAfterBack')) {
-            sessionStorage.setItem('reloadedAfterBack', 'true');
-            location.reload();
-        }
-    } else {
-        sessionStorage.removeItem('reloadedAfterBack');
-    }
-
-    const lastCategory = localStorage.getItem('lastCategory');
-    if (lastCategory && document.getElementById(lastCategory)) {
-        document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-        document.getElementById(lastCategory).style.display = 'block';
-        currentCategory = lastCategory;
-        localStorage.removeItem('lastCategory');
-    }
-
-    
-});
-
+  // экспорт updateCart в window, если нужно вызвать вручную
+  window.updateCart = updateCart;
+})();
 </script>
 
 </body>
 </html>
+
 
 
 
