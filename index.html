@@ -696,7 +696,11 @@
     totalPriceElement.textContent = total;
     cartCountElement.textContent = totalQuantity;
   }
-
+// Предупреждение, если товаров больше 10
+        const stockWarning = document.getElementById('stock-warning');
+        stockWarning.textContent = totalQuantity > 10 ? "Увага! Обмежена кількість товару в наявності!" : "";
+       
+    }
   window.increaseQuantity = function (id, event) {
     event.stopPropagation();
     const item = cart.find(i => i.id === id);
@@ -875,6 +879,7 @@
 
 </body>
 </html>
+
 
 
 
