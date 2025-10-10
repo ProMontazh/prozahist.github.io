@@ -740,6 +740,18 @@
     showToast(`${item.name} додано до кошика!`);
   };
 
+  window.addToCartFromProductPage = function(item) {
+    const existingItem = cart.find(ci => ci.id === item.id);
+    if (existingItem) existingItem.quantity++;
+    else {
+      item.quantity = 1;
+      cart.push(item);
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCart();
+    showToast(`${item.name} додано до кошика!`);
+  };
+
   window.clearCart = function () {
     cart = [];
     localStorage.removeItem('cart');
@@ -763,32 +775,29 @@
     }
   });
 
-  // === КАТЕГОРИИ и HISTORY ===
+  // === КАТЕГОРИИ ===
   let currentCategory = null;
 
   window.toggleCategory = function (catId, push = true) {
     document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
     const target = document.getElementById(catId);
     if (!target) return;
+
     target.style.display = 'block';
     target.classList.add('fade-in');
     currentCategory = catId;
 
-    // Скрываем категории и баннер, показываем футер
     const categories = document.getElementById('categories');
     const mainBanner = document.getElementById('main-banner');
     if (categories) categories.style.display = 'none';
     if (mainBanner) mainBanner.style.display = 'none';
 
-    // ✅ Прокрутка вверх только при новом переходе
     if (push) {
       setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
+      history.pushState({ category: catId }, '', '#' + catId);
     }
-
-    if (push) history.pushState({ category: catId }, '', '#' + catId);
   };
 
-  // --- Определение ID товара из URL ---
   function extractProductIdFromUrl(url) {
     if (!url) return '';
     const m = url.match(/\(([^)]+)\)/);
@@ -797,7 +806,6 @@
     return filename.replace(/\.[^.]+$/, '') || filename;
   }
 
-  // --- Переход на страницу товара ---
   window.openProductDetails = function (pageUrl) {
     const prodId = extractProductIdFromUrl(pageUrl);
     if (currentCategory) localStorage.setItem('lastCategory', currentCategory);
@@ -806,23 +814,22 @@
     window.location.href = pageUrl;
   };
 
-  // --- popstate (Назад / Вперёд) ---
-  window.addEventListener('popstate', (event) => {
-    const state = event.state;
+  function handleState(state) {
     const categories = document.getElementById('categories');
     const mainBanner = document.getElementById('main-banner');
-
     document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
 
-    if (state && state.category) {
-      const target = document.getElementById(state.category);
-      if (target) {
-        target.style.display = 'block';
-        target.classList.add('fade-in');
-        currentCategory = state.category;
-        if (categories) categories.style.display = 'none';
-        if (mainBanner) mainBanner.style.display = 'none';
-      }
+    let catId = null;
+    if (state && state.category) catId = state.category;
+    else if (location.hash) catId = location.hash.substring(1);
+
+    if (catId && document.getElementById(catId)) {
+      const target = document.getElementById(catId);
+      target.style.display = 'block';
+      target.classList.add('fade-in');
+      currentCategory = catId;
+      if (categories) categories.style.display = 'none';
+      if (mainBanner) mainBanner.style.display = 'none';
     } else {
       currentCategory = null;
       if (categories) categories.style.display = 'flex';
@@ -831,61 +838,15 @@
 
     cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCart();
-  });
-
-  // --- pageshow ---
-window.addEventListener('popstate', (event) => {
-    const state = event.state;
-    const categories = document.getElementById('categories');
-    const mainBanner = document.getElementById('main-banner');
-
-    document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-
-    let catId = null;
-
-    if (state && state.category) {
-        catId = state.category;
-    } else if (location.hash) {
-        catId = location.hash.substring(1);
-    }
-
-    if (catId && document.getElementById(catId)) {
-        const target = document.getElementById(catId);
-        target.style.display = 'block';
-        target.classList.add('fade-in');
-        currentCategory = catId;
-        if (categories) categories.style.display = 'none';
-        if (mainBanner) mainBanner.style.display = 'none';
-    } else {
-        currentCategory = null;
-        if (categories) categories.style.display = 'flex';
-        if (mainBanner) mainBanner.style.display = 'block';
-    }
-
-    cart = JSON.parse(localStorage.getItem('cart')) || [];
-    updateCart();
-});
-    // --- Добавление из страницы деталей товара ---
-window.addToCartFromProductPage = function(item) {
-  const existingItem = cart.find(ci => ci.id === item.id);
-  if (existingItem) existingItem.quantity++;
-  else {
-    item.quantity = 1;
-    cart.push(item);
   }
-  localStorage.setItem('cart', JSON.stringify(cart));
-  updateCart(); // обновляем корзину сразу
-  const toast = document.getElementById('toast');
-  if (toast) {
-    toast.textContent = `${item.name} додано до кошика!`;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 3000);
-  }
-};
 
-window.updateCart = updateCart;
+  window.addEventListener('popstate', (event) => handleState(event.state));
+  window.addEventListener('pageshow', (event) => handleState(history.state));
+
+  updateCart(); // Инициализация корзины при загрузке
 })();
 </script>
+
 
 <style>
 /* Анимация появления товаров */
@@ -907,4 +868,5 @@ window.updateCart = updateCart;
 
 </body>
 </html>
+
 
