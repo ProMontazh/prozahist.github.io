@@ -845,29 +845,14 @@ window.addEventListener('pageshow', (event) => {
         localStorage.removeItem('lastCategory');
     }
 
-    // 🔹 Восстанавливаем позицию прокрутки
-    const lastProductId = localStorage.getItem('lastProductId');
-    const lastScroll = localStorage.getItem('scrollPosition');
-    if (lastProductId) {
-        const product = document.getElementById(lastProductId);
-        if (product) {
-            setTimeout(() => {
-                product.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                product.classList.add('highlight-product');
-                setTimeout(() => product.classList.remove('highlight-product'), 2000);
-            }, 500);
-        } else if (lastScroll) {
-            window.scrollTo({ top: parseInt(lastScroll), behavior: 'smooth' });
-        }
-        localStorage.removeItem('lastProductId');
-        localStorage.removeItem('scrollPosition');
-    }
+    
 });
 
 </script>
 
 </body>
 </html>
+
 
 
 
