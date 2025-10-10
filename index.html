@@ -761,30 +761,28 @@
     }
   });
 
-  // --- КАТЕГОРИИ ---
+  // --- КАТЕГОРИИ и HISTORY ---
   let currentCategory = null;
-
-  function updateCategoryButtonsVisibility() {
-    const categories = document.getElementById('categories');
-    const banner = document.getElementById('main-banner');
-    if (currentCategory) {
-      if (categories) categories.style.display = 'none';
-      if (banner) banner.style.display = 'none';
-    } else {
-      if (categories) categories.style.display = 'flex';
-      if (banner) banner.style.display = 'block';
-    }
-  }
 
   window.toggleCategory = function (catId, push = true) {
     document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
     const target = document.getElementById(catId);
     if (!target) return;
     target.style.display = 'block';
-    target.scrollIntoView({ behavior: 'smooth' });
     currentCategory = catId;
-    updateCategoryButtonsVisibility();
-    if (push) history.pushState({ category: catId }, '', '#' + catId);
+
+    // Скрываем баннер и категории
+    const banner = document.getElementById('main-banner');
+    if (banner) banner.style.display = 'none';
+    const categoryButtons = document.getElementById('categories');
+    if (categoryButtons) categoryButtons.style.display = 'none';
+
+    // Скроллим к началу категории
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    if (push) {
+      history.pushState({ category: catId }, '', '#' + catId);
+    }
   };
 
   function extractProductIdFromUrl(url) {
@@ -803,72 +801,60 @@
     window.location.href = pageUrl;
   };
 
-  // --- POPSTATE ---
   window.addEventListener('popstate', (event) => {
     const state = event.state;
+    const banner = document.getElementById('main-banner');
+    const categoryButtons = document.getElementById('categories');
+
     if (state && state.category) {
       document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
       const target = document.getElementById(state.category);
-      if (target) target.style.display = 'block';
-      currentCategory = state.category;
+      if (target) {
+        target.style.display = 'block';
+        currentCategory = state.category;
+        if (banner) banner.style.display = 'none';
+        if (categoryButtons) categoryButtons.style.display = 'none';
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     } else {
       document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
       currentCategory = null;
+      if (banner) banner.style.display = 'block';
+      if (categoryButtons) categoryButtons.style.display = 'flex';
     }
-    updateCategoryButtonsVisibility();
     cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCart();
   });
 
-  // --- PAGESHOW ---
-  window.addEventListener('pageshow', () => {
+  window.addEventListener('pageshow', (event) => {
     cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCart();
 
+    // Восстанавливаем категорию, но показываем с начала
     const lastCategory = localStorage.getItem('lastCategory');
-    if (lastCategory && document.getElementById(lastCategory)) {
+    let categoryToShow = lastCategory || (location.hash ? location.hash.substring(1) : null);
+    if (categoryToShow && document.getElementById(categoryToShow)) {
       document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-      document.getElementById(lastCategory).style.display = 'block';
-      currentCategory = lastCategory;
-    } else if (location.hash) {
-      const catFromHash = location.hash.substring(1);
-      if (document.getElementById(catFromHash)) {
-        document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-        document.getElementById(catFromHash).style.display = 'block';
-        currentCategory = catFromHash;
-      }
-    }
+      const container = document.getElementById(categoryToShow);
+      container.style.display = 'block';
+      currentCategory = categoryToShow;
 
-    updateCategoryButtonsVisibility();
+      // Скрываем баннер и кнопки категорий
+      const banner = document.getElementById('main-banner');
+      if (banner) banner.style.display = 'none';
+      const categoryButtons = document.getElementById('categories');
+      if (categoryButtons) categoryButtons.style.display = 'none';
 
-    const lastProductId = localStorage.getItem('lastProductId');
-    const lastScroll = parseInt(localStorage.getItem('lastScroll') || '0', 10);
+      container.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-    if (lastProductId) {
-      setTimeout(() => {
-        let el = document.querySelector(`img[src*="${lastProductId}"]`);
-        if (el) el = el.closest('.product-item');
-        if (!el) el = document.getElementById(lastProductId);
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          el.classList.add('highlight-product');
-          setTimeout(() => el.classList.remove('highlight-product'), 2000);
-        } else if (!isNaN(lastScroll) && lastScroll > 0) {
-          window.scrollTo({ top: lastScroll, behavior: 'smooth' });
-        }
-        localStorage.removeItem('lastProductId');
-        localStorage.removeItem('lastScroll');
-        localStorage.removeItem('lastCategory');
-      }, 120);
-    } else if (!isNaN(lastScroll) && lastScroll > 0) {
-      setTimeout(() => {
-        window.scrollTo({ top: lastScroll, behavior: 'smooth' });
-        localStorage.removeItem('lastScroll');
-      }, 120);
+      localStorage.removeItem('lastProductId');
+      localStorage.removeItem('lastScroll');
+      localStorage.removeItem('lastCategory');
     }
   });
 
   window.addEventListener('DOMContentLoaded', () => {
+    // если есть хеш — показываем категорию
     if (location.hash) {
       const catId = location.hash.substring(1);
       if (document.getElementById(catId)) {
@@ -878,16 +864,15 @@
     }
     cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCart();
-    updateCategoryButtonsVisibility();
   });
 
   window.updateCart = updateCart;
 })();
 </script>
 
-
 </body>
 </html>
+
 
 
 
