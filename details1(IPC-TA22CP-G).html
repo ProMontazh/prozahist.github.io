@@ -270,6 +270,18 @@
             nextImage();
         }
     });
+    window.addEventListener('popstate', () => {
+    const lastCat = localStorage.getItem('lastCategory');
+    if (lastCat) {
+        // возвращаем на index.html и открываем нужную категорию
+        window.location.href = `index.html#${lastCat}`;
+    } else {
+        // если категории нет — просто на главную
+        window.location.href = 'index.html';
+    }
+});
+
 </script>
 </body>
 </html>
+
