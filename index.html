@@ -337,24 +337,18 @@
 
 
 /* Фон для блока категорий */
-/* Фон для блока категорий с градиентом */
 #categories {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 15px; /* промежуток между карточками */
+    gap: 15px; /* минимальный промежуток между карточками */
     margin: 0px 0;
-    background-image: 
-        linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), /* полупрозрачный тёмный градиент */
-        url('images/fon_for_category.png'); /* путь к картинке */
+    background-image: url('images/fon_for_category.png'); /* путь к картинке */
     background-size: cover; /* растянуть на весь блок */
     background-position: center;
-    padding: 60px 10px; /* увеличенные отступы сверху и снизу */
-    border-radius: 15px; /* плавные углы */
-    min-height: 400px; /* минимальная высота блока */
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* лёгкая тень блока */
+    padding: 10px;
+    border-radius: 0px;
 }
-
 
 .category-buttons {
   display: flex;
@@ -907,5 +901,4 @@
 
 </body>
 </html>
-
 
