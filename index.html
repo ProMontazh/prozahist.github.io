@@ -376,6 +376,12 @@
     max-width: calc(50% - 15px);
   }
 }
+/* Скрываем баннер на мобильных устройствах */
+@media (max-width: 768px) {
+  #main-banner {
+    display: none !important;
+  }
+}
 
 
 
@@ -883,6 +889,7 @@ window.updateCart = updateCart;
 
 </body>
 </html>
+
 
 
 
