@@ -653,252 +653,115 @@
 </footer>
 
 <!-- вставьте этот CSS в <head> -->
-<style>
-/* подсветка возвращённой карточки */
-.highlight-product {
-  outline: 3px solid #ff4747;
-  border-radius: 8px;
-  transition: outline 0.2s ease;
-}
-</style>
 <script>
 (() => {
-  // === КОРЗИНА ===
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  let cart = JSON.parse(localStorage.getItem('cart') || '{}');
+  let currentCategory = null;
+  let lastScroll = 0;
 
+  const cartCount = document.getElementById('cart-count');
+  const categories = document.getElementById('categories');
+  const banner = document.getElementById('main-banner');
+  const promo = document.getElementById('promo-text');
+  const footer = document.getElementById('footer');
+
+  // === Обновление отображения корзины ===
   function updateCart() {
-    const cartItems = document.getElementById('cart-items');
-    const totalPriceElement = document.getElementById('total-price');
-    const cartCountElement = document.getElementById('cart-count');
-
-    if (!cartItems || !totalPriceElement || !cartCountElement) return;
-
-    cartItems.innerHTML = '';
-    let total = 0;
-    let totalQuantity = 0;
-
-    cart.forEach(item => {
-      total += item.price * item.quantity;
-      totalQuantity += item.quantity;
-
-      const div = document.createElement('div');
-      div.className = 'cart-item';
-      div.innerHTML = `
-        <img src="${item.image}" alt="${item.name}" style="width:30px;height:auto;margin-right:5px;">
-        <span>${item.name} - ${item.price} грн</span>
-        <div class="quantity-control">
-          <button class="cart-btn" onclick="decreaseQuantity('${item.id}', event)">-</button>
-          <span class="quantity">${item.quantity}</span>
-          <button class="cart-btn" onclick="increaseQuantity('${item.id}', event)">+</button>
-        </div>
-      `;
-      cartItems.appendChild(div);
-    });
-
-    totalPriceElement.textContent = total;
-    cartCountElement.textContent = totalQuantity;
+    const total = Object.values(cart).reduce((a, b) => a + b, 0);
+    if (cartCount) cartCount.textContent = total;
+    localStorage.setItem('cart', JSON.stringify(cart));
   }
 
-  // --- стили кнопок и корзины прямо в JS ---
-  const style = document.createElement('style');
-  style.textContent = `
-    .cart-btn {
-      background-color: #2196F3;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      width: 26px;
-      height: 26px;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: bold;
-      line-height: 1;
-      transition: background 0.2s;
-    }
-    .cart-btn:hover {
-      background-color: #1976D2;
-    }
-    .quantity-control {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    /* Контейнер корзины со скроллом */
-    #cart-content {
-      max-height: 350px;
-      overflow-y: auto;
-      padding: 10px;
-      scrollbar-width: thin;
-      scrollbar-color: #2196F3 #f0f0f0;
-    }
-    #cart-content::-webkit-scrollbar {
-      width: 6px;
-    }
-    #cart-content::-webkit-scrollbar-thumb {
-      background-color: #2196F3;
-      border-radius: 3px;
-    }
-    #cart-content::-webkit-scrollbar-track {
-      background: #f0f0f0;
-    }
-  `;
-  document.head.appendChild(style);
-
-  // --- функции изменения количества ---
-  window.increaseQuantity = function (id, e) {
-    e.stopPropagation();
-    const item = cart.find(i => i.id === id);
-    if (item) {
-      item.quantity++;
-      localStorage.setItem('cart', JSON.stringify(cart));
-      updateCart();
-    }
-  };
-
-  window.decreaseQuantity = function (id, e) {
-    e.stopPropagation();
-    const item = cart.find(i => i.id === id);
-    if (item) {
-      if (item.quantity > 1) item.quantity--;
-      else cart = cart.filter(i => i.id !== id);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      updateCart();
-    }
-  };
-
-  window.addToCart = function (event, item) {
-    if (event) event.stopPropagation();
-    let existing = cart.find(i => i.id === item.id);
-    if (existing) existing.quantity++;
-    else {
-      item.quantity = 1;
-      cart.push(item);
-    }
-    localStorage.setItem('cart', JSON.stringify(cart));
+  // === Добавление товара в корзину ===
+  window.addToCart = function (id) {
+    cart[id] = (cart[id] || 0) + 1;
     updateCart();
   };
 
-  window.clearCart = function () {
-    cart = [];
-    localStorage.removeItem('cart');
-    updateCart();
-  };
+  // === Переключение категории ===
+  window.toggleCategory = function (categoryId, pushState = true) {
+    lastScroll = window.scrollY;
+    document.querySelectorAll('.products').forEach(p => p.style.display = 'none');
 
-  window.toggleCart = function () {
-    const cartContent = document.getElementById('cart-content');
-    if (!cartContent) return;
-    cartContent.style.display = getComputedStyle(cartContent).display === 'none' ? 'block' : 'none';
-  };
-
-  document.addEventListener('click', (e) => {
-    const cartContent = document.getElementById('cart-content');
-    const cartButton = document.querySelector('.cart');
-    if (!cartContent || !cartButton) return;
-    if (!cartContent.contains(e.target) && !cartButton.contains(e.target)) {
-      cartContent.style.display = 'none';
+    const target = document.getElementById(categoryId);
+    if (target) {
+      target.style.display = 'block';
+      window.scrollTo({ top: 0 });
+      currentCategory = categoryId;
     }
-  });
 
-  // === КАТЕГОРИИ ===
-  let currentCategory = null;
-
-  window.toggleCategory = function (catId, push = true) {
-    document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-    const target = document.getElementById(catId);
-    if (!target) return;
-    target.style.display = 'block';
-    currentCategory = catId;
-
-    const categories = document.getElementById('categories');
-    const banner = document.getElementById('main-banner');
-    const promo = document.getElementById('promo-text');
     if (categories) categories.style.display = 'none';
     if (banner) banner.style.display = 'none';
     if (promo) promo.style.display = 'none';
+    if (footer) footer.style.display = 'block';
 
-    setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 50);
-
-    if (push) history.pushState({ category: catId }, '', '#' + catId);
+    if (pushState) {
+      history.pushState({ category: categoryId, scroll: 0 }, '', `#${categoryId}`);
+    }
   };
 
-  // === ДЕТАЛИ ТОВАРА ===
-  function extractProductIdFromUrl(url) {
-    if (!url) return '';
-    const m = url.match(/\(([^)]+)\)/);
-    if (m && m[1]) return m[1];
-    const filename = url.split('/').pop().split('?')[0].split('#')[0];
-    return filename.replace(/\.[^.]+$/, '') || filename;
-  }
+  // === Переход к карточке товара ===
+  window.viewProduct = function (productId) {
+    lastScroll = window.scrollY;
+    history.pushState({ product: productId, category: currentCategory, scroll: lastScroll }, '', `#${productId}`);
 
-  window.openProductDetails = function (pageUrl) {
-    const prodId = extractProductIdFromUrl(pageUrl);
-    if (currentCategory) localStorage.setItem('lastCategory', currentCategory);
-    if (prodId) localStorage.setItem('lastProductId', prodId);
-    localStorage.setItem('lastScroll', String(window.scrollY || 0));
-    window.location.href = pageUrl;
+    document.querySelectorAll('.products').forEach(p => p.style.display = 'none');
+    const details = document.getElementById(`details-${productId}`);
+    if (details) details.style.display = 'block';
   };
 
-  // === НАЗАД / ВПЕРЁД ===
+  // === Обработчик кнопки "назад" ===
   window.addEventListener('popstate', (event) => {
     const state = event.state;
-    const categories = document.getElementById('categories');
-    const banner = document.getElementById('main-banner');
-    const promo = document.getElementById('promo-text');
 
-    document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
+    document.querySelectorAll('.products, [id^="details-"]').forEach(s => s.style.display = 'none');
 
-    if (state && state.category) {
+    if (state && state.product) {
+      // Вернулись со страницы товара
+      const cat = state.category;
+      const catEl = document.getElementById(cat);
+      if (catEl) {
+        catEl.style.display = 'block';
+        currentCategory = cat;
+        window.scrollTo({ top: state.scroll || 0 });
+      }
+      if (categories) categories.style.display = 'none';
+      if (banner) banner.style.display = 'none';
+      if (promo) promo.style.display = 'none';
+    } else if (state && state.category) {
+      // Открыли категорию
       const target = document.getElementById(state.category);
       if (target) {
         target.style.display = 'block';
         currentCategory = state.category;
-        if (categories) categories.style.display = 'none';
-        if (banner) banner.style.display = 'none';
-        if (promo) promo.style.display = 'none';
+        window.scrollTo({ top: state.scroll || 0 });
       }
+      if (categories) categories.style.display = 'none';
+      if (banner) banner.style.display = 'none';
+      if (promo) promo.style.display = 'none';
     } else {
+      // Вернулись на главную
       currentCategory = null;
       if (categories) categories.style.display = 'flex';
       if (banner) banner.style.display = 'block';
       if (promo) promo.style.display = 'block';
+      document.querySelectorAll('.products').forEach(p => p.style.display = 'none');
+      window.scrollTo({ top: 0 });
     }
-
-    cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCart();
   });
 
-  // === ВОССТАНОВЛЕНИЕ СОСТОЯНИЯ ===
-  window.addEventListener('pageshow', () => {
-    cart = JSON.parse(localStorage.getItem('cart')) || [];
-    updateCart();
-
-    const lastCategory = localStorage.getItem('lastCategory');
-    if (lastCategory && document.getElementById(lastCategory)) {
-      document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-      document.getElementById(lastCategory).style.display = 'block';
-      currentCategory = lastCategory;
-
-      const categories = document.getElementById('categories');
-      const banner = document.getElementById('main-banner');
-      const promo = document.getElementById('promo-text');
-      if (categories) categories.style.display = 'none';
-      if (banner) banner.style.display = 'none';
-      if (promo) promo.style.display = 'none';
-    }
-
-    setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 50);
-  });
-
-  // === ПЕРВАЯ ЗАГРУЗКА ===
-  window.addEventListener('DOMContentLoaded', () => {
-    if (location.hash) {
-      const catId = location.hash.substring(1);
-      if (document.getElementById(catId)) {
-        toggleCategory(catId, false);
-        history.replaceState({ category: catId }, '', '#' + catId);
+  // === При загрузке страницы ===
+  window.addEventListener('load', () => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+      const productEl = document.getElementById(`details-${hash}`);
+      if (productEl) {
+        productEl.style.display = 'block';
+      } else if (document.getElementById(hash)) {
+        toggleCategory(hash, false);
       }
     }
-    cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCart();
   });
 })();
@@ -924,6 +787,7 @@
 
 </body>
 </html>
+
 
 
 
