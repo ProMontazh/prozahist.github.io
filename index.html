@@ -481,35 +481,34 @@
 
 <!-- Категорія: Внутрішні Wi-Fi камери -->
 <section id="indoor" class="products" style="display: none;">
-
    <h2 style="text-align: center; margin-bottom: 40px; margin-top: 80px;">Внутрішні Wi-Fi відеокамери</h2>
-     <div class="products-container">
-    <div class="product-item" onclick="openProductDetails('details1(IPC-TA22CP-G).html')">
-        <img src="images/IPC-TA22CP-G.png" alt="Відеокамера 1">
-        <h3>Поворотна камера IMOU IPC-TA22CP-G</h3>
-        <p>Поворотна PT камера, з функцією розумного відстеження</p>
-        <p class="product-price">1900.00 грн</p>
-        <button class="btn" onclick="addToCart(event, { 
-            id:'IPC-TA22CP-G', 
-            name:'IMOU IPC-TA22CP-G', 
-            price:1900, 
-            image:'images/IPC-TA22CP-G.png' 
-        })">Додати у кошик</button>
-    </div>
+   <div class="products-container">
+   
+      <div class="product-item" onclick="openProductDetails('details1(IPC-TA22CP-G).html')">
+          <img src="images/IPC-TA22CP-G.png" alt="Відеокамера 1">
+          <h3>Поворотна камера IMOU IPC-TA22CP-G</h3>
+          <p>Поворотна PT камера, з функцією розумного відстеження</p>
+          <p class="product-price">1900.00 грн</p>
+          <button class="btn" onclick="event.stopPropagation(); addToCartFromProductPage({ 
+              id: 'IPC-TA22CP-G', 
+              name: 'IMOU IPC-TA22CP-G', 
+              price: 1900, 
+              image: 'images/IPC-TA22CP-G.png' 
+          })">Додати у кошик</button>
+      </div>
 
-    <div class="product-item" onclick="openProductDetails('details2(IPC-C22EP-A).html')">
-        <img src="images/IPC-C22EP-A.png" alt="Відеокамера 2">
-        <h3>Внутрішня камера IMOU IPC-C22EP-A</h3>
-        <p>Компактна Wi-Fi камера з двостороннім аудіозв'язком</p>
-        <p class="product-price">2090.00 грн</p>
-        <button class="btn" onclick="addToCart(event, { 
-            id:'IPC-C22EP-A', 
-            name:'IMOU IPC-C22EP-A', 
-            price:2090, 
-            image:'images/IPC-C22EP-A.png' 
-        })">Додати у кошик</button>
-    </div>
-
+      <div class="product-item" onclick="openProductDetails('details2(IPC-C22EP-A).html')">
+          <img src="images/IPC-C22EP-A.png" alt="Відеокамера 2">
+          <h3>Внутрішня камера IMOU IPC-C22EP-A</h3>
+          <p>Компактна Wi-Fi камера з двостороннім аудіозв'язком</p>
+          <p class="product-price">2090.00 грн</p>
+          <button class="btn" onclick="event.stopPropagation(); addToCartFromProductPage({ 
+              id: 'IPC-C22EP-A', 
+              name: 'IMOU IPC-C22EP-A', 
+              price: 2090, 
+              image: 'images/IPC-C22EP-A.png' 
+          })">Додати у кошик</button>
+      </div>
     <div class="product-item" onclick="openProductDetails('details3(IPC-K2EP-3H1W).html')">
         <img src="images/IPC-K2EP-3H1W.png" alt="Відеокамера 3">
         <h3>Поворотна камера IMOU IPC-K2EP-3H1W</h3>
@@ -868,5 +867,6 @@
 
 </body>
 </html>
+
 
 
