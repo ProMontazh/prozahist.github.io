@@ -664,7 +664,6 @@
     const cartItems = document.getElementById('cart-items');
     const totalPriceElement = document.getElementById('total-price');
     const cartCountElement = document.getElementById('cart-count');
-
     if (!cartItems || !totalPriceElement || !cartCountElement) return;
 
     cartItems.innerHTML = '';
@@ -696,8 +695,8 @@
     if (stockWarning) stockWarning.textContent = totalQuantity > 10 ? "Увага! Обмежена кількість товару в наявності!" : "";
   }
 
-  window.increaseQuantity = (id, event) => {
-    event.stopPropagation();
+  window.increaseQuantity = (id, e) => {
+    e.stopPropagation();
     const item = cart.find(i => i.id === id);
     if (item) {
       item.quantity++;
@@ -706,8 +705,8 @@
     }
   };
 
-  window.decreaseQuantity = (id, event) => {
-    event.stopPropagation();
+  window.decreaseQuantity = (id, e) => {
+    e.stopPropagation();
     const item = cart.find(i => i.id === id);
     if (item) {
       if (item.quantity > 1) item.quantity--;
@@ -717,18 +716,18 @@
     }
   };
 
-  function showToast(message) {
+  function showToast(msg) {
     const toast = document.getElementById('toast');
     if (!toast) return;
-    toast.textContent = message;
+    toast.textContent = msg;
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 3000);
   }
 
   window.addToCart = (event, item) => {
-    if (event) event.stopPropagation();
-    const existingItem = cart.find(ci => ci.id === item.id);
-    if (existingItem) existingItem.quantity++;
+    if (event && event.stopPropagation) event.stopPropagation();
+    const exist = cart.find(ci => ci.id === item.id);
+    if (exist) exist.quantity++;
     else {
       item.quantity = 1;
       cart.push(item);
@@ -751,7 +750,7 @@
     cartContent.style.display = getComputedStyle(cartContent).display === 'none' ? 'block' : 'none';
   };
 
-  document.addEventListener('click', (ev) => {
+  document.addEventListener('click', ev => {
     const cartContent = document.getElementById('cart-content');
     const cartButton = document.querySelector('.cart');
     if (!cartContent || !cartButton) return;
@@ -764,6 +763,7 @@
   let currentCategory = null;
 
   window.toggleCategory = (catId, push = true) => {
+    const previousCategory = currentCategory;
     document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
     const target = document.getElementById(catId);
     if (!target) return;
@@ -775,12 +775,15 @@
     if (categories) categories.style.display = 'none';
     if (mainBanner) mainBanner.style.display = 'none';
 
-    setTimeout(() => {
-      const headerOffset = 80;
-      const elementPosition = target.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - headerOffset;
-      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-    }, 50);
+    // ✅ Прокручиваем только если это новая категория
+    if (previousCategory !== catId) {
+      setTimeout(() => {
+        const headerOffset = 80;
+        const elementPosition = target.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      }, 50);
+    }
 
     if (push) history.pushState({ category: catId }, '', '#' + catId);
   };
@@ -801,8 +804,8 @@
     window.location.href = pageUrl;
   };
 
-  // Универсальный обработчик popstate
-  window.addEventListener('popstate', (event) => {
+  // --- ОБРАБОТКА НАЗАД / ВПЕРЕД ---
+  window.addEventListener('popstate', event => {
     const state = event.state;
     const categories = document.getElementById('categories');
     const mainBanner = document.getElementById('main-banner');
@@ -827,6 +830,7 @@
     updateCart();
   });
 
+  // --- ВОССТАНОВЛЕНИЕ СОСТОЯНИЯ ---
   window.addEventListener('pageshow', () => {
     cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCart();
@@ -863,21 +867,20 @@
         localStorage.removeItem('lastProductId');
         localStorage.removeItem('lastScroll');
         localStorage.removeItem('lastCategory');
-      }, 200); // немного увеличил таймаут
+      }, 120);
     } else if (!isNaN(lastScroll) && lastScroll > 0) {
       setTimeout(() => {
         window.scrollTo({ top: lastScroll, behavior: 'smooth' });
         localStorage.removeItem('lastScroll');
-      }, 200);
+      }, 120);
     }
   });
-
 })();
 </script>
 
-
 </body>
 </html>
+
 
 
 
