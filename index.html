@@ -72,39 +72,68 @@
         }
 /* Контейнер товаров */
 .products-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;               /* Расстояние между карточками */
-    justify-content: space-between; /* Равные промежутки */
-    padding: 0 20px;  /* отступ слева и справа */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: space-between;
 }
-/* Карточки товаров */
+
 .product-item {
-    background-color: white;
-    padding: 15px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    flex: 0 0 calc((100% - 5*15px)/6); /* 6 карточек в ряд на десктопе */
-    min-width: 150px;
-    box-sizing: border-box;
-    cursor: pointer;
-    transition: transform 0.5s;
-    margin-bottom: 10px; /* расстояние между строками карточек */
-    display: flex;            /* включаем flex */
-    flex-direction: column;   /* расположение сверху вниз */
-    align-items: center;      /* выравнивание по центру */
-    text-align: center;       /* текст тоже по центру */
+  background-color: white;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  flex: 0 0 calc((100% - 5*15px)/6); /* 6 карточек в ряд */
+  min-width: 150px;
+  box-sizing: border-box;
+  cursor: pointer;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Важная строчка! */
+  align-items: center;
+  text-align: center;
+
+  transition: transform 0.3s;
 }
 
 .product-item img {
-    width: 100%;
-    height: auto;
-    margin-bottom: 10px; /* отступ под изображением */
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* чтобы картинки не растягивались */
 }
 
-
-.product-item:hover {
-    transform: scale(1.03);
+.product-item h3 {
+  font-size: 1em;
+  margin: 10px 0 5px 0;
+  min-height: 48px; /* фиксируем высоту заголовка, чтобы карточки не прыгали */
 }
+
+.product-item p {
+  margin: 5px 0;
+  flex-grow: 1; /* чтобы описание занимало свободное место */
+}
+
+.product-price {
+  font-size: 1.2em;
+  color: red;
+  font-weight: bold;
+  margin: 10px 0 5px 0;
+}
+
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
 
 /* Мобильная версия: одна карточка на строку */
 @media (max-width: 768px) {
@@ -879,6 +908,7 @@
 
 </body>
 </html>
+
 
 
 
