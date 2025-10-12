@@ -817,16 +817,18 @@
     target.classList.add('fade-in');
     currentCategory = catId;
 
-    // Скрыть категории и баннер
+    // Скрываем категории и баннер
     const categories = document.getElementById('categories');
     const mainBanner = document.getElementById('main-banner');
     if (categories) categories.style.display = 'none';
-    if (mainBanner) mainBanner.style.display = 'none';
+    if (mainBanner) mainBanner.style.setProperty('display', 'none', 'important');
 
-    // Скролл вверх
+    // Прокрутка вверх
     setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 50);
 
+    // Сохраняем состояние
     if (push) history.pushState({ category: catId }, '', '#' + catId);
+    localStorage.setItem('lastCategory', catId);
   };
 
   // === ОТКРЫТИЕ ТОВАРА ===
@@ -841,12 +843,12 @@
   window.openProductDetails = function(pageUrl) {
     const prodId = extractProductIdFromUrl(pageUrl);
     if (currentCategory) localStorage.setItem('lastCategory', currentCategory);
-    if (prodId) localStorage.setItem('lastProductId', prodId);
     localStorage.setItem('lastScroll', String(window.scrollY || 0));
-    window.location.href = pageUrl; // ✅ переход на страницу товара
+    if (prodId) localStorage.setItem('lastProductId', prodId);
+    window.location.href = pageUrl;
   };
 
-  // === ОБРАБОТКА НАЗАД / ВПЕРЕД ===
+  // === ВОССТАНОВЛЕНИЕ СОСТОЯНИЯ ===
   function handleState(state) {
     const categories = document.getElementById('categories');
     const mainBanner = document.getElementById('main-banner');
@@ -855,18 +857,21 @@
     let catId = null;
     if (state && state.category) catId = state.category;
     else if (location.hash) catId = location.hash.substring(1);
+    else catId = localStorage.getItem('lastCategory');
 
     if (catId && document.getElementById(catId)) {
       const target = document.getElementById(catId);
       target.style.display = 'block';
       currentCategory = catId;
       if (categories) categories.style.display = 'none';
-      if (mainBanner) mainBanner.style.display = 'none';
-      window.scrollTo({ top: 0 });
+      if (mainBanner) mainBanner.style.setProperty('display', 'none', 'important');
+      // Восстанавливаем позицию прокрутки
+      const lastScroll = parseInt(localStorage.getItem('lastScroll') || '0');
+      setTimeout(() => window.scrollTo({ top: lastScroll, behavior: 'instant' }), 50);
     } else {
       currentCategory = null;
       if (categories) categories.style.display = 'flex';
-      if (mainBanner) mainBanner.style.display = 'block';
+      if (mainBanner) mainBanner.style.setProperty('display', 'block', 'important');
     }
 
     cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -896,6 +901,7 @@
 
 </body>
 </html>
+
 
 
 
