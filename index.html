@@ -837,13 +837,21 @@
     return filename.replace(/\.[^.]+$/, '') || filename;
   }
 
-  window.openProductDetails = function(pageUrl) {
+ window.openProductDetails = function(pageUrl) {
     const prodId = extractProductIdFromUrl(pageUrl);
     if (currentCategory) localStorage.setItem('lastCategory', currentCategory);
     if (prodId) localStorage.setItem('lastProductId', prodId);
     localStorage.setItem('lastScroll', String(window.scrollY || 0));
+
+    // Скрываем баннер на мобильных при переходе в товар
+    const mainBanner = document.getElementById('main-banner');
+    if (window.innerWidth <= 768 && mainBanner) {
+        mainBanner.style.display = 'none';
+    }
+
     window.location.href = pageUrl;
-  };
+};
+
 
   function handleState(state) {
     const categories = document.getElementById('categories');
@@ -899,6 +907,7 @@
 </style>
 </body>
 </html>
+
 
 
 
