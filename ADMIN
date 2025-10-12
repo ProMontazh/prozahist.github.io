@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>ПроЗахист — Локальна адмінка</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; background: #f4f4f4; }
+    h1 { color: #2c3e50; }
+    input, textarea, button { margin: 5px; padding: 8px; }
+    .product { background: white; padding: 10px; margin: 10px 0; border-radius: 5px; }
+    img { width: 80px; height: 80px; object-fit: cover; margin-right: 10px; }
+  </style>
+</head>
+<body>
+
+  <h1>Адмінка "ПроЗахист" (офлайн-версія)</h1>
+
+  <div>
+    <input id="name" placeholder="Назва товару">
+    <input id="price" type="number" placeholder="Ціна (грн)">
+    <textarea id="desc" placeholder="Опис"></textarea>
+    <input id="image" type="file" accept="image/*">
+    <button onclick="addProduct()">Додати товар</button>
+  </div>
+
+  <hr>
+
+  <h2>Список товарів</h2>
+  <div id="list"></div>
+
+  <script>
+    // ---- ЗАВАНТАЖЕННЯ ТОВАРІВ З localStorage ----
+    let products = JSON.parse(localStorage.getItem("products") || "[]");
+
+    function save() {
+      localStorage.setItem("products", JSON.stringify(products));
+      render();
+    }
+
+    function addProduct() {
+      const name = document.getElementById("name").value;
+      const price = document.getElementById("price").value;
+      const desc = document.getElementById("desc").value;
+      const imageInput = document.getElementById("image");
+      const reader = new FileReader();
+
+      reader.onload = function() {
+        const image = reader.result;
+        products.push({ id: Date.now(), name, price, desc, image });
+        save();
+      };
+
+      if (imageInput.files[0]) reader.readAsDataURL(imageInput.files[0]);
+      else {
+        products.push({ id: Date.now(), name, price, desc, image: "" });
+        save();
+      }
+    }
+
+    function deleteProduct(id) {
+      products = products.filter(p => p.id !== id);
+      save();
+    }
+
+    function render() {
+      const list = document.getElementById("list");
+      list.innerHTML = "";
+      products.forEach(p => {
+        const div = document.createElement("div");
+        div.className = "product";
+        div.innerHTML = `
+          <div style="display:flex; align-items:center;">
+            ${p.image ? `<img src="${p.image}">` : ""}
+            <div>
+              <strong>${p.name}</strong> — ${p.price} грн<br>
+              <small>${p.desc}</small><br>
+              <button onclick="deleteProduct(${p.id})">Видалити</button>
+            </div>
+          </div>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    render();
+  </script>
+</body>
+</html>
