@@ -412,6 +412,16 @@
     background-position: center;
   }
 }
+/* Отступ снизу для товаров, чтобы футер не прилипал */
+.products {
+    padding-bottom: 40px; /* общий отступ для всех экранов */
+}
+
+@media (max-width: 768px) {
+    .products {
+        padding-bottom: 80px; /* чуть больше для мобильной версии */
+    }
+}
 
 
         </style>
@@ -907,6 +917,7 @@
 </style>
 </body>
 </html>
+
 
 
 
