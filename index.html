@@ -809,13 +809,10 @@
   let currentCategory = null;
 
   window.toggleCategory = function(catId, push = true) {
-    // Скрыть все продукты
     document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-
     const target = document.getElementById(catId);
     if (!target) return;
 
-    // Показать выбранную категорию
     target.style.display = 'block';
     target.classList.add('fade-in');
     currentCategory = catId;
@@ -826,14 +823,30 @@
     if (categories) categories.style.display = 'none';
     if (mainBanner) mainBanner.style.display = 'none';
 
-    // Скроллим к началу
+    // Скролл вверх
     setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 50);
 
-    // Обновляем историю
     if (push) history.pushState({ category: catId }, '', '#' + catId);
   };
 
-  // --- Восстановление состояния при возврате ---
+  // === ОТКРЫТИЕ ТОВАРА ===
+  function extractProductIdFromUrl(url) {
+    if (!url) return '';
+    const m = url.match(/\(([^)]+)\)/);
+    if (m && m[1]) return m[1];
+    const filename = url.split('/').pop().split('?')[0].split('#')[0];
+    return filename.replace(/\.[^.]+$/, '') || filename;
+  }
+
+  window.openProductDetails = function(pageUrl) {
+    const prodId = extractProductIdFromUrl(pageUrl);
+    if (currentCategory) localStorage.setItem('lastCategory', currentCategory);
+    if (prodId) localStorage.setItem('lastProductId', prodId);
+    localStorage.setItem('lastScroll', String(window.scrollY || 0));
+    window.location.href = pageUrl; // ✅ переход на страницу товара
+  };
+
+  // === ОБРАБОТКА НАЗАД / ВПЕРЕД ===
   function handleState(state) {
     const categories = document.getElementById('categories');
     const mainBanner = document.getElementById('main-banner');
@@ -863,12 +876,11 @@
   window.addEventListener('popstate', (event) => handleState(event.state));
   window.addEventListener('pageshow', () => handleState(history.state));
 
-  updateCart(); // Инициализация корзины при загрузке
+  updateCart();
 })();
 </script>
 
 <style>
-/* Анимация появления товаров */
 .fade-in {
   animation: fadeIn 0.4s ease-in-out;
 }
@@ -876,8 +888,6 @@
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
-/* Корзина прокручиваемая при большом количестве товаров */
 #cart-items {
   max-height: 300px;
   overflow-y: auto;
@@ -886,6 +896,7 @@
 
 </body>
 </html>
+
 
 
 
