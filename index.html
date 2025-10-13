@@ -84,19 +84,17 @@
   background-color: white;
   padding: 15px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  flex: 1 1 calc(16.66% - 15px); /* 6 карточек в ряд */
-  min-width: 150px;
+  flex: 0 1 280px; /* фиксированная ширина карточки */
   box-sizing: border-box;
   cursor: pointer;
-  
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  
-  transition: transform 0.2s; /* плавное увеличение */
+  transition: transform 0.2s;
 }
+
 .product-item:hover {
   transform: scale(1.03); /* увеличиваем на 5% только при hover */
 }
@@ -884,6 +882,7 @@
 </style>
 </body>
 </html>
+
 
 
 
