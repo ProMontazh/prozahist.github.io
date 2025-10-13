@@ -698,7 +698,7 @@
 
     totalPriceElement.textContent = total;
     cartCountElement.textContent = totalQuantity;
-    stockWarning.textContent = totalQuantity > 10 ? "Увага! Обмежена кількість товару в наявності!" : "";
+    stockWarning.textContent = totalQuantity > 10 ? "Увага! Обмежена кількість товару. Наявність уточнюйте" : "";
   }
 
   window.increaseQuantity = function(id, event) {
@@ -881,6 +881,7 @@
 </style>
 </body>
 </html>
+
 
 
 
