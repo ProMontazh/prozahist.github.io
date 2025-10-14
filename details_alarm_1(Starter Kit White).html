@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>Деталі товару - Ajax Starter Kit White</title> 
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .toast {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 1.0em;
+    white-space: nowrap; /* Устанавливаем текст в одну строчку */        
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: 9999;
+    }
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            opacity: 0; /* Начальное значение для анимации */
+            animation: fadeIn 3.0s forwards; /* Плавное появление */
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .product-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .product-image {
+            flex: 1;
+            cursor: pointer;
+        }
+
+        .product-image img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .product-info {
+            flex: 2;
+        }
+
+        .product-info h2 {
+            margin-top: 0;
+        }
+
+        .product-price {
+            font-size: 1.8em;
+            color: red;
+            margin: 10px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px; /* Отступ сверху для кнопки */
+            text-align: center; /* Центрируем текст в кнопке */
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .product-description {
+            white-space: pre-line;
+            line-height: 1.4;
+            font-size: 1.0rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="product-details">
+        <div class="product-image">
+            <img src="images/ajax_starterkit_white_s.png" alt="Сигналізація Ajax" onclick="openModal('images/ajax_starterkit_white_s.png')">     
+            <img src="images/ajax_starterkit_white.png" alt="Сигналізація Ajax - вид другий" style="margin-top: 10px;" onclick="openModal('images/ajax_starterkit_white.png')">     
+        </div>
+        <div id="toast" class="toast"></div>
+        <div class="product-info">
+            <h2>Стартовий комплект системи безпеки Ajax.</h2>     
+            Складається з хаба, датчика руху, датчика відчинення та брелока з тривожною кнопкою.
+            <p class="product-description">
+                Характеристики:      
+                
+Максимальна кількість пристроїв у системі 100
+Максимальна кількість користувачів 50
+Мобільні застосунки iOS 13.0 і вище, Android 5.0 і вище
+Час доставки сигналу тривоги 0,15 с
+Радіопротокол Jeweller
+Дальність зв’язку з датчиками — до 2000 м на відкритому просторі
+Двосторонній зв’язок між пристроями
+
+Робочі частоти:
+866,0 – 866,5 МГц
+868,0 – 868,6 МГц
+868,7 – 869,2 МГц
+905,0 – 926,5 МГц
+915,85 – 926,5 МГц
+921,0 – 922,0 МГц
+(залежить від регіону продажів)
+
+Саморегульована потужність радіосигналу — до 20 мВт
+Блочне шифрування, засноване на алгоритмі AES
+Період опитування датчика — 12 - 300 секунд
+
+Канали зв'язку
+Ethernet, GSM (850/900/1800/1900 МГц)
+Підтримка SIM-карт
+Micro SIM 2G
+Відеоспостереження
+До 10 камер або відеореєстраторів
+Строк гарантії	12 міс.
+</p>
+<p class="product-price">9700.00 грн</p>     
+<button class="btn" onclick="addToCartFromProductPage({ id: 'ajax starterkit white', name: 'ajax starterkit white', price: 9700, image: 'images/ajax_starterkit_white_s.png' })">Додати у кошик</button>
+</div>
+</div>
+</div>
+
+<div id="modal" class="modal" onclick="closeModal()">
+<img id="modal-img" src=""/>
+</div>
+
+<script>
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => {
+    toast.classList.remove("show");
+    }, 3000); // Время отображения сообщения 3 секунды
+    }
+    
+    function addToCartFromProductPage(item) {
+    const existingItem = cart.find(cartItem => cartItem.id === item.id);
+
+    if (existingItem) {
+        existingItem.quantity++;
+    } else {
+        item.quantity = 1;
+        cart.push(item);
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    showToast(`${item.name} додано до кошика!`);
+}
+function openModal(imageSrc) {
+    document.getElementById("modal-img").src = imageSrc;
+    document.getElementById("modal").style.display = "flex";
+    }
+    
+    function closeModal() {
+    document.getElementById("modal").style.display = "none";
+    }
+    </script>
+</body>
+</html>
+
