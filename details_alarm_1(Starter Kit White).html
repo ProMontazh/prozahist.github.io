@@ -177,7 +177,7 @@
 
     <div class="carousel">
         <img src="images/ajax_starterkit_white_s.png" alt="Starter Kit White" onclick="openModal('images/ajax_starterkit_white_s.png')">
-        <img src="images/ajax_starterkit_white.png" alt="Starter Kit White - інший вид" onclick="openModal('ajax_starterkit_white.png')">
+       <!--  <img src="images/ajax_starterkit_white.png" alt="Starter Kit White - інший вид" onclick="openModal('ajax_starterkit_white.png')"> -->
         
     </div>
 
@@ -228,10 +228,8 @@
 <script>
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const images = [
-        "images/ajax_starterkit_white_s.png",
-        "images/ajax_starterkit_white.png"
-       
-    ];
+        "images/ajax_starterkit_white_s.png"
+      ];
     let currentIndex = 0;
 
     function showToast(message) {
