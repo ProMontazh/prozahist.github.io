@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>Деталі товару - Ajax Starter Kit 2 White</title> 
+     <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .toast {
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 1.0em;
+            white-space: nowrap;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 9999;
+        }
+
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .container {
+          
+            max-width: 830px;
+            margin: 20px auto;
+            
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            animation: fadeIn 3.0s forwards;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .product-title {
+            text-align: center;
+            font-size: 2em;
+            margin-top: 0;
+        }
+
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 10px;
+            scroll-behavior: smooth;
+        }
+
+        .carousel img {
+            width: 100%;
+            max-width: 400px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .carousel img:hover {
+            transform: scale(1.05);
+        }
+
+        .product-description {
+            max-width: 100%;
+            margin-top: 20px;
+            font-size: 1.0rem;
+            line-height: 1.6;
+        }
+
+        .product-description ul {
+            padding-left: 20px;
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+        .product-description li {
+            margin-bottom: 6px;
+        }
+
+        .product-price {
+            font-size: 1.8em;
+            color: red;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .btn {
+            display: block;
+            width: fit-content;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px auto;
+            text-align: center;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* ----- Модальное окно ----- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+
+        .modal .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+            padding: 10px;
+        }
+
+        .modal .arrow.left {
+            left: 20px;
+        }
+
+        .modal .arrow.right {
+            right: 20px;
+        }
+            /* Улучшаем вид списка характеристик на ПК */
+@media (min-width: 1024px) {
+  .product-description ul {
+    padding-left: 150px; /* больше отступ слева */
+    margin-top: 15px;
+  }
+
+  .product-description li {
+  border-bottom: 1px dotted #ddd;
+  padding-bottom: 5px;
+}
+}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="product-title">Базовий комплект Ajax Starter Kit 2 White</h2>
+
+    <div class="carousel">
+        <img src="images/ajax_starterkit_white_s.png" alt="Starter Kit White" onclick="openModal('images/ajax_starterkit_white_s.png')">
+       <!--  <img src="images/ajax_starterkit_white.png" alt="Starter Kit White - інший вид" onclick="openModal('ajax_starterkit_white.png')"> -->
+        
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <div class="product-description">
+  У комплект StarterKit 2 входять чотири пристрої. Hub 2: Хаб контролює роботу пристроїв системи безпеки та підтримує датчики з фотоверифікацією тривог. З ним ви завжди знаєте, що відбувається в будинку завдяки пуш-повідомленням, смс та дзвінкам; MotionProtect: Датчик руху з перших кроків реагує на стороннього в приміщенні, що охороняється; DoorProtect: Датчик швидко реагує на відкриття. Це перша лінія захисту вашої системи безпеки, яку можна встановити на будь-який тип дверей; SpaceControl: Брелок для ключів ставить та знімає будинок з охорони. А одне натискання тривожної кнопки викликає підкріплення в екстреній ситуації.
+До базового комплекту легко під’єднати додаткові бездротові датчики у тому числі MotionCam, сирену, клавіатуру, датчик диму або протікання води.
+        <br><br>
+        Характеристики:
+        <ul>
+<li>Максимальна кількість пристроїв у системі: 100</li>
+<li>Максимальна кількість користувачів: 50</li>
+<li>Мобільні застосунки: iOS 13.0 і вище, Android 5.0 і вище</li>
+<li>Час доставки сигналу тривоги: 0,15 с</li>
+<li>Радіопротокол Jeweller</li>
+<li>Дальність зв’язку з датчиками — до 2000 м на відкритому просторі</li>
+<li>Двосторонній зв’язок між пристроями</li>
+<li>Робочі частоти:</li>
+<li>866,0 – 866,5 МГц</li>
+<li>868,0 – 868,6 МГц</li>
+<li>868,7 – 869,2 МГц</li>
+<li>905,0 – 926,5 МГц</li>
+<li>915,85 – 926,5 МГц</li>
+<li>921,0 – 922,0 МГц (залежить від регіону продажів)</li>
+<li>Резервне живлення від вбудованого акумулятора до 15 годин</li>
+<li>Саморегульована потужність радіосигналу — до 20 мВт</li>
+<li>Блочне шифрування, засноване на алгоритмі AES</li>
+<li>Період опитування датчика — 12 - 300 секунд</li>
+<li>Канали зв'язку Ethernet, GSM (850/900/1800/1900 МГц)</li>
+<li>Підтримка SIM-карт 2шт micro SIM 2G</li>
+<li>Строк гарантії	12 міс.</li>
+        </ul>
+    </div>
+
+    <p class="product-price">12100.00 грн</p>
+    <button class="btn" onclick="addToCartFromProductPage({ id: 'Starter Kit 2 White', name: 'Starter Kit 2 White', price: 12100, image: 'images/ajax_starterkit_white_s.png' })">Додати у кошик</button>
+</div>
+
+<div id="modal" class="modal" onclick="closeModal()">
+    <span class="arrow left" onclick="event.stopPropagation(); prevImage()">&#10094;</span>
+    <img id="modal-img" src=""/>
+    <span class="arrow right" onclick="event.stopPropagation(); nextImage()">&#10095;</span>
+</div>
+
+<script>
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const images = [
+        "images/ajax_starterkit_white_s.png"
+      ];
+    let currentIndex = 0;
+
+    function showToast(message) {
+        const toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.classList.add("show");
+        setTimeout(() => {
+            toast.classList.remove("show");
+        }, 3000);
+    }
+
+    function addToCartFromProductPage(item) {
+        const existingItem = cart.find(cartItem => cartItem.id === item.id);
+        if (existingItem) {
+            existingItem.quantity++;
+        } else {
+            item.quantity = 1;
+            cart.push(item);
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        showToast(`${item.name} додано до кошика!`);
+    }
+
+    function openModal(imageSrc) {
+        currentIndex = images.indexOf(imageSrc);
+        document.getElementById("modal-img").src = imageSrc;
+        document.getElementById("modal").style.display = "flex";
+    }
+
+    function closeModal() {
+        document.getElementById("modal").style.display = "none";
+    }
+
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        document.getElementById("modal-img").src = images[currentIndex];
+    }
+
+    function prevImage() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        document.getElementById("modal-img").src = images[currentIndex];
+    }
+
+    // свайп на мобильных
+    let startX = 0;
+    const modal = document.getElementById("modal");
+
+    modal.addEventListener("touchstart", (e) => {
+        startX = e.touches[0].clientX;
+    });
+
+    modal.addEventListener("touchend", (e) => {
+        let endX = e.changedTouches[0].clientX;
+        if (endX - startX > 50) {
+            prevImage();
+        } else if (startX - endX > 50) {
+            nextImage();
+        }
+    });
+    window.addEventListener('popstate', () => {
+    const lastCat = localStorage.getItem('lastCategory');
+    if (lastCat) {
+        // возвращаем на index.html и открываем нужную категорию
+        window.location.href = `index.html#${lastCat}`;
+    } else {
+        // если категории нет — просто на главную
+        window.location.href = 'index.html';
+    }
+});
+
+</script>
+</body>
+</html>
+
+
