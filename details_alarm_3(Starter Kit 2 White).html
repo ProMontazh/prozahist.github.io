@@ -235,10 +235,7 @@
         }, 3000);
     }
 
-    function addToCartFromProductPage(item) {
-    // 🧩 нормализуем id (убираем пробелы и приводим к нижнему регистру)
-    item.id = item.id.replace(/\s+/g, '').toLowerCase();
-
+   function addToCartFromProductPage(item) {
     const existingItem = cart.find(cartItem => cartItem.id === item.id);
     if (existingItem) {
         existingItem.quantity++;
@@ -246,6 +243,9 @@
         item.quantity = 1;
         cart.push(item);
     }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    showToast(`${item.name} додано до кошика!`);
+}
 
     localStorage.setItem('cart', JSON.stringify(cart));
     showToast(`${item.name} додано до кошика!`);
