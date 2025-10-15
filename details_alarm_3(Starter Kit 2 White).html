@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <title>Деталі товару - Ajax Starter Kit 2 White</title> 
+    <title>Деталі товару - Ajax StarterKit 2 White</title> 
      <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -172,7 +172,7 @@
 <body>
 
 <div class="container">
-    <h2 class="product-title">Базовий комплект Ajax Starter Kit 2 White</h2>
+    <h2 class="product-title">Базовий комплект Ajax StarterKit 2 White</h2>
 
     <div class="carousel">
         <img src="images/ajax_starterkit_white_s.png" alt="Starter Kit White" onclick="openModal('images/ajax_starterkit_white_s.png')">
@@ -195,25 +195,22 @@
 <li>Радіопротокол Jeweller</li>
 <li>Дальність зв’язку з датчиками — до 2000 м на відкритому просторі</li>
 <li>Двосторонній зв’язок між пристроями</li>
-<li>Робочі частоти:</li>
-<li>866,0 – 866,5 МГц</li>
-<li>868,0 – 868,6 МГц</li>
-<li>868,7 – 869,2 МГц</li>
-<li>905,0 – 926,5 МГц</li>
-<li>915,85 – 926,5 МГц</li>
-<li>921,0 – 922,0 МГц (залежить від регіону продажів)</li>
-<li>Резервне живлення від вбудованого акумулятора до 15 годин</li>
+<li>Робочі частоти: 868,0 – 868,6 МГц</li>
+<li>Термін роботи датчиків однієї батареї становить до 7 років</li>
+<li>Живлення датчиків походить від батарейок CR123A</li>
+<li>Живлення брелока — від батареї CR2032</li>
+<li>Резервне живлення Хаба від вбудованого акумулятора до 15 годин</li>
 <li>Саморегульована потужність радіосигналу — до 20 мВт</li>
 <li>Блочне шифрування, засноване на алгоритмі AES</li>
 <li>Період опитування датчика — 12 - 300 секунд</li>
 <li>Канали зв'язку Ethernet, GSM (850/900/1800/1900 МГц)</li>
-<li>Підтримка SIM-карт 2шт micro SIM 2G</li>
+<li>Підтримка 2-х SIM-карт micro SIM 2G</li>
 <li>Строк гарантії	12 міс.</li>
         </ul>
     </div>
 
     <p class="product-price">12100.00 грн</p>
-    <button class="btn" onclick="addToCartFromProductPage({ id: 'Starter Kit 2 White', name: 'Starter Kit 2 White', price: 12100, image: 'images/ajax_starterkit_white_s.png' })">Додати у кошик</button>
+    <button class="btn" onclick="addToCartFromProductPage({ id: 'StarterKit 2 White', name: 'StarterKit 2 White', price: 12100, image: 'images/ajax_starterkit_white_s.png' })">Додати у кошик</button>
 </div>
 
 <div id="modal" class="modal" onclick="closeModal()">
@@ -239,16 +236,20 @@
     }
 
     function addToCartFromProductPage(item) {
-        const existingItem = cart.find(cartItem => cartItem.id === item.id);
-        if (existingItem) {
-            existingItem.quantity++;
-        } else {
-            item.quantity = 1;
-            cart.push(item);
-        }
-        localStorage.setItem('cart', JSON.stringify(cart));
-        showToast(`${item.name} додано до кошика!`);
+    // 🧩 нормализуем id (убираем пробелы и приводим к нижнему регистру)
+    item.id = item.id.replace(/\s+/g, '').toLowerCase();
+
+    const existingItem = cart.find(cartItem => cartItem.id === item.id);
+    if (existingItem) {
+        existingItem.quantity++;
+    } else {
+        item.quantity = 1;
+        cart.push(item);
     }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    showToast(`${item.name} додано до кошика!`);
+}
 
     function openModal(imageSrc) {
         currentIndex = images.indexOf(imageSrc);
