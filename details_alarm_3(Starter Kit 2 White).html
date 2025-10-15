@@ -222,7 +222,7 @@
 <script>
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const images = [
-        "images/ajax_starterkit_white_s.png"
+        "images/ajax_starterkit_black.png"
       ];
     let currentIndex = 0;
 
@@ -235,21 +235,17 @@
         }, 3000);
     }
 
-   function addToCartFromProductPage(item) {
-    const existingItem = cart.find(cartItem => cartItem.id === item.id);
-    if (existingItem) {
-        existingItem.quantity++;
-    } else {
-        item.quantity = 1;
-        cart.push(item);
+    function addToCartFromProductPage(item) {
+        const existingItem = cart.find(cartItem => cartItem.id === item.id);
+        if (existingItem) {
+            existingItem.quantity++;
+        } else {
+            item.quantity = 1;
+            cart.push(item);
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        showToast(`${item.name} додано до кошика!`);
     }
-    localStorage.setItem('cart', JSON.stringify(cart));
-    showToast(`${item.name} додано до кошика!`);
-}
-
-    localStorage.setItem('cart', JSON.stringify(cart));
-    showToast(`${item.name} додано до кошика!`);
-}
 
     function openModal(imageSrc) {
         currentIndex = images.indexOf(imageSrc);
