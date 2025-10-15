@@ -801,7 +801,7 @@
     setTimeout(() => toast.classList.remove('show'), 3000);
   }
 
-  window.addToCart = function(event, item) {
+ window.addToCart = function(event, item) {
     if (event && event.stopPropagation) event.stopPropagation();
     const existingItem = cart.find(ci => ci.id === item.id);
     if (existingItem) existingItem.quantity++;
@@ -812,7 +812,7 @@
     localStorage.setItem('cart', JSON.stringify(cart));
     updateCart();
     showToast(`${item.name} додано до кошика!`);
-  };
+};
 
   window.addToCartFromProductPage = function(event, item) {
     event.stopPropagation();
@@ -990,6 +990,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </style>
 </body>
 </html>
+
 
 
 
