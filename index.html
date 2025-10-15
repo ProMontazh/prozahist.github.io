@@ -429,8 +429,14 @@
     gap: 10px;          /* можна також трохи зменшити відстань між картками */
   }
 }
-
-
+@media (max-width: 900px) and (orientation: landscape) {
+  #main-banner {
+    height: 80px;          /* уменьшаем высоту баннера */
+    padding-top: 60px;     /* делаем меньше отступ сверху */
+    background-size: cover;
+    background-position: center;
+  }
+}
         </style>
 </head>
 <body>
@@ -984,6 +990,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </style>
 </body>
 </html>
+
 
 
 
