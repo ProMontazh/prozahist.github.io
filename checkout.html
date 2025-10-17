@@ -273,20 +273,22 @@ function showToast() {
     setTimeout(() => { toast.classList.remove('show'); }, 2500);
 }
     // Исправляем перекрытие кнопки клавиатурой на мобильных
-const inputs = document.querySelectorAll('input');
-inputs.forEach(input => {
-    input.addEventListener('focus', () => {
-        document.body.style.paddingBottom = '300px'; // добавляем место под клавиатуру
-        window.scrollTo(0, document.body.scrollHeight); // прокрутка вниз
+if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth <= 768) {
+    const inputs = document.querySelectorAll('input, textarea, select');
+    inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            document.body.style.paddingBottom = '300px'; // добавляем место под клавиатуру
+            window.scrollTo(0, document.body.scrollHeight); // прокрутка вниз
+        });
+        input.addEventListener('blur', () => {
+            document.body.style.paddingBottom = '0'; // возвращаем обратно
+        });
     });
-    input.addEventListener('blur', () => {
-        document.body.style.paddingBottom = '0'; // возвращаем обратно
-    });
-});
+}
 </script>
-
 </body>
 </html>
+
 
 
 
