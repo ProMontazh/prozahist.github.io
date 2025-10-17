@@ -220,83 +220,93 @@
     <img id="modal-img" src=""/>
     <span class="arrow right" onclick="event.stopPropagation(); nextImage()">&#10095;</span>
 </div>
-
 <script>
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const images = [
-        "images/ajax_starterkit_black.png"
-      ];
-    let currentIndex = 0;
+const cart = JSON.parse(localStorage.getItem('cart')) || [];
+const images = [
+    "images/ajax_starterkit_white_black"
+];
+let currentIndex = 0;
 
-    function showToast(message) {
-        const toast = document.getElementById("toast");
-        toast.textContent = message;
-        toast.classList.add("show");
-        setTimeout(() => {
-            toast.classList.remove("show");
-        }, 3000);
-    }
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000);
+}
 
-    function addToCartFromProductPage(item) {
-        const existingItem = cart.find(cartItem => cartItem.id === item.id);
-        if (existingItem) {
-            existingItem.quantity++;
-        } else {
-            item.quantity = 1;
-            cart.push(item);
-        }
-        localStorage.setItem('cart', JSON.stringify(cart));
-        showToast(`${item.name} додано до кошика!`);
-    }
-
-    function openModal(imageSrc) {
-        currentIndex = images.indexOf(imageSrc);
-        document.getElementById("modal-img").src = imageSrc;
-        document.getElementById("modal").style.display = "flex";
-    }
-
-    function closeModal() {
-        document.getElementById("modal").style.display = "none";
-    }
-
-    function nextImage() {
-        currentIndex = (currentIndex + 1) % images.length;
-        document.getElementById("modal-img").src = images[currentIndex];
-    }
-
-    function prevImage() {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        document.getElementById("modal-img").src = images[currentIndex];
-    }
-
-    // свайп на мобильных
-    let startX = 0;
-    const modal = document.getElementById("modal");
-
-    modal.addEventListener("touchstart", (e) => {
-        startX = e.touches[0].clientX;
-    });
-
-    modal.addEventListener("touchend", (e) => {
-        let endX = e.changedTouches[0].clientX;
-        if (endX - startX > 50) {
-            prevImage();
-        } else if (startX - endX > 50) {
-            nextImage();
-        }
-    });
-    window.addEventListener('popstate', () => {
-    const lastCat = localStorage.getItem('lastCategory');
-    if (lastCat) {
-        // возвращаем на index.html и открываем нужную категорию
-        window.location.href = `index.html#${lastCat}`;
+function addToCartFromProductPage(item) {
+    const existingItem = cart.find(cartItem => cartItem.id === item.id);
+    if (existingItem) {
+        existingItem.quantity++;
     } else {
-        // если категории нет — просто на главную
-        window.location.href = 'index.html';
+        item.quantity = 1;
+        cart.push(item);
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    showToast(`${item.name} додано до кошика!`);
+}
+
+function openModal(imageSrc) {
+    currentIndex = images.indexOf(imageSrc);
+    document.getElementById("modal-img").src = imageSrc;
+    document.getElementById("modal").style.display = "flex";
+
+    // 👇 Если изображение одно — стрелки не показываем
+    if (images.length <= 1) {
+        document.querySelector('.arrow.left').style.display = 'none';
+        document.querySelector('.arrow.right').style.display = 'none';
+    } else {
+        document.querySelector('.arrow.left').style.display = 'block';
+        document.querySelector('.arrow.right').style.display = 'block';
+    }
+}
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+function nextImage() {
+    if (images.length <= 1) return; // если одно фото — ничего не делаем
+    currentIndex = (currentIndex + 1) % images.length;
+    document.getElementById("modal-img").src = images[currentIndex];
+}
+
+function prevImage() {
+    if (images.length <= 1) return;
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    document.getElementById("modal-img").src = images[currentIndex];
+}
+
+// свайп на мобильных
+let startX = 0;
+const modal = document.getElementById("modal");
+
+modal.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+});
+
+modal.addEventListener("touchend", (e) => {
+    let endX = e.changedTouches[0].clientX;
+    if (endX - startX > 50) {
+        prevImage();
+    } else if (startX - endX > 50) {
+        nextImage();
     }
 });
 
+// возврат к категории при нажатии "назад"
+window.addEventListener('popstate', () => {
+    const lastCat = localStorage.getItem('lastCategory');
+    if (lastCat) {
+        window.location.href = `index.html#${lastCat}`;
+    } else {
+        window.location.href = 'index.html';
+    }
+});
 </script>
+
 </body>
 </html>
 
