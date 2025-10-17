@@ -296,6 +296,14 @@
         // если категории нет — просто на главную
         window.location.href = 'index.html';
     }
+        if (images.length <= 1) {
+    document.querySelector('.arrow.left').style.display = 'none';
+    document.querySelector('.arrow.right').style.display = 'none';
+} else {
+    document.querySelector('.arrow.left').style.display = 'block';
+    document.querySelector('.arrow.right').style.display = 'block';
+}
+
 });
 
 </script>
