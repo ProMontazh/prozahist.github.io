@@ -64,6 +64,7 @@
             gap: 10px;
             padding: 10px;
             scroll-behavior: smooth;
+            justify-content: flex-start; /* добавь это */
         }
 
         .carousel img {
@@ -308,7 +309,16 @@ window.addEventListener('popstate', () => {
         window.location.href = 'index.html';
     }
 });
-</script>
+    // Центрируем изображение, если оно одно
+document.addEventListener("DOMContentLoaded", () => {
+    const carousel = document.querySelector(".carousel");
+    const imgs = carousel.querySelectorAll("img");
 
+    if (imgs.length === 1) {
+        carousel.style.justifyContent = "center";
+    }
+});
+
+</script>
 </body>
 </html>
