@@ -429,7 +429,28 @@
     background-position: center;
   }
 }
-        </style>
+  .phone-float {
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+    color: #ff6600; /* тот же цвет, что и слово 'pro' в логотипе */
+    font-weight: bold;
+    font-size: 1.1em;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px 14px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.phone-float:hover {
+    background: #ff6600;
+    color: white;
+    transform: scale(1.05);
+}
+     
+</style>
 </head>
 <body>
 
@@ -783,7 +804,7 @@
                 image:'images/ajax_starterkit_black.png' 
             })">Додати у кошик</button>
        </div>
-   
+    <a href="tel:+380935016040" class="phone-float">(063) 501-60-40</a>
     </div>
 </section>
 
@@ -1059,6 +1080,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </style>
 </body>
 </html>
+
 
 
 
