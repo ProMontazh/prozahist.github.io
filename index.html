@@ -54,7 +54,7 @@
         .container {
             margin-top: 0px; /* Отступ для компенсации фиксированной шапки */
         }
-        
+
         #products {
             display: flex;
             flex-wrap: wrap;
@@ -531,7 +531,7 @@
       <img src="images/alarm.png" alt="Охоронна сигналізація">
       <span>Комплекти сигналізації</span>
   </div>
-    
+
        <div class="category-card" onclick="toggleCategory('alarm_hub')">
       <img src="images/alarm_hub.png" alt="Хаби">
       <span>Хаби</span>
@@ -540,18 +540,19 @@
       <img src="images/whaterstop.png" alt="Захист від потопу">
       <span>Захист від потопу</span>
   </div>
-  
+
   <div class="category-card" onclick="toggleCategory('fire')">
       <img src="images/fire.png" alt="Захист від пожежі">
       <span>Захист від пожежі</span>
   </div>
-       <a href="tel:+380935016040" class="category help-category">
-  <img src="images/help.png" alt="Help">
-  <p>093-501-60-40</p>
-</a>
+       <div class="category-card" onclick="toggleCategory('help')">
+      <img src="images/help.png" alt="Контакт">
+       <a href="tel:+380935016040" class="phone-float">063-501-60-40</a>    
+      <span>063-501-60-40</span>  
+      
 
   </div>
-     
+
  </div>
 
 <!-- Категорія: Внутрішні Wi-Fi камери -->
@@ -640,7 +641,7 @@
 </section>
 
     <!-- Категорія: Зовнішні Wi-Fi камери -->
-       
+
     <section id="outdoor" class="products" style="display: none;">
     <h2 style="text-align: center; margin-bottom: 40px; margin-top: 80px;">Зовнішні відеокамери</h2>
     <div class="products-container">
@@ -682,7 +683,7 @@
             image:'images/IPC-K7CP-3H1WE_1.png' 
         })">Додати у кошик</button>
     </div>
-     
+
         <div class="product-item"  onclick="openProductDetails('details_outdoor_3(IPC-S3EP-3M0WE).html')">
         <img src="images/IPC-K3DP-3H0WF_2.png" alt="Відеокамера 3">
         <h3>Зовнішня IP камера IMOU IPC-S3EP-3M0WE</h3>
@@ -720,16 +721,16 @@
             image:'images/IPC-S7XEP-10M0WED.png' 
         })">Додати у кошик</button>
     </div>
-         
+
     </div>
             </section> 
-   
+
     <!-- Категорія: Зовнішні 4G Wi-Fi камери -->
-       
+
     <section id="outdoor_4G" class="products" style="display: none;">
     <h2 style="text-align: center; margin-bottom: 40px; margin-top: 80px;">Зовнішні 4G відеокамери</h2>
       <div class="products-container">   
-    
+
           <div class="product-item"  onclick="openProductDetails('details_outdoor4G_1(IPC-K7FP-3H0TE-EU).html')">
         <img src="images/IPC-K7FP-3H0TE-EU.png" alt="Відеокамера 1">
         <h3>Зовнішня 4G камера IMOU IPC-K7FP-3H0TE-EU</h3>
@@ -742,7 +743,7 @@
             image:'images/IPC-K7FP-3H0TE-EU.png' 
         })">Додати у кошик</button>
     </div>
-          
+
           <div class="product-item"  onclick="openProductDetails('details_outdoor4G_2(IPC-B7ED-5M0TEA-EU).html')">
         <img src="images/IPC-B7ED-5M0TEA-EU.png" alt="Відеокамера 2">
         <h3>Зовнішня камера IMOU IPC-B7ED-5M0TEA-EU</h3>
@@ -757,7 +758,7 @@
     </div>
       </div>  
             </section> 
-   
+
     <!-- Категорія: Охоронна сігналізація -->
 
     <section id="alarm" class="products" style="display: none;">
@@ -789,7 +790,7 @@
                 image:'images/ajax_starterkit_black.png' 
             })">Додати у кошик</button>
         </div>
-      
+
         <div class="product-item" onclick="openProductDetails('details_alarm_3(Starter Kit 2 White).html')">
             <img src="images/ajax_starterkit_white_s.png" alt="Starter Kit 2 White">
             <h3>Комплект охоронної сигналізації StarterKit 2 White</h3>
@@ -802,7 +803,7 @@
                 image:'images/ajax_starterkit_white_s.png' 
             })">Додати у кошик</button>
        </div>
-    
+
         <div class="product-item" onclick="openProductDetails('details_alarm_4(Starter Kit 2 Black).html')">
             <img src="images/ajax_starterkit_black.png" alt="Starter it 2 Black">
             <h3>Комплект охоронної сигналізації StarterKit 2 Black</h3>
@@ -815,7 +816,7 @@
                 image:'images/ajax_starterkit_black.png' 
             })">Додати у кошик</button>
        </div>
-    
+
     </div>
 </section>
 
@@ -1091,146 +1092,3 @@ document.addEventListener('DOMContentLoaded', () => {
 </style>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
