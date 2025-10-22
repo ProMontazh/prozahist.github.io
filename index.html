@@ -429,7 +429,11 @@
     background-position: center;
   }
 }
-  
+ .phone-help {
+  color: #800000; /* тот же цвет, что у слова "ПРО" в логотипе */
+  font-weight: bold;
+  white-space: nowrap; /* чтобы номер был в одну строку */
+} 
 </style>
 </head>
 <body>
@@ -520,13 +524,11 @@
   <div class="category-card" onclick="toggleCategory('fire')">
       <img src="images/fire.png" alt="Захист від пожежі">
       <span>Захист від пожежі</span>
-  </div>
-       <div class="category-card" onclick="toggleCategory('help')">
-      <a href="tel:+380935016040" class="category-card">
-  <img src="images/help.png" alt="Контакт">
-  <span>063-501-60-40</span>
-</a>
+  <div class="category-card" onclick="window.location.href='tel:+380935016040'">
+  <img src="images/help.png" alt="Help">
+  <span class="category-title phone-help">063-501-60-40</span>
 </div>
+
 </div>
 
 <!-- Категорія: Внутрішні Wi-Fi камери -->
@@ -1066,5 +1068,6 @@ document.addEventListener('DOMContentLoaded', () => {
 </style>
 </body>
 </html>
+
 
 
