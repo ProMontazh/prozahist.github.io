@@ -805,13 +805,13 @@
         <h3>Кран перекриття води Ajax WaterStop ½" (DN 15)</h3>
         <p>Перекриває воду за 7 секунд після тривоги датчика LeaksProtect</p>
         <p class="product-price">5900.00 грн</p>
-        <button class="btn" onclick="addToCart(event, { 
-            id:'WaterStop ½" white', 
-            name:'WaterStop ½" white', 
-            price:5900, 
-            image:'images/ajax_waterstop_white.png' 
-        })">Додати у кошик</button>
-    </div>
+<button class="btn" onclick="addToCartFromProductPage({
+  id:'WaterStop_white',
+  name:'Кран Ajax WaterStop ½” білий',
+  price:5900,
+  image:'images/ajax_waterstop_white.png'
+})">Додати у кошик</button>
+          </div>
          
          <div class="product-item" onclick="openProductDetails('details_water_2(waterstop_white_0.75D).html')">
         <img src="images/ajax_waterstop_white.png" alt="Запірний кран 2">
@@ -1126,6 +1126,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </style>
 </body>
 </html>
+
 
 
 
