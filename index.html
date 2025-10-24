@@ -489,7 +489,8 @@
         <button class="cancel-button" onclick="clearCart(); toggleCart()">Скасувати</button>
     </div>
 </div>
-
+<!-- 🎵 Аудио-файл для звука при наведении -->
+<audio id="hover-sound" src="sounds/hover.mp3" preload="auto"></audio>
     <!-- Кнопки категорий -->
 
    <div id="categories" class="category-buttons">
@@ -855,8 +856,7 @@
   border-radius: 8px;
   transition: outline 0.2s ease;
 }
-<!-- 🎵 Аудио-файл для звука при наведении -->
-<audio id="hover-sound" src="sounds/hover.mp3" preload="auto"></audio>
+
 
 <style>
 /* Анимация появления товаров */
@@ -1112,6 +1112,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+
 
 
 
