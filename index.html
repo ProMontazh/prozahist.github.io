@@ -1109,9 +1109,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const hoverSound = document.getElementById('hover-sound');
+  if (!hoverSound) return;
 
+  const categoryCards = document.querySelectorAll('.category-card');
+  categoryCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      hoverSound.currentTime = 0;
+      hoverSound.play().catch(() => {});
+    });
+  });
+});
+</script>
 </body>
 </html>
+
 
 
 
