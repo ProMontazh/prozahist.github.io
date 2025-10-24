@@ -855,7 +855,27 @@
   border-radius: 8px;
   transition: outline 0.2s ease;
 }
+<!-- 🎵 Аудио-файл для звука при наведении -->
+<audio id="hover-sound" src="sounds/hover.mp3" preload="auto"></audio>
+
+<style>
+/* Анимация появления товаров */
+.fade-in {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Корзина прокручиваемая при большом количестве товаров */
+#cart-items {
+  max-height: 300px;
+  overflow-y: auto;
+}
 </style>
+
 <script>
 (() => {
   // === КОРЗИНА ===
@@ -889,18 +909,7 @@
       `;
       cartItems.appendChild(cartItem);
     });
-<audio id="hover-audio" src="sounds/hover.mp3" preload="auto"></audio>
 
-<script>
-const hoverSound = document.getElementById('hover-audio');
-hoverSound.volume = 0.3;
-
-document.querySelectorAll('.category-card').forEach(card => {
-  card.addEventListener('mouseenter', () => {
-    hoverSound.currentTime = 0;
-    hoverSound.play();
-  });
-});
     totalPriceElement.textContent = total;
     cartCountElement.textContent = totalQuantity;
     stockWarning.textContent = totalQuantity > 10 ? "Увага! Обмежена кількість товару. Наявність уточнюйте" : "";
@@ -935,22 +944,8 @@ document.querySelectorAll('.category-card').forEach(card => {
     setTimeout(() => toast.classList.remove('show'), 3000);
   }
 
-window.addToCart = function(event, item) {
+  window.addToCart = function(event, item) {
     if (event && event.stopPropagation) event.stopPropagation();
-    const existingItem = cart.find(ci => ci.id === item.id);
-    if (existingItem) existingItem.quantity++;
-    else {
-      item.quantity = 1;
-      cart.push(item);
-    }
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCart();
-    showToast(`${item.name} додано до кошика!`);
-};
-
-
-  window.addToCartFromProductPage = function(event, item) {
-    event.stopPropagation();
     const existingItem = cart.find(ci => ci.id === item.id);
     if (existingItem) existingItem.quantity++;
     else {
@@ -997,7 +992,6 @@ window.addToCart = function(event, item) {
     target.classList.add('fade-in');
     currentCategory = catId;
 
-    // Скрываем только блок категорий и баннер
     const categories = document.getElementById('categories');
     const mainBanner = document.getElementById('main-banner');
     if (categories) categories.style.display = 'none';
@@ -1017,21 +1011,19 @@ window.addToCart = function(event, item) {
     return filename.replace(/\.[^.]+$/, '') || filename;
   }
 
- window.openProductDetails = function(pageUrl) {
+  window.openProductDetails = function(pageUrl) {
     const prodId = extractProductIdFromUrl(pageUrl);
     if (currentCategory) localStorage.setItem('lastCategory', currentCategory);
     if (prodId) localStorage.setItem('lastProductId', prodId);
     localStorage.setItem('lastScroll', String(window.scrollY || 0));
 
-    // Скрываем баннер на мобильных при переходе в товар
     const mainBanner = document.getElementById('main-banner');
     if (window.innerWidth <= 768 && mainBanner) {
         mainBanner.style.display = 'none';
     }
 
     window.location.href = pageUrl;
-};
-
+  };
 
   function handleState(state) {
     const categories = document.getElementById('categories');
@@ -1062,15 +1054,16 @@ window.addToCart = function(event, item) {
   window.addEventListener('popstate', (event) => handleState(event.state));
   window.addEventListener('pageshow', (event) => handleState(history.state));
 
-  updateCart(); // Инициализация корзины при загрузке
+  updateCart();
 })();
 </script>
 
 <script>
+// === Свайп между категориями ===
 document.addEventListener('DOMContentLoaded', () => {
   const categories = Array.from(document.querySelectorAll('.products'));
   let currentIndex = categories.findIndex(cat => cat.style.display === 'block');
-  if (currentIndex === -1) currentIndex = 0; // по умолчанию первая
+  if (currentIndex === -1) currentIndex = 0;
 
   let touchStartX = 0;
   let touchEndX = 0;
@@ -1083,33 +1076,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleSwipe() {
-  const diff = touchEndX - touchStartX;
-  if (Math.abs(diff) < 50) return; // игнорируем короткие свайпы
-
-  // Находим все категории, которые реально существуют
-  const visibleCategories = Array.from(document.querySelectorAll('.products'));
-  if (visibleCategories.length === 0) return;
-
-  // Если индекс не определён — ставим на первую
-  if (currentIndex < 0 || currentIndex >= visibleCategories.length) {
-    currentIndex = 0;
+    const diff = touchEndX - touchStartX;
+    if (Math.abs(diff) < 50) return;
+    const visibleCategories = Array.from(document.querySelectorAll('.products'));
+    if (visibleCategories.length === 0) return;
+    if (currentIndex < 0 || currentIndex >= visibleCategories.length) currentIndex = 0;
+    if (diff < 0 && currentIndex < visibleCategories.length - 1) showCategory(currentIndex + 1);
+    else if (diff > 0 && currentIndex > 0) showCategory(currentIndex - 1);
   }
 
-  // Свайп влево → следующая категория
-  if (diff < 0 && currentIndex < visibleCategories.length - 1) {
-    showCategory(currentIndex + 1);
-  }
-  // Свайп вправо → предыдущая категория
-  else if (diff > 0 && currentIndex > 0) {
-    showCategory(currentIndex - 1);
-  }
-}
-
-
-  document.addEventListener('touchstart', e => {
-    touchStartX = e.changedTouches[0].screenX;
-  });
-
+  document.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX);
   document.addEventListener('touchend', e => {
     touchEndX = e.changedTouches[0].screenX;
     handleSwipe();
@@ -1117,26 +1093,26 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+<script>
+// === Звук при наведении на карточки категорий ===
+document.addEventListener('DOMContentLoaded', () => {
+  const hoverSound = document.getElementById('hover-sound');
+  if (!hoverSound) return;
+  hoverSound.volume = 0.4;
 
-<style>
-/* Анимация появления товаров */
-.fade-in {
-  animation: fadeIn 0.4s ease-in-out;
-}
+  const cards = document.querySelectorAll('.category-card');
+  cards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      hoverSound.currentTime = 0;
+      hoverSound.play().catch(() => {});
+    });
+  });
+});
+</script>
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Корзина прокручиваемая при большом количестве товаров */
-#cart-items {
-  max-height: 300px;
-  overflow-y: auto;
-}
-</style>
 </body>
 </html>
+
 
 
 
