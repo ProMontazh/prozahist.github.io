@@ -1106,11 +1106,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const backSound = document.getElementById('back-sound');
+  if (!backSound) return;
+
+  // При нажатии кнопки "Назад" (popstate = возврат в истории)
+  window.addEventListener('popstate', () => {
+    backSound.currentTime = 0;
+    backSound.play().catch(() => {});
+  });
+
+  // (Необязательно) Если у тебя есть своя кнопка "Назад"
+  const backButtons = document.querySelectorAll('.back-button');
+  backButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      backSound.currentTime = 0;
+      backSound.play().catch(() => {});
+    });
+  });
+});
+</script>
 
 
 </script>
+<audio id="back-sound" src="sounds/hover_2.mp3" preload="auto"></audio> 
 </body>
 </html>
+
 
 
 
