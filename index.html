@@ -1066,7 +1066,7 @@
 
   // === 🎵 ЗВУК "НАЗАД" ===
   const backSound = document.getElementById('back-sound');
-
+  if (backSound) backSound.volume = 0.3; // 🔈 громкость от 0.0 (тихо) до 1.0 (громко)
   window.addEventListener('popstate', (e) => {
     handleState(e.state);
     if (backSound) {
@@ -1120,6 +1120,7 @@
 </script>
 </body>
 </html>
+
 
 
 
