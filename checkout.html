@@ -94,6 +94,12 @@ h1 { text-align:center; }
         </div>
         <input type="hidden" id="cart-data" name="cart">
         <button type="submit" class="submit-button">Підтвердити замовлення</button>
+         <!-- 💳 Кнопка оплати карткою -->
+    <a id="pay-button" href="#" target="_blank" class="submit-button"
+       style="background:#2b7cff; display:none; text-align:center;">
+       💳 Сплатити карткою
+    </a>
+
     </form>
 </div>
 
@@ -285,9 +291,81 @@ if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWi
         });
     });
 }
+    // === Кнопка "Сплатити карткою" ===
+function showPaymentButton(amount) {
+    const payBtn = document.getElementById("pay-button");
+    const privatLink = "https://payhub.privatbank.ua/l/abc12345"; // 🔹 заміни своєю реальною ссилкою від ПриватБанку
+    payBtn.href = privatLink + "?amount=" + amount.toFixed(2);
+    payBtn.style.display = "block";
+}
+
+// Показуємо кнопку після розрахунку фінальної суми
+function displayOrder() {
+    const orderItemsContainer = document.getElementById('cart-items');
+    const totalPriceElement = document.getElementById('total-price');
+    const cartDataField = document.getElementById('cart-data');
+
+    orderItemsContainer.innerHTML = '';
+    totalPriceElement.innerHTML = '';
+    totalPriceElement.offsetHeight;
+
+    let total = 0;
+    let cartText = "";
+
+    cart.forEach(item => {
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
+        const itemElement = document.createElement('div');
+        itemElement.classList.add('cart-item');
+        itemElement.textContent = `${item.name} — ${item.price} грн × ${item.quantity} = ${subtotal} грн`;
+        orderItemsContainer.appendChild(itemElement);
+        cartText += `${item.name} — ${item.price} грн × ${item.quantity} = ${subtotal} грн\n`;
+    });
+
+    const discountPercent = calculateDiscount(total);
+    const discountAmount = (total * discountPercent) / 100;
+    const finalTotal = total - discountAmount;
+
+    const orderNumber = generateOrderNumber();
+    document.getElementById('order-header').textContent = `Ваше замовлення №${orderNumber}`;
+
+    const totalLine = createLine(`Сума: ${total.toFixed(2)} грн`);
+    totalLine.classList.add('show');
+    totalPriceElement.appendChild(totalLine);
+
+    const discountColor = discountPercent > 0 ? "green" : "gray";
+    const discountText =
+        discountPercent > 0
+            ? `Знижка: - ${discountAmount.toFixed(2)} грн`
+            : `Знижка: 0 грн`;
+
+    const discountLine = createLine(discountText, discountColor);
+    totalPriceElement.appendChild(discountLine);
+    setTimeout(() => discountLine.classList.add('show'), 1500);
+
+    const finalLine = createLine(`До сплати: 0 грн`);
+    totalPriceElement.appendChild(finalLine);
+    setTimeout(() => {
+        finalLine.classList.add('show');
+        animateNumber(finalLine, 0, finalTotal, 1500);
+    }, 2500);
+
+    cartDataField.value =
+        `Номер замовлення: ${orderNumber}\n` +
+        cartText +
+        `\nЗагальна сума: ${total.toFixed(2)} грн` +
+        (discountPercent > 0
+            ? `\nЗнижка ${discountPercent}%: - ${discountAmount.toFixed(2)} грн\nДо сплати: ${finalTotal.toFixed(2)} грн`
+            : `\nДо сплати: ${finalTotal.toFixed(2)} грн`);
+
+    // 🔹 Показуємо кнопку "Сплатити карткою"
+    setTimeout(() => showPaymentButton(finalTotal), 4000);
+}
+
 </script>
 </body>
 </html>
+
 
 
 
