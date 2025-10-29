@@ -135,209 +135,169 @@ h1 { text-align:center; }
 <script>
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-// === Номер замовлення ===
+// Генерація номера замовлення
 function getDailyOrderNumber() {
   const today = new Date().toISOString().slice(0, 10);
   let ordersData = JSON.parse(localStorage.getItem('dailyOrders') || '{}');
-  if (!ordersData.date || ordersData.date !== today) {
-    ordersData = { date: today, number: 0 };
-  }
+  if (!ordersData.date || ordersData.date !== today) ordersData = { date: today, number: 0 };
   ordersData.number = (ordersData.number % 99) + 1;
   localStorage.setItem('dailyOrders', JSON.stringify(ordersData));
   return ordersData.number;
 }
-
 function generateOrderNumber() {
   const orderNum = getDailyOrderNumber();
   const now = new Date();
-  const day = String(now.getDate()).padStart(2, '0');
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const year = String(now.getFullYear()).slice(-2);
-  return `${String(orderNum).padStart(2, '0')}${day}${month}${year}`;
+  const d = String(now.getDate()).padStart(2, '0');
+  const m = String(now.getMonth() + 1).padStart(2, '0');
+  const y = String(now.getFullYear()).slice(-2);
+  return `${String(orderNum).padStart(2, '0')}${d}${m}${y}`;
 }
 
-// === Знижка ===
+// Знижка
 function calculateDiscount(total) {
-  let discount = 0;
-  if (total >= 500 && total < 4999) discount = 3;
-  else if (total >= 5000 && total < 9999) discount = 5;
-  else if (total >= 10000 && total < 19999) discount = 7;
-  else if (total >= 20000 && total < 39999) discount = 10;
-  else if (total >= 40000 && total < 69999) discount = 13;
-  else if (total >= 100000) discount = 15;
-  return discount;
+  if (total >= 100000) return 15;
+  if (total >= 40000) return 13;
+  if (total >= 20000) return 10;
+  if (total >= 10000) return 7;
+  if (total >= 5000) return 5;
+  if (total >= 500) return 3;
+  return 0;
 }
 
-// === Создание строки ===
-function createLine(text, color = "#000") {
-  const line = document.createElement('div');
-  line.classList.add('fade-line');
-  line.textContent = text;
-  line.style.color = color;
-  line.style.fontSize = "1.0em";
-  line.style.fontWeight = "bold";
-  return line;
-}
-
-// === Анимация суммы ===
-function animateNumber(element, start, end, duration) {
+// Анімація суми
+function animateNumber(el, start, end, duration) {
   const range = end - start;
   let startTime = null;
   function step(timestamp) {
     if (!startTime) startTime = timestamp;
     const progress = Math.min((timestamp - startTime) / duration, 1);
-    element.textContent = `До сплати: ${Math.round(start + range * progress).toFixed(2)} грн`;
+    el.textContent = `До сплати: ${Math.round(start + range * progress).toFixed(2)} грн`;
     if (progress < 1) window.requestAnimationFrame(step);
-    else {
-      const sound = document.getElementById('cash-sound');
-      sound.volume = 0.15;
-      sound.play();
-    }
+    else { const sound = document.getElementById('cash-sound'); sound.volume = 0.15; sound.play(); }
   }
   window.requestAnimationFrame(step);
 }
 
-// === Отображение заказа ===
+// Відображення замовлення
 function displayOrder() {
-  const orderItemsContainer = document.getElementById('cart-items');
-  const totalPriceElement = document.getElementById('total-price');
-  const cartDataField = document.getElementById('cart-data');
+  const container = document.getElementById('cart-items');
+  const totalPriceEl = document.getElementById('total-price');
+  const cartData = document.getElementById('cart-data');
+  container.innerHTML = ''; totalPriceEl.innerHTML = '';
 
-  orderItemsContainer.innerHTML = '';
-  totalPriceElement.innerHTML = '';
-
-  let total = 0;
-  let cartText = "";
-
+  let total = 0, cartText = '';
   cart.forEach(item => {
     const subtotal = item.price * item.quantity;
     total += subtotal;
-    const itemElement = document.createElement('div');
-    itemElement.classList.add('cart-item');
-    itemElement.textContent = `${item.name} — ${item.price} грн × ${item.quantity} = ${subtotal} грн`;
-    orderItemsContainer.appendChild(itemElement);
+    const div = document.createElement('div');
+    div.classList.add('cart-item');
+    div.textContent = `${item.name} — ${item.price} грн × ${item.quantity} = ${subtotal} грн`;
+    container.appendChild(div);
     cartText += `${item.name} — ${item.price} грн × ${item.quantity} = ${subtotal} грн\n`;
   });
 
-  const discountPercent = calculateDiscount(total);
-  const discountAmount = (total * discountPercent) / 100;
+  const discount = calculateDiscount(total);
+  const discountAmount = total * discount / 100;
   const finalTotal = total - discountAmount;
+  const orderNum = generateOrderNumber();
+  document.getElementById('order-header').textContent = `Ваше замовлення №${orderNum}`;
 
-  const orderNumber = generateOrderNumber();
-  document.getElementById('order-header').textContent = `Ваше замовлення №${orderNumber}`;
+  const totalLine = document.createElement('div');
+  totalLine.classList.add('fade-line','show');
+  totalLine.textContent = `Сума: ${total.toFixed(2)} грн`;
+  totalPriceEl.appendChild(totalLine);
 
-  const totalLine = createLine(`Сума: ${total.toFixed(2)} грн`);
-  totalLine.classList.add('show');
-  totalPriceElement.appendChild(totalLine);
+  const discLine = document.createElement('div');
+  discLine.classList.add('fade-line','show');
+  discLine.textContent = discount>0?`Знижка: -${discountAmount.toFixed(2)} грн`:`Знижка: 0 грн`;
+  totalPriceEl.appendChild(discLine);
 
-  const discountColor = discountPercent > 0 ? "green" : "gray";
-  const discountText = discountPercent > 0
-    ? `Знижка: - ${discountAmount.toFixed(2)} грн`
-    : `Знижка: 0 грн`;
+  const finalLine = document.createElement('div');
+  finalLine.classList.add('fade-line','show');
+  totalPriceEl.appendChild(finalLine);
+  setTimeout(()=>animateNumber(finalLine,0,finalTotal,1500),1000);
 
-  const discountLine = createLine(discountText, discountColor);
-  totalPriceElement.appendChild(discountLine);
-  setTimeout(() => discountLine.classList.add('show'), 1500);
+  cartData.value =
+    `Номер замовлення: ${orderNum}\n${cartText}\nЗагальна сума: ${total.toFixed(2)} грн`+
+    (discount>0?`\nЗнижка ${discount}%: -${discountAmount.toFixed(2)} грн\nДо сплати: ${finalTotal.toFixed(2)} грн`
+    :`\nДо сплати: ${finalTotal.toFixed(2)} грн`);
 
-  const finalLine = createLine(`До сплати: 0 грн`);
-  totalPriceElement.appendChild(finalLine);
-  setTimeout(() => {
-    finalLine.classList.add('show');
-    animateNumber(finalLine, 0, finalTotal, 1500);
-  }, 2500);
-
-  cartDataField.value =
-    `Номер замовлення: ${orderNumber}\n` +
-    cartText +
-    `\nЗагальна сума: ${total.toFixed(2)} грн` +
-    (discountPercent > 0
-      ? `\nЗнижка ${discountPercent}%: - ${discountAmount.toFixed(2)} грн\nДо сплати: ${finalTotal.toFixed(2)} грн`
-      : `\nДо сплати: ${finalTotal.toFixed(2)} грн`);
-
-  // Показываем кнопку оплаты
-  setTimeout(() => {
-    const payBtn = document.getElementById("pay-button");
-    payBtn.style.display = "block";
-    payBtn.dataset.amount = finalTotal.toFixed(2);
-  }, 4000);
+  setTimeout(()=>{
+    const payBtn=document.getElementById('pay-button');
+    payBtn.style.display='block';
+    payBtn.dataset.amount=finalTotal.toFixed(2);
+  },3000);
 }
-
 displayOrder();
 
-// === Проверка заполнения всех полей ===
+// Перевірка заповнення
 const inputs = document.querySelectorAll('#name, #phone, #city, #branch');
 const payButton = document.getElementById('pay-button');
-
 function checkFormCompletion() {
-  const allFilled = Array.from(inputs).every(input => input.value.trim() !== '');
-  if (allFilled) {
-    payButton.classList.remove('disabled');
-    payButton.style.opacity = '1';
-    payButton.style.pointerEvents = 'auto';
-  } else {
-    payButton.classList.add('disabled');
-    payButton.style.opacity = '0.5';
-    payButton.style.pointerEvents = 'none';
-  }
+  const filled = Array.from(inputs).every(i=>i.value.trim()!=='');
+  payButton.style.opacity = filled?'1':'0.5';
+  payButton.style.pointerEvents='auto';
 }
+inputs.forEach(i=>i.addEventListener('input',checkFormCompletion));
 
-inputs.forEach(input => input.addEventListener('input', checkFormCompletion));
-
-// === Отправка обычного заказа ===
-document.getElementById('checkout-form').addEventListener('submit', function (e) {
-  e.preventDefault();
-  const form = e.target;
-  const data = new FormData(form);
-  fetch(form.action, { method: form.method, body: data, headers: { 'Accept': 'application/json' } })
-    .then(response => {
-      if (response.ok) {
-        showToast();
-        localStorage.removeItem('cart');
-        form.reset();
-        displayOrder();
-        setTimeout(() => { window.location.href = "index.html"; }, 3000);
-      } else {
-        alert("Сталася помилка при відправці замовлення.");
-      }
-    })
-    .catch(() => alert("Помилка з’єднання із сервером."));
-});
-
-// === Обработка "Сплатити карткою" ===
-payButton.addEventListener('click', function (e) {
-  e.preventDefault();
-  const form = document.getElementById('checkout-form');
-  const data = new FormData(form);
-
-  // Добавляем пометку "Оплачено карткою" в заказ
-  let currentCart = document.getElementById('cart-data').value;
-  currentCart += "\n\n💳 Оплачено карткою ✅";
-  data.set('cart', currentCart);
-
-  fetch(form.action, { method: form.method, body: data, headers: { 'Accept': 'application/json' } })
-    .then(response => {
-      if (response.ok) {
-        const amount = this.dataset.amount || 0;
-        const privatLink = "https://payhub.privatbank.ua/l/abc12345"; // замени на свою ссылку
-        window.location.href = privatLink + "?amount=" + amount;
-      } else {
-        alert("Помилка при надсиланні замовлення.");
-      }
-    })
-    .catch(() => alert("Помилка з’єднання із сервером."));
-});
-
-// === Toast ===
-function showToast() {
-  const toast = document.getElementById('toast');
+// Toast
+function showToast(msg) {
+  const toast=document.getElementById('toast');
+  const message=toast.querySelector('.toast-message');
+  message.textContent=msg;
   toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2500);
+  setTimeout(()=>toast.classList.remove('show'),2500);
 }
+
+// Відправка форми
+document.getElementById('checkout-form').addEventListener('submit',e=>{
+  e.preventDefault();
+  const form=e.target;
+  const empty=Array.from(inputs).filter(i=>i.value.trim()==='');
+  if(empty.length){ showToast("⚠️ Будь ласка, заповніть усі поля!"); return; }
+
+  const data=new FormData(form);
+  fetch(form.action,{method:form.method,body:data,headers:{'Accept':'application/json'}})
+  .then(r=>{
+    if(r.ok){
+      showToast("✅ Ваше замовлення підтверджено!");
+      localStorage.removeItem('cart');
+      form.reset();
+      displayOrder();
+      setTimeout(()=>window.location.href="index.html",3000);
+    } else showToast("⚠️ Помилка при відправці замовлення.");
+  })
+  .catch(()=>showToast("⚠️ Помилка з’єднання із сервером."));
+});
+
+// Оплата карткою
+payButton.addEventListener('click',e=>{
+  e.preventDefault();
+  const empty=Array.from(inputs).filter(i=>i.value.trim()==='');
+  if(empty.length){ showToast("⚠️ Будь ласка, заповніть усі поля!"); return; }
+
+  const form=document.getElementById('checkout-form');
+  const data=new FormData(form);
+  let current=document.getElementById('cart-data').value;
+  current+="\n\n💳 Оплачено карткою ✅";
+  data.set('cart',current);
+
+  fetch(form.action,{method:form.method,body:data,headers:{'Accept':'application/json'}})
+  .then(r=>{
+    if(r.ok){
+      const amount=this.dataset.amount||0;
+      const link="https://payhub.privatbank.ua/l/abc12345";
+      window.location.href=link+"?amount="+amount;
+    } else showToast("⚠️ Помилка при надсиланні замовлення.");
+  })
+  .catch(()=>showToast("⚠️ Помилка з’єднання із сервером."));
+});
 </script>
 
 
 </body>
 </html>
+
 
 
 
