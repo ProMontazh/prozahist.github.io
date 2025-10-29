@@ -63,6 +63,27 @@ h1 { text-align:center; }
     .total-price { font-size:1.1em; text-align:right; }
     .submit-button { font-size:1.5em; padding:8px; }
 }
+    .button-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.button-row .submit-button {
+  flex: 1;
+  text-decoration: none; /* убираем подчёркивание */
+}
+
+.pay-button {
+  background: #2b7cff;
+  display: none;
+  text-align: center;
+}
+
+.pay-button:hover {
+  background: #1e5fcc;
+}
+
 </style>
 </head>
 <body>
@@ -327,6 +348,7 @@ document.getElementById('pay-button').addEventListener('click', function (e) {
 
 </body>
 </html>
+
 
 
 
