@@ -277,11 +277,20 @@ function checkFormCompletion() {
   } else {
     payButton.classList.add('disabled');
     payButton.style.opacity = '0.5';
-    payButton.style.pointerEvents = 'none';
+    payButton.style.pointerEvents = 'auto'; // оставляем возможность кликнуть и показать ошибки
   }
 }
 
 inputs.forEach(input => input.addEventListener('input', checkFormCompletion));
+
+// === Всплывающее сообщение об ошибке ===
+function showError(message) {
+  const toast = document.getElementById('toast');
+  const msg = toast.querySelector('.toast-message');
+  msg.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
 
 // === Отправка обычного заказа ===
 document.getElementById('checkout-form').addEventListener('submit', function (e) {
@@ -291,25 +300,42 @@ document.getElementById('checkout-form').addEventListener('submit', function (e)
   fetch(form.action, { method: form.method, body: data, headers: { 'Accept': 'application/json' } })
     .then(response => {
       if (response.ok) {
-        showToast();
+        showError("✅ Ваше замовлення підтверджено!");
         localStorage.removeItem('cart');
         form.reset();
         displayOrder();
         setTimeout(() => { window.location.href = "index.html"; }, 3000);
       } else {
-        alert("Сталася помилка при відправці замовлення.");
+        showError("⚠️ Помилка при відправці замовлення.");
       }
     })
-    .catch(() => alert("Помилка з’єднання із сервером."));
+    .catch(() => showError("⚠️ Помилка з’єднання із сервером."));
 });
 
 // === Обработка "Сплатити карткою" ===
 payButton.addEventListener('click', function (e) {
   e.preventDefault();
+
+  // Проверка полей перед оплатой
+  const emptyFields = [];
+  inputs.forEach(input => {
+    if (input.value.trim() === '') {
+      emptyFields.push(input.previousElementSibling.textContent);
+      input.style.border = "2px solid red";
+    } else {
+      input.style.border = "1px solid #ddd";
+    }
+  });
+
+  if (emptyFields.length > 0) {
+    showError("⚠️ Заповніть поля: " + emptyFields.join(', '));
+    return;
+  }
+
   const form = document.getElementById('checkout-form');
   const data = new FormData(form);
 
-  // Добавляем пометку "Оплачено карткою" в заказ
+  // Добавляем пометку "Оплачено карткою"
   let currentCart = document.getElementById('cart-data').value;
   currentCart += "\n\n💳 Оплачено карткою ✅";
   data.set('cart', currentCart);
@@ -321,10 +347,10 @@ payButton.addEventListener('click', function (e) {
         const privatLink = "https://payhub.privatbank.ua/l/abc12345"; // замени на свою ссылку
         window.location.href = privatLink + "?amount=" + amount;
       } else {
-        alert("Помилка при надсиланні замовлення.");
+        showError("⚠️ Помилка при надсиланні замовлення.");
       }
     })
-    .catch(() => alert("Помилка з’єднання із сервером."));
+    .catch(() => showError("⚠️ Помилка з’єднання із сервером."));
 });
 
 // === Toast ===
@@ -337,4 +363,5 @@ function showToast() {
 
 </body>
 </html>
+
 
