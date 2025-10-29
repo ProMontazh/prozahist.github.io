@@ -168,7 +168,7 @@ function calculateDiscount(total) {
   return discount;
 }
 
-// === Вспомогательные функции ===
+// === Создание строки ===
 function createLine(text, color = "#000") {
   const line = document.createElement('div');
   line.classList.add('fade-line');
@@ -179,6 +179,7 @@ function createLine(text, color = "#000") {
   return line;
 }
 
+// === Анимация суммы ===
 function animateNumber(element, start, end, duration) {
   const range = end - start;
   let startTime = null;
@@ -196,15 +197,7 @@ function animateNumber(element, start, end, duration) {
   window.requestAnimationFrame(step);
 }
 
-// === Кнопка "Сплатити карткою" ===
-function showPaymentButton(amount) {
-  const payBtn = document.getElementById("pay-button");
-  const privatLink = "https://payhub.privatbank.ua/l/abc12345"; // 🔹 заміни на свою реальну ссилку
-  payBtn.href = privatLink + "?amount=" + amount.toFixed(2);
-  payBtn.style.display = "block";
-}
-
-// === Відображення замовлення ===
+// === Отображение заказа ===
 function displayOrder() {
   const orderItemsContainer = document.getElementById('cart-items');
   const totalPriceElement = document.getElementById('total-price');
@@ -261,25 +254,36 @@ function displayOrder() {
       ? `\nЗнижка ${discountPercent}%: - ${discountAmount.toFixed(2)} грн\nДо сплати: ${finalTotal.toFixed(2)} грн`
       : `\nДо сплати: ${finalTotal.toFixed(2)} грн`);
 
-  // 🔹 Показуємо кнопку "Сплатити карткою"
-  setTimeout(() => showPaymentButton(finalTotal), 4000);
+  // Показываем кнопку оплаты
+  setTimeout(() => {
+    const payBtn = document.getElementById("pay-button");
+    payBtn.style.display = "block";
+    payBtn.dataset.amount = finalTotal.toFixed(2);
+  }, 4000);
 }
 
 displayOrder();
 
-// === Автоматичний перехід між полями ===
-['name', 'phone', 'city', 'branch'].forEach((id, index) => {
-  const field = document.getElementById(id);
-  field.addEventListener('keydown', function (e) {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      const nextField = ['name', 'phone', 'city', 'branch'][index + 1];
-      if (nextField) document.getElementById(nextField).focus();
-    }
-  });
-});
+// === Проверка заполнения всех полей ===
+const inputs = document.querySelectorAll('#name, #phone, #city, #branch');
+const payButton = document.getElementById('pay-button');
 
-// === Відправка форми ===
+function checkFormCompletion() {
+  const allFilled = Array.from(inputs).every(input => input.value.trim() !== '');
+  if (allFilled) {
+    payButton.classList.remove('disabled');
+    payButton.style.opacity = '1';
+    payButton.style.pointerEvents = 'auto';
+  } else {
+    payButton.classList.add('disabled');
+    payButton.style.opacity = '0.5';
+    payButton.style.pointerEvents = 'none';
+  }
+}
+
+inputs.forEach(input => input.addEventListener('input', checkFormCompletion));
+
+// === Отправка обычного заказа ===
 document.getElementById('checkout-form').addEventListener('submit', function (e) {
   e.preventDefault();
   const form = e.target;
@@ -289,80 +293,51 @@ document.getElementById('checkout-form').addEventListener('submit', function (e)
       if (response.ok) {
         showToast();
         localStorage.removeItem('cart');
-        displayOrder();
         form.reset();
+        displayOrder();
         setTimeout(() => { window.location.href = "index.html"; }, 3000);
       } else {
-        response.json().then(data => alert(data.error || "Сталася помилка при відправці замовлення."));
-      }
-    }).catch(() => alert("Помилка з’єднання із сервером."));
-});
-
-// === Toast (повідомлення про успішне замовлення) ===
-function showToast() {
-  const toast = document.getElementById('toast');
-  toast.classList.add('show');
-  setTimeout(() => { toast.classList.remove('show'); }, 2500);
-}
-
-// === Мобільна оптимізація ===
-if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth <= 768) {
-  const inputs = document.querySelectorAll('input, textarea, select');
-  inputs.forEach(input => {
-    input.addEventListener('focus', () => {
-      document.body.style.paddingBottom = '300px';
-      window.scrollTo(0, document.body.scrollHeight);
-    });
-    input.addEventListener('blur', () => {
-      document.body.style.paddingBottom = '0';
-    });
-  });
-}
-    // === Обработка кнопки "Сплатити карткою" ===
-document.getElementById('pay-button').addEventListener('click', function (e) {
-  e.preventDefault();
-
-  const form = document.getElementById('checkout-form');
-  const data = new FormData(form);
-
-  // Отправляем заказ на почту перед переходом на оплату
-  fetch(form.action, { method: form.method, body: data, headers: { 'Accept': 'application/json' } })
-    .then(response => {
-      if (response.ok) {
-        // После успешной отправки — редиректим на оплату
-        const amountMatch = document.querySelector('#total-price .fade-line:last-child');
-        let amount = 0;
-        if (amountMatch && amountMatch.textContent.includes("грн")) {
-          amount = parseFloat(amountMatch.textContent.replace(/[^\d.]/g, ""));
-        }
-
-        const privatLink = "https://payhub.privatbank.ua/l/abc12345"; // 🔹 замени на свою ссылку
-        window.location.href = privatLink + "?amount=" + amount.toFixed(2);
-      } else {
-        alert("Помилка при надсиланні замовлення. Спробуйте ще раз.");
+        alert("Сталася помилка при відправці замовлення.");
       }
     })
     .catch(() => alert("Помилка з’єднання із сервером."));
 });
 
-// Проверяем, заполнены ли все поля
-function checkFormCompletion() {
-    const allFilled = Array.from(inputs).every(input => input.value.trim() !== '');
-    if (allFilled) {
-        payButton.style.display = 'block';
-        payButton.style.opacity = '1';
-    } else {
-        payButton.style.display = 'none';
-        payButton.style.opacity = '0';
-    }
+// === Обработка "Сплатити карткою" ===
+payButton.addEventListener('click', function (e) {
+  e.preventDefault();
+  const form = document.getElementById('checkout-form');
+  const data = new FormData(form);
+
+  // Добавляем пометку "Оплачено карткою" в заказ
+  let currentCart = document.getElementById('cart-data').value;
+  currentCart += "\n\n💳 Оплачено карткою ✅";
+  data.set('cart', currentCart);
+
+  fetch(form.action, { method: form.method, body: data, headers: { 'Accept': 'application/json' } })
+    .then(response => {
+      if (response.ok) {
+        const amount = this.dataset.amount || 0;
+        const privatLink = "https://payhub.privatbank.ua/l/abc12345"; // замени на свою ссылку
+        window.location.href = privatLink + "?amount=" + amount;
+      } else {
+        alert("Помилка при надсиланні замовлення.");
+      }
+    })
+    .catch(() => alert("Помилка з’єднання із сервером."));
+});
+
+// === Toast ===
+function showToast() {
+  const toast = document.getElementById('toast');
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
 }
-
-// Отслеживаем ввод в каждом поле
-inputs.forEach(input => input.addEventListener('input', checkFormCompletion));
-
 </script>
+
 
 </body>
 </html>
+
 
 
