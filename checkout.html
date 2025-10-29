@@ -312,56 +312,71 @@ document.getElementById('checkout-form').addEventListener('submit', function (e)
     .catch(() => showError("⚠️ Помилка з’єднання із сервером."));
 });
 
-// === Обработка "Сплатити карткою" ===
+// === Обробка кнопки «Сплатити карткою» ===
+const payButton = document.getElementById('pay-button');
+
 payButton.addEventListener('click', function (e) {
   e.preventDefault();
 
-  // Проверка полей перед оплатой
-  const emptyFields = [];
+  const form = document.getElementById('checkout-form');
+  const inputs = form.querySelectorAll('input[required]');
+  let isValid = true;
+
+  // 🔹 Перевіряємо всі поля
   inputs.forEach(input => {
-    if (input.value.trim() === '') {
-      emptyFields.push(input.previousElementSibling.textContent);
-      input.style.border = "2px solid red";
-    } else {
-      input.style.border = "1px solid #ddd";
+    if (!input.value.trim()) {
+      input.reportValidity(); // показує стандартне повідомлення "Заповніть це поле"
+      isValid = false;
     }
   });
 
-  if (emptyFields.length > 0) {
-    showError("⚠️ Заповніть поля: " + emptyFields.join(', '));
-    return;
-  }
+  if (!isValid) return; // ❌ якщо не всі заповнені — зупиняємо
 
-  const form = document.getElementById('checkout-form');
+  // 🔹 Додаємо позначку "Оплачено карткою"
   const data = new FormData(form);
-
-  // Добавляем пометку "Оплачено карткою"
   let currentCart = document.getElementById('cart-data').value;
   currentCart += "\n\n💳 Оплачено карткою ✅";
   data.set('cart', currentCart);
 
-  fetch(form.action, { method: form.method, body: data, headers: { 'Accept': 'application/json' } })
+  // 🔹 Надсилаємо форму (на пошту)
+  fetch(form.action, {
+    method: form.method,
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  })
     .then(response => {
       if (response.ok) {
+        // ✅ Якщо успішно — переходимо на оплату
         const amount = this.dataset.amount || 0;
-        const privatLink = "https://payhub.privatbank.ua/l/abc12345"; // замени на свою ссылку
-        window.location.href = privatLink + "?amount=" + amount;
+        const privatLink = "https://payhub.privatbank.ua/l/abc12345"; // 🔗 заміни на своє посилання
+        showToast("✅ Замовлення успішно надіслано! Зараз відкриється сторінка оплати.", "success");
+        setTimeout(() => {
+          window.location.href = privatLink + "?amount=" + amount;
+        }, 1500);
       } else {
-        showError("⚠️ Помилка при надсиланні замовлення.");
+        showToast("⚠️ Помилка при надсиланні замовлення.", "error");
       }
     })
-    .catch(() => showError("⚠️ Помилка з’єднання із сервером."));
+    .catch(() => showToast("⚠️ Помилка з’єднання із сервером.", "error"));
 });
 
-// === Toast ===
-function showToast() {
+// === Функція повідомлення ===
+function showToast(message, type = "success") {
   const toast = document.getElementById('toast');
+  const toastMessage = toast.querySelector('.toast-message');
+  toastMessage.textContent = message;
+
+  if (type === "error") toastMessage.style.background = "#e53935";
+  else toastMessage.style.background = "#4CAF50";
+
   toast.classList.add('show');
   setTimeout(() => toast.classList.remove('show'), 2500);
 }
+
 </script>
 
 </body>
 </html>
+
 
 
