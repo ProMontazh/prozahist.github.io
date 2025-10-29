@@ -343,11 +343,30 @@ document.getElementById('pay-button').addEventListener('click', function (e) {
     })
     .catch(() => alert("Помилка з’єднання із сервером."));
 });
+// === Поява кнопки "Сплатити карткою" після заповнення форми ===
+const inputs = document.querySelectorAll('#name, #phone, #city, #branch');
+const payButton = document.getElementById('pay-button');
+
+// Проверяем, заполнены ли все поля
+function checkFormCompletion() {
+    const allFilled = Array.from(inputs).every(input => input.value.trim() !== '');
+    if (allFilled) {
+        payButton.style.display = 'block';
+        payButton.style.opacity = '1';
+    } else {
+        payButton.style.display = 'none';
+        payButton.style.opacity = '0';
+    }
+}
+
+// Отслеживаем ввод в каждом поле
+inputs.forEach(input => input.addEventListener('input', checkFormCompletion));
 
 </script>
 
 </body>
 </html>
+
 
 
 
