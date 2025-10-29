@@ -93,12 +93,13 @@ h1 { text-align:center; }
             <input type="tel" id="branch" name="branch" required>
         </div>
         <input type="hidden" id="cart-data" name="cart">
-        <button type="submit" class="submit-button">Підтвердити замовлення</button>
-         <!-- 💳 Кнопка оплати карткою -->
-    <a id="pay-button" href="#" target="_blank" class="submit-button"
-       style="background:#2b7cff; display:none; text-align:center;">
-       💳 Сплатити карткою
-    </a>
+       <div class="button-row">
+  <button type="submit" class="submit-button">Підтвердити замовлення</button>
+  <a id="pay-button" href="#" target="_blank" class="submit-button pay-button">
+    💳 Сплатити карткою
+  </a>
+</div>
+
 
     </form>
 </div>
@@ -326,6 +327,7 @@ document.getElementById('pay-button').addEventListener('click', function (e) {
 
 </body>
 </html>
+
 
 
 
