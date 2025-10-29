@@ -343,9 +343,6 @@ document.getElementById('pay-button').addEventListener('click', function (e) {
     })
     .catch(() => alert("Помилка з’єднання із сервером."));
 });
-// === Поява кнопки "Сплатити карткою" після заповнення форми ===
-const inputs = document.querySelectorAll('#name, #phone, #city, #branch');
-const payButton = document.getElementById('pay-button');
 
 // Проверяем, заполнены ли все поля
 function checkFormCompletion() {
@@ -366,6 +363,7 @@ inputs.forEach(input => input.addEventListener('input', checkFormCompletion));
 
 </body>
 </html>
+
 
 
 
