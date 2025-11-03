@@ -436,6 +436,30 @@ a[href^="mailto:"]:hover {
   color: #007bff;
   text-decoration: underline;
 }
+        .contacts-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 40px;       /* відступ зверху від карток */
+  margin-left: 20px;      /* трохи вліво */
+  margin-bottom: 20px;    /* невеликий відступ знизу */
+  font-size: 1.0em;
+  color: #333;
+}
+
+.contact-link {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  margin-bottom: 8px;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.contact-link:hover {
+  color: #007bff;          /* синє підсвічування при наведенні */
+  transform: translateX(3px); /* легке зміщення для ефекту "руху" */
+}
+
 </style>
 </head>
 <body>
@@ -540,15 +564,12 @@ a[href^="mailto:"]:hover {
     <img src="images/help.png" alt="Help">
     <span></span>
   </a>
-       <!-- Контактний телефон -->
-<div style="align-self: flex-start; text-align: left; margin: 20px 0 30px 20px; font-size: 1.0em;">
-  <a href="tel:+380935016040" style="color: #333; text-decoration: none; font-weight: bold; display: block; margin-bottom: 6px;">
-    📞 (093) 501-60-40
-  </a>
-  <a href="mailto:prozakhyst@ukr.net" style="color: #333; text-decoration: none; font-weight: bold; display: block;">
-    📧 prozakhyst@ukr.net
-  </a>
+       <!-- Контактний телефон і пошта -->
+<div class="contacts-block">
+  <a href="tel:+380935016040" class="contact-link">📞 (093) 501-60-40</a>
+  <a href="mailto:prozakhyst@ukr.net" class="contact-link">📧 prozakhyst@ukr.net</a>
 </div>
+
 
 </div>
 
@@ -1140,6 +1161,7 @@ a[href^="mailto:"]:hover {
 </script>
 </body>
 </html>
+
 
 
 
