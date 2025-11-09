@@ -578,7 +578,21 @@ a[href^="mailto:"]:hover {
     <section id="indoor" class="products" style="display: none;">
     <h2 style="text-align: center; margin-bottom: 40px; margin-top: 80px;">Внутрішні відеокамери</h2>
      <div class="products-container">
-    <div class="product-item" onclick="openProductDetails('details_indoor_1(IPC-K2MP-3H1WE).html')">
+    
+    <div class="product-item" onclick="openProductDetails('details_indoor_2(IPC-C32EP).html')">
+        <img src="images/IPC-C22EP-A.png" alt="Відеокамера 2">
+        <h3>Внутрішня камера IMOU IPC-C22EP-A</h3>
+        <p>Компактна Wi-Fi камера 2МП з двостороннім аудіозв'язком, кут огляду 112°</p>
+        <p class="product-price">1548.00 грн</p>
+        <button class="btn" onclick="addToCart(event, { 
+            id:'IPC-C32EP', 
+            name:'Камера IPC-C32EP', 
+            price:1548, 
+            image:'images/IPC-C22EP-A.png' 
+        })">Додати у кошик</button>
+    
+    </div>
+<div class="product-item" onclick="openProductDetails('details_indoor_1(IPC-K2MP-3H1WE).html')">
         <img src="images/IPC-K2MP-3H1WE.png" alt="Відеокамера 1">
         <h3>Поворотна камера IMOU IPC-K2MP-3H1WE</h3>
         <p>Поворотна Wi-Fi камера з мікрофоном та динаміком, роздільна здатність 3Мп, кут 66°</p>
@@ -588,19 +602,6 @@ a[href^="mailto:"]:hover {
             name:'Камера IPC-K2MP-3H1WE', 
             price:1890, 
             image:'images/IPC-K2MP-3H1WE.png' 
-        })">Додати у кошик</button>
-    </div>
-
-    <div class="product-item" onclick="openProductDetails('details2(IPC-C22EP-A).html')">
-        <img src="images/IPC-C22EP-A.png" alt="Відеокамера 2">
-        <h3>Внутрішня камера IMOU IPC-C22EP-A</h3>
-        <p>Компактна Wi-Fi камера з двостороннім аудіозв'язком</p>
-        <p class="product-price">2090.00 грн</p>
-        <button class="btn" onclick="addToCart(event, { 
-            id:'IPC-C22EP-A', 
-            name:'IMOU IPC-C22EP-A', 
-            price:2090, 
-            image:'images/IPC-C22EP-A.png' 
         })">Додати у кошик</button>
     </div>
 
@@ -1206,6 +1207,7 @@ a[href^="mailto:"]:hover {
 </script>
 </body>
 </html>
+
 
 
 
