@@ -1,295 +1,527 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
-  <title>ПроЗахист - магазин систем безпеки</title>
-  <style>
-    :root {
-      --accent: #007bff;
-      --accent-dark: #0056b3;
-      --text-dark: #333;
-      --gray: #808080;
-      --bg: #f4f4f4;
-      --card-shadow: 0 0 10px rgba(0,0,0,0.1);
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <title>ПроЗахист - магазин систем безпеки</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif; /* Применяем Open Sans для всего текста */
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* чтобы контент не выходил за экран */
+            background-color: #f4f4f4;
+        }
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 65px; /* мобильная и десктопная версия одинаково */
+            background: linear-gradient( to right, rgba(7, 7, 7, 0.95), rgba(148, 148, 148, 0.95));
+            padding: 0px;
+            color: white;
+            text-align: left;
+            z-index: 1000; /* Убедитесь, что шапка перекрывает остальной контент */
+         }
+        header .logo svg {
+    height: 65px;  /* подгоняем размер */
+    width: auto;
     }
-    * { box-sizing: border-box; }
-    body {
-      font-family: 'Open Sans', sans-serif;
-      margin: 0;
-      background-color: var(--bg);
-      color: var(--text-dark);
-      overflow-x: hidden;
-    }
-    header {
-      position: fixed;
-      inset: 0 0 auto 0;
-      height: 65px;
-      background: linear-gradient(to right, rgba(7,7,7,0.95), rgba(148,148,148,0.95));
-      color: #fff;
-      padding: 0 12px;
-      display: flex;
-      align-items: center;
-      z-index: 1000;
-    }
-    header .logo svg {
-      height: 65px;
-      width: auto;
-    }
-    main { padding-top: 80px; }
-    .toast {
-      position: fixed;
-      top: 45%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0,0,0,0.4);
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 5px;
-      font-size: 1em;
-      white-space: nowrap;
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity .5s;
-      z-index: 9999;
-    }
-    .toast.show { visibility: visible; opacity: 1; }
-    .cart {
-      position: fixed;
-      top: 14px;
-      right: 10px;
-      background: #333;
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 8px;
-      cursor: pointer;
-      z-index: 1100;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 16px;
-    }
-    .cart-content {
-      position: fixed;
-      right: 20px;
-      top: 100px;
-      width: 350px;
-      background: rgba(255,255,255,0.95);
-      color: #000;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: var(--card-shadow);
-      display: none;
-      z-index: 1100;
-    }
-    #cart-items { max-height: 300px; overflow-y: auto; }
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-    .quantity-control {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .quantity-btn {
-      width: 30px;
-      height: 30px;
-      border: none;
-      border-radius: 5px;
-      background: var(--accent);
-      color: #fff;
-      font-size: 18px;
-      cursor: pointer;
-      transition: background .3s;
-    }
-    .quantity-btn:hover { background: var(--accent-dark); }
-    .category-buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
-      padding: 120px 20px 40px;
-      background-image: url('images/fon_for_category.png');
-      background-size: cover;
-      background-position: center;
-    }
-    .category-card {
-      position: relative;
-      flex: 1 1 calc(20% - 20px);
-      max-width: calc(20% - 20px);
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: var(--card-shadow);
-      cursor: pointer;
-      transition: transform .3s;
-    }
-    .category-card:hover { transform: scale(1.05); }
-    .category-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .category-card span {
-      position: absolute;
-      inset: auto 0 0 0;
-      padding: 10px;
-      text-align: center;
-      font-weight: bold;
-      color: #bbb;
-      font-size: .85em;
-    }
-    .contacts-block {
-      display: flex;
-      flex-direction: column;
-      font-weight: bold;
-      color: var(--gray);
-    }
-    .contact-link {
-      color: var(--gray);
-      text-decoration: none;
-      margin-bottom: 8px;
-      transition: color .3s, transform .2s;
-    }
-    .contact-link:hover {
-      color: var(--accent);
-      transform: translateX(1px);
-    }
-    .products {
-      display: none;
-      padding: 80px 20px 60px;
-    }
-    .products.active { display: block; animation: fadeIn .4s ease-in-out; }
-    .products h2 {
-      text-align: center;
-      margin-bottom: 40px;
-    }
+        .toast {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 1.0em;
+    white-space: nowrap; /* Устанавливаем текст в одну строчку */        
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: 9999;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+        .container {
+            margin-top: 0px; /* Отступ для компенсации фиксированной шапки */
+        }
+
+        #products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: space-around;
+        }
+/* Контейнер товаров */
+.products-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* чтобы карточки центрировались */
+  gap: 15px;
+  padding: 0 10px;
+}
+
+.product-item {
+  background-color: white;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  flex: 0 1 230px; /* фиксированная ширина карточки */
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.product-item:hover {
+  transform: scale(1.03); /* увеличиваем на 5% только при hover */
+}
+.product-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* чтобы картинки не растягивались */
+}
+
+.product-item h3 {
+  font-size: 1em;
+  margin: 10px 0 5px 0;
+  min-height: 48px; /* фиксируем высоту заголовка, чтобы карточки не прыгали */
+}
+
+.product-item p {
+  margin: 5px 0;
+  flex-grow: 1; /* чтобы описание занимало свободное место */
+}
+
+.product-price {
+  font-size: 1.2em;
+  color: red;
+  font-weight: bold;
+  margin: 10px 0 5px 0;
+}
+
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+
+/* Мобильная версия: одна карточка на строку */
+@media (max-width: 768px) {
     .products-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      padding: 0 10px;
+        display: flex;
+        flex-direction: column; /* вертикально */
+        align-items: center;    /* центрируем карточки */
+        gap: 20px;              /* расстояние между карточками */
+        padding: 0 5px;        /* отступы слева и справа */
+        box-sizing: border-box; /* чтобы padding учитывался */
     }
     .product-item {
-      background: #fff;
-      box-shadow: var(--card-shadow);
-      padding: 15px;
-      flex: 0 1 230px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      transition: transform .2s;
-      cursor: pointer;
+        width: 100%;            /* карточка занимает всю ширину контейнера */
+        max-width: 400px;       /* но не больше */
+        margin: 0 auto;         /* центрируем при необходимости */
+        box-sizing: border-box; /* внутренние отступы не ломают ширину */
     }
-    .product-item:hover { transform: scale(1.03); }
-    .product-item img { width: 100%; height: auto; object-fit: cover; }
-    .product-item h3 {
-      font-size: 1em;
-      margin: 10px 0 5px;
-      min-height: 48px;
-    }
-    .product-item p { margin: 5px 0; flex-grow: 1; }
-    .product-price {
-      font-size: 1.2em;
-      color: red;
-      font-weight: bold;
-      margin: 10px 0 5px;
-    }
-    .btn {
-      display: inline-block;
-      padding: 10px 20px;
-      background: var(--accent);
-      color: #fff;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: transform .3s ease, background .3s ease;
-    }
-    .btn:hover { background: var(--accent-dark); }
-    footer {
-      background: #333;
-      color: #fff;
-      text-align: center;
-      padding: 8px;
-      font-size: .85em;
-    }
-    footer .black { color: var(--gray); }
-    .highlight-product {
-      outline: 3px solid #ff4747;
-      border-radius: 8px;
-      transition: outline .2s;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @media (max-width: 1024px) {
-      .category-card { flex: 1 1 calc(33% - 20px); max-width: calc(33% - 20px); }
-    }
-    @media (max-width: 768px) {
-      .cart { font-size: .85em; padding: 8px; }
-      .cart-content {
-        width: 85%;
-        max-width: 400px;
-        inset: 70px auto auto 0;
-        margin: 0 auto;
-      }
-      .category-buttons {
-        padding: 95px 10px 30px;
-        gap: 10px;
-      }
-      .category-card { flex: 1 1 calc(50% - 15px); max-width: calc(50% - 15px); }
-      .products { padding: 70px 10px 60px; }
-      .products-container {
-        flex-direction: column;
+}
+ .product-item img {
+            width: 100%;
+            height: auto;
+        }
+        .product-price {
+            font-size: 1.2em;
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            margin-top: 3px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease; /* Плавное изменение размеров и цвета */
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+       footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 8px;  /* уменьшили верхний/нижний и боковой отступ */
+    font-size: 0.85em; /* чуть меньше текста */
+    margin-top: 0px;  /* меньше отступ сверху */
+}
+        .red {
+            color: #800000;
+        }
+        .black {
+            color: #808080;
+        }
+        .cart {
+    position: fixed;
+    top: 14px;
+    right: 10px;
+    background-color: #333;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 1100;
+
+    display: flex;              /* включаем flex */
+    align-items: center;        /* выравнивание по вертикали */
+    gap: 6px;                   /* расстояние между иконкой и текстом */
+    font-size: 16px;            /* выровненный размер текста */
+}
+        .cart-content {
+            display: none;
+            position: fixed;
+            right: 20px;
+            top: 100px;
+            background-color: rgba(255, 255, 255, 0.95); /* черный цвет с 50% прозрачности */
+            color: black;
+            padding: 20px;
+            border-radius: 8px;
+            width: 350px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1100; /* Убедитесь, что значение выше, чем у шапки */
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .checkout-button, .cancel-button {
+            padding: 10px 16px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            min-width: 100px;
+            text-align: center;
+            font-size: 16px; /* Задайте подходящий размер шрифта */
+            line-height: 1.0; /* Или укажите конкретную высоту, например, 24px */
+            display: inline-block;
+        }
+        .checkout-button {
+            background-color: #4CAF50;
+        }
+        .cancel-button {
+            background-color: #f35363;
+        }
+        .checkout-button:hover {
+            background-color: #367c39;
+        }
+        .cancel-button:hover {
+            background-color: #d44150;
+        }
+        /* Стили для корзины и кнопок +, - */
+        .cart-item {
+        display: flex;
+        justify-content: space-between;
         align-items: center;
-        gap: 20px;
-        padding: 0 5px;
-      }
-      .product-item { width: 100%; max-width: 400px; }
-      header h1 { font-size: 1em; }
-      footer { font-size: .8em; }
+        margin-bottom: 10px;
+        }
+        .quantity-control {
+        display: flex;
+        align-items: center;
+        }
+        .quantity-btn {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin: 0 5px;
     }
-    @media (max-width: 900px) and (orientation: landscape) {
-      .category-buttons { padding-top: 80px; }
+    .quantity-btn:hover {
+        background-color: #0056b3;
     }
-  </style>
+    .quantity {
+        font-size: 18px;
+        padding: 0 10px;
+    }
+        /* Мобильная версия */
+        @media (max-width: 768px){
+            body {
+            font-family: 'Open Sans', sans-serif; /* Применяем Open Sans для всего текста */
+            }
+            #main-banner {
+                background-image: url('images/fon_for_category.png'); /* Укажите путь к изображению 'fon.mobile.jpg' */
+                background-size: cover; /* Изображение полностью покрывает экран */
+                background-repeat: no-repeat; /* Изображение не повторяется */
+                background-position: center; /* Центрирование фона */
+                height: 60px;
+                padding-top: 85px;
+            }
+
+            #products {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .product-item {
+                width: 90%;
+            }
+
+            .cart {
+                top: 15px;
+                right: 10px;
+                padding: 8px;
+                font-size: 0.8em;
+            }
+
+            .cart-content {
+            width: 85%;
+            max-width: 400px; /* Настраиваем максимальную ширину */
+            margin: 0 auto; /* Центрируем содержимое */
+            top: 70px;
+            right: 0;
+            left: 0;
+            }
+
+            header h1 {
+                font-size: 1.0em;
+                padding: 10px;
+            }
+
+            .btn {
+                padding: 8px 16px;
+                font-size: 0.9em;
+            }
+
+            footer {
+                font-size: 0.8em;
+            }
+
+        }
+
+
+/* Фон для блока категорий */
+#categories {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px; /* минимальный промежуток между карточками */
+    margin: 0px 0;
+    background-image: url('images/fon_for_category.png'); /* путь к картинке */
+    background-size: cover; /* растянуть на весь блок */
+    background-position: center;
+    padding: 116px 20px 40px 20px; /* зменшено нижній відступ */ /* больше пространства вокруг */
+    border-radius: 0px;
+}
+
+.category-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 40px 0;
+  flex-wrap: wrap;
+}
+
+.category-card {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 0px;
+  text-align: center;
+  cursor: pointer;
+  flex: 1 1 calc(20% - 20px); /* ✅ теперь 5 карточек в ряд */
+  max-width: calc(20% - 20px);
+  transition: transform 0.3s;
+  box-sizing: border-box;
+}
+.category-card:hover {
+  transform: scale(1.05);
+}
+
+.category-card img {
+  width: 100%;
+  height: 100%;             /* Занимает всю карточку */
+  object-fit: cover;        /* Кадрирует изображение, сохраняя пропорции */
+  display: block;
+}
+
+.category-card span {
+  position: absolute;       /* Располагаем текст поверх изображения */
+  bottom: 0;                /* Внизу карточки */
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  color: #bbbbbb;     /* серый цвет текста */
+  font-weight: bold;
+  background: none; /* прозрачный фон под текст */
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 0.8em;
+}
+/* Центрирование последнего ряда (если карточек меньше 5) */
+#categories {
+  justify-content: center;
+}
+
+/* На мобиле по 2 в ряд */
+@media (max-width:768px) {
+  .category-card {
+    flex: 1 1 calc(50% - 15px); 
+    max-width: calc(50% - 15px);
+  }
+}
+@media (max-width: 768px) {
+  #main-banner {
+    height: 40px; 
+    background-size: cover;
+    background-position: center;
+  }
+}
+/* Отступ снизу для товаров, чтобы футер не прилипал */
+.products {
+    padding-bottom: 60px; /* общий отступ для всех экранов */
+}
+
+@media (max-width: 768px) {
+    .products {
+        padding-bottom: 60px; /* чуть больше для мобильной версии */
+    }
+}
+@media (max-width: 768px) {
+  #categories {
+    padding: 95px 10px 30px 10px; /* верх, горизонтально, низ, горизонтально */
+    gap: 10px;          /* можна також трохи зменшити відстань між картками */
+  }
+}
+@media (max-width: 900px) and (orientation: landscape) {
+  #main-banner {
+    height: 80px;          /* уменьшаем высоту баннера */
+    padding-top: 60px;     /* делаем меньше отступ сверху */
+    background-size: cover;
+    background-position: center;
+  }
+}
+a[href^="mailto:"]:hover {
+  color: #007bff;
+
+}
+        .contacts-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 90px;       /* відступ зверху від карток */
+  margin-left: 0px;      /* трохи вліво */
+  margin-bottom: 0px;    /* невеликий відступ знизу */
+  font-size: 1.0em;
+  color: #808080;
+}
+
+.contact-link {
+  color: #808080;
+  text-decoration: none;
+  font-weight: bold;
+  margin-bottom: 8px;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.contact-link:hover {
+  color: #007bff;          /* синє підсвічування при наведенні */
+  transform: translateX(1px); /* легке зміщення для ефекту "руху" */
+}
+
+</style>
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <svg xmlns="http://www.w3.org/2000/svg" width="220" height="70" viewBox="0 0 600 200">
-        <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#800000">ПРО</text>
-        <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#808080">ЗАХИСТ</text>
-        <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="29" fill="#bbbbbb">ІНТЕРНЕТ-МАГАЗИН СИСТЕМ БЕЗПЕКИ</text>
-        <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10"/>
-        <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10"/>
-        <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10"/>
-        <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10"/>
-      </svg>
+
+<header>
+     <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="220" height="70" viewBox="0 0 600 200">
+          <!-- Текст ПРО (красным) -->
+          <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#800000">
+            ПРО
+          </text>
+
+          <!-- Текст ЗАХИСТ (чёрным) -->
+          <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#808080">
+            ЗАХИСТ
+          </text>
+
+          <!-- Слоган (светлый серый) -->
+          <!-- Слоган -->
+          <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="29" fill="#bbbbbb">
+          ІНТЕРНЕТ-МАГАЗИН СИСТЕМ БЕЗПЕКИ
+          </text>
+<!-- Домик справа от слова ПРОЗАХИСТ -->
+  <!-- Крыша (две красные линии, чуть ниже относительно текста) -->
+  <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10"/>
+  <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10"/>
+
+  <!-- Стены (без линии пола) -->
+  <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10"/>
+  <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10"/>
+        </svg>
     </div>
-  </header>
+    <style>
+    /* Подсветка при наведении на логотип */
+    .logo-svg:hover #slogan {
+        fill: #ffffff; /* белый при наведении */
+        transition: fill 0.5s ease;
+    }
+</style>
+</header>
 
-  <div id="toast" class="toast"></div>
 
-  <div class="cart" onclick="toggleCart()">🛒 Кошик (<span id="cart-count">0</span>)</div>
-  <div class="cart-content" id="cart-content">
+
+<div id="toast" class="toast"></div>
+<!-- Корзина -->
+<div class="cart" onclick="toggleCart()">🛒 Кошик (<span id="cart-count">0</span>)</div>
+<div class="cart-content" id="cart-content">
     <h2>Мій кошик</h2>
     <div id="cart-items"></div>
     <p class="total-price">Сума: <span id="total-price">0</span> грн</p>
-    <p id="stock-warning" style="color:red;font-weight:bold;"></p>
-    <div class="button-row" style="display:flex;justify-content:space-between;margin-top:10px;gap:10px;">
-      <a href="checkout.html" class="checkout-button btn" style="background:#4CAF50;min-width:120px;text-align:center;">Оформити замовлення</a>
-      <button class="cancel-button btn" style="background:#f35363;min-width:120px;" onclick="clearCart();toggleCart()">Скасувати</button>
-    </div>
-  </div>
+    <p id="stock-warning" style="color:red; font-weight: bold;"></p> <!-- Здесь будет выводиться сообщение -->
 
-  <!-- Звуки (оставлены без изменений) -->
-  <audio id="hover-sound" src="hover_1.mp3" preload="auto"></audio>
-     <!-- иконкі категорій -->
-  <main>
-    <div id="categories" class="category-buttons">
+    <div class="button-row">
+        <a href="checkout.html" class="checkout-button">Оформити замовлення</a>
+        <button class="cancel-button" onclick="clearCart(); toggleCart()">Скасувати</button>
+    </div>
+</div>
+<!-- 🎵 Аудио-файл для звука при наведении -->
+<audio id="hover-sound" src="hover_1.mp3" preload="auto"></audio>
+    <!-- Кнопки категорий -->
+
+   <div id="categories" class="category-buttons">
   <div class="category-card" onclick="toggleCategory('indoor')">
       <img src="images/indoor.png" alt="Внутрішні камери">
       <span>Внутрішні камери</span>
@@ -346,7 +578,7 @@
     <section id="indoor" class="products" style="display: none;">
     <h2 style="text-align: center; margin-bottom: 40px; margin-top: 80px;">Внутрішні відеокамери</h2>
      <div class="products-container">
-    
+
     <div class="product-item" onclick="openProductDetails('details_indoor_2(IPC-C32EP).html')">
         <img src="images/IPC-C22EP-A.png" alt="Відеокамера 2">
         <h3>Компактна камера IMOU IPC-C32EP</h3>
@@ -358,9 +590,9 @@
             price:1548, 
             image:'images/IPC-C22EP-A.png' 
         })">Додати у кошик</button>
-    
+
     </div>
-         
+
     <div class="product-item" onclick="openProductDetails('details_indoor_3(IPC-K2EP-3H3W).html')">
         <img src="images/IPC-K2EP-3H1W.png" alt="Відеокамера 3">
         <h3>Поворотна камера IMOU IPC-K2EP-3H3W</h3>
@@ -399,7 +631,7 @@
             image:'images/IPC-K2EP-3H1W.png' 
         })">Додати у кошик</button>
     </div>
-         
+
     <div class="product-item" onclick="openProductDetails('details_indoor_5(IPC-T22EP-C).html')">
         <img src="images/IPC-T22EP-C.png" alt="Відеокамера 5">
         <h3>Купольна камера IMOU IPC-T22EP-C</h3>
@@ -829,7 +1061,7 @@
                 image:'images/ajax_motionprotect_black_1.jpg' 
             })">Додати у кошик</button>
        </div>
-        
+
          <div class="product-item" onclick="openProductDetails('details_protect_7(ajax_motioncam_white).html')">
             <img src="images/ajax_motioncam_white_1.jpg" alt="Ajax MotionCam White">
             <h3>Датчик з фотокамерою Ajax MotionCam White</h3>
@@ -931,7 +1163,7 @@
                 image:'images/ajax_keypad_black_1.jpg' 
             })">Додати у кошик</button>
        </div>
-        
+
         <div class="product-item" onclick="openProductDetails('details_protect_15(ajax_keypad_plus_white).html')">
             <img src="images/ajax_keypad_plus_white_1.png" alt="Ajax KeyPad Plus White">
             <h3>Сенсорна клавіатура Ajax KeyPad Plus White</h3>
@@ -969,7 +1201,7 @@
                 image:'images/ajax_spacecontrol_white_1.jpg' 
             })">Додати у кошик</button>
        </div>
-         
+
          <div class="product-item" onclick="openProductDetails('details_protect_18(ajax_spacecontrol_black).html')">
             <img src="images/ajax_spacecontrol_black_1.jpg" alt="Ajax SpaceControl Black">
             <h3>Брелок керування Ajax SpaceControl Black</h3>
@@ -982,9 +1214,9 @@
                 image:'images/ajax_spacecontrol_black_1.jpg' 
             })">Додати у кошик</button>
        </div>
-    
 
-        
+
+
  </div>
         </section>
 
@@ -1018,7 +1250,7 @@
     image:'images/ajax_leaksprotect_black_1.jpg'
   })">Додати у кошик</button>
 </div>
-         
+
     <div class="product-item" onclick="openProductDetails('details_water_1(waterstop_white_0.5D).html')">
   <img src="images/ajax_waterstop_white.png" alt="WaterStop ½ white">
   <h3>Кран Ajax WaterStop ½″ (DN 15)</h3>
@@ -1059,10 +1291,10 @@
 </div>
 </section>
          <!-- Категорія: Карти microSD -->
- 
+
          <section id="microSD" class="products" style="display: none;">
   <h2 style="text-align: center; margin-bottom: 40px; margin-top: 80px;">Карти пам'яті microSD</h2>
-  
+
   <div class="products-container">
 
     <div class="product-item">
@@ -1090,7 +1322,7 @@
         image:'images/microSD_128.png'
       })">Додати у кошик</button>
     </div>
-       
+
       <div class="product-item">
       <img src="images/microSD_256.png" alt="microSD 256Gb" style="width: 160px; height: auto; object-fit: contain;">
       <h3>Карта пам'яті MicroSD Imou 256Гб ST2-256-S1</h3>
@@ -1108,387 +1340,278 @@
 </section>
 
 
-</main>
 
-  <footer>
+<footer>
     <p>&copy; 2024-2025 <span class="black">ПРОЗАХИСТ.</span> Всі права захищені.</p>
-  </footer>
+</footer>
 
-  <style>
-    .logo-svg:hover #slogan { fill: #ffffff; transition: fill .5s; }
-  </style>
+<style>
+/* Подсветка возвращённой карточки */
+.highlight-product {
+  outline: 3px solid #ff4747;
+  border-radius: 8px;
+  transition: outline 0.2s ease;
+}
 
-  <!-- второй блок звука оставлен как был -->
-  <audio id="hover-sound" src="hover.mp3" preload="auto"></audio>
-  <audio id="back-sound" src="hover_2.mp3" preload="auto"></audio>
+/* Анимация появления товаров */
+.fade-in {
+  animation: fadeIn 0.4s ease-in-out;
+}
 
-  <script>
-  (() => {
-    const safeStorage = {
-      get(key) {
-        try { return JSON.parse(localStorage.getItem(key)) || null; }
-        catch { return null; }
-      },
-      set(key, value) {
-        try { localStorage.setItem(key, JSON.stringify(value)); }
-        catch { /* ignore */ }
-      },
-      remove(key) {
-        try { localStorage.removeItem(key); }
-        catch { /* ignore */ }
-      }
-    };
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-    let cart = safeStorage.get('cart') || [];
+/* Корзина прокручиваемая при большом количестве товаров */
+#cart-items {
+  max-height: 300px;
+  overflow-y: auto;
+}
+</style>
 
-    function renderCartItem(item) {
-      const container = document.createElement('div');
-      container.className = 'cart-item';
+<!-- 🎵 Звуки -->
+<audio id="hover-sound" src="hover.mp3" preload="auto"></audio>
+<audio id="back-sound" src="hover_2.mp3" preload="auto"></audio>
 
-      const img = document.createElement('img');
-      img.src = item.image;
-      img.alt = item.name;
-      img.style.width = '30px';
-      img.style.height = 'auto';
-      img.style.marginRight = '5px';
+<script>
+(() => {
+  // === 🛒 КОРЗИНА ===
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-      const title = document.createElement('span');
-      title.textContent = `${item.name} - ${item.price} грн`;
+  function updateCart() {
+    const cartItems = document.getElementById('cart-items');
+    const totalPriceElement = document.getElementById('total-price');
+    const cartCountElement = document.getElementById('cart-count');
+    const stockWarning = document.getElementById('stock-warning');
+    if (!cartItems || !totalPriceElement || !cartCountElement || !stockWarning) return;
 
-      const qtyControl = document.createElement('div');
-      qtyControl.className = 'quantity-control';
+    cartItems.innerHTML = '';
+    let total = 0;
+    let totalQuantity = 0;
 
-      const decBtn = document.createElement('button');
-      decBtn.className = 'quantity-btn';
-      decBtn.textContent = '-';
-      decBtn.onclick = (ev) => decreaseQuantity(item.id, ev);
+    cart.forEach(item => {
+      total += item.price * item.quantity;
+      totalQuantity += item.quantity;
 
-      const qty = document.createElement('span');
-      qty.className = 'quantity';
-      qty.textContent = item.quantity;
+      const cartItem = document.createElement('div');
+      cartItem.className = 'cart-item';
+      cartItem.innerHTML = `
+        <img src="${item.image}" alt="${item.name}" style="width:30px;height:auto;margin-right:5px;">
+        <span>${item.name} - ${item.price} грн</span>
+        <div class="quantity-control">
+          <button class="quantity-btn" onclick="decreaseQuantity('${item.id}', event)">-</button>
+          <span class="quantity">${item.quantity}</span>
+          <button class="quantity-btn" onclick="increaseQuantity('${item.id}', event)">+</button>
+        </div>
+      `;
+      cartItems.appendChild(cartItem);
+    });
 
-      const incBtn = document.createElement('button');
-      incBtn.className = 'quantity-btn';
-      incBtn.textContent = '+';
-      incBtn.onclick = (ev) => increaseQuantity(item.id, ev);
+    totalPriceElement.textContent = total.toFixed(2);
+    cartCountElement.textContent = totalQuantity;
+    stockWarning.textContent = totalQuantity > 10 ? "Увага! Обмежена кількість товару. Наявність уточнюйте" : "";
+  }
 
-      qtyControl.append(decBtn, qty, incBtn);
-      container.append(img, title, qtyControl);
-      return container;
-    }
-
-    function updateCart() {
-      const cartItemsEl = document.getElementById('cart-items');
-      const totalPriceEl = document.getElementById('total-price');
-      const cartCountEl = document.getElementById('cart-count');
-      const stockWarningEl = document.getElementById('stock-warning');
-      if (!cartItemsEl || !totalPriceEl || !cartCountEl || !stockWarningEl) return;
-
-      cartItemsEl.innerHTML = '';
-      let total = 0;
-      let quantity = 0;
-
-      cart.forEach(item => {
-        total += item.price * item.quantity;
-        quantity += item.quantity;
-        cartItemsEl.appendChild(renderCartItem(item));
-      });
-
-      totalPriceEl.textContent = total.toFixed(2);
-      cartCountEl.textContent = quantity;
-      stockWarningEl.textContent = quantity > 10 ? 'Увага! Обмежена кількість товару. Наявність уточнюйте' : '';
-    }
-
-    function showToast(message) {
-      const toast = document.getElementById('toast');
-      if (!toast) return;
-      toast.textContent = message;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 3000);
-    }
-
-    window.addToCart = function(event, item) {
-      event?.stopPropagation?.();
-      const existing = cart.find(ci => ci.id === item.id);
-      if (existing) existing.quantity += 1;
-      else cart.push({ ...item, quantity: 1 });
-
-      safeStorage.set('cart', cart);
+  window.increaseQuantity = function(id, event) {
+    event.stopPropagation();
+    const item = cart.find(i => i.id === id);
+    if (item) {
+      item.quantity++;
+      localStorage.setItem('cart', JSON.stringify(cart));
       updateCart();
-      showToast(`${item.name} додано до кошика!`);
-    };
+    }
+  };
 
-    window.addToCartFromProductPage = window.addToCart;
-
-    window.increaseQuantity = function(id, event) {
-      event.stopPropagation();
-      const item = cart.find(i => i.id === id);
-      if (item) {
-        item.quantity += 1;
-        safeStorage.set('cart', cart);
-        updateCart();
-      }
-    };
-
-    window.decreaseQuantity = function(id, event) {
-      event.stopPropagation();
-      const item = cart.find(i => i.id === id);
-      if (!item) return;
-      if (item.quantity > 1) item.quantity -= 1;
+  window.decreaseQuantity = function(id, event) {
+    event.stopPropagation();
+    const item = cart.find(i => i.id === id);
+    if (item) {
+      if (item.quantity > 1) item.quantity--;
       else cart = cart.filter(i => i.id !== id);
-      safeStorage.set('cart', cart);
+      localStorage.setItem('cart', JSON.stringify(cart));
       updateCart();
-    };
-
-    window.clearCart = function() {
-      cart = [];
-      safeStorage.remove('cart');
-      updateCart();
-      showToast('Кошик очищено');
-    };
-
-    window.toggleCart = function() {
-      const panel = document.getElementById('cart-content');
-      if (!panel) return;
-      panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
-    };
-
-    document.addEventListener('click', (ev) => {
-      const panel = document.getElementById('cart-content');
-      const cartBtn = document.querySelector('.cart');
-      if (!panel || !cartBtn) return;
-      if (!panel.contains(ev.target) && !cartBtn.contains(ev.target)) {
-        panel.style.display = 'none';
-      }
-    });
-
-    // Категории
-    let currentCategory = null;
-    const categorySections = Array.from(document.querySelectorAll('.products'));
-    const categoriesBlock = document.getElementById('categories');
-    const mainBanner = document.getElementById('main-banner');
-
-    function showCategoriesLanding() {
-      categorySections.forEach(section => section.classList.remove('active'));
-      categoriesBlock?.classList.remove('hidden');
-      if (mainBanner) mainBanner.style.display = 'block';
-      currentCategory = null;
-      safeStorage.remove('lastCategory');
     }
+  };
 
-    window.toggleCategory = function(catId, push = true) {
-      const target = document.getElementById(catId);
-      if (!target) return;
+  function showToast(message) {
+    const toast = document.getElementById('toast');
+    if (!toast) return;
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3000);
+  }
 
-      categorySections.forEach(section => section.classList.remove('active'));
-      target.classList.add('active');
-      categoriesBlock?.classList.add('hidden');
-      if (mainBanner) mainBanner.style.display = 'none';
-
-      currentCategory = catId;
-      if (push) {
-        history.pushState({ category: catId }, '', '#' + catId);
-        setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
-      }
-      safeStorage.set('lastCategory', catId);
-    };
-
-    function extractProductIdFromUrl(url = '') {
-      const match = url.match(/\(([^)]+)\)/);
-      if (match) return match[1];
-      const filename = url.split('/').pop()?.split(/[?#]/)[0] || '';
-      return filename.replace(/\.[^.]+$/, '') || filename;
+  window.addToCart = function(event, item) {
+    if (event && event.stopPropagation) event.stopPropagation();
+    const existingItem = cart.find(ci => ci.id === item.id);
+    if (existingItem) existingItem.quantity++;
+    else {
+      item.quantity = 1;
+      cart.push(item);
     }
-
-    window.openProductDetails = function(pageUrl) {
-      const prodId = extractProductIdFromUrl(pageUrl);
-      if (currentCategory) safeStorage.set('lastCategory', currentCategory);
-      if (prodId) safeStorage.set('lastProductId', prodId);
-      safeStorage.set('lastScroll', String(window.scrollY || 0));
-
-      if (window.innerWidth <= 768 && mainBanner) mainBanner.style.display = 'none';
-      window.location.href = pageUrl;
-    };
-
-    function handleState(state) {
-      if (!state || !state.category) {
-        showCategoriesLanding();
-        return;
-      }
-      toggleCategory(state.category, false);
-    }
-
-    const backSound = document.getElementById('back-sound');
-    if (backSound) backSound.volume = 0.35;
-
-    window.addEventListener('popstate', (e) => {
-      handleState(e.state);
-      if (backSound) {
-        backSound.currentTime = 0;
-        backSound.play().catch(() => {});
-      }
-    });
-
-    window.addEventListener('pageshow', () => {
-      const savedCategory = safeStorage.get('lastCategory');
-      if (savedCategory && document.getElementById(savedCategory)) {
-        toggleCategory(savedCategory, false);
-      } else {
-        showCategoriesLanding();
-      }
-      cart = safeStorage.get('cart') || [];
-      updateCart();
-    });
-
-    // Hover sound (код не трогали, только подключили)
-    const hoverSound = document.getElementById('hover-sound');
-    if (hoverSound) {
-      hoverSound.volume = 0.4;
-      document.querySelectorAll('.category-card').forEach(card => {
-        card.addEventListener('mouseenter', () => {
-          hoverSound.currentTime = 0;
-          hoverSound.play().catch(() => {});
-        });
-      });
-    }
-
-    // Swipe навигация
-    let touchStartX = 0;
-    let touchEndX = 0;
-    let currentIndex = categorySections.findIndex(section => section.classList.contains('active'));
-    if (currentIndex < 0) currentIndex = 0;
-
-    function showCategoryByIndex(index) {
-      if (index < 0 || index >= categorySections.length) return;
-      const section = categorySections[index];
-      if (section && section.id) toggleCategory(section.id);
-    }
-
-    function handleSwipe() {
-      const diff = touchEndX - touchStartX;
-      if (Math.abs(diff) < 50) return;
-      if (diff < 0) showCategoryByIndex(currentIndex + 1);
-      else showCategoryByIndex(currentIndex - 1);
-    }
-
-    document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
-    document.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].clientX;
-      handleSwipe();
-    });
-
+    localStorage.setItem('cart', JSON.stringify(cart));
     updateCart();
-  })();
-  </script>
+    showToast(`${item.name} додано до кошика!`);
+  };
+
+  window.addToCartFromProductPage = function(event, item) {
+    event.stopPropagation();
+    const existingItem = cart.find(ci => ci.id === item.id);
+    if (existingItem) existingItem.quantity++;
+    else {
+      item.quantity = 1;
+      cart.push(item);
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCart();
+    showToast(`${item.name} додано до кошика!`);
+  };
+
+  window.clearCart = function() {
+    cart = [];
+    localStorage.removeItem('cart');
+    updateCart();
+    showToast('Кошик очищено');
+  };
+
+  window.toggleCart = function() {
+    const cartContent = document.getElementById('cart-content');
+    if (!cartContent) return;
+    const isHidden = getComputedStyle(cartContent).display === 'none';
+    cartContent.style.display = isHidden ? 'block' : 'none';
+  };
+
+  document.addEventListener('click', (ev) => {
+    const cartContent = document.getElementById('cart-content');
+    const cartButton = document.querySelector('.cart');
+    if (!cartContent || !cartButton) return;
+    if (!cartContent.contains(ev.target) && !cartButton.contains(ev.target)) {
+      cartContent.style.display = 'none';
+    }
+  });
+
+  // === 📂 КАТЕГОРИИ ===
+  let currentCategory = null;
+
+  window.toggleCategory = function(catId, push = true) {
+    document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
+    const target = document.getElementById(catId);
+    if (!target) return;
+
+    target.style.display = 'block';
+    target.classList.add('fade-in');
+    currentCategory = catId;
+
+    const categories = document.getElementById('categories');
+    const mainBanner = document.getElementById('main-banner');
+    if (categories) categories.style.display = 'none';
+    if (mainBanner) mainBanner.style.display = 'none';
+
+    if (push) {
+      setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
+      history.pushState({ category: catId }, '', '#' + catId);
+    }
+  };
+
+  function extractProductIdFromUrl(url) {
+    if (!url) return '';
+    const m = url.match(/\(([^)]+)\)/);
+    if (m && m[1]) return m[1];
+    const filename = url.split('/').pop().split('?')[0].split('#')[0];
+    return filename.replace(/\.[^.]+$/, '') || filename;
+  }
+
+  window.openProductDetails = function(pageUrl) {
+    const prodId = extractProductIdFromUrl(pageUrl);
+    if (currentCategory) localStorage.setItem('lastCategory', currentCategory);
+    if (prodId) localStorage.setItem('lastProductId', prodId);
+    localStorage.setItem('lastScroll', String(window.scrollY || 0));
+
+    const mainBanner = document.getElementById('main-banner');
+    if (window.innerWidth <= 768 && mainBanner) {
+      mainBanner.style.display = 'none';
+    }
+
+    window.location.href = pageUrl;
+  };
+
+  function handleState(state) {
+    const categories = document.getElementById('categories');
+    const mainBanner = document.getElementById('main-banner');
+    document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
+
+    let catId = state ? state.category : null;
+    if (catId && document.getElementById(catId)) {
+      const target = document.getElementById(catId);
+      target.style.display = 'block';
+      target.classList.add('fade-in');
+      currentCategory = catId;
+      if (categories) categories.style.display = 'none';
+      if (mainBanner) mainBanner.style.display = 'none';
+    } else {
+      currentCategory = null;
+      if (categories) categories.style.display = 'flex';
+      if (mainBanner) mainBanner.style.display = 'block';
+    }
+
+    cart = JSON.parse(localStorage.getItem('cart')) || [];
+    updateCart();
+  }
+
+  // === 🎵 ЗВУК "НАЗАД" ===
+  const backSound = document.getElementById('back-sound');
+  if (backSound) backSound.volume = 0.35; // 🔈 громкость от 0.0 (тихо) до 1.0 (громко)
+  window.addEventListener('popstate', (e) => {
+    handleState(e.state);
+    if (backSound) {
+      backSound.currentTime = 0;
+      backSound.play().catch(() => {});
+    }
+  });
+
+  window.addEventListener('pageshow', (e) => handleState(history.state));
+
+  updateCart();
+
+  // === 🎵 Звук при наведении на карточки категорий ===
+  const hoverSound = document.getElementById('hover-sound');
+  if (hoverSound) {
+    hoverSound.volume = 0.4;
+    document.querySelectorAll('.category-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        hoverSound.currentTime = 0;
+        hoverSound.play().catch(() => {});
+      });
+    });
+  }
+
+  // === 📱 Свайпы между категориями ===
+  let touchStartX = 0;
+  let touchEndX = 0;
+  const products = Array.from(document.querySelectorAll('.products'));
+  let currentIndex = 0;
+
+  function showCategory(index) {
+    if (index < 0 || index >= products.length) return;
+    products.forEach(p => p.style.display = 'none');
+    products[index].style.display = 'block';
+    currentIndex = index;
+  }
+
+  function handleSwipe() {
+    const diff = touchEndX - touchStartX;
+    if (Math.abs(diff) < 50) return;
+    if (diff < 0 && currentIndex < products.length - 1) showCategory(currentIndex + 1);
+    else if (diff > 0 && currentIndex > 0) showCategory(currentIndex - 1);
+  }
+
+  document.addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
+  document.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].clientX;
+    handleSwipe();
+  });
+})();
+</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
