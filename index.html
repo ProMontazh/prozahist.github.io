@@ -519,6 +519,7 @@ a[href^="mailto:"]:hover {
 </div>
 <!-- 🎵 Аудио-файл для звука при наведении -->
 <audio id="hover-sound" src="hover_1.mp3" preload="auto"></audio>
+   
     <!-- Кнопки категорий -->
 
    <div id="categories" class="category-buttons">
@@ -534,7 +535,10 @@ a[href^="mailto:"]:hover {
       <img src="images/outdoor_4G.png" alt="Зовнішні 4G камери">
       <span>Зовнішні 4G камери</span>
   </div>
-
+  <div class="category-card" onclick="toggleCategory('microSD')">
+      <img src="images/microSD.png" alt="microSD">
+      <span>Карти пам'яті</span>
+  </div>
   <div class="category-card" onclick="toggleCategory('alarm')">
       <img src="images/alarm.png" alt="Охоронна сигналізація">
       <span>Комплекти сигналізації</span>
@@ -555,10 +559,7 @@ a[href^="mailto:"]:hover {
       <img src="images/fire.png" alt="Захист від пожежі">
       <span>Захист від пожежі</span>
   </div>
-<div class="category-card" onclick="toggleCategory('microSD')">
-      <img src="images/microSD.png" alt="microSD">
-      <span>Карти пам'яті</span>
-  </div>
+
   <!-- Телефон як картка -->
   <a href="tel:+380935016040" class="category-card">
     <img src="images/help.png" alt="Help">
@@ -1616,5 +1617,6 @@ a[href^="mailto:"]:hover {
 </script>
 </body>
 </html>
+
 
 
