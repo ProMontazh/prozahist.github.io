@@ -1684,38 +1684,49 @@ a[href^="mailto:"]:hover {
     });
   }
 
-  // === 📱 Свайпы между категориями ===
-  let touchStartX = 0;
-  let touchEndX = 0;
-  const products = Array.from(document.querySelectorAll('.products'));
-  let currentIndex = 0;
+ // === 📱 Свайпы между категориями ===
+let touchStartX = 0;
+let touchEndX = 0;
 
-  function showCategory(index) {
-    if (index < 0 || index >= products.length) return;
-    products.forEach(p => p.style.display = 'none');
-    products[index].style.display = 'block';
-    currentIndex = index;
-  }
+document.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+});
 
-  function handleSwipe() {
+document.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].clientX;
+
+    // 🔍 Проверяем: показывается ли сейчас какая-либо категория товаров?
+    const activeProducts = [...document.querySelectorAll('.products')]
+        .find(p => getComputedStyle(p).display === 'block');
+
+    // ❗ Если на главной (нет активного блока товаров) — свайпы игнорируем
+    if (!activeProducts) return;
+
+    // 🔄 Получаем все категории
+    const products = Array.from(document.querySelectorAll('.products'));
+    let currentIndex = products.indexOf(activeProducts);
+
     const diff = touchEndX - touchStartX;
     if (Math.abs(diff) < 50) return;
-    if (diff < 0 && currentIndex < products.length - 1) showCategory(currentIndex + 1);
-    else if (diff > 0 && currentIndex > 0) showCategory(currentIndex - 1);
-  }
 
-  document.addEventListener('touchend', e => {
-  // ❗ Если мы на главной странице — свайп не работает
-  const categories = document.getElementById('categories');
-  if (categories && getComputedStyle(categories).display !== "none") return;
+    // Свайп влево
+    if (diff < 0 && currentIndex < products.length - 1) {
+        products.forEach(p => p.style.display = 'none');
+        products[currentIndex + 1].style.display = 'block';
+    }
 
-  touchEndX = e.changedTouches[0].clientX;
-  handleSwipe();
+    // Свайп вправо
+    if (diff > 0 && currentIndex > 0) {
+        products.forEach(p => p.style.display = 'none');
+        products[currentIndex - 1].style.display = 'block';
+    }
 });
+
 })();
 </script>
 </body>
 </html>
+
 
 
 
