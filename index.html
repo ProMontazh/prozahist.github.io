@@ -540,7 +540,7 @@ a[href^="mailto:"]:hover {
       <span>Карти пам'яті</span>
   </div>
   <div class="category-card" onclick="toggleCategory('alarm')">
-      <img src="images/alarm.png" alt="Охоронна сигналізація">
+      <img src="images/alarm.png" alt="Комплекти сигналізації">
       <span>Комплекти сигналізації</span>
   </div>
   <div class="category-card" onclick="toggleCategory('hub')">
@@ -832,10 +832,10 @@ a[href^="mailto:"]:hover {
   </div>
 </section>
 
-    <!-- Категорія: Охоронна сігналізація -->
+    <!-- Категорія: Комплекти сигналізації -->
 
     <section id="alarm" class="products" style="display: none;">
-    <h2 style="text-align: center; margin-bottom: 40px; margin-top: 80px;">Охоронна сигналізація Ajax</h2>
+    <h2 style="text-align: center; margin-bottom: 40px; margin-top: 80px;">Комплекти сигналізації Ajax</h2>
     <div class="products-container">
 
         <div class="product-item" onclick="openProductDetails('details_alarm_1(Starter Kit White).html')">
@@ -850,6 +850,7 @@ a[href^="mailto:"]:hover {
                 image:'images/ajax_starterkit_white_s.png' 
             })">Додати у кошик</button>
        </div>
+
 
         <div class="product-item" onclick="openProductDetails('details_alarm_2(Starter Kit Black).html')">
             <img src="images/ajax_starterkit_black.png" alt="Starter Kit Black">
@@ -1291,8 +1292,21 @@ a[href^="mailto:"]:hover {
                 image:'images/ajax_motionprotect_outdoor_1.jpg' 
             })">Додати у кошик</button>
        </div>
+
+         <div class="product-item" onclick="openProductDetails('details_protect_2(ajax_motioncam_outdoor_white).html')">
+            <img src="images/ajax_motioncam_outdoor_white_1.png" alt="Ajax MotionCam Outdoor White">
+            <h3>Зовнішній датчик руху з фото Ajax MotionCam Outdoor White</h3>
+            <p>Зв'язок з хабом до 1700 м, дальність виявлення до 15 м, кут: 90°</p>
+            <p class="product-price">8200.00 грн</p>
+            <button class="btn" onclick="addToCart(event, { 
+                id:'Ajax MotionCam Outdoor White', 
+                name:'Ajax MotionCam Outdoor White', 
+                price:8200, 
+                image:'images/images/ajax_motioncam_outdoor_white_1.png' 
+            })">Додати у кошик</button>
+       </div>
         
-         <div class="product-item" onclick="openProductDetails('details_protect_2(ajax_streetsiren_white).html')">
+         <div class="product-item" onclick="openProductDetails('details_protect_3(ajax_streetsiren_white).html')">
             <img src="images/ajax_streetsiren_white_1.jpg" alt="Ajax StreetSiren White">
             <h3>Зовнішня сирена Ajax StreetSiren White</h3>
             <p>Зв'язок з хабом до 2000 м, Гучність оповіщення від 85 до 113 дБ</p>
@@ -1305,7 +1319,7 @@ a[href^="mailto:"]:hover {
             })">Додати у кошик</button>
        </div>
 
-       <div class="product-item" onclick="openProductDetails('details_protect_3(ajax_streetsiren_black).html')">
+       <div class="product-item" onclick="openProductDetails('details_protect_4(ajax_streetsiren_black).html')">
             <img src="images/ajax_streetsiren_black_1.jpg" alt="Ajax StreetSiren Black">
             <h3>Зовнішня сирена Ajax StreetSiren Black</h3>
             <p>Зв'язок з хабом до 2000 м, Гучність оповіщення від 85 до 113 дБ</p>
@@ -1673,6 +1687,7 @@ a[href^="mailto:"]:hover {
 </script>
 </body>
 </html>
+
 
 
 
