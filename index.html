@@ -1704,15 +1704,19 @@ a[href^="mailto:"]:hover {
     else if (diff > 0 && currentIndex > 0) showCategory(currentIndex - 1);
   }
 
-  document.addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
   document.addEventListener('touchend', e => {
-    touchEndX = e.changedTouches[0].clientX;
-    handleSwipe();
-  });
+  // ❗ Если мы на главной странице — свайп не работает
+  const categories = document.getElementById('categories');
+  if (categories && getComputedStyle(categories).display !== "none") return;
+
+  touchEndX = e.changedTouches[0].clientX;
+  handleSwipe();
+});
 })();
 </script>
 </body>
 </html>
+
 
 
 
