@@ -1279,8 +1279,20 @@ a[href^="mailto:"]:hover {
     <h2 style="text-align: center; margin-bottom: 40px; margin-top: 80px;">Зовнішні датчики, сирени</h2>
     <div class="products-container">
 
+        <div class="product-item" onclick="openProductDetails('details_protect_1(ajax_motionprotect_outdoor).html')">
+            <img src="images/ajax_motionprotect_outdoor_1.jpg" alt="Ajax MotionProtect Outdoor White">
+            <h3>Зовнішній датчик руху Ajax MotionProtect Outdoor White</h3>
+            <p>Зв'язок з хабом до 1700 м, дальність виявлення до 15 м, кут виявлення: 90°, від +60°С до −25°С</p>
+            <p class="product-price">5620.00 грн</p>
+            <button class="btn" onclick="addToCart(event, { 
+                id:'Ajax MotionProtect Outdoor White', 
+                name:'Ajax MotionProtect Outdoor White', 
+                price:5620, 
+                image:'images/ajax_motionprotect_outdoor_1.jpg' 
+            })">Додати у кошик</button>
+       </div>
         
-         <div class="product-item" onclick="openProductDetails('details_protect_1(ajax_streetsiren_white).html')">
+         <div class="product-item" onclick="openProductDetails('details_protect_2(ajax_streetsiren_white).html')">
             <img src="images/ajax_streetsiren_white_1.jpg" alt="Ajax StreetSiren White">
             <h3>Зовнішня сирена Ajax StreetSiren White</h3>
             <p>Зв'язок з хабом до 2000 м, Гучність оповіщення від 85 до 113 дБ</p>
@@ -1293,7 +1305,7 @@ a[href^="mailto:"]:hover {
             })">Додати у кошик</button>
        </div>
 
-       <div class="product-item" onclick="openProductDetails('details_protect_2(ajax_streetsiren_black).html')">
+       <div class="product-item" onclick="openProductDetails('details_protect_3(ajax_streetsiren_black).html')">
             <img src="images/ajax_streetsiren_black_1.jpg" alt="Ajax StreetSiren Black">
             <h3>Зовнішня сирена Ajax StreetSiren Black</h3>
             <p>Зв'язок з хабом до 2000 м, Гучність оповіщення від 85 до 113 дБ</p>
@@ -1661,6 +1673,7 @@ a[href^="mailto:"]:hover {
 </script>
 </body>
 </html>
+
 
 
 
