@@ -433,119 +433,85 @@
 </head>
 <body>
 
-<header>
-     <div class="logo">
-        <svg xmlns="http://www.w3.org/2000/svg" width="220" height="70" viewBox="0 0 600 200">
-          <!-- Текст ПРО (красным) -->
-          <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#800000">
-            ПРО
-          </text>
+  <header>
+        <div class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="220" height="70" viewBox="0 0 600 200">
+                <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#800000">ПРО</text>
+                <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#808080">ЗАХИСТ</text>
+                <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="33" fill="#bbbbbb">БЕЗДРОТОВІ СИСТЕМИ БЕЗПЕКИ</text>
+                <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10"/>
+                <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10"/>
+                <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10"/>
+                <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10"/>
+            </svg>
+        </div>
+    </header>
 
-          <!-- Текст ЗАХИСТ (чёрным) -->
-          <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#808080">
-            ЗАХИСТ
-          </text>
-
-          <!-- Слоган (светлый серый) -->
-          <!-- Слоган -->
-          <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="33" fill="#bbbbbb">
-          БЕЗДРОТОВІ СИСТЕМИ БЕЗПЕКИ 
-          </text>
-<!-- Домик справа от слова ПРОЗАХИСТ -->
-  <!-- Крыша (две красные линии, чуть ниже относительно текста) -->
-  <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10"/>
-  <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10"/>
-
-  <!-- Стены (без линии пола) -->
-  <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10"/>
-  <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10"/>
-        </svg>
+    <div id="toast" class="toast"></div>
+    
+    <div class="cart" onclick="toggleCart()">🛒 Кошик (<span id="cart-count">0</span>)</div>
+    <div class="cart-content" id="cart-content">
+        <h2>Мій кошик</h2>
+        <div id="cart-items"></div>
+        <p class="total-price">Сума: <span id="total-price">0</span> грн</p>
+        <p id="stock-warning" style="color:red; font-weight: bold;"></p>
+        <div class="button-row">
+            <a href="checkout.html" class="checkout-button">Оформити замовлення</a>
+            <button class="cancel-button" onclick="clearCart(); toggleCart()">Скасувати</button>
+        </div>
     </div>
-    <style>
-    /* Подсветка при наведении на логотип */
-    .logo-svg:hover #slogan {
-        fill: #ffffff; /* белый при наведении */
-        transition: fill 0.5s ease;
-    }
-</style>
-</header>
 
+    <audio id="hover-sound1" src="hover_1.mp3" preload="auto"></audio>
+    <audio id="hover-sound" src="hover.mp3" preload="auto"></audio>
+    <audio id="back-sound" src="hover_2.mp3" preload="auto"></audio>
 
-
-<div id="toast" class="toast"></div>
-<!-- Корзина -->
-<div class="cart" onclick="toggleCart()">🛒 Кошик (<span id="cart-count">0</span>)</div>
-<div class="cart-content" id="cart-content">
-    <h2>Мій кошик</h2>
-    <div id="cart-items"></div>
-    <p class="total-price">Сума: <span id="total-price">0</span> грн</p>
-    <p id="stock-warning" style="color:red; font-weight: bold;"></p> <!-- Здесь будет выводиться сообщение -->
-
-    <div class="button-row">
-        <a href="checkout.html" class="checkout-button">Оформити замовлення</a>
-        <button class="cancel-button" onclick="clearCart(); toggleCart()">Скасувати</button>
-    </div>
-</div>
-<!-- 🎵 Аудио-файл для звука при наведении -->
-<audio id="hover-sound1" src="hover_1.mp3" preload="auto"></audio>
-   
-    <!-- Кнопки категорий -->
-
-   <div id="categories" class="category-buttons">
-  <div class="category-card" onclick="toggleCategory('indoor')">
-      <img src="images/indoor.png" alt="Внутрішні камери">
-      <span>Внутрішні камери</span>
-  </div>
-  <div class="category-card" onclick="toggleCategory('outdoor')">
-      <img src="images/outdoor.png" alt="Зовнішні камери">
-      <span>Зовнішні камери</span>
-  </div>
-  <div class="category-card" onclick="toggleCategory('outdoor_4G')">
-      <img src="images/outdoor_4G.png" alt="Зовнішні 4G камери">
-      <span>Зовнішні 4G камери</span>
-  </div>
-  <div class="category-card" onclick="toggleCategory('microSD')">
-      <img src="images/microSD.png" alt="microSD">
-      <span>Карти пам'яті</span>
-  </div>
-  <div class="category-card" onclick="toggleCategory('alarm')">
-      <img src="images/alarm.png" alt="Комплекти сигналізації">
-      <span>Комплекти сигналізації</span>
-  </div>
-  <div class="category-card" onclick="toggleCategory('hub')">
-      <img src="images/hub_white.png" alt="Хаби">
-      <span>Хаби</span>
-  </div>
-  <div class="category-card" onclick="toggleCategory('protect')">
-      <img src="images/protect_indoor.png" alt="Внутрішня охорона">
-      <span>Внутрішня охорона</span>
-  </div>
+    <div id="categories" class="category-buttons">
+        <div class="category-card" onclick="toggleCategory('indoor')">
+            <img src="images/indoor.png" alt="Внутрішні камери">
+            <span>Внутрішні камери</span>
+        </div>
+        <div class="category-card" onclick="toggleCategory('outdoor')">
+            <img src="images/outdoor.png" alt="Зовнішні камери">
+            <span>Зовнішні камери</span>
+        </div>
+        <div class="category-card" onclick="toggleCategory('outdoor_4G')">
+            <img src="images/outdoor_4G.png" alt="Зовнішні 4G камери">
+            <span>Зовнішні 4G камери</span>
+        </div>
+        <div class="category-card" onclick="toggleCategory('microSD')">
+            <img src="images/microSD.png" alt="microSD">
+            <span>Карти пам'яті</span>
+        </div>
+        <div class="category-card" onclick="toggleCategory('alarm')">
+            <img src="images/alarm.png" alt="Комплекти сигналізації">
+            <span>Комплекти сигналізації</span>
+        </div>
+        <div class="category-card" onclick="toggleCategory('hub')">
+            <img src="images/hub_white.png" alt="Хаби">
+            <span>Хаби</span>
+        </div>
+        <div class="category-card" onclick="toggleCategory('protect')">
+            <img src="images/protect_indoor.png" alt="Внутрішня охорона">
+            <span>Внутрішня охорона</span>
+        </div>
         <div class="category-card" onclick="toggleCategory('protect_outdoor')">
-      <img src="images/protect_outdoor.png" alt="Зовнішня охорона">
-      <span>Зовнішня охорона</span>
-  </div>
-  <div class="category-card" onclick="toggleCategory('waterstop')">
-      <img src="images/waterstop.png" alt="Захист від потопу">
-      <span>Захист від потопу</span>
-  </div>
-  <div class="category-card" onclick="toggleCategory('fire')">
-      <img src="images/fire.png" alt="Захист від пожежі">
-      <span>Захист від пожежі</span>
-  </div>
+            <img src="images/protect_outdoor.png" alt="Зовнішня охорона">
+            <span>Зовнішня охорона</span>
+        </div>
+        <div class="category-card" onclick="toggleCategory('waterstop')">
+            <img src="images/waterstop.png" alt="Захист від потопу">
+            <span>Захист від потопу</span>
+        </div>
+        <div class="category-card" onclick="toggleCategory('fire')">
+            <img src="images/fire.png" alt="Захист від пожежі">
+            <span>Захист від пожежі</span>
+        </div>
 
-  <!-- Телефон як картка -->
-  <!-- <a href="tel:+380935016040" class="category-card">
-    <img src="images/help.png" alt="Help">
-    <span></span>
-  </a> -->
-       <!-- Контактний телефон і пошта -->
-<div class="contacts-block">
-  <a href="tel:+380935016040" class="contact-link">📞 (093) 501-60-40</a>
-  <a href="mailto:prozakhyst@ukr.net" class="contact-link">📧 prozakhyst@ukr.net</a>
-</div>
-
-
-</div>
+        <div class="contacts-block">
+            <a href="tel:+380935016040" class="contact-link">📞 (093) 501-60-40</a>
+            <a href="mailto:prozakhyst@ukr.net" class="contact-link">📧 prozakhyst@ukr.net</a>
+        </div>
+    </div>
 
 <!-- Категорія: Внутрішні Wi-Fi камери -->
 
@@ -1486,9 +1452,7 @@
 }
 </style>
 
-<!-- 🎵 Звуки -->
-<audio id="hover-sound" src="hover.mp3" preload="auto"></audio>
-<audio id="back-sound" src="hover_2.mp3" preload="auto"></audio>
+
 
 <script>
 (() => {
@@ -1744,6 +1708,7 @@ document.addEventListener('touchend', e => {
 </script>
 </body>
 </html>
+
 
 
 
