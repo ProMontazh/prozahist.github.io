@@ -454,6 +454,7 @@
         <h2>Мій кошик</h2>
         <div id="cart-items"></div>
         <p class="total-price">Сума: <span id="total-price">0</span> грн</p>
+        <p id="discount-message" style="color: #28a745; font-weight: bold;"></p>
         <p id="stock-warning" style="color:red; font-weight: bold;"></p>
         <div class="button-row">
             <a href="checkout.html" class="checkout-button">Оформити замовлення</a>
@@ -1490,8 +1491,16 @@
       ? "Увага! Обмежена кількість товару. Наявність уточнюйте" 
       : "";
   }
-
-  window.increaseQuantity = function(id, event) {
+// 💰 Перевірка на знижку
+const discountMessage = document.getElementById('discount-message');
+if (discountMessage) {
+  if (total >= 1000) {
+    discountMessage.textContent = "Доступна знижка!";
+  } else {
+    discountMessage.textContent = "";
+  }
+}
+window.increaseQuantity = function(id, event) {
     if (event) event.stopPropagation();
     const item = cart.find(i => i.id === id);
     if (item) {
@@ -1758,6 +1767,7 @@
 </script>
 </body>
 </html>
+
 
 
 
