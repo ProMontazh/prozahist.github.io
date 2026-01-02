@@ -160,7 +160,7 @@ function generateOrderNumber() {
 // === Знижка ===
 function calculateDiscount(total) {
   let discount = 0;
-  if (total >= 500 && total < 4999) discount = 3;
+  if (total >= 1000 && total < 4999) discount = 3;
   else if (total >= 5000 && total < 9999) discount = 5;
   else if (total >= 10000 && total < 29999) discount = 7;
   else if (total >= 30000 && total < 59999) discount = 10;
@@ -365,6 +365,7 @@ inputs.forEach(input => input.addEventListener('input', checkFormCompletion));
 
 </body>
 </html>
+
 
 
 
