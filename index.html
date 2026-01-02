@@ -1484,10 +1484,7 @@
   overflow-y: auto;
 }
 </style>
-
-
-
-<script>
+ <script>
     (() => {
         // === 🛒 КОШИК ===
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -1532,8 +1529,8 @@
             const discountMessage = document.getElementById('discount-message');
             if (discountMessage) {
                 if (total >= 1000) {
-                    discountMessage.textContent = "Доступна знижка!";
-                    discountMessage.style.display = "block";
+                    discountMessage.textContent = "— Доступна знижка!";
+                    discountMessage.style.display = "inline";
                 } else {
                     discountMessage.textContent = "";
                     discountMessage.style.display = "none";
@@ -1808,5 +1805,6 @@
     </script>
 </body>
 </html>
+
 
 
