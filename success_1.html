@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <title>Оплата успішна - ПроЗахист</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to right, rgba(7, 7, 7, 0.95), rgba(148, 148, 148, 0.95));
+            overflow: hidden;
+        }
+
+        .success-container {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            max-width: 500px;
+            width: 90%;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .success-icon {
+            font-size: 100px;
+            margin-bottom: 20px;
+            animation: bounce 1s ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        h1 {
+            color: #800000;
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .order-number {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        .order-number strong {
+            color: #800000;
+            font-size: 1.3em;
+        }
+
+        p {
+            color: #666;
+            font-size: 1.1em;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+
+        .info-text {
+            background: #fff5f5;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #800000;
+        }
+
+        .info-text p {
+            color: #333;
+            margin: 5px 0;
+            font-size: 0.95em;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(to right, rgba(7, 7, 7, 0.95), rgba(148, 148, 148, 0.95));
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-top: 30px;
+            font-size: 1.1em;
+            font-weight: 700;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(to right, rgba(128, 0, 0, 0.95), rgba(80, 80, 80, 0.95));
+        }
+
+        .contact-info {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .contact-info p {
+            font-size: 0.9em;
+            color: #999;
+        }
+
+        .contact-info a {
+            color: #800000;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .contact-info a:hover {
+            color: #007bff;
+            text-decoration: underline;
+        }
+
+        /* Конфетті ефект */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #f0f;
+            position: absolute;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .logo-text {
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .logo-text .red {
+            color: #800000;
+            font-weight: 700;
+        }
+
+        .logo-text .gray {
+            color: #808080;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .success-container {
+                padding: 40px 20px;
+                width: 95%;
+            }
+
+            h1 {
+                font-size: 1.6em;
+            }
+
+            .success-icon {
+                font-size: 80px;
+            }
+
+            .btn {
+                padding: 12px 30px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="success-icon">✅</div>
+        <h1>Оплата успішна!</h1>
+        
+        <div class="order-number">
+            Ваше замовлення <strong id="order-num">#12345</strong> оплачено
+        </div>
+
+        <p class="logo-text">
+            Дякуємо за покупку в <span class="red">ПРО</span><span class="gray">ЗАХІСТ</span>!
+        </p>
+
+        <div class="info-text">
+            <p>✉️ Деталі замовлення надіслано</p>
+            <p>📦 Очікуйте дзвінок для підтвердження відправки</p>
+            <p>🚚 Доставка: Нова Пошта протягом 1-3 днів</p>
+        </div>
+
+        <a href="index.html" class="btn">Повернутися на головну</a>
+
+        <div class="contact-info">
+            <p>Питання? Зв'яжіться з нами:</p>
+            <p>
+                📞 <a href="tel:+380935016040">(093) 501-60-40</a><br>
+                📧 <a href="mailto:prozakhyst@ukr.net">prozakhyst@ukr.net</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Очищаємо кошик після успішної оплати
+        localStorage.removeItem('cart');
+
+        // Отримуємо номер замовлення з URL (якщо Portmone передає)
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderNumber = urlParams.get('shop_order_number') || 
+                           localStorage.getItem('lastOrderNumber') || 
+                           'XXXXX';
+        
+        document.getElementById('order-num').textContent = '#' + orderNumber;
+
+        // Створюємо конфетті ефект
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = ['#800000', '#808080', '#4CAF50', '#007bff', '#FFC107'][Math.floor(Math.random() * 5)];
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(confetti);
+
+                // Видаляємо конфетті після анімації
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+
+        // Запускаємо конфетті при завантаженні
+        createConfetti();
+
+        // Зберігаємо в історію, що оплата успішна
+        const successData = {
+            timestamp: new Date().toISOString(),
+            orderNumber: orderNumber
+        };
+        localStorage.setItem('lastSuccessfulPayment', JSON.stringify(successData));
+    </script>
+</body>
+</html>
