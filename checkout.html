@@ -219,7 +219,8 @@ function displayOrder() {
         `\nЗагальна сума: ${total.toFixed(2)} грн` +
         (discountPercent > 0
             ? `\nЗнижка ${discountPercent}%: - ${discountAmount.toFixed(2)} грн\nДо сплати: ${finalTotal.toFixed(2)} грн`
-            : `\nДо сплати: ${finalTotal.toFixed(2)} грн`);
+            : `\nДо сплати: ${finalTotal.toFixed(2)} грн`) +
+        `\n\n⚠️ Статус оплати: Очікується`;
 
     // Показуємо кнопку оплати
     setTimeout(() => {
@@ -241,6 +242,13 @@ document.getElementById('pay-button').addEventListener('click', function (e) {
         alert('Будь ласка, заповніть всі поля форми!');
         return;
     }
+    
+    // Зберігаємо номер замовлення для success.html
+    localStorage.setItem('lastOrderNumber', currentOrderNumber);
+    
+    // Додаємо інформацію про оплату карткою в приховане поле
+    const cartDataField = document.getElementById('cart-data');
+    cartDataField.value = cartDataField.value + '\n\n💳 СПЛАЧЕНО КАРТКОЮ ОНЛАЙН';
     
     // Відправляємо форму на email
     const data = new FormData(form);
