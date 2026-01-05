@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $cart = $_POST["cart"];
 
     // Настройка получателя и заголовков
-    $to = "prozahist@ukr.net";  // Замените на вашу почту
+    $to = "prozakhyst@ukr.net";  // Замените на вашу почту
     $subject = "Новый заказ";
     $headers = "From: no-reply@yourdomain.com\r\n";
     $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
@@ -31,3 +31,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 ?>
+
