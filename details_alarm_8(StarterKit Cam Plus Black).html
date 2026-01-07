@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>Деталі товару - Ajax StarterKit Cam Plus Black</title> 
+     <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+       .toast {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 1.0em;
+    white-space: nowrap; /* Устанавливаем текст в одну строчку */        
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: 9999;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+}
+        .container {
+          
+            max-width: 830px;
+            margin: 20px auto;
+            
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            animation: fadeIn 3.0s forwards;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+       .product-title {
+    text-align: center;
+    font-size: 1.5em; /* уменьшен шрифт */
+    margin-top: 0;
+}
+        .carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    gap: 10px;
+    padding: 10px;
+    scroll-behavior: smooth;
+        }
+        .carousel img {
+            width: 100%;
+            max-width: 400px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .carousel img:hover {
+            transform: scale(1.05);
+        }
+
+        .product-description {
+            max-width: 100%;
+            margin-top: 20px;
+            font-size: 1.0rem;
+            line-height: 1.6;
+        }
+
+        .product-description ul {
+            padding-left: 20px;
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+        .product-description li {
+            margin-bottom: 6px;
+        }
+
+        .product-price {
+            font-size: 1.8em;
+            color: red;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .btn {
+            display: block;
+            width: fit-content;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px auto;
+            text-align: center;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* ----- Модальное окно ----- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+
+        .modal .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+            padding: 10px;
+        }
+
+        .modal .arrow.left {
+            left: 20px;
+        }
+
+        .modal .arrow.right {
+            right: 20px;
+        }
+            /* Улучшаем вид списка характеристик на ПК */
+@media (min-width: 1024px) {
+  .product-description ul {
+    padding-left: 150px; /* больше отступ слева */
+    margin-top: 15px;
+  }
+
+  .product-description li {
+  border-bottom: 1px dotted #ddd;
+  padding-bottom: 5px;
+}
+}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="product-title">Базовий комплект Ajax StarterKit Cam Plus Black</h2>
+
+    <div class="carousel">
+        <img src="images/ajax_starterkit_cam_black.jpg" alt="StarterKit Cam Plus Black" onclick="openModal('images/ajax_starterkit_cam_black.jpg')">
+       <!--  <img src="images/ajax_starterkit_white.png" alt="Starter Kit White - інший вид" onclick="openModal('ajax_starterkit_white.png')"> -->
+        
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <div class="product-description">
+   
+Стартовий набір охоронної системи Ajax StarterKit Plus Cam
+Стартовий набір охоронної сигналізації можна під’єднати до пульта охоронної компанії, завжди онлайн завдяки роботі із трьома каналами зв'язку, автоматизує безпеку сценаріями та надсилає анімовані серії фотографій для верифікації тривог. StarterKit Cam Plus забезпечує контроль навіть при знеструмленні та втраті підключення до інтернету. Передбачено керування з мобільного пристрою із будь-якої точки світу.
+Комплектація стартового набору охоронної сигналізації Ajax
+Стартовий комплект бездротової системи охоронної сигналізації Ajax StarterKit Cam складається з централі Hub 2 Plus, датчика відкриття DoorProtect, датчика руху MotionCam та брелока Ajax SpaceControl.
+        <ul>
+<li>Hub 2 Plus – hub повністю контролює роботу пристроїв системи безпеки. За допомогою радіопротоколу Jeweller та двостороннього зв'язку охоронних датчиків з hub користувача буде повідомлено про подію за допомогою пуш-повідомлень, смс та дзвінків. Радіопротокол Ajax Wings використовується для фотографій. Hub розрахований на підключення 100 пристроїв, 50 користувачів, 25 камер відеоспостереження чи реєстраторів, 50 кімнат, 9 охоронних груп. Радіус покриття сигналу – до 2000 м.</li>
+<li>MotionCam — це бездротовий датчик, який реагує на рухи в приміщенні, що охороняється, за допомогою PIR-сенсора. Якщо рух було зафіксовано, пристрій робить серію фотографій. Датчик ігнорує об'єкти до 50 см і до 20 кг, а це означає, що помилкових спрацьовувань на домашніх тварин не буде. Датчик оснащений фотокамерою з роздільною здатністю до 640х480, що спрацьовує від сенсора і передає анімовані серії знімків — фотоверифікацію.</li>
+<li>DoorProtect — перша лінія оборони системи безпеки. Датчик призначений для встановлення на будь-якому типі дверей та вікон, реагує на відкриття. Пристрій укомплектований герконом, розрахованим на понад мільйон відкриттів. Дальність зв'язку пристрою з hub — до 1200 м. Є захист від глушіння сигналу, температурний сенсор і тампер, який запобігає відкриттю датчика.</li>
+<li>Ajax SpaceControl — брелок управління охоронною сигналізацією, який ставить та знімає приміщення з охорони. Додаткова функція тривожної кнопки одним натисканням викликає підкріплення в екстреній ситуації.</li>
+Передбачено захист від підробки та випадкових спрацьовувань тривоги. Дальність зв'язку з hub – до 1300 м. Набір охоронної сигналізації Ajax StarterKit Cam Plus сприяє запобіганню або фіксації факту проникнення в приміщення під охороною. Такого комплекту буде достатньо для базового захисту.
+                </ul>
+        <br><br>
+        Характеристики:
+        <ul>
+<li>Максимальна кількість пристроїв у системі: 200</li>
+<li>Максимальна кількість користувачів: 200</li>
+<li>Мобільні застосунки: iOS 13.0 і вище, Android 5.0 і вище</li>
+<li>Час доставки сигналу тривоги: 0,15 с</li>
+<li>Радіопротокол Jeweller</li>
+<li>Дальність зв’язку з датчиками — до 2000 м на відкритому просторі</li>
+<li>Двосторонній зв’язок між пристроями</li>
+<li>Робочі частоти: 868,0 – 868,6 МГц</li>
+<li>Термін роботи датчиків однієї батареї становить до 7 років</li>
+<li>Датчики живляться від батарейок CR123A</li>
+<li>Живлення брелока — від батареї CR2032</li>
+<li>Резервне живлення Хаба від вбудованого акумулятора до 15 годин</li>
+<li>Саморегульована потужність радіосигналу — до 20 мВт</li>
+<li>Блочне шифрування, засноване на алгоритмі AES</li>
+<li>Період опитування датчика — 12 - 300 секунд</li>
+<li>Канали зв'язку Ethernet, Wi-Fi, GSM (850/900/1800/1900 МГц)</li>
+<li>Підтримка 2-х SIM-карт micro SIM 4G</li>
+<li>Строк гарантії	12 міс.</li>
+        </ul>
+    </div>
+
+    <p class="product-price">19500.00 грн</p>
+    <button class="btn" onclick="addToCartFromProductPage({ id: 'StarterKit Cam Black', name: 'Ajax StarterKit Cam Black', price: 19500, image: 'images/ajax_starterkit_cam_black.jpg' })">Додати у кошик</button>
+</div>
+
+<div id="modal" class="modal" onclick="closeModal()">
+    <span class="arrow left" onclick="event.stopPropagation(); prevImage()">&#10094;</span>
+    <img id="modal-img" src=""/>
+    <span class="arrow right" onclick="event.stopPropagation(); nextImage()">&#10095;</span>
+</div>
+<script>
+const cart = JSON.parse(localStorage.getItem('cart')) || [];
+const images = [
+    "images/ajax_starterkit_cam_black.jpg"
+];
+let currentIndex = 0;
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 3000);
+}
+
+function addToCartFromProductPage(item) {
+    const existingItem = cart.find(cartItem => cartItem.id === item.id);
+    if (existingItem) {
+        existingItem.quantity++;
+    } else {
+        item.quantity = 1;
+        cart.push(item);
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    showToast(`${item.name} додано до кошика!`);
+}
+
+function openModal(imageSrc) {
+    currentIndex = images.indexOf(imageSrc);
+    document.getElementById("modal-img").src = imageSrc;
+    document.getElementById("modal").style.display = "flex";
+
+    // 👇 Если изображение одно — стрелки не показываем
+    if (images.length <= 1) {
+        document.querySelector('.arrow.left').style.display = 'none';
+        document.querySelector('.arrow.right').style.display = 'none';
+    } else {
+        document.querySelector('.arrow.left').style.display = 'block';
+        document.querySelector('.arrow.right').style.display = 'block';
+    }
+}
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+function nextImage() {
+    if (images.length <= 1) return; // если одно фото — ничего не делаем
+    currentIndex = (currentIndex + 1) % images.length;
+    document.getElementById("modal-img").src = images[currentIndex];
+}
+
+function prevImage() {
+    if (images.length <= 1) return;
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    document.getElementById("modal-img").src = images[currentIndex];
+}
+
+// свайп на мобильных
+let startX = 0;
+const modal = document.getElementById("modal");
+
+modal.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+});
+
+modal.addEventListener("touchend", (e) => {
+    let endX = e.changedTouches[0].clientX;
+    if (endX - startX > 50) {
+        prevImage();
+    } else if (startX - endX > 50) {
+        nextImage();
+    }
+});
+
+// возврат к категории при нажатии "назад"
+window.addEventListener('popstate', () => {
+    const lastCat = localStorage.getItem('lastCategory');
+    if (lastCat) {
+        window.location.href = `index.html#${lastCat}`;
+    } else {
+        window.location.href = 'index.html';
+    }
+});
+</script>
+</body>
+</html>
