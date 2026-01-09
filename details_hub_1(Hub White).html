@@ -281,6 +281,7 @@ function addToCartFromProductPage(item) {
   showToast(`${item.name} додано до кошика!`);
 }
 
+/* === Карусель === */
 function updateCarousel() {
   const carousel = document.getElementById('carousel');
   carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
@@ -296,6 +297,7 @@ function prevImage() {
   updateCarousel();
 }
 
+/* === Модалка === */
 function openModal(imageSrc) {
   const modal = document.getElementById("modal");
   const modalImg = document.getElementById("modal-img");
@@ -308,7 +310,18 @@ function closeModal() {
   document.getElementById("modal").style.display = "none";
 }
 
-// Свайп для карусели
+/* ✅ Новые функции для стрелок внутри модалки */
+function nextModalImage() {
+  currentIndex = (currentIndex + 1) % images.length;
+  document.getElementById("modal-img").src = images[currentIndex];
+}
+
+function prevModalImage() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  document.getElementById("modal-img").src = images[currentIndex];
+}
+
+/* === Свайп для карусели === */
 const carousel = document.getElementById('carousel');
 let startX = 0;
 carousel.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
@@ -316,6 +329,15 @@ carousel.addEventListener('touchend', (e) => {
   const endX = e.changedTouches[0].clientX;
   if (endX - startX > 50) prevImage();
   if (startX - endX > 50) nextImage();
+});
+
+/* === Свайп для модалки === */
+const modal = document.getElementById("modal");
+modal.addEventListener("touchstart", (e) => startX = e.touches[0].clientX);
+modal.addEventListener("touchend", (e) => {
+  const endX = e.changedTouches[0].clientX;
+  if (endX - startX > 50) prevModalImage();
+  if (startX - endX > 50) nextModalImage();
 });
 </script>
 
