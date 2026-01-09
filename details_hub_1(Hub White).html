@@ -55,20 +55,36 @@
       margin-top: 0;
     }
 
+    /* === ✅ Исправленный блок карусели === */
     .carousel {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       gap: 10px;
       padding: 10px;
-      overflow-x: hidden;
+    }
+
+    .carousel::-webkit-scrollbar {
+      display: none; /* скрываем полосу прокрутки */
+    }
+
+    .carousel-track {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 10px;
     }
 
     .carousel img {
+      flex: 0 0 auto;
       width: 100%;
       max-width: 400px;
       border-radius: 5px;
       cursor: pointer;
+      object-fit: contain;
+      scroll-snap-align: start;
       transition: transform 0.3s ease;
     }
 
@@ -166,10 +182,13 @@
 <div class="container">
   <h2 class="product-title">Охоронний пристрій Ajax Hub (2G) White</h2>
 
+  <!-- ✅ исправленный HTML карусели -->
   <div class="carousel">
-    <img src="images/ajax_hub_white_1.jpg" alt="Hub White" onclick="openModal('images/ajax_hub_white_1.jpg')">
-    <img src="images/ajax_hub_white_2.jpg" alt="Hub White - інший вид" onclick="openModal('images/ajax_hub_white_2.jpg')">
-    <img src="images/ajax_hub_white_3.jpg" alt="Hub White - інший вид" onclick="openModal('images/ajax_hub_white_3.jpg')">
+    <div class="carousel-track">
+      <img src="images/ajax_hub_white_1.jpg" alt="Hub White" onclick="openModal('images/ajax_hub_white_1.jpg')">
+      <img src="images/ajax_hub_white_2.jpg" alt="Hub White - інший вид" onclick="openModal('images/ajax_hub_white_2.jpg')">
+      <img src="images/ajax_hub_white_3.jpg" alt="Hub White - інший вид" onclick="openModal('images/ajax_hub_white_3.jpg')">
+    </div>
   </div>
 
   <div id="toast" class="toast"></div>
@@ -238,11 +257,8 @@ function openModal(imageSrc) {
   modalImg.src = imageSrc;
   modal.style.display = "flex";
 
-  // Показати або сховати стрілки
-  document.querySelector('.arrow.left').style.display =
-    images.length > 1 ? 'block' : 'none';
-  document.querySelector('.arrow.right').style.display =
-    images.length > 1 ? 'block' : 'none';
+  document.querySelector('.arrow.left').style.display = images.length > 1 ? 'block' : 'none';
+  document.querySelector('.arrow.right').style.display = images.length > 1 ? 'block' : 'none';
 }
 
 function closeModal() {
@@ -261,7 +277,7 @@ function prevImage() {
   document.getElementById("modal-img").src = images[currentIndex];
 }
 
-// 📱 Свайпи в модальному вікні
+// 📱 Свайп в модальном окне
 let startX = 0;
 const modal = document.getElementById("modal");
 modal.addEventListener("touchstart", (e) => startX = e.touches[0].clientX);
@@ -271,7 +287,7 @@ modal.addEventListener("touchend", (e) => {
   if (startX - endX > 50) nextImage();
 });
 
-// 🔙 Повернення до категорії при натисканні "назад"
+// 🔙 Повернення до категорії
 window.addEventListener('popstate', () => {
   const lastCat = localStorage.getItem('lastCategory');
   window.location.href = lastCat ? `index.html#${lastCat}` : 'index.html';
