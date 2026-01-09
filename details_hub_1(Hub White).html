@@ -23,7 +23,6 @@
       padding: 8px 12px;
       border-radius: 5px;
       font-size: 1em;
-      white-space: nowrap;
       visibility: hidden;
       opacity: 0;
       transition: opacity 0.4s;
@@ -55,41 +54,61 @@
       margin-top: 0;
     }
 
-    /* === ✅ Исправленный блок карусели === */
+    /* === Карусель === */
+    .carousel-wrapper {
+      position: relative;
+      overflow: hidden;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
     .carousel {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scroll-snap-type: x mandatory;
       display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 10px;
-      padding: 10px;
-    }
-
-    .carousel::-webkit-scrollbar {
-      display: none; /* скрываем полосу прокрутки */
-    }
-
-    .carousel-track {
-      display: flex;
-      flex-wrap: nowrap;
-      gap: 10px;
+      transition: transform 0.5s ease;
     }
 
     .carousel img {
-      flex: 0 0 auto;
-      width: 100%;
-      max-width: 400px;
+      flex: 0 0 100%;
+      max-width: 100%;
       border-radius: 5px;
       cursor: pointer;
       object-fit: contain;
-      scroll-snap-align: start;
-      transition: transform 0.3s ease;
     }
 
-    .carousel img:hover {
-      transform: scale(1.05);
+    /* === Стрелки для десктопа === */
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      font-size: 2em;
+      padding: 8px 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      user-select: none;
+      display: none;
+      transition: background 0.3s;
+      z-index: 10;
+    }
+
+    .carousel-arrow:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .carousel-arrow.left {
+      left: 10px;
+    }
+
+    .carousel-arrow.right {
+      right: 10px;
+    }
+
+    /* Стрелки видны только на десктопе */
+    @media (min-width: 768px) {
+      .carousel-arrow {
+        display: block;
+      }
     }
 
     .product-description {
@@ -164,17 +183,6 @@
 
     .modal .arrow.left { left: 20px; }
     .modal .arrow.right { right: 20px; }
-
-    @media (min-width: 1024px) {
-      .product-description ul {
-        padding-left: 150px;
-      }
-
-      .product-description li {
-        border-bottom: 1px dotted #ddd;
-        padding-bottom: 5px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -182,13 +190,15 @@
 <div class="container">
   <h2 class="product-title">Охоронний пристрій Ajax Hub (2G) White</h2>
 
-  <!-- ✅ исправленный HTML карусели -->
-  <div class="carousel">
-    <div class="carousel-track">
+  <div class="carousel-wrapper">
+    <div class="carousel" id="carousel">
       <img src="images/ajax_hub_white_1.jpg" alt="Hub White" onclick="openModal('images/ajax_hub_white_1.jpg')">
       <img src="images/ajax_hub_white_2.jpg" alt="Hub White - інший вид" onclick="openModal('images/ajax_hub_white_2.jpg')">
       <img src="images/ajax_hub_white_3.jpg" alt="Hub White - інший вид" onclick="openModal('images/ajax_hub_white_3.jpg')">
     </div>
+
+    <div class="carousel-arrow left" onclick="prevImage()">&#10094;</div>
+    <div class="carousel-arrow right" onclick="nextImage()">&#10095;</div>
   </div>
 
   <div id="toast" class="toast"></div>
@@ -240,14 +250,25 @@ function showToast(message) {
 function addToCartFromProductPage(item) {
   cart = JSON.parse(localStorage.getItem('cart')) || [];
   const existingItem = cart.find(i => i.id === item.id);
-  if (existingItem) {
-    existingItem.quantity++;
-  } else {
-    item.quantity = 1;
-    cart.push(item);
-  }
+  if (existingItem) existingItem.quantity++;
+  else { item.quantity = 1; cart.push(item); }
   localStorage.setItem('cart', JSON.stringify(cart));
   showToast(`${item.name} додано до кошика!`);
+}
+
+function updateCarousel() {
+  const carousel = document.getElementById('carousel');
+  carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+
+function nextImage() {
+  currentIndex = (currentIndex + 1) % images.length;
+  updateCarousel();
+}
+
+function prevImage() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  updateCarousel();
 }
 
 function openModal(imageSrc) {
@@ -256,41 +277,20 @@ function openModal(imageSrc) {
   currentIndex = images.indexOf(imageSrc);
   modalImg.src = imageSrc;
   modal.style.display = "flex";
-
-  document.querySelector('.arrow.left').style.display = images.length > 1 ? 'block' : 'none';
-  document.querySelector('.arrow.right').style.display = images.length > 1 ? 'block' : 'none';
 }
 
 function closeModal() {
   document.getElementById("modal").style.display = "none";
 }
 
-function nextImage() {
-  if (images.length <= 1) return;
-  currentIndex = (currentIndex + 1) % images.length;
-  document.getElementById("modal-img").src = images[currentIndex];
-}
-
-function prevImage() {
-  if (images.length <= 1) return;
-  currentIndex = (currentIndex - 1 + images.length) % images.length;
-  document.getElementById("modal-img").src = images[currentIndex];
-}
-
-// 📱 Свайп в модальном окне
+// Свайп для карусели
+const carousel = document.getElementById('carousel');
 let startX = 0;
-const modal = document.getElementById("modal");
-modal.addEventListener("touchstart", (e) => startX = e.touches[0].clientX);
-modal.addEventListener("touchend", (e) => {
+carousel.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
+carousel.addEventListener('touchend', (e) => {
   const endX = e.changedTouches[0].clientX;
   if (endX - startX > 50) prevImage();
   if (startX - endX > 50) nextImage();
-});
-
-// 🔙 Повернення до категорії
-window.addEventListener('popstate', () => {
-  const lastCat = localStorage.getItem('lastCategory');
-  window.location.href = lastCat ? `index.html#${lastCat}` : 'index.html';
 });
 </script>
 
