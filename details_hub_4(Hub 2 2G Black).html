@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <title>Деталі товару - Ajax Hub 2 (2G) Black</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    /* ===== Toast ===== */
+     .toast {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 1.0em;
+    white-space: nowrap; /* Устанавливаем текст в одну строчку */        
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: 9999;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+}
+    /* ===== Контейнер ===== */
+    .container {
+      max-width: 830px;
+      margin: 20px auto;
+      padding: 30px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      animation: fadeIn 1.5s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .product-title {
+      text-align: center;
+      font-size: 1.6em;
+      margin-top: 0;
+    }
+
+    /* ===== Карусель ===== */
+    .carousel-wrapper {
+      position: relative;
+      overflow: hidden;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .carousel {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .carousel img {
+      flex: 0 0 100%;
+      max-width: 100%;
+      border-radius: 5px;
+      cursor: pointer;
+      object-fit: contain;
+    }
+
+    /* Стрілки для десктопу */
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      font-size: 2em;
+      padding: 8px 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.3s;
+      z-index: 10;
+      display: none;
+    }
+
+    .carousel-arrow:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .carousel-arrow.left { left: 10px; }
+    .carousel-arrow.right { right: 10px; }
+
+    /* ===== Опис ===== */
+    .product-description {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 20px 0 30px 20px;
+    }
+
+    .product-description ul {
+      padding-left: 20px;
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
+
+    .product-description li {
+      margin-bottom: 6px;
+    }
+
+    .product-price {
+      font-size: 1.8em;
+      color: red;
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .btn {
+      display: block;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      margin: 20px auto;
+      text-align: center;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+
+    /* ===== Модалка ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .modal .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3em;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+      padding: 10px;
+      z-index: 10001;
+    }
+
+    .modal .arrow.left { left: 20px; }
+    .modal .arrow.right { right: 20px; }
+
+    /* ===== Медіа-запити ===== */
+    @media (min-width: 768px) {
+      .carousel-arrow { display: block; }
+    }
+
+    @media (min-width: 1024px) {
+      .product-description {
+        margin-left: 80px;
+        margin-right: 40px;
+      }
+      .product-description ul {
+        padding-left: 60px;
+      }
+      .carousel img {
+        max-height: 420px; /* 👈 регулюй розмір тут */
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 class="product-title">Охоронний пристрій Ajax Hub 2 (2G) Black</h2>
+
+  <div class="carousel-wrapper">
+    <div class="carousel" id="carousel">
+      <img src="images/ajax_hub_black_1.jpg" alt="Hub Black" onclick="openModal('images/ajax_hub_black_1.jpg')">
+      <img src="images/ajax_hub_black_2.jpg" alt="Hub Black - інший вид" onclick="openModal('images/ajax_hub_black_2.jpg')">
+      <img src="images/ajax_hub_black_3.jpg" alt="Hub Black - інший вид" onclick="openModal('images/ajax_hub_black_3.jpg')">
+    </div>
+
+    <div class="carousel-arrow left" onclick="prevImage()">&#10094;</div>
+    <div class="carousel-arrow right" onclick="nextImage()">&#10095;</div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+   <div class="product-description">
+    Бездротова централь з підтримкою фотоверифікації тривог, Ethernet, та 2 SIM-карти (2G). Hub 2 керує роботою всіх пристроїв системи безпеки та повідомляє про відчинення дверей, розбиття вікон, загрозу пожежі або потопу. Якщо на об’єкт проникнуть злодії, Hub 2 сповістить пульт охорони1 і надішле фотографії з датчиків руху MotionCam. Вам не доведеться перебувати під цілодобовим наглядом відеокамер, щоб бачити, чому спрацювала сигналізація.
+    Hub 2 готовий до роботи з коробки. Всі модулі комунікації, блок живлення і резервну батарею вже встановлено. Щоб розпочати налаштування системи, потрібно під'єднати пристрій до електромережі та інтернету, вставити сім-карти та просканувати QR-код через застосунок. А завдяки кріпильній панелі SmartBracket корпус пристрою не потрібно розбирати під час монтажу.
+    Підключення охоронних пристроїв, відеокамер, користувачів, тестування радіосигналу, створення груп і сценаріїв, навіть надсилання запиту на підключення до ПЦС — будь-які налаштування системи завждоси дтупні в застосунках Ajax.
+    <ul>
+            <li>Максимальна кількість пристроїв у системі: 100</li>
+            <li>Зокрема, до 10 сирен або клавіатур із вбудованою сиреною та 5 ретрансляторів радіосигналу.</li>
+            <li>Максимальна кількість користувачів: 50</li>
+            <li>Групи охорони до 9</li>
+            <li>Кімнати до 50</li>
+            <li>Відеореєстратори Ajax до 14</li>
+            <li>Камери Ajax до 224 через відеореєстратори Ajax та до 200 автономних</li>
+            <li>IP-камери сторонніх виробників до 25 за використання RTSP через SDK</li>
+            <li>до 224 за використання ONVIF через відеореєстратори Ajax</li>
+            <li>Мобільні застосунки: iOS 13.0 і вище, Android 5.0 і вище</li>
+            <li>Час доставки сигналу тривоги: 0,15 с</li>
+            <li>Радіопротокол Jeweller</li>
+            <li>Дальність зв'язку з датчиками — до 2000 м на відкритому просторі</li>
+            <li>Двосторонній зв'язок між пристроями</li>
+            <li>Робочі частоти: 868,0 – 868,6 МГц</li>
+            <li>Резервне живлення Хаба від вбудованого акумулятора до 15 годин</li>          
+            <li>Саморегульована потужність радіосигналу — до 20 мВт</li>
+            <li>Блочне шифрування, засноване на алгоритмі AES</li>
+            <li>Період опитування датчика — 12 - 300 секунд</li>
+            <li>Канали зв'язку Ethernet, GSM900/DCS1800 (B3/B8)</li>
+            <li>Підтримка 2-х SIM-карт micro SIM 2G</li>
+            <li>Строк гарантії	12 міс.</li>
+    </ul>
+  </div>
+
+  <p class="product-price">8000.00 грн</p>
+  <button class="btn" onclick="addToCartFromProductPage({ id: 'Hub 2 (2G) Black', name: 'Ajax Hub (2G) Black', price: 8000, image: 'images/ajax_hub_black_1.jpg' })">
+    Додати у кошик
+  </button>
+</div>
+
+<div id="modal" class="modal" onclick="closeModal()">
+  <span class="arrow left" onclick="event.stopPropagation(); prevModalImage()">&#10094;</span>
+  <img id="modal-img" src="" alt="Збільшене зображення">
+  <span class="arrow right" onclick="event.stopPropagation(); nextModalImage()">&#10095;</span>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+const images = [
+  "images/ajax_hub_black_1.jpg",
+  "images/ajax_hub_black_2.jpg",
+  "images/ajax_hub_black_3.jpg"
+];
+let currentIndex = 0;
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 2500);
+}
+
+function addToCartFromProductPage(item) {
+  cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const existingItem = cart.find(i => i.id === item.id);
+  if (existingItem) existingItem.quantity++;
+  else { item.quantity = 1; cart.push(item); }
+  localStorage.setItem('cart', JSON.stringify(cart));
+  showToast(`${item.name} додано до кошика!`);
+}
+
+/* === Карусель === */
+function updateCarousel() {
+  document.getElementById('carousel').style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+function nextImage() {
+  currentIndex = (currentIndex + 1) % images.length;
+  updateCarousel();
+}
+function prevImage() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  updateCarousel();
+}
+
+/* === Модалка === */
+function openModal(imageSrc) {
+  currentIndex = images.indexOf(imageSrc);
+  document.getElementById("modal-img").src = imageSrc;
+  document.getElementById("modal").style.display = "flex";
+}
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
+function nextModalImage() {
+  currentIndex = (currentIndex + 1) % images.length;
+  document.getElementById("modal-img").src = images[currentIndex];
+}
+function prevModalImage() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  document.getElementById("modal-img").src = images[currentIndex];
+}
+
+/* === Свайпи === */
+let startX = 0;
+const carousel = document.getElementById('carousel');
+carousel.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
+carousel.addEventListener('touchend', e => {
+  const diff = e.changedTouches[0].clientX - startX;
+  if (Math.abs(diff) > 50) diff > 0 ? prevImage() : nextImage();
+}, { passive: true });
+
+const modal = document.getElementById("modal");
+modal.addEventListener("touchstart", e => startX = e.touches[0].clientX, { passive: true });
+modal.addEventListener("touchend", e => {
+  const diff = e.changedTouches[0].clientX - startX;
+  if (Math.abs(diff) > 50) diff > 0 ? prevModalImage() : nextModalImage();
+}, { passive: true });
+</script>
+</body>
+</html>
