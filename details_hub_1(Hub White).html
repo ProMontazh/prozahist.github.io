@@ -13,27 +13,27 @@
       background-color: #f4f4f4;
     }
 
-      .toast {
-    position: fixed;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.4);
-    color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 1.0em;
-    white-space: nowrap; /* Устанавливаем текст в одну строчку */        
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.5s;
-    z-index: 9999;
-}
+    .toast {
+      position: fixed;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.4);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      font-size: 1.0em;
+      white-space: nowrap;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.5s;
+      z-index: 9999;
+    }
 
-.toast.show {
-    visibility: visible;
-    opacity: 1;
-}
+    .toast.show {
+      visibility: visible;
+      opacity: 1;
+    }
 
     .container {
       max-width: 830px;
@@ -76,7 +76,6 @@
       object-fit: contain;
     }
 
-    /* === Стрелки для десктопа === */
     .carousel-arrow {
       position: absolute;
       top: 50%;
@@ -105,31 +104,29 @@
       right: 10px;
     }
 
-    /* Стрелки видны только на десктопе */
     @media (min-width: 768px) {
       .carousel-arrow {
         display: block;
       }
     }
 
-   .product-description {
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-top: 20px;
-  margin-bottom: 30px; /* отступ снизу перед ценой */
-  margin-left: 20px;   /* 👈 общий отступ слева */
-}
+    .product-description {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-top: 20px;
+      margin-bottom: 30px;
+      margin-left: 20px;
+    }
 
-.product-description ul {
-  padding-left: 20px;  /* 👈 небольшой внутренний отступ */
-  margin-top: 10px;
-  margin-bottom: 0;
-}
+    .product-description ul {
+      padding-left: 20px;
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
 
     .product-description li {
       margin-bottom: 6px;
     }
-
 
     .product-price {
       font-size: 1.8em;
@@ -188,17 +185,16 @@
 
     .modal .arrow.left { left: 20px; }
     .modal .arrow.right { right: 20px; }
-    /* 🔧 Більший відступ для десктопів */
-@media (min-width: 1024px) {
-  .product-description {
-    margin-left: 80px;   /* більше місця зліва */
-    margin-right: 40px;  /* і трохи справа */
-  }
 
-  .product-description ul {
-    padding-left: 60px;  /* список відсунемо трохи правіше */
-  }
-}
+    @media (min-width: 1024px) {
+      .product-description {
+        margin-left: 80px;
+        margin-right: 40px;
+      }
+      .product-description ul {
+        padding-left: 60px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -219,6 +215,7 @@
 
   <div id="toast" class="toast"></div>
 
+  
   <div class="product-description">
     Бездротова централь з підтримкою Ethernet та SIM-карти (2G)
     <br><br>
@@ -251,10 +248,11 @@
   </button>
 </div>
 
+<!-- ✅ Исправлено: стрелки теперь вызывают prevModalImage / nextModalImage -->
 <div id="modal" class="modal" onclick="closeModal()">
-  <span class="arrow left" onclick="event.stopPropagation(); prevImage()">&#10094;</span>
+  <span class="arrow left" onclick="event.stopPropagation(); prevModalImage()">&#10094;</span>
   <img id="modal-img" src="" alt="Збільшене зображення">
-  <span class="arrow right" onclick="event.stopPropagation(); nextImage()">&#10095;</span>
+  <span class="arrow right" onclick="event.stopPropagation(); nextModalImage()">&#10095;</span>
 </div>
 
 <script>
@@ -274,7 +272,7 @@ function showToast(message) {
 }
 
 function addToCartFromProductPage(item) {
-  cart = JSON.parse(localStorage.getItem('cart')) || [];
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
   const existingItem = cart.find(i => i.id === item.id);
   if (existingItem) existingItem.quantity++;
   else { item.quantity = 1; cart.push(item); }
@@ -282,7 +280,6 @@ function addToCartFromProductPage(item) {
   showToast(`${item.name} додано до кошика!`);
 }
 
-/* === Карусель === */
 function updateCarousel() {
   const carousel = document.getElementById('carousel');
   carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
@@ -303,7 +300,8 @@ function openModal(imageSrc) {
   const modal = document.getElementById("modal");
   const modalImg = document.getElementById("modal-img");
   currentIndex = images.indexOf(imageSrc);
-  modalImg.src = imageSrc;
+  if (currentIndex < 0) currentIndex = 0;
+  modalImg.src = images[currentIndex];
   modal.style.display = "flex";
 }
 
@@ -311,8 +309,6 @@ function closeModal() {
   document.getElementById("modal").style.display = "none";
 }
 
-// Свайп для карусели
-/* ✅ Новые функции для стрелок внутри модалки */
 function nextModalImage() {
   currentIndex = (currentIndex + 1) % images.length;
   document.getElementById("modal-img").src = images[currentIndex];
@@ -323,23 +319,14 @@ function prevModalImage() {
   document.getElementById("modal-img").src = images[currentIndex];
 }
 
-/* === Свайп для карусели === */
-const carousel = document.getElementById('carousel');
+/* Свайпы для модалки */
 let startX = 0;
-carousel.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
-carousel.addEventListener('touchend', (e) => {
-  const endX = e.changedTouches[0].clientX;
-  if (endX - startX > 50) prevImage();
-  if (startX - endX > 50) nextImage();
-});
-
-/* === Свайп для модалки === */
 const modal = document.getElementById("modal");
-modal.addEventListener("touchstart", (e) => startX = e.touches[0].clientX);
-modal.addEventListener("touchend", (e) => {
+modal.addEventListener("touchstart", e => startX = e.touches[0].clientX);
+modal.addEventListener("touchend", e => {
   const endX = e.changedTouches[0].clientX;
   if (endX - startX > 50) prevModalImage();
-  if (startX - endX > 50) nextModalImage();
+  else if (startX - endX > 50) nextModalImage();
 });
 </script>
 </body>
