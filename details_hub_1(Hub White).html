@@ -101,6 +101,64 @@
 
     .modal .arrow.left { left: 20px; }
     .modal .arrow.right { right: 20px; }
+
+    /* === Цена и кнопка === */
+    .product-price {
+      font-size: 1.8em;
+      color: red;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: block;
+      margin: 20px auto;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+
+    /* === Описание === */
+    .product-description {
+      margin: 20px 20px 0 20px;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .product-description ul {
+      padding-left: 20px;
+    }
+
+    /* === Toast === */
+    .toast {
+      position: fixed;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      font-size: 1em;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.4s;
+      z-index: 9999;
+    }
+
+    .toast.show {
+      visibility: visible;
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -118,16 +176,6 @@
     <div class="carousel-arrow left" onclick="prevImage()">&#10094;</div>
     <div class="carousel-arrow right" onclick="nextImage()">&#10095;</div>
   </div>
-</div>
-
-<!-- ✅ Исправлено: теперь модалка закрывается только при клике по фону -->
-<div id="modal" class="modal">
-  <span class="arrow left" onclick="event.stopPropagation(); prevModalImage()">&#10094;</span>
-  <img id="modal-img" src="" alt="Збільшене зображення">
-  <span class="arrow right" onclick="event.stopPropagation(); nextModalImage()">&#10095;</span>
-</div>
-
-  <div id="toast" class="toast"></div>
 
   
   <div class="product-description">
@@ -162,12 +210,13 @@
   </button>
 </div>
 
-<!-- ✅ Исправлено: стрелки теперь вызывают prevModalImage / nextModalImage -->
-<div id="modal" class="modal" onclick="closeModal()">
+<div id="modal" class="modal">
   <span class="arrow left" onclick="event.stopPropagation(); prevModalImage()">&#10094;</span>
   <img id="modal-img" src="" alt="Збільшене зображення">
   <span class="arrow right" onclick="event.stopPropagation(); nextModalImage()">&#10095;</span>
 </div>
+
+<div id="toast" class="toast"></div>
 
 <script>
 const images = [
@@ -199,13 +248,9 @@ function openModal(index) {
 function closeModal() {
   document.getElementById("modal").style.display = "none";
 }
-
-/* Клик по фону — закрыть */
 document.getElementById("modal").addEventListener("click", (e) => {
   if (e.target.id === "modal") closeModal();
 });
-
-/* Стрелки в модалке */
 function nextModalImage() {
   currentIndex = (currentIndex + 1) % images.length;
   document.getElementById("modal-img").src = images[currentIndex];
@@ -215,7 +260,7 @@ function prevModalImage() {
   document.getElementById("modal-img").src = images[currentIndex];
 }
 
-/* Свайпы */
+/* === Свайпы === */
 let startX = 0;
 const modal = document.getElementById("modal");
 modal.addEventListener("touchstart", e => startX = e.touches[0].clientX, { passive: true });
@@ -227,6 +272,18 @@ modal.addEventListener("touchend", e => {
     else nextModalImage();
   }
 }, { passive: true });
+
+/* === Toast === */
+function showToast(msg) {
+  const toast = document.getElementById("toast");
+  toast.textContent = msg;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 2000);
+}
+
+function addToCartFromProductPage(item) {
+  showToast(`${item.name} додано до кошика!`);
+}
 </script>
 </body>
 </html>
