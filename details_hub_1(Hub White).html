@@ -3,23 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ajax Hub White</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <title>Деталі товару - Ajax Hub White</title>
   <style>
     body {
       font-family: 'Roboto', sans-serif;
       margin: 0;
+      padding: 0;
       background-color: #f4f4f4;
     }
+
+      .toast {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 1.0em;
+    white-space: nowrap; /* Устанавливаем текст в одну строчку */        
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: 9999;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+}
 
     .container {
       max-width: 830px;
       margin: 20px auto;
       padding: 30px;
-      background: #fff;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1.5s forwards;
+      opacity: 0;
     }
 
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .product-title {
+      text-align: center;
+      font-size: 1.5em;
+      margin-top: 0;
+    }
+
+    /* === Карусель === */
     .carousel-wrapper {
       position: relative;
       overflow: hidden;
@@ -40,6 +76,7 @@
       object-fit: contain;
     }
 
+    /* === Стрелки для десктопа === */
     .carousel-arrow {
       position: absolute;
       top: 50%;
@@ -60,31 +97,82 @@
       background: rgba(0, 0, 0, 0.7);
     }
 
-    .carousel-arrow.left { left: 10px; }
-    .carousel-arrow.right { right: 10px; }
-
-    @media (min-width: 768px) {
-      .carousel-arrow { display: block; }
+    .carousel-arrow.left {
+      left: 10px;
     }
 
-    /* === Модалка === */
+    .carousel-arrow.right {
+      right: 10px;
+    }
+
+    /* Стрелки видны только на десктопе */
+    @media (min-width: 768px) {
+      .carousel-arrow {
+        display: block;
+      }
+    }
+
+   .product-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 20px;
+  margin-bottom: 30px; /* отступ снизу перед ценой */
+  margin-left: 20px;   /* 👈 общий отступ слева */
+}
+
+.product-description ul {
+  padding-left: 20px;  /* 👈 небольшой внутренний отступ */
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+    .product-description li {
+      margin-bottom: 6px;
+    }
+
+
+    .product-price {
+      font-size: 1.8em;
+      color: red;
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .btn {
+      display: block;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      margin: 20px auto;
+      text-align: center;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+
     .modal {
       display: none;
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background: rgba(0,0,0,0.85);
       justify-content: center;
       align-items: center;
       z-index: 10000;
-      touch-action: none;
     }
 
     .modal img {
       max-width: 90%;
       max-height: 90%;
       border-radius: 10px;
-      user-select: none;
+      transition: transform 0.3s ease;
     }
 
     .modal .arrow {
@@ -96,88 +184,41 @@
       cursor: pointer;
       user-select: none;
       padding: 10px;
-      z-index: 10001;
     }
 
     .modal .arrow.left { left: 20px; }
     .modal .arrow.right { right: 20px; }
+    /* 🔧 Більший відступ для десктопів */
+@media (min-width: 1024px) {
+  .product-description {
+    margin-left: 80px;   /* більше місця зліва */
+    margin-right: 40px;  /* і трохи справа */
+  }
 
-    /* === Цена и кнопка === */
-    .product-price {
-      font-size: 1.8em;
-      color: red;
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    .btn {
-      display: block;
-      margin: 20px auto;
-      background-color: #007bff;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1em;
-      transition: background 0.3s;
-    }
-
-    .btn:hover {
-      background-color: #0056b3;
-    }
-
-    /* === Описание === */
-    .product-description {
-      margin: 20px 20px 0 20px;
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-
-    .product-description ul {
-      padding-left: 20px;
-    }
-
-    /* === Toast === */
-    .toast {
-      position: fixed;
-      top: 45%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: rgba(0, 0, 0, 0.6);
-      color: white;
-      padding: 8px 12px;
-      border-radius: 5px;
-      font-size: 1em;
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity 0.4s;
-      z-index: 9999;
-    }
-
-    .toast.show {
-      visibility: visible;
-      opacity: 1;
-    }
+  .product-description ul {
+    padding-left: 60px;  /* список відсунемо трохи правіше */
+  }
+}
   </style>
 </head>
 <body>
 
 <div class="container">
-  <h2>Охоронний пристрій Ajax Hub (2G) White</h2>
+  <h2 class="product-title">Охоронний пристрій Ajax Hub (2G) White</h2>
 
   <div class="carousel-wrapper">
     <div class="carousel" id="carousel">
-      <img src="images/ajax_hub_white_1.jpg" onclick="openModal(0)" alt="Ajax Hub">
-      <img src="images/ajax_hub_white_2.jpg" onclick="openModal(1)" alt="Ajax Hub 2">
-      <img src="images/ajax_hub_white_3.jpg" onclick="openModal(2)" alt="Ajax Hub 3">
+      <img src="images/ajax_hub_white_1.jpg" alt="Hub White" onclick="openModal('images/ajax_hub_white_1.jpg')">
+      <img src="images/ajax_hub_white_2.jpg" alt="Hub White - інший вид" onclick="openModal('images/ajax_hub_white_2.jpg')">
+      <img src="images/ajax_hub_white_3.jpg" alt="Hub White - інший вид" onclick="openModal('images/ajax_hub_white_3.jpg')">
     </div>
 
     <div class="carousel-arrow left" onclick="prevImage()">&#10094;</div>
     <div class="carousel-arrow right" onclick="nextImage()">&#10095;</div>
   </div>
 
-  
+  <div id="toast" class="toast"></div>
+
   <div class="product-description">
     Бездротова централь з підтримкою Ethernet та SIM-карти (2G)
     <br><br>
@@ -210,15 +251,14 @@
   </button>
 </div>
 
-<div id="modal" class="modal">
-  <span class="arrow left" onclick="event.stopPropagation(); prevModalImage()">&#10094;</span>
+<div id="modal" class="modal" onclick="closeModal()">
+  <span class="arrow left" onclick="event.stopPropagation(); prevImage()">&#10094;</span>
   <img id="modal-img" src="" alt="Збільшене зображення">
-  <span class="arrow right" onclick="event.stopPropagation(); nextModalImage()">&#10095;</span>
+  <span class="arrow right" onclick="event.stopPropagation(); nextImage()">&#10095;</span>
 </div>
 
-<div id="toast" class="toast"></div>
-
 <script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 const images = [
   "images/ajax_hub_white_1.jpg",
   "images/ajax_hub_white_2.jpg",
@@ -226,64 +266,81 @@ const images = [
 ];
 let currentIndex = 0;
 
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 2500);
+}
+
+function addToCartFromProductPage(item) {
+  cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const existingItem = cart.find(i => i.id === item.id);
+  if (existingItem) existingItem.quantity++;
+  else { item.quantity = 1; cart.push(item); }
+  localStorage.setItem('cart', JSON.stringify(cart));
+  showToast(`${item.name} додано до кошика!`);
+}
+
 /* === Карусель === */
 function updateCarousel() {
-  document.getElementById('carousel').style.transform = `translateX(-${currentIndex * 100}%)`;
+  const carousel = document.getElementById('carousel');
+  carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
 }
+
 function nextImage() {
   currentIndex = (currentIndex + 1) % images.length;
   updateCarousel();
 }
+
 function prevImage() {
   currentIndex = (currentIndex - 1 + images.length) % images.length;
   updateCarousel();
 }
 
 /* === Модалка === */
-function openModal(index) {
-  currentIndex = index;
-  document.getElementById("modal-img").src = images[currentIndex];
-  document.getElementById("modal").style.display = "flex";
+function openModal(imageSrc) {
+  const modal = document.getElementById("modal");
+  const modalImg = document.getElementById("modal-img");
+  currentIndex = images.indexOf(imageSrc);
+  modalImg.src = imageSrc;
+  modal.style.display = "flex";
 }
+
 function closeModal() {
   document.getElementById("modal").style.display = "none";
 }
-document.getElementById("modal").addEventListener("click", (e) => {
-  if (e.target.id === "modal") closeModal();
-});
+
+// Свайп для карусели
+/* ✅ Новые функции для стрелок внутри модалки */
 function nextModalImage() {
   currentIndex = (currentIndex + 1) % images.length;
   document.getElementById("modal-img").src = images[currentIndex];
 }
+
 function prevModalImage() {
   currentIndex = (currentIndex - 1 + images.length) % images.length;
   document.getElementById("modal-img").src = images[currentIndex];
 }
 
-/* === Свайпы === */
+/* === Свайп для карусели === */
+const carousel = document.getElementById('carousel');
 let startX = 0;
-const modal = document.getElementById("modal");
-modal.addEventListener("touchstart", e => startX = e.touches[0].clientX, { passive: true });
-modal.addEventListener("touchend", e => {
+carousel.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
+carousel.addEventListener('touchend', (e) => {
   const endX = e.changedTouches[0].clientX;
-  const diff = endX - startX;
-  if (Math.abs(diff) > 50) {
-    if (diff > 0) prevModalImage();
-    else nextModalImage();
-  }
-}, { passive: true });
+  if (endX - startX > 50) prevImage();
+  if (startX - endX > 50) nextImage();
+});
 
-/* === Toast === */
-function showToast(msg) {
-  const toast = document.getElementById("toast");
-  toast.textContent = msg;
-  toast.classList.add("show");
-  setTimeout(() => toast.classList.remove("show"), 2000);
-}
-
-function addToCartFromProductPage(item) {
-  showToast(`${item.name} додано до кошика!`);
-}
+/* === Свайп для модалки === */
+const modal = document.getElementById("modal");
+modal.addEventListener("touchstart", (e) => startX = e.touches[0].clientX);
+modal.addEventListener("touchend", (e) => {
+  const endX = e.changedTouches[0].clientX;
+  if (endX - startX > 50) prevModalImage();
+  if (startX - endX > 50) nextModalImage();
+});
 </script>
 </body>
 </html>
