@@ -13,84 +13,145 @@
       background-color: #f4f4f4;
     }
 
+    .toast {
+      position: fixed;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      font-size: 1em;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.4s;
+      z-index: 9999;
+    }
+
+    .toast.show {
+      visibility: visible;
+      opacity: 1;
+    }
+
     .container {
-      max-width: 800px;
-      margin: 30px auto;
-      padding: 25px;
-      background: #fff;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      border-radius: 8px;
+      max-width: 830px;
+      margin: 20px auto;
+      padding: 30px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1.5s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
     }
 
     .product-title {
       text-align: center;
       font-size: 1.6em;
-      margin-bottom: 20px;
+      margin-top: 0;
+    }
+
+    /* === Карусель === */
+    .carousel-wrapper {
+      position: relative;
+      overflow: hidden;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .carousel {
+      display: flex;
+      transition: transform 0.5s ease;
     }
 
     .carousel img {
-      width: 100%;
+      flex: 0 0 100%;
       max-width: 100%;
-      border-radius: 6px;
+      border-radius: 5px;
       cursor: pointer;
       object-fit: contain;
-      margin-bottom: 10px;
     }
 
-    .product-description {
-      font-size: 1rem;
-      line-height: 1.6;
-      margin-top: 15px;
-      margin-left: 10px;
+    /* === Стрелки для десктопа === */
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      font-size: 2em;
+      padding: 8px 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      user-select: none;
+      display: none;
+      transition: background 0.3s;
+      z-index: 10;
     }
 
-    .product-description ul {
-      padding-left: 20px;
-      margin-top: 10px;
+    .carousel-arrow:hover {
+      background: rgba(0, 0, 0, 0.7);
     }
+
+    .carousel-arrow.left {
+      left: 10px;
+    }
+
+    .carousel-arrow.right {
+      right: 10px;
+    }
+
+    /* Стрелки видны только на десктопе */
+    @media (min-width: 768px) {
+      .carousel-arrow {
+        display: block;
+      }
+    }
+
+   .product-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 20px;
+  margin-bottom: 30px; /* отступ снизу перед ценой */
+  margin-left: 20px;   /* 👈 общий отступ слева */
+}
+
+.product-description ul {
+  padding-left: 20px;  /* 👈 небольшой внутренний отступ */
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+    .product-description li {
+      margin-bottom: 6px;
+    }
+
 
     .product-price {
       font-size: 1.8em;
       color: red;
       text-align: center;
-      margin: 20px 0;
+      margin: 15px 0;
     }
 
     .btn {
       display: block;
       background-color: #007bff;
       color: white;
+      padding: 10px 20px;
+      margin: 20px auto;
+      text-align: center;
       border: none;
       border-radius: 5px;
-      padding: 10px 20px;
-      margin: 0 auto;
       cursor: pointer;
       transition: background 0.3s;
     }
 
     .btn:hover {
       background-color: #0056b3;
-    }
-
-    .toast {
-      position: fixed;
-      top: 45%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(0,0,0,0.7);
-      color: #fff;
-      padding: 8px 14px;
-      border-radius: 5px;
-      font-size: 1em;
-      opacity: 0;
-      transition: opacity 0.4s;
-      z-index: 10000;
-      visibility: hidden;
-    }
-
-    .toast.show {
-      opacity: 1;
-      visibility: visible;
     }
 
     .modal {
@@ -103,17 +164,17 @@
       background: rgba(0,0,0,0.85);
       justify-content: center;
       align-items: center;
-      z-index: 1000;
+      z-index: 10000;
     }
 
     .modal img {
       max-width: 90%;
       max-height: 90%;
       border-radius: 10px;
-      transition: opacity 0.3s;
+      transition: transform 0.3s ease;
     }
 
-    .arrow {
+    .modal .arrow {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
@@ -122,14 +183,21 @@
       cursor: pointer;
       user-select: none;
       padding: 10px;
-      background: rgba(0,0,0,0.4);
-      border-radius: 50%;
     }
 
-    .arrow.left { left: 20px; }
-    .arrow.right { right: 20px; }
+    .modal .arrow.left { left: 20px; }
+    .modal .arrow.right { right: 20px; }
+    /* 🔧 Більший відступ для десктопів */
+@media (min-width: 1024px) {
+  .product-description {
+    margin-left: 80px;   /* більше місця зліва */
+    margin-right: 40px;  /* і трохи справа */
+  }
 
-    .arrow:hover { background: rgba(0,0,0,0.6); }
+  .product-description ul {
+    padding-left: 60px;  /* список відсунемо трохи правіше */
+  }
+}
   </style>
 </head>
 <body>
@@ -137,19 +205,24 @@
 <div class="container">
   <h2 class="product-title">Охоронний пристрій Ajax Hub (2G) White</h2>
 
-  <div class="carousel">
-    <img src="images/ajax_hub_white_1.jpg" alt="Hub White" onclick="openModal('images/ajax_hub_white_1.jpg')">
-    <img src="images/ajax_hub_white_2.jpg" alt="Hub White - інший вид" onclick="openModal('images/ajax_hub_white_2.jpg')">
-    <img src="images/ajax_hub_white_3.jpg" alt="Hub White - інший вид" onclick="openModal('images/ajax_hub_white_3.jpg')">
+  <div class="carousel-wrapper">
+    <div class="carousel" id="carousel">
+      <img src="images/ajax_hub_white_1.jpg" alt="Hub White" onclick="openModal('images/ajax_hub_white_1.jpg')">
+      <img src="images/ajax_hub_white_2.jpg" alt="Hub White - інший вид" onclick="openModal('images/ajax_hub_white_2.jpg')">
+      <img src="images/ajax_hub_white_3.jpg" alt="Hub White - інший вид" onclick="openModal('images/ajax_hub_white_3.jpg')">
+    </div>
+
+    <div class="carousel-arrow left" onclick="prevImage()">&#10094;</div>
+    <div class="carousel-arrow right" onclick="nextImage()">&#10095;</div>
   </div>
 
   <div id="toast" class="toast"></div>
 
-   <div class="product-description">
-        Бездротова централь з підтримкою Ethernet та SIM-карти (2G)
-        <br><br>
-        Характеристики:
-        <ul>
+  <div class="product-description">
+    Бездротова централь з підтримкою Ethernet та SIM-карти (2G)
+    <br><br>
+    <strong>Характеристики:</strong>
+    <ul>
             <li>Максимальна кількість пристроїв у системі: 100</li>
             <li>Зокрема, до 10 сирен та 1 ретранслятор радіосигналу.</li>
             <li>Максимальна кількість користувачів: 50</li>
@@ -167,9 +240,9 @@
             <li>Період опитування датчика — 12 - 300 секунд</li>
             <li>Канали зв'язку Ethernet, GSM (850/900/1800/1900 МГц GPRS)</li>
             <li>Підтримка SIM-карти micro SIM 2G</li>
-            <li>Строк гарантії 12 міс.</li>
-        </ul>
-    </div>
+
+    </ul>
+  </div>
 
   <p class="product-price">6700.00 грн</p>
   <button class="btn" onclick="addToCartFromProductPage({ id: 'Hub White', name: 'Ajax Hub White', price: 6700, image: 'images/ajax_hub_white_1.jpg' })">
@@ -178,9 +251,9 @@
 </div>
 
 <div id="modal" class="modal" onclick="closeModal()">
-  <span class="arrow left" onclick="event.stopPropagation(); prevModalImage()">&#10094;</span>
+  <span class="arrow left" onclick="event.stopPropagation(); prevImage()">&#10094;</span>
   <img id="modal-img" src="" alt="Збільшене зображення">
-  <span class="arrow right" onclick="event.stopPropagation(); nextModalImage()">&#10095;</span>
+  <span class="arrow right" onclick="event.stopPropagation(); nextImage()">&#10095;</span>
 </div>
 
 <script>
@@ -200,25 +273,45 @@ function showToast(message) {
 }
 
 function addToCartFromProductPage(item) {
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  const existing = cart.find(i => i.id === item.id);
-  if (existing) existing.quantity++;
+  cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const existingItem = cart.find(i => i.id === item.id);
+  if (existingItem) existingItem.quantity++;
   else { item.quantity = 1; cart.push(item); }
   localStorage.setItem('cart', JSON.stringify(cart));
   showToast(`${item.name} додано до кошика!`);
 }
 
+/* === Карусель === */
+function updateCarousel() {
+  const carousel = document.getElementById('carousel');
+  carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+
+function nextImage() {
+  currentIndex = (currentIndex + 1) % images.length;
+  updateCarousel();
+}
+
+function prevImage() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  updateCarousel();
+}
+
+/* === Модалка === */
 function openModal(imageSrc) {
+  const modal = document.getElementById("modal");
+  const modalImg = document.getElementById("modal-img");
   currentIndex = images.indexOf(imageSrc);
-  document.getElementById("modal-img").src = imageSrc;
-  document.getElementById("modal").style.display = "flex";
-  document.querySelectorAll('.arrow').forEach(a => a.style.display = (images.length > 1) ? 'block' : 'none');
+  modalImg.src = imageSrc;
+  modal.style.display = "flex";
 }
 
 function closeModal() {
   document.getElementById("modal").style.display = "none";
 }
 
+// Свайп для карусели
+/* ✅ Новые функции для стрелок внутри модалки */
 function nextModalImage() {
   currentIndex = (currentIndex + 1) % images.length;
   document.getElementById("modal-img").src = images[currentIndex];
@@ -229,20 +322,23 @@ function prevModalImage() {
   document.getElementById("modal-img").src = images[currentIndex];
 }
 
-// Свайп у модалці
+/* === Свайп для карусели === */
+const carousel = document.getElementById('carousel');
 let startX = 0;
-const modal = document.getElementById("modal");
-modal.addEventListener("touchstart", e => startX = e.touches[0].clientX);
-modal.addEventListener("touchend", e => {
+carousel.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
+carousel.addEventListener('touchend', (e) => {
   const endX = e.changedTouches[0].clientX;
-  if (endX - startX > 50) prevModalImage();
-  else if (startX - endX > 50) nextModalImage();
+  if (endX - startX > 50) prevImage();
+  if (startX - endX > 50) nextImage();
 });
 
-// Назад до категорії
-window.addEventListener('popstate', () => {
-  const lastCat = localStorage.getItem('lastCategory');
-  window.location.href = lastCat ? `index.html#${lastCat}` : 'index.html';
+/* === Свайп для модалки === */
+const modal = document.getElementById("modal");
+modal.addEventListener("touchstart", (e) => startX = e.touches[0].clientX);
+modal.addEventListener("touchend", (e) => {
+  const endX = e.changedTouches[0].clientX;
+  if (endX - startX > 50) prevModalImage();
+  if (startX - endX > 50) nextModalImage();
 });
 </script>
 </body>
