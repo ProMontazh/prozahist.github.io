@@ -464,12 +464,13 @@
             }
         }
         
-    </style>
+   </style>
+
 <header>
   <div class="logo">
     <svg xmlns="http://www.w3.org/2000/svg" width="220" height="70" viewBox="0 0 600 200">
       <defs>
-        <!-- Градієнт для хвилі -->
+        <!-- Анімований градієнт для хвилі -->
         <linearGradient id="gradient" x1="0%" y1="0%" x2="200%" y2="0%">
           <stop offset="0%" stop-color="#bbb" />
           <stop offset="20%" stop-color="#ffffff" />
@@ -477,18 +478,23 @@
           <stop offset="60%" stop-color="#ffffff" />
           <stop offset="80%" stop-color="#bbb" />
           <stop offset="100%" stop-color="#bbb" />
+
+          <!-- Анімація руху градієнта -->
+          <animate attributeName="x1" values="0%; -100%; 0%" dur="8s" repeatCount="indefinite" />
+          <animate attributeName="x2" values="200%; 100%; 200%" dur="8s" repeatCount="indefinite" />
         </linearGradient>
       </defs>
 
       <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#800000">
         ПРО
       </text>
+
       <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#808080">
         ЗАХИСТ
       </text>
 
-      <!-- Слоган з анімацією -->
-      <text class="slogan" x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="33">
+      <!-- Слоган з плавною хвилею -->
+      <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="33" fill="url(#gradient)">
         БЕЗДРОТОВІ СИСТЕМИ БЕЗПЕКИ
       </text>
 
@@ -498,64 +504,8 @@
       <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10" />
     </svg>
   </div>
-
-  <style>
-    /* Плавна хвиля градієнта */
-    .slogan {
-      fill: url(#gradient);
-      animation: waveMove 8s linear infinite;
-      /* повільна анімація */
-    }
-
-    @keyframes waveMove {
-      0% {
-        fill: url(#gradient);
-      }
-      50% {
-        fill: url(#gradient);
-      }
-      100% {
-        fill: url(#gradient);
-      }
-    }
-
-    /* Анімація руху градієнта */
-    @keyframes gradientShift {
-      0% {
-        x1: 0%;
-        x2: 200%;
-      }
-      50% {
-        x1: -100%;
-        x2: 100%;
-      }
-      100% {
-        x1: 0%;
-        x2: 200%;
-      }
-    }
-
-    /* Трюк: щоб рухалася хвиля — анімуємо градієнт через JS або SVG animateTransform */
-    #gradient {
-      animation: gradientMove 8s linear infinite;
-    }
-
-    @keyframes gradientMove {
-      0% {
-        x1: 0%;
-        x2: 200%;
-      }
-      50% {
-        x1: -100%;
-        x2: 100%;
-      }
-      100% {
-        x1: 0%;
-        x2: 200%;
-      }
-    }
-  </style>
 </header>
+
 
     <div id="toast" class="toast"></div>
     
@@ -1943,6 +1893,7 @@
     </script>
 </body>
 </html>
+
 
 
 
