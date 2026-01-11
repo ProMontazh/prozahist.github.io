@@ -463,22 +463,7 @@
                 background-position: center;
             }
         }
-        /* Базовий колір слогана */
-.slogan {
-  fill: url(#gradient);
-}
-
-/* Градієнт із хвилею */
-.logo svg defs {
-  animation: waveMove 6s linear infinite;
-}
-
-/* Анімація плавного руху хвилі */
-@keyframes waveMove {
-  0% { transform: translateX(-30%); }
-  50% { transform: translateX(30%); }
-  100% { transform: translateX(-30%); }
-}
+        
     </style>
 </head>
 <body>
@@ -499,7 +484,38 @@
     <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10"/>
   </svg>
 </div>
+<style>
+/* Базовий колір слогана */
+.slogan {
+  fill: url(#gradient);
+}
 
+/* Градієнт із хвилею */
+.logo svg defs {
+  animation: waveMove 6s linear infinite;
+}
+
+/* Анімація плавного руху хвилі */
+@keyframes waveMove {
+  0% { transform: translateX(-30%); }
+  50% { transform: translateX(30%); }
+  100% { transform: translateX(-30%); }
+}
+</style>
+
+<!-- SVG градієнт для ефекту хвилі -->
+<svg width="0" height="0">
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="200%" y2="0%">
+      <stop offset="0%" stop-color="#bbb"/>
+      <stop offset="20%" stop-color="#ffffff"/>
+      <stop offset="40%" stop-color="#bbb"/>
+      <stop offset="60%" stop-color="#ffffff"/>
+      <stop offset="80%" stop-color="#bbb"/>
+      <stop offset="100%" stop-color="#bbb"/>
+    </linearGradient>
+  </defs>
+</svg>
     </header>
 
     <div id="toast" class="toast"></div>
@@ -1888,6 +1904,7 @@
     </script>
 </body>
 </html>
+
 
 
 
