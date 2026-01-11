@@ -482,66 +482,17 @@
             <animate attributeName="offset" values="0; 1.65; 1.65" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
           </stop>
         </linearGradient>
-        
-        <!-- Градієнт для ПРО -->
-        <linearGradient id="pro-wave" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="-0.5" stop-color="#800000">
-            <animate attributeName="offset" values="-0.5; 1.5; 1.5" keyTimes="0; 0.5; 1" dur="1s" repeatCount="1" begin="9s; 24s" fill="freeze" />
-          </stop>
-          <stop offset="-0.25" stop-color="#ff4444">
-            <animate attributeName="offset" values="-0.25; 1.75; 1.75" keyTimes="0; 0.5; 1" dur="1s" repeatCount="1" begin="9s; 24s" fill="freeze" />
-          </stop>
-          <stop offset="0" stop-color="#800000">
-            <animate attributeName="offset" values="0; 2; 2" keyTimes="0; 0.5; 1" dur="1s" repeatCount="1" begin="9s; 24s" fill="freeze" />
-          </stop>
-        </linearGradient>
-        
-        <!-- Градієнт для ЗАХИСТ -->
-        <linearGradient id="zahist-wave" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="-0.5" stop-color="#808080">
-            <animate attributeName="offset" values="-0.5; 1.5; 1.5" keyTimes="0; 0.5; 1" dur="1.5s" repeatCount="1" begin="10s; 25s" fill="freeze" />
-          </stop>
-          <stop offset="-0.25" stop-color="#cccccc">
-            <animate attributeName="offset" values="-0.25; 1.75; 1.75" keyTimes="0; 0.5; 1" dur="1.5s" repeatCount="1" begin="10s; 25s" fill="freeze" />
-          </stop>
-          <stop offset="0" stop-color="#808080">
-            <animate attributeName="offset" values="0; 2; 2" keyTimes="0; 0.5; 1" dur="1.5s" repeatCount="1" begin="10s; 25s" fill="freeze" />
-          </stop>
-        </linearGradient>
-        
-        <!-- Градієнт для будинку -->
-        <linearGradient id="house-wave-red" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="-0.5" stop-color="#800000">
-            <animate attributeName="offset" values="-0.5; 1.5; 1.5" keyTimes="0; 0.5; 1" dur="1s" repeatCount="1" begin="11.5s; 26.5s" fill="freeze" />
-          </stop>
-          <stop offset="-0.25" stop-color="#ff4444">
-            <animate attributeName="offset" values="-0.25; 1.75; 1.75" keyTimes="0; 0.5; 1" dur="1s" repeatCount="1" begin="11.5s; 26.5s" fill="freeze" />
-          </stop>
-          <stop offset="0" stop-color="#800000">
-            <animate attributeName="offset" values="0; 2; 2" keyTimes="0; 0.5; 1" dur="1s" repeatCount="1" begin="11.5s; 26.5s" fill="freeze" />
-          </stop>
-        </linearGradient>
-        
-        <linearGradient id="house-wave-gray" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="-0.5" stop-color="#808080">
-            <animate attributeName="offset" values="-0.5; 1.5; 1.5" keyTimes="0; 0.5; 1" dur="1s" repeatCount="1" begin="11.5s; 26.5s" fill="freeze" />
-          </stop>
-          <stop offset="-0.25" stop-color="#cccccc">
-            <animate attributeName="offset" values="-0.25; 1.75; 1.75" keyTimes="0; 0.5; 1" dur="1s" repeatCount="1" begin="11.5s; 26.5s" fill="freeze" />
-          </stop>
-          <stop offset="0" stop-color="#808080">
-            <animate attributeName="offset" values="0; 2; 2" keyTimes="0; 0.5; 1" dur="1s" repeatCount="1" begin="11.5s; 26.5s" fill="freeze" />
-          </stop>
-        </linearGradient>
       </defs>
       
       <!-- Назва ПРО -->
-      <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#pro-wave)">
+      <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#800000">
+        <animate attributeName="fill" values="#800000; #ff4444; #800000; #800000; #800000; #800000" keyTimes="0; 0.05; 0.1; 0.4; 0.7; 1" dur="15s" repeatCount="indefinite" begin="9s" />
         ПРО
       </text>
       
       <!-- Назва ЗАХИСТ -->
-      <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#zahist-wave)">
+      <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#808080">
+        <animate attributeName="fill" values="#808080; #808080; #808080; #cccccc; #808080; #808080" keyTimes="0; 0.1; 0.15; 0.25; 0.35; 1" dur="15s" repeatCount="indefinite" begin="9s" />
         ЗАХИСТ
       </text>
       
@@ -551,12 +502,20 @@
       </text>
       
       <!-- Декор - дах -->
-      <line x1="483" y1="65" x2="523" y2="48" stroke="url(#house-wave-red)" stroke-width="10" />
-      <line x1="523" y1="48" x2="563" y2="65" stroke="url(#house-wave-red)" stroke-width="10" />
+      <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10">
+        <animate attributeName="stroke" values="#800000; #800000; #800000; #800000; #800000; #ff4444; #800000" keyTimes="0; 0.35; 0.4; 0.45; 0.5; 0.55; 0.6" dur="15s" repeatCount="indefinite" begin="9s" />
+      </line>
+      <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10">
+        <animate attributeName="stroke" values="#800000; #800000; #800000; #800000; #800000; #ff4444; #800000" keyTimes="0; 0.35; 0.4; 0.45; 0.5; 0.55; 0.6" dur="15s" repeatCount="indefinite" begin="9s" />
+      </line>
       
       <!-- Декор - стіни -->
-      <line x1="493" y1="70" x2="493" y2="100" stroke="url(#house-wave-gray)" stroke-width="10" />
-      <line x1="553" y1="70" x2="553" y2="100" stroke="url(#house-wave-gray)" stroke-width="10" />
+      <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10">
+        <animate attributeName="stroke" values="#808080; #808080; #808080; #808080; #808080; #cccccc; #808080" keyTimes="0; 0.35; 0.4; 0.45; 0.5; 0.55; 0.6" dur="15s" repeatCount="indefinite" begin="9s" />
+      </line>
+      <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10">
+        <animate attributeName="stroke" values="#808080; #808080; #808080; #808080; #808080; #cccccc; #808080" keyTimes="0; 0.35; 0.4; 0.45; 0.5; 0.55; 0.6" dur="15s" repeatCount="indefinite" begin="9s" />
+      </line>
     </svg>
   </div>
 </header>
@@ -1947,6 +1906,7 @@
     </script>
 </body>
 </html>
+
 
 
 
