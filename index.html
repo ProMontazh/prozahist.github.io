@@ -470,29 +470,52 @@
   <div class="logo">
     <svg xmlns="http://www.w3.org/2000/svg" width="220" height="70" viewBox="0 0 600 200">
       <defs>
-        <!-- Градієнт для хвилі -->
+        <!-- Градієнт для хвилі слогана -->
         <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="-0.3" stop-color="#bbbbbb">
-            <animate attributeName="offset" values="-0.3; 1; 1" keyTimes="0; 0.5; 1" dur="10s" repeatCount="indefinite" begin="3s" />
+            <animate attributeName="offset" values="-0.3; 1; 1" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
           </stop>
           <stop offset="-0.15" stop-color="#ffffff">
-            <animate attributeName="offset" values="-0.15; 1.5; 1.5" keyTimes="0; 0.5; 1" dur="10s" repeatCount="indefinite" begin="3s" />
+            <animate attributeName="offset" values="-0.15; 1.5; 1.5" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
           </stop>
           <stop offset="0" stop-color="#bbbbbb">
-            <animate attributeName="offset" values="0; 1.65; 1.65" keyTimes="0; 0.5; 1" dur="10s" repeatCount="indefinite" begin="3s" />
+            <animate attributeName="offset" values="0; 1.65; 1.65" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+          </stop>
+        </linearGradient>
+        
+        <!-- Градієнт для хвилі логотипу -->
+        <linearGradient id="logo-wave" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="-0.3" stop-color="#800000">
+            <animate attributeName="offset" values="-0.3; 1.2; 1.2" keyTimes="0; 0.5; 1" dur="3s" repeatCount="indefinite" begin="9s" />
+          </stop>
+          <stop offset="-0.15" stop-color="#ff4444">
+            <animate attributeName="offset" values="-0.15; 1.35; 1.35" keyTimes="0; 0.5; 1" dur="3s" repeatCount="indefinite" begin="9s" />
+          </stop>
+          <stop offset="0" stop-color="#800000">
+            <animate attributeName="offset" values="0; 1.5; 1.5" keyTimes="0; 0.5; 1" dur="3s" repeatCount="indefinite" begin="9s" />
+          </stop>
+        </linearGradient>
+        
+        <linearGradient id="logo-wave-gray" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="-0.3" stop-color="#808080">
+            <animate attributeName="offset" values="-0.3; 1.2; 1.2" keyTimes="0; 0.5; 1" dur="3s" repeatCount="indefinite" begin="9s" />
+          </stop>
+          <stop offset="-0.15" stop-color="#cccccc">
+            <animate attributeName="offset" values="-0.15; 1.35; 1.35" keyTimes="0; 0.5; 1" dur="3s" repeatCount="indefinite" begin="9s" />
+          </stop>
+          <stop offset="0" stop-color="#808080">
+            <animate attributeName="offset" values="0; 1.5; 1.5" keyTimes="0; 0.5; 1" dur="3s" repeatCount="indefinite" begin="9s" />
           </stop>
         </linearGradient>
       </defs>
       
       <!-- Назва ПРО -->
-      <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#800000">
-        <animate attributeName="fill" values="#800000; #ff4444; #800000; #800000; #800000; #800000; #800000; #800000; #800000; #800000" dur="10s" repeatCount="indefinite" begin="8s" />
+      <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#logo-wave)">
         ПРО
       </text>
       
       <!-- Назва ЗАХИСТ -->
-      <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#808080">
-        <animate attributeName="fill" values="#808080; #808080; #cccccc; #808080; #808080; #808080; #808080; #808080; #808080; #808080" dur="10s" repeatCount="indefinite" begin="8s" />
+      <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#logo-wave-gray)">
         ЗАХИСТ
       </text>
       
@@ -502,20 +525,12 @@
       </text>
       
       <!-- Декор - дах -->
-      <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10">
-        <animate attributeName="stroke" values="#800000; #800000; #800000; #ff4444; #800000; #800000; #800000; #800000; #800000; #800000" dur="10s" repeatCount="indefinite" begin="8s" />
-      </line>
-      <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10">
-        <animate attributeName="stroke" values="#800000; #800000; #800000; #ff4444; #800000; #800000; #800000; #800000; #800000; #800000" dur="10s" repeatCount="indefinite" begin="8s" />
-      </line>
+      <line x1="483" y1="65" x2="523" y2="48" stroke="url(#logo-wave)" stroke-width="10" />
+      <line x1="523" y1="48" x2="563" y2="65" stroke="url(#logo-wave)" stroke-width="10" />
       
       <!-- Декор - стіни -->
-      <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10">
-        <animate attributeName="stroke" values="#808080; #808080; #808080; #cccccc; #808080; #808080; #808080; #808080; #808080; #808080" dur="10s" repeatCount="indefinite" begin="8s" />
-      </line>
-      <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10">
-        <animate attributeName="stroke" values="#808080; #808080; #808080; #cccccc; #808080; #808080; #808080; #808080; #808080; #808080" dur="10s" repeatCount="indefinite" begin="8s" />
-      </line>
+      <line x1="493" y1="70" x2="493" y2="100" stroke="url(#logo-wave-gray)" stroke-width="10" />
+      <line x1="553" y1="70" x2="553" y2="100" stroke="url(#logo-wave-gray)" stroke-width="10" />
     </svg>
   </div>
 </header>
@@ -1906,6 +1921,7 @@
     </script>
 </body>
 </html>
+
 
 
 
