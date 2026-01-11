@@ -472,17 +472,14 @@
       <defs>
         <!-- Градієнт для хвилі -->
         <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#888" stop-opacity="0">
+          <stop offset="0%" stop-color="#888">
             <animate attributeName="offset" values="-0.5; 1; 1" keyTimes="0; 0.5; 1" dur="10s" repeatCount="indefinite" begin="4.5s" />
-            <animate attributeName="stop-opacity" values="0; 1" dur="0.5s" begin="3s" fill="freeze" />
           </stop>
-          <stop offset="15%" stop-color="#ffffff" stop-opacity="0">
+          <stop offset="15%" stop-color="#ffffff">
             <animate attributeName="offset" values="0; 1.5; 1.5" keyTimes="0; 0.5; 1" dur="10s" repeatCount="indefinite" begin="4.5s" />
-            <animate attributeName="stop-opacity" values="0; 1" dur="1.5s" begin="3s" fill="freeze" />
           </stop>
-          <stop offset="30%" stop-color="#888" stop-opacity="0">
+          <stop offset="30%" stop-color="#888">
             <animate attributeName="offset" values="0.15; 1.65; 1.65" keyTimes="0; 0.5; 1" dur="10s" repeatCount="indefinite" begin="4.5s" />
-            <animate attributeName="stop-opacity" values="0; 1" dur="0.5s" begin="3s" fill="freeze" />
           </stop>
         </linearGradient>
       </defs>
@@ -494,7 +491,8 @@
         ЗАХИСТ
       </text>
       <!-- Слоган з хвилею -->
-      <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="33" fill="#bbb" stroke="url(#wave-gradient)" stroke-width="2">
+      <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="33" fill="#bbb" stroke="url(#wave-gradient)" stroke-width="2" stroke-opacity="0">
+        <animate attributeName="stroke-opacity" values="0; 1" dur="1.5s" begin="3s" fill="freeze" />
         БЕЗДРОТОВІ СИСТЕМИ БЕЗПЕКИ
       </text>
       <!-- Декор -->
@@ -1891,6 +1889,7 @@
     </script>
 </body>
 </html>
+
 
 
 
