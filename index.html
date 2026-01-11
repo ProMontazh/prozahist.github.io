@@ -463,21 +463,43 @@
                 background-position: center;
             }
         }
+        /* Базовий колір слогана */
+.slogan {
+  fill: url(#gradient);
+}
+
+/* Градієнт із хвилею */
+.logo svg defs {
+  animation: waveMove 6s linear infinite;
+}
+
+/* Анімація плавного руху хвилі */
+@keyframes waveMove {
+  0% { transform: translateX(-30%); }
+  50% { transform: translateX(30%); }
+  100% { transform: translateX(-30%); }
+}
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">
-            <svg xmlns="http://www.w3.org/2000/svg" width="220" height="70" viewBox="0 0 600 200">
-                <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#800000">ПРО</text>
-                <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#808080">ЗАХИСТ</text>
-                <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="33" fill="#bbbbbb">БЕЗДРОТОВІ СИСТЕМИ БЕЗПЕКИ</text>
-                <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10"/>
-                <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10"/>
-                <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10"/>
-                <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10"/>
-            </svg>
-        </div>
+       <div class="logo">
+  <svg xmlns="http://www.w3.org/2000/svg" width="220" height="70" viewBox="0 0 600 200">
+    <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#800000">ПРО</text>
+    <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#808080">ЗАХИСТ</text>
+
+    <!-- Слоган з ефектом "біжучої хвилі" -->
+    <text class="slogan" x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="33">
+      БЕЗДРОТОВІ СИСТЕМИ БЕЗПЕКИ
+    </text>
+
+    <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10"/>
+    <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10"/>
+    <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10"/>
+    <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10"/>
+  </svg>
+</div>
+
     </header>
 
     <div id="toast" class="toast"></div>
@@ -1866,6 +1888,7 @@
     </script>
 </body>
 </html>
+
 
 
 
