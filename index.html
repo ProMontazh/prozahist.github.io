@@ -482,50 +482,36 @@
             <animate attributeName="offset" values="0; 1.65; 1.65" keyTimes="0; 0.5; 1" dur="10s" repeatCount="indefinite" begin="3s" />
           </stop>
         </linearGradient>
-        
-        <!-- Фільтр для світіння -->
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-          <feMerge>
-            <feMergeNode in="coloredBlur"/>
-            <feMergeNode in="SourceGraphic"/>
-          </feMerge>
-        </filter>
       </defs>
       
-      <!-- Група для назви з анімацією -->
-      <g>
-        <animate attributeName="opacity" values="1; 1; 1.5; 1" dur="2s" begin="8s" fill="freeze" />
-        
-        <!-- Назва -->
-        <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#800000" filter="url(#glow)">
-          <animate attributeName="fill" values="#800000; #ff0000; #800000" dur="2s" begin="8s" fill="freeze" />
-          ПРО
-        </text>
-        <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#808080" filter="url(#glow)">
-          <animate attributeName="fill" values="#808080; #cccccc; #808080" dur="2s" begin="8s" fill="freeze" />
-          ЗАХИСТ
-        </text>
-        
-        <!-- Декор -->
-        <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10" filter="url(#glow)">
-          <animate attributeName="stroke" values="#800000; #ff0000; #800000" dur="2s" begin="8s" fill="freeze" />
-        </line>
-        <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10" filter="url(#glow)">
-          <animate attributeName="stroke" values="#800000; #ff0000; #800000" dur="2s" begin="8s" fill="freeze" />
-        </line>
-        <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10" filter="url(#glow)">
-          <animate attributeName="stroke" values="#808080; #cccccc; #808080" dur="2s" begin="8s" fill="freeze" />
-        </line>
-        <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10" filter="url(#glow)">
-          <animate attributeName="stroke" values="#808080; #cccccc; #808080" dur="2s" begin="8s" fill="freeze" />
-        </line>
-      </g>
+      <!-- Назва -->
+      <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#800000">
+        <animate attributeName="fill" values="#800000; #a00000; #800000" dur="1.5s" begin="8s" repeatCount="indefinite" repeatDur="10s" />
+        ПРО
+      </text>
+      <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="#808080">
+        <animate attributeName="fill" values="#808080; #a0a0a0; #808080" dur="1.5s" begin="8s" repeatCount="indefinite" repeatDur="10s" />
+        ЗАХИСТ
+      </text>
       
       <!-- Слоган з хвилею -->
       <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="33" fill="url(#wave-gradient)">
         БЕЗДРОТОВІ СИСТЕМИ БЕЗПЕКИ
       </text>
+      
+      <!-- Декор -->
+      <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10">
+        <animate attributeName="stroke" values="#800000; #a00000; #800000" dur="1.5s" begin="8s" repeatCount="indefinite" repeatDur="10s" />
+      </line>
+      <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10">
+        <animate attributeName="stroke" values="#800000; #a00000; #800000" dur="1.5s" begin="8s" repeatCount="indefinite" repeatDur="10s" />
+      </line>
+      <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10">
+        <animate attributeName="stroke" values="#808080; #a0a0a0; #808080" dur="1.5s" begin="8s" repeatCount="indefinite" repeatDur="10s" />
+      </line>
+      <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10">
+        <animate attributeName="stroke" values="#808080; #a0a0a0; #808080" dur="1.5s" begin="8s" repeatCount="indefinite" repeatDur="10s" />
+      </line>
     </svg>
   </div>
 </header>
@@ -1915,6 +1901,7 @@
     </script>
 </body>
 </html>
+
 
 
 
