@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <title>Деталі товару - Ajax MultiTransmitter Black</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    /* ===== Toast ===== */
+     .toast {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 1.0em;
+    white-space: nowrap; /* Устанавливаем текст в одну строчку */        
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: 9999;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+}
+    /* ===== Контейнер ===== */
+    .container {
+      max-width: 830px;
+      margin: 20px auto;
+      padding: 30px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      animation: fadeIn 1.5s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .product-title {
+      text-align: center;
+      font-size: 1.6em;
+      margin-top: 0;
+    }
+
+    /* ===== Карусель ===== */
+    .carousel-wrapper {
+      position: relative;
+      overflow: hidden;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .carousel {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .carousel img {
+      flex: 0 0 100%;
+      max-width: 100%;
+      border-radius: 5px;
+      cursor: pointer;
+      object-fit: contain;
+    }
+
+    /* Стрілки для десктопу */
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      font-size: 2em;
+      padding: 8px 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.3s;
+      z-index: 10;
+      display: none;
+    }
+
+    .carousel-arrow:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .carousel-arrow.left { left: 10px; }
+    .carousel-arrow.right { right: 10px; }
+
+    /* ===== Опис ===== */
+    .product-description {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 20px 0 30px 20px;
+    }
+
+    .product-description ul {
+      padding-left: 20px;
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
+
+    .product-description li {
+      margin-bottom: 6px;
+    }
+
+    .product-price {
+      font-size: 1.8em;
+      color: red;
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .btn {
+      display: block;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      margin: 20px auto;
+      text-align: center;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+
+    /* ===== Модалка ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .modal .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3em;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+      padding: 10px;
+      z-index: 10001;
+    }
+
+    .modal .arrow.left { left: 20px; }
+    .modal .arrow.right { right: 20px; }
+
+    /* ===== Медіа-запити ===== */
+    @media (min-width: 768px) {
+      .carousel-arrow { display: block; }
+    }
+
+    @media (min-width: 1024px) {
+      .product-description {
+        margin-left: 80px;
+        margin-right: 40px;
+      }
+      .product-description ul {
+        padding-left: 60px;
+      }
+      .carousel img {
+        max-height: 420px; /* 👈 регулюй розмір тут */
+      }
+    }
+    @media (max-width: 767px) {
+  .product-description {
+    margin-left: 10px; /* 👈 уменьшаем отступ слева */
+  }
+
+  .product-description ul {
+    padding-left: 15px; /* 👈 уменьшаем отступ для списка */
+  }
+}
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 class="product-title">Бездротовий модуль MultiTransmitter Black</h2>
+
+  <div class="carousel-wrapper">
+    <div class="carousel" id="carousel">
+      <img src="images/ajax_multitransmitter_black_1.jpg" alt="MultiTransmitter Black" onclick="openModal('images/ajax_multitransmitter_black_1.jpg')">
+      <img src="images/ajax_multitransmitter_black_2.jpg" alt="MultiTransmitter Black - інший вид" onclick="openModal('images/ajax_multitransmitter_black_2.jpg')">
+     
+    </div>
+
+    <div class="carousel-arrow left" onclick="prevImage()">&#10094;</div>
+    <div class="carousel-arrow right" onclick="nextImage()">&#10095;</div>
+  </div>
+
+ <div class="product-description">
+  <p><strong>MultiTransmitter Black</strong> — бездротовий модуль для інтеграції до 18 сторонніх пристроїв у систему Ajax.</p>
+
+  <h3>Сумісність пристроїв</h3>
+
+  <h3>Зв’язок</h3>
+  <ul>
+    <li><strong>Технологія зв’язку:</strong> Jeweller — пропрієтарна бездротова технологія для передавання команд, тривог і подій.</li>
+    <li>Двосторонній зв’язок.</li>
+    <li>Передовий захист від саботажу.</li>
+    <li>Блокове шифрування з плаваючим ключем.</li>
+    <li>Миттєві сповіщення.</li>
+    <li>Дистанційне керування та налаштування в застосунках Ajax.</li>
+  </ul>
+
+  <p><strong>Діапазони радіочастот:</strong></p>
+  <ul>
+    
+    <li>868,0 – 868,6 МГц</li>
+    
+  </ul>
+  <ul>
+    <li><strong>Максимальна потужність (ERP):</strong> до 20 мВт</li>
+    <li><strong>Модуляція:</strong> GFSK</li>
+    <li><strong>Дальність зв’язку:</strong> до 2000 м (без перешкод)</li>
+    <li><strong>Шифрування:</strong> блокове з плаваючим ключем</li>
+    <li><strong>Радіочастотний гопінг:</strong> запобігає глушінню сигналу</li>
+  </ul>
+
+  <h3>Під’єднання дротових пристроїв</h3>
+  <ul>
+    <li><strong>Кількість зон:</strong> 18 дротових зон</li>
+    <li><strong>Тип підключення:</strong> NC, NO, EOL (до прошивки 2.13), NC, NO, EOL, 2EOL, 3EOL (після 2.13)</li>
+    <li><strong>Опір EOL резисторів:</strong>
+      <ul>
+        <li>1–7,5 кОм (до прошивки 2.13)</li>
+        <li>1–15 кОм для кожного резистора, сумарно до 30 кОм (після 2.13)</li>
+      </ul>
+    </li>
+    <li><strong>Довжина кабелю:</strong> до 400 м (перетин 0,22 мм²)</li>
+    <li><strong>Режими роботи:</strong> імпульсний, бістабільний</li>
+  </ul>
+
+  <h3>Типи подій</h3>
+  <p>До 15 типів подій дротових пристроїв:</p>
+  <ul>
+    <li>Тривога корпусу</li>
+    <li>Вторгнення</li>
+    <li>Пожежа</li>
+    <li>Невідкладна допомога</li>
+    <li>Тривожна кнопка</li>
+    <li>Газ</li>
+    <li>Несправність</li>
+    <li>Затоплення</li>
+    <li>Розбиття скла</li>
+    <li>Перевищено порогову температуру</li>
+    <li>Низька температура</li>
+    <li>Маскування</li>
+    <li>Код примусу (відкриття)</li>
+    <li>Вібрація</li>
+    <li>Інформаційний</li>
+  </ul>
+
+  <h3>Захист</h3>
+  <ul>
+    <li><strong>Тривога тампера:</strong> 2 тампери — сповіщають про спробу відкрити корпус чи відірвати від поверхні.</li>
+    <li><strong>Захист від підміни:</strong> автентифікація пристрою.</li>
+    <li><strong>Виявлення втрати зв’язку:</strong> до 36 с між хабом і модулем.</li>
+    <li><strong>Миттєве виявлення несправностей:</strong> для типів підключення EOL/2EOL/3EOL.</li>
+  </ul>
+
+  <h3>Живлення</h3>
+  <ul>
+    <li><strong>Основне живлення:</strong> 100–240 В~, 50/60 Гц</li>
+    <li><strong>Резервне живлення:</strong> 12 В⎓ (до 7 А·год), час заряджання до 30 годин</li>
+    <li><strong>Живлення під’єднаних пристроїв:</strong> 10,5–15 В⎓, сумарно до 1 А</li>
+    <li>Дві лінії живлення + одна лінія для пожежних датчиків.</li>
+  </ul>
+
+  <h3>Корпус</h3>
+  <ul>
+    <li><strong>Розміри:</strong> 192 × 238 × 100 мм</li>
+    <li><strong>Вага:</strong> 874 г (білий), 802 г (чорний)</li>
+    <li><strong>Робочі температури:</strong> −10 °C…+40 °C</li>
+    <li><strong>Вологість:</strong> до 75%</li>
+    <li><strong>Клас захисту:</strong> IP40, IK06</li>
+  </ul>
+
+  <h3>Комплектація</h3>
+  <ul>
+    <li>Плата MultiTransmitter Jeweller</li>
+    <li>Корпус</li>
+    <li>Кабель живлення</li>
+    <li>Кабель підключення акумулятора 12 В⎓</li>
+    <li>Монтажний комплект</li>
+    <li>Коротка інструкція</li>
+  </ul>
+
+  <h3>Гарантія</h3>
+  <p>12 місяці від дати продажу.</p>
+</div>
+
+
+  <p class="product-price">4900.00 грн</p>
+  <button class="btn" onclick="addToCartFromProductPage({ id: 'Ajax MultiTransmitter Black', name: 'MultiTransmitter Black', price: 4900, image: 'images/ajax_multitransmitter_black_1.jpg' })">
+    Додати у кошик
+  </button>
+</div>
+
+<div id="modal" class="modal" onclick="closeModal()">
+  <span class="arrow left" onclick="event.stopPropagation(); prevModalImage()">&#10094;</span>
+  <img id="modal-img" src="" alt="Збільшене зображення">
+  <span class="arrow right" onclick="event.stopPropagation(); nextModalImage()">&#10095;</span>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+const images = [
+  "images/ajax_multitransmitter_black_1.jpg",
+  "images/ajax_multitransmitter_black_2.jpg"
+
+];
+let currentIndex = 0;
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 2500);
+}
+
+function addToCartFromProductPage(item) {
+  cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const existingItem = cart.find(i => i.id === item.id);
+  if (existingItem) existingItem.quantity++;
+  else { item.quantity = 1; cart.push(item); }
+  localStorage.setItem('cart', JSON.stringify(cart));
+  showToast(`${item.name} додано до кошика!`);
+}
+
+/* === Карусель === */
+function updateCarousel() {
+  document.getElementById('carousel').style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+function nextImage() {
+  currentIndex = (currentIndex + 1) % images.length;
+  updateCarousel();
+}
+function prevImage() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  updateCarousel();
+}
+
+/* === Модалка === */
+function openModal(imageSrc) {
+  currentIndex = images.indexOf(imageSrc);
+  document.getElementById("modal-img").src = imageSrc;
+  document.getElementById("modal").style.display = "flex";
+}
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
+function nextModalImage() {
+  currentIndex = (currentIndex + 1) % images.length;
+  document.getElementById("modal-img").src = images[currentIndex];
+}
+function prevModalImage() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  document.getElementById("modal-img").src = images[currentIndex];
+}
+
+/* === Свайпи === */
+let startX = 0;
+const carousel = document.getElementById('carousel');
+carousel.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
+carousel.addEventListener('touchend', e => {
+  const diff = e.changedTouches[0].clientX - startX;
+  if (Math.abs(diff) > 50) diff > 0 ? prevImage() : nextImage();
+}, { passive: true });
+
+const modal = document.getElementById("modal");
+modal.addEventListener("touchstart", e => startX = e.touches[0].clientX, { passive: true });
+modal.addEventListener("touchend", e => {
+  const diff = e.changedTouches[0].clientX - startX;
+  if (Math.abs(diff) > 50) diff > 0 ? prevModalImage() : nextModalImage();
+}, { passive: true });
+</script>
+</body>
+</html>
