@@ -13,7 +13,7 @@
             overflow-x: hidden;
             background-color: #f4f4f4;
         }
-        
+
         header {
             position: fixed;
             top: 0;
@@ -26,12 +26,12 @@
             text-align: left;
             z-index: 1000;
         }
-        
+
         header .logo svg {
             height: 65px;
             width: auto;
         }
-        
+
         .toast {
             position: fixed;
             top: 45%;
@@ -92,7 +92,7 @@
         .product-item:hover {
             transform: scale(1.03);
         }
-        
+
         .product-item img {
             width: 100%;
             height: auto;
@@ -140,15 +140,15 @@
             font-size: 0.85em;
             margin-top: 0;
         }
-        
+
         .red {
             color: #800000;
         }
-        
+
         .black {
             color: #808080;
         }
-        
+
         .cart {
             position: fixed;
             top: 14px;
@@ -164,7 +164,7 @@
             gap: 6px;
             font-size: 16px;
         }
-        
+
         .cart-content {
             display: none;
             position: fixed;
@@ -184,7 +184,7 @@
             justify-content: space-between;
             margin-top: 10px;
         }
-        
+
         .checkout-button, .cancel-button {
             padding: 10px 16px;
             color: white;
@@ -198,35 +198,35 @@
             display: inline-block;
             cursor: pointer;
         }
-        
+
         .checkout-button {
             background-color: #4CAF50;
         }
-        
+
         .cancel-button {
             background-color: #f35363;
         }
-        
+
         .checkout-button:hover {
             background-color: #367c39;
         }
-        
+
         .cancel-button:hover {
             background-color: #d44150;
         }
-        
+
         .cart-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 10px;
         }
-        
+
         .quantity-control {
             display: flex;
             align-items: center;
         }
-        
+
         .quantity-btn {
             width: 30px;
             height: 30px;
@@ -242,11 +242,11 @@
             transition: background-color 0.3s;
             margin: 0 5px;
         }
-        
+
         .quantity-btn:hover {
             background-color: #0056b3;
         }
-        
+
         .quantity {
             font-size: 18px;
             padding: 0 10px;
@@ -287,7 +287,7 @@
             transition: transform 0.3s;
             box-sizing: border-box;
         }
-        
+
         .category-card:hover {
             transform: scale(1.05);
         }
@@ -402,7 +402,7 @@
                 padding: 0 5px;
                 box-sizing: border-box;
             }
-            
+
             .product-item {
                 width: 100%;
                 max-width: 400px;
@@ -463,7 +463,7 @@
                 background-position: center;
             }
         }
-        
+
  </style>
 
 <header>
@@ -527,9 +527,9 @@
     </svg>
   </div>
 </header>
-   
+
     <div id="toast" class="toast"></div>
-    
+
     <div class="cart" onclick="toggleCart()">🛒 Кошик (<span id="cart-count">0</span>)</div>
     <div class="cart-content" id="cart-content">
         <h2>Мій кошик</h2>
@@ -1074,7 +1074,7 @@
         <div class="product-item" onclick="openProductDetails('details_hub_9(Ajax MultiTransmitter White).html')">
             <img src="images/ajax_multitransmitter_white_1.jpg" alt="MultiTransmitter White">
             <h3>Бездротовий модуль Ajax MultiTransmitter White</h3>
-            
+
             <p>Інтеграція до 18 дротових пристроїв у систему Ajax, дальність зв'язку до 2000м</p>
             <p class="product-price">4900.00 грн</p>
             <button class="btn" onclick="addToCart(event, { 
@@ -1088,7 +1088,7 @@
         <div class="product-item" onclick="openProductDetails('details_hub_10(Ajax MultiTransmitter Black).html')">
             <img src="images/ajax_multitransmitter_black_1.jpg" alt="MultiTransmitter Black">
             <h3>Бездротовий модуль Ajax MultiTransmitter Black</h3>
-          
+
             <p>Інтеграція до 18 дротових пристроїв у систему Ajax, дальність зв'язку до 2000м</p>
             <p class="product-price">4900.00 грн</p>
             <button class="btn" onclick="addToCart(event, { 
@@ -1603,7 +1603,7 @@
             const totalPriceElement = document.getElementById('total-price');
             const cartCountElement = document.getElementById('cart-count');
             const stockWarning = document.getElementById('stock-warning');
-            
+
             if (!cartItems || !totalPriceElement || !cartCountElement || !stockWarning) return;
 
             cartItems.innerHTML = '';
@@ -1726,7 +1726,7 @@
             const cartContent = document.getElementById('cart-content');
             const cartButton = document.querySelector('.cart');
             if (!cartContent || !cartButton) return;
-            
+
             if (!cartContent.contains(ev.target) && !cartButton.contains(ev.target)) {
                 cartContent.style.display = 'none';
             }
@@ -1738,7 +1738,7 @@
         window.toggleCategory = function(catId, push = true) {
             // Ховаємо всі категорії товарів
             document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-            
+
             const target = document.getElementById(catId);
             if (!target) return;
 
@@ -1763,11 +1763,11 @@
         // Витягування ID продукту з URL
         function extractProductIdFromUrl(url) {
             if (!url) return '';
-            
+
             // Витягуємо ID з дужок, наприклад: details_indoor_2(IPC-C32EP).html
             const match = url.match(/\(([^)]+)\)/);
             if (match && match[1]) return match[1];
-            
+
             // Альтернативний спосіб - беремо ім'я файлу без розширення
             const filename = url.split('/').pop().split('?')[0].split('#')[0];
             return filename.replace(/\.[^.]+$/, '') || filename;
@@ -1775,7 +1775,7 @@
 
         window.openProductDetails = function(pageUrl) {
             const prodId = extractProductIdFromUrl(pageUrl);
-            
+
             // Зберігаємо поточну категорію та позицію прокрутки
             if (currentCategory) {
                 localStorage.setItem('lastCategory', currentCategory);
@@ -1798,19 +1798,19 @@
         function handleState(state) {
             const categories = document.getElementById('categories');
             const mainBanner = document.getElementById('main-banner');
-            
+
             // Ховаємо всі категорії товарів
             document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
 
             const catId = state ? state.category : null;
-            
+
             if (catId && document.getElementById(catId)) {
                 // Показуємо обрану категорію
                 const target = document.getElementById(catId);
                 target.style.display = 'block';
                 target.classList.add('fade-in');
                 currentCategory = catId;
-                
+
                 if (categories) categories.style.display = 'none';
                 if (mainBanner) mainBanner.style.display = 'none';
             } else {
@@ -1850,7 +1850,7 @@
         const hoverSound = document.getElementById('hover-sound');
         if (hoverSound) {
             hoverSound.volume = 0.4;
-            
+
             document.querySelectorAll('.category-card').forEach(card => {
                 card.addEventListener('mouseenter', () => {
                     hoverSound.currentTime = 0;
@@ -1882,7 +1882,7 @@
             const currentIndex = products.indexOf(activeProducts);
 
             const diff = touchEndX - touchStartX;
-            
+
             // Мінімальна відстань для спрацювання свайпу
             if (Math.abs(diff) < 50) return;
 
@@ -1891,7 +1891,7 @@
                 products.forEach(p => p.style.display = 'none');
                 products[currentIndex + 1].style.display = 'block';
                 products[currentIndex + 1].classList.add('fade-in');
-                
+
                 // Оновлюємо currentCategory та історію
                 const nextCatId = products[currentIndex + 1].id;
                 currentCategory = nextCatId;
@@ -1903,7 +1903,7 @@
                 products.forEach(p => p.style.display = 'none');
                 products[currentIndex - 1].style.display = 'block';
                 products[currentIndex - 1].classList.add('fade-in');
-                
+
                 // Оновлюємо currentCategory та історію
                 const prevCatId = products[currentIndex - 1].id;
                 currentCategory = prevCatId;
@@ -1914,92 +1914,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
