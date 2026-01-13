@@ -473,60 +473,116 @@
         <!-- 🌊 Хвиля для слогана -->
         <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="-0.3" stop-color="#999">
-            <animate attributeName="offset" values="-0.3; 1.3; 1.3; 1.3; -0.3; 1.3; 1.3" keyTimes="0; 0.125; 0.2; 0.45; 0.5; 0.625; 1" dur="30s" repeatCount="indefinite" begin="2s" />
+            <animate attributeName="offset"
+                     values="-0.3; 1.3; -0.3"
+                     keyTimes="0; 0.5; 1"
+                     dur="30s"
+                     repeatCount="indefinite"
+                     begin="0s" />
           </stop>
           <stop offset="-0.15" stop-color="#ffffff">
-            <animate attributeName="offset" values="-0.15; 1.45; 1.45; 1.45; -0.15; 1.45; 1.45" keyTimes="0; 0.125; 0.2; 0.45; 0.5; 0.625; 1" dur="30s" repeatCount="indefinite" begin="2s" />
+            <animate attributeName="offset"
+                     values="-0.15; 1.45; -0.15"
+                     keyTimes="0; 0.5; 1"
+                     dur="30s"
+                     repeatCount="indefinite"
+                     begin="0s" />
           </stop>
           <stop offset="0" stop-color="#999">
-            <animate attributeName="offset" values="0; 1.6; 1.6; 1.6; 0; 1.6; 1.6" keyTimes="0; 0.125; 0.2; 0.45; 0.5; 0.625; 1" dur="30s" repeatCount="indefinite" begin="2s" />
+            <animate attributeName="offset"
+                     values="0; 1.6; 0"
+                     keyTimes="0; 0.5; 1"
+                     dur="30s"
+                     repeatCount="indefinite"
+                     begin="0s" />
           </stop>
         </linearGradient>
+
         <!-- 🔴 Хвиля для ПРО -->
         <linearGradient id="pro-wave" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="-0.3" stop-color="#800000">
-            <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.25; 1" dur="4.2s" begin="22s; 52s; 82s; 112s; 142s" fill="freeze" />
+            <animate attributeName="offset"
+                     values="-0.3; 1.3; -0.3"
+                     dur="25s"
+                     repeatCount="indefinite"
+                     begin="5s" />
           </stop>
           <stop offset="-0.15" stop-color="#ff4444">
-            <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.25; 1" dur="4.2s" begin="22s; 52s; 82s; 112s; 142s" fill="freeze" />
+            <animate attributeName="offset"
+                     values="-0.15; 1.45; -0.15"
+                     dur="25s"
+                     repeatCount="indefinite"
+                     begin="5s" />
           </stop>
           <stop offset="0" stop-color="#800000">
-            <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.25; 1" dur="4.2s" begin="22s; 52s; 82s; 112s; 142s" fill="freeze" />
+            <animate attributeName="offset"
+                     values="0; 1.6; 0"
+                     dur="25s"
+                     repeatCount="indefinite"
+                     begin="5s" />
           </stop>
         </linearGradient>
-        <!-- ⚙️ Хвиля для ЗАХИСТ -->
+
+        <!-- ⚙️ Хвиля для ЗАХИСТ (задержка +0.7s) -->
         <linearGradient id="zahist-wave" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="-0.3" stop-color="#808080">
-            <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.25; 1" dur="5s" begin="22.7s; 52.7s; 82.7s; 112.7s; 142.7s" fill="freeze" />
+            <animate attributeName="offset"
+                     values="-0.3; 1.3; -0.3"
+                     dur="25s"
+                     repeatCount="indefinite"
+                     begin="5.7s" />
           </stop>
           <stop offset="-0.15" stop-color="#e0e0e0">
-            <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.25; 1" dur="5s" begin="22.7s; 52.7s; 82.7s; 112.7s; 142.7s" fill="freeze" />
+            <animate attributeName="offset"
+                     values="-0.15; 1.45; -0.15"
+                     dur="25s"
+                     repeatCount="indefinite"
+                     begin="5.7s" />
           </stop>
           <stop offset="0" stop-color="#808080">
-            <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.25; 1" dur="5s" begin="22.7s; 52.7s; 82.7s; 112.7s; 142.7s" fill="freeze" />
+            <animate attributeName="offset"
+                     values="0; 1.6; 0"
+                     dur="25s"
+                     repeatCount="indefinite"
+                     begin="5.7s" />
           </stop>
         </linearGradient>
       </defs>
+
       <!-- ПРО -->
-      <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#pro-wave)">
+      <text x="15" y="100" font-family="Open Sans, sans-serif"
+            font-weight="bold" font-size="74"
+            fill="url(#pro-wave)">
         ПРО
       </text>
+
       <!-- ЗАХИСТ -->
-      <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#zahist-wave)">
+      <text x="172" y="100" font-family="Open Sans, sans-serif"
+            font-weight="bold" font-size="74"
+            fill="url(#zahist-wave)">
         ЗАХИСТ
       </text>
+
       <!-- Слоган -->
-      <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="33" fill="url(#wave-gradient)">
+      <text x="15" y="160" font-family="Arial, sans-serif"
+            font-weight="bold" font-size="33"
+            fill="url(#wave-gradient)">
         БЕЗДРОТОВІ СИСТЕМИ БЕЗПЕКИ
       </text>
+
       <!-- Декор -->
-      <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10" />
-      <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10" />
-      <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10" />
-      <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10" />
+      <line x1="483" y1="65" x2="523" y2="48"
+            stroke="#800000" stroke-width="10" />
+      <line x1="523" y1="48" x2="563" y2="65"
+            stroke="#800000" stroke-width="10" />
+      <line x1="493" y1="70" x2="493" y2="100"
+            stroke="#808080" stroke-width="10" />
+      <line x1="553" y1="70" x2="553" y2="100"
+            stroke="#808080" stroke-width="10" />
     </svg>
   </div>
 </header>
+
 
     <div id="toast" class="toast"></div>
 
@@ -1914,3 +1970,4 @@
     </script>
 </body>
 </html>
+
