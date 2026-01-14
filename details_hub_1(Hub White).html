@@ -14,27 +14,28 @@
     }
 
     /* ===== Toast ===== */
-     .toast {
-    position: fixed;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.4);
-    color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 1.0em;
-    white-space: nowrap; /* Устанавливаем текст в одну строчку */        
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.5s;
-    z-index: 9999;
-}
+    .toast {
+      position: fixed;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.4);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      font-size: 1.0em;
+      white-space: nowrap;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.5s;
+      z-index: 9999;
+    }
 
-.toast.show {
-    visibility: visible;
-    opacity: 1;
-}
+    .toast.show {
+      visibility: visible;
+      opacity: 1;
+    }
+
     /* ===== Контейнер ===== */
     .container {
       max-width: 830px;
@@ -77,29 +78,53 @@
       object-fit: contain;
     }
 
-    /* Стрілки для десктопу */
+    /* Стрілки для десктопу - приховані */
     .carousel-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.5);
-      color: #fff;
-      font-size: 2em;
-      padding: 8px 12px;
-      border-radius: 50%;
-      cursor: pointer;
-      user-select: none;
-      transition: background 0.3s;
-      z-index: 10;
       display: none;
     }
 
-    .carousel-arrow:hover {
-      background: rgba(0, 0, 0, 0.7);
+    /* Горизонтальна прокрутка для десктопу */
+    .carousel-scroll {
+      display: none;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      padding: 10px 0;
+      scrollbar-width: thin;
+      scrollbar-color: #888 #f1f1f1;
     }
 
-    .carousel-arrow.left { left: 10px; }
-    .carousel-arrow.right { right: 10px; }
+    .carousel-scroll::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .carousel-scroll::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    .carousel-scroll::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+    }
+
+    .carousel-scroll::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+    .carousel-scroll img {
+      display: inline-block;
+      width: auto;
+      max-height: 420px;
+      margin-right: 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .carousel-scroll img:hover {
+      transform: scale(1.1);
+    }
 
     /* ===== Опис ===== */
     .product-description {
@@ -178,7 +203,13 @@
 
     /* ===== Медіа-запити ===== */
     @media (min-width: 768px) {
-      .carousel-arrow { display: block; }
+      /* Показуємо прокрутку замість каруселі */
+      .carousel-wrapper {
+        display: none;
+      }
+      .carousel-scroll {
+        display: block;
+      }
     }
 
     @media (min-width: 1024px) {
@@ -189,19 +220,16 @@
       .product-description ul {
         padding-left: 60px;
       }
-      .carousel img {
-        max-height: 420px; /* 👈 регулюй розмір тут */
+    }
+
+    @media (max-width: 767px) {
+      .product-description {
+        margin-left: 10px;
+      }
+      .product-description ul {
+        padding-left: 15px;
       }
     }
-    @media (max-width: 767px) {
-  .product-description {
-    margin-left: 10px; /* 👈 уменьшаем отступ слева */
-  }
-
-  .product-description ul {
-    padding-left: 15px; /* 👈 уменьшаем отступ для списка */
-  }
-}
 
   </style>
 </head>
@@ -210,6 +238,7 @@
 <div class="container">
   <h2 class="product-title">Охоронний пристрій Ajax Hub (2G) White</h2>
 
+  <!-- Карусель для мобільних (без змін) -->
   <div class="carousel-wrapper">
     <div class="carousel" id="carousel">
       <img src="images/ajax_hub_white_1.jpg" alt="Hub White" onclick="openModal('images/ajax_hub_white_1.jpg')">
@@ -221,31 +250,37 @@
     <div class="carousel-arrow right" onclick="nextImage()">&#10095;</div>
   </div>
 
+  <!-- Прокрутка для десктопу -->
+  <div class="carousel-scroll">
+    <img src="images/ajax_hub_white_1.jpg" alt="Hub White" onclick="openModal('images/ajax_hub_white_1.jpg')">
+    <img src="images/ajax_hub_white_2.jpg" alt="Hub White - інший вид" onclick="openModal('images/ajax_hub_white_2.jpg')">
+    <img src="images/ajax_hub_white_3.jpg" alt="Hub White - інший вид" onclick="openModal('images/ajax_hub_white_3.jpg')">
+  </div>
+
   <div id="toast" class="toast"></div>
 
-   <div class="product-description">
-    Бездротова централь з підтримкою Ethernet та SIM-карти (2G). Hub — ключовий елемент системи Ajax. Завдяки безпрецедентній дальності зв’язку централь підтримує до 100 бездротових пристроїв Ajax, а також забезпечує підвищену автономність, захист від саботажу та взаємоконтроль усіх елементів системи. Hub Jeweller змінює правила гри серед професійних систем безпеки. Пристрій готовий до роботи прямо з коробки, тому ви зможете легко налаштувати його в застосунках Ajax як на об’єкті, так і віддалено.
+  <div class="product-description">
+    Бездротова централь з підтримкою Ethernet та SIM-карти (2G). Hub — ключовий елемент системи Ajax. Завдяки безпрецедентній дальності зв'язку централь підтримує до 100 бездротових пристроїв Ajax, а також забезпечує підвищену автономність, захист від саботажу та взаємоконтроль усіх елементів системи. Hub Jeweller змінює правила гри серед професійних систем безпеки. Пристрій готовий до роботи прямо з коробки, тому ви зможете легко налаштувати його в застосунках Ajax як на об'єкті, так і віддалено.
     <br><br>
     <strong>Характеристики:</strong>
     <ul>
-            <li>Максимальна кількість пристроїв у системі: 100</li>
-            <li>Зокрема, до 10 сирен та 1 ретранслятор радіосигналу.</li>
-            <li>Максимальна кількість користувачів: 50</li>
-            <li>Групи охорони до 9</li>
-            <li>Кімнати до 50</li>
-            <li>Мобільні застосунки: iOS 13.0 і вище, Android 5.0 і вище</li>
-            <li>Час доставки сигналу тривоги: 0,15 с</li>
-            <li>Радіопротокол Jeweller</li>
-            <li>Дальність зв'язку з датчиками — до 2000 м на відкритому просторі</li>
-            <li>Двосторонній зв'язок між пристроями</li>
-            <li>Робочі частоти: 868,0 – 868,6 МГц</li>
-            <li>Резервне живлення Хаба від вбудованого акумулятора до 15 годин</li>          
-            <li>Саморегульована потужність радіосигналу — до 20 мВт</li>
-            <li>Блочне шифрування, засноване на алгоритмі AES</li>
-            <li>Період опитування датчика — 12 - 300 секунд</li>
-            <li>Канали зв'язку Ethernet, GSM (850/900/1800/1900 МГц GPRS)</li>
-            <li>Підтримка SIM-карти micro SIM 2G</li>
-
+      <li>Максимальна кількість пристроїв у системі: 100</li>
+      <li>Зокрема, до 10 сирен та 1 ретранслятор радіосигналу.</li>
+      <li>Максимальна кількість користувачів: 50</li>
+      <li>Групи охорони до 9</li>
+      <li>Кімнати до 50</li>
+      <li>Мобільні застосунки: iOS 13.0 і вище, Android 5.0 і вище</li>
+      <li>Час доставки сигналу тривоги: 0,15 с</li>
+      <li>Радіопротокол Jeweller</li>
+      <li>Дальність зв'язку з датчиками — до 2000 м на відкритому просторі</li>
+      <li>Двосторонній зв'язок між пристроями</li>
+      <li>Робочі частоти: 868,0 – 868,6 МГц</li>
+      <li>Резервне живлення Хаба від вбудованого акумулятора до 15 годин</li>          
+      <li>Саморегульована потужність радіосигналу — до 20 мВт</li>
+      <li>Блочне шифрування, засноване на алгоритмі AES</li>
+      <li>Період опитування датчика — 12 - 300 секунд</li>
+      <li>Канали зв'язку Ethernet, GSM (850/900/1800/1900 МГц GPRS)</li>
+      <li>Підтримка SIM-карти micro SIM 2G</li>
     </ul>
   </div>
 
@@ -286,7 +321,7 @@ function addToCartFromProductPage(item) {
   showToast(`${item.name} додано до кошика!`);
 }
 
-/* === Карусель === */
+/* === Карусель (для мобільних) === */
 function updateCarousel() {
   document.getElementById('carousel').style.transform = `translateX(-${currentIndex * 100}%)`;
 }
@@ -317,7 +352,7 @@ function prevModalImage() {
   document.getElementById("modal-img").src = images[currentIndex];
 }
 
-/* === Свайпи === */
+/* === Свайпи (для мобільних) === */
 let startX = 0;
 const carousel = document.getElementById('carousel');
 carousel.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
