@@ -794,16 +794,19 @@ document.getElementById('productForm').addEventListener('submit', e => {
   };
 
   let products = JSON.parse(localStorage.getItem(STORAGE_KEYS.products)) || [];
-  const editIndex = document.getElementById('editProductIndex').value;
+ const editIndex = document.getElementById('editProductIndex').value;
 
-  if (editIndex) {
-    products[editIndex] = product;
+if (editIndex !== '') { // перевіряємо, що рядок не порожній
+    products[parseInt(editIndex)] = product; // перетворюємо на число
     alert('✅ Товар оновлено!');
-  } else {
-    if (products.some(p => p.id === product.id)) return alert('❌ Товар з таким ID вже існує!');
+} else {
+    if (products.some(p => p.id === product.id)) {
+        return alert('❌ Товар з таким ID вже існує!');
+    }
     products.push(product);
     alert('✅ Товар додано!');
-  }
+}
+
 
   localStorage.setItem(STORAGE_KEYS.products, JSON.stringify(products));
   closeProductModal();
