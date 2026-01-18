@@ -610,7 +610,7 @@
 // ===== КОНФІГУРАЦІЯ =====
 const ADMIN_CREDENTIALS = {
   username: 'admin',
-  password: 'ProZakhyst'  // ЗМІНІТЬ НА СВІЙ ПАРОЛЬ!
+  password: 'ProZakhyst' // 🔐 ЗМІНІТЬ НА СВІЙ ПАРОЛЬ
 };
 
 const STORAGE_KEYS = {
@@ -622,16 +622,15 @@ const STORAGE_KEYS = {
 
 // ===== АВТОРИЗАЦІЯ =====
 function checkAuth() {
-  const isLoggedIn = localStorage.getItem(STORAGE_KEYS.auth);
-  if (isLoggedIn === 'true') {
+  if (localStorage.getItem(STORAGE_KEYS.auth) === 'true') {
     showAdminPanel();
   }
 }
 
-document.getElementById('loginForm').addEventListener('submit', function(e) {
+document.getElementById('loginForm').addEventListener('submit', e => {
   e.preventDefault();
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
 
   if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
     localStorage.setItem(STORAGE_KEYS.auth, 'true');
@@ -658,21 +657,18 @@ function showAdminPanel() {
 }
 
 // ===== ВКЛАДКИ =====
-function showTab(tabName) {
-  document.querySelectorAll('.tab-content').forEach(tab => {
-    tab.classList.remove('active');
-  });
-  document.querySelectorAll('.tab').forEach(tab => {
-    tab.classList.remove('active');
-  });
+function showTab(tabName, el) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(`${tabName}-tab`).classList.add('active');
+  if (el) el.classList.add('active');
 
-  document.getElementById(tabName + '-tab').classList.add('active');
-  event.target.classList.add('active');
-
-  if (tabName === 'dashboard') loadStats();
-  if (tabName === 'categories') loadCategories();
-  if (tabName === 'products') loadProducts();
-  if (tabName === 'orders') loadOrders();
+  switch (tabName) {
+    case 'dashboard': loadStats(); break;
+    case 'categories': loadCategories(); break;
+    case 'products': loadProducts(); break;
+    case 'orders': loadOrders(); break;
+  }
 }
 
 // ===== СТАТИСТИКА =====
@@ -680,53 +676,31 @@ function loadStats() {
   const categories = JSON.parse(localStorage.getItem(STORAGE_KEYS.categories)) || [];
   const products = JSON.parse(localStorage.getItem(STORAGE_KEYS.products)) || [];
   const orders = JSON.parse(localStorage.getItem(STORAGE_KEYS.orders)) || [];
-  
-  const totalRevenue = orders.reduce((sum, order) => sum + (order.total || 0), 0);
+  const totalRevenue = orders.reduce((sum, o) => sum + (o.total || 0), 0);
 
-  const html = `
-    <div class="stat-card">
-      <div class="number">${categories.length}</div>
-      <div class="label">Категорій</div>
-    </div>
-    <div class="stat-card">
-      <div class="number">${products.length}</div>
-      <div class="label">Товарів</div>
-    </div>
-    <div class="stat-card">
-      <div class="number">${orders.length}</div>
-      <div class="label">Замовлень</div>
-    </div>
-    <div class="stat-card">
-      <div class="number">${totalRevenue.toFixed(2)}</div>
-      <div class="label">Дохід (грн)</div>
-    </div>
+  document.getElementById('statsGrid').innerHTML = `
+    <div class="stat-card"><div class="number">${categories.length}</div><div class="label">Категорій</div></div>
+    <div class="stat-card"><div class="number">${products.length}</div><div class="label">Товарів</div></div>
+    <div class="stat-card"><div class="number">${orders.length}</div><div class="label">Замовлень</div></div>
+    <div class="stat-card"><div class="number">${totalRevenue.toFixed(2)}</div><div class="label">Дохід (грн)</div></div>
   `;
-
-  document.getElementById('statsGrid').innerHTML = html;
 }
 
 // ===== КАТЕГОРІЇ =====
-document.getElementById('categoryForm').addEventListener('submit', function(e) {
+document.getElementById('categoryForm').addEventListener('submit', e => {
   e.preventDefault();
-  
-  const category = {
-    id: document.getElementById('categoryId').value.trim(),
-    name: document.getElementById('categoryName').value.trim()
-  };
+  const id = document.getElementById('categoryId').value.trim();
+  const name = document.getElementById('categoryName').value.trim();
+
+  if (!id || !name) return alert('⚠️ Вкажіть ID та назву категорії.');
 
   let categories = JSON.parse(localStorage.getItem(STORAGE_KEYS.categories)) || [];
-  
-  // Перевірка на дублікат
-  if (categories.find(c => c.id === category.id)) {
-    alert('❌ Категорія з таким ID вже існує!');
-    return;
-  }
+  if (categories.some(c => c.id === id)) return alert('❌ Категорія з таким ID вже існує!');
 
-  categories.push(category);
+  categories.push({ id, name });
   localStorage.setItem(STORAGE_KEYS.categories, JSON.stringify(categories));
-
-  alert('✅ Категорію додано успішно!');
-  this.reset();
+  e.target.reset();
+  alert('✅ Категорію додано!');
   loadCategories();
   loadStats();
 });
@@ -734,123 +708,99 @@ document.getElementById('categoryForm').addEventListener('submit', function(e) {
 function loadCategories() {
   const categories = JSON.parse(localStorage.getItem(STORAGE_KEYS.categories)) || [];
   const products = JSON.parse(localStorage.getItem(STORAGE_KEYS.products)) || [];
-  const categoriesList = document.getElementById('categoriesList');
+  const list = document.getElementById('categoriesList');
 
-  if (categories.length === 0) {
-    categoriesList.innerHTML = `
-      <div class="empty-state" style="grid-column: 1 / -1;">
-        <p>📁 Категорій поки немає</p>
-      </div>
-    `;
+  if (!categories.length) {
+    list.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><p>📁 Категорій поки немає</p></div>`;
     return;
   }
 
-  let html = '';
-  categories.forEach((category, index) => {
-    const productCount = products.filter(p => p.category === category.id).length;
-    
-    html += `
+  list.innerHTML = categories.map((c, i) => {
+    const count = products.filter(p => p.category === c.id).length;
+    return `
       <div class="category-card">
-        <h3>${category.name}</h3>
-        <div class="product-count">📦 Товарів: ${productCount}</div>
+        <h3>${c.name}</h3>
+        <div class="product-count">📦 Товарів: ${count}</div>
         <div class="action-buttons">
-          <button class="btn btn-danger" onclick="deleteCategory(${index}, '${category.id}')">🗑️ Видалити</button>
+          <button class="btn btn-danger" onclick="deleteCategory(${i}, '${c.id}')">🗑️ Видалити</button>
         </div>
-      </div>
-    `;
-  });
+      </div>`;
+  }).join('');
 
-  categoriesList.innerHTML = html;
   updateCategoryDropdown();
 }
 
 function updateCategoryDropdown() {
   const categories = JSON.parse(localStorage.getItem(STORAGE_KEYS.categories)) || [];
-  const select = document.getElementById('productCategory');
-  
-  let options = '<option value="">Оберіть категорію</option>';
-  categories.forEach(cat => {
-    options += `<option value="${cat.id}">${cat.name}</option>`;
-  });
-  
-  select.innerHTML = options;
+  document.getElementById('productCategory').innerHTML =
+    `<option value="">Оберіть категорію</option>` +
+    categories.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
 }
 
-function deleteCategory(index, categoryId) {
+function deleteCategory(index, id) {
   const products = JSON.parse(localStorage.getItem(STORAGE_KEYS.products)) || [];
-  const hasProducts = products.some(p => p.category === categoryId);
+  if (products.some(p => p.category === id)) return alert('❌ Спочатку видаліть товари з цієї категорії!');
+  if (!confirm('Видалити категорію?')) return;
 
-  if (hasProducts) {
-    alert('❌ Неможливо видалити категорію, яка містить товари!');
-    return;
-  }
-
-  if (confirm('Ви впевнені, що хочете видалити цю категорію?')) {
-    let categories = JSON.parse(localStorage.getItem(STORAGE_KEYS.categories)) || [];
-    categories.splice(index, 1);
-    localStorage.setItem(STORAGE_KEYS.categories, JSON.stringify(categories));
-    loadCategories();
-    loadStats();
-  }
+  let categories = JSON.parse(localStorage.getItem(STORAGE_KEYS.categories)) || [];
+  categories.splice(index, 1);
+  localStorage.setItem(STORAGE_KEYS.categories, JSON.stringify(categories));
+  loadCategories();
+  loadStats();
 }
 
 // ===== ТОВАРИ =====
 function openProductModal(index = null) {
-  document.getElementById('productModal').style.display = 'block';
-  document.getElementById('productForm').reset();
+  const modal = document.getElementById('productModal');
+  const form = document.getElementById('productForm');
+  form.reset();
   document.getElementById('editProductIndex').value = '';
-  document.getElementById('modalTitle').textContent = 'Додати товар';
+  document.getElementById('modalTitle').textContent = index === null ? 'Додати товар' : 'Редагувати товар';
 
   if (index !== null) {
     const products = JSON.parse(localStorage.getItem(STORAGE_KEYS.products)) || [];
-    const product = products[index];
-    
-    document.getElementById('modalTitle').textContent = 'Редагувати товар';
+    const p = products[index];
+    form.productId.value = p.id;
+    form.productName.value = p.name;
+    form.productCategory.value = p.category;
+    form.productDescription.value = p.description;
+    form.productPrice.value = p.price;
+    form.productImage.value = p.image;
+    form.productDetailsPage.value = p.detailsPage || '';
+    form.productImages.value = (p.images || []).join(', ');
     document.getElementById('editProductIndex').value = index;
-    document.getElementById('productId').value = product.id;
-    document.getElementById('productName').value = product.name;
-    document.getElementById('productCategory').value = product.category;
-    document.getElementById('productDescription').value = product.description;
-    document.getElementById('productPrice').value = product.price;
-    document.getElementById('productImage').value = product.image;
-    document.getElementById('productDetailsPage').value = product.detailsPage || '';
-    document.getElementById('productImages').value = product.images ? product.images.join(', ') : '';
   }
 
   updateCategoryDropdown();
+  modal.style.display = 'block';
 }
 
 function closeProductModal() {
   document.getElementById('productModal').style.display = 'none';
 }
 
-document.getElementById('productForm').addEventListener('submit', function(e) {
+document.getElementById('productForm').addEventListener('submit', e => {
   e.preventDefault();
-  
+  const form = e.target;
   const product = {
-    id: document.getElementById('productId').value.trim(),
-    name: document.getElementById('productName').value.trim(),
-    category: document.getElementById('productCategory').value,
-    description: document.getElementById('productDescription').value.trim(),
-    price: parseFloat(document.getElementById('productPrice').value),
-    image: document.getElementById('productImage').value.trim(),
-    detailsPage: document.getElementById('productDetailsPage').value.trim() || null,
-    images: document.getElementById('productImages').value.split(',').map(img => img.trim()).filter(img => img)
+    id: form.productId.value.trim(),
+    name: form.productName.value.trim(),
+    category: form.productCategory.value,
+    description: form.productDescription.value.trim(),
+    price: parseFloat(form.productPrice.value),
+    image: form.productImage.value.trim(),
+    detailsPage: form.productDetailsPage.value.trim() || null,
+    images: form.productImages.value.split(',').map(x => x.trim()).filter(x => x)
   };
 
   let products = JSON.parse(localStorage.getItem(STORAGE_KEYS.products)) || [];
   const editIndex = document.getElementById('editProductIndex').value;
 
-  if (editIndex !== '') {
-    // Редагування
+  if (editIndex) {
     products[editIndex] = product;
     alert('✅ Товар оновлено!');
   } else {
-    // Додавання нового
-    if (products.find(p => p.id === product.id)) {
-      alert('❌ Товар з таким ID вже існує!');
-      return;
-    }
+    if (products.some(p => p.id === product.id)) return alert('❌ Товар з таким ID вже існує!');
     products.push(product);
     alert('✅ Товар додано!');
   }
@@ -866,75 +816,46 @@ function loadProducts() {
   const categories = JSON.parse(localStorage.getItem(STORAGE_KEYS.categories)) || [];
   const tbody = document.getElementById('productsTableBody');
 
-  if (products.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 40px; color: #999;">📦 Товарів поки немає</td></tr>';
+  if (!products.length) {
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:40px;color:#999">📦 Товарів поки немає</td></tr>`;
     return;
   }
 
-  let html = '';
-  products.forEach((product, index) => {
-    const category = categories.find(c => c.id === product.category);
-    const categoryName = category ? category.name : 'Без категорії';
-
-    html += `
-      <tr data-product-id="${product.id}" data-product-name="${product.name.toLowerCase()}">
-        <td><img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/60'"></td>
-        <td><code>${product.id}</code></td>
-        <td><strong>${product.name}</strong></td>
-        <td>${categoryName}</td>
-        <td><strong>${product.price} грн</strong></td>
+  tbody.innerHTML = products.map((p, i) => {
+    const cat = categories.find(c => c.id === p.category);
+    return `
+      <tr data-product-id="${p.id}" data-product-name="${p.name.toLowerCase()}">
+        <td><img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/60'"></td>
+        <td><code>${p.id}</code></td>
+        <td><strong>${p.name}</strong></td>
+        <td>${cat ? cat.name : 'Без категорії'}</td>
+        <td><strong>${p.price} грн</strong></td>
         <td>
           <div class="action-buttons">
-            <button class="btn btn-edit" onclick="openProductModal(${index})">✏️ Редагувати</button>
-            <button class="btn btn-danger" onclick="deleteProduct(${index})">🗑️</button>
+            <button class="btn btn-edit" onclick="openProductModal(${i})">✏️</button>
+            <button class="btn btn-danger" onclick="deleteProduct(${i})">🗑️</button>
           </div>
         </td>
-      </tr>
-    `;
-  });
-
-  tbody.innerHTML = html;
+      </tr>`;
+  }).join('');
 }
 
 function filterProducts() {
-  const searchText = document.getElementById('productSearch').value.toLowerCase();
-  const rows = document.querySelectorAll('#productsTableBody tr');
-
-  rows.forEach(row => {
-    const productName = row.dataset.productName || '';
-    const productId = row.dataset.productId || '';
-    
-    if (productName.includes(searchText) || productId.includes(searchText)) {
-      row.style.display = '';
-    } else {
-      row.style.display = 'none';
-    }
-  });
-}
-
-  const searchText = document.getElementById('productSearch').value.toLowerCase();
-  const rows = document.querySelectorAll('#productsTableBody tr');
-
-  rows.forEach(row => {
-    const productName = row.dataset.productName || '';
-    const productId = row.dataset.productId || '';
-    
-    if (productName.includes(searchText) || productId.includes(searchText)) {
-      row.style.display = '';
-    } else {
-      row.style.display = 'none';
-    }
+  const text = document.getElementById('productSearch').value.toLowerCase();
+  document.querySelectorAll('#productsTableBody tr').forEach(row => {
+    const name = row.dataset.productName || '';
+    const id = row.dataset.productId || '';
+    row.style.display = (name.includes(text) || id.includes(text)) ? '' : 'none';
   });
 }
 
 function deleteProduct(index) {
-  if (confirm('Ви впевнені, що хочете видалити цей товар?')) {
-    let products = JSON.parse(localStorage.getItem(STORAGE_KEYS.products)) || [];
-    products.splice(index, 1);
-    localStorage.setItem(STORAGE_KEYS.products, JSON.stringify(products));
-    loadProducts();
-    loadStats();
-  }
+  if (!confirm('Видалити цей товар?')) return;
+  let products = JSON.parse(localStorage.getItem(STORAGE_KEYS.products)) || [];
+  products.splice(index, 1);
+  localStorage.setItem(STORAGE_KEYS.products, JSON.stringify(products));
+  loadProducts();
+  loadStats();
 }
 
 // ===== ЗАМОВЛЕННЯ =====
@@ -942,71 +863,55 @@ function loadOrders() {
   const orders = JSON.parse(localStorage.getItem(STORAGE_KEYS.orders)) || [];
   const tbody = document.getElementById('ordersTableBody');
 
-  if (orders.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 40px; color: #999;">🛒 Замовлень поки немає</td></tr>';
+  if (!orders.length) {
+    tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:40px;color:#999">🛒 Замовлень поки немає</td></tr>`;
     return;
   }
 
-  let html = '';
-  orders.forEach((order, index) => {
-    const itemsCount = order.items.reduce((sum, item) => sum + item.quantity, 0);
-    const orderDate = order.date ? new Date(order.date).toLocaleDateString('uk-UA') : 'Невідомо';
-
-    html += `
+  tbody.innerHTML = orders.map((o, i) => {
+    const count = o.items.reduce((s, x) => s + x.quantity, 0);
+    const date = o.date ? new Date(o.date).toLocaleDateString('uk-UA') : '—';
+    return `
       <tr>
-        <td><strong>#${index + 1}</strong></td>
-        <td>${orderDate}</td>
-        <td>${order.customerName}</td>
-        <td>${order.customerPhone}</td>
-        <td>${order.customerAddress || '—'}</td>
-        <td>${itemsCount} шт.</td>
-        <td><strong>${order.total} грн</strong></td>
+        <td><strong>#${i + 1}</strong></td>
+        <td>${date}</td>
+        <td>${o.customerName}</td>
+        <td>${o.customerPhone}</td>
+        <td>${o.customerAddress || '—'}</td>
+        <td>${count} шт.</td>
+        <td><strong>${o.total} грн</strong></td>
         <td>
           <div class="action-buttons">
-            <button class="btn btn-primary" onclick="viewOrder(${index})">👁️ Переглянути</button>
-            <button class="btn btn-danger" onclick="deleteOrder(${index})">🗑️</button>
+            <button class="btn btn-primary" onclick="viewOrder(${i})">👁️</button>
+            <button class="btn btn-danger" onclick="deleteOrder(${i})">🗑️</button>
           </div>
         </td>
-      </tr>
-    `;
-  });
-
-  tbody.innerHTML = html;
+      </tr>`;
+  }).join('');
 }
 
-function viewOrder(index) {
-  const orders = JSON.parse(localStorage.getItem(STORAGE_KEYS.orders)) || [];
-  const order = orders[index];
-  
-  let items = order.items.map(item => 
-    `• ${item.name} x${item.quantity} = ${item.price * item.quantity} грн`
-  ).join('\n');
-  
+function viewOrder(i) {
+  const o = JSON.parse(localStorage.getItem(STORAGE_KEYS.orders))[i];
   alert(`
-📋 ЗАМОВЛЕННЯ #${index + 1}
-
-👤 Клієнт: ${order.customerName}
-📞 Телефон: ${order.customerPhone}
-📍 Адреса: ${order.customerAddress || 'Не вказано'}
-
-📦 ТОВАРИ:
-${items}
-
-💰 ЗАГАЛЬНА СУМА: ${order.total} грн
-  `);
+📋 ЗАМОВЛЕННЯ #${i + 1}
+👤 ${o.customerName}
+📞 ${o.customerPhone}
+📍 ${o.customerAddress || '—'}
+---------------------
+${o.items.map(it => `• ${it.name} x${it.quantity} = ${it.price * it.quantity} грн`).join('\n')}
+💰 Всього: ${o.total} грн`);
 }
 
-function deleteOrder(index) {
-  if (confirm('Видалити це замовлення?')) {
-    let orders = JSON.parse(localStorage.getItem(STORAGE_KEYS.orders)) || [];
-    orders.splice(index, 1);
-    localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(orders));
-    loadOrders();
-    loadStats();
-  }
+function deleteOrder(i) {
+  if (!confirm('Видалити це замовлення?')) return;
+  let o = JSON.parse(localStorage.getItem(STORAGE_KEYS.orders)) || [];
+  o.splice(i, 1);
+  localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(o));
+  loadOrders();
+  loadStats();
 }
 
-// ===== ЕКСПОРТ ДАНИХ =====
+// ===== ІМПОРТ / ЕКСПОРТ =====
 function exportData() {
   const data = {
     categories: JSON.parse(localStorage.getItem(STORAGE_KEYS.categories)) || [],
@@ -1014,68 +919,48 @@ function exportData() {
     orders: JSON.parse(localStorage.getItem(STORAGE_KEYS.orders)) || [],
     exportDate: new Date().toISOString()
   };
-
-  const dataStr = JSON.stringify(data, null, 2);
-  const dataBlob = new Blob([dataStr], { type: 'application/json' });
-  const url = URL.createObjectURL(dataBlob);
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const link = document.createElement('a');
-  link.href = url;
+  link.href = URL.createObjectURL(blob);
   link.download = `prozahist-backup-${new Date().toISOString().split('T')[0]}.json`;
   link.click();
-  URL.revokeObjectURL(url);
 }
 
 function importData() {
   const input = document.createElement('input');
   input.type = 'file';
   input.accept = 'application/json';
-  
-  input.onchange = function(e) {
+  input.onchange = e => {
     const file = e.target.files[0];
     const reader = new FileReader();
-    
-    reader.onload = function(event) {
+    reader.onload = ev => {
       try {
-        const data = JSON.parse(event.target.result);
-        
-        if (confirm('Це замінить всі поточні дані. Продовжити?')) {
-          if (data.categories) localStorage.setItem(STORAGE_KEYS.categories, JSON.stringify(data.categories));
-          if (data.products) localStorage.setItem(STORAGE_KEYS.products, JSON.stringify(data.products));
-          if (data.orders) localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(data.orders));
-          
-          alert('✅ Дані успішно імпортовано!');
-          location.reload();
-        }
-      } catch (error) {
-        alert('❌ Помилка імпорту: ' + error.message);
+        const data = JSON.parse(ev.target.result);
+        if (!confirm('Це замінить усі поточні дані. Продовжити?')) return;
+        if (data.categories) localStorage.setItem(STORAGE_KEYS.categories, JSON.stringify(data.categories));
+        if (data.products) localStorage.setItem(STORAGE_KEYS.products, JSON.stringify(data.products));
+        if (data.orders) localStorage.setItem(STORAGE_KEYS.orders, JSON.stringify(data.orders));
+        alert('✅ Дані імпортовано!');
+        location.reload();
+      } catch (err) {
+        alert('❌ Помилка імпорту: ' + err.message);
       }
     };
-    
     reader.readAsText(file);
   };
-  
   input.click();
 }
 
 // ===== ІНІЦІАЛІЗАЦІЯ =====
 checkAuth();
 
-// Закриття модального вікна при кліку поза ним
-window.onclick = function(event) {
+window.onclick = e => {
   const modal = document.getElementById('productModal');
-  if (event.target === modal) {
-    closeProductModal();
-  }
-}
+  if (e.target === modal) closeProductModal();
+};
 
-// Гарячі клавіші
-document.addEventListener('keydown', function(e) {
-  // ESC - закрити модальне вікно
-  if (e.key === 'Escape') {
-    closeProductModal();
-  }
-  
-  // Ctrl+S - зберегти форму товару (якщо відкрита)
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeProductModal();
   if (e.ctrlKey && e.key === 's') {
     e.preventDefault();
     const modal = document.getElementById('productModal');
