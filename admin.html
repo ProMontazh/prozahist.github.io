@@ -898,8 +898,19 @@ function loadProducts() {
 
 function filterProducts() {
   const searchText = document.getElementById('productSearch').value.toLowerCase();
-  const
-    function filterProducts() {
+  const rows = document.querySelectorAll('#productsTableBody tr');
+
+  rows.forEach(row => {
+    const productName = row.dataset.productName || '';
+    const productId = row.dataset.productId || '';
+    
+    if (productName.includes(searchText) || productId.includes(searchText)) {
+      row.style.display = '';
+    } else {
+      row.style.display = 'none';
+    }
+  });
+}
   const searchText = document.getElementById('productSearch').value.toLowerCase();
   const rows = document.querySelectorAll('#productsTableBody tr');
 
