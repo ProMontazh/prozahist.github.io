@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Адмін-панель</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .login-box {
+      background: white;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn-login:hover {
+      background-color: #0056b3;
+    }
+
+    .error-message {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+      display: none;
+    }
+
+    /* Адмін-панель */
+    .admin-panel {
+      display: none;
+      padding: 20px;
+    }
+
+    .admin-header {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .admin-content {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #ddd;
+    }
+
+    .tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: 16px;
+      color: #666;
+      transition: all 0.3s;
+    }
+
+    .tab.active {
+      color: #007bff;
+      border-bottom: 3px solid #007bff;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .product-form {
+      display: grid;
+      gap: 20px;
+      max-width: 600px;
+    }
+
+    .product-form input,
+    .product-form textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .product-form textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background-color: #c82333;
+    }
+
+    .btn-secondary {
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background-color: #5a6268;
+    }
+
+    .products-list {
+      margin-top: 30px;
+    }
+
+    .product-card {
+      background: #f8f9fa;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .product-info {
+      flex: 1;
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .orders-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .orders-table th,
+    .orders-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .orders-table th {
+      background-color: #f8f9fa;
+      font-weight: bold;
+    }
+
+    .orders-table tr:hover {
+      background-color: #f8f9fa;
+    }
+
+    .status-badge {
+      padding: 5px 10px;
+      border-radius: 3px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .status-new {
+      background-color: #ffc107;
+      color: #000;
+    }
+
+    .status-processing {
+      background-color: #17a2b8;
+      color: white;
+    }
+
+    .status-completed {
+      background-color: #28a745;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Форма входу -->
+<div class="login-container" id="loginContainer">
+  <div class="login-box">
+    <h2>Вхід в адмін-панель</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <label>Логін</label>
+        <input type="text" id="username" required>
+      </div>
+      <div class="form-group">
+        <label>Пароль</label>
+        <input type="password" id="password" required>
+      </div>
+      <button type="submit" class="btn-login">Увійти</button>
+      <div class="error-message" id="errorMessage">Невірний логін або пароль</div>
+    </form>
+  </div>
+</div>
+
+<!-- Адмін-панель -->
+<div class="admin-panel" id="adminPanel">
+  <div class="admin-header">
+    <h1>Адмін-панель</h1>
+    <button class="btn btn-secondary" onclick="logout()">Вийти</button>
+  </div>
+
+  <div class="admin-content">
+    <!-- Вкладки -->
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('products')">Товари</button>
+      <button class="tab" onclick="showTab('orders')">Замовлення</button>
+      <button class="tab" onclick="showTab('settings')">Налаштування</button>
+    </div>
+
+    <!-- Вкладка "Товари" -->
+    <div class="tab-content active" id="products-tab">
+      <h2>Додати новий товар</h2>
+      <form class="product-form" id="productForm">
+        <input type="text" id="productId" placeholder="ID товару" required>
+        <input type="text" id="productName" placeholder="Назва товару" required>
+        <textarea id="productDescription" placeholder="Опис товару" required></textarea>
+        <input type="number" id="productPrice" placeholder="Ціна" required>
+        <input type="text" id="productImage" placeholder="Шлях до зображення" required>
+        <input type="text" id="productDetailsPage" placeholder="Сторінка деталей (опціонально)">
+        <button type="submit" class="btn btn-primary">Додати товар</button>
+      </form>
+
+      <div class="products-list" id="productsList">
+        <h3>Список товарів</h3>
+        <!-- Тут будуть відображатися товари -->
+      </div>
+    </div>
+
+    <!-- Вкладка "Замовлення" -->
+    <div class="tab-content" id="orders-tab">
+      <h2>Замовлення</h2>
+      <table class="orders-table" id="ordersTable">
+        <thead>
+          <tr>
+            <th>№</th>
+            <th>Дата</th>
+            <th>Клієнт</th>
+            <th>Телефон</th>
+            <th>Товари</th>
+            <th>Сума</th>
+            <th>Статус</th>
+            <th>Дії</th>
+          </tr>
+        </thead>
+        <tbody id="ordersTableBody">
+          <!-- Тут будуть відображатися замовлення -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Вкладка "Налаштування" -->
+    <div class="tab-content" id="settings-tab">
+      <h2>Налаштування сайту</h2>
+      <form class="product-form" id="settingsForm">
+        <input type="text" id="siteName" placeholder="Назва сайту">
+        <input type="email" id="siteEmail" placeholder="Email для замовлень">
+        <input type="tel" id="sitePhone" placeholder="Телефон">
+        <textarea id="siteAbout" placeholder="Про компанію"></textarea>
+        <button type="submit" class="btn btn-primary">Зберегти налаштування</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+// Дані для входу (ЗМІНІТЬ НА СВОЇ!)
+const ADMIN_CREDENTIALS = {
+  username: 'admin',
+  password: 'admin123'
+};
+
+// Перевірка авторизації
+function checkAuth() {
+  const isLoggedIn = localStorage.getItem('adminLoggedIn');
+  if (isLoggedIn === 'true') {
+    showAdminPanel();
+  }
+}
+
+// Вхід
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+
+  if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+    localStorage.setItem('adminLoggedIn', 'true');
+    showAdminPanel();
+  } else {
+    document.getElementById('errorMessage').style.display = 'block';
+  }
+});
+
+// Вихід
+function logout() {
+  localStorage.removeItem('adminLoggedIn');
+  document.getElementById('loginContainer').style.display = 'flex';
+  document.getElementById('adminPanel').style.display = 'none';
+  document.getElementById('loginForm').reset();
+}
+
+// Показати адмін-панель
+function showAdminPanel() {
+  document.getElementById('loginContainer').style.display = 'none';
+  document.getElementById('adminPanel').style.display = 'block';
+  loadProducts();
+  loadOrders();
+  loadSettings();
+}
+
+// Перемикання вкладок
+function showTab(tabName) {
+  // Приховати всі вкладки
+  document.querySelectorAll('.tab-content').forEach(tab => {
+    tab.classList.remove('active');
+  });
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.classList.remove('active');
+  });
+
+  // Показати вибрану вкладку
+  document.getElementById(tabName + '-tab').classList.add('active');
+  event.target.classList.add('active');
+}
+
+// Додавання товару
+document.getElementById('productForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const product = {
+    id: document.getElementById('productId').value,
+    name: document.getElementById('productName').value,
+    description: document.getElementById('productDescription').value,
+    price: parseFloat(document.getElementById('productPrice').value),
+    image: document.getElementById('productImage').value,
+    detailsPage: document.getElementById('productDetailsPage').value || null
+  };
+
+  let products = JSON.parse(localStorage.getItem('adminProducts')) || [];
+  products.push(product);
+  localStorage.setItem('adminProducts', JSON.stringify(products));
+
+  alert('Товар додано успішно!');
+  this.reset();
+  loadProducts();
+});
+
+// Завантаження товарів
+function loadProducts() {
+  const products = JSON.parse(localStorage.getItem('adminProducts')) || [];
+  const productsList = document.getElementById('productsList');
+  
+  if (products.length === 0) {
+    productsList.innerHTML = '<h3>Список товарів</h3><p>Товарів поки немає</p>';
+    return;
+  }
+
+  let html = '<h3>Список товарів</h3>';
+  products.forEach((product, index) => {
+    html += `
+      <div class="product-card">
+        <div class="product-info">
+          <strong>${product.name}</strong><br>
+          <small>${product.description.substring(0, 50)}...</small><br>
+          <strong>Ціна: ${product.price} грн</strong>
+        </div>
+        <div class="product-actions">
+          <button class="btn btn-danger" onclick="deleteProduct(${index})">Видалити</button>
+        </div>
+      </div>
+    `;
+  });
+  
+  productsList.innerHTML = html;
+}
+
+// Видалення товару
+function deleteProduct(index) {
+  if (confirm('Ви впевнені, що хочете видалити цей товар?')) {
+    let products = JSON.parse(localStorage.getItem('adminProducts')) || [];
+    products.splice(index, 1);
+    localStorage.setItem('adminProducts', JSON.stringify(products));
+    loadProducts();
+  }
+}
+
+// Завантаження замовлень
+function loadOrders() {
+  const orders = JSON.parse(localStorage.getItem('orders')) || [];
+  const tbody = document.getElementById('ordersTableBody');
+  
+  if (orders.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align: center;">Замовлень поки немає</td></tr>';
+    return;
+  }
+
+  let html = '';
+  orders.forEach((order, index) => {
+    const itemsCount = order.items.reduce((sum, item) => sum + item.quantity, 0);
+    html += `
+      <tr>
+        <td>${index + 1}</td>
+        <td>${new Date(order.date).toLocaleDateString('uk-UA')}</td>
+        <td>${order.customerName}</td>
+        <td>${order.customerPhone}</td>
+        <td>${itemsCount} шт.</td>
+        <td>${order.total} грн</td>
+        <td><span class="status-badge status-${order.status || 'new'}">${getStatusText(order.status || 'new')}</span></td>
+        <td>
+          <button class="btn btn-primary" onclick="viewOrder(${index})">Переглянути</button>
+        </td>
+      </tr>
+    `;
+  });
+  
+  tbody.innerHTML = html;
+}
+
+function getStatusText(status) {
+  const statuses = {
+    'new': 'Нове',
+    'processing': 'В обробці',
+    'completed': 'Виконано'
+  };
+  return statuses[status] || 'Нове';
+}
+
+function viewOrder(index) {
+  const orders = JSON.parse(localStorage.getItem('orders')) || [];
+  const order = orders[index];
+  
+  let items = order.items.map(item => `${item.name} x${item.quantity} - ${item.price * item.quantity} грн`).join('\n');
+  
+  alert(`Замовлення №${index + 1}\n\nКлієнт: ${order.customerName}\nТелефон: ${order.customerPhone}\nАдреса: ${order.customerAddress || 'Не вказано'}\n\nТовари:\n${items}\n\nЗагальна сума: ${order.total} грн`);
+}
+
+// Завантаження налаштувань
+function loadSettings() {
+  const settings = JSON.parse(localStorage.getItem('siteSettings')) || {};
+  document.getElementById('siteName').value = settings.siteName || '';
+  document.getElementById('siteEmail').value = settings.siteEmail || '';
+  document.getElementById('sitePhone').value = settings.sitePhone || '';
+  document.getElementById('siteAbout').value = settings.siteAbout || '';
+}
+
+// Збереження налаштувань
+document.getElementById('settingsForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const settings = {
+    siteName: document.getElementById('siteName').value,
+    siteEmail: document.getElementById('siteEmail').value,
+    sitePhone: document.getElementById('sitePhone').value,
+    siteAbout: document.getElementById('siteAbout').value
+  };
+
+  localStorage.setItem('siteSettings', JSON.stringify(settings));
+  alert('Налаштування збережено!');
+});
+
+// Перевірка при завантаженні сторінки
+checkAuth();
+</script>
+
+</body>
+</html>
