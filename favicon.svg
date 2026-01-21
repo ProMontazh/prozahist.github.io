@@ -1,28 +1,28 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
 
   <!-- Крыша -->
-  <line x1="20" y1="70" x2="100" y2="20"
-        stroke="#800000" stroke-width="16"
+  <line x1="40" y1="80" x2="100" y2="40"
+        stroke="#800000" stroke-width="14"
         stroke-linecap="round"/>
 
-  <line x1="100" y1="20" x2="180" y2="70"
-        stroke="#800000" stroke-width="16"
+  <line x1="100" y1="40" x2="160" y2="80"
+        stroke="#800000" stroke-width="14"
         stroke-linecap="round"/>
 
-  <!-- Стены -->
-  <line x1="35" y1="75" x2="35" y2="145"
-        stroke="#808080" stroke-width="16"
+  <!-- Стены (укорочены) -->
+  <line x1="55" y1="85" x2="55" y2="115"
+        stroke="#808080" stroke-width="14"
         stroke-linecap="round"/>
 
-  <line x1="165" y1="75" x2="165" y2="145"
-        stroke="#808080" stroke-width="16"
+  <line x1="145" y1="85" x2="145" y2="115"
+        stroke="#808080" stroke-width="14"
         stroke-linecap="round"/>
 
-  <!-- Текст -->
-  <text x="100" y="185"
+  <!-- Текст (поднят выше) -->
+  <text x="100" y="155"
         text-anchor="middle"
-        font-size="40"
-        font-weight="800"
+        font-size="34"
+        font-weight="700"
         font-family="Arial, Helvetica, sans-serif">
     <tspan fill="#800000">ПРО</tspan><tspan fill="#808080">ЗАХИСТ</tspan>
   </text>
