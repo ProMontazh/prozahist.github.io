@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://прозахист.pp.ua/sitemap.xml
+
+# Заборонити індексацію адмінки
+Disallow: /admin.html
+Disallow: /checkout.html
