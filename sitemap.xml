@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<!-- Головна сторінка -->
+<url>
+  <loc>https://прозахист.pp.ua/</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>1.0</priority>
+</url>
+
+<!-- Адмін-панель -->
+<url>
+  <loc>https://прозахист.pp.ua/admin.html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.3</priority>
+</url>
+
+<!-- Сторінка оформлення замовлення -->
+<url>
+  <loc>https://прозахист.pp.ua/checkout.html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<!-- ========== ВНУТРІШНІ КАМЕРИ ========== -->
+<url>
+  <loc>https://прозахист.pp.ua/details_indoor_1(IPC-K2MP-3H1WE).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_indoor_2(IPC-C32EP).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_indoor_3(IPC-K2EP-3H3W).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_indoor_4(IPC-K2EP-5H3W).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_indoor_5(IPC-T22EP-C).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_indoor_6(IPC-T42EP-C).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<!-- ========== ЗОВНІШНІ КАМЕРИ ========== -->
+<url>
+  <loc>https://прозахист.pp.ua/details_outdoor_1(IPC-K3DP-3H0WF).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_outdoor_2(IPC-K3DP-5H0WF).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_outdoor_3(IPC-S3EP-3M0WE).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_outdoor_4(IPC-GS7EP-5M0WE).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_outdoor_5(IPC-K7CP-3H1WE).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_outdoor_6(IPC-S7XEP-10M0WED).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<!-- ========== ЗОВНІШНІ 4G КАМЕРИ ========== -->
+<url>
+  <loc>https://прозахист.pp.ua/details_outdoor4G_1(IPC-K7FP-3H0TE-EU).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_outdoor4G_2(IPC-B7ED-5M0TEA-EU).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<!-- ========== КОМПЛЕКТИ СИГНАЛІЗАЦІЇ ========== -->
+<url>
+  <loc>https://прозахист.pp.ua/details_alarm_1(Starter Kit White).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_alarm_2(Starter Kit Black).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_alarm_3(Starter Kit 2 White).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_alarm_4(Starter Kit 2 Black).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_alarm_5(StarterKit Cam White).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_alarm_6(StarterKit Cam Black).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_alarm_7(StarterKit Cam Plus White).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_alarm_8(StarterKit Cam Plus Black).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<!-- ========== ХАБИ ТА МОДУЛІ ========== -->
+<url>
+  <loc>https://прозахист.pp.ua/details_hub_01(Hub White).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.9</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_hub_02(Hub Black).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.9</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_hub_03(Hub 2 2G White).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.9</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_hub_04(Hub 2 2G Black).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.9</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_hub_05(Hub 2 4G White).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.9</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_hub_06(Hub 2 4G Black).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.9</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_hub_07(Hub 2 Plus White).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.9</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_hub_08(Hub 2 Plus Black).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.9</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_hub_09(Ajax MultiTransmitter White).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_hub_10(Ajax MultiTransmitter Black).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_hub_11(Ajax ReX White).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_hub_12(Ajax ReX Black).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_hub_13(Ajax ReX 2 White).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_hub_14(Ajax ReX 2 Black).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<!-- ========== ВНУТРІШНЯ ОХОРОНА ========== -->
+<url>
+  <loc>https://прозахист.pp.ua/details_protect_01(ajax_doorprotect_white).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_protect_02(ajax_doorprotect_black).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_protect_03(ajax_doorprotect_plus_white).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_protect_04(ajax_doorprotect_plus_black).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_protect_03(ajax_motionprotect_white).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_protect_04(ajax_motionprotect_black).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<!-- ========== ЗОВНІШНЯ ОХОРОНА ========== -->
+<url>
+  <loc>https://прозахист.pp.ua/details_protect_1(ajax_motionprotect_outdoor).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_protect_2(ajax_motioncam_outdoor_white).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.7</priority>
+</url>
+
+<!-- ========== ЗАХИСТ ВІД ПОТОПУ ========== -->
+<url>
+  <loc>https://прозахист.pp.ua/details_water_1(waterstop_white_0.5D).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.6</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_water_2(waterstop_white_0.75D).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.6</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_water_3(waterstop_white_1D).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.6</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_water_4(ajax_leaksprotect_white).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.6</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_water_5(ajax_leaksprotect_black).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.6</priority>
+</url>
+
+<!-- ========== ЗАХИСТ ВІД ПОЖЕЖІ ========== -->
+<url>
+  <loc>https://прозахист.pp.ua/details_fire_1(FireProtect_white).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.6</priority>
+</url>
+
+<url>
+  <loc>https://прозахист.pp.ua/details_fire_2(FireProtect_black).html</loc>
+  <lastmod>2025-01-21</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.6</priority>
+</url>
+
+</urlset>
