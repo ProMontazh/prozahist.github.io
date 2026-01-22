@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://прозахист.pp.ua/sitemap.xml
+Sitemap: https://xn--80anevegliy.pp.ua/sitemap.xml
 
 # Заборонити індексацію адмінки
 Disallow: /admin.html
