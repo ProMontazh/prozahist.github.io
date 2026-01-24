@@ -40,45 +40,78 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     
     <!-- Structured Data - Organization -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Store",
-      "name": "ПРОЗАХИСТ",
-      "description": "Магазин бездротових систем безпеки Ajax та відеокамер IMOU",
-      "url": "https://xn--80anevegliy.pp.ua",
-      "logo": "https://xn--80anevegliy.pp.ua/favicon_32.svg",
-      "image": "https://xn--80anevegliy.pp.ua/images/og-image.jpg",
-      "telephone": "+380935016040",
-      "email": "prozakhyst@ukr.net",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "UA",
-        "addressLocality": "Україна"
+    <!-- Structured Data - Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "@id": "https://xn--80anevegliy.pp.ua/#store",
+  "name": "ПРОЗАХИСТ",
+  "alternateName": "ProZakhyst",
+  "description": "Магазин бездротових систем безпеки Ajax та відеокамер IMOU",
+  "url": "https://xn--80anevegliy.pp.ua",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://xn--80anevegliy.pp.ua/favicon_32.svg",
+    "width": "32",
+    "height": "32"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://xn--80anevegliy.pp.ua/images/og-image.jpg",
+    "width": "1200",
+    "height": "630"
+  },
+  "telephone": "+380935016040",
+  "email": "prozakhyst@ukr.net",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "UA",
+    "addressRegion": "Харківська область",
+    "addressLocality": "Харків"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "49.9935",
+    "longitude": "36.2304"
+  },
+  "priceRange": "$$",
+  "paymentAccepted": "Cash, Credit Card, Debit Card",
+  "currenciesAccepted": "UAH",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "opens": "09:00",
+    "closes": "21:00"
+  },
+  "sameAs": [
+    "https://www.facebook.com/prozakhyst",
+    "https://www.instagram.com/prozakhyst"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Системи безпеки",
+    "itemListElement": [
+      {
+        "@type": "OfferCatalog",
+        "name": "Ajax системи охоронної сигналізації"
       },
-      "priceRange": "$$",
-      "paymentAccepted": ["Cash", "Credit Card", "Debit Card"],
-      "currenciesAccepted": "UAH",
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday"
-        ],
-        "opens": "09:00",
-        "closes": "21:00"
-      },
-      "sameAs": [
-        "https://www.facebook.com/prozakhyst",
-        "https://www.instagram.com/prozakhyst"
-      ]
-    }
-    </script>
+      {
+        "@type": "OfferCatalog",
+        "name": "IMOU відеокамери"
+      }
+    ]
+  }
+}
+</script>
 
     <style>
         body {
@@ -2077,6 +2110,7 @@
     </script>
 </body>
 </html>
+
 
 
 
