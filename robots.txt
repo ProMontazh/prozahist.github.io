@@ -1,8 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://xn--80anevegliy.pp.ua/sitemap.xml
-
-# Заборонити індексацію адмінки
-Disallow: /admin.html
-Disallow: /checkout.html
+Sitemap: https://прозахист.pp.ua/sitemap.xml
