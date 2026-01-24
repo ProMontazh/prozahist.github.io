@@ -12,7 +12,7 @@
   <priority>1.0</priority>
 </url>
 
-<!-- Основні категорії -->
+<!-- Основні категорії (з хешем) -->
 <url>
   <loc>https://xn--80anevegliy.pp.ua/#indoor.html</loc>
   <lastmod>2025-01-24</lastmod>
@@ -22,6 +22,13 @@
 
 <url>
   <loc>https://xn--80anevegliy.pp.ua/#outdoor.html</loc>
+  <lastmod>2025-01-24</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.9</priority>
+</url>
+
+<url>
+  <loc>https://xn--80anevegliy.pp.ua/#outdoor4G.html</loc>
   <lastmod>2025-01-24</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.9</priority>
@@ -48,15 +55,28 @@
   <priority>0.8</priority>
 </url>
 
-<!-- Додаткові сторінки -->
 <url>
-  <loc>https://xn--80anevegliy.pp.ua/checkout.html</loc>
+  <loc>https://xn--80anevegliy.pp.ua/#water.html</loc>
+  <lastmod>2025-01-24</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://xn--80anevegliy.pp.ua/#fire.html</loc>
+  <lastmod>2025-01-24</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://xn--80anevegliy.pp.ua/#checkout.html</loc>
   <lastmod>2025-01-24</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.7</priority>
 </url>
 
-<!-- ========== ВНУТРІШНІ КАМЕРИ ========== -->
+<!-- ========== ВНУТРІШНІ КАМЕРИ (без хешу) ========== -->
 <url>
   <loc>https://xn--80anevegliy.pp.ua/details_indoor_1(IPC-K2MP-3H1WE).html</loc>
   <lastmod>2025-01-24</lastmod>
@@ -99,7 +119,7 @@
   <priority>0.7</priority>
 </url>
 
-<!-- ========== ЗОВНІШНІ КАМЕРИ ========== -->
+<!-- ========== ЗОВНІШНІ КАМЕРИ (без хешу) ========== -->
 <url>
   <loc>https://xn--80anevegliy.pp.ua/details_outdoor_1(IPC-K3DP-3H0WF).html</loc>
   <lastmod>2025-01-24</lastmod>
@@ -142,7 +162,7 @@
   <priority>0.7</priority>
 </url>
 
-<!-- ========== ЗОВНІШНІ 4G КАМЕРИ ========== -->
+<!-- ========== ЗОВНІШНІ 4G КАМЕРИ (без хешу) ========== -->
 <url>
   <loc>https://xn--80anevegliy.pp.ua/details_outdoor4G_1(IPC-K7FP-3H0TE-EU).html</loc>
   <lastmod>2025-01-24</lastmod>
@@ -157,7 +177,7 @@
   <priority>0.7</priority>
 </url>
 
-<!-- ========== КОМПЛЕКТИ СИГНАЛІЗАЦІЇ ========== -->
+<!-- ========== КОМПЛЕКТИ СИГНАЛІЗАЦІЇ (без хешу) ========== -->
 <url>
   <loc>https://xn--80anevegliy.pp.ua/details_alarm_1(Starter Kit White).html</loc>
   <lastmod>2025-01-24</lastmod>
@@ -214,7 +234,7 @@
   <priority>0.8</priority>
 </url>
 
-<!-- ========== ХАБИ ТА МОДУЛІ ========== -->
+<!-- ========== ХАБИ ТА МОДУЛІ (без хешу) ========== -->
 <url>
   <loc>https://xn--80anevegliy.pp.ua/details_hub_01(Hub White).html</loc>
   <lastmod>2025-01-24</lastmod>
@@ -313,7 +333,7 @@
   <priority>0.7</priority>
 </url>
 
-<!-- ========== ВНУТРІШНЯ ОХОРОНА ========== -->
+<!-- ========== ВНУТРІШНЯ ОХОРОНА (без хешу) ========== -->
 <url>
   <loc>https://xn--80anevegliy.pp.ua/details_protect_01(ajax_doorprotect_white).html</loc>
   <lastmod>2025-01-24</lastmod>
@@ -356,7 +376,7 @@
   <priority>0.7</priority>
 </url>
 
-<!-- ========== ЗОВНІШНЯ ОХОРОНА ========== -->
+<!-- ========== ЗОВНІШНЯ ОХОРОНА (без хешу) ========== -->
 <url>
   <loc>https://xn--80anevegliy.pp.ua/details_protect_1(ajax_motionprotect_outdoor).html</loc>
   <lastmod>2025-01-24</lastmod>
@@ -371,7 +391,7 @@
   <priority>0.7</priority>
 </url>
 
-<!-- ========== ЗАХИСТ ВІД ПОТОПУ ========== -->
+<!-- ========== ЗАХИСТ ВІД ПОТОПУ (без хешу) ========== -->
 <url>
   <loc>https://xn--80anevegliy.pp.ua/details_water_1(waterstop_white_0.5D).html</loc>
   <lastmod>2025-01-24</lastmod>
@@ -407,7 +427,7 @@
   <priority>0.6</priority>
 </url>
 
-<!-- ========== ЗАХИСТ ВІД ПОЖЕЖІ ========== -->
+<!-- ========== ЗАХИСТ ВІД ПОЖЕЖІ (без хешу) ========== -->
 <url>
   <loc>https://xn--80anevegliy.pp.ua/details_fire_1(FireProtect_white).html</loc>
   <lastmod>2025-01-24</lastmod>
