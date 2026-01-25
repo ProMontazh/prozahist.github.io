@@ -2580,9 +2580,411 @@
             }
         });
     })();
+     // ⚠️ ВСТАВТЕ ВАШ GOOGLE SCRIPT URL ТУТ ⚠️
+        const SCRIPT_URL = 'ВАШ_GOOGLE_SCRIPT_URL_СЮДИ';
+        
+        let selectedRating = 0;
+        let allReviews = [];
+
+        // Ініціалізація при завантаженні
+        document.addEventListener('DOMContentLoaded', function() {
+            initStarRating();
+            loadReviewsForWidget();
+        });
+
+        // Завантаження для віджету
+        async function loadReviewsForWidget() {
+            try {
+                const response = await fetch(SCRIPT_URL);
+                const data = await response.json();
+
+                if (data.success && data.reviews) {
+                    allReviews = data.reviews;
+                    updateWidget(data.reviews);
+                } else {
+                    updateWidget([]);
+                }
+            } catch (error) {
+                updateWidget([]);
+            }
+        }
+
+        // Оновлення віджету
+        function updateWidget(reviews) {
+            const count = reviews.length;
+            const avgRating = count > 0 
+                ? reviews.reduce((sum, r) => sum + r.rating, 0) / count 
+                : 0;
+
+            // Оновити число
+            document.getElementById('widgetRating').textContent = avgRating.toFixed(1);
+            
+            // Оновити кількість
+            const countText = count === 0 ? 'Немає відгуків' :
+                             count === 1 ? '1 відгук' :
+                             count < 5 ? `${count} відгуки` :
+                             `${count} відгуків`;
+            document.getElementById('widgetCount').textContent = countText;
+
+            // Оновити зірки
+            renderWidgetStars(avgRating);
+        }
+
+        // Відображення зірок віджету з частковим заповненням
+        function renderWidgetStars(rating) {
+            const container = document.getElementById('widgetStars');
+            container.innerHTML = '';
+
+            for (let i = 1; i <= 5; i++) {
+                const star = document.createElement('span');
+                star.className = 'widget-star';
+                star.innerHTML = '★';
+
+                // Якщо рейтинг більше поточної зірки
+                if (rating >= i) {
+                    // Повністю заповнена зірка
+                    const filled = document.createElement('span');
+                    filled.className = 'widget-star-filled';
+                    filled.style.width = '100%';
+                    filled.innerHTML = '★';
+                    star.appendChild(filled);
+                } else if (rating > i - 1) {
+                    // Частково заповнена зірка
+                    const filled = document.createElement('span');
+                    filled.className = 'widget-star-filled';
+                    const percentage = ((rating - (i - 1)) * 100).toFixed(0);
+                    filled.style.width = percentage + '%';
+                    filled.innerHTML = '★';
+                    star.appendChild(filled);
+                }
+
+                container.appendChild(star);
+            }
+        }
+
+        // Відкрити модальне вікно
+        function openReviewsModal() {
+            document.getElementById('reviewsModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            loadReviews();
+        }
+
+        // Закрити модальне вікно
+        function closeReviewsModal() {
+            document.getElementById('reviewsModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function closeModalOnOutsideClick(event) {
+            if (event.target.id === 'reviewsModal') {
+                closeReviewsModal();
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeReviewsModal();
+            }
+        });
+
+        // Перемикання вкладок
+        function switchTab(tab) {
+            const tabs = document.querySelectorAll('.reviews-tab');
+            const contents = document.querySelectorAll('.reviews-tab-content');
+            
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+            
+            if (tab === 'read') {
+                tabs[0].classList.add('active');
+                document.getElementById('readTab').classList.add('active');
+            } else {
+                tabs[1].classList.add('active');
+                document.getElementById('writeTab').classList.add('active');
+            }
+        }
+
+        // Ініціалізація рейтингу форми
+        function initStarRating() {
+            const stars = document.querySelectorAll('.star-input');
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    selectedRating = parseInt(this.getAttribute('data-rating'));
+                    document.getElementById('reviewRating').value = selectedRating;
+                    updateStars(selectedRating);
+                });
+            });
+        }
+
+        function updateStars(rating) {
+            const stars = document.querySelectorAll('.star-input');
+            stars.forEach((star, index) => {
+                star.classList.toggle('active', index < rating);
+            });
+        }
+
+        // Показати повідомлення
+        function showFormMessage(text, type) {
+            const msg = document.getElementById('formMessage');
+            msg.textContent = text;
+            msg.className = `message ${type}`;
+            msg.style.display = 'block';
+            setTimeout(() => msg.style.display = 'none', 5000);
+        }
+
+        // Відправка відгуку
+        async function submitReview(event) {
+            event.preventDefault();
+
+            if (selectedRating === 0) {
+                showFormMessage('Будь ласка, оберіть оцінку!', 'error');
+                return;
+            }
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Відправка...';
+
+            const review = {
+                name: document.getElementById('reviewName').value.trim(),
+                product: document.getElementById('reviewProduct').value,
+                rating: selectedRating,
+                text: document.getElementById('reviewText').value.trim(),
+                date: new Date().toLocaleDateString('uk-UA', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                })
+            };
+
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(review)
+                });
+
+                showFormMessage('✓ Дякуємо! Ваш відгук успішно додано!', 'success');
+                
+                document.getElementById('reviewName').value = '';
+                document.getElementById('reviewProduct').value = '';
+                document.getElementById('reviewText').value = '';
+                selectedRating = 0;
+                updateStars(0);
+
+                setTimeout(() => {
+                    switchTab('read');
+                    loadReviews();
+                    loadReviewsForWidget();
+                }, 2000);
+
+            } catch (error) {
+                showFormMessage('Помилка відправки. Спробуйте ще раз.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Відправити відгук';
+            }
+        }
+
+        // Завантаження відгуків у модальне вікно
+        async function loadReviews() {
+            const loading = document.getElementById('loading');
+            const list = document.getElementById('reviewsList');
+            const noReviews = document.getElementById('noReviews');
+
+            loading.style.display = 'block';
+            list.style.display = 'none';
+            noReviews.style.display = 'none';
+
+            try {
+                const response = await fetch(SCRIPT_URL);
+                const data = await response.json();
+
+                loading.style.display = 'none';
+
+                if (data.success && data.reviews && data.reviews.length > 0) {
+                    updateModalStats(data.reviews);
+                    displayReviews(data.reviews);
+                } else {
+                    updateModalStats([]);
+                    noReviews.style.display = 'block';
+                }
+            } catch (error) {
+                loading.style.display = 'none';
+                noReviews.style.display = 'block';
+            }
+        }
+
+        // Оновлення статистики модального вікна
+        function updateModalStats(reviews) {
+            const count = reviews.length;
+            const avgRating = count > 0 
+                ? reviews.reduce((sum, r) => sum + r.rating, 0) / count 
+                : 0;
+
+            document.getElementById('modalRating').textContent = avgRating.toFixed(1);
+            
+            const countText = count === 0 ? 'Немає відгуків' :
+                             count === 1 ? '1 відгук' :
+                             count < 5 ? `${count} відгуки` :
+                             `${count} відгуків`;
+            document.getElementById('modalCount').textContent = countText;
+
+            // Зірки в модальному вікні
+            const modalStars = document.getElementById('modalStars');
+            modalStars.innerHTML = '';
+            for (let i = 1; i <= 5; i++) {
+                const star = document.createElement('span');
+                star.className = i <= Math.round(avgRating) ? 'modal-star' : 'modal-star empty';
+                star.textContent = '★';
+                modalStars.appendChild(star);
+            }
+        }
+
+        // Відображення списку відгуків
+        function displayReviews(reviews) {
+            const list = document.getElementById('reviewsList');
+            list.style.display = 'grid';
+            list.innerHTML = '';
+
+            reviews.forEach(review => {
+                if (!review.name || !review.text) return;
+
+                const initials = review.name.split(' ')
+                    .map(n => n[0])
+                    .join('')
+                    .toUpperCase()
+                    .substring(0, 2);
+
+                const stars = Array(5).fill(0)
+                    .map((_, i) => `<span class="star ${i >= review.rating ? 'empty' : ''}">★</span>`)
+                    .join('');
+
+                const card = document.createElement('div');
+                card.className = 'review-card';
+                card.innerHTML = `
+                    <div class="review-header">
+                        <div class="review-avatar">${initials}</div>
+                        <div class="review-info">
+                            <div class="review-name">${escapeHtml(review.name)}</div>
+                            <div class="review-date">${review.date}</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">${stars}</div>
+                    <div class="review-text">${escapeHtml(review.text)}</div>
+                    <div class="review-product">🛡️ ${escapeHtml(review.product)}</div>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
     </script>
+    <!-- ВІДЖЕТ ДЛЯ ДОДАВАННЯ НАД ТЕЛЕФОНОМ -->
+    <div class="reviews-widget" onclick="openReviewsModal()">
+        <div class="widget-stars" id="widgetStars">
+            <!-- Зірки генеруються JavaScript -->
+        </div>
+        <div class="widget-rating">
+            <div class="widget-rating-number" id="widgetRating">0.0</div>
+            <div class="widget-rating-count" id="widgetCount">0 відгуків</div>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНЕ ВІКНО -->
+    <div id="reviewsModal" class="reviews-modal" onclick="closeModalOnOutsideClick(event)">
+        <div class="reviews-modal-content">
+            <div class="reviews-modal-header">
+                <h2>Відгуки клієнтів</h2>
+                <button class="reviews-modal-close" onclick="closeReviewsModal()">&times;</button>
+            </div>
+
+            <div class="reviews-modal-body">
+                <!-- Загальна статистика -->
+                <div class="modal-rating-summary">
+                    <div class="modal-rating-big">
+                        <div class="modal-rating-number" id="modalRating">0.0</div>
+                        <div class="modal-rating-stars" id="modalStars"></div>
+                        <div class="modal-rating-count" id="modalCount">0 відгуків</div>
+                    </div>
+                </div>
+
+                <!-- Табы -->
+                <div class="reviews-tabs">
+                    <button class="reviews-tab active" onclick="switchTab('read')">
+                        📖 Читати відгуки
+                    </button>
+                    <button class="reviews-tab" onclick="switchTab('write')">
+                        ✍️ Написати відгук
+                    </button>
+                </div>
+
+                <!-- Вкладка: Читати відгуки -->
+                <div id="readTab" class="reviews-tab-content active">
+                    <div class="loading" id="loading">Завантаження відгуків...</div>
+                    <div class="reviews-list" id="reviewsList" style="display: none;"></div>
+                    <div class="no-reviews" id="noReviews" style="display: none;">
+                        📝 Поки що немає відгуків. Будьте першим!
+                    </div>
+                </div>
+
+                <!-- Вкладка: Написати відгук -->
+                <div id="writeTab" class="reviews-tab-content">
+                    <div id="formMessage" class="message" style="display: none;"></div>
+                    
+                    <form class="reviews-form" onsubmit="submitReview(event)">
+                        <div class="form-group">
+                            <label for="reviewName">Ваше ім'я *</label>
+                            <input type="text" id="reviewName" required placeholder="Введіть ваше ім'я">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reviewProduct">Який товар ви купували? *</label>
+                            <select id="reviewProduct" required>
+                                <option value="">Оберіть товар</option>
+                                <option value="Ajax Hub">Ajax Hub</option>
+                                <option value="Ajax Hub 2 Plus">Ajax Hub 2 Plus</option>
+                                <option value="Ajax Hub 2 4G">Ajax Hub 2 4G</option>
+                                <option value="Ajax Starter Kit">Ajax Starter Kit</option>
+                                <option value="IMOU камери">IMOU камери</option>
+                                <option value="Ajax датчики">Ajax датчики</option>
+                                <option value="Інше">Інше</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ваша оцінка *</label>
+                            <div class="star-rating" id="starRating">
+                                <span class="star-input" data-rating="1">★</span>
+                                <span class="star-input" data-rating="2">★</span>
+                                <span class="star-input" data-rating="3">★</span>
+                                <span class="star-input" data-rating="4">★</span>
+                                <span class="star-input" data-rating="5">★</span>
+                            </div>
+                            <input type="hidden" id="reviewRating" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reviewText">Ваш відгук *</label>
+                            <textarea id="reviewText" required placeholder="Розкажіть про свій досвід..." minlength="20"></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            Відправити відгук
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
+
 
 
 
