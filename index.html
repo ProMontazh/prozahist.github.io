@@ -2679,7 +2679,7 @@
         });
     })();
      // ⚠️ ВСТАВТЕ ВАШ GOOGLE SCRIPT URL ТУТ ⚠️
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwYWJ9_lC9_zApPVcxYgaUJd-oCYsni4B7Emj5H5n4OgUuXZJx-qhv8-JQW2D_oS4Um/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxXlDXQeSquMo91OamMmfLu15f3tn_1NF6s09tlWr_hUfML3SADZT-AWZp3XBY6tCF6lQ/exec';
         
         let selectedRating = 0;
         let allReviews = [];
@@ -2706,7 +2706,13 @@
                 updateWidget([]);
             }
         }
-
+fetch(SCRIPT_URL)
+  .then(r => r.json())
+  .then(data => {
+    if (data.success) {
+      console.log('Отзывы:', data.reviews);
+    }
+  });
         // Оновлення віджету
         function updateWidget(reviews) {
             const count = reviews.length;
@@ -2986,6 +2992,7 @@
     
 </body>
 </html>
+
 
 
 
