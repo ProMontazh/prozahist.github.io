@@ -578,7 +578,455 @@
                 background-position: center;
             }
         }
+/* Віджет з рейтингом (для розміщення над телефоном) */
+        .reviews-widget {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid #f0f0f0;
+        }
 
+        .reviews-widget:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(128, 0, 0, 0.2);
+            border-color: #800000;
+        }
+
+        .reviews-widget-stars {
+            display: flex;
+            gap: 2px;
+            font-size: 24px;
+            position: relative;
+            line-height: 1;
+        }
+
+        .reviews-widget-stars-bg {
+            color: #e0e0e0;
+            position: relative;
+        }
+
+        .reviews-widget-stars-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #ffa500;
+            overflow: hidden;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .reviews-widget-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .reviews-widget-rating {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .reviews-widget-count {
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Модальне вікно */
+        .reviews-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.3s;
+        }
+
+        .reviews-modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .reviews-modal-content {
+            background-color: #fff;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.3s;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .reviews-modal-header {
+            background: linear-gradient(135deg, #800000, #a00000);
+            color: white;
+            padding: 25px 30px;
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .reviews-modal-header h2 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .reviews-modal-header-stats {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .reviews-modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .reviews-modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .reviews-modal-body {
+            padding: 30px;
+        }
+
+        /* Табы */
+        .reviews-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .reviews-tab {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .reviews-tab.active {
+            color: #800000;
+        }
+
+        .reviews-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #800000;
+        }
+
+        .reviews-tab-content {
+            display: none;
+        }
+
+        .reviews-tab-content.active {
+            display: block;
+        }
+
+        /* Форма */
+        .reviews-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 15px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #800000;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 8px;
+            font-size: 36px;
+        }
+
+        .star-input {
+            color: #ddd;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .star-input:hover,
+        .star-input.active {
+            color: #ffa500;
+            transform: scale(1.1);
+        }
+
+        .submit-btn {
+            background: #800000;
+            color: white;
+            padding: 14px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            background: #600000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(128, 0, 0, 0.3);
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Список відгуків */
+        .reviews-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .review-card {
+            background: #f9f9f9;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        .review-card:hover {
+            border-color: #800000;
+            box-shadow: 0 4px 12px rgba(128, 0, 0, 0.1);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .review-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #800000, #a00000);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            margin-right: 12px;
+        }
+
+        .review-info {
+            flex-grow: 1;
+        }
+
+        .review-name {
+            font-weight: 700;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .review-date {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .review-stars {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 12px;
+        }
+
+        .star {
+            color: #ffa500;
+            font-size: 18px;
+        }
+
+        .star.empty {
+            color: #ddd;
+        }
+
+        .review-text {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 12px;
+        }
+
+        .review-product {
+            display: inline-block;
+            background: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #666;
+            border: 1px solid #e0e0e0;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        .no-reviews {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Skeleton loader */
+        .reviews-widget.loading .reviews-widget-rating,
+        .reviews-widget.loading .reviews-widget-count {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 4px;
+            color: transparent;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        @media (max-width: 768px) {
+            .reviews-widget {
+                padding: 10px 16px;
+            }
+
+            .reviews-widget-stars {
+                font-size: 20px;
+            }
+
+            .reviews-widget-rating {
+                font-size: 18px;
+            }
+
+            .reviews-modal-content {
+                max-width: 100%;
+                max-height: 100vh;
+                border-radius: 0;
+            }
+
+            .reviews-modal-header {
+                border-radius: 0;
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .reviews-tabs {
+                overflow-x: auto;
+            }
+
+            .star-rating {
+                font-size: 28px;
+            }
+        }
  </style>
 
 <header>
@@ -2204,9 +2652,280 @@
             }
         });
     })();
+     // ⚠️ ВСТАВТЕ ВАШ GOOGLE SCRIPT URL ТУТ ⚠️
+        const SCRIPT_URL = 'ВАШ_GOOGLE_SCRIPT_URL_СЮДИ';
+        
+        let selectedRating = 0;
+        let reviewsData = null;
+
+        // Ініціалізація
+        document.addEventListener('DOMContentLoaded', function() {
+            initStarRating();
+            loadReviewsData();
+        });
+
+        // Завантаження даних для віджета
+        async function loadReviewsData() {
+            try {
+                const response = await fetch(SCRIPT_URL);
+                const data = await response.json();
+                
+                if (data.success && data.reviews) {
+                    reviewsData = data.reviews;
+                    updateWidget(data.reviews);
+                } else {
+                    updateWidget([]);
+                }
+            } catch (error) {
+                console.error('Error loading reviews:', error);
+                updateWidget([]);
+            }
+        }
+
+        // Оновлення віджета
+        function updateWidget(reviews) {
+            const widget = document.getElementById('reviewsWidget');
+            const rating = document.getElementById('widgetRating');
+            const count = document.getElementById('widgetCount');
+            const starsFill = document.getElementById('widgetStarsFill');
+
+            widget.classList.remove('loading');
+
+            const totalReviews = reviews.length;
+            const avgRating = totalReviews > 0 
+                ? reviews.reduce((sum, r) => sum + (r.rating || 0), 0) / totalReviews 
+                : 0;
+
+            rating.textContent = avgRating.toFixed(1);
+            count.textContent = `${totalReviews} ${getReviewsWord(totalReviews)}`;
+
+            // Заповнення зірок
+            const percentage = (avgRating / 5) * 100;
+            starsFill.style.width = `${percentage}%`;
+        }
+
+        function getReviewsWord(count) {
+            if (count === 0) return 'відгуків';
+            if (count === 1) return 'відгук';
+            if (count >= 2 && count <= 4) return 'відгуки';
+            return 'відгуків';
+        }
+
+        // Відкрити модальне вікно
+        function openReviewsModal() {
+            document.getElementById('reviewsModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            loadReviews();
+        }
+
+        // Закрити модальне вікно
+        function closeReviewsModal() {
+            document.getElementById('reviewsModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function closeModalOnOutsideClick(event) {
+            if (event.target.id === 'reviewsModal') {
+                closeReviewsModal();
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeReviewsModal();
+            }
+        });
+
+        // Перемикання вкладок
+        function switchTab(tab) {
+            const tabs = document.querySelectorAll('.reviews-tab');
+            const contents = document.querySelectorAll('.reviews-tab-content');
+            
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+            
+            if (tab === 'read') {
+                tabs[0].classList.add('active');
+                document.getElementById('readTab').classList.add('active');
+            } else {
+                tabs[1].classList.add('active');
+                document.getElementById('writeTab').classList.add('active');
+            }
+        }
+
+        // Ініціалізація рейтингу
+        function initStarRating() {
+            const stars = document.querySelectorAll('.star-input');
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    selectedRating = parseInt(this.getAttribute('data-rating'));
+                    document.getElementById('reviewRating').value = selectedRating;
+                    updateStars(selectedRating);
+                });
+            });
+        }
+
+        function updateStars(rating) {
+            const stars = document.querySelectorAll('.star-input');
+            stars.forEach((star, index) => {
+                star.classList.toggle('active', index < rating);
+            });
+        }
+
+        // Показати повідомлення
+        function showFormMessage(text, type) {
+            const msg = document.getElementById('formMessage');
+            msg.textContent = text;
+            msg.className = `message ${type}`;
+            msg.style.display = 'block';
+            setTimeout(() => {
+                msg.style.display = 'none';
+            }, 5000);
+        }
+
+        // Відправка відгуку
+        async function submitReview(event) {
+            event.preventDefault();
+
+            if (selectedRating === 0) {
+                showFormMessage('Будь ласка, оберіть оцінку!', 'error');
+                return;
+            }
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Відправка...';
+
+            const review = {
+                name: document.getElementById('reviewName').value.trim(),
+                product: document.getElementById('reviewProduct').value,
+                rating: selectedRating,
+                text: document.getElementById('reviewText').value.trim(),
+                date: new Date().toLocaleDateString('uk-UA', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                })
+            };
+
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(review)
+                });
+
+                showFormMessage('✓ Дякуємо! Ваш відгук успішно додано!', 'success');
+                
+                // Очистити форму
+                document.getElementById('reviewName').value = '';
+                document.getElementById('reviewProduct').value = '';
+                document.getElementById('reviewText').value = '';
+                selectedRating = 0;
+                updateStars(0);
+
+                // Оновити дані
+                setTimeout(() => {
+                    loadReviewsData();
+                    switchTab('read');
+                    loadReviews();
+                }, 2000);
+
+            } catch (error) {
+                showFormMessage('Помилка відправки. Спробуйте ще раз.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Відправити відгук';
+            }
+        }
+
+        // Завантаження відгуків в модальне вікно
+        async function loadReviews() {
+            const loading = document.getElementById('loading');
+            const list = document.getElementById('reviewsList');
+            const noReviews = document.getElementById('noReviews');
+
+            loading.style.display = 'block';
+            list.style.display = 'none';
+            noReviews.style.display = 'none';
+
+            try {
+                const response = await fetch(SCRIPT_URL);
+                const data = await response.json();
+
+                loading.style.display = 'none';
+
+                if (data.success && data.reviews && data.reviews.length > 0) {
+                    displayReviews(data.reviews);
+                    updateModalStats(data.reviews);
+                } else {
+                    noReviews.style.display = 'block';
+                    updateModalStats([]);
+                }
+            } catch (error) {
+                loading.style.display = 'none';
+                noReviews.style.display = 'block';
+            }
+        }
+
+        // Оновлення статистики в модальному вікні
+        function updateModalStats(reviews) {
+            const totalReviews = reviews.length;
+            const avgRating = totalReviews > 0 
+                ? reviews.reduce((sum, r) => sum + (r.rating || 0), 0) / totalReviews 
+                : 0;
+
+            document.getElementById('modalAvgRating').textContent = avgRating.toFixed(1);
+            document.getElementById('modalTotalReviews').textContent = totalReviews;
+        }
+
+        // Відображення відгуків
+        function displayReviews(reviews) {
+            const list = document.getElementById('reviewsList');
+            list.style.display = 'grid';
+            list.innerHTML = '';
+
+            reviews.forEach(review => {
+                if (!review.name || !review.text) return;
+
+                const initials = review.name.split(' ')
+                    .map(n => n[0])
+                    .join('')
+                    .toUpperCase()
+                    .substring(0, 2);
+
+                const stars = Array(5).fill(0)
+                    .map((_, i) => `<span class="star ${i >= review.rating ? 'empty' : ''}">★</span>`)
+                    .join('');
+
+                const card = document.createElement('div');
+                card.className = 'review-card';
+                card.innerHTML = `
+                    <div class="review-header">
+                        <div class="review-avatar">${initials}</div>
+                        <div class="review-info">
+                            <div class="review-name">${escapeHtml(review.name)}</div>
+                            <div class="review-date">${review.date}</div>
+                        </div>
+                    </div>
+                    <div class="review-stars">${stars}</div>
+                    <div class="review-text">${escapeHtml(review.text)}</div>
+                    <div class="review-product">🛡️ ${escapeHtml(review.product)}</div>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
     </script>
 </body>
 </html>
+
 
 
 
