@@ -2862,12 +2862,11 @@ fetch(SCRIPT_URL + '?t=' + Date.now())
             };
 
             try {
-                await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(review)
-                });
+               await fetch(SCRIPT_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(review)
+});
 
                 showFormMessage('✓ Дякуємо! Ваш відгук успішно додано!', 'success');
                 
@@ -2992,6 +2991,7 @@ fetch(SCRIPT_URL + '?t=' + Date.now())
     
 </body>
 </html>
+
 
 
 
