@@ -578,7 +578,476 @@
                 background-position: center;
             }
         }
+/* Віджет з зірками */
+        .reviews-widget {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            background: white;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
 
+        .reviews-widget:hover {
+            border-color: #800000;
+            box-shadow: 0 4px 16px rgba(128, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .widget-stars {
+            display: flex;
+            gap: 3px;
+        }
+
+        .widget-star {
+            font-size: 24px;
+            color: #ddd;
+            position: relative;
+            display: inline-block;
+        }
+
+        .widget-star-filled {
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            color: #ffa500;
+        }
+
+        .widget-rating {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .widget-rating-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: #800000;
+            line-height: 1;
+        }
+
+        .widget-rating-count {
+            font-size: 12px;
+            color: #999;
+            line-height: 1;
+        }
+
+        /* Модальне вікно */
+        .reviews-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.3s;
+        }
+
+        .reviews-modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .reviews-modal-content {
+            background-color: #fff;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.3s;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .reviews-modal-header {
+            background: linear-gradient(135deg, #800000, #a00000);
+            color: white;
+            padding: 25px 30px;
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .reviews-modal-header h2 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .reviews-modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .reviews-modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .reviews-modal-body {
+            padding: 30px;
+        }
+
+        /* Статистика у модальному вікні */
+        .modal-rating-summary {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding: 25px;
+            background: #f9f9f9;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .modal-rating-big {
+            text-align: center;
+        }
+
+        .modal-rating-number {
+            font-size: 56px;
+            font-weight: 700;
+            color: #800000;
+            line-height: 1;
+        }
+
+        .modal-rating-stars {
+            display: flex;
+            gap: 4px;
+            margin: 10px 0;
+            justify-content: center;
+        }
+
+        .modal-star {
+            font-size: 28px;
+            color: #ffa500;
+        }
+
+        .modal-star.empty {
+            color: #ddd;
+        }
+
+        .modal-rating-count {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Табы */
+        .reviews-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .reviews-tab {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .reviews-tab.active {
+            color: #800000;
+        }
+
+        .reviews-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #800000;
+        }
+
+        .reviews-tab-content {
+            display: none;
+        }
+
+        .reviews-tab-content.active {
+            display: block;
+        }
+
+        /* Форма */
+        .reviews-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 15px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #800000;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 8px;
+            font-size: 36px;
+        }
+
+        .star-input {
+            color: #ddd;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .star-input:hover,
+        .star-input.active {
+            color: #ffa500;
+            transform: scale(1.1);
+        }
+
+        .submit-btn {
+            background: #800000;
+            color: white;
+            padding: 14px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            background: #600000;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(128, 0, 0, 0.3);
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Список відгуків */
+        .reviews-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .review-card {
+            background: #f9f9f9;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        .review-card:hover {
+            border-color: #800000;
+            box-shadow: 0 4px 12px rgba(128, 0, 0, 0.1);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .review-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #800000, #a00000);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            margin-right: 12px;
+        }
+
+        .review-info {
+            flex-grow: 1;
+        }
+
+        .review-name {
+            font-weight: 700;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .review-date {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .review-stars {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 12px;
+        }
+
+        .star {
+            color: #ffa500;
+            font-size: 18px;
+        }
+
+        .star.empty {
+            color: #ddd;
+        }
+
+        .review-text {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 12px;
+        }
+
+        .review-product {
+            display: inline-block;
+            background: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #666;
+            border: 1px solid #e0e0e0;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        .no-reviews {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        @media (max-width: 768px) {
+            .reviews-widget {
+                padding: 10px 16px;
+            }
+
+            .widget-star {
+                font-size: 20px;
+            }
+
+            .widget-rating-number {
+                font-size: 18px;
+            }
+
+            .reviews-modal-content {
+                max-width: 100%;
+                max-height: 100vh;
+                border-radius: 0;
+            }
+
+            .reviews-modal-header {
+                border-radius: 0;
+            }
+
+            .modal-rating-summary {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .reviews-tabs {
+                overflow-x: auto;
+            }
+
+            .star-rating {
+                font-size: 28px;
+            }
+        }
  </style>
 
 <header>
@@ -2114,6 +2583,7 @@
     </script>
 </body>
 </html>
+
 
 
 
