@@ -714,15 +714,102 @@
 
         <div class="contacts-block">
             <div class="reviews-widget loading" onclick="openReviewsModal()" id="reviewsWidget">
-    <div class="reviews-widget-stars">
-        <div class="reviews-widget-stars-bg">★★★★★</div>
-        <div class="reviews-widget-stars-fill" id="widgetStarsFill">★★★★★</div>
+    <!-- ВІДЖЕТ ДЛЯ РОЗМІЩЕННЯ НАД ТЕЛЕФОНОМ -->
+    <div class="reviews-widget loading" onclick="openReviewsModal()" id="reviewsWidget">
+        <div class="reviews-widget-stars">
+            <div class="reviews-widget-stars-bg">★★★★★</div>
+            <div class="reviews-widget-stars-fill" id="widgetStarsFill">★★★★★</div>
+        </div>
+        <div class="reviews-widget-info">
+            <div class="reviews-widget-rating" id="widgetRating">0.0</div>
+            <div class="reviews-widget-count" id="widgetCount">0 відгуків</div>
+        </div>
     </div>
-    <div class="reviews-widget-info">
-        <div class="reviews-widget-rating" id="widgetRating">0.0</div>
-        <div class="reviews-widget-count" id="widgetCount">0 відгуків</div>
+
+    <!-- МОДАЛЬНЕ ВІКНО -->
+    <div id="reviewsModal" class="reviews-modal" onclick="closeModalOnOutsideClick(event)">
+        <div class="reviews-modal-content">
+            <div class="reviews-modal-header">
+                <div>
+                    <h2>Відгуки клієнтів</h2>
+                    <div class="reviews-modal-header-stats">
+                        <span>⭐ <span id="modalAvgRating">0.0</span></span>
+                        <span>•</span>
+                        <span><span id="modalTotalReviews">0</span> відгуків</span>
+                    </div>
+                </div>
+                <button class="reviews-modal-close" onclick="closeReviewsModal()">&times;</button>
+            </div>
+
+            <div class="reviews-modal-body">
+                <!-- Табы -->
+                <div class="reviews-tabs">
+                    <button class="reviews-tab active" onclick="switchTab('read')">
+                        📖 Читати відгуки
+                    </button>
+                    <button class="reviews-tab" onclick="switchTab('write')">
+                        ✍️ Написати відгук
+                    </button>
+                </div>
+
+                <!-- Вкладка: Читати відгуки -->
+                <div id="readTab" class="reviews-tab-content active">
+                    <div class="loading" id="loading">Завантаження відгуків...</div>
+                    <div class="reviews-list" id="reviewsList" style="display: none;"></div>
+                    <div class="no-reviews" id="noReviews" style="display: none;">
+                        📝 Поки що немає відгуків. Будьте першим!
+                    </div>
+                </div>
+
+                <!-- Вкладка: Написати відгук -->
+                <div id="writeTab" class="reviews-tab-content">
+                    <div id="formMessage" class="message" style="display: none;"></div>
+                    
+                    <form class="reviews-form" onsubmit="submitReview(event)">
+                        <div class="form-group">
+                            <label for="reviewName">Ваше ім'я *</label>
+                            <input type="text" id="reviewName" required placeholder="Введіть ваше ім'я">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reviewProduct">Який товар ви купували? *</label>
+                            <select id="reviewProduct" required>
+                                <option value="">Оберіть товар</option>
+                                <option value="Ajax Hub">Ajax Hub</option>
+                                <option value="Ajax Hub 2 Plus">Ajax Hub 2 Plus</option>
+                                <option value="Ajax Hub 2 4G">Ajax Hub 2 4G</option>
+                                <option value="Ajax Starter Kit">Ajax Starter Kit</option>
+                                <option value="IMOU камери">IMOU камери</option>
+                                <option value="Ajax датчики">Ajax датчики</option>
+                                <option value="Інше">Інше</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ваша оцінка *</label>
+                            <div class="star-rating" id="starRating">
+                                <span class="star-input" data-rating="1">★</span>
+                                <span class="star-input" data-rating="2">★</span>
+                                <span class="star-input" data-rating="3">★</span>
+                                <span class="star-input" data-rating="4">★</span>
+                                <span class="star-input" data-rating="5">★</span>
+                            </div>
+                            <input type="hidden" id="reviewRating" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reviewText">Ваш відгук *</label>
+                            <textarea id="reviewText" required placeholder="Розкажіть про свій досвід..." minlength="20"></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            Відправити відгук
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
             <a href="tel:+380935016040" class="contact-link">📞 (093) 501-60-40</a>
             <a href="mailto:prozakhyst@ukr.net" class="contact-link">📧 prozakhyst@ukr.net</a>
         </div>
@@ -2120,6 +2207,7 @@
     </script>
 </body>
 </html>
+
 
 
 
