@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
-    
+
     <!-- Title - оптимізований для SEO -->
     <title>ПРОЗАХИСТ - системи безпеки Ajax, IMOU | сигналізація та відеонагляд</title>
-    
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="ПРОЗАХИСТ - магазин бездротових систем безпеки. Системи охоронної сигналізації Ajax, датчики руху, відеонагляд IMOU. Доставка по Україні. ☎ +380935016040">
     <meta name="author" content="ПРОЗАХИСТ">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://xn--80anevegliy.pp.ua/">
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://xn--80anevegliy.pp.ua/">
@@ -25,7 +25,7 @@
     <meta property="og:image:alt" content="ПРОЗАХИСТ - Системи безпеки">
     <meta property="og:locale" content="uk_UA">
     <meta property="og:site_name" content="ПРОЗАХИСТ">
-    
+
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://xn--80anevegliy.pp.ua/">
@@ -33,12 +33,12 @@
     <meta name="twitter:description" content="Магазин систем охоронної сигналізації Ajax та відеокамер IMOU">
     <meta name="twitter:image" content="https://xn--80anevegliy.pp.ua/og-image.jpg">
     <meta name="twitter:image:alt" content="ПРОЗАХИСТ - Системи безпеки">
-    
+
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" sizes="16x16" href="/favicon_16.svg">
     <link rel="icon" type="image/svg+xml" sizes="32x32" href="/favicon_32.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    
+
     <!-- Structured Data - Organization -->
     <!-- Structured Data - Organization -->
 <script type="application/ld+json">
@@ -463,11 +463,7 @@
             animation: fadeIn 0.4s ease-in-out;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        
         #cart-items {
             max-height: 300px;
             overflow-y: auto;
@@ -578,64 +574,63 @@
                 background-position: center;
             }
         }
-/* Віджет з рейтингом (для розміщення над телефоном) */
+/* Віджет з зірками */
         .reviews-widget {
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            background: white;
             padding: 12px 20px;
+            background: transparent;
+            border: 2px solid #f0f0f0;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            border: 2px solid #f0f0f0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
 
         .reviews-widget:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(128, 0, 0, 0.2);
             border-color: #800000;
+            box-shadow: 0 4px 16px rgba(128, 0, 0, 0.15);
+            transform: translateY(-2px);
         }
 
-        .reviews-widget-stars {
+        .widget-stars {
             display: flex;
-            gap: 2px;
+            gap: 3px;
+        }
+
+        .widget-star {
             font-size: 24px;
+            color: #ddd;
             position: relative;
-            line-height: 1;
+            display: inline-block;
         }
 
-        .reviews-widget-stars-bg {
-            color: #e0e0e0;
-            position: relative;
-        }
-
-        .reviews-widget-stars-fill {
+        .widget-star-filled {
             position: absolute;
             top: 0;
             left: 0;
-            color: #ffa500;
             overflow: hidden;
-            white-space: nowrap;
-            pointer-events: none;
+            color: #ffa500;
         }
 
-        .reviews-widget-info {
+        .widget-rating {
             display: flex;
             flex-direction: column;
             gap: 2px;
         }
 
-        .reviews-widget-rating {
+        .widget-rating-number {
             font-size: 20px;
             font-weight: 700;
-            color: #333;
+            color: #800000;
+            line-height: 1;
         }
 
-        .reviews-widget-count {
-            font-size: 13px;
-            color: #666;
+        .widget-rating-count {
+            font-size: 12px;
+            color: #999;
+            line-height: 1;
         }
 
         /* Модальне вікно */
@@ -663,16 +658,20 @@
             to { opacity: 1; }
         }
 
-        .reviews-modal-content {
-            background-color: #fff;
-            border-radius: 16px;
-            width: 100%;
-            max-width: 900px;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-            animation: slideDown 0.3s;
-        }
+      .reviews-modal-content {
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+
+    border-radius: 16px;
+    width: 100%;
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
 
         @keyframes slideDown {
             from {
@@ -701,14 +700,6 @@
             font-weight: 700;
         }
 
-        .reviews-modal-header-stats {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 14px;
-            opacity: 0.9;
-        }
-
         .reviews-modal-close {
             background: none;
             border: none;
@@ -732,6 +723,50 @@
 
         .reviews-modal-body {
             padding: 30px;
+        }
+
+        /* Статистика у модальному вікні */
+        .modal-rating-summary {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(6px);
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .modal-rating-big {
+            text-align: center;
+        }
+
+        .modal-rating-number {
+            font-size: 56px;
+            font-weight: 700;
+            color: #800000;
+            line-height: 1;
+        }
+
+        .modal-rating-stars {
+            display: flex;
+            gap: 4px;
+            margin: 10px 0;
+            justify-content: center;
+        }
+
+        .modal-star {
+            font-size: 28px;
+            color: #ffa500;
+        }
+
+        .modal-star.empty {
+            color: #ddd;
+        }
+
+        .modal-rating-count {
+            font-size: 14px;
+            color: #666;
         }
 
         /* Табы */
@@ -867,8 +902,8 @@
         }
 
         .review-card {
-            background: #f9f9f9;
-            border: 2px solid #f0f0f0;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.15); /* аккуратный контур */
             border-radius: 12px;
             padding: 20px;
             transition: all 0.3s;
@@ -978,31 +1013,16 @@
             border: 1px solid #f5c6cb;
         }
 
-        /* Skeleton loader */
-        .reviews-widget.loading .reviews-widget-rating,
-        .reviews-widget.loading .reviews-widget-count {
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-            border-radius: 4px;
-            color: transparent;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
         @media (max-width: 768px) {
             .reviews-widget {
                 padding: 10px 16px;
             }
 
-            .reviews-widget-stars {
+            .widget-star {
                 font-size: 20px;
             }
 
-            .reviews-widget-rating {
+            .widget-rating-number {
                 font-size: 18px;
             }
 
@@ -1014,9 +1034,11 @@
 
             .reviews-modal-header {
                 border-radius: 0;
+            }
+
+            .modal-rating-summary {
                 flex-direction: column;
-                gap: 10px;
-                align-items: flex-start;
+                gap: 20px;
             }
 
             .reviews-tabs {
@@ -1027,6 +1049,9 @@
                 font-size: 28px;
             }
         }
+        .reviews-modal-content * {
+    background-color: transparent !important;
+}
  </style>
 
 <header>
@@ -1161,16 +1186,14 @@
         </div>
 
         <div class="contacts-block">
-            <div class="reviews-widget loading" onclick="openReviewsModal()" id="reviewsWidget">
-    <!-- ВІДЖЕТ ДЛЯ РОЗМІЩЕННЯ НАД ТЕЛЕФОНОМ -->
-    <div class="reviews-widget loading" onclick="openReviewsModal()" id="reviewsWidget">
-        <div class="reviews-widget-stars">
-            <div class="reviews-widget-stars-bg">★★★★★</div>
-            <div class="reviews-widget-stars-fill" id="widgetStarsFill">★★★★★</div>
+            <!-- ВІДЖЕТ ДЛЯ ДОДАВАННЯ НАД ТЕЛЕФОНОМ -->
+    <div class="reviews-widget" onclick="openReviewsModal()">
+        <div class="widget-stars" id="widgetStars">
+            <!-- Зірки генеруються JavaScript -->
         </div>
-        <div class="reviews-widget-info">
-            <div class="reviews-widget-rating" id="widgetRating">0.0</div>
-            <div class="reviews-widget-count" id="widgetCount">0 відгуків</div>
+        <div class="widget-rating">
+            <div class="widget-rating-number" id="widgetRating">0.0</div>
+            <div class="widget-rating-count" id="widgetCount">0 відгуків</div>
         </div>
     </div>
 
@@ -1178,18 +1201,20 @@
     <div id="reviewsModal" class="reviews-modal" onclick="closeModalOnOutsideClick(event)">
         <div class="reviews-modal-content">
             <div class="reviews-modal-header">
-                <div>
-                    <h2>Відгуки клієнтів</h2>
-                    <div class="reviews-modal-header-stats">
-                        <span>⭐ <span id="modalAvgRating">0.0</span></span>
-                        <span>•</span>
-                        <span><span id="modalTotalReviews">0</span> відгуків</span>
-                    </div>
-                </div>
+                <h2>Відгуки клієнтів</h2>
                 <button class="reviews-modal-close" onclick="closeReviewsModal()">&times;</button>
             </div>
 
             <div class="reviews-modal-body">
+                <!-- Загальна статистика -->
+                <div class="modal-rating-summary">
+                    <div class="modal-rating-big">
+                        <div class="modal-rating-number" id="modalRating">0.0</div>
+                        <div class="modal-rating-stars" id="modalStars"></div>
+                        <div class="modal-rating-count" id="modalCount">0 відгуків</div>
+                    </div>
+                </div>
+
                 <!-- Табы -->
                 <div class="reviews-tabs">
                     <button class="reviews-tab active" onclick="switchTab('read')">
@@ -1212,7 +1237,7 @@
                 <!-- Вкладка: Написати відгук -->
                 <div id="writeTab" class="reviews-tab-content">
                     <div id="formMessage" class="message" style="display: none;"></div>
-                    
+
                     <form class="reviews-form" onsubmit="submitReview(event)">
                         <div class="form-group">
                             <label for="reviewName">Ваше ім'я *</label>
@@ -1815,7 +1840,7 @@
                 image:'images/ajax_rex_black_1.jpg' 
             })">Додати у кошик</button>
        </div>
-        
+
  </div>
         </section>
 
@@ -2654,61 +2679,84 @@
     })();
      // ⚠️ ВСТАВТЕ ВАШ GOOGLE SCRIPT URL ТУТ ⚠️
         const SCRIPT_URL = 'ВАШ_GOOGLE_SCRIPT_URL_СЮДИ';
-        
-        let selectedRating = 0;
-        let reviewsData = null;
 
-        // Ініціалізація
+        let selectedRating = 0;
+        let allReviews = [];
+
+        // Ініціалізація при завантаженні
         document.addEventListener('DOMContentLoaded', function() {
             initStarRating();
-            loadReviewsData();
+            loadReviewsForWidget();
         });
 
-        // Завантаження даних для віджета
-        async function loadReviewsData() {
+        // Завантаження для віджету
+        async function loadReviewsForWidget() {
             try {
                 const response = await fetch(SCRIPT_URL);
                 const data = await response.json();
-                
+
                 if (data.success && data.reviews) {
-                    reviewsData = data.reviews;
+                    allReviews = data.reviews;
                     updateWidget(data.reviews);
                 } else {
                     updateWidget([]);
                 }
             } catch (error) {
-                console.error('Error loading reviews:', error);
                 updateWidget([]);
             }
         }
 
-        // Оновлення віджета
+        // Оновлення віджету
         function updateWidget(reviews) {
-            const widget = document.getElementById('reviewsWidget');
-            const rating = document.getElementById('widgetRating');
-            const count = document.getElementById('widgetCount');
-            const starsFill = document.getElementById('widgetStarsFill');
-
-            widget.classList.remove('loading');
-
-            const totalReviews = reviews.length;
-            const avgRating = totalReviews > 0 
-                ? reviews.reduce((sum, r) => sum + (r.rating || 0), 0) / totalReviews 
+            const count = reviews.length;
+            const avgRating = count > 0 
+                ? reviews.reduce((sum, r) => sum + r.rating, 0) / count 
                 : 0;
 
-            rating.textContent = avgRating.toFixed(1);
-            count.textContent = `${totalReviews} ${getReviewsWord(totalReviews)}`;
+            // Оновити число
+            document.getElementById('widgetRating').textContent = avgRating.toFixed(1);
 
-            // Заповнення зірок
-            const percentage = (avgRating / 5) * 100;
-            starsFill.style.width = `${percentage}%`;
+            // Оновити кількість
+            const countText = count === 0 ? 'Немає відгуків' :
+                             count === 1 ? '1 відгук' :
+                             count < 5 ? `${count} відгуки` :
+                             `${count} відгуків`;
+            document.getElementById('widgetCount').textContent = countText;
+
+            // Оновити зірки
+            renderWidgetStars(avgRating);
         }
 
-        function getReviewsWord(count) {
-            if (count === 0) return 'відгуків';
-            if (count === 1) return 'відгук';
-            if (count >= 2 && count <= 4) return 'відгуки';
-            return 'відгуків';
+        // Відображення зірок віджету з частковим заповненням
+        function renderWidgetStars(rating) {
+            const container = document.getElementById('widgetStars');
+            container.innerHTML = '';
+
+            for (let i = 1; i <= 5; i++) {
+                const star = document.createElement('span');
+                star.className = 'widget-star';
+                star.innerHTML = '★';
+
+                // Якщо рейтинг більше поточної зірки
+                if (rating >= i) {
+                    // Повністю заповнена зірка
+                    const filled = document.createElement('span');
+                    filled.className = 'widget-star-filled';
+                    filled.style.width = '100%';
+                    filled.innerHTML = '★';
+                    star.appendChild(filled);
+                } else if (rating > i - 1) {
+                    // Частково заповнена зірка
+                    const filled = document.createElement('span');
+                    filled.className = 'widget-star-filled';
+                    const percentage = ((rating - (i - 1)) * 100).toFixed(0);
+                    filled.style.width = percentage + '%';
+                    filled.innerHTML = '★';
+                    star.appendChild(filled);
+                }
+
+                container.appendChild(star);
+            }
         }
 
         // Відкрити модальне вікно
@@ -2740,10 +2788,10 @@
         function switchTab(tab) {
             const tabs = document.querySelectorAll('.reviews-tab');
             const contents = document.querySelectorAll('.reviews-tab-content');
-            
+
             tabs.forEach(t => t.classList.remove('active'));
             contents.forEach(c => c.classList.remove('active'));
-            
+
             if (tab === 'read') {
                 tabs[0].classList.add('active');
                 document.getElementById('readTab').classList.add('active');
@@ -2753,7 +2801,7 @@
             }
         }
 
-        // Ініціалізація рейтингу
+        // Ініціалізація рейтингу форми
         function initStarRating() {
             const stars = document.querySelectorAll('.star-input');
             stars.forEach(star => {
@@ -2778,9 +2826,7 @@
             msg.textContent = text;
             msg.className = `message ${type}`;
             msg.style.display = 'block';
-            setTimeout(() => {
-                msg.style.display = 'none';
-            }, 5000);
+            setTimeout(() => msg.style.display = 'none', 5000);
         }
 
         // Відправка відгуку
@@ -2817,19 +2863,17 @@
                 });
 
                 showFormMessage('✓ Дякуємо! Ваш відгук успішно додано!', 'success');
-                
-                // Очистити форму
+
                 document.getElementById('reviewName').value = '';
                 document.getElementById('reviewProduct').value = '';
                 document.getElementById('reviewText').value = '';
                 selectedRating = 0;
                 updateStars(0);
 
-                // Оновити дані
                 setTimeout(() => {
-                    loadReviewsData();
                     switchTab('read');
                     loadReviews();
+                    loadReviewsForWidget();
                 }, 2000);
 
             } catch (error) {
@@ -2840,7 +2884,7 @@
             }
         }
 
-        // Завантаження відгуків в модальне вікно
+        // Завантаження відгуків у модальне вікно
         async function loadReviews() {
             const loading = document.getElementById('loading');
             const list = document.getElementById('reviewsList');
@@ -2857,11 +2901,11 @@
                 loading.style.display = 'none';
 
                 if (data.success && data.reviews && data.reviews.length > 0) {
-                    displayReviews(data.reviews);
                     updateModalStats(data.reviews);
+                    displayReviews(data.reviews);
                 } else {
-                    noReviews.style.display = 'block';
                     updateModalStats([]);
+                    noReviews.style.display = 'block';
                 }
             } catch (error) {
                 loading.style.display = 'none';
@@ -2869,18 +2913,33 @@
             }
         }
 
-        // Оновлення статистики в модальному вікні
+        // Оновлення статистики модального вікна
         function updateModalStats(reviews) {
-            const totalReviews = reviews.length;
-            const avgRating = totalReviews > 0 
-                ? reviews.reduce((sum, r) => sum + (r.rating || 0), 0) / totalReviews 
+            const count = reviews.length;
+            const avgRating = count > 0 
+                ? reviews.reduce((sum, r) => sum + r.rating, 0) / count 
                 : 0;
 
-            document.getElementById('modalAvgRating').textContent = avgRating.toFixed(1);
-            document.getElementById('modalTotalReviews').textContent = totalReviews;
+            document.getElementById('modalRating').textContent = avgRating.toFixed(1);
+
+            const countText = count === 0 ? 'Немає відгуків' :
+                             count === 1 ? '1 відгук' :
+                             count < 5 ? `${count} відгуки` :
+                             `${count} відгуків`;
+            document.getElementById('modalCount').textContent = countText;
+
+            // Зірки в модальному вікні
+            const modalStars = document.getElementById('modalStars');
+            modalStars.innerHTML = '';
+            for (let i = 1; i <= 5; i++) {
+                const star = document.createElement('span');
+                star.className = i <= Math.round(avgRating) ? 'modal-star' : 'modal-star empty';
+                star.textContent = '★';
+                modalStars.appendChild(star);
+            }
         }
 
-        // Відображення відгуків
+        // Відображення списку відгуків
         function displayReviews(reviews) {
             const list = document.getElementById('reviewsList');
             list.style.display = 'grid';
@@ -2923,63 +2982,7 @@
             return div.innerHTML;
         }
     </script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
