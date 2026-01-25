@@ -2693,7 +2693,7 @@
         // Завантаження для віджету
         async function loadReviewsForWidget() {
             try {
-                const response = await fetch(SCRIPT_URL);
+                const response = await fetch(SCRIPT_URL + '?t=' + Date.now());
                 const data = await response.json();
 
                 if (data.success && data.reviews) {
@@ -2706,7 +2706,7 @@
                 updateWidget([]);
             }
         }
-fetch(SCRIPT_URL)
+fetch(SCRIPT_URL + '?t=' + Date.now())
   .then(r => r.json())
   .then(data => {
     if (data.success) {
@@ -2902,7 +2902,7 @@ fetch(SCRIPT_URL)
             noReviews.style.display = 'none';
 
             try {
-                const response = await fetch(SCRIPT_URL);
+                const response = await fetch(SCRIPT_URL + '?t=' + Date.now());
                 const data = await response.json();
 
                 loading.style.display = 'none';
@@ -2992,6 +2992,7 @@ fetch(SCRIPT_URL)
     
 </body>
 </html>
+
 
 
 
