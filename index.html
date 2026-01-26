@@ -2962,7 +2962,13 @@
                         <div class="review-avatar">${initials}</div>
                         <div class="review-info">
                             <div class="review-name">${escapeHtml(review.name)}</div>
-                            <div class="review-date">${review.date}</div>
+                            <div class="review-date">
+                        ${new Date(review.date).toLocaleDateString('uk-UA', {
+                       day: '2-digit',
+                       month: 'long',
+                       year: 'numeric'
+                       })}
+                     </div>
                         </div>
                     </div>
                     <div class="review-stars">${stars}</div>
@@ -2982,6 +2988,7 @@
 
 </body>
 </html>
+
 
 
 
