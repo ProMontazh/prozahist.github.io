@@ -1331,18 +1331,37 @@
                             <input type="text" id="reviewName" required placeholder="Введіть ваше ім'я">
                         </div>
 
-                        <div class="form-group">
-                            <label for="reviewProduct">Який товар ви купували? *</label>
-                            <select id="reviewProduct" required>
-                                <option value="">Оберіть товар</option>
-                                <option value="Ajax Hub">Ajax Hub</option>
-                                <option value="Ajax Hub 2 Plus">Ajax Hub 2 Plus</option>
-                                <option value="Ajax Hub 2 4G">Ajax Hub 2 4G</option>
-                                <option value="Ajax Starter Kit">Ajax Starter Kit</option>
-                                <option value="IMOU камери">IMOU камери</option>
-                                <option value="Ajax датчики">Ajax датчики</option>
-                                <option value="Інше">Інше</option>
-                            </select>
+                       <div class="form-group">
+    <label for="reviewProduct">Яку категорію товару ви купували? *</label>
+    <select id="reviewProduct" required>
+        <option value="">Оберіть категорію</option>
+
+        <optgroup label="Відеоспостереження">
+            <option value="indoor">Внутрішні камери</option>
+            <option value="outdoor">Зовнішні камери</option>
+            <option value="outdoor_4G">Зовнішні 4G камери</option>
+        </optgroup>
+
+        <optgroup label="Накопичувачі">
+            <option value="microSD">Карти пам'яті</option>
+        </optgroup>
+
+        <optgroup label="Сигналізація Ajax">
+            <option value="alarm">Комплекти сигналізації</option>
+            <option value="hub">Хаби, модулі</option>
+            <option value="protect">Внутрішня охорона</option>
+            <option value="protect_outdoor">Зовнішня охорона</option>
+        </optgroup>
+
+        <optgroup label="Безпека">
+            <option value="waterstop">Захист від потопу</option>
+            <option value="fire">Захист від пожежі</option>
+        </optgroup>
+
+        <option value="other">Інше</option>
+    </select>
+</div>
+
                         </div>
 
                         <div class="form-group">
@@ -3073,6 +3092,7 @@
     </script>
 
 </body>
+
 
 
 
