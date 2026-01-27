@@ -2939,47 +2939,41 @@
         }
 
         // Відображення списку відгуків
-        function displayReviews(reviews) {
-            const list = document.getElementById('reviewsList');
-            list.style.display = 'grid';
-            list.innerHTML = '';
+      function displayReviews(reviews) {
+    const list = document.getElementById('reviewsList');
+    list.style.display = 'grid';
+    list.innerHTML = '';
 
-            reviews.forEach(review => {
-                if (!review.name || !review.text) return;
+    reviews.forEach(review => {
+        if (!review.name || !review.text) return;
 
-                const initials = review.name.split(' ')
-                    .map(n => n[0])
-                    .join('')
-                    .toUpperCase()
-                    .substring(0, 2);
+        const initials = review.name.split(' ')
+            .map(n => n[0])
+            .join('')
+            .toUpperCase()
+            .substring(0, 2);
 
-                const stars = Array(5).fill(0)
-                    .map((_, i) => `<span class="star ${i >= review.rating ? 'empty' : ''}">★</span>`)
-                    .join('');
+        const stars = Array(5).fill(0)
+            .map((_, i) => `<span class="star ${i >= review.rating ? 'empty' : ''}">★</span>`)
+            .join('');
 
-                const card = document.createElement('div');
-                card.className = 'review-card';
-                card.innerHTML = `
-                    <div class="review-header">
-                        <div class="review-avatar">${initials}</div>
-                        <div class="review-info">
-                            <div class="review-name">${escapeHtml(review.name)}</div>
-                            <div class="review-date">
-                        ${new Date(review.date).toLocaleDateString('uk-UA', {
-                       day: '2-digit',
-                       month: 'long',
-                       year: 'numeric'
-                       })}
-                     </div>
-                        </div>
-                    </div>
-                    <div class="review-stars">${stars}</div>
-                    <div class="review-text">${escapeHtml(review.text)}</div>
-                    <div class="review-product">🛡️ ${escapeHtml(review.product)}</div>
-                `;
-                list.appendChild(card);
-            });
-        }
+        const card = document.createElement('div');
+        card.className = 'review-card';
+        card.innerHTML = `
+            <div class="review-header">
+                <div class="review-avatar">${initials}</div>
+                <div class="review-info">
+                    <div class="review-name">${escapeHtml(review.name)}</div>
+                    <div class="review-date">${escapeHtml(review.date)}</div>
+                </div>
+            </div>
+            <div class="review-stars">${stars}</div>
+            <div class="review-text">${escapeHtml(review.text)}</div>
+            <div class="review-product">🛡️ ${escapeHtml(review.product)}</div>
+        `;
+        list.appendChild(card);
+    });
+}
 
         function escapeHtml(text) {
             const div = document.createElement('div');
@@ -2989,4 +2983,5 @@
     </script>
 
 </body>
+
 
