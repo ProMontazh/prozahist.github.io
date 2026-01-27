@@ -3039,6 +3039,25 @@ const CATEGORY_MAP = {
         icon: 'images/other.png'
     }
 };
+     function renderReview(review) {
+    const cat = CATEGORY_MAP[review.product] || CATEGORY_MAP.other;
+
+    return `
+        <div class="review-card" data-category="${review.product}">
+            
+            <div class="review-category"
+                 onclick="openCategoryFromReview(this)"
+                 data-category="${review.product}">
+                 
+                <img src="${cat.icon}" alt="${cat.label}">
+                <span>${cat.label}</span>
+            </div>
+
+            <div class="review-text">${review.text}</div>
+        </div>
+    `;
+}
+
         // Завантаження відгуків у модальне вікно
         async function loadReviews() {
             const loading = document.getElementById('loading');
@@ -3141,6 +3160,7 @@ const CATEGORY_MAP = {
     </script>
 
 </body>
+
 
 
 
