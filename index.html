@@ -3106,13 +3106,40 @@ card.innerHTML = `
             div.textContent = text;
             return div.innerHTML;
         }
+function goToCategoryFromReview(categoryId) {
+    // 1️⃣ Закрываем модалку
+    const modal = document.querySelector('.reviews-modal');
+    if (modal) {
+        modal.classList.remove('active');
+    }
 
+    // 2️⃣ Возвращаем скролл страницы
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+
+    // 3️⃣ Переключаем категорию
+    if (typeof toggleCategory === 'function') {
+        toggleCategory(categoryId);
+    }
+
+    // 4️⃣ Скроллимся к товарам (с задержкой)
+    setTimeout(() => {
+        const productsBlock = document.getElementById('products');
+        if (productsBlock) {
+            productsBlock.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    }, 300);
+}
 
     </script>
 
 </body>
 
 </html>
+
 
 
 
