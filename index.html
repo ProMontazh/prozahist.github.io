@@ -3120,26 +3120,26 @@ const CATEGORY_MAP = {
             .map((_, i) => `<span class="star ${i >= review.rating ? 'empty' : ''}">★</span>`)
             .join('');
 
-        const card = document.createElement('div');
-        card.className = 'review-card';
-        card.innerHTML = `
-            <div class="review-header">
-                <div class="review-avatar">${initials}</div>
-                <div class="review-info">
-                    <div class="review-name">${escapeHtml(review.name)}</div>
-                    <div class="review-date">${escapeHtml(review.date)}</div>
-                </div>
-            </div>
-            <div class="review-stars">${stars}</div>
-            <div class="review-text">${escapeHtml(review.text)}</div>
-            const cat = CATEGORY_MAP[review.product] || CATEGORY_MAP.other;
+        const cat = CATEGORY_MAP[review.product] || CATEGORY_MAP.other;
 
-<div class="review-product">
-    <img src="${cat.icon}" alt="${cat.label}">
-    ${cat.label}
-</div>
+const card = document.createElement('div');
+card.className = 'review-card';
+card.innerHTML = `
+    <div class="review-header">
+        <div class="review-avatar">${initials}</div>
+        <div class="review-info">
+            <div class="review-name">${escapeHtml(review.name)}</div>
+            <div class="review-date">${escapeHtml(review.date)}</div>
+        </div>
+    </div>
+    <div class="review-stars">${stars}</div>
+    <div class="review-text">${escapeHtml(review.text)}</div>
+    <div class="review-product" onclick="toggleCategory('${review.product}')">
+        <img src="${cat.icon}" alt="${cat.label}">
+        ${cat.label}
+    </div>
+`;
 
-        `;
         list.appendChild(card);
     });
 }
@@ -3156,6 +3156,7 @@ const CATEGORY_MAP = {
 </body>
 
 </html>
+
 
 
 
