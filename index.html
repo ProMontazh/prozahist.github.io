@@ -1060,13 +1060,16 @@
                 align-items: center;
             }
 
-            .reviews-modal-content {
-                max-width: 100%;
-                max-height: calc(100vh - 40px);
-                border-radius: 16px;
-                width: calc(100% - 20px);
-                margin: 0 10px;
-            }
+           .reviews-modal-content {
+    height: 90vh;          /* 🔒 фикс */
+    max-height: 90vh;
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;      /* ❗️ ВАЖНО */
+}
+
 
             .reviews-modal-header {
                 border-radius: 0;
@@ -3065,6 +3068,7 @@
     </script>
 
 </body>
+
 
 
 
