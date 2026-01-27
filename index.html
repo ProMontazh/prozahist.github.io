@@ -113,7 +113,7 @@
 }
 </script>
 
-    <style>
+   <style>
         body {
             font-family: 'Open Sans', sans-serif;
             margin: 0;
@@ -493,19 +493,20 @@
             align-items: center;
             gap: 12px;
             padding: 12px 20px;
-            background: white;
-            border: 2px solid #f0f0f0;
+            background: transparent;
+            border: 2px solid rgba(240, 240, 240, 0.5);
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             margin-bottom: 15px;
         }
 
         .reviews-widget:hover {
-            border-color: #800000;
-            box-shadow: 0 4px 16px rgba(128, 0, 0, 0.2);
+            border-color: rgba(128, 0, 0, 0.8);
+            box-shadow: 0 4px 16px rgba(128, 0, 0, 0.15);
             transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .widget-stars {
@@ -576,7 +577,8 @@
         }
 
         .reviews-modal-content {
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             border-radius: 16px;
             width: 100%;
             max-width: 900px;
@@ -3049,6 +3051,7 @@
     </script>
 
 </body>
+
 
 
 
