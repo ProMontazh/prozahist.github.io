@@ -3132,7 +3132,13 @@ const CATEGORY_MAP = {
             </div>
             <div class="review-stars">${stars}</div>
             <div class="review-text">${escapeHtml(review.text)}</div>
-            <div class="review-product">🛡️ ${escapeHtml(review.product)}</div>
+            const cat = CATEGORY_MAP[review.product] || CATEGORY_MAP.other;
+
+<div class="review-product">
+    <img src="${cat.icon}" alt="${cat.label}">
+    ${cat.label}
+</div>
+
         `;
         list.appendChild(card);
     });
@@ -3150,6 +3156,7 @@ const CATEGORY_MAP = {
 </body>
 
 </html>
+
 
 
 
