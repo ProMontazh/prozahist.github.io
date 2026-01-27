@@ -826,332 +826,289 @@
             transform: none;
         }
 
-        /* ========== СПИСОК ВІДГУКІВ ========== */
-        .reviews-list {
-            display: grid;
-            gap: 20px;
-            grid-template-columns: 1fr;
-        }
-
-        .review-card {
-            background: rgba(249, 249, 249, 0.7);
-            backdrop-filter: blur(5px);
-            border: 2px solid rgba(240, 240, 240, 0.6);
-            border-radius: 12px;
-            padding: 20px;
-            transition: all 0.3s;
-        }
-
-        .review-card:hover {
-            border-color: rgba(128, 0, 0, 0.8);
-            box-shadow: 0 4px 12px rgba(128, 0, 0, 0.15);
-            transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.9);
-        }
-
-        .review-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .review-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #800000, #a00000);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 18px;
-            margin-right: 12px;
-            flex-shrink: 0;
-        }
-
-        .review-info {
-            flex-grow: 1;
-        }
-
-        .review-name {
-            font-weight: 700;
-            font-size: 16px;
-            color: #333;
-            margin-bottom: 4px;
-        }
-
-        .review-date {
-            font-size: 13px;
-            color: #999;
-        }
-
-        .review-stars {
-            display: flex;
-            gap: 2px;
-            margin-bottom: 12px;
-        }
-
-        .star {
-            color: #ffa500;
-            font-size: 18px;
-        }
-
-        .star.empty {
-            color: #ddd;
-        }
-
-        .review-text {
-            font-size: 15px;
-            line-height: 1.6;
-            color: #555;
-            margin-bottom: 12px;
-            word-wrap: break-word;
-        }
-
-        .review-product {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(3px);
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 13px;
-            color: #666;
-            border: 1px solid rgba(224, 224, 224, 0.6);
-        }
-
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: #999;
-            font-size: 16px;
-        }
-
-        .no-reviews {
-            text-align: center;
-            padding: 40px;
-            color: #999;
-            font-size: 16px;
-        }
-
-        .message {
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            text-align: center;
-            font-weight: 500;
-        }
-
-        .message.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .message.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-       .review-category {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 10px;
-    font-size: 13px;
-    color: #666;
-    cursor: pointer;
+       /* ========== СПИСОК ВІДГУКІВ - ОПТИМІЗИРОВАНО ========== */
+.reviews-list {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    justify-items: center; /* центрируем карточки */
+    padding: 10px;
 }
 
-.review-category img {
-    width: 18px;
-    height: 18px;
+.review-card {
+    background: rgba(249, 249, 249, 0.7);
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(240, 240, 240, 0.6);
+    border-radius: 12px;
+    padding: 15px 18px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 320px; /* ограничение ширины карточки */
+    transition: all 0.3s;
+}
+
+.review-card:hover {
+    border-color: rgba(128, 0, 0, 0.8);
+    box-shadow: 0 4px 12px rgba(128, 0, 0, 0.15);
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.review-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #800000, #a00000);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.review-info {
+    flex-grow: 1;
+}
+
+.review-name {
+    font-weight: 700;
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 3px;
+}
+
+.review-date {
+    font-size: 12px;
+    color: #999;
+}
+
+.review-stars {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 10px;
+}
+
+.star {
+    color: #ffa500;
+    font-size: 16px;
+}
+
+.star.empty {
+    color: #ddd;
+}
+
+.review-text {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+
+.review-product {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(3px);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #666;
+    border: 1px solid rgba(224, 224, 224, 0.6);
+}
+
+.review-product img {
+    width: 16px;
+    height: 16px;
     object-fit: contain;
 }
 
-.review-category:hover {
-    color: #800000;
+       /* ========== АДАПТИВНІСТЬ ========== */
+@media (max-width: 768px) {
+    #main-banner {
+        background-image: url('images/fon_for_category.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: auto;           /* теперь адаптивно */
+        padding-top: 80px;      /* уменьшил */
+    }
+
+    #products {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .products-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;              /* уменьшил */
+        padding: 0 12px;
+        box-sizing: border-box;
+    }
+
+    .product-item {
+        width: 100%;
+        max-width: 360px;       /* чуть меньше, чтобы не были огромными */
+        margin: 0 auto;
+        padding: 16px 18px;     /* уменьшил паддинги */
+        padding-bottom: 25px;
+        box-sizing: border-box;
+    }
+
+    .cart {
+        top: 12px;
+        right: 10px;
+        padding: 6px 8px;
+        font-size: 0.85em;
+    }
+
+    .cart-content {
+        width: 90%;
+        max-width: 380px;
+        margin: 0 auto;
+        top: 65px;
+        left: 0;
+        right: 0;
+    }
+
+    header h1 {
+        font-size: 1em;
+        padding: 8px;
+    }
+
+    .btn {
+        padding: 8px 18px;
+        font-size: 0.9em;
+    }
+
+    footer {
+        font-size: 0.8em;
+    }
+
+    .category-card {
+        flex: 1 1 calc(50% - 12px);
+        max-width: calc(50% - 12px);
+    }
+
+    #categories {
+        padding: 90px 10px 25px 10px;
+        gap: 8px;
+    }
+
+    .products {
+        padding-bottom: 50px;
+    }
+
+    .product-price {
+        margin-bottom: 10px !important;
+    }
+
+    /* Відгуки - мобільна версія */
+    .reviews-widget {
+        padding: 8px 12px;
+        gap: 8px;
+    }
+
+    .widget-star {
+        font-size: 18px;
+    }
+
+    .widget-rating-number {
+        font-size: 16px;
+    }
+
+    .widget-rating-count {
+        font-size: 11px;
+    }
+
+    .reviews-modal {
+        padding: 15px 0;
+        align-items: center;
+    }
+
+    .reviews-modal.active {
+        padding: 15px 0;
+        align-items: center;
+    }
+
+    .reviews-modal-content {
+        height: auto;
+        max-height: 90vh;
+        width: 95%;
+        max-width: 900px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .reviews-modal-header {
+        border-radius: 0;
+        padding: 18px 12px;
+    }
+
+    .reviews-modal-header h2 {
+        font-size: 20px;
+    }
+
+    .reviews-modal-body {
+        padding: 18px 12px;
+        flex: 1;
+        overflow-y: auto;
+    }
+
+    .modal-rating-summary {
+        flex-direction: column;
+        gap: 12px;
+        padding: 18px;
+    }
+
+    .modal-rating-number {
+        font-size: 44px;
+    }
+
+    .reviews-tabs {
+        gap: 5px;
+    }
+
+    .reviews-tab {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    .star-rating {
+        font-size: 26px;
+        gap: 5px;
+    }
+
+    .reviews-form {
+        max-width: 100%;
+    }
+
+    .review-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .review-name {
+        font-size: 14px;
+    }
+
+    .review-text {
+        font-size: 13px;
+    }
 }
-
-        /* ========== АДАПТИВНІСТЬ ========== */
-        @media (max-width: 768px) {
-            #main-banner {
-                background-image: url('images/fon_for_category.png');
-                background-size: cover;
-                background-repeat: no-repeat;
-                background-position: center;
-                height: 40px;
-                padding-top: 85px;
-            }
-
-            #products {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .products-container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-                padding: 0 12px;
-                box-sizing: border-box;
-            }
-
-            .product-item {
-                width: 100%;
-                max-width: 400px;
-                margin: 0 auto;
-                box-sizing: border-box;
-                padding: 20px 22px;
-                padding-bottom: 30px;
-            }
-
-            .cart {
-                top: 15px;
-                right: 10px;
-                padding: 8px;
-                font-size: 0.8em;
-            }
-
-            .cart-content {
-                width: 85%;
-                max-width: 400px;
-                margin: 0 auto;
-                top: 70px;
-                right: 0;
-                left: 0;
-            }
-
-            header h1 {
-                font-size: 1.0em;
-                padding: 10px;
-            }
-
-            .btn {
-                padding: 10px 20px;
-                font-size: 0.9em;
-            }
-
-            footer {
-                font-size: 0.8em;
-            }
-
-            .category-card {
-                flex: 1 1 calc(50% - 15px);
-                max-width: calc(50% - 15px);
-            }
-
-            #categories {
-                padding: 95px 10px 30px 10px;
-                gap: 10px;
-            }
-
-            .products {
-                padding-bottom: 60px;
-            }
-
-            .product-price {
-                margin-bottom: 15px !important;
-            }
-
-            /* Відгуки - мобільна версія */
-            .reviews-widget {
-                padding: 10px 16px;
-                gap: 10px;
-            }
-
-            .widget-star {
-                font-size: 20px;
-            }
-
-            .widget-rating-number {
-                font-size: 18px;
-            }
-
-            .widget-rating-count {
-                font-size: 11px;
-            }
-
-            .reviews-modal {
-                padding: 20px 0;
-                align-items: center;
-            }
-
-            .reviews-modal.active {
-                padding: 20px 0;
-                align-items: center;
-            }
-
-           .reviews-modal-content {
-    height: 90vh;          /* 🔒 фикс */
-    max-height: 90vh;
-    width: 100%;
-    max-width: 900px;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;      /* ❗️ ВАЖНО */
-}
-
-
-            .reviews-modal-header {
-                border-radius: 0;
-                padding: 20px 15px;
-            }
-
-            .reviews-modal-header h2 {
-                font-size: 22px;
-            }
-
-            .reviews-modal-body {
-                padding: 20px 15px;
-                 flex: 1;
-                 overflow-y: auto;      /* 👈 скролл ТОЛЬКО здесь */
-            }
-            .modal-rating-summary {
-                flex-direction: column;
-                gap: 15px;
-                padding: 20px;
-            }
-
-            .modal-rating-number {
-                font-size: 48px;
-            }
-
-            .reviews-tabs {
-                gap: 5px;
-            }
-
-            .reviews-tab {
-                padding: 10px 16px;
-                font-size: 14px;
-            }
-
-            .star-rating {
-                font-size: 28px;
-                gap: 6px;
-            }
-
-            .reviews-form {
-                max-width: 100%;
-            }
-
-            .review-avatar {
-                width: 45px;
-                height: 45px;
-                font-size: 16px;
-            }
-
-            .review-name {
-                font-size: 15px;
-            }
-
-            .review-text {
-                font-size: 14px;
-            }
-          
-           
-        }
 
 
         @media (max-width: 900px) and (orientation: landscape) {
@@ -3156,6 +3113,7 @@ card.innerHTML = `
 </body>
 
 </html>
+
 
 
 
