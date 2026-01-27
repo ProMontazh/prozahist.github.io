@@ -953,6 +953,25 @@
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
+       .review-category {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #666;
+    cursor: pointer;
+}
+
+.review-category img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.review-category:hover {
+    color: #800000;
+}
 
         /* ========== АДАПТИВНІСТЬ ========== */
         @media (max-width: 768px) {
@@ -1130,25 +1149,7 @@
             .review-text {
                 font-size: 14px;
             }
-            .review-category {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 10px;
-    font-size: 13px;
-    color: #666;
-    cursor: pointer;
-}
-
-.review-category img {
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
-}
-
-.review-category:hover {
-    color: #800000;
-}
+           
         }
 
 
@@ -3140,6 +3141,7 @@ const CATEGORY_MAP = {
     </script>
 
 </body>
+
 
 
 
