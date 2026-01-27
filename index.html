@@ -2826,170 +2826,103 @@
             msg.style.display = 'block';
             setTimeout(() => msg.style.display = 'none', 5000);
         }
+// Відправка відгуку (ВИПРАВЛЕНА ВЕРСІЯ)
+async function submitReview(event) {
+    event.preventDefault();
 
-        // Відправка відгуку
-        async function submitReview(event) {
-            event.preventDefault();
+    if (selectedRating === 0) {
+        showFormMessage('Будь ласка, оберіть оцінку!', 'error');
+        return;
+    }
 
-            if (selectedRating === 0) {
-                showFormMessage('Будь ласка, оберіть оцінку!', 'error');
-                return;
-            }
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Відправка...';
 
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Відправка...';
+    const review = {
+        name: document.getElementById('reviewName').value.trim(),
+        product: document.getElementById('reviewProduct').value,
+        rating: selectedRating,
+        text: document.getElementById('reviewText').value.trim(),
+        date: new Date().toLocaleDateString('uk-UA', { 
+            day: 'numeric',
+            month: 'long', 
+            year: 'numeric'
+        }) // Дає: "26 січня 2026"
+    };
 
-            const review = {
-                name: document.getElementById('reviewName').value.trim(),
-                product: document.getElementById('reviewProduct').value,
-                rating: selectedRating,
-                text: document.getElementById('reviewText').value.trim(),
-                date: new Date().toLocaleDateString('uk-UA', { 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
-                })
-            };
+    try {
+        await fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(review)
+        });
 
-            try {
-                await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(review)
-                });
+        showFormMessage('✓ Дякуємо! Ваш відгук успішно додано!', 'success');
 
-                showFormMessage('✓ Дякуємо! Ваш відгук успішно додано!', 'success');
+        document.getElementById('reviewName').value = '';
+        document.getElementById('reviewProduct').value = '';
+        document.getElementById('reviewText').value = '';
+        selectedRating = 0;
+        updateStars(0);
 
-                document.getElementById('reviewName').value = '';
-                document.getElementById('reviewProduct').value = '';
-                document.getElementById('reviewText').value = '';
-                selectedRating = 0;
-                updateStars(0);
+        setTimeout(() => {
+            switchTab('read');
+            loadReviews();
+            loadReviewsForWidget();
+        }, 2000);
 
-                setTimeout(() => {
-                    switchTab('read');
-                    loadReviews();
-                    loadReviewsForWidget();
-                }, 2000);
+    } catch (error) {
+        showFormMessage('Помилка відправки. Спробуйте ще раз.', 'error');
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Відправити відгук';
+    }
+}
 
-            } catch (error) {
-                showFormMessage('Помилка відправки. Спробуйте ще раз.', 'error');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Відправити відгук';
-            }
-        }
+// Відображення списку відгуків (ВИПРАВЛЕНО)
+function displayReviews(reviews) {
+    const list = document.getElementById('reviewsList');
+    list.style.display = 'grid';
+    list.innerHTML = '';
 
-        // Завантаження відгуків у модальне вікно
-        async function loadReviews() {
-            const loading = document.getElementById('loading');
-            const list = document.getElementById('reviewsList');
-            const noReviews = document.getElementById('noReviews');
+    reviews.forEach(review => {
+        if (!review.name || !review.text) return;
 
-            loading.style.display = 'block';
-            list.style.display = 'none';
-            noReviews.style.display = 'none';
+        const initials = review.name.split(' ')
+            .map(n => n[0])
+            .join('')
+            .toUpperCase()
+            .substring(0, 2);
 
-            try {
-                const response = await fetch(SCRIPT_URL);
-                const data = await response.json();
+        const stars = Array(5).fill(0)
+            .map((_, i) => `<span class="star ${i >= review.rating ? 'empty' : ''}">★</span>`)
+            .join('');
 
-                loading.style.display = 'none';
-
-                if (data.success && data.reviews && data.reviews.length > 0) {
-                    updateModalStats(data.reviews);
-                    displayReviews(data.reviews);
-                } else {
-                    updateModalStats([]);
-                    noReviews.style.display = 'block';
-                }
-            } catch (error) {
-                loading.style.display = 'none';
-                noReviews.style.display = 'block';
-            }
-        }
-
-        // Оновлення статистики модального вікна
-        function updateModalStats(reviews) {
-            const count = reviews.length;
-            const avgRating = count > 0 
-                ? reviews.reduce((sum, r) => sum + r.rating, 0) / count 
-                : 0;
-
-            document.getElementById('modalRating').textContent = avgRating.toFixed(1);
-
-            const countText = count === 0 ? 'Немає відгуків' :
-                             count === 1 ? '1 відгук' :
-                             count < 5 ? `${count} відгуки` :
-                             `${count} відгуків`;
-            document.getElementById('modalCount').textContent = countText;
-
-            // Зірки в модальному вікні
-            const modalStars = document.getElementById('modalStars');
-            modalStars.innerHTML = '';
-            for (let i = 1; i <= 5; i++) {
-                const star = document.createElement('span');
-                star.className = i <= Math.round(avgRating) ? 'modal-star' : 'modal-star empty';
-                star.textContent = '★';
-                modalStars.appendChild(star);
-            }
-        }
-
-        // Відображення списку відгуків
-        function displayReviews(reviews) {
-            const list = document.getElementById('reviewsList');
-            list.style.display = 'grid';
-            list.innerHTML = '';
-
-            reviews.forEach(review => {
-                if (!review.name || !review.text) return;
-
-                const initials = review.name.split(' ')
-                    .map(n => n[0])
-                    .join('')
-                    .toUpperCase()
-                    .substring(0, 2);
-
-                const stars = Array(5).fill(0)
-                    .map((_, i) => `<span class="star ${i >= review.rating ? 'empty' : ''}">★</span>`)
-                    .join('');
-
-                const card = document.createElement('div');
-                card.className = 'review-card';
-                card.innerHTML = `
-                    <div class="review-header">
-                        <div class="review-avatar">${initials}</div>
-                        <div class="review-info">
-                            <div class="review-name">${escapeHtml(review.name)}</div>
-                            <div class="review-date">
-                        ${new Date(review.date).toLocaleDateString('uk-UA', {
-                       day: '2-digit',
-                       month: 'long',
-                       year: 'numeric'
-                       })}
-                     </div>
-                        </div>
-                    </div>
-                    <div class="review-stars">${stars}</div>
-                    <div class="review-text">${escapeHtml(review.text)}</div>
-                    <div class="review-product">🛡️ ${escapeHtml(review.product)}</div>
-                `;
-                list.appendChild(card);
-            });
-        }
-
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
+        const card = document.createElement('div');
+        card.className = 'review-card';
+        card.innerHTML = `
+            <div class="review-header">
+                <div class="review-avatar">${initials}</div>
+                <div class="review-info">
+                    <div class="review-name">${escapeHtml(review.name)}</div>
+                    <div class="review-date">${escapeHtml(review.date)}</div>
+                </div>
+            </div>
+            <div class="review-stars">${stars}</div>
+            <div class="review-text">${escapeHtml(review.text)}</div>
+            <div class="review-product">🛡️ ${escapeHtml(review.product)}</div>
+        `;
+        list.appendChild(card);
+    });
+}
     </script>
 
 </body>
 
 </html>
+
 
 
 
