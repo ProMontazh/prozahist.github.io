@@ -2471,8 +2471,56 @@
   overflow-y: auto;
 }
 </style>
- <script>
+
+    <script>
+        /* ======================================================
+   🧩 КАРТА КАТЕГОРИЙ — ВСЕГДА В САМОМ ВЕРХУ
+   ====================================================== */
+const CATEGORY_MAP = {
+    indoor: {
+        label: 'Внутрішні камери IMOU',
+        icon: 'images/indoor.png'
+    },
+    outdoor: {
+        label: 'Зовнішні камери IMOU',
+        icon: 'images/outdoor.png'
+    },
+    outdoor_4G: {
+        label: 'Зовнішні 4G камери IMOU',
+        icon: 'images/outdoor_4G.png'
+    },
+    alarm: {
+        label: 'Комплекти сигналізації Ajax',
+        icon: 'images/alarm.png'
+    },
+    hub: {
+        label: 'Хаби, модулі Ajax',
+        icon: 'images/hub_white.png'
+    },
+    protect: {
+        label: 'Внутрішня охорона Ajax',
+        icon: 'images/protect_indoor.png'
+    },
+    protect_outdoor: {
+        label: 'Зовнішня охорона Ajax',
+        icon: 'images/protect_outdoor.png'
+    },
+    waterstop: {
+        label: 'Захист від потопу Ajax',
+        icon: 'images/waterstop.png'
+    },
+    fire: {
+        label: 'Захист від пожежі Ajax',
+        icon: 'images/fire.png'
+    },
+    other: {
+        label: 'Інше',
+        icon: 'images/other.png'
+    }
+};
+
     (() => {
+        
         // === 🛒 КОШИК ===
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -2997,49 +3045,7 @@
                 submitBtn.textContent = 'Відправити відгук';
             }
         }
-/* ===== КАРТА КАТЕГОРИЙ (ОБЯЗАТЕЛЬНО ВВЕРХУ) ===== */
-const CATEGORY_MAP = {
-    indoor: {
-        label: 'Внутрішні камери IMOU',
-        icon: 'images/indoor.png'
-    },
-    outdoor: {
-        label: 'Зовнішні камери IMOU',
-        icon: 'images/outdoor.png'
-    },
-    outdoor_4G: {
-        label: 'Зовнішні 4G камери IMOU',
-        icon: 'images/outdoor_4G.png'
-    },
-    alarm: {
-        label: 'Комплекти сигналізації Ajax',
-        icon: 'images/alarm.png'
-    },
-    hub: {
-        label: 'Хаби, модулі Ajax',
-        icon: 'images/hub_white.png'
-    },
-    protect: {
-        label: 'Внутрішня охорона Ajax',
-        icon: 'images/protect_indoor.png'
-    },
-    protect_outdoor: {
-        label: 'Зовнішня охорона Ajax',
-        icon: 'images/protect_outdoor.png'
-    },
-    waterstop: {
-        label: 'Захист від потопу Ajax',
-        icon: 'images/waterstop.png'
-    },
-    fire: {
-        label: 'Захист від пожежі Ajax',
-        icon: 'images/fire.png'
-    },
-    other: {
-        label: 'Інше',
-        icon: 'images/other.png'
-    }
-};
+
         // Завантаження відгуків у модальне вікно
         async function loadReviews() {
             const loading = document.getElementById('loading');
@@ -3144,6 +3150,7 @@ const CATEGORY_MAP = {
 </body>
 
 </html>
+
 
 
 
