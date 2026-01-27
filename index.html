@@ -3089,9 +3089,13 @@ card.innerHTML = `
             <div class="review-date">${escapeHtml(review.date)}</div>
         </div>
     </div>
+
     <div class="review-stars">${stars}</div>
+
     <div class="review-text">${escapeHtml(review.text)}</div>
-    <div class="review-product" onclick="toggleCategory('${review.product}')">
+
+    <div class="review-product"
+         onclick="goToCategoryFromReview('${review.product}')">
         <img src="${cat.icon}" alt="${cat.label}">
         ${cat.label}
     </div>
@@ -3139,6 +3143,7 @@ function goToCategoryFromReview(categoryId) {
 </body>
 
 </html>
+
 
 
 
