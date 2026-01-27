@@ -113,7 +113,7 @@
 }
 </script>
 
-   <style>
+  <style>
         body {
             font-family: 'Open Sans', sans-serif;
             margin: 0;
@@ -577,7 +577,8 @@
         }
 
         .reviews-modal-content {
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: rgba(255, 255, 255, 0.85) !important;
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             border-radius: 16px;
             width: 100%;
@@ -1050,22 +1051,21 @@
             }
 
             .reviews-modal {
-                padding: 0;
-                align-items: flex-start;
+                padding: 20px 0;
+                align-items: center;
             }
 
             .reviews-modal.active {
-                padding: 0;
-                align-items: flex-start;
+                padding: 20px 0;
+                align-items: center;
             }
 
             .reviews-modal-content {
                 max-width: 100%;
-                max-height: 100vh;
-                min-height: 100vh;
-                border-radius: 0;
-                width: 100%;
-                margin: 0;
+                max-height: calc(100vh - 40px);
+                border-radius: 16px;
+                width: calc(100% - 20px);
+                margin: 0 10px;
             }
 
             .reviews-modal-header {
@@ -3065,6 +3065,7 @@
     </script>
 
 </body>
+
 
 
 
