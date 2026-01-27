@@ -652,9 +652,13 @@
         }
 
         .reviews-modal-body {
-            padding: 30px;
-            background: transparent;
-        }
+    padding: 30px;
+    background: transparent;
+
+    flex: 1;              /* 🔒 занимает фиксированное место */
+    overflow-y: auto;     /* ✅ скролл ТОЛЬКО тут */
+}
+
 
         /* ========== СТАТИСТИКА ========== */
         .modal-rating-summary {
@@ -3149,6 +3153,7 @@ function goToCategoryFromReview(categoryId) {
 </body>
 
 </html>
+
 
 
 
