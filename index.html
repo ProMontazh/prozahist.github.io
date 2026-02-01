@@ -491,18 +491,20 @@ if (location.pathname === '/index') {
             margin-left: 10px;
             display: none;
         }
-      .tab-content {
+      .reviews-tab-content {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
   visibility: hidden;
+  transition: all 0.3s ease; /* плавное раскрытие */
 }
 
-.tab-content.active {
-  max-height: 5000px;
+.reviews-tab-content.active {
+  max-height: 5000px; /* достаточно, чтобы вместить весь контент */
   opacity: 1;
   visibility: visible;
 }
+
 
         /* ========== ВІДЖЕТ ВІДГУКІВ ========== */
         .reviews-widget {
@@ -3182,6 +3184,7 @@ function goToCategoryFromReview(categoryId) {
     </script>
 </body>
 </html>
+
 
 
 
