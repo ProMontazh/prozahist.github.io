@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>Автономна 4G камера Imou IPC-TB3FP-3T0WE FSP12-TYPEC</title>
+     
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+    .seo-text {
+  font-family: 'Roboto', sans-serif;
+  max-width: 900px;
+  margin: 0 auto 30px;  /* центрирование и отступ снизу */
+
+  font-size: 16px;
+  line-height: 1.4;     /* увеличенное расстояние между строками */
+  opacity: 0.9;
+}
+
+
+        .toast {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 1.0em;
+    white-space: nowrap; /* Устанавливаем текст в одну строчку */        
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: 9999;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+}
+        .container {
+          
+            max-width: 830px;
+            margin: 20px auto;
+            
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            animation: fadeIn 3.0s forwards;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .product-title {
+            text-align: center;
+            font-size: 1.5em;
+            margin-top: 0;
+        }
+
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 10px;
+            scroll-behavior: smooth;
+            justify-content: flex-start; /* добавь это */
+        }
+
+        .carousel img {
+            width: 100%;
+            max-width: 400px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .carousel img:hover {
+            transform: scale(1.05);
+        }
+
+        .product-description {
+            max-width: 100%;
+            margin-top: 20px;
+            font-size: 1.0rem;
+            line-height: 1.6;
+        }
+
+        .product-description ul {
+            padding-left: 20px;
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+        .product-description li {
+            margin-bottom: 6px;
+        }
+
+        .product-price {
+            font-size: 1.8em;
+            color: red;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .btn {
+            display: block;
+            width: fit-content;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px auto;
+            text-align: center;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* ----- Модальное окно ----- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+
+        .modal .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+            padding: 10px;
+        }
+
+        .modal .arrow.left {
+            left: 20px;
+        }
+
+        .modal .arrow.right {
+            right: 20px;
+        }
+            /* Улучшаем вид списка характеристик на ПК */
+@media (min-width: 1024px) {
+  .product-description ul {
+    padding-left: 150px; /* больше отступ слева */
+    margin-top: 15px;
+  }
+
+  .product-description li {
+  border-bottom: 1px dotted #ddd;
+  padding-bottom: 5px;
+}
+}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="product-title">Автономна 4G камера Imou IPC-TB3FP-3T0WE FSP12-TYPEC</h2>
+    <p class="seo-text">
+Автономна поворотна 4G камера відеоспостереження IPC-TB3FP-3T0WE FSP12-TYPEC призначена для охорони об’єктів без підключення до Wi-Fi та електромережі. Камера передає данні через мобільний інтернет, має сонячну панель і вбудований акумулятор, веде запис на карту пам’яті підтримує віддалений доступ з телефону.
+Має нічне бачення, детекцію руху та надсилає сповіщення у разі подій. Самостійне встановлення займає мінімум часу та не потребує спеціальних навичок. Камера постачається з офіційною гарантією та доставляється по всій Україні.
+    </p>
+
+    <div class="carousel">
+        <img src="images/IPC-TB3FP-3T0WE FSP12-TYPEC_1.png" alt="IP-Камера IMOU" onclick="openModal('images/IPC-TB3FP-3T0WE FSP12-TYPEC_1.png')">
+      <img src="images/IPC-TB3FP-3T0WE FSP12-TYPEC_2.png" alt="IP-Камера IMOU" onclick="openModal('images/IPC-TB3FP-3T0WE FSP12-TYPEC_2.png')">
+      <img src="images/IPC-TB3FP-3T0WE FSP12-TYPEC_3.png" alt="IP-Камера IMOU" onclick="openModal('images/IPC-TB3FP-3T0WE FSP12-TYPEC_3.png')">
+      <img src="images/IPC-TB3FP-3T0WE FSP12-TYPEC_4.png" alt="IP-Камера IMOU" onclick="openModal('images/IPC-TB3FP-3T0WE FSP12-TYPEC_4.png')">
+   </div>
+
+    <div id="toast" class="toast"></div>
+
+    <div class="product-description">
+ Роздільна здатність 3МП, 1/3" CMOS-матриця;
+ Фокус 3.6мм (кут огляду 98°);
+ Максимальна роздільна здатність відео 3 МП (2304x1296) - 15 к\с;
+ Кодеки H.264, H.265;
+ Аналітика та аларми: детектор руху, виявлення людини, автотрекінг;
+ 5 VDC, батарея 5 000 мА•г;
+ IP65; 
+ Колір корпусу – білий
+        <br><br>
+        Характеристики:
+        <ul>
+<li>Фокусна відстань	2.8 мм</li>
+<li>Кути огляду	98°(Г), 54°(В), 121°(Д)</li>
+<li>Відео компресія	H.264&H.265</li>
+<li>Частота кадрів (головний потік)	2304 х 1296 - 15 к/с</li>
+<li>Метод зберігання	SD карта до 256 Гб</li>
+<li>Аудіо інтерфейси	вбудований мікрофон та динамік</li>
+<li>Мережеві інтерфейси	Wi-Fi:IEEE802.11b/g/n</li>
+<li>Цифрове збільшення	8x</li>
+<li>Вхід і вихід з регіону	Підтримує</li>
+<li>Живлення	батарея 5000 мА•г; DC 5В 2A</li>
+<li>Потужність споживання	3.5 Вт</li>
+<li>Робоча температура	-20℃~+50℃</li>
+<li>Розміри	88×63×41 мм</li>
+<li>Вага	180 г</li>
+<li>Розмір упаковки (Ш х В х Г)	180 x 90 x 280 мм</li>
+<li>Вага брутто	0.81 кг</li>
+        </ul>
+    </div>
+
+    <p class="product-price">4200.00 грн</p>
+    <button class="btn" onclick="addToCartFromProductPage({ id: 'IPC-TB3FP-3T0WE FSP12-TYPEC', name: 'IPC-TB3FP-3T0WE FSP12-TYPEC', price: 4200.00, image: 'images/IPC-TB3FP-3T0WE FSP12-TYPEC_1.png' })">Додати у кошик</button>
+</div>
+
+<div id="modal" class="modal" onclick="closeModal()">
+    <span class="arrow left" onclick="event.stopPropagation(); prevImage()">&#10094;</span>
+    <img id="modal-img" src=""/>
+    <span class="arrow right" onclick="event.stopPropagation(); nextImage()">&#10095;</span>
+</div>
+
+<script>
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const images = [
+         "images/IPC-TB3FP-3T0WE FSP12-TYPEC_1.png",
+      "images/IPC-TB3FP-3T0WE FSP12-TYPEC_2.png",
+      "images/IPC-TB3FP-3T0WE FSP12-TYPEC_3.png",
+      "images/IPC-TB3FP-3T0WE FSP12-TYPEC_4.png"
+      
+    ];
+    let currentIndex = 0;
+
+    function showToast(message) {
+        const toast = document.getElementById("toast");
+        toast.textContent = message;
+        toast.classList.add("show");
+        setTimeout(() => {
+            toast.classList.remove("show");
+        }, 3000);
+    }
+
+    function addToCartFromProductPage(item) {
+        const existingItem = cart.find(cartItem => cartItem.id === item.id);
+        if (existingItem) {
+            existingItem.quantity++;
+        } else {
+            item.quantity = 1;
+            cart.push(item);
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        showToast(`${item.name} додано до кошика!`);
+    }
+
+    function openModal(imageSrc) {
+    currentIndex = images.indexOf(imageSrc);
+    document.getElementById("modal-img").src = imageSrc;
+    document.getElementById("modal").style.display = "flex";
+
+    // 👇 Если изображение одно — стрелки не показываем
+    if (images.length <= 1) {
+        document.querySelector('.arrow.left').style.display = 'none';
+        document.querySelector('.arrow.right').style.display = 'none';
+    } else {
+        document.querySelector('.arrow.left').style.display = 'block';
+        document.querySelector('.arrow.right').style.display = 'block';
+    }
+}
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+function nextImage() {
+    if (images.length <= 1) return; // если одно фото — ничего не делаем
+    currentIndex = (currentIndex + 1) % images.length;
+    document.getElementById("modal-img").src = images[currentIndex];
+}
+
+function prevImage() {
+    if (images.length <= 1) return;
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    document.getElementById("modal-img").src = images[currentIndex];
+}
+
+// свайп на мобильных
+let startX = 0;
+const modal = document.getElementById("modal");
+
+modal.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+});
+
+modal.addEventListener("touchend", (e) => {
+    let endX = e.changedTouches[0].clientX;
+    if (endX - startX > 50) {
+        prevImage();
+    } else if (startX - endX > 50) {
+        nextImage();
+    }
+});
+
+// возврат к категории при нажатии "назад"
+window.addEventListener('popstate', () => {
+    const lastCat = localStorage.getItem('lastCategory');
+    if (lastCat) {
+        window.location.href = `index.html#${lastCat}`;
+    } else {
+        window.location.href = 'index.html';
+    }
+});
+    // Центрируем изображение, если оно одно
+document.addEventListener("DOMContentLoaded", () => {
+    const carousel = document.querySelector(".carousel");
+    const imgs = carousel.querySelectorAll("img");
+
+    if (imgs.length === 1) {
+        carousel.style.justifyContent = "center";
+    }
+});
+
+</script>
+</body>
+</html>
