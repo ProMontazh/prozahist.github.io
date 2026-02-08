@@ -1,83 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Головна сторінка -->
   <url>
     <loc>https://xn--80anevegliy.pp.ua/</loc>
-    <lastmod>2026-01-24</lastmod>
+    <lastmod>2026-02-08</lastmod>
   </url>
 
-  <!-- ===== ВНУТРІШНІ КАМЕРИ ===== -->
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_indoor_1%28IPC-K2MP-3H1WE%29.html</loc>
-    <lastmod>2026-01-24</lastmod>
-  </url>
+  <!-- ВНУТРІШНІ КАМЕРИ -->
+  <url><loc>https://xn--80anevegliy.pp.ua/details_indoor_1%28IPC-K2MP-3H1WE%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_indoor_2%28IPC-C32EP%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_indoor_3%28IPC-K2EP-3H3W%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_indoor_4%28IPC-K2EP-5H3W%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_indoor_5%28IPC-T22EP-C%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_indoor_6%28IPC-T42EP-C%29.html</loc><lastmod>2026-02-08</lastmod></url>
 
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_indoor_2%28IPC-C32EP%29.html</loc>
-    <lastmod>2026-01-24</lastmod>
-  </url>
+  <!-- ЗОВНІШНІ КАМЕРИ -->
+  <url><loc>https://xn--80anevegliy.pp.ua/details_outdoor_1%28IPC-K3DP-3H0WF%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_outdoor_2%28IPC-K3DP-5H0WF%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_outdoor_3%28IPC-S3EP-3M0WE%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_outdoor_4%28IPC-GS7EP-5M0WE%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_outdoor_5%28IPC-K7CP-3H1WE%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_outdoor_6%28IPC-S7XEP-10M0WED%29.html</loc><lastmod>2026-02-08</lastmod></url>
 
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_indoor_3%28IPC-K2EP-3H3W%29.html</loc>
-    <lastmod>2026-01-24</lastmod>
-  </url>
+  <!-- 4G КАМЕРИ -->
+  <url><loc>https://xn--80anevegliy.pp.ua/details_outdoor4G_1%28IPC-K7FP-3H0TE-EU%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_outdoor4G_2%28IPC-B7ED-5M0TEA-EU%29.html</loc><lastmod>2026-02-08</lastmod></url>
 
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_indoor_4%28IPC-K2EP-5H3W%29.html</loc>
-    <lastmod>2026-01-24</lastmod>
-  </url>
+  <!-- КОМПЛЕКТИ СИГНАЛІЗАЦІЇ -->
+  <url><loc>https://xn--80anevegliy.pp.ua/details_alarm_1%28Starter%20Kit%20White%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_alarm_2%28Starter%20Kit%20Black%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_alarm_3%28Starter%20Kit%202%20White%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_alarm_4%28Starter%20Kit%202%20Black%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_alarm_5%28StarterKit%20Cam%20White%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_alarm_6%28StarterKit%20Cam%20Black%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_alarm_7%28StarterKit%20Cam%20Plus%20White%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_alarm_8%28StarterKit%20Cam%20Plus%20Black%29.html</loc><lastmod>2026-02-08</lastmod></url>
 
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_indoor_5%28IPC-T22EP-C%29.html</loc>
-    <lastmod>2026-01-24</lastmod>
-  </url>
+  <!-- ХАБИ -->
+  <url><loc>https://xn--80anevegliy.pp.ua/details_hub_01%28Hub%20White%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_hub_02%28Hub%20Black%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_hub_03%28Hub%202%202G%20White%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_hub_04%28Hub%202%202G%20Black%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_hub_05%28Hub%202%204G%20White%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_hub_06%28Hub%202%204G%20Black%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_hub_07%28Hub%202%20Plus%20White%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_hub_08%28Hub%202%20Plus%20Black%29.html</loc><lastmod>2026-02-08</lastmod></url>
 
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_indoor_6%28IPC-T42EP-C%29.html</loc>
-    <lastmod>2026-01-24</lastmod>
-  </url>
-
-  <!-- ===== ЗОВНІШНІ КАМЕРИ ===== -->
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_outdoor_1%28IPC-K3DP-3H0WF%29.html</loc>
-    <lastmod>2026-01-24</lastmod>
-  </url>
-
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_outdoor_2%28IPC-K3DP-5H0WF%29.html</loc>
-    <lastmod>2026-01-24</lastmod>
-  </url>
-
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_outdoor_3%28IPC-S3EP-3M0WE%29.html</loc>
-    <lastmod>2026-01-24</lastmod>
-  </url>
-
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_outdoor_4%28IPC-GS7EP-5M0WE%29.html</loc>
-    <lastmod>2026-01-24</lastmod>
-  </url>
-
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_outdoor_5%28IPC-K7CP-3H1WE%29.html</loc>
-    <lastmod>2026-01-24</lastmod>
-  </url>
-
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_outdoor_6%28IPC-S7XEP-10M0WED%29.html</loc>
-    <lastmod>2026-01-24</lastmod>
-  </url>
-
-  <!-- ===== 4G КАМЕРИ ===== -->
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_outdoor4G_1%28IPC-K7FP-3H0TE-EU%29.html</loc>
-    <lastmod>2026-01-24</lastmod>
-  </url>
-
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_outdoor4G_2%28IPC-B7ED-5M0TEA-EU%29.html</loc>
-    <lastmod>2026-01-24</lastmod>
-  </url>
+  <!-- ПОТОП / ПОЖЕЖА -->
+  <url><loc>https://xn--80anevegliy.pp.ua/details_water_1%28waterstop_white_0.5D%29.html</loc><lastmod>2026-02-08</lastmod></url>
+  <url><loc>https://xn--80anevegliy.pp.ua/details_fire_1%28FireProtect_white%29.html</loc><lastmod>2026-02-08</lastmod></url>
 
 </urlset>
