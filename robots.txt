@@ -1,4 +1,35 @@
+# robots.txt для сайта продажи систем безопасности
+
 User-agent: *
 Allow: /
 
+# Запрет индексации служебных директорий
+Disallow: /admin/
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /private/
+
+# Разрешить индексацию изображений
+Allow: /images/
+
+# Разрешить индексацию всех страниц товаров
+Allow: /details_*.html
+
+# Указание на sitemap
 Sitemap: https://прозахист.pp.ua/sitemap.xml
+
+# Дополнительные директивы для основных поисковых систем
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /images/
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Yandex
+Allow: /
+
+# Скорость сканирования (необязательно)
+Crawl-delay: 1
