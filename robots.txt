@@ -15,8 +15,8 @@ Allow: /images/
 # Разрешить индексацию всех страниц товаров
 Allow: /details_*.html
 
-# Указание на sitemap
-Sitemap: https://прозахист.pp.ua/sitemap.xml
+# Указание на sitemap (Punycode для кириллического домена)
+Sitemap: https://xn--80anevegliy.pp.ua/sitemap.xml
 
 # Дополнительные директивы для основных поисковых систем
 User-agent: Googlebot
