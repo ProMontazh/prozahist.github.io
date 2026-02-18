@@ -1,594 +1,594 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
-  <!-- Главная страница -->
+  <!-- Головна сторінка -->
   <url>
     <loc>https://xn--80anevegliy.pp.ua/</loc>
-    <lastmod>2026-02-09</lastmod>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Категория: Внутренние камеры -->
+  <!-- Категорії -->
   <url>
     <loc>https://xn--80anevegliy.pp.ua/#indoor</loc>
-    <lastmod>2026-02-09</lastmod>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_cam_indoor_2(IPC-C32EP).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_cam_indoor_3(IPC-K2EP-3H3W).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_cam_indoor_1(IPC-K2MP-3H1WE).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_cam_indoor_4(IPC-K2EP-5H3W).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_cam_indoor_5(IPC-T22EP-C).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_cam_indoor_6(IPC-T42EP-C).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Категория: Внешние камеры -->
   <url>
     <loc>https://xn--80anevegliy.pp.ua/#outdoor</loc>
-    <lastmod>2026-02-09</lastmod>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_cam_outdoor_1(IPC-K3DP-3H0WF).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_cam_outdoor_2(IPC-K3DP-5H0WF).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_cam_outdoor_5(IPC-K7CP-3H1WE).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_cam_outdoor_3(IPC-S3EP-3M0WE).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_cam_outdoor_4(IPC-GS7EP-5M0WE).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_cam_outdoor_6(IPC-S7XEP-10M0WED).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Категория: Внешние 4G камеры -->
   <url>
     <loc>https://xn--80anevegliy.pp.ua/#outdoor_4G</loc>
-    <lastmod>2026-02-09</lastmod>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_cam_outdoor_4G_1(IPC-K7FP-3H0TE-EU).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_cam_outdoor_4G_3(IPC-TB3FP-3T0WE%20FSP12-TYPEC).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_cam_outdoor_4G_2(IPC-B7ED-5M0TEA-EU).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Категория: Карты памяти -->
   <url>
     <loc>https://xn--80anevegliy.pp.ua/#microSD</loc>
-    <lastmod>2026-02-09</lastmod>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- Категория: Комплекты сигнализации Ajax -->
+  
   <url>
     <loc>https://xn--80anevegliy.pp.ua/#alarm</loc>
-    <lastmod>2026-02-09</lastmod>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_alarm_1(Starter%20Kit%20White).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_alarm_2(Starter%20Kit%20Black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_alarm_3(Starter%20Kit%202%20White).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_alarm_4(Starter%20Kit%202%20Black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_alarm_5(StarterKit%20Cam%20White).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_alarm_6(StarterKit%20Cam%20Black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_alarm_7(StarterKit%20Cam%20Plus%20White).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_alarm_8(StarterKit%20Cam%20Plus%20Black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Категория: Хабы и модули -->
   <url>
     <loc>https://xn--80anevegliy.pp.ua/#hub</loc>
-    <lastmod>2026-02-09</lastmod>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_hub_01(Hub%20White).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_hub_02(Hub%20Black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_hub_03(Hub%202%202G%20White).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_hub_04(Hub%202%202G%20Black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_hub_05(Hub%202%204G%20White).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_hub_06(Hub%202%204G%20Black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_hub_07(Hub%202%20Plus%20White).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_hub_08(Hub%202%20Plus%20Black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_hub_09(Ajax%20MultiTransmitter%20White).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_hub_10(Ajax%20MultiTransmitter%20Black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_hub_11(Ajax%20ReX%20White).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_hub_12(Ajax%20ReX%20Black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_hub_13(Ajax%20ReX%202%20White).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_hub_14(Ajax%20ReX%202%20Black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Категория: Внутренняя охрана -->
   <url>
     <loc>https://xn--80anevegliy.pp.ua/#protect</loc>
-    <lastmod>2026-02-09</lastmod>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_01(ajax_doorprotect_white).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_02(ajax_doorprotect_black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_03(ajax_doorprotect_plus_white).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_04(ajax_doorprotect_plus_black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_03(ajax_motionprotect_white).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_04(ajax_motionprotect_black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_05(ajax_combiprotect_white).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_06(ajax_combiprotect_black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_07(ajax_motioncam_white).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_08(ajax_motioncam_black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_09(ajax_motioncam_PhOD_white).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_10(ajax_motioncam_PhOD_black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_11(ajax_motionprotect_curtain_white).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_12(ajax_motionprotect_curtain_black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_13(ajax_homesiren_white).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_14(ajax_homesiren_black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_15(ajax_keypad_white).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_16(ajax_keypad_black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_17(ajax_keypad_plus_white).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_18(ajax_keypad_plus_black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_19(ajax_spacecontrol_white).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_20(ajax_spacecontrol_black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Категория: Внешняя охрана -->
   <url>
     <loc>https://xn--80anevegliy.pp.ua/#protect_outdoor</loc>
-    <lastmod>2026-02-09</lastmod>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_1(ajax_motionprotect_outdoor).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_2(ajax_motioncam_outdoor_white).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_3(ajax_curtain_outdoor_white).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_4(ajax_dualcurtain_outdoor_white).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_5(ajax_streetsiren_white).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_protect_6(ajax_streetsiren_black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Категория: Защита от потопа -->
-  <url>
     <loc>https://xn--80anevegliy.pp.ua/#waterstop</loc>
-    <lastmod>2026-02-09</lastmod>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_water_1(waterstop_white_0.5D).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_water_2(waterstop_white_0.75D).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_water_3(waterstop_white_1D).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_water_4(ajax_leaksprotect_white).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_water_5(ajax_leaksprotect_black).html</loc>
-    <lastmod>2026-02-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Категория: Защита от пожара -->
   <url>
     <loc>https://xn--80anevegliy.pp.ua/#fire</loc>
-    <lastmod>2026-02-09</lastmod>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  
+
+  <!-- Внутрішні камери (6 товарів) -->
   <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_fire_1(FireProtect_white).html</loc>
-    <lastmod>2026-02-09</lastmod>
+    <loc>https://xn--80anevegliy.pp.ua/details_cam_indoor_1_IPC_K2MP_3H1WE.html</loc>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://xn--80anevegliy.pp.ua/details_fire_2(FireProtect_black).html</loc>
-    <lastmod>2026-02-09</lastmod>
+    <loc>https://xn--80anevegliy.pp.ua/details_cam_indoor_2_IPC_C32EP.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_cam_indoor_3_IPC_K2EP_3H3W.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_cam_indoor_4_IPC_K2EP_5H3W.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_cam_indoor_5_IPC_T22EP_C.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_cam_indoor_6_IPC_T42EP_C.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Зовнішні камери (6 товарів) -->
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_cam_outdoor_01_IPC_K3DP_3H0WF.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_cam_outdoor_02_IPC_K3DP_5H0WF.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_cam_outdoor_03_IPC_S3EP_3M0WE.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_cam_outdoor_04_IPC_GS7EP_5M0WE.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_cam_outdoor_05_IPC_K7CP_3H1WE.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_cam_outdoor_06_IPC_S7XEP_10M0WED.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Зовнішні 4G камери (3 товари) -->
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_cam_outdoor_4G_1_IPC_K7FP_3H0TE_EU.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_cam_outdoor_4G_2_IPC_B7ED_5M0TEA_EU.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_cam_outdoor_4G_3_IPC_TB3FP_3T0WE_FSP12_TYPEC.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Комплекти сигналізації Ajax (8 товарів) -->
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_alarm_1_Starter_Kit_White.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_alarm_2_Starter_Kit_Black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_alarm_3_Starter_Kit_2_White.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_alarm_4_Starter_Kit_2_Black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_alarm_5_StarterKit_Cam_White.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_alarm_6_StarterKit_Cam_Black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_alarm_7_StarterKit_Cam_Plus_White.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_alarm_8_StarterKit_Cam_Plus_Black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Хаби та модулі Ajax (14 товарів) -->
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_hub_01_Hub_White.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_hub_02_Hub_Black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_hub_03_Hub_2_2G_White.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_hub_04_Hub_2_2G_Black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_hub_05_Hub_2_4G_White.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_hub_06_Hub_2_4G_Black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_hub_07_Hub_2_Plus_White.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_hub_08_Hub_2_Plus_Black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_hub_09_Ajax_MultiTransmitter_White.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_hub_10_Ajax_MultiTransmitter_Black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_hub_11_Ajax_ReX_White.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_hub_12_Ajax_ReX_Black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_hub_13_Ajax_ReX_2_White.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_hub_14_Ajax_ReX_2_Black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Датчики, клавіатури, сирени (22 товари) -->
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_01_ajax_doorprotect_white.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_02_ajax_doorprotect_black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_03_ajax_doorprotect_plus_white.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_04_ajax_doorprotect_plus_black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_05_ajax_motionprotect_white.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_06_ajax_motionprotect_black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_07_ajax_combiprotect_white.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_08_ajax_combiprotect_black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_09_ajax_motioncam_white.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_10_ajax_motioncam_black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_11_ajax_motioncam_PhOD_white.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_12_ajax_motioncam_PhOD_black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_13_ajax_motionprotect_curtain_white.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_14_ajax_motionprotect_curtain_black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_15_ajax_homesiren_white.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_16_ajax_homesiren_black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_17_ajax_keypad_white.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_18_ajax_keypad_black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_19_ajax_keypad_plus_white.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_20_ajax_keypad_plus_black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_21_ajax_spacecontrol_white.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_22_ajax_spacecontrol_black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Зовнішні датчики та сирени (6 товарів) -->
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_1_ajax_motionprotect_outdoor.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_2_ajax_motioncam_outdoor_white.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_3_ajax_curtain_outdoor_white.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_4_ajax_dualcurtain_outdoor_white.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_5_ajax_streetsiren_white.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_protect_6_ajax_streetsiren_black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Захист від потопу (5 товарів) -->
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_water_1_waterstop_white_0.5D.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_water_2_waterstop_white_0.75D.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_water_3_waterstop_white_1D.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_water_4_ajax_leaksprotect_white.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_water_5_ajax_leaksprotect_black.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Захист від пожежі (2 товари) -->
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_fire_1_FireProtect_white.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://xn--80anevegliy.pp.ua/details_fire_2_FireProtect_black.html</loc>
+    <lastmod>2026-02-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
