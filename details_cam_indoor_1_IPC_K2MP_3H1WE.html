@@ -13,24 +13,51 @@
             background-color: #f4f4f4;
         }
 
-       /* Header без фона */
+      /* ===== HEADER ===== */
+
+/* Мобильная версия (по умолчанию) */
 header {
-    background: none;        /* убрали градиент */
-    padding: 4px 1px;      /* добавили отступ слева */
-    box-shadow: none;        /* убрали тень */
+    position: relative;
+    width: 100%;
+    background: none;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
 }
 
-/* Логотип влево */
+/* Логотип */
 .logo {
     display: flex;
-    justify-content: flex-start;  /* вместо center */
-    align-items: flex-start;      /* вместо center */
+    align-items: center;
+    justify-content: flex-start;
 }
 
-/* Размер SVG */
 .logo svg {
-    max-width: 200px;  /* можно задать конкретный размер */
+    width: 220px;
     height: auto;
+}
+
+/* ===== Десктоп ===== */
+@media (min-width: 1024px) {
+    
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 65px;
+        padding: 0 20px;
+        background: none;
+    }
+
+    .logo svg {
+        width: 200px;
+    }
+
+    /* чтобы контент не залез под фиксированный header */
+    .container {
+        margin-top: 90px;
+    }
 }
  .toast {
             position: fixed;
