@@ -13,54 +13,25 @@
             background-color: #f4f4f4;
         }
 
-     /* ================= HEADER ================= */
+        /* Header з логотипом */
+        header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
 
-/* Базовая версия (мобильные устройства) */
-header {
-    position: relative;
-    width: 100%;
-    background: none;
-    padding: 6px 12px;
-    display: flex;
-    align-items: center;
-    z-index: 1000;
-}
+        .logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-.logo {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-}
+        .logo svg {
+            max-width: 100%;
+            height: auto;
+        }
 
-/* Стабильный мобильный размер */
-.logo svg {
-    width: clamp(130px, 38vw, 180px);
-    height: auto;
-    display: block;
-}
-
-/* ================= DESKTOP ================= */
-@media (min-width: 1024px) {
-
-    header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 65px;
-        padding: 0 20px;
-    }
-
-    .logo svg {
-        width: 200px;
-    }
-
-    /* Чтобы контент не заходил под фиксированный header */
-    .container {
-        margin-top: 85px;
-    }
-}
- .toast {
+        .toast {
             position: fixed;
             top: 45%;
             left: 50%;
@@ -84,7 +55,7 @@ header {
 
         .container {
             max-width: 830px;
-            margin: 0 auto;
+            margin: 20px auto;
             padding: 30px;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -218,7 +189,16 @@ header {
             }
         }
 
-   
+        /* Мобільна версія */
+        @media (max-width: 768px) {
+            header {
+                padding: 10px 0;
+            }
+
+            .logo svg {
+                width: 280px;
+                height: auto;
+            }
 
             .container {
                 margin: 0;
@@ -240,14 +220,19 @@ header {
             }
         }
 
-        
+        /* Дуже маленькі екрани */
+        @media (max-width: 480px) {
+            .logo svg {
+                width: 240px;
+            }
+        }
     </style>
 </head>
 <body>
 
 <header>
   <div class="logo">
-    <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 600 200">
+    <svg xmlns="http://www.w3.org/2000/svg" width="220" height="70" viewBox="0 0 600 200">
       <defs>
         <!-- 🌊 Хвиля для слогана -->
         <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
