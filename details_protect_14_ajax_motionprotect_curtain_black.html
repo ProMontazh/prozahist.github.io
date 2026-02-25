@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <title>Деталі товару - Ajax MotionProtect Curtain Black</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    /* ===== ЛОГОТИП (БАЗОВІ СТИЛІ ДЛЯ ДЕСКТОПУ) ===== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      background: transparent;
+    }
+
+    .logo svg {
+      width: 205px;
+      height: auto;
+     
+    }
+
+    /* ===== Toast ===== */
+    .toast {
+      position: fixed;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.4);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      font-size: 1.0em;
+      white-space: nowrap;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.5s;
+      z-index: 9999;
+    }
+
+    .toast.show {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* ===== Контейнер ===== */
+    .container {
+      max-width: 830px;
+      margin: 20px auto;
+      padding: 30px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      animation: fadeIn 1.5s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .product-title {
+      text-align: center;
+      font-size: 1.6em;
+      margin-top: 0;
+    }
+
+    /* ===== Карусель ===== */
+    .carousel-wrapper {
+      position: relative;
+      overflow: hidden;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .carousel {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .carousel img {
+      flex: 0 0 100%;
+      max-width: 100%;
+      border-radius: 5px;
+      cursor: pointer;
+      object-fit: contain;
+    }
+
+    /* Стрілки для десктопу */
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      font-size: 2em;
+      padding: 8px 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.3s;
+      z-index: 10;
+      display: none;
+    }
+
+    .carousel-arrow:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .carousel-arrow.left { left: 10px; }
+    .carousel-arrow.right { right: 10px; }
+
+    /* ===== Опис ===== */
+    .product-description {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 20px 0 30px 20px;
+    }
+
+    .product-description ul {
+      padding-left: 20px;
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
+
+    .product-description li {
+      margin-bottom: 6px;
+    }
+
+    .product-price {
+      font-size: 1.8em;
+      color: red;
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .btn {
+      display: block;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      margin: 20px auto;
+      text-align: center;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+
+    /* ===== Модалка ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .modal .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3em;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+      padding: 10px;
+      z-index: 10001;
+    }
+
+    .modal .arrow.left { left: 20px; }
+    .modal .arrow.right { right: 20px; }
+
+    /* ===== Медіа-запити ===== */
+    @media (min-width: 768px) {
+      .carousel-arrow { display: block; }
+    }
+
+    @media (min-width: 1024px) {
+      .product-description {
+        margin-left: 80px;
+        margin-right: 40px;
+      }
+      .product-description ul {
+        padding-left: 60px;
+      }
+      .carousel img {
+        max-height: 420px;
+      }
+    }
+
+    /* Мобільна версія - прибираємо фіксацію логотипу */
+    @media (max-width: 768px) {
+      header {
+        position: static;
+        top: auto;
+        left: auto;
+        padding: 0px;
+        background: transparent;
+      }
+
+      .logo svg {
+        width: 230px;
+        
+      }
+
+      .container {
+        margin: 0;
+        padding: 20px;
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      body {
+        background-color: #fff;
+      }
+
+      .product-title {
+        font-size: 1.3em;
+      }
+
+      .carousel {
+        padding: 5px 0;
+      }
+
+      .product-description {
+        margin-left: 10px;
+      }
+
+      .product-description ul {
+        padding-left: 15px;
+      }
+    }
+
+    /* Дуже маленькі екрани */
+    @media (max-width: 480px) {
+      header {
+        position: static;
+        top: auto;
+        left: auto;
+        padding: 0px;
+        background: transparent;
+      }
+
+      .logo svg {
+        width: 205px;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <svg xmlns="http://www.w3.org/2000/svg" width="180" height="56" viewBox="0 0 600 200">
+      <defs>
+        <!-- 🌊 Хвиля для слогана -->
+        <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="-0.3" stop-color="#999">
+            <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+          </stop>
+          <stop offset="-0.15" stop-color="#666">
+            <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+          </stop>
+          <stop offset="0" stop-color="#999">
+            <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+          </stop>
+        </linearGradient>
+        <!-- 🔴 Хвиля для ПРО -->
+        <linearGradient id="pro-wave" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="-0.3" stop-color="#800000">
+            <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+          </stop>
+          <stop offset="-0.15" stop-color="#ff4444">
+            <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+          </stop>
+          <stop offset="0" stop-color="#800000">
+            <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+          </stop>
+        </linearGradient>
+        <!-- ⚙️ Хвиля для ЗАХИСТ -->
+        <linearGradient id="zahist-wave" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="-0.3" stop-color="#808080">
+            <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+          </stop>
+          <stop offset="-0.15" stop-color="#e0e0e0">
+            <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+          </stop>
+          <stop offset="0" stop-color="#808080">
+            <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+          </stop>
+        </linearGradient>
+      </defs>
+      <!-- ПРО -->
+      <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#pro-wave)">ПРО</text>
+      <!-- ЗАХИСТ -->
+      <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#zahist-wave)">ЗАХИСТ</text>
+      <!-- Слоган -->
+      <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="33" fill="url(#wave-gradient)">БЕЗДРОТОВІ СИСТЕМИ БЕЗПЕКИ</text>
+      <!-- Декор -->
+      <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10" />
+      <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10" />
+      <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10" />
+      <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10" />
+    </svg>
+  </div>
+</header>
+
+<div class="container">
+  <h2 class="product-title">Датчик руху з вузьким кутом огляду «штора» Ajax MotionProtect Curtain Black</h2>
+
+  <div class="carousel-wrapper">
+    <div class="carousel" id="carousel">
+      <img src="images/ajax_motionprotect_curtain_black_1.jpg" alt="MotionCam Black" onclick="openModal('images/ajax_motionprotect_curtain_black_1.jpg')">
+      <img src="images/ajax_motionprotect_curtain_black_2.jpg" alt="MotionCam Black" onclick="openModal('images/ajax_motionprotect_curtain_black_2.jpg')">
+     
+      
+    </div>
+
+    <div class="carousel-arrow left" onclick="prevImage()">&#10094;</div>
+    <div class="carousel-arrow right" onclick="nextImage()">&#10095;</div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <div class="product-description">
+Бездротовий ІЧ-датчик руху типу «штора» Ajax MotionProtect Curtain Jeweller призначений для захисту віконних і дверних прорізів від проникнення. Пристрій створює невидиму вертикальну завісу завдяки вузькому горизонтальному куту виявлення 6° та широкому вертикальному куту 90°. Оснащений двома інфрачервоними сенсорами з дальністю виявлення до 15 метрів та інтелектуальною кореляційною обробкою сигналу для захисту від хибних спрацювань.
+
+<br><br>
+<strong>Основні характеристики:</strong>
+<ul>
+  <li>2 інфрачервоні (ІЧ) сенсори для точного виявлення</li>
+  <li>Дальність виявлення руху до 6–15 м (залежить від режиму)</li>
+  <li>Кут виявлення: горизонтальний 6°, вертикальний 90° (створює вертикальну завісу)</li>
+  <li>Дальність зв'язку з хабом до 1700 м на відкритому просторі</li>
+  <li>Швидкість виявлення: від 0,3 до 2 м/с</li>
+  <li>Кореляційна обробка сигналу для підвищеної точності виявлення</li>
+  <li>Температурна компенсація для роботи від −10°C до +40°C</li>
+  <li>Можливість встановлення перевернутим для ігнорування домашніх тварин</li>
+  <li>3 рівні чутливості (налаштовується)</li>
+  <li>Автономна робота до 5 років від однієї батареї CR123A</li>
+  <li>Клас захисту IP54 (захист від пилу та бризок води)</li>
+  <li>Миттєві сповіщення про проникнення</li>
+</ul>
+
+<strong>Виявлення руху типу «штора»:</strong>
+<ul>
+  <li>Чутливі елементи: 2 інфрачервоні (ІЧ) сенсори</li>
+  <li>Дальність виявлення: до 6–15 м (без кореляційної обробки, при встановленні на висоті 2,4 м)</li>
+  <li>Дальність виявлення: до 6–8 м (з увімкненою кореляційною обробкою)</li>
+  <li>Кут виявлення: горизонтальний — 6° (вузька завіса), вертикальний — 90° (висока завіса)</li>
+  <li>Швидкість виявлення: від 0,3 до 2 м/с</li>
+  <li>3 рівні чутливості для різних умов встановлення</li>
+  <li>Напрямок лінзи датчика має бути перпендикулярним імовірному шляху вторгнення</li>
+  <li>Створення невидимої вертикальної завіси для захисту прорізів</li>
+</ul>
+
+<strong>Кореляційна обробка сигналу:</strong>
+<ul>
+  <li>Інтелектуальний алгоритм для підвищення точності виявлення</li>
+  <li>Аналіз сигналів від двох ІЧ сенсорів одночасно</li>
+  <li>Зменшення кількості хибних спрацювань</li>
+  <li>Виявлення тільки при спрацюванні обох сенсорів</li>
+  <li>Фільтрація помилкових тривог від побутових факторів</li>
+  <li>Можливість увімкнення/вимкнення через застосунок Ajax</li>
+  <li>При увімкненні дальність зменшується до 6–8 м, але точність зростає</li>
+</ul>
+
+<strong>Температурна компенсація:</strong>
+<ul>
+  <li>Ефективне виявлення руху за температури від −10°C до +40°C</li>
+  <li>Автоматичне регулювання чутливості залежно від температури навколишнього середовища</li>
+  <li>Стабільна робота при перепадах температури</li>
+  <li>Надійне виявлення в літній та зимовий період</li>
+  <li>Компенсація впливу температури об'єкта та фону</li>
+</ul>
+
+<strong>Імунітет до домашніх тварин:</strong>
+<ul>
+  <li>Можливість встановлення датчика перевернутим</li>
+  <li>При перевернутому встановленні датчик не реагує на домашніх тварин</li>
+  <li>Створення захисної завіси у верхній частині прорізу</li>
+  <li>Тварини рухаються внизу і не потрапляють в зону виявлення</li>
+  <li>Ідеально для будинків з домашніми улюбленцями</li>
+</ul>
+
+<strong>Технологія зв'язку Jeweller:</strong>
+<ul>
+  <li>Пропрієтарна бездротова технологія зв'язку Ajax для передавання команд, тривог і подій</li>
+  <li>Дальність зв'язку: до 1700 м (між пристроєм і хабом або ретранслятором за відсутності перешкод)</li>
+  <li>Двосторонній зв'язок з хабом</li>
+  <li>Блокове шифрування з плаваючим ключем</li>
+  <li>Передовий захист від саботажу</li>
+  <li>Миттєві сповіщення про події</li>
+  <li>Дистанційне керування та налаштування в застосунках Ajax</li>
+  <li>Радіочастотний гопінг для запобігання радіозавадам і глушінню</li>
+  <li>Діапазони радіочастот: 866,0–866,5 МГц, 868,0–868,6 МГц, 868,7–869,2 МГц, 905,0–926,5 МГц, 915,85–926,5 МГц, 921,0–922,0 МГц (залежить від регіону)</li>
+  <li>Максимальна ефективна випромінювана потужність (ERP): до 20 мВт</li>
+  <li>Автоматичне регулювання потужності для зниження енергоспоживання та радіозавад</li>
+  <li>Модуляція радіосигналу: GFSK</li>
+</ul>
+
+<strong>Захист від саботажу:</strong>
+<ul>
+  <li>Тривога тампера при спробі відірвати датчик від поверхні або зняти його з кріпильної панелі</li>
+  <li>Захист від підміни — автентифікація пристрою</li>
+  <li>Виявлення втрати зв'язку від 36 секунд (залежить від налаштувань Jeweller або Jeweller/Fibra)</li>
+  <li>Захист від радіозавад та глушіння через радіочастотний гопінг</li>
+  <li>Сповіщення про низький заряд батареї</li>
+</ul>
+
+<strong>Живлення:</strong>
+<ul>
+  <li>Батарея: 1 × CR123A тип C (попередньо встановлена)</li>
+  <li>Розрахунковий строк роботи від батареї: до 5 років</li>
+  <li>Діапазон робочої напруги: 2,1–3,3 В⎓</li>
+  <li>Номінальна робоча напруга: 3 В⎓</li>
+  <li>Споживання струму в стані спокою: 41 мкА</li>
+  <li>Максимальний струм споживання: 60,4 мА</li>
+  <li>Повна ємність батареї: 1600 мА·год</li>
+  <li>Напруга низького заряду батареї: 2,5 В⎓</li>
+  <li>Напруга відновлення низького заряду: 2,7 В⎓</li>
+  <li>Напруга відпрацьованої батареї: 2,1 В⎓ (пристрій вимикається)</li>
+  <li>Ємність відпрацьованої батареї: 300 мА·год</li>
+  <li>Виробник батареї: Huiderui</li>
+</ul>
+
+<strong>Фізичні характеристики:</strong>
+<ul>
+  <li>Розміри датчика: 134 × 44 × 34 мм</li>
+  <li>Розміри з кронштейном: 134 × 52 × 41 мм</li>
+  <li>Вага: 118 г</li>
+  <li>Діапазон робочих температур: від −10°C до +40°C</li>
+  <li>Допустима вологість: до 75%</li>
+  <li>Клас захисту: IP54 (захист від пилу та бризок води з будь-якого напрямку)</li>
+  <li>Кольори: чорний, білий</li>
+  <li>Призначений лише для встановлення в приміщенні</li>
+</ul>
+
+<strong>Рекомендації з встановлення:</strong>
+<ul>
+  <li>Рекомендована висота встановлення: 2,4 м</li>
+  <li>Встановлюйте збоку від віконного або дверного прорізу</li>
+  <li>Напрямок лінзи датчика має бути перпендикулярним імовірному шляху вторгнення</li>
+  <li>Створюйте вертикальну «завісу» для покриття всієї висоти прорізу</li>
+  <li>Встановлюйте перевернутим при наявності домашніх тварин</li>
+  <li>Ідеально підходить для захисту вікон, балконних дверей, французьких вікон</li>
+  <li>Можна використовувати для дверних прорізів, коридорів, вузьких проходів</li>
+  <li>Уникайте встановлення біля джерел тепла (батареї, кондиціонери)</li>
+  <li>Не встановлюйте під прямими сонячними променями</li>
+  <li>Пристрій призначений лише для встановлення в приміщенні</li>
+  <li>Використовуйте комплектний кронштейн для точного кута нахилу</li>
+</ul>
+
+<strong>Застосування:</strong>
+<ul>
+  <li>Захист віконних прорізів у житлових будинках</li>
+  <li>Контроль балконних і терасних дверей</li>
+  <li>Захист французьких вікон і панорамних склінь</li>
+  <li>Моніторинг вхідних дверей у офісах</li>
+  <li>Захист вітрин магазинів від розбиття</li>
+  <li>Контроль доступу через критичні прорізи</li>
+  <li>Захист завантажувальних дверей на складах</li>
+  <li>Моніторинг пожежних виходів</li>
+  <li>Контроль воріт гаражів та паркінгів</li>
+  <li>Захист вікон музеїв та виставкових залів</li>
+</ul>
+
+<strong>Переваги Ajax MotionProtect Curtain:</strong>
+<ul>
+  <li>✅ Висока дальність зв'язку — до 1700 м</li>
+  <li>✅ Вузький горизонтальний кут 6° — точна «завіса»</li>
+  <li>✅ Широкий вертикальний кут 90° — покриття всієї висоти</li>
+  <li>✅ Два ІЧ сенсори для підвищеної надійності</li>
+  <li>✅ Кореляційна обробка сигналу — мінімум хибних спрацювань</li>
+  <li>✅ Можливість перевернутого встановлення — ігнорування тварин</li>
+  <li>✅ Температурна компенсація для точного виявлення</li>
+  <li>✅ До 5 років автономної роботи</li>
+  <li>✅ IP54 — захист від пилу та води</li>
+  <li>✅ Дистанційне налаштування через застосунок Ajax</li>
+  <li>✅ 3 рівні чутливості</li>
+  <li>✅ Захист від радіозавад та глушіння</li>
+</ul>
+
+<strong>Чим відрізняється від звичайного датчика руху:</strong>
+<ul>
+  <li>Створює вузьку вертикальну «завісу» замість широкої зони покриття</li>
+  <li>Призначений для захисту конкретних прорізів (вікна, двері)</li>
+  <li>Можна встановлювати перевернутим для ігнорування тварин</li>
+  <li>IP54 — вищий рівень захисту (звичайний MotionProtect — IP50)</li>
+  <li>Два ІЧ сенсори замість одного</li>
+  <li>Кореляційна обробка сигналу для підвищеної точності</li>
+  <li>Менша дальність виявлення (до 15 м замість 12 м), але вища точність</li>
+  <li>Комплектний кронштейн для точного позиціонування</li>
+</ul>
+
+<strong>Режими роботи:</strong>
+<ul>
+  <li><strong>Без кореляційної обробки:</strong> дальність до 6–15 м, швидше реагування, більше покриття</li>
+  <li><strong>З кореляційною обробкою:</strong> дальність до 6–8 м, менше хибних спрацювань, вища точність</li>
+  <li>Вибір режиму налаштовується через застосунок Ajax</li>
+  <li>Кореляційна обробка рекомендована для складних умов (багато перешкод, тварини)</li>
+</ul>
+
+<strong>Налаштування через застосунок Ajax:</strong>
+<ul>
+  <li>Увімкнення/вимкнення кореляційної обробки сигналу</li>
+  <li>Регулювання чутливості датчика (3 рівні)</li>
+  <li>Тестування покриття зони виявлення</li>
+  <li>Налаштування сповіщень про тривоги та події</li>
+  <li>Моніторинг заряду батареї</li>
+  <li>Перевірка рівня сигналу Jeweller</li>
+  <li>Дистанційне тестування роботи датчика</li>
+  <li>Перегляд історії подій</li>
+  <li>Налаштування затримок на вхід/вихід</li>
+</ul>
+
+<strong>Сценарії використання:</strong>
+<ul>
+  <li>Захист вікон першого поверху від злому</li>
+  <li>Контроль проникнення через балконні двері</li>
+  <li>Моніторинг панорамних вікон у приватних будинках</li>
+  <li>Захист пожежних виходів від несанкціонованого відкриття</li>
+  <li>Виявлення розбиття вітрин магазинів</li>
+  <li>Контроль відкриття воріт гаражів</li>
+  <li>Захист критичних зон доступу у банках</li>
+  <li>Моніторинг завантажувальних дверей на складах</li>
+  <li>Захист прорізів при наявності домашніх тварин (перевернуте встановлення)</li>
+</ul>
+
+<strong>Встановлення з домашніми тваринами:</strong>
+<ul>
+  <li>Встановіть датчик перевернутим (лінза вниз)</li>
+  <li>Зона виявлення буде у верхній частині прорізу</li>
+  <li>Тварини рухаються внизу і не спрацьовують датчик</li>
+  <li>Людина при проникненні все одно потрапляє в зону виявлення</li>
+  <li>✅ Ефективний захист без хибних тривог від тварин</li>
+</ul>
+
+<strong>Комплектація:</strong>
+<ul>
+  <li>MotionProtect Curtain Jeweller</li>
+  <li>Кріпильна панель SmartBracket</li>
+  <li>Кронштейн для точного позиціонування</li>
+  <li>Батарея CR123A (попередньо встановлена)</li>
+  <li>Монтажний комплект</li>
+  <li>Коротка інструкція</li>
+</ul>
+
+<strong>Сумісність:</strong>
+<ul>
+  <li>Працює з усіма хабами Ajax (Hub, Hub 2, Hub Plus, Hub Hybrid)</li>
+  <li>Підтримка ретрансляторів сигналу (ReX, ReX 2)</li>
+  <li>Інтеграція з застосунками Ajax (iOS, Android, macOS, Windows)</li>
+  <li>Підключення до пультів централізованого спостереження (ПЦС)</li>
+  <li>Підтримка професійного режиму для інсталяторів (PRO)</li>
+</ul>
+
+<strong>Чому варто обрати MotionProtect Curtain:</strong>
+<ul>
+  <li>Точний захист конкретних прорізів</li>
+  <li>Ідеально для вікон і дверей</li>
+  <li>IP54 — можна встановлювати біля вікон (бризки дощу)</li>
+  <li>Працює з домашніми тваринами</li>
+  <li>Швидке виявлення проникнення</li>
+  <li>Тривалий термін роботи від батареї</li>
+  <li>Дистанційне керування через додаток</li>
+  <li>Надійний захист від саботажу</li>
+</ul>
+</div>
+  <p class="product-price">2600.00 грн</p>
+  <button class="btn" onclick="addToCartFromProductPage({ id: 'Ajax MotionProtect Curtain Black', name: 'Ajax MotionProtect Curtain Black', price: 2600, image: 'images/ajax_motionprotect_curtain_black_1.jpg' })">
+    Додати у кошик
+  </button>
+</div>
+
+<div id="modal" class="modal" onclick="closeModal()">
+  <span class="arrow left" onclick="event.stopPropagation(); prevModalImage()">&#10094;</span>
+  <img id="modal-img" src="" alt="Збільшене зображення">
+  <span class="arrow right" onclick="event.stopPropagation(); nextModalImage()">&#10095;</span>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+const images = [
+  "images/ajax_motionprotect_curtain_black_1.jpg",
+  "images/ajax_motionprotect_curtain_black_2.jpg"
+  
+
+];
+let currentIndex = 0;
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 2500);
+}
+
+function addToCartFromProductPage(item) {
+  cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const existingItem = cart.find(i => i.id === item.id);
+  if (existingItem) existingItem.quantity++;
+  else { item.quantity = 1; cart.push(item); }
+  localStorage.setItem('cart', JSON.stringify(cart));
+  showToast(`${item.name} додано до кошика!`);
+}
+
+/* === Карусель === */
+function updateCarousel() {
+  document.getElementById('carousel').style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+function nextImage() {
+  currentIndex = (currentIndex + 1) % images.length;
+  updateCarousel();
+}
+function prevImage() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  updateCarousel();
+}
+
+/* === Модалка === */
+function openModal(imageSrc) {
+  currentIndex = images.indexOf(imageSrc);
+  document.getElementById("modal-img").src = imageSrc;
+  document.getElementById("modal").style.display = "flex";
+}
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
+function nextModalImage() {
+  currentIndex = (currentIndex + 1) % images.length;
+  document.getElementById("modal-img").src = images[currentIndex];
+}
+function prevModalImage() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  document.getElementById("modal-img").src = images[currentIndex];
+}
+
+/* === Свайпи === */
+let startX = 0;
+const carousel = document.getElementById('carousel');
+carousel.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
+carousel.addEventListener('touchend', e => {
+  const diff = e.changedTouches[0].clientX - startX;
+  if (Math.abs(diff) > 50) diff > 0 ? prevImage() : nextImage();
+}, { passive: true });
+
+const modal = document.getElementById("modal");
+modal.addEventListener("touchstart", e => startX = e.touches[0].clientX, { passive: true });
+modal.addEventListener("touchend", e => {
+  const diff = e.changedTouches[0].clientX - startX;
+  if (Math.abs(diff) > 50) diff > 0 ? prevModalImage() : nextModalImage();
+}, { passive: true });
+</script>
+</body>
+</html>
