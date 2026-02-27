@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <title>Деталі товару - Ajax KeyPad Plus White</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    /* ===== ЛОГОТИП (БАЗОВІ СТИЛІ ДЛЯ ДЕСКТОПУ) ===== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      background: transparent;
+    }
+
+    .logo svg {
+      width: 205px;
+      height: auto;
+     
+    }
+
+    /* ===== Toast ===== */
+    .toast {
+      position: fixed;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.4);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      font-size: 1.0em;
+      white-space: nowrap;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.5s;
+      z-index: 9999;
+    }
+
+    .toast.show {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* ===== Контейнер ===== */
+    .container {
+      max-width: 830px;
+      margin: 20px auto;
+      padding: 30px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      animation: fadeIn 1.5s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .product-title {
+      text-align: center;
+      font-size: 1.6em;
+      margin-top: 0;
+    }
+
+    /* ===== Карусель ===== */
+    .carousel-wrapper {
+      position: relative;
+      overflow: hidden;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .carousel {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .carousel img {
+      flex: 0 0 100%;
+      max-width: 100%;
+      border-radius: 5px;
+      cursor: pointer;
+      object-fit: contain;
+    }
+
+    /* Стрілки для десктопу */
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      font-size: 2em;
+      padding: 8px 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.3s;
+      z-index: 10;
+      display: none;
+    }
+
+    .carousel-arrow:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .carousel-arrow.left { left: 10px; }
+    .carousel-arrow.right { right: 10px; }
+
+    /* ===== Опис ===== */
+    .product-description {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 20px 0 30px 20px;
+    }
+
+    .product-description ul {
+      padding-left: 20px;
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
+
+    .product-description li {
+      margin-bottom: 6px;
+    }
+
+    .product-price {
+      font-size: 1.8em;
+      color: red;
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .btn {
+      display: block;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      margin: 20px auto;
+      text-align: center;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+
+    /* ===== Модалка ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .modal .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3em;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+      padding: 10px;
+      z-index: 10001;
+    }
+
+    .modal .arrow.left { left: 20px; }
+    .modal .arrow.right { right: 20px; }
+
+    /* ===== Медіа-запити ===== */
+    @media (min-width: 768px) {
+      .carousel-arrow { display: block; }
+    }
+
+    @media (min-width: 1024px) {
+      .product-description {
+        margin-left: 80px;
+        margin-right: 40px;
+      }
+      .product-description ul {
+        padding-left: 60px;
+      }
+      .carousel img {
+        max-height: 420px;
+      }
+    }
+
+    /* Мобільна версія - прибираємо фіксацію логотипу */
+    @media (max-width: 768px) {
+      header {
+        position: static;
+        top: auto;
+        left: auto;
+        padding: 0px;
+        background: transparent;
+      }
+
+      .logo svg {
+        width: 230px;
+        
+      }
+
+      .container {
+        margin: 0;
+        padding: 20px;
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      body {
+        background-color: #fff;
+      }
+
+      .product-title {
+        font-size: 1.3em;
+      }
+
+      .carousel {
+        padding: 5px 0;
+      }
+
+      .product-description {
+        margin-left: 10px;
+      }
+
+      .product-description ul {
+        padding-left: 15px;
+      }
+    }
+
+    /* Дуже маленькі екрани */
+    @media (max-width: 480px) {
+      header {
+        position: static;
+        top: auto;
+        left: auto;
+        padding: 0px;
+        background: transparent;
+      }
+
+      .logo svg {
+        width: 205px;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <svg xmlns="http://www.w3.org/2000/svg" width="180" height="56" viewBox="0 0 600 200">
+      <defs>
+        <!-- 🌊 Хвиля для слогана -->
+        <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="-0.3" stop-color="#999">
+            <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+          </stop>
+          <stop offset="-0.15" stop-color="#666">
+            <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+          </stop>
+          <stop offset="0" stop-color="#999">
+            <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+          </stop>
+        </linearGradient>
+        <!-- 🔴 Хвиля для ПРО -->
+        <linearGradient id="pro-wave" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="-0.3" stop-color="#800000">
+            <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+          </stop>
+          <stop offset="-0.15" stop-color="#ff4444">
+            <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+          </stop>
+          <stop offset="0" stop-color="#800000">
+            <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+          </stop>
+        </linearGradient>
+        <!-- ⚙️ Хвиля для ЗАХИСТ -->
+        <linearGradient id="zahist-wave" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="-0.3" stop-color="#808080">
+            <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+          </stop>
+          <stop offset="-0.15" stop-color="#e0e0e0">
+            <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+          </stop>
+          <stop offset="0" stop-color="#808080">
+            <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+          </stop>
+        </linearGradient>
+      </defs>
+      <!-- ПРО -->
+      <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#pro-wave)">ПРО</text>
+      <!-- ЗАХИСТ -->
+      <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#zahist-wave)">ЗАХИСТ</text>
+      <!-- Слоган -->
+      <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="33" fill="url(#wave-gradient)">БЕЗДРОТОВІ СИСТЕМИ БЕЗПЕКИ</text>
+      <!-- Декор -->
+      <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10" />
+      <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10" />
+      <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10" />
+      <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10" />
+    </svg>
+  </div>
+</header>
+
+<div class="container">
+  <h2 class="product-title">Бездротова сенсорна клавіатура Ajax KeyPad Plus White</h2>
+
+  <div class="carousel-wrapper">
+    <div class="carousel" id="carousel">
+      <img src="images/ajax_keypad_plus_white_1.jpg" alt="KeyPad White" onclick="openModal('images/ajax_keypad_plus_white_1.jpg')">
+      <img src="images/ajax_keypad_plus_white_2.jpg" alt="KeyPad White" onclick="openModal('images/ajax_keypad_plus_white_2.jpg')">
+      <img src="images/ajax_keypad_plus_white_3.jpg" alt="KeyPad White" onclick="openModal('images/ajax_keypad_plus_white_3.jpg')">
+     
+    </div>
+
+    <div class="carousel-arrow left" onclick="prevImage()">&#10094;</div>
+    <div class="carousel-arrow right" onclick="nextImage()">&#10095;</div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <div class="product-description">
+    Бездротова сенсорна клавіатура Ajax KeyPad Plus Jeweller з підтримкою захищених безконтактних карток і брелоків призначена для зручного керування режимами охорони системи безпеки Ajax. 
+    Пристрій оснащений сучасним ємнісним сенсором, підтримує технологію DESFire EV1/EV2 з 128-бітним шифруванням, дозволяє використовувати до 200 персональних кодів доступу, 
+    картки Pass і брелоки Tag для активації/деактивації системи. Має функціональну кнопку для тривоги або глушіння пожежних сирен.
+
+<br><br>
+<strong>Основні характеристики:</strong>
+<ul>
+  <li>Ємнісний сенсорний екран для введення кодів</li>
+  <li>Підтримка безконтактних карток Pass та брелоків Tag (DESFire EV1, EV2)</li>
+  <li>До 200 персональних кодів доступу (по одному для кожного користувача)</li>
+  <li>До 200 персональних кодів примусу для тихої тривоги</li>
+  <li>До 99 кодів для незареєстрованих користувачів (тимчасові коди)</li>
+  <li>1 загальний код доступу для клавіатури</li>
+  <li>1 загальний код примусу для клавіатури</li>
+  <li>Функціональна кнопка (тривога, глушіння пожежних сирен, без дії)</li>
+  <li>Захист від добирання коду (блокування на 3-180 хвилин)</li>
+  <li>Керування охороною груп приміщень</li>
+  <li>Світлодіодна індикація режиму охорони та несправностей</li>
+  <li>Дальність зв'язку з хабом до 1700 м на відкритому просторі</li>
+  <li>Автономна робота до 3,5 років від 4 батарей АА</li>
+</ul>
+
+<strong>Керування системою:</strong>
+<ul>
+  <li>Коди доступу: введення персонального коду на клавіатурі</li>
+  <li>Картки Pass: безконтактні картки DESFire у форм-факторі банківської картки</li>
+  <li>Брелоки Tag: безконтактні брелоки DESFire компактного розміру</li>
+  <li>Функціональність карток і брелоків однакова, відрізняються тільки дизайном</li>
+  <li>Можливість використання комбінованого методу (код + картка для підвищеної безпеки)</li>
+</ul>
+
+<strong>Технологія DESFire EV1, EV2:</strong>
+<ul>
+  <li>Заснована на міжнародному стандарті ISO 14443</li>
+  <li>Комплексне 128-бітне шифрування даних</li>
+  <li>Захист від копіювання та клонування карток</li>
+  <li>Високий рівень безпеки передачі даних</li>
+  <li>Унікальний ідентифікатор для кожної картки/брелока</li>
+  <li>Неможливість підробки або емуляції</li>
+  <li>Сумісність з EV1 (перше покоління) та EV2 (друге покоління)</li>
+</ul>
+
+<strong>Коди доступу:</strong>
+<ul>
+  <li>До 200 персональних кодів доступу (залежить від моделі хаба)</li>
+  <li>Кожен користувач системи має свій унікальний код</li>
+  <li>1 загальний код доступу для кожної клавіатури KeyPad Plus</li>
+  <li>Довжина коду налаштовується в застосунку Ajax</li>
+  <li>Можливість створення тимчасових кодів</li>
+  <li>Історія використання кодів у застосунку</li>
+  <li>Легке додавання та видалення кодів через застосунок</li>
+</ul>
+
+<strong>Коди примусу (для тихої тривоги):</strong>
+<ul>
+  <li>До 200 персональних кодів примусу (залежить від моделі хаба)</li>
+  <li>По одному коду примусу для кожного користувача</li>
+  <li>1 загальний код примусу для кожної клавіатури</li>
+  <li>При введенні коду примусу система знімається з охорони як звичайно</li>
+  <li>Одночасно надсилається тиха тривога адміністраторам та на ПЦС</li>
+  <li>Зловмисник не розуміє, що надіслано сигнал тривоги</li>
+  <li>Ідеально для ситуацій з примусом або загрозою</li>
+</ul>
+
+<strong>Коди незареєстрованих користувачів:</strong>
+<ul>
+  <li>До 99 персональних кодів для осіб, не зареєстрованих у системі Ajax</li>
+  <li>Тимчасові коди для гостей, працівників, кур'єрів</li>
+  <li>Не потребують створення повноцінного облікового запису</li>
+  <li>Обмежені права доступу</li>
+  <li>Контроль використання через історію подій</li>
+  <li>Легке видалення після закінчення потреби</li>
+</ul>
+
+<strong>Функціональна кнопка:</strong>
+<ul>
+  <li>Режим "Тривога": система надсилає тривогу на ПЦС та користувачам, активує сирени</li>
+  <li>Режим "Глушіння пожежної тривоги": вимикає сирени пожежних датчиків Ajax</li>
+  <li>Режим "Без дії": кнопка вимкнена</li>
+  <li>Налаштування режиму через застосунок Ajax</li>
+  <li>Швидкий доступ до важливої функції без введення коду</li>
+  <li>Корисно для екстрених ситуацій</li>
+</ul>
+
+<strong>Керування охороною групи:</strong>
+<ul>
+  <li>Можливість керування охороною окремих груп приміщень</li>
+  <li>Введіть загальний код клавіатури + ідентифікатор групи</li>
+  <li>Корисно для багатокімнатних приміщень</li>
+  <li>Часткова охорона певних зон</li>
+  <li>Гнучке управління великими об'єктами</li>
+  <li>Налаштування груп через застосунок Ajax</li>
+</ul>
+
+<strong>Індикація подій:</strong>
+<ul>
+  <li>Світлодіодна індикація режиму охорони (знято/поставлено на охорону)</li>
+  <li>Індикація проблем з датчиками (несправність, низький заряд)</li>
+  <li>Індикація втрати зв'язку з хабом</li>
+  <li>Індикація процесу постановки/зняття з охорони</li>
+  <li>Індикація затримки на вхід/вихід</li>
+  <li>Звукові сигналі при введенні коду та спрацюванні</li>
+  <li>Миттєве сповіщення про статус системи</li>
+</ul>
+
+<strong>Захист від добирання коду:</strong>
+<ul>
+  <li>Блокування клавіатури при трьох невірних спробах вводу коду поспіль протягом однієї хвилини</li>
+  <li>Час блокування: від 3 до 180 хвилин (налаштовується)</li>
+  <li>Налаштування через застосунок Ajax (PRO або адміністратор)</li>
+  <li>Сповіщення про спроби добирання коду</li>
+  <li>Захист від брутфорс атак</li>
+  <li>Історія невдалих спроб у застосунку</li>
+</ul>
+
+<strong>Ємнісний сенсор:</strong>
+<ul>
+  <li>Сучасна технологія сенсорного введення</li>
+  <li>Чутливий дотик без зусилля</li>
+  <li>Стійкість до забруднень та пошкоджень</li>
+  <li>Довговічність (немає механічних кнопок)</li>
+  <li>Зручність використання</li>
+  <li>Швидкий відгук на дотик</li>
+</ul>
+
+<strong>Технологія зв'язку Jeweller:</strong>
+<ul>
+  <li>Пропрієтарна бездротова технологія Ajax для передавання команд, тривог і подій</li>
+  <li>Дальність зв'язку: до 1700 м (між клавіатурою і хабом або ретранслятором за відсутності перешкод)</li>
+  <li>Двосторонній зв'язок з хабом</li>
+  <li>Блокове шифрування з плаваючим ключем</li>
+  <li>Передовий захист від саботажу</li>
+  <li>Миттєві сповіщення про події</li>
+  <li>Дистанційне керування та налаштування в застосунках Ajax</li>
+  <li>Радіочастотний гопінг для запобігання радіозавадам і глушінню</li>
+  <li>Діапазони радіочастот: 866,0–866,5 МГц, 868,0–868,6 МГц, 868,7–869,2 МГц, 905,0–926,5 МГц, 915,85–926,5 МГц, 921,0–922,0 МГц (залежить від регіону)</li>
+  <li>Максимальна ефективна випромінювана потужність (ERP): до 20 мВт</li>
+  <li>Автоматичне регулювання потужності для зниження енергоспоживання та радіозавад</li>
+  <li>Модуляція радіосигналу: GFSK</li>
+</ul>
+
+<strong>Захист від саботажу:</strong>
+<ul>
+  <li>Тривога тампера при спробі відірвати клавіатуру від поверхні або зняти з кріплення</li>
+  <li>Захист від підміни — автентифікація пристрою</li>
+  <li>Виявлення втрати зв'язку від 36 секунд (залежить від налаштувань Jeweller або Jeweller/Fibra)</li>
+  <li>Захист від радіозавад через радіочастотний гопінг</li>
+  <li>Блокування при спробах добирання коду</li>
+  <li>Сповіщення про низький заряд батареї</li>
+</ul>
+
+<strong>Живлення:</strong>
+<ul>
+  <li>Батареї: 4 × AA тип C (попередньо встановлені)</li>
+  <li>Розрахунковий строк роботи від батарей: до 3,5 років</li>
+  <li>Діапазон робочої напруги: 2,25–3,3 В⎓</li>
+  <li>Номінальна робоча напруга: 3 В⎓</li>
+  <li>Споживання струму в стані спокою: 0,064 мА</li>
+  <li>Максимальний струм споживання: 165 мА</li>
+  <li>Повна ємність батарей: 12000 мА·год</li>
+  <li>Напруга низького заряду батареї: 2,5 В⎓</li>
+  <li>Напруга відновлення низького заряду: 2,7 В⎓</li>
+  <li>Напруга відпрацьованої батареї: 2,25 В⎓ (пристрій вимикається)</li>
+  <li>Ємність відпрацьованих батарей: 500 мА·год</li>
+  <li>Виробники батарей: Huiderui, Energizer</li>
+</ul>
+
+<strong>Фізичні характеристики:</strong>
+<ul>
+  <li>Розміри: 165 × 113 × 20 мм</li>
+  <li>Вага: 267 г</li>
+  <li>Діапазон робочих температур: від −10°C до +40°C</li>
+  <li>Допустима вологість: до 75%</li>
+  <li>Кольори: чорний, білий</li>
+  <li>Пристрій призначений лише для встановлення в приміщенні</li>
+  <li>Сучасний мінімалістичний дизайн</li>
+</ul>
+
+<strong>Рекомендації з встановлення:</strong>
+<ul>
+  <li>Встановлюйте біля входу для зручного доступу</li>
+  <li>Висота встановлення: 1,2-1,5 м для зручності використання</li>
+  <li>Розташовуйте у видному місці</li>
+  <li>Уникайте встановлення поруч з металевими конструкціями</li>
+  <li>Не встановлюйте під прямими сонячними променями</li>
+  <li>Захистіть від дії вологи та пилу</li>
+  <li>Переконайтесь у стійкому зв'язку з хабом</li>
+  <li>Пристрій призначений лише для встановлення в приміщенні</li>
+</ul>
+
+<strong>Застосування:</strong>
+<ul>
+  <li>Житлові приміщення (квартири, будинки)</li>
+  <li>Офіси та комерційні приміщення</li>
+  <li>Магазини та торгові точки</li>
+  <li>Банки та фінансові установи</li>
+  <li>Складські приміщення</li>
+  <li>Навчальні заклади</li>
+  <li>Медичні установи</li>
+  <li>Готелі та хостели</li>
+  <li>Виробничі приміщення</li>
+  <li>Будь-які об'єкти з системою Ajax</li>
+</ul>
+
+<strong>Переваги Ajax KeyPad Plus:</strong>
+<ul>
+  <li>✅ Висока дальність зв'язку — до 1700 м</li>
+  <li>✅ Сенсорна клавіатура з ємнісним сенсором</li>
+  <li>✅ Підтримка карток Pass і брелоків Tag (DESFire EV1/EV2)</li>
+  <li>✅ До 200 персональних кодів доступу</li>
+  <li>✅ До 200 кодів примусу для тихої тривоги</li>
+  <li>✅ До 99 кодів для незареєстрованих користувачів</li>
+  <li>✅ 128-бітне шифрування DESFire — максимальна безпека</li>
+  <li>✅ Захист від добирання коду (блокування)</li>
+  <li>✅ Функціональна кнопка для тривоги</li>
+  <li>✅ Керування групами приміщень</li>
+  <li>✅ Світлодіодна індикація стану системи</li>
+  <li>✅ До 3,5 років автономної роботи</li>
+  <li>✅ Дистанційне налаштування через застосунок</li>
+  <li>✅ Сучасний мінімалістичний дизайн</li>
+</ul>
+
+<strong>Налаштування через застосунок Ajax:</strong>
+<ul>
+  <li>Додавання/видалення користувачів та їх кодів</li>
+  <li>Додавання/видалення карток Pass і брелоків Tag</li>
+  <li>Створення кодів примусу</li>
+  <li>Створення кодів для незареєстрованих користувачів</li>
+  <li>Налаштування функціональної кнопки</li>
+  <li>Налаштування часу блокування при невірних спробах (3-180 хв)</li>
+  <li>Налаштування груп для керування</li>
+  <li>Моніторинг заряду батарей</li>
+  <li>Перевірка рівня сигналу Jeweller</li>
+  <li>Перегляд історії подій та використання кодів</li>
+  <li>Тестування клавіатури</li>
+</ul>
+
+<strong>Сценарії використання:</strong>
+<ul>
+  <li>Зручне керування системою без смартфона</li>
+  <li>Постановка/зняття з охорони персоналом офісу</li>
+  <li>Видача тимчасових кодів працівникам, кур'єрам, гостям</li>
+  <li>Використання кодів примусу при загрозі</li>
+  <li>Швидка тривога натисканням функціональної кнопки</li>
+  <li>Керування окремими зонами великого об'єкта</li>
+  <li>Контроль доступу співробітників через картки</li>
+  <li>Індикація стану системи для всіх присутніх</li>
+  <li>Глушіння помилкових пожежних тривог</li>
+</ul>
+
+<strong>Картки Pass і брелоки Tag:</strong>
+<ul>
+  <li>Однакова функціональність, різний дизайн</li>
+  <li>Картки Pass: форм-фактор банківської картки, зручно носити в гаманці</li>
+  <li>Брелоки Tag: компактний розмір, зручно носити на ключах</li>
+  <li>Технологія DESFire EV1/EV2 з 128-бітним шифруванням</li>
+  <li>Захист від копіювання та клонування</li>
+  <li>Унікальний ідентифікатор для кожної картки/брелока</li>
+  <li>Швидке спрацювання (безконтактна технологія)</li>
+  <li>Купуються окремо</li>
+</ul>
+
+<strong>Відмінності від KeyPad (базова версія):</strong>
+<ul>
+  <li>Підтримка безконтактних карток Pass і брелоків Tag</li>
+  <li>Технологія DESFire EV1/EV2 з 128-бітним шифруванням</li>
+  <li>Більше персональних кодів (до 200 замість до 99)</li>
+  <li>Коди примусу (до 200)</li>
+  <li>Коди незареєстрованих користувачів (до 99)</li>
+  <li>Ємнісний сенсор замість механічних кнопок</li>
+  <li>Сучасніший дизайн</li>
+  <li>Трохи вища вартість</li>
+</ul>
+
+<strong>Комплектація:</strong>
+<ul>
+  <li>KeyPad Plus Jeweller</li>
+  <li>Кріпильна панель SmartBracket</li>
+  <li>4 батареї АА (попередньо встановлені)</li>
+  <li>Монтажний комплект</li>
+  <li>Коротка інструкція</li>
+</ul>
+
+<strong>Сумісність:</strong>
+<ul>
+  <li>Працює з усіма хабами Ajax (Hub, Hub 2, Hub Plus, Hub Hybrid)</li>
+  <li>Підтримка ретрансляторів сигналу (ReX, ReX 2)</li>
+  <li>Інтеграція з застосунками Ajax (iOS, Android, macOS, Windows)</li>
+  <li>Підключення до пультів централізованого спостереження (ПЦС)</li>
+  <li>Підтримка професійного режиму для інсталяторів (PRO)</li>
+  <li>Сумісність з усіма пристроями Ajax</li>
+</ul>
+
+<strong>Чому варто обрати KeyPad Plus:</strong>
+<ul>
+  <li>Максимальна безпека з DESFire та 128-бітним шифруванням</li>
+  <li>Зручність використання карток і брелоків</li>
+  <li>Велика кількість користувачів (до 200 кодів)</li>
+  <li>Коди примусу для екстрених ситуацій</li>
+  <li>Тимчасові коди для гостей</li>
+  <li>Захист від добирання коду</li>
+  <li>Керування групами приміщень</li>
+  <li>Сучасний дизайн з сенсорним екраном</li>
+</ul>
+</div>
+  <p class="product-price">4250.00 грн</p>
+  <button class="btn" onclick="addToCartFromProductPage({ id: 'Ajax KeyPad Plus White', name: 'Ajax KeyPad Plus White', price: 4250, image: 'images/ajax_keypad_plus_white_1.jpg' })">
+    Додати у кошик
+  </button>
+</div>
+
+<div id="modal" class="modal" onclick="closeModal()">
+  <span class="arrow left" onclick="event.stopPropagation(); prevModalImage()">&#10094;</span>
+  <img id="modal-img" src="" alt="Збільшене зображення">
+  <span class="arrow right" onclick="event.stopPropagation(); nextModalImage()">&#10095;</span>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+const images = [
+  "images/ajax_keypad_plus_white_1.jpg",
+  "images/ajax_keypad_plus_white_2.jpg",
+  "images/ajax_keypad_plus_white_3.jpg"
+  
+];
+let currentIndex = 0;
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 2500);
+}
+
+function addToCartFromProductPage(item) {
+  cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const existingItem = cart.find(i => i.id === item.id);
+  if (existingItem) existingItem.quantity++;
+  else { item.quantity = 1; cart.push(item); }
+  localStorage.setItem('cart', JSON.stringify(cart));
+  showToast(`${item.name} додано до кошика!`);
+}
+
+/* === Карусель === */
+function updateCarousel() {
+  document.getElementById('carousel').style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+function nextImage() {
+  currentIndex = (currentIndex + 1) % images.length;
+  updateCarousel();
+}
+function prevImage() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  updateCarousel();
+}
+
+/* === Модалка === */
+function openModal(imageSrc) {
+  currentIndex = images.indexOf(imageSrc);
+  document.getElementById("modal-img").src = imageSrc;
+  document.getElementById("modal").style.display = "flex";
+}
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
+function nextModalImage() {
+  currentIndex = (currentIndex + 1) % images.length;
+  document.getElementById("modal-img").src = images[currentIndex];
+}
+function prevModalImage() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  document.getElementById("modal-img").src = images[currentIndex];
+}
+
+/* === Свайпи === */
+let startX = 0;
+const carousel = document.getElementById('carousel');
+carousel.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
+carousel.addEventListener('touchend', e => {
+  const diff = e.changedTouches[0].clientX - startX;
+  if (Math.abs(diff) > 50) diff > 0 ? prevImage() : nextImage();
+}, { passive: true });
+
+const modal = document.getElementById("modal");
+modal.addEventListener("touchstart", e => startX = e.touches[0].clientX, { passive: true });
+modal.addEventListener("touchend", e => {
+  const diff = e.changedTouches[0].clientX - startX;
+  if (Math.abs(diff) > 50) diff > 0 ? prevModalImage() : nextModalImage();
+}, { passive: true });
+</script>
+</body>
+</html>
