@@ -334,7 +334,8 @@
       <img src="images/ajax_keypad_white_1.jpg" alt="KeyPad White" onclick="openModal('images/ajax_keypad_white_1.jpg')">
       <img src="images/ajax_keypad_white_2.jpg" alt="KeyPad White" onclick="openModal('images/ajax_keypad_white_2.jpg')">
       <img src="images/ajax_keypad_white_3.jpg" alt="KeyPad White" onclick="openModal('images/ajax_keypad_white_3.jpg')">
-     
+
+      <img src="images/ajax_keypad_white_1.jpg" alt="KeyPad White" onclick="openModal('images/ajax_keypad_white_1.jpg')">
     </div>
 
     <div class="carousel-arrow left" onclick="prevImage()">&#10094;</div>
@@ -344,7 +345,10 @@
   <div id="toast" class="toast"></div>
 
   <div class="product-description">
-Бездротова сенсорна клавіатура Ajax KeyPad Jeweller призначена для керування режимами охорони системи Ajax без використання мобільного додатку. Пристрій дозволяє ставити та знімати систему з охорони за допомогою персональних кодів доступу, підтримує до 200 користувачів, має функціональну кнопку для активації тривоги або глушіння пожежних сирен, а також сповіщає про стан системи за допомогою світлодіодної індикації. KeyPad захищений від добирання коду блокуванням після трьох невдалих спроб та підтримує коди примусу для відправлення прихованої тривоги.
+Бездротова сенсорна клавіатура Ajax KeyPad Jeweller призначена для керування режимами охорони системи Ajax без використання мобільного додатку. 
+    Пристрій дозволяє ставити та знімати систему з охорони за допомогою персональних кодів доступу, підтримує до 200 користувачів, 
+    має функціональну кнопку для активації тривоги або глушіння пожежних сирен, а також сповіщає про стан системи за допомогою світлодіодної індикації. 
+    KeyPad захищений від добирання коду блокуванням після трьох невдалих спроб та підтримує коди примусу для відправлення прихованої тривоги.
 
 <br><br>
 <strong>Основні характеристики:</strong>
@@ -659,6 +663,7 @@ const images = [
   
 ];
 let currentIndex = 0;
+const totalSlides = images.length;
 
 function showToast(message) {
   const toast = document.getElementById("toast");
@@ -678,30 +683,67 @@ function addToCartFromProductPage(item) {
 
 /* === Карусель === */
 function updateCarousel() {
-  document.getElementById('carousel').style.transform = `translateX(-${currentIndex * 100}%)`;
+  const carouselEl = document.getElementById('carousel');
+  carouselEl.style.transform = `translateX(-${currentIndex * 100}%)`;
 }
+
 function nextImage() {
-  currentIndex = (currentIndex + 1) % images.length;
+  const carouselEl = document.getElementById('carousel');
+  currentIndex++;
+  carouselEl.style.transition = 'transform 0.5s ease';
   updateCarousel();
+  
+  // Якщо дійшли до клону (позиція після останнього оригіналу)
+  if (currentIndex === totalSlides) {
+    setTimeout(() => {
+      carouselEl.style.transition = 'none';
+      currentIndex = 0;
+      updateCarousel();
+    }, 500); // Після завершення анімації
+  }
 }
+
 function prevImage() {
-  currentIndex = (currentIndex - 1 + images.length) % images.length;
-  updateCarousel();
+  const carouselEl = document.getElementById('carousel');
+  
+  // Якщо на першому зображенні - миттєво стрибаємо на клон
+  if (currentIndex === 0) {
+    carouselEl.style.transition = 'none';
+    currentIndex = totalSlides;
+    updateCarousel();
+    
+    // Даємо браузеру час застосувати зміни
+    setTimeout(() => {
+      carouselEl.style.transition = 'transform 0.5s ease';
+      currentIndex--;
+      updateCarousel();
+    }, 20);
+  } else {
+    currentIndex--;
+    carouselEl.style.transition = 'transform 0.5s ease';
+    updateCarousel();
+  }
 }
 
 /* === Модалка === */
 function openModal(imageSrc) {
-  currentIndex = images.indexOf(imageSrc);
+  const modalIndex = images.indexOf(imageSrc);
+  if (modalIndex !== -1) {
+    currentIndex = modalIndex;
+  }
   document.getElementById("modal-img").src = imageSrc;
   document.getElementById("modal").style.display = "flex";
 }
+
 function closeModal() {
   document.getElementById("modal").style.display = "none";
 }
+
 function nextModalImage() {
   currentIndex = (currentIndex + 1) % images.length;
   document.getElementById("modal-img").src = images[currentIndex];
 }
+
 function prevModalImage() {
   currentIndex = (currentIndex - 1 + images.length) % images.length;
   document.getElementById("modal-img").src = images[currentIndex];
