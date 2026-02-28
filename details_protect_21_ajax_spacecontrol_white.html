@@ -672,16 +672,41 @@ function addToCartFromProductPage(item) {
 }
 
 /* === Карусель === */
-function updateCarousel() {
-  document.getElementById('carousel').style.transform = `translateX(-${currentIndex * 100}%)`;
+function updateCarousel(instant = false) {
+  const carouselEl = document.getElementById('carousel');
+  
+  if (instant) {
+    // Вимкнути transition для миттєвого переходу
+    carouselEl.style.transition = 'none';
+    carouselEl.style.transform = `translateX(-${currentIndex * 100}%)`;
+    
+    // Примусити браузер застосувати зміни
+    carouselEl.offsetHeight;
+    
+    // Увімкнути transition назад
+    carouselEl.style.transition = 'transform 0.5s ease';
+  } else {
+    carouselEl.style.transform = `translateX(-${currentIndex * 100}%)`;
+  }
 }
+
 function nextImage() {
+  const oldIndex = currentIndex;
   currentIndex = (currentIndex + 1) % images.length;
-  updateCarousel();
+  
+  // Якщо перехід з останнього на перше - миттєвий перехід
+  const instant = (oldIndex === images.length - 1 && currentIndex === 0);
+  updateCarousel(instant);
 }
+
 function prevImage() {
+  const oldIndex = currentIndex;
   currentIndex = (currentIndex - 1 + images.length) % images.length;
-  updateCarousel();
+  
+  // Якщо перехід з першого на останнє - миттєвий перехід
+  const instant = (oldIndex === 0 && currentIndex === images.length - 1);
+  updateCarousel(instant);
+}
 }
 
 /* === Модалка === */
