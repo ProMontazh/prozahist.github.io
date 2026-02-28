@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <title>Деталі товару - Ajax SpaceControl White</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    /* ===== ЛОГОТИП (БАЗОВІ СТИЛІ ДЛЯ ДЕСКТОПУ) ===== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      background: transparent;
+    }
+
+    .logo svg {
+      width: 205px;
+      height: auto;
+     
+    }
+
+    /* ===== Toast ===== */
+    .toast {
+      position: fixed;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.4);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      font-size: 1.0em;
+      white-space: nowrap;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.5s;
+      z-index: 9999;
+    }
+
+    .toast.show {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* ===== Контейнер ===== */
+    .container {
+      max-width: 830px;
+      margin: 20px auto;
+      padding: 30px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      animation: fadeIn 1.5s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .product-title {
+      text-align: center;
+      font-size: 1.6em;
+      margin-top: 0;
+    }
+
+    /* ===== Карусель ===== */
+    .carousel-wrapper {
+      position: relative;
+      overflow: hidden;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .carousel {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .carousel img {
+      flex: 0 0 100%;
+      max-width: 100%;
+      border-radius: 5px;
+      cursor: pointer;
+      object-fit: contain;
+    }
+
+    /* Стрілки для десктопу */
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      font-size: 2em;
+      padding: 8px 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.3s;
+      z-index: 10;
+      display: none;
+    }
+
+    .carousel-arrow:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .carousel-arrow.left { left: 10px; }
+    .carousel-arrow.right { right: 10px; }
+
+    /* ===== Опис ===== */
+    .product-description {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin: 20px 0 30px 20px;
+    }
+
+    .product-description ul {
+      padding-left: 20px;
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
+
+    .product-description li {
+      margin-bottom: 6px;
+    }
+
+    .product-price {
+      font-size: 1.8em;
+      color: red;
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .btn {
+      display: block;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      margin: 20px auto;
+      text-align: center;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+
+    /* ===== Модалка ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .modal .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3em;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+      padding: 10px;
+      z-index: 10001;
+    }
+
+    .modal .arrow.left { left: 20px; }
+    .modal .arrow.right { right: 20px; }
+
+    /* ===== Медіа-запити ===== */
+    @media (min-width: 768px) {
+      .carousel-arrow { display: block; }
+    }
+
+    @media (min-width: 1024px) {
+      .product-description {
+        margin-left: 80px;
+        margin-right: 40px;
+      }
+      .product-description ul {
+        padding-left: 60px;
+      }
+      .carousel img {
+        max-height: 420px;
+      }
+    }
+
+    /* Мобільна версія - прибираємо фіксацію логотипу */
+    @media (max-width: 768px) {
+      header {
+        position: static;
+        top: auto;
+        left: auto;
+        padding: 0px;
+        background: transparent;
+      }
+
+      .logo svg {
+        width: 230px;
+        
+      }
+
+      .container {
+        margin: 0;
+        padding: 20px;
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      body {
+        background-color: #fff;
+      }
+
+      .product-title {
+        font-size: 1.3em;
+      }
+
+      .carousel {
+        padding: 5px 0;
+      }
+
+      .product-description {
+        margin-left: 10px;
+      }
+
+      .product-description ul {
+        padding-left: 15px;
+      }
+    }
+
+    /* Дуже маленькі екрани */
+    @media (max-width: 480px) {
+      header {
+        position: static;
+        top: auto;
+        left: auto;
+        padding: 0px;
+        background: transparent;
+      }
+
+      .logo svg {
+        width: 205px;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <svg xmlns="http://www.w3.org/2000/svg" width="180" height="56" viewBox="0 0 600 200">
+      <defs>
+        <!-- 🌊 Хвиля для слогана -->
+        <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="-0.3" stop-color="#999">
+            <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+          </stop>
+          <stop offset="-0.15" stop-color="#666">
+            <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+          </stop>
+          <stop offset="0" stop-color="#999">
+            <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+          </stop>
+        </linearGradient>
+        <!-- 🔴 Хвиля для ПРО -->
+        <linearGradient id="pro-wave" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="-0.3" stop-color="#800000">
+            <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+          </stop>
+          <stop offset="-0.15" stop-color="#ff4444">
+            <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+          </stop>
+          <stop offset="0" stop-color="#800000">
+            <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+          </stop>
+        </linearGradient>
+        <!-- ⚙️ Хвиля для ЗАХИСТ -->
+        <linearGradient id="zahist-wave" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="-0.3" stop-color="#808080">
+            <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+          </stop>
+          <stop offset="-0.15" stop-color="#e0e0e0">
+            <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+          </stop>
+          <stop offset="0" stop-color="#808080">
+            <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+          </stop>
+        </linearGradient>
+      </defs>
+      <!-- ПРО -->
+      <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#pro-wave)">ПРО</text>
+      <!-- ЗАХИСТ -->
+      <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#zahist-wave)">ЗАХИСТ</text>
+      <!-- Слоган -->
+      <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="33" fill="url(#wave-gradient)">БЕЗДРОТОВІ СИСТЕМИ БЕЗПЕКИ</text>
+      <!-- Декор -->
+      <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10" />
+      <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10" />
+      <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10" />
+      <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10" />
+    </svg>
+  </div>
+</header>
+
+<div class="container">
+  <h2 class="product-title">Брелок з тривожною кнопкою і керуванням режимами охорони Ajax SpaceControl White</h2>
+
+  <div class="carousel-wrapper">
+    <div class="carousel" id="carousel">
+      <img src="images/ajax_spacecontrol_white_1.jpg" alt="Ajax SpaceControl White" onclick="openModal('images/ajax_spacecontrol_white_1.jpg')">
+      <img src="images/ajax_spacecontrol_white_2.jpg" alt="Ajax SpaceControl White" onclick="openModal('images/ajax_spacecontrol_white_2.jpg')">
+      <img src="images/ajax_spacecontrol_white_3.jpg" alt="Ajax SpaceControl White" onclick="openModal('images/ajax_spacecontrol_white_3.jpg')">
+      <img src="images/ajax_spacecontrol_white_4.jpg" alt="Ajax SpaceControl White" onclick="openModal('images/ajax_spacecontrol_white_4.jpg')">
+     
+    </div>
+
+    <div class="carousel-arrow left" onclick="prevImage()">&#10094;</div>
+    <div class="carousel-arrow right" onclick="nextImage()">&#10095;</div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <div class="product-description">
+Бездротовий брелок Ajax SpaceControl Jeweller з тривожною кнопкою і керуванням режимами охорони призначений для зручного управління системою безпеки Ajax без використання смартфона. Компактний пристрій з 4 кнопками дозволяє ставити систему на охорону, знімати з охорони, вмикати нічний режим та викликати тривогу. Брелок має дальність зв'язку до 1300 метрів, захист від випадкових натискань, можливість призначення конкретному користувачеві та керування охороною окремих груп приміщень.
+
+<br><br>
+<strong>Основні характеристики:</strong>
+<ul>
+  <li>4 функціональні кнопки для повного керування системою</li>
+  <li>Кнопка постановки системи під охорону</li>
+  <li>Кнопка зняття системи з охорони</li>
+  <li>Кнопка ввімкнення нічного режиму</li>
+  <li>Тривожна кнопка для екстрених ситуацій</li>
+  <li>Дальність зв'язку з хабом до 1300 м на відкритому просторі</li>
+  <li>Захист від випадкових натискань (тривале або подвійне натискання)</li>
+  <li>Можливість призначення конкретному користувачеві</li>
+  <li>Керування охороною окремих груп приміщень</li>
+  <li>Компактний розмір: 65 × 37 × 10 мм</li>
+  <li>Легкий: 12,7-13 г</li>
+  <li>Автономна робота до 5 років від однієї батареї CR2032</li>
+  <li>Два кольори на вибір: чорний, білий</li>
+</ul>
+
+<strong>4 функціональні кнопки:</strong>
+<ul>
+  <li>Кнопка встановлення системи під охорону (повна охорона)</li>
+  <li>Кнопка зняття системи з охорони (деактивація всіх режимів)</li>
+  <li>Кнопка ввімкнення нічного режиму (часткова охорона, периметр)</li>
+  <li>Тривожна кнопка (сигнал SOS, виклик допомоги)</li>
+  <li>Інтуїтивно зрозумілі символи на кнопках</li>
+  <li>Тактильний відгук при натисканні</li>
+  <li>Миттєве виконання команди після натискання</li>
+</ul>
+
+<strong>Тривожна кнопка (SOS):</strong>
+<ul>
+  <li>Виклик екстреної допомоги одним натисканням</li>
+  <li>Система надсилає тривогу на пульт охоронної компанії (ПЦС)</li>
+  <li>Миттєве сповіщення всім користувачам системи</li>
+  <li>Активація всіх підключених сирен</li>
+  <li>Корисно при загрозі здоров'ю, нападі, пограбуванні</li>
+  <li>Можна використовувати вдома та на вулиці (в межах дальності зв'язку)</li>
+  <li>Ідеально для літніх людей, дітей, людей з обмеженими можливостями</li>
+</ul>
+
+<strong>Нічний режим охорони:</strong>
+<ul>
+  <li>Часткова охорона періметра (вікна, двері) при перебуванні вдома</li>
+  <li>Можливість вільно пересуватися всередині приміщення</li>
+  <li>Датчики руху всередині будинку не активні</li>
+  <li>Датчики відчинення на вікнах і дверях активні</li>
+  <li>Спокійний сон під захистом системи</li>
+  <li>Миттєва тривога при спробі проникнення ззовні</li>
+  <li>Швидке ввімкнення одним натисканням перед сном</li>
+</ul>
+
+<strong>Призначення користувачеві:</strong>
+<ul>
+  <li>Брелок можна призначити конкретному користувачеві системи</li>
+  <li>Події брелока надходять у застосунки Ajax від імені цього користувача</li>
+  <li>Брелок має такі самі права на керування, що й користувач</li>
+  <li>Можливість відстеження хто саме керував системою</li>
+  <li>Історія дій зберігається у застосунку</li>
+  <li>Легке управління правами доступу через застосунок</li>
+  <li>Можна видалити або заблокувати брелок дистанційно</li>
+</ul>
+
+<strong>Керування охороною групи:</strong>
+<ul>
+  <li>Користувач може вибрати групу приміщень, охороною якої керує брелок</li>
+  <li>Корисно для багатокімнатних або багатоповерхових об'єктів</li>
+  <li>Можна охороняти тільки певну частину будинку або офісу</li>
+  <li>Гнучке керування великими об'єктами</li>
+  <li>Налаштування груп через застосунок Ajax</li>
+  <li>Один брелок може керувати однією групою</li>
+</ul>
+
+<strong>Захист від випадкових натискань:</strong>
+<ul>
+  <li>Функція доступна для брелоків з версією прошивки 5.54.1.0 або вище</li>
+  <li>Брелоки, виготовлені після 19 березня 2020 року</li>
+  <li>Режим тривалого натискання: потрібно утримувати кнопку 1-2 секунди</li>
+  <li>Режим подвійного натискання: потрібно натиснути кнопку двічі швидко</li>
+  <li>Налаштування режиму через застосунок Ajax</li>
+  <li>Запобігає випадковій активації/деактивації системи в кишені або сумці</li>
+  <li>Особливо важливо для тривожної кнопки</li>
+</ul>
+
+<strong>Технологія зв'язку Jeweller:</strong>
+<ul>
+  <li>Пропрієтарна бездротова технологія Ajax для передавання команд, тривог і подій</li>
+  <li>Дальність зв'язку: до 1300 м (між пристроєм і хабом або ретранслятором за відсутності перешкод)</li>
+  <li>Двосторонній зв'язок з хабом</li>
+  <li>Блокове шифрування з плаваючим ключем</li>
+  <li>Передовий захист від саботажу</li>
+  <li>Миттєві сповіщення про події</li>
+  <li>Дистанційне керування та налаштування в застосунках Ajax</li>
+  <li>Радіочастотний гопінг для запобігання радіозавадам і глушінню</li>
+  <li>Діапазони радіочастот: 866,0–866,5 МГц, 868,0–868,6 МГц, 868,7–869,2 МГц, 905,0–926,5 МГц, 915,85–926,5 МГц, 921,0–922,0 МГц (залежить від регіону)</li>
+  <li>Максимальна ефективна випромінювана потужність (ERP): до 20 мВт</li>
+  <li>Автоматичне регулювання потужності для зниження енергоспоживання та радіозавад</li>
+  <li>Модуляція радіосигналу: GFSK</li>
+</ul>
+
+<strong>Живлення:</strong>
+<ul>
+  <li>Батарея: 1 × CR2032 тип C (попередньо встановлена)</li>
+  <li>Розрахунковий строк роботи від батареї: до 5 років</li>
+  <li>Номінальна робоча напруга: 3 В⎓</li>
+  <li>Споживання струму в стані спокою: 0,7 мкА</li>
+  <li>Максимальний струм споживання: 26 мА</li>
+  <li>Повна ємність батареї: 225 мА·год</li>
+  <li>Виробники батареї: Renata, Panasonic</li>
+  <li>Легка заміна батареї без інструментів</li>
+  <li>Сповіщення про низький заряд батареї у застосунку</li>
+</ul>
+
+<strong>Фізичні характеристики:</strong>
+<ul>
+  <li>Розміри: 65 × 37 × 10 мм</li>
+  <li>Вага білого пристрою: 13 г</li>
+  <li>Вага чорного пристрою: 12,7 г</li>
+  <li>Діапазон робочих температур: від −10°C до +40°C</li>
+  <li>Допустима вологість: до 95%</li>
+  <li>Клас захисту: IP50 (захист від пилу), IK04 (захист від ударів)</li>
+  <li>Кольори: чорний, білий</li>
+  <li>Компактний дизайн для носіння на ключах</li>
+  <li>Міцний пластиковий корпус</li>
+</ul>
+
+<strong>Рекомендації з використання:</strong>
+<ul>
+  <li>Носіть брелок на ключах для постійного доступу</li>
+  <li>Тримайте поблизу при перебуванні вдома</li>
+  <li>Використовуйте для швидкого керування без смартфона</li>
+  <li>Видайте брелоки членам сім'ї, співробітникам</li>
+  <li>Носіть окремо від інших ключів для запобігання пошкодженням</li>
+  <li>Уникайте впливу води (хоча допускається вологість до 95%)</li>
+  <li>Не залишайте під прямими сонячними променями</li>
+  <li>Перевіряйте заряд батареї через застосунок</li>
+</ul>
+
+<strong>Застосування:</strong>
+<ul>
+  <li>Житлові приміщення (квартири, будинки)</li>
+  <li>Офіси та комерційні приміщення</li>
+  <li>Магазини та торгові точки</li>
+  <li>Складські приміщення</li>
+  <li>Гаражі та паркінги</li>
+  <li>Дачі та заміські будинки</li>
+  <li>Для літніх людей (тривожна кнопка)</li>
+  <li>Для дітей (безпека та контроль)</li>
+  <li>Для працівників з доступом до об'єкта</li>
+  <li>Будь-які об'єкти з системою Ajax</li>
+</ul>
+
+<strong>Переваги Ajax SpaceControl:</strong>
+<ul>
+  <li>✅ Висока дальність зв'язку — до 1300 м</li>
+  <li>✅ 4 функціональні кнопки для повного керування</li>
+  <li>✅ Тривожна кнопка SOS для екстрених ситуацій</li>
+  <li>✅ Нічний режим охорони для спокійного сну</li>
+  <li>✅ Захист від випадкових натискань</li>
+  <li>✅ Можливість призначення користувачеві</li>
+  <li>✅ Керування групами приміщень</li>
+  <li>✅ Компактний і легкий (12,7-13 г)</li>
+  <li>✅ До 5 років автономної роботи</li>
+  <li>✅ Швидке керування без смартфона</li>
+  <li>✅ Два кольори на вибір</li>
+  <li>✅ Захист від вологості до 95%</li>
+  <li>✅ Захист від ударів IK04</li>
+</ul>
+
+<strong>Налаштування через застосунок Ajax:</strong>
+<ul>
+  <li>Додавання брелока до системи</li>
+  <li>Призначення брелока конкретному користувачеві</li>
+  <li>Налаштування режиму захисту від випадкових натискань (тривале/подвійне)</li>
+  <li>Вибір групи приміщень для керування</li>
+  <li>Моніторинг заряду батареї</li>
+  <li>Перевірка рівня сигналу Jeweller</li>
+  <li>Перегляд історії використання брелока</li>
+  <li>Блокування або видалення брелока дистанційно</li>
+  <li>Тестування роботи брелока</li>
+</ul>
+
+<strong>Сценарії використання:</strong>
+<ul>
+  <li>Швидка постановка/зняття з охорони при виході/поверненні додому</li>
+  <li>Ввімкнення нічного режиму перед сном одним натисканням</li>
+  <li>Виклик екстреної допомоги при загрозі (напад, пограбування, проблеми зі здоров'ям)</li>
+  <li>Керування системою для літніх членів сім'ї (простіше ніж смартфон)</li>
+  <li>Надання доступу працівникам без видачі смартфона</li>
+  <li>Тривожна кнопка для самотніх літніх людей</li>
+  <li>Дітям для виклику батьків у разі небезпеки</li>
+  <li>Керування охороною окремих зон великого об'єкта</li>
+  <li>Резервний спосіб керування при розрядженому телефоні</li>
+</ul>
+
+<strong>Відмінності від Button (тривожна кнопка):</strong>
+<ul>
+  <li>SpaceControl має 4 кнопки (Button — тільки 1)</li>
+  <li>Повне керування системою (постановка/зняття з охорони, нічний режим)</li>
+  <li>Можливість керування групами</li>
+  <li>Можливість призначення користувачеві</li>
+  <li>Більші розміри (65×37×10 мм проти 42×42×13 мм)</li>
+  <li>Менша дальність зв'язку (1300 м проти 1300 м — однаково)</li>
+  <li>Вища вартість завдяки додатковому функціоналу</li>
+</ul>
+
+<strong>Чому варто обрати SpaceControl:</strong>
+<ul>
+  <li>Повне керування системою без смартфона</li>
+  <li>Зручність для всіх членів сім'ї</li>
+  <li>Тривожна кнопка для екстрених ситуацій</li>
+  <li>Нічний режим для комфортного сну</li>
+  <li>Компактний розмір для носіння на ключах</li>
+  <li>Тривалий термін роботи від батареї</li>
+  <li>Захист від випадкових натискань</li>
+  <li>Простота використання</li>
+</ul>
+
+<strong>Для кого підходить SpaceControl:</strong>
+<ul>
+  <li>Всі члени сім'ї з доступом до будинку</li>
+  <li>Літні люди, яким складно користуватися смартфоном</li>
+  <li>Діти для безпеки та можливості викликати допомогу</li>
+  <li>Працівники офісів, магазинів з доступом до приміщення</li>
+  <li>Люди з обмеженими можливостями</li>
+  <li>Власники великих будинків з декількома зонами охорони</li>
+  <li>Всі, хто цінує швидкість і зручність</li>
+</ul>
+
+<strong>Історія подій у застосунку:</strong>
+<ul>
+  <li>Всі дії брелока записуються в історію</li>
+  <li>Видно хто і коли поставив/зняв систему з охорони</li>
+  <li>Фіксація використання тривожної кнопки</li>
+  <li>Ввімкнення/вимкнення нічного режиму</li>
+  <li>Контроль доступу членів сім'ї або працівників</li>
+  <li>Можливість аналізу використання системи</li>
+</ul>
+
+<strong>Комплектація:</strong>
+<ul>
+  <li>Ajax SpaceControl Jeweller</li>
+  <li>Батарея CR2032 (попередньо встановлена)</li>
+  <li>Коротка інструкція</li>
+</ul>
+
+<strong>Сумісність:</strong>
+<ul>
+  <li>Працює з усіма хабами Ajax (Hub, Hub 2, Hub Plus, Hub Hybrid)</li>
+  <li>Підтримка ретрансляторів сигналу (ReX, ReX 2) для збільшення дальності</li>
+  <li>Інтеграція з застосунками Ajax (iOS, Android, macOS, Windows)</li>
+  <li>Підключення до пультів централізованого спостереження (ПЦС)</li>
+  <li>Сумісність з усіма пристроями та датчиками Ajax</li>
+  <li>Підтримка сценаріїв автоматизації</li>
+</ul>
+
+<strong>Безпека та шифрування:</strong>
+<ul>
+  <li>Блокове шифрування з плаваючим ключем</li>
+  <li>Захист від перехоплення та підміни команд</li>
+  <li>Унікальний ідентифікатор для кожного брелока</li>
+  <li>Радіочастотний гопінг проти глушіння</li>
+  <li>Автентифікація пристрою при кожній команді</li>
+  <li>Неможливість клонування або копіювання</li>
+</ul>
+
+<strong>Швидкість виконання команд:</strong>
+<ul>
+  <li>Миттєве передавання команди після натискання кнопки</li>
+  <li>Час спрацювання: менше 1 секунди</li>
+  <li>Двосторонній зв'язок підтверджує виконання команди</li>
+  <li>Сирени та датчики реагують одразу</li>
+  <li>Критично важливо для тривожної кнопки</li>
+</ul>
+
+<strong>Порада щодо використання:</strong>
+<ul>
+  <li>Рекомендується мати по брелоку для кожного дорослого члена сім'ї</li>
+  <li>Призначте кожен брелок відповідному користувачеві для контролю доступу</li>
+  <li>Налаштуйте захист від випадкових натискань для тривожної кнопки</li>
+  <li>Періодично перевіряйте заряд батареї через застосунок</li>
+  <li>Тримайте запасну батарею CR2032 вдома</li>
+  <li>Поясніть всім членам сім'ї призначення кожної кнопки</li>
+</ul>
+</div>
+  <p class="product-price">970.00 грн</p>
+  <button class="btn" onclick="addToCartFromProductPage({ id: 'Ajax SpaceControl White', name: 'Ajax SpaceControl White', price: 970, image: 'images/ajax_spacecontrol_white_1.jpg' })">
+    Додати у кошик
+  </button>
+</div>
+
+<div id="modal" class="modal" onclick="closeModal()">
+  <span class="arrow left" onclick="event.stopPropagation(); prevModalImage()">&#10094;</span>
+  <img id="modal-img" src="" alt="Збільшене зображення">
+  <span class="arrow right" onclick="event.stopPropagation(); nextModalImage()">&#10095;</span>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+const images = [
+  "images/ajax_spacecontrol_white_1.jpg",
+  "images/ajax_spacecontrol_white_2.jpg",
+  "images/ajax_spacecontrol_white_3.jpg",
+  "images/ajax_spacecontrol_white_4.jpg"
+ 
+  
+];
+let currentIndex = 0;
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 2500);
+}
+
+function addToCartFromProductPage(item) {
+  cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const existingItem = cart.find(i => i.id === item.id);
+  if (existingItem) existingItem.quantity++;
+  else { item.quantity = 1; cart.push(item); }
+  localStorage.setItem('cart', JSON.stringify(cart));
+  showToast(`${item.name} додано до кошика!`);
+}
+
+/* === Карусель === */
+function updateCarousel() {
+  document.getElementById('carousel').style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+function nextImage() {
+  currentIndex = (currentIndex + 1) % images.length;
+  updateCarousel();
+}
+function prevImage() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  updateCarousel();
+}
+
+/* === Модалка === */
+function openModal(imageSrc) {
+  currentIndex = images.indexOf(imageSrc);
+  document.getElementById("modal-img").src = imageSrc;
+  document.getElementById("modal").style.display = "flex";
+}
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
+function nextModalImage() {
+  currentIndex = (currentIndex + 1) % images.length;
+  document.getElementById("modal-img").src = images[currentIndex];
+}
+function prevModalImage() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  document.getElementById("modal-img").src = images[currentIndex];
+}
+
+/* === Свайпи === */
+let startX = 0;
+const carousel = document.getElementById('carousel');
+carousel.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
+carousel.addEventListener('touchend', e => {
+  const diff = e.changedTouches[0].clientX - startX;
+  if (Math.abs(diff) > 50) diff > 0 ? prevImage() : nextImage();
+}, { passive: true });
+
+const modal = document.getElementById("modal");
+modal.addEventListener("touchstart", e => startX = e.touches[0].clientX, { passive: true });
+modal.addEventListener("touchend", e => {
+  const diff = e.changedTouches[0].clientX - startX;
+  if (Math.abs(diff) > 50) diff > 0 ? prevModalImage() : nextModalImage();
+}, { passive: true });
+</script>
+</body>
+</html>
