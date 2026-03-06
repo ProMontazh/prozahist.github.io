@@ -181,6 +181,8 @@
         <img src="images/IPC-K3DP-3H0WF.png" alt="IP-Камера IMOU" onclick="openModal('images/IPC-K3DP-3H0WF.png')">
         <img src="images/IPC-K3DP-3H0WF_2.png" alt="IP-Камера IMOU - вид сбоку" onclick="openModal('images/IPC-K3DP-3H0WF_2.png')">
         <img src="images/IPC-K3DP-3H0WF_1.png" alt="IP-Камера IMOU - вид сбоку" onclick="openModal('images/IPC-K3DP-3H0WF_1.png')">
+
+        <img src="images/IPC-K3DP-3H0WF.png" alt="IP-Камера IMOU" onclick="openModal('images/IPC-K3DP-3H0WF.png')">
     </div>
 
     <div id="toast" class="toast"></div>
@@ -230,77 +232,109 @@
         "images/IPC-K3DP-3H0WF.png",
         "images/IPC-K3DP-3H0WF_2.png",
         "images/IPC-K3DP-3H0WF_1.png"
-    ];
-    let currentIndex = 0;
+   ];
+let currentIndex = 0;
+const totalSlides = images.length;
 
-    function showToast(message) {
-        const toast = document.getElementById("toast");
-        toast.textContent = message;
-        toast.classList.add("show");
-        setTimeout(() => {
-            toast.classList.remove("show");
-        }, 3000);
-    }
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 2500);
+}
 
-    function addToCartFromProductPage(item) {
-        const existingItem = cart.find(cartItem => cartItem.id === item.id);
-        if (existingItem) {
-            existingItem.quantity++;
-        } else {
-            item.quantity = 1;
-            cart.push(item);
-        }
-        localStorage.setItem('cart', JSON.stringify(cart));
-        showToast(`${item.name} додано до кошика!`);
-    }
+function addToCartFromProductPage(item) {
+  cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const existingItem = cart.find(i => i.id === item.id);
+  if (existingItem) existingItem.quantity++;
+  else { item.quantity = 1; cart.push(item); }
+  localStorage.setItem('cart', JSON.stringify(cart));
+  showToast(`${item.name} додано до кошика!`);
+}
 
-    function openModal(imageSrc) {
-        currentIndex = images.indexOf(imageSrc);
-        document.getElementById("modal-img").src = imageSrc;
-        document.getElementById("modal").style.display = "flex";
-    }
+/* === Карусель === */
+function updateCarousel() {
+  const carouselEl = document.getElementById('carousel');
+  carouselEl.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
 
-    function closeModal() {
-        document.getElementById("modal").style.display = "none";
-    }
+function nextImage() {
+  const carouselEl = document.getElementById('carousel');
+  currentIndex++;
+  carouselEl.style.transition = 'transform 0.5s ease';
+  updateCarousel();
+  
+  // Якщо дійшли до клону (позиція після останнього оригіналу)
+  if (currentIndex === totalSlides) {
+    setTimeout(() => {
+      carouselEl.style.transition = 'none';
+      currentIndex = 0;
+      updateCarousel();
+    }, 500); // Після завершення анімації
+  }
+}
 
-    function nextImage() {
-        currentIndex = (currentIndex + 1) % images.length;
-        document.getElementById("modal-img").src = images[currentIndex];
-    }
+function prevImage() {
+  const carouselEl = document.getElementById('carousel');
+  
+  // Якщо на першому зображенні - миттєво стрибаємо на клон
+  if (currentIndex === 0) {
+    carouselEl.style.transition = 'none';
+    currentIndex = totalSlides;
+    updateCarousel();
+    
+    // Даємо браузеру час застосувати зміни
+    setTimeout(() => {
+      carouselEl.style.transition = 'transform 0.5s ease';
+      currentIndex--;
+      updateCarousel();
+    }, 20);
+  } else {
+    currentIndex--;
+    carouselEl.style.transition = 'transform 0.5s ease';
+    updateCarousel();
+  }
+}
 
-    function prevImage() {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        document.getElementById("modal-img").src = images[currentIndex];
-    }
+/* === Модалка === */
+function openModal(imageSrc) {
+  const modalIndex = images.indexOf(imageSrc);
+  if (modalIndex !== -1) {
+    currentIndex = modalIndex;
+  }
+  document.getElementById("modal-img").src = imageSrc;
+  document.getElementById("modal").style.display = "flex";
+}
 
-    // свайп на мобильных
-    let startX = 0;
-    const modal = document.getElementById("modal");
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
 
-    modal.addEventListener("touchstart", (e) => {
-        startX = e.touches[0].clientX;
-    });
+function nextModalImage() {
+  currentIndex = (currentIndex + 1) % images.length;
+  document.getElementById("modal-img").src = images[currentIndex];
+}
 
-    modal.addEventListener("touchend", (e) => {
-        let endX = e.changedTouches[0].clientX;
-        if (endX - startX > 50) {
-            prevImage();
-        } else if (startX - endX > 50) {
-            nextImage();
-        }
-    });
-    window.addEventListener('popstate', () => {
-    const lastCat = localStorage.getItem('lastCategory');
-    if (lastCat) {
-        // возвращаем на index.html и открываем нужную категорию
-        window.location.href = `index.html#${lastCat}`;
-    } else {
-        // если категории нет — просто на главную
-        window.location.href = 'index.html';
-    }
-});
+function prevModalImage() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  document.getElementById("modal-img").src = images[currentIndex];
+}
 
+/* === Свайпи === */
+let startX = 0;
+const carousel = document.getElementById('carousel');
+carousel.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
+carousel.addEventListener('touchend', e => {
+  const diff = e.changedTouches[0].clientX - startX;
+  if (Math.abs(diff) > 50) diff > 0 ? prevImage() : nextImage();
+}, { passive: true });
+
+const modal = document.getElementById("modal");
+modal.addEventListener("touchstart", e => startX = e.touches[0].clientX, { passive: true });
+modal.addEventListener("touchend", e => {
+  const diff = e.changedTouches[0].clientX - startX;
+  if (Math.abs(diff) > 50) diff > 0 ? prevModalImage() : nextModalImage();
+}, { passive: true });
 </script>
 </body>
 </html>
