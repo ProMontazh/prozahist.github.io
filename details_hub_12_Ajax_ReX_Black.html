@@ -215,6 +215,8 @@
       <img src="images/ajax_rex_black_1.jpg" alt="ReX Black" onclick="openModal('images/ajax_rex_black_1.jpg')">
       <img src="images/ajax_rex_black_2.jpg" alt="ReX Black - інший вид" onclick="openModal('images/ajax_rex_black_2.jpg')">
       <img src="images/ajax_rex_black_3.jpg" alt="ReX Black - інший вид" onclick="openModal('images/ajax_rex_black_3.jpg')">
+
+      <img src="images/ajax_rex_black_1.jpg" alt="ReX Black" onclick="openModal('images/ajax_rex_black_1.jpg')">
     </div>
 
     <div class="carousel-arrow left" onclick="prevImage()">&#10094;</div>
@@ -299,6 +301,7 @@ const images = [
  "images/ajax_rex_black_3.jpg"
 ];
 let currentIndex = 0;
+const totalSlides = images.length;
 
 function showToast(message) {
   const toast = document.getElementById("toast");
@@ -318,30 +321,67 @@ function addToCartFromProductPage(item) {
 
 /* === Карусель === */
 function updateCarousel() {
-  document.getElementById('carousel').style.transform = `translateX(-${currentIndex * 100}%)`;
+  const carouselEl = document.getElementById('carousel');
+  carouselEl.style.transform = `translateX(-${currentIndex * 100}%)`;
 }
+
 function nextImage() {
-  currentIndex = (currentIndex + 1) % images.length;
+  const carouselEl = document.getElementById('carousel');
+  currentIndex++;
+  carouselEl.style.transition = 'transform 0.5s ease';
   updateCarousel();
+  
+  // Якщо дійшли до клону (позиція після останнього оригіналу)
+  if (currentIndex === totalSlides) {
+    setTimeout(() => {
+      carouselEl.style.transition = 'none';
+      currentIndex = 0;
+      updateCarousel();
+    }, 500); // Після завершення анімації
+  }
 }
+
 function prevImage() {
-  currentIndex = (currentIndex - 1 + images.length) % images.length;
-  updateCarousel();
+  const carouselEl = document.getElementById('carousel');
+  
+  // Якщо на першому зображенні - миттєво стрибаємо на клон
+  if (currentIndex === 0) {
+    carouselEl.style.transition = 'none';
+    currentIndex = totalSlides;
+    updateCarousel();
+    
+    // Даємо браузеру час застосувати зміни
+    setTimeout(() => {
+      carouselEl.style.transition = 'transform 0.5s ease';
+      currentIndex--;
+      updateCarousel();
+    }, 20);
+  } else {
+    currentIndex--;
+    carouselEl.style.transition = 'transform 0.5s ease';
+    updateCarousel();
+  }
 }
 
 /* === Модалка === */
 function openModal(imageSrc) {
-  currentIndex = images.indexOf(imageSrc);
+  const modalIndex = images.indexOf(imageSrc);
+  if (modalIndex !== -1) {
+    currentIndex = modalIndex;
+  }
   document.getElementById("modal-img").src = imageSrc;
   document.getElementById("modal").style.display = "flex";
 }
+
 function closeModal() {
   document.getElementById("modal").style.display = "none";
 }
+
 function nextModalImage() {
   currentIndex = (currentIndex + 1) % images.length;
   document.getElementById("modal-img").src = images[currentIndex];
 }
+
 function prevModalImage() {
   currentIndex = (currentIndex - 1 + images.length) % images.length;
   document.getElementById("modal-img").src = images[currentIndex];
