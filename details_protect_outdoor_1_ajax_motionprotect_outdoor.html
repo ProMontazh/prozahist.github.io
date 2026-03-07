@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wi-Fi відеокамера Imou IPC-K3DP-3H0WF 3МП з ІЧ підсвічуванням до 30м, IP67. Купити камеру спостереження з доставкою по Україні">
+    <meta name="keywords" content="imou камера, ip камера, wifi камера, камера спостереження, IPC-K3DP-3H0WF">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>Ajax MotionProtect Outdoor White</title>
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "Ajax MotionProtect Outdoor White датчик руху зовнішний",
+      "image": [
+        "https://прозахист.pp.ua/images/ajax_motionprotect_outdoor_1.jpg",
+        "https://прозахист.pp.ua/images/ajax_motionprotect_outdoor_2.jpg",
+        "https://прозахист.pp.ua/images/ajax_motionprotect_outdoor_3.jpg"
+      ],
+      "description": "датчик руху зовнішній, Зв'язок з хабом до 1700 м, дальність виявлення до 15 м, кут виявлення: 90°",
+      "brand": {
+        "@type": "Brand",
+        "name": "Ajax"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://прозахист.pp.ua/details_protect_outdoor_1_ajax_motionprotect_outdoor.html",
+        "priceCurrency": "UAH",
+        "price": "6100.00",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-03-07"
+      }
+    }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* ===== ЛОГОТИП ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background: transparent;
+        }
+
+        .logo svg {
+            width: 205px;
+            height: auto;
+        }
+
+        /* ===== Toast ===== */
+        .toast {
+            position: fixed;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 1.0em;
+            white-space: nowrap;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 9999;
+        }
+
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* ===== Контейнер ===== */
+        .container {
+            max-width: 830px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.5s forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .product-title {
+            text-align: center;
+            font-size: 1.6em;
+            margin-top: 0;
+        }
+
+        /* ===== Карусель ===== */
+        .carousel-wrapper {
+            position: relative;
+            overflow: hidden;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel img {
+            flex: 0 0 100%;
+            max-width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            object-fit: contain;
+        }
+
+        /* Стрілки для десктопу */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 2em;
+            padding: 8px 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.3s;
+            z-index: 10;
+            display: none;
+        }
+
+        .carousel-arrow:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .carousel-arrow.left { left: 10px; }
+        .carousel-arrow.right { right: 10px; }
+
+        /* ===== Опис ===== */
+        .product-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 20px 0 30px 20px;
+        }
+
+        .product-description ul {
+            padding-left: 20px;
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+
+        .product-description li {
+            margin-bottom: 6px;
+        }
+
+        .product-price {
+            font-size: 1.8em;
+            color: red;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .btn {
+            display: block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            margin: 20px auto;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* ===== Модалка ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .modal .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+            padding: 10px;
+            z-index: 10001;
+        }
+
+        .modal .arrow.left { left: 20px; }
+        .modal .arrow.right { right: 20px; }
+
+        /* ===== Медіа-запити ===== */
+        @media (min-width: 768px) {
+            .carousel-arrow { display: block; }
+        }
+
+        @media (min-width: 1024px) {
+            .product-description {
+                margin-left: 80px;
+                margin-right: 40px;
+            }
+            .product-description ul {
+                padding-left: 60px;
+            }
+            .product-description li {
+                border-bottom: 1px dotted #ddd;
+                padding-bottom: 5px;
+            }
+            .carousel img {
+                max-height: 420px;
+            }
+        }
+
+        /* Мобільна версія */
+        @media (max-width: 768px) {
+            header {
+                position: static;
+                top: auto;
+                left: auto;
+                padding: 0px;
+                background: transparent;
+            }
+
+            .logo svg {
+                width: 230px;
+            }
+
+            .container {
+                margin: 0;
+                padding: 20px;
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            body {
+                background-color: #fff;
+            }
+
+            .product-title {
+                font-size: 1.3em;
+            }
+
+            .carousel {
+                padding: 5px 0;
+            }
+
+            .product-description {
+                margin-left: 10px;
+            }
+
+            .product-description ul {
+                padding-left: 15px;
+            }
+        }
+
+        /* Дуже маленькі екрани */
+        @media (max-width: 480px) {
+            header {
+                position: static;
+                top: auto;
+                left: auto;
+                padding: 0px;
+                background: transparent;
+            }
+
+            .logo svg {
+                width: 205px;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="180" height="56" viewBox="0 0 600 200">
+            <defs>
+                <!-- 🌊 Хвиля для слогана -->
+                <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="-0.3" stop-color="#999">
+                        <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+                    </stop>
+                    <stop offset="-0.15" stop-color="#666">
+                        <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+                    </stop>
+                    <stop offset="0" stop-color="#999">
+                        <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+                    </stop>
+                </linearGradient>
+                <!-- 🔴 Хвиля для ПРО -->
+                <linearGradient id="pro-wave" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="-0.3" stop-color="#800000">
+                        <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+                    </stop>
+                    <stop offset="-0.15" stop-color="#ff4444">
+                        <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+                    </stop>
+                    <stop offset="0" stop-color="#800000">
+                        <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+                    </stop>
+                </linearGradient>
+                <!-- ⚙️ Хвиля для ЗАХИСТ -->
+                <linearGradient id="zahist-wave" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="-0.3" stop-color="#808080">
+                        <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+                    </stop>
+                    <stop offset="-0.15" stop-color="#e0e0e0">
+                        <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+                    </stop>
+                    <stop offset="0" stop-color="#808080">
+                        <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+                    </stop>
+                </linearGradient>
+            </defs>
+            <!-- ПРО -->
+            <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#pro-wave)">ПРО</text>
+            <!-- ЗАХИСТ -->
+            <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#zahist-wave)">ЗАХИСТ</text>
+            <!-- Слоган -->
+            <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="33" fill="url(#wave-gradient)">БЕЗДРОТОВІ СИСТЕМИ БЕЗПЕКИ</text>
+            <!-- Декор -->
+            <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10" />
+            <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10" />
+            <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10" />
+            <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10" />
+        </svg>
+    </div>
+</header>
+
+<div class="container">
+    <h2 class="product-title">Зовнішній датчик руху Ajax MotionProtect Outdoor White</h2>
+
+    <div class="carousel-wrapper">
+        <div class="carousel" id="carousel">
+            <img src="images/ajax_motionprotect_outdoor_1.jpg" alt="Датчик Ajax" onclick="openModal('images/ajax_motionprotect_outdoor_1.jpg')">
+            <img src="images/ajax_motionprotect_outdoor_2" alt="Датчик Ajax - вид збоку" onclick="openModal('images/ajax_motionprotect_outdoor_2.jpg')">
+            <img src="images/ajax_motionprotect_outdoor_3" alt="Датчик Ajax - вид збоку" onclick="openModal('images/ajax_motionprotect_outdoor_3.jpg')">
+            <!-- Клон першого зображення для безшовного циклу -->
+            <img src="images/ajax_motionprotect_outdoor_1.jpg" alt="Датчик Ajax" onclick="openModal('images/ajax_motionprotect_outdoor_1.jpg')">
+        </div>
+
+        <div class="carousel-arrow left" onclick="prevImage()">&#10094;</div>
+        <div class="carousel-arrow right" onclick="nextImage()">&#10095;</div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <div class="product-description">
+Бездротовий ІЧ датчик руху Ajax MotionProtect Outdoor Jeweller призначений для виявлення руху на вулиці та в приміщенні з максимальною точністю та мінімальними хибними спрацюваннями. Обладнаний двома інфрачервоними сенсорами, дальність виявлення руху від 3 до 15 метрів (налаштовується), кут огляду 90° по горизонталі. Алгоритми LISA та SmartDetect забезпечують захист від хибних тривог, імунітет до тварин заввишки до 80 см. Система антимаскування виявляє спроби заблокувати огляд датчика. Працює при температурах від -25°C до +60°C, захист IP55 для всепогодного використання. Дальність зв'язку з хабом до 1700 м, автономна робота до 5 років від двох батарей CR123A.
+
+<br><br>
+<strong>Основні характеристики:</strong>
+<ul>
+  <li>2 інфрачервоні сенсори для точного виявлення руху</li>
+  <li>Дальність виявлення: 3-15 метрів (налаштовується повзунком)</li>
+  <li>Кут виявлення: 90° по горизонталі</li>
+  <li>Швидкість виявлення руху: від 0,3 до 2 м/с</li>
+  <li>Імунітет до тварин заввишки до 80 см</li>
+  <li>Алгоритми захисту від хибних спрацювань: LISA, SmartDetect</li>
+  <li>Система антимаскування від спроб блокування огляду</li>
+  <li>Температурна компенсація: -25°C до +60°C</li>
+  <li>3 рівні чутливості (налаштовується)</li>
+  <li>Дальність зв'язку з хабом до 1700 м</li>
+  <li>Автономна робота до 5 років від 2 × CR123A</li>
+  <li>Додаткове живлення 5-28 В⎓ (батарея резервна)</li>
+  <li>Захист IP55 для всепогодного використання</li>
+</ul>
+
+<strong>Два ІЧ сенсори для максимальної точності:</strong>
+<ul>
+  <li>Подвійна інфрачервона технологія виявлення</li>
+  <li>Два незалежні сенсори аналізують рух одночасно</li>
+  <li>Спрацювання тільки при підтвердженні обома сенсорами</li>
+  <li>Різко зменшує ймовірність хибних тривог</li>
+  <li>Високоточне виявлення людини</li>
+  <li>Чутливість до зміни температури в зоні виявлення</li>
+  <li>Надійна робота в різних погодних умовах</li>
+</ul>
+
+<strong>Налаштування дальності виявлення (3-15 метрів):</strong>
+<ul>
+  <li>Регульована дальність за допомогою повзунка на корпусі</li>
+  <li>Мінімальна дальність: 3 метри (для невеликих зон)</li>
+  <li>Максимальна дальність: 15 метрів (для великих територій)</li>
+  <li>Оптимальна висота встановлення: 0,8-1,3 метра</li>
+  <li>Можливість точної калібрування під конкретний об'єкт</li>
+  <li>Зменшення хибних спрацювань за межами зони інтересу</li>
+  <li>Економія енергії при меншій дальності</li>
+</ul>
+
+<strong>Кут виявлення 90° по горизонталі:</strong>
+<ul>
+  <li>Широкий горизонтальний кут покриття 90°</li>
+  <li>Охоплює велику площу перед датчиком</li>
+  <li>Ідеально для охорони периметра</li>
+  <li>Контроль входу, воріт, стін будинку</li>
+  <li>Меншe датчиків потрібно для охорони території</li>
+  <li>Рівномірне покриття всієї зони виявлення</li>
+</ul>
+
+<strong>Швидкість виявлення руху (0,3-2 м/с):</strong>
+<ul>
+  <li>Виявляє рух від повільної ходьби (0,3 м/с) до швидкого бігу (2 м/с)</li>
+  <li>Оптимальний діапазон для виявлення людини</li>
+  <li>Не реагує на дуже повільні рухи (гілки дерев на вітрі)</li>
+  <li>Не реагує на дуже швидкі рухи (птахи, листя)</li>
+  <li>Направлення лінзи має бути перпендикулярним шляху руху</li>
+  <li>Максимальна ефективність при русі поперек зони виявлення</li>
+</ul>
+
+<strong>Імунітет до тварин (зріст до 80 см):</strong>
+<ul>
+  <li>Не реагує на домашніх тварин заввишки до 80 см</li>
+  <li>Розпізнає відмінність між людиною та твариною</li>
+  <li>Аналіз швидкості руху та теплового сліду</li>
+  <li>Підходить для будинків з собаками середнього розміру</li>
+  <li>Підходить для котів та інших невеликих тварин</li>
+  <li>Зменшення хибних спрацювань від тварин на 99%</li>
+  <li>Важливо: велика собака (понад 80 см) може спричинити спрацювання</li>
+</ul>
+
+<strong>Алгоритми захисту від хибних тривог:</strong>
+<ul>
+  <li>LISA (Listens to Infrared Sensor Algorithmically) - інтелектуальний аналіз сигналу</li>
+  <li>SmartDetect - розумна технологія виявлення</li>
+  <li>Програмні алгоритми фільтрують помилкові спрацювання</li>
+  <li>Аналіз форми теплового сліду</li>
+  <li>Відсівання сигналів від дрібних тварин, птахів, комах</li>
+  <li>Захист від спрацювань на рухомі гілки дерев</li>
+  <li>Захист від впливу дощу, снігу, граду</li>
+  <li>Мінімізація хибних тривог до рівня менше 1%</li>
+</ul>
+
+<strong>Система антимаскування:</strong>
+<ul>
+  <li>Виявляє спроби закрити або заблокувати огляд датчика</li>
+  <li>Контроль наявності перешкод перед лінзою</li>
+  <li>Миттєве сповіщення при спробі маскування</li>
+  <li>Захист від фарби, стрічки, плівки на лінзі</li>
+  <li>Захист від установки перешкод перед датчиком</li>
+  <li>Hood (козирок) рекомендується для захисту від дощу/снігу</li>
+  <li>Важливий елемент професійної системи безпеки</li>
+</ul>
+
+<strong>Температурна компенсація (-25°C до +60°C):</strong>
+<ul>
+  <li>Ефективне виявлення руху в екстремальних температурах</li>
+  <li>Працює взимку при морозах до -25°C</li>
+  <li>Працює влітку при спеці до +60°C</li>
+  <li>Автоматична компенсація чутливості залежно від температури</li>
+  <li>Стабільна робота при різкій зміні температури</li>
+  <li>Підходить для використання в Україні цілий рік</li>
+  <li>Не потребує сезонного переналаштування</li>
+</ul>
+
+<strong>Три рівні чутливості:</strong>
+<ul>
+  <li>Низька чутливість: для зон з можливими завадами</li>
+  <li>Середня чутливість: стандартний режим (рекомендовано)</li>
+  <li>Висока чутливість: для максимальної точності виявлення</li>
+  <li>Налаштовується через застосунок Ajax</li>
+  <li>Можливість налаштування PRO або адміністратором</li>
+  <li>Дозволяє оптимізувати роботу під конкретні умови</li>
+</ul>
+
+<strong>Технологія зв'язку Jeweller:</strong>
+<ul>
+  <li>Пропрієтарна бездротова технологія Ajax для передавання команд, тривог і подій</li>
+  <li>Дальність зв'язку: до 1700 м (між датчиком і хабом або ретранслятором за відсутності перешкод)</li>
+  <li>Двосторонній зв'язок з хабом</li>
+  <li>Блокове шифрування з плаваючим ключем</li>
+  <li>Передовий захист від саботажу</li>
+  <li>Миттєві сповіщення про події</li>
+  <li>Дистанційне керування та налаштування в застосунках Ajax</li>
+  <li>Радіочастотний гопінг для запобігання радіозавадам і глушінню</li>
+  <li>Діапазони радіочастот: 866,0–866,5 МГц, 868,0–868,6 МГц, 868,7–869,2 МГц, 905,0–926,5 МГц, 915,85–926,5 МГц, 921,0–922,0 МГц (залежить від регіону)</li>
+  <li>Максимальна ефективна випромінювана потужність (ERP): до 20 мВт</li>
+  <li>Автоматичне регулювання потужності для зниження енергоспоживання та радіозавад</li>
+  <li>Модуляція радіосигналу: GFSK</li>
+</ul>
+
+<strong>Захист від саботажу:</strong>
+<ul>
+  <li>Тривога тампера при спробі відірвати датчик від поверхні або зняти з кріпильної панелі</li>
+  <li>Захист від підміни — автентифікація пристрою</li>
+  <li>Система антимаскування виявляє спроби заблокувати огляд</li>
+  <li>Виявлення втрати зв'язку від 36 секунд (залежить від налаштувань Jeweller)</li>
+  <li>Захист від радіозавад через радіочастотний гопінг</li>
+  <li>Сповіщення про низький заряд батареї</li>
+</ul>
+
+<strong>Основне живлення (батареї):</strong>
+<ul>
+  <li>Батареї: 2 × CR123A тип C (попередньо встановлені)</li>
+  <li>Розрахунковий строк роботи від батарей: до 5 років</li>
+  <li>Діапазон робочої напруги: 2,1–3,3 В⎓</li>
+  <li>Номінальна робоча напруга: 3 В⎓</li>
+  <li>Споживання струму в стані спокою: 79 мкА</li>
+  <li>Максимальний струм споживання: 58,8 мА</li>
+  <li>Повна ємність батареї: 3200 мА·год</li>
+  <li>Напруга низького заряду батареї: 2,5 В⎓</li>
+  <li>Напруга відновлення низького заряду: 2,7 В⎓</li>
+  <li>Напруга відпрацьованої батареї: 2,1 В⎓ (пристрій вимикається)</li>
+  <li>Ємність відпрацьованої батареї: 480 мА·год</li>
+  <li>Виробник батарей: Huiderui</li>
+</ul>
+
+<strong>Додаткове живлення (зовнішнє джерело):</strong>
+<ul>
+  <li>Робоча напруга зовнішнього джерела: 5–28 В⎓, від 200 мА</li>
+  <li>Батарея слугує резервним джерелом при підключенні зовнішнього живлення</li>
+  <li>Автоматичне перемикання між зовнішнім та батарейним живленням</li>
+  <li>Ідеально для установки в місцях з доступом до електромережі</li>
+  <li>Необмежений термін роботи при зовнішньому живленні</li>
+  <li>Захист від відключення живлення завдяки резервній батареї</li>
+  <li>Широкий діапазон напруг (5-28 В) для різних джерел</li>
+</ul>
+
+<strong>Фізичні характеристики:</strong>
+<ul>
+  <li>Розміри: 183 × 70 × 65 мм</li>
+  <li>Вага: 322 г</li>
+  <li>Діапазон робочих температур: від -25°C до +60°C</li>
+  <li>Допустима вологість: до 95%</li>
+  <li>Клас захисту: IP55 (захист від пилу та струменів води)</li>
+  <li>Колір: білий</li>
+  <li>Міцний пластиковий корпус</li>
+  <li>Сучасний дизайн</li>
+</ul>
+
+<strong>Захист IP55:</strong>
+<ul>
+  <li>Захист від пилу (рівень 5) — пило-захищений</li>
+  <li>Захист від води (рівень 5) — струмені води з будь-якого напрямку</li>
+  <li>Працює під дощем, снігом, градом</li>
+  <li>Стійкість до бруду та пилу</li>
+  <li>Рекомендується Hood (козирок) для додаткового захисту антимаскування</li>
+  <li>Всепогодне використання на вулиці</li>
+  <li>Тривалий термін служби в зовнішніх умовах</li>
+</ul>
+
+<strong>Рекомендації з встановлення:</strong>
+<ul>
+  <li>Рекомендована висота встановлення: 0,8-1,3 метра</li>
+  <li>Призначений для використання в приміщенні та на вулиці</li>
+  <li>Встановлюйте Hood (козирок) для захисту системи антимаскування від дощу та снігу</li>
+  <li>Направляйте датчик перпендикулярно до імовірного шляху вторгнення</li>
+  <li>Уникайте встановлення поруч з джерелами тепла (кондиціонери, обігрівачі)</li>
+  <li>Уникайте зон з рухомими об'єктами (дерева, кущі на вітрі)</li>
+  <li>Налаштуйте дальність виявлення після встановлення</li>
+  <li>Перевірте стійкий зв'язок з хабом</li>
+</ul>
+
+<strong>Застосування:</strong>
+<ul>
+  <li>Охорона периметра приватного будинку</li>
+  <li>Захист входу, воріт, дверей</li>
+  <li>Контроль території ділянки, саду</li>
+  <li>Охорона паркінгу, гаражу</li>
+  <li>Захист вікон від проникнення</li>
+  <li>Контроль стін будинку, огорожі</li>
+  <li>Охорона господарських будівель</li>
+  <li>Захист комерційних об'єктів</li>
+  <li>Нагляд за складами на вулиці</li>
+  <li>Будь-які завдання зовнішньої охорони</li>
+</ul>
+
+<strong>Переваги Ajax MotionProtect Outdoor:</strong>
+<ul>
+  <li>✅ Висока дальність зв'язку — до 1700 м</li>
+  <li>✅ 2 ІЧ сенсори для максимальної точності</li>
+  <li>✅ Налаштування дальності виявлення 3-15 м</li>
+  <li>✅ Імунітет до тварин заввишки до 80 см</li>
+  <li>✅ Алгоритми LISA та SmartDetect — мінімум хибних тривог</li>
+  <li>✅ Система антимаскування від спроб блокування</li>
+  <li>✅ Температурна компенсація -25°C до +60°C</li>
+  <li>✅ 3 рівні чутливості для точного налаштування</li>
+  <li>✅ До 5 років автономної роботи</li>
+  <li>✅ Додаткове живлення 5-28 В⎓</li>
+  <li>✅ Захист IP55 для всепогодного використання</li>
+  <li>✅ Широкий кут виявлення 90°</li>
+  <li>✅ Дистанційне налаштування через застосунок</li>
+</ul>
+
+<strong>Налаштування через застосунок Ajax:</strong>
+<ul>
+  <li>Додавання датчика до системи за кілька кроків</li>
+  <li>Вибір рівня чутливості (низький, середній, високий)</li>
+  <li>Тестування датчика в режимі реального часу</li>
+  <li>Перевірка рівня сигналу Jeweller</li>
+  <li>Моніторинг заряду батарей</li>
+  <li>Налаштування часу затримки на вхід/вихід</li>
+  <li>Перегляд історії спрацювань</li>
+  <li>Налаштування сповіщень</li>
+  <li>Віддалене тестування без виїзду на об'єкт</li>
+  <li>Оновлення прошивки онлайн</li>
+</ul>
+
+<strong>Сценарії використання:</strong>
+<ul>
+  <li>Охорона периметра приватного будинку від проникнення зловмисників</li>
+  <li>Контроль входу на ділянку через ворота або калитку</li>
+  <li>Захист стін будинку від спроб проникнення через вікна</li>
+  <li>Нагляд за паркінгом для виявлення несанкціонованого доступу</li>
+  <li>Контроль господарських будівель (сарай, гараж, літня кухня)</li>
+  <li>Захист огорожі від перелізання</li>
+  <li>Охорона товарів на відкритому складі</li>
+  <li>Контроль території комерційного об'єкта</li>
+  <li>Нагляд за зоною завантаження/розвантаження</li>
+</ul>
+
+<strong>Відмінності від MotionProtect (для приміщень):</strong>
+<ul>
+  <li>MotionProtect Outdoor призначений для вулиці (IP55 vs IP20)</li>
+  <li>Розширений температурний діапазон (-25°C до +60°C vs -10°C до +40°C)</li>
+  <li>Система антимаскування (відсутня в базовій моделі)</li>
+  <li>Алгоритми LISA та SmartDetect для роботи на вулиці</li>
+  <li>Налаштування дальності виявлення повзунком (3-15 м)</li>
+  <li>Можливість додаткового живлення 5-28 В⎓</li>
+  <li>Більші розміри та вага</li>
+  <li>Вища вартість (додаткові функції для вулиці)</li>
+</ul>
+
+<strong>Hood (козирок) — рекомендований аксесуар:</strong>
+<ul>
+  <li>Захищає систему антимаскування від дощу та снігу</li>
+  <li>Запобігає хибним спрацюванням антимаскування</li>
+  <li>Продовжує термін служби датчика</li>
+  <li>Легке встановлення на корпус датчика</li>
+  <li>Рекомендується для установки на відкритих ділянках</li>
+  <li>Купується окремо</li>
+</ul>
+
+<strong>Комплектація:</strong>
+<ul>
+  <li>MotionProtect Outdoor Jeweller</li>
+  <li>Кріпильна панель SmartBracket</li>
+  <li>Монтажний комплект</li>
+  <li>2 батареї CR123A (попередньо встановлені)</li>
+  <li>Коротка інструкція</li>
+</ul>
+
+<strong>Сумісність:</strong>
+<ul>
+  <li>Працює з усіма хабами Ajax (Hub, Hub 2, Hub Plus, Hub Hybrid)</li>
+  <li>Підтримка ретрансляторів сигналу (ReX, ReX 2)</li>
+  <li>Інтеграція з застосунками Ajax (iOS, Android, macOS, Windows)</li>
+  <li>Підключення до пультів централізованого спостереження (ПЦС)</li>
+  <li>Підтримка професійного режиму для інсталяторів (PRO)</li>
+  <li>Сумісність з усіма пристроями Ajax</li>
+</ul>
+
+<strong>Чому варто обрати MotionProtect Outdoor:</strong>
+<ul>
+  <li>Найточніший датчик руху для вулиці від Ajax</li>
+  <li>Мінімум хибних спрацювань завдяки LISA та SmartDetect</li>
+  <li>Система антимаскування для професійної безпеки</li>
+  <li>Імунітет до тварин — підходить для будинків з собаками</li>
+  <li>Працює в екстремальних температурах</li>
+  <li>До 5 років автономної роботи</li>
+  <li>Можливість зовнішнього живлення для необмеженої роботи</li>
+  <li>Надійний захист IP55</li>
+  <li>Простота налаштування через застосунок</li>
+</ul>
+</div>
+
+    <p class="product-price">6100.00 грн</p>
+    <button class="btn" onclick="addToCartFromProductPage({ id: 'Ajax MotionProtect Outdoor', name: 'Ajax MotionProtect Outdoor', price: 6100, image: 'images/ajax_motionprotect_outdoor_1.jpg' })">
+        Додати у кошик
+    </button>
+</div>
+
+<div id="modal" class="modal" onclick="closeModal()">
+    <span class="arrow left" onclick="event.stopPropagation(); prevModalImage()">&#10094;</span>
+    <img id="modal-img" src="" alt="Збільшене зображення">
+    <span class="arrow right" onclick="event.stopPropagation(); nextModalImage()">&#10095;</span>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+const images = [
+    "images/ajax_motionprotect_outdoor_1.jpg",
+    "images/ajax_motionprotect_outdoor_2.jpg",
+    "images/ajax_motionprotect_outdoor_3.jpg"
+];
+let currentIndex = 0;
+const totalSlides = images.length;
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 2500);
+}
+
+function addToCartFromProductPage(item) {
+    cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingItem = cart.find(i => i.id === item.id);
+    if (existingItem) existingItem.quantity++;
+    else { item.quantity = 1; cart.push(item); }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    showToast(`${item.name} додано до кошика!`);
+}
+
+/* === Карусель === */
+function updateCarousel() {
+    const carouselEl = document.getElementById('carousel');
+    carouselEl.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+
+function nextImage() {
+    const carouselEl = document.getElementById('carousel');
+    currentIndex++;
+    carouselEl.style.transition = 'transform 0.5s ease';
+    updateCarousel();
+    
+    // Якщо дійшли до клону (позиція після останнього оригіналу)
+    if (currentIndex === totalSlides) {
+        setTimeout(() => {
+            carouselEl.style.transition = 'none';
+            currentIndex = 0;
+            updateCarousel();
+        }, 500);
+    }
+}
+
+function prevImage() {
+    const carouselEl = document.getElementById('carousel');
+    
+    // Якщо на першому зображенні - миттєво стрибаємо на клон
+    if (currentIndex === 0) {
+        carouselEl.style.transition = 'none';
+        currentIndex = totalSlides;
+        updateCarousel();
+        
+        // Даємо браузеру час застосувати зміни
+        setTimeout(() => {
+            carouselEl.style.transition = 'transform 0.5s ease';
+            currentIndex--;
+            updateCarousel();
+        }, 20);
+    } else {
+        currentIndex--;
+        carouselEl.style.transition = 'transform 0.5s ease';
+        updateCarousel();
+    }
+}
+
+/* === Модалка === */
+function openModal(imageSrc) {
+    const modalIndex = images.indexOf(imageSrc);
+    if (modalIndex !== -1) {
+        currentIndex = modalIndex;
+    }
+    document.getElementById("modal-img").src = imageSrc;
+    document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+function nextModalImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    document.getElementById("modal-img").src = images[currentIndex];
+}
+
+function prevModalImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    document.getElementById("modal-img").src = images[currentIndex];
+}
+
+/* === Свайпи === */
+let startX = 0;
+const carousel = document.getElementById('carousel');
+carousel.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
+carousel.addEventListener('touchend', e => {
+    const diff = e.changedTouches[0].clientX - startX;
+    if (Math.abs(diff) > 50) diff > 0 ? prevImage() : nextImage();
+}, { passive: true });
+
+const modal = document.getElementById("modal");
+modal.addEventListener("touchstart", e => startX = e.touches[0].clientX, { passive: true });
+modal.addEventListener("touchend", e => {
+    const diff = e.changedTouches[0].clientX - startX;
+    if (Math.abs(diff) > 50) diff > 0 ? prevModalImage() : nextModalImage();
+}, { passive: true });
+</script>
+</body>
+</html>
