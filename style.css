@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Магазин</title>
-    <style>
-        /* ======================================================
+/* ======================================================
    🎨 БАЗОВЫЕ СТИЛИ + SEO-ОПТИМИЗАЦИЯ
    ====================================================== */
 
@@ -263,7 +256,7 @@ header .logo svg {
     position: relative;
     overflow: hidden;
     background: var(--white);
-    border-radius: 0; /* КВАДРАТНАЯ КАРТОЧКА */
+    border-radius: 0;
     box-shadow: var(--shadow);
     padding: 0;
     text-align: center;
@@ -275,6 +268,7 @@ header .logo svg {
     text-decoration: none;
     color: inherit;
     display: block;
+    aspect-ratio: 1 / 1;
 }
 
 .category-card:hover,
@@ -287,7 +281,7 @@ header .logo svg {
 
 .category-card img {
     width: 100%;
-    height: 200px;
+    height: 100%;
     object-fit: cover;
     display: block;
     transition: var(--transition);
@@ -317,8 +311,8 @@ header .logo svg {
    ====================================================== */
 
 .products {
-    padding-bottom: 0; /* УБРАН ОТСТУП ПЕРЕД ФУТЕРОМ */
-    display: none; /* Скрыты по умолчанию, показываются через JS */
+    padding-bottom: 0;
+    display: none;
 }
 
 .products.active {
@@ -355,7 +349,7 @@ header .logo svg {
 .product-item {
     background-color: var(--white);
     padding: 20px;
-    border-radius: 0; /* БЕЗ ЗАКРУГЛЕНИЙ */
+    border-radius: 0;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     flex: 0 1 280px;
     box-sizing: border-box;
@@ -373,7 +367,7 @@ header .logo svg {
 .product-item:focus-within {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-    border-color: transparent; /* УБРАН КРАСНЫЙ КОНТУР */
+    border-color: transparent;
 }
 
 .product-item:focus-within {
@@ -385,7 +379,7 @@ header .logo svg {
     width: 100%;
     height: 200px;
     object-fit: contain;
-    border-radius: 0; /* БЕЗ ЗАКРУГЛЕНИЙ */
+    border-radius: 0;
     margin-bottom: 15px;
 }
 
@@ -1149,7 +1143,7 @@ footer {
     text-align: center;
     padding: 30px 20px;
     font-size: 0.9em;
-    margin-top: 0; /* УБРАН ОТСТУП */
+    margin-top: 0;
 }
 
 .footer-links {
@@ -1207,7 +1201,7 @@ footer {
 
 .highlight-product {
     outline: 3px solid #ff4747;
-    border-radius: 0; /* БЕЗ ЗАКРУГЛЕНИЙ */
+    border-radius: 0;
     transition: outline 0.2s ease;
 }
 
@@ -1238,10 +1232,6 @@ footer {
         flex: 1 1 calc(50% - 12px);
         max-width: calc(50% - 12px);
         min-width: 140px;
-    }
-
-    .category-card img {
-        height: 150px;
     }
 
     #categories {
@@ -1409,357 +1399,3 @@ footer {
         page-break-inside: avoid;
     }
 }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="logo">
-            <svg viewBox="0 0 200 65" xmlns="http://www.w3.org/2000/svg">
-                <rect width="200" height="65" fill="transparent"/>
-                <text x="20" y="45" font-family="Arial" font-size="28" fill="white" font-weight="bold">LOGO</text>
-            </svg>
-        </div>
-        <a href="#main-content" class="skip-link">Перейти к содержимому</a>
-    </header>
-
-    <!-- Cart -->
-    <button class="cart" aria-label="Корзина товаров">
-        <span>🛒</span>
-        <span class="cart-count">0</span>
-    </button>
-
-    <div class="cart-content" id="cart-content" aria-hidden="true">
-        <h2>Ваша корзина</h2>
-        <div class="cart-items"></div>
-        <div class="total-price">Итого: <span id="total">0</span> ₽</div>
-        <div class="button-row">
-            <button class="checkout-button">Оформить</button>
-            <button class="cancel-button">Закрыть</button>
-        </div>
-    </div>
-
-    <!-- Toast Notification -->
-    <div class="toast" id="toast" role="alert" aria-live="polite"></div>
-
-    <!-- Breadcrumbs -->
-    <nav class="breadcrumbs" aria-label="Хлебные крошки">
-        <ol>
-            <li><a href="/">Главная</a></li>
-            <li><a href="/catalog">Каталог</a></li>
-            <li aria-current="page">Текущая страница</li>
-        </ol>
-    </nav>
-
-    <!-- Categories Section -->
-    <section id="categories" aria-label="Категории товаров">
-        <h2 class="visually-hidden">Категории</h2>
-        
-        <a href="#category1" class="category-card">
-            <img src="https://via.placeholder.com/300x200/800000/ffffff?text=Category+1" alt="">
-            <span>Категория 1</span>
-        </a>
-        
-        <a href="#category2" class="category-card">
-            <img src="https://via.placeholder.com/300x200/808080/ffffff?text=Category+2" alt="">
-            <span>Категория 2</span>
-        </a>
-        
-        <a href="#category3" class="category-card">
-            <img src="https://via.placeholder.com/300x200/333333/ffffff?text=Category+3" alt="">
-            <span>Категория 3</span>
-        </a>
-        
-        <a href="#category4" class="category-card">
-            <img src="https://via.placeholder.com/300x200/555555/ffffff?text=Category+4" alt="">
-            <span>Категория 4</span>
-        </a>
-        
-        <a href="#category5" class="category-card">
-            <img src="https://via.placeholder.com/300x200/666666/ffffff?text=Category+5" alt="">
-            <span>Категория 5</span>
-        </a>
-    </section>
-
-    <!-- Products Section -->
-    <main id="main-content">
-        <section class="products active" id="products-section" aria-label="Товары">
-            <h2 class="category-title">Наши товары</h2>
-            
-            <p class="seo-text">
-                Широкий ассортимент качественных товаров по доступным ценам. 
-                Быстрая доставка и гарантия качества на все позиции.
-            </p>
-
-            <div class="products-container">
-                <article class="product-item">
-                    <img src="https://via.placeholder.com/280x200/f4f4f4/333333?text=Product+1" alt="Товар 1">
-                    <h3>Название товара 1</h3>
-                    <p>Описание товара с техническими характеристиками</p>
-                    <div class="product-price">1 999 ₽</div>
-                    <button class="btn">В корзину</button>
-                </article>
-
-                <article class="product-item">
-                    <img src="https://via.placeholder.com/280x200/f4f4f4/333333?text=Product+2" alt="Товар 2">
-                    <h3>Название товара 2</h3>
-                    <p>Описание товара с техническими характеристиками</p>
-                    <div class="product-price">2 499 ₽</div>
-                    <button class="btn">В корзину</button>
-                </article>
-
-                <article class="product-item">
-                    <img src="https://via.placeholder.com/280x200/f4f4f4/333333?text=Product+3" alt="Товар 3">
-                    <h3>Название товара 3</h3>
-                    <p>Описание товара с техническими характеристиками</p>
-                    <div class="product-price">3 299 ₽</div>
-                    <button class="btn">В корзину</button>
-                </article>
-
-                <article class="product-item">
-                    <img src="https://via.placeholder.com/280x200/f4f4f4/333333?text=Product+4" alt="Товар 4">
-                    <h3>Название товара 4</h3>
-                    <p>Описание товара с техническими характеристиками</p>
-                    <div class="product-price">1 599 ₽</div>
-                    <button class="btn">В корзину</button>
-                </article>
-
-                <article class="product-item">
-                    <img src="https://via.placeholder.com/280x200/f4f4f4/333333?text=Product+5" alt="Товар 5">
-                    <h3>Название товара 5</h3>
-                    <p>Описание товара с техническими характеристиками</p>
-                    <div class="product-price">4 199 ₽</div>
-                    <button class="btn">В корзину</button>
-                </article>
-
-                <article class="product-item">
-                    <img src="https://via.placeholder.com/280x200/f4f4f4/333333?text=Product+6" alt="Товар 6">
-                    <h3>Название товара 6</h3>
-                    <p>Описание товара с техническими характеристиками</p>
-                    <div class="product-price">2 899 ₽</div>
-                    <button class="btn">В корзину</button>
-                </article>
-            </div>
-        </section>
-    </main>
-
-    <!-- Reviews Widget -->
-    <div style="text-align: center; padding: 20px;">
-        <button class="reviews-widget" onclick="openReviewsModal()">
-            <div class="widget-stars">
-                <span class="widget-star">★</span>
-                <span class="widget-star">★</span>
-                <span class="widget-star">★</span>
-                <span class="widget-star">★</span>
-                <span class="widget-star">★</span>
-            </div>
-            <div class="widget-rating">
-                <span class="widget-rating-number">4.8</span>
-                <span class="widget-rating-count">128 отзывов</span>
-            </div>
-        </button>
-    </div>
-
-    <!-- Reviews Modal -->
-    <div class="reviews-modal" id="reviewsModal" role="dialog" aria-modal="true" aria-labelledby="reviews-title">
-        <div class="reviews-modal-content">
-            <div class="reviews-modal-header">
-                <h2 id="reviews-title">Отзывы клиентов</h2>
-                <button class="reviews-modal-close" onclick="closeReviewsModal()" aria-label="Закрыть">×</button>
-            </div>
-            <div class="reviews-modal-body">
-                <div class="modal-rating-summary">
-                    <div class="modal-rating-big">
-                        <div class="modal-rating-number">4.8</div>
-                        <div class="modal-rating-stars">
-                            <span class="modal-star">★</span>
-                            <span class="modal-star">★</span>
-                            <span class="modal-star">★</span>
-                            <span class="modal-star">★</span>
-                            <span class="modal-star empty">★</span>
-                        </div>
-                        <div class="modal-rating-count">На основе 128 отзывов</div>
-                    </div>
-                </div>
-
-                <div class="reviews-tabs">
-                    <button class="reviews-tab active" onclick="switchTab('all')">Все отзывы</button>
-                    <button class="reviews-tab" onclick="switchTab('add')">Написать отзыв</button>
-                </div>
-
-                <div class="reviews-tab-content active" id="tab-all">
-                    <div class="reviews-list">
-                        <div class="review-card">
-                            <div class="review-header">
-                                <div class="review-avatar">АИ</div>
-                                <div class="review-info">
-                                    <div class="review-name">Алексей И.</div>
-                                    <div class="review-date">15 марта 2024</div>
-                                </div>
-                            </div>
-                            <div class="review-stars">
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                            </div>
-                            <p class="review-text">Отличный товар, быстрая доставка. Рекомендую!</p>
-                        </div>
-
-                        <div class="review-card">
-                            <div class="review-header">
-                                <div class="review-avatar">МК</div>
-                                <div class="review-info">
-                                    <div class="review-name">Мария К.</div>
-                                    <div class="review-date">10 марта 2024</div>
-                                </div>
-                            </div>
-                            <div class="review-stars">
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star">★</span>
-                                <span class="star empty">★</span>
-                            </div>
-                            <p class="review-text">Хорошее качество, но упаковка могла быть лучше.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="reviews-tab-content" id="tab-add">
-                    <form class="reviews-form">
-                        <div class="form-group">
-                            <label for="review-name">Ваше имя</label>
-                            <input type="text" id="review-name" placeholder="Введите ваше имя">
-                        </div>
-                        <div class="form-group">
-                            <label>Оценка</label>
-                            <div class="star-rating">
-                                <span class="star-input" onclick="setRating(1)">★</span>
-                                <span class="star-input" onclick="setRating(2)">★</span>
-                                <span class="star-input" onclick="setRating(3)">★</span>
-                                <span class="star-input" onclick="setRating(4)">★</span>
-                                <span class="star-input" onclick="setRating(5)">★</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="review-text">Ваш отзыв</label>
-                            <textarea id="review-text" placeholder="Расскажите о вашем опыте"></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">Отправить отзыв</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-links">
-            <div>
-                <h4>О компании</h4>
-                <a href="#">О нас</a>
-                <a href="#">Контакты</a>
-                <a href="#">Вакансии</a>
-            </div>
-            <div>
-                <h4>Покупателям</h4>
-                <a href="#">Доставка</a>
-                <a href="#">Оплата</a>
-                <a href="#">Возврат</a>
-            </div>
-            <div>
-                <h4>Контакты</h4>
-                <a href="tel:+78001234567">8 (800) 123-45-67</a>
-                <a href="mailto:info@example.com">info@example.com</a>
-            </div>
-        </div>
-        <p>&copy; 2024 Магазин. Все права защищены.</p>
-    </footer>
-
-    <script>
-        // Cart functionality
-        let cartCount = 0;
-        const cart = document.querySelector('.cart');
-        const cartContent = document.getElementById('cart-content');
-        const cartCountEl = document.querySelector('.cart-count');
-        const totalEl = document.getElementById('total');
-        const toast = document.getElementById('toast');
-
-        cart.addEventListener('click', () => {
-            const isHidden = cartContent.style.display === 'none' || !cartContent.style.display;
-            cartContent.style.display = isHidden ? 'block' : 'none';
-            cartContent.setAttribute('aria-hidden', !isHidden);
-        });
-
-        document.querySelector('.cancel-button').addEventListener('click', () => {
-            cartContent.style.display = 'none';
-            cartContent.setAttribute('aria-hidden', 'true');
-        });
-
-        // Add to cart buttons
-        document.querySelectorAll('.product-item .btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                cartCount++;
-                cartCountEl.textContent = cartCount;
-                totalEl.textContent = (cartCount * 1999).toLocaleString();
-                showToast('Товар добавлен в корзину!');
-            });
-        });
-
-        function showToast(message) {
-            toast.textContent = message;
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2000);
-        }
-
-        // Reviews Modal
-        function openReviewsModal() {
-            document.getElementById('reviewsModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeReviewsModal() {
-            document.getElementById('reviewsModal').classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        function switchTab(tab) {
-            document.querySelectorAll('.reviews-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.reviews-tab-content').forEach(c => c.classList.remove('active'));
-            
-            event.target.classList.add('active');
-            document.getElementById('tab-' + tab).classList.add('active');
-        }
-
-        function setRating(rating) {
-            const stars = document.querySelectorAll('.star-input');
-            stars.forEach((star, index) => {
-                if (index < rating) {
-                    star.classList.add('active');
-                } else {
-                    star.classList.remove('active');
-                }
-            });
-        }
-
-        // Close modal on outside click
-        document.getElementById('reviewsModal').addEventListener('click', (e) => {
-            if (e.target === e.currentTarget) {
-                closeReviewsModal();
-            }
-        });
-
-        // Escape key to close modal
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeReviewsModal();
-            }
-        });
-    </script>
-</body>
-</html>
