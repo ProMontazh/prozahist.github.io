@@ -3,9 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Imou IPC-GS7EP-5M0WE - поворотна Wi-Fi камера 5МП з панорамуванням 340°, нахилом 90°, ІЧ підсвічуванням до 30м, IP66. Купити з доставкою">
+    <meta name="keywords" content="imou cruiser, поворотна камера, wifi камера 5мп, ptz камера, IPC-GS7EP-5M0WE">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="canonical" href="https://прозахист.pp.ua/details_cam_outdoor_04_IPC_GS7EP_5M0WE">
-    <title>Вулична поворотна Wi-Fi камера Imou IPC-GS7EP-5M0WE</title>
+    <link rel="canonical" href="https://прозахист.pp.ua/details_cam_outdoor_04_IPC_GS7EP_5M0WE.html">
+    <title>Imou IPC-GS7EP-5M0WE — Поворотна Wi-Fi камера 5МП</title>
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "Imou Cruiser IPC-GS7EP-5M0WE",
+      "image": [
+        "https://прозахист.pp.ua/images/IPC-GS7EP-5M0WE.png",
+        "https://прозахіст.pp.ua/images/IPC-GS7EP-5M0WE_1.png",
+        "https://прозахіст.pp.ua/images/IPC-GS7EP-5M0WE_2.png"
+      ],
+      "description": "Поворотна Wi-Fi камера 5МП з панорамуванням 340°, нахилом 90°, ІЧ підсвічуванням до 30м, виявлення людей та транспорту, Wi-Fi 6, IP66",
+      "brand": {
+        "@type": "Brand",
+        "name": "Imou"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://прозахіст.pp.ua/details_cam_outdoor_04_IPC_GS7EP_5M0WE.html",
+        "priceCurrency": "UAH",
+        "price": "3740.00",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+    </script>
+    
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -13,77 +42,115 @@
             padding: 0;
             background-color: #f4f4f4;
         }
-    
 
+        /* ===== ЛОГОТИП ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background: transparent;
+        }
+
+        .logo svg {
+            width: 205px;
+            height: auto;
+        }
+
+        /* ===== Toast ===== */
         .toast {
-    position: fixed;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.4);
-    color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 1.0em;
-    white-space: nowrap; /* Устанавливаем текст в одну строчку */        
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.5s;
-    z-index: 9999;
-}
+            position: fixed;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 1.0em;
+            white-space: nowrap;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 9999;
+        }
 
-.toast.show {
-    visibility: visible;
-    opacity: 1;
-}
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* ===== Контейнер ===== */
         .container {
-          
             max-width: 830px;
             margin: 20px auto;
-            
             padding: 30px;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.5s forwards;
             opacity: 0;
-            animation: fadeIn 3.0s forwards;
         }
 
         @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+            to { opacity: 1; }
         }
 
         .product-title {
             text-align: center;
-            font-size: 1.5em;
+            font-size: 1.6em;
             margin-top: 0;
+        }
+
+        /* ===== Карусель ===== */
+        .carousel-wrapper {
+            position: relative;
+            overflow: hidden;
+            max-width: 100%;
+            margin: 0 auto;
         }
 
         .carousel {
             display: flex;
-            overflow-x: auto;
-            gap: 10px;
-            padding: 10px;
-            scroll-behavior: smooth;
+            transition: transform 0.5s ease;
         }
 
         .carousel img {
-            width: 100%;
-            max-width: 400px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: transform 0.3s ease;
-        }
-
-        .carousel img:hover {
-            transform: scale(1.05);
-        }
-
-        .product-description {
+            flex: 0 0 100%;
             max-width: 100%;
-            margin-top: 20px;
-            font-size: 1.0rem;
+            border-radius: 5px;
+            cursor: pointer;
+            object-fit: contain;
+        }
+
+        /* Стрілки для десктопу */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 2em;
+            padding: 8px 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.3s;
+            z-index: 10;
+            display: none;
+        }
+
+        .carousel-arrow:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .carousel-arrow.left { left: 10px; }
+        .carousel-arrow.right { right: 10px; }
+
+        /* ===== Опис ===== */
+        .product-description {
+            font-size: 1rem;
             line-height: 1.6;
+            margin: 20px 0 30px 20px;
         }
 
         .product-description ul {
@@ -91,6 +158,7 @@
             margin-top: 10px;
             margin-bottom: 0;
         }
+
         .product-description li {
             margin-bottom: 6px;
         }
@@ -99,28 +167,27 @@
             font-size: 1.8em;
             color: red;
             text-align: center;
-            margin: 10px 0;
+            margin: 15px 0;
         }
 
         .btn {
             display: block;
-            width: fit-content;
-            padding: 10px 20px;
             background-color: #007bff;
             color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            cursor: pointer;
+            padding: 10px 20px;
             margin: 20px auto;
             text-align: center;
             border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
         }
 
         .btn:hover {
             background-color: #0056b3;
         }
 
-        /* ----- Модальное окно ----- */
+        /* ===== Модалка ===== */
         .modal {
             display: none;
             position: fixed;
@@ -128,7 +195,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.85);
             justify-content: center;
             align-items: center;
             z-index: 10000;
@@ -138,6 +205,7 @@
             max-width: 90%;
             max-height: 90%;
             border-radius: 10px;
+            transition: transform 0.3s ease;
         }
 
         .modal .arrow {
@@ -149,165 +217,331 @@
             cursor: pointer;
             user-select: none;
             padding: 10px;
+            z-index: 10001;
         }
 
-        .modal .arrow.left {
-            left: 20px;
+        .modal .arrow.left { left: 20px; }
+        .modal .arrow.right { right: 20px; }
+
+        /* ===== Медіа-запити ===== */
+        @media (min-width: 768px) {
+            .carousel-arrow { display: block; }
         }
 
-        .modal .arrow.right {
-            right: 20px;
+        @media (min-width: 1024px) {
+            .product-description {
+                margin-left: 80px;
+                margin-right: 40px;
+            }
+            .product-description ul {
+                padding-left: 60px;
+            }
+            .product-description li {
+                border-bottom: 1px dotted #ddd;
+                padding-bottom: 5px;
+            }
+            .carousel img {
+                max-height: 420px;
+            }
         }
-            /* Улучшаем вид списка характеристик на ПК */
-@media (min-width: 1024px) {
-  .product-description ul {
-    padding-left: 150px; /* больше отступ слева */
-    margin-top: 15px;
-  }
 
-  .product-description li {
-  border-bottom: 1px dotted #ddd;
-  padding-bottom: 5px;
-}
-}
+        /* Мобільна версія */
+        @media (max-width: 768px) {
+            header {
+                position: static;
+                top: auto;
+                left: auto;
+                padding: 0px;
+                background: transparent;
+            }
+
+            .logo svg {
+                width: 230px;
+            }
+
+            .container {
+                margin: 0;
+                padding: 20px;
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            body {
+                background-color: #fff;
+            }
+
+            .product-title {
+                font-size: 1.3em;
+            }
+
+            .carousel {
+                padding: 5px 0;
+            }
+
+            .product-description {
+                margin-left: 10px;
+            }
+
+            .product-description ul {
+                padding-left: 15px;
+            }
+        }
+
+        /* Дуже маленькі екрани */
+        @media (max-width: 480px) {
+            header {
+                position: static;
+                top: auto;
+                left: auto;
+                padding: 0px;
+                background: transparent;
+            }
+
+            .logo svg {
+                width: 205px;
+            }
+        }
     </style>
 </head>
 <body>
+<header>
+    <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="180" height="56" viewBox="0 0 600 200">
+            <defs>
+                <!-- 🌊 Хвиля для слогана -->
+                <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="-0.3" stop-color="#999">
+                        <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+                    </stop>
+                    <stop offset="-0.15" stop-color="#666">
+                        <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+                    </stop>
+                    <stop offset="0" stop-color="#999">
+                        <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+                    </stop>
+                </linearGradient>
+                <!-- 🔴 Хвиля для ПРО -->
+                <linearGradient id="pro-wave" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="-0.3" stop-color="#800000">
+                        <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+                    </stop>
+                    <stop offset="-0.15" stop-color="#ff4444">
+                        <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+                    </stop>
+                    <stop offset="0" stop-color="#800000">
+                        <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+                    </stop>
+                </linearGradient>
+                <!-- ⚙️ Хвиля для ЗАХИСТ -->
+                <linearGradient id="zahist-wave" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="-0.3" stop-color="#808080">
+                        <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+                    </stop>
+                    <stop offset="-0.15" stop-color="#e0e0e0">
+                        <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+                    </stop>
+                    <stop offset="0" stop-color="#808080">
+                        <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+                    </stop>
+                </linearGradient>
+            </defs>
+            <!-- ПРО -->
+            <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#pro-wave)">ПРО</text>
+            <!-- ЗАХИСТ -->
+            <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#zahist-wave)">ЗАХИСТ</text>
+            <!-- Слоган -->
+            <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="33" fill="url(#wave-gradient)">БЕЗДРОТОВІ СИСТЕМИ БЕЗПЕКИ</text>
+            <!-- Декор -->
+            <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10" />
+            <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10" />
+            <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10" />
+            <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10" />
+        </svg>
+    </div>
+</header>
 
 <div class="container">
-    <h2 class="product-title">Wi-Fi відеокамера з PT Imou IPC-GS7EP-5M0WE</h2>
+    <h2 class="product-title">Поворотна Wi-Fi камера Imou Cruiser IPC-GS7EP-5M0WE</h2>
 
-    <div class="carousel">
-        <img src="images/IPC-GS7EP-5M0WE.png" alt="IP-Камера IMOU" onclick="openModal('images/IPC-GS7EP-5M0WE.png')">
-        <img src="images/IPC-GS7EP-5M0WE_1.png" alt="IP-Камера IMOU - вид сбоку" onclick="openModal('images/IPC-GS7EP-5M0WE_1.png')">
-        <img src="images/IPC-GS7EP-5M0WE_2.png" alt="IP-Камера IMOU - вид сбоку" onclick="openModal('images/IPC-GS7EP-5M0WE_2.png')">
+    <div class="carousel-wrapper">
+        <div class="carousel" id="carousel">
+            <img src="images/IPC-GS7EP-5M0WE.png" alt="Imou Cruiser поворотна камера" onclick="openModal('images/IPC-GS7EP-5M0WE.png')">
+            <img src="images/IPC-GS7EP-5M0WE_1.png" alt="Imou Cruiser вид збоку" onclick="openModal('images/IPC-GS7EP-5M0WE_1.png')">
+            <img src="images/IPC-GS7EP-5M0WE_2.png" alt="Imou Cruiser деталі" onclick="openModal('images/IPC-GS7EP-5M0WE_2.png')">
+            <!-- Клон першого зображення для безшовного циклу -->
+            <img src="images/IPC-GS7EP-5M0WE.png" alt="Imou Cruiser поворотна камера" onclick="openModal('images/IPC-GS7EP-5M0WE.png')">
+        </div>
+
+        <div class="carousel-arrow left" onclick="prevImage()">&#10094;</div>
+        <div class="carousel-arrow right" onclick="nextImage()">&#10095;</div>
     </div>
 
     <div id="toast" class="toast"></div>
 
     <div class="product-description">
-Cruiser забезпечує 5-мегапіксельний моніторинг у реальному часі 3K з функціями панорамування від 0 до 340 ° та нахилу від 0 до 90 ° забезпечує повне покриття кожного куточка вашого будинку. Підтримує чотири режими нічного бачення для ясності як вдень навіть у непроглядній темряві. Камера сертифікована за стандартом IP66, тому її можна використовувати на відкритому повітрі за різних погодних умов. Cruiser 2 із вбудованим прожектором та сиреною активно утримує небажаних відвідувачів від вторгнення на вашу територію.
+Cruiser забезпечує 5-мегапіксельний моніторинг у реальному часі 3K з функціями панорамування від 0 до 340° та нахилу від 0 до 90° забезпечує повне покриття кожного куточка вашого будинку. Підтримує чотири режими нічного бачення для ясності як вдень навіть у непроглядній темряві. Камера сертифікована за стандартом IP66, тому її можна використовувати на відкритому повітрі за різних погодних умов. Cruiser 2 із вбудованим прожектором та сиреною активно утримує небажаних відвідувачів від вторгнення на вашу територію.
+
 Роздільна здатність 5МП, 1/2.7" CMOS-матриця; Фокус 3.6мм (кут огляду 85°); Максимальна роздільна здатність відео 5 МП (2880 x 1620) - 25 к\с Кодеки H.265/H.264; ІЧ світло (до 30м); Аналітика та аларми: виявлення людей та транспортних засобів за допомогою ДІ; інтелектуальне відстеження; Micro SD (максимум 256ГБ); 12 VDC; IP66; Колір корпусу – білий
+
         <br><br>
-        Характеристики:
+        <strong>Характеристики:</strong>
         <ul>
-<li>Матриця	1/2.7” 5 МП CMOS</li>
-<li>Регулювання по осях	0~340° Поворот; 0~90° Нахил</li>
-<li>Кути огляду	85°(Г), 42°(В),102°(Д)</li>
-<li>Тип підсвічування	ІЧ+видиме світло</li>
-<li>Фокусна відстань	3.6 мм</li>
-<li>Дальність підсвічування	30м</li>
-<li>Відео компресія	H.265/H.264</li>
-<li>Частота кадрів (головний потік)	2880 x 1620 25 к/с</li>
-<li>Метод зберігання	micro SD 256 Гб</li>
-<li>Сумісність	ONVIF</li>
-<li>Аудіо інтерфейси	вбудований мікрофон та динамік</li>
-<li>Мережеві інтерфейси	1 x 100 Ethernet; Wi-Fi 6:IEEE802.11 ax/b/g/n 120 м</li>
-<li>Цифрове збільшення	8x</li>
-<li>Перетин лінії	Підтримує</li>
-<li>Вхід і вихід з регіону	Підтримує</li>
-<li>Живлення	DC 12В 1A (входить до комплекту)</li>
-<li>Потужність споживання	12 Вт</li>
-<li>Робоча температура	-30°C~+60°C</li>
-<li>Ступінь захисту	IP66</li>
-<li>Розміри	110 × 129 × 133 мм</li>
-<li>Вага	370 г</li>
-<li>Матеріал	пластик</li>
-<li>Розмір упаковки (Ш х В х Г)	150 x 170 x 170 мм</li>
-<li>Вага брутто	0.78 кг</li>
-<li>Строк гарантії	12 міс.</li>
+            <li>Матриця: 1/2.7" 5 МП CMOS</li>
+            <li>Регулювання по осях: 0~340° Поворот; 0~90° Нахил</li>
+            <li>Кути огляду: 85°(Г), 42°(В), 102°(Д)</li>
+            <li>Тип підсвічування: ІЧ + видиме світло</li>
+            <li>Фокусна відстань: 3.6 мм</li>
+            <li>Дальність підсвічування: 30 м</li>
+            <li>Відео компресія: H.265/H.264</li>
+            <li>Частота кадрів (головний потік): 2880 x 1620 - 25 к/с</li>
+            <li>Метод зберігання: micro SD 256 ГБ</li>
+            <li>Сумісність: ONVIF</li>
+            <li>Аудіо інтерфейси: вбудований мікрофон та динамік</li>
+            <li>Мережеві інтерфейси: 1 × 100 Ethernet; Wi-Fi 6: IEEE802.11 ax/b/g/n 120 м</li>
+            <li>Цифрове збільшення: 8×</li>
+            <li>Перетин лінії: Підтримує</li>
+            <li>Вхід і вихід з регіону: Підтримує</li>
+            <li>Живлення: DC 12В 1A (входить до комплекту)</li>
+            <li>Потужність споживання: 12 Вт</li>
+            <li>Робоча температура: -30°C ~ +60°C</li>
+            <li>Ступінь захисту: IP66</li>
+            <li>Розміри: 110 × 129 × 133 мм</li>
+            <li>Вага: 370 г</li>
+            <li>Матеріал: пластик</li>
+            <li>Розмір упаковки (Ш × В × Г): 150 × 170 × 170 мм</li>
+            <li>Вага брутто: 0.78 кг</li>
+            <li>Строк гарантії: 12 міс.</li>
         </ul>
     </div>
 
     <p class="product-price">3740.00 грн</p>
-    <button class="btn" onclick="addToCartFromProductPage({ id: 'IPC-GS7EP-5M0WE', name: 'IPC-GS7EP-5M0WE', price: 3740.00, image: 'images/IPC-GS7EP-5M0WE_1.png' })">Додати у кошик</button>
+    <button class="btn" onclick="addToCartFromProductPage({ id: 'IPC-GS7EP-5M0WE', name: 'IPC-GS7EP-5M0WE', price: 3740.00, image: 'images/IPC-GS7EP-5M0WE_1.png' })">
+        Додати у кошик
+    </button>
 </div>
 
 <div id="modal" class="modal" onclick="closeModal()">
-    <span class="arrow left" onclick="event.stopPropagation(); prevImage()">&#10094;</span>
-    <img id="modal-img" src=""/>
-    <span class="arrow right" onclick="event.stopPropagation(); nextImage()">&#10095;</span>
+    <span class="arrow left" onclick="event.stopPropagation(); prevModalImage()">&#10094;</span>
+    <img id="modal-img" src="" alt="Збільшене зображення">
+    <span class="arrow right" onclick="event.stopPropagation(); nextModalImage()">&#10095;</span>
 </div>
 
 <script>
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const images = [
-        "images/IPC-GS7EP-5M0WE.png",
-        "images/IPC-GS7EP-5M0WE_1.png",
-        "images/IPC-GS7EP-5M0WE_2.png"
-    ];
-    let currentIndex = 0;
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+const images = [
+    "images/IPC-GS7EP-5M0WE.png",
+    "images/IPC-GS7EP-5M0WE_1.png",
+    "images/IPC-GS7EP-5M0WE_2.png"
+];
+let currentIndex = 0;
+const totalSlides = images.length;
 
-    function showToast(message) {
-        const toast = document.getElementById("toast");
-        toast.textContent = message;
-        toast.classList.add("show");
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 2500);
+}
+
+function addToCartFromProductPage(item) {
+    cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingItem = cart.find(i => i.id === item.id);
+    if (existingItem) existingItem.quantity++;
+    else { item.quantity = 1; cart.push(item); }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    showToast(`${item.name} додано до кошика!`);
+}
+
+/* === Карусель === */
+function updateCarousel() {
+    const carouselEl = document.getElementById('carousel');
+    carouselEl.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+
+function nextImage() {
+    const carouselEl = document.getElementById('carousel');
+    currentIndex++;
+    carouselEl.style.transition = 'transform 0.5s ease';
+    updateCarousel();
+    
+    if (currentIndex === totalSlides) {
         setTimeout(() => {
-            toast.classList.remove("show");
-        }, 3000);
+            carouselEl.style.transition = 'none';
+            currentIndex = 0;
+            updateCarousel();
+        }, 500);
     }
+}
 
-    function addToCartFromProductPage(item) {
-        const existingItem = cart.find(cartItem => cartItem.id === item.id);
-        if (existingItem) {
-            existingItem.quantity++;
-        } else {
-            item.quantity = 1;
-            cart.push(item);
-        }
-        localStorage.setItem('cart', JSON.stringify(cart));
-        showToast(`${item.name} додано до кошика!`);
+function prevImage() {
+    const carouselEl = document.getElementById('carousel');
+    
+    if (currentIndex === 0) {
+        carouselEl.style.transition = 'none';
+        currentIndex = totalSlides;
+        updateCarousel();
+        
+        setTimeout(() => {
+            carouselEl.style.transition = 'transform 0.5s ease';
+            currentIndex--;
+            updateCarousel();
+        }, 20);
+    } else {
+        currentIndex--;
+        carouselEl.style.transition = 'transform 0.5s ease';
+        updateCarousel();
     }
+}
 
-    function openModal(imageSrc) {
-        currentIndex = images.indexOf(imageSrc);
-        document.getElementById("modal-img").src = imageSrc;
-        document.getElementById("modal").style.display = "flex";
+/* === Модалка === */
+function openModal(imageSrc) {
+    const modalIndex = images.indexOf(imageSrc);
+    if (modalIndex !== -1) {
+        currentIndex = modalIndex;
     }
+    document.getElementById("modal-img").src = imageSrc;
+    document.getElementById("modal").style.display = "flex";
+}
 
-    function closeModal() {
-        document.getElementById("modal").style.display = "none";
-    }
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
 
-    function nextImage() {
-        currentIndex = (currentIndex + 1) % images.length;
-        document.getElementById("modal-img").src = images[currentIndex];
-    }
+function nextModalImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    document.getElementById("modal-img").src = images[currentIndex];
+}
 
-    function prevImage() {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        document.getElementById("modal-img").src = images[currentIndex];
-    }
+function prevModalImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    document.getElementById("modal-img").src = images[currentIndex];
+}
 
-    // свайп на мобильных
-    let startX = 0;
-    const modal = document.getElementById("modal");
+/* === Свайпи === */
+let startX = 0;
+const carousel = document.getElementById('carousel');
+carousel.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
+carousel.addEventListener('touchend', e => {
+    const diff = e.changedTouches[0].clientX - startX;
+    if (Math.abs(diff) > 50) diff > 0 ? prevImage() : nextImage();
+}, { passive: true });
 
-    modal.addEventListener("touchstart", (e) => {
-        startX = e.touches[0].clientX;
-    });
+const modal = document.getElementById("modal");
+modal.addEventListener("touchstart", e => startX = e.touches[0].clientX, { passive: true });
+modal.addEventListener("touchend", e => {
+    const diff = e.changedTouches[0].clientX - startX;
+    if (Math.abs(diff) > 50) diff > 0 ? prevModalImage() : nextModalImage();
+}, { passive: true });
 
-    modal.addEventListener("touchend", (e) => {
-        let endX = e.changedTouches[0].clientX;
-        if (endX - startX > 50) {
-            prevImage();
-        } else if (startX - endX > 50) {
-            nextImage();
-        }
-    });
-    window.addEventListener('popstate', () => {
+/* === Навігація назад === */
+window.addEventListener('popstate', () => {
     const lastCat = localStorage.getItem('lastCategory');
     if (lastCat) {
-        // возвращаем на index.html и открываем нужную категорию
         window.location.href = `index.html#${lastCat}`;
     } else {
-        // если категории нет — просто на главную
         window.location.href = 'index.html';
     }
 });
-
 </script>
 </body>
 </html>
-
-
