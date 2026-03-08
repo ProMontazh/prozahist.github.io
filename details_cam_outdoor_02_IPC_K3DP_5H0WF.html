@@ -39,77 +39,115 @@
             padding: 0;
             background-color: #f4f4f4;
         }
-    
 
+        /* ===== ЛОГОТИП ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background: transparent;
+        }
+
+        .logo svg {
+            width: 205px;
+            height: auto;
+        }
+
+        /* ===== Toast ===== */
         .toast {
-    position: fixed;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.4);
-    color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-size: 1.0em;
-    white-space: nowrap; /* Устанавливаем текст в одну строчку */        
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.5s;
-    z-index: 9999;
-}
+            position: fixed;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 1.0em;
+            white-space: nowrap;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 9999;
+        }
 
-.toast.show {
-    visibility: visible;
-    opacity: 1;
-}
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* ===== Контейнер ===== */
         .container {
-          
             max-width: 830px;
             margin: 20px auto;
-            
             padding: 30px;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.5s forwards;
             opacity: 0;
-            animation: fadeIn 3.0s forwards;
         }
 
         @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+            to { opacity: 1; }
         }
 
-       .product-title {
-    text-align: center;
-    font-size: 1.5em; /* уменьшен шрифт (было 2em) */
-    margin-top: 0;
-}
+        .product-title {
+            text-align: center;
+            font-size: 1.6em;
+            margin-top: 0;
+        }
+
+        /* ===== Карусель ===== */
+        .carousel-wrapper {
+            position: relative;
+            overflow: hidden;
+            max-width: 100%;
+            margin: 0 auto;
+        }
 
         .carousel {
             display: flex;
-            overflow-x: auto;
-            gap: 10px;
-            padding: 10px;
-            scroll-behavior: smooth;
+            transition: transform 0.5s ease;
         }
 
         .carousel img {
-            width: 100%;
-            max-width: 400px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: transform 0.3s ease;
-        }
-
-        .carousel img:hover {
-            transform: scale(1.05);
-        }
-
-        .product-description {
+            flex: 0 0 100%;
             max-width: 100%;
-            margin-top: 20px;
-            font-size: 1.0rem;
+            border-radius: 5px;
+            cursor: pointer;
+            object-fit: contain;
+        }
+
+        /* Стрілки для десктопу */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 2em;
+            padding: 8px 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.3s;
+            z-index: 10;
+            display: none;
+        }
+
+        .carousel-arrow:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .carousel-arrow.left { left: 10px; }
+        .carousel-arrow.right { right: 10px; }
+
+        /* ===== Опис ===== */
+        .product-description {
+            font-size: 1rem;
             line-height: 1.6;
+            margin: 20px 0 30px 20px;
         }
 
         .product-description ul {
@@ -117,6 +155,7 @@
             margin-top: 10px;
             margin-bottom: 0;
         }
+
         .product-description li {
             margin-bottom: 6px;
         }
@@ -125,28 +164,27 @@
             font-size: 1.8em;
             color: red;
             text-align: center;
-            margin: 10px 0;
+            margin: 15px 0;
         }
 
         .btn {
             display: block;
-            width: fit-content;
-            padding: 10px 20px;
             background-color: #007bff;
             color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            cursor: pointer;
+            padding: 10px 20px;
             margin: 20px auto;
             text-align: center;
             border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
         }
 
         .btn:hover {
             background-color: #0056b3;
         }
 
-        /* ----- Модальное окно ----- */
+        /* ===== Модалка ===== */
         .modal {
             display: none;
             position: fixed;
@@ -154,7 +192,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.85);
             justify-content: center;
             align-items: center;
             z-index: 10000;
@@ -164,6 +202,7 @@
             max-width: 90%;
             max-height: 90%;
             border-radius: 10px;
+            transition: transform 0.3s ease;
         }
 
         .modal .arrow {
@@ -175,30 +214,148 @@
             cursor: pointer;
             user-select: none;
             padding: 10px;
+            z-index: 10001;
         }
 
-        .modal .arrow.left {
-            left: 20px;
+        .modal .arrow.left { left: 20px; }
+        .modal .arrow.right { right: 20px; }
+
+        /* ===== Медіа-запити ===== */
+        @media (min-width: 768px) {
+            .carousel-arrow { display: block; }
         }
 
-        .modal .arrow.right {
-            right: 20px;
+        @media (min-width: 1024px) {
+            .product-description {
+                margin-left: 80px;
+                margin-right: 40px;
+            }
+            .product-description ul {
+                padding-left: 60px;
+            }
+            .product-description li {
+                border-bottom: 1px dotted #ddd;
+                padding-bottom: 5px;
+            }
+            .carousel img {
+                max-height: 420px;
+            }
         }
-            /* Улучшаем вид списка характеристик на ПК */
-@media (min-width: 1024px) {
-  .product-description ul {
-    padding-left: 150px; /* больше отступ слева */
-    margin-top: 15px;
-  }
 
-  .product-description li {
-  border-bottom: 1px dotted #ddd;
-  padding-bottom: 5px;
-}
-}
+        /* Мобільна версія */
+        @media (max-width: 768px) {
+            header {
+                position: static;
+                top: auto;
+                left: auto;
+                padding: 0px;
+                background: transparent;
+            }
+
+            .logo svg {
+                width: 230px;
+            }
+
+            .container {
+                margin: 0;
+                padding: 20px;
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            body {
+                background-color: #fff;
+            }
+
+            .product-title {
+                font-size: 1.3em;
+            }
+
+            .carousel {
+                padding: 5px 0;
+            }
+
+            .product-description {
+                margin-left: 10px;
+            }
+
+            .product-description ul {
+                padding-left: 15px;
+            }
+        }
+
+        /* Дуже маленькі екрани */
+        @media (max-width: 480px) {
+            header {
+                position: static;
+                top: auto;
+                left: auto;
+                padding: 0px;
+                background: transparent;
+            }
+
+            .logo svg {
+                width: 205px;
+            }
+        }
     </style>
 </head>
 <body>
+<header>
+    <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="180" height="56" viewBox="0 0 600 200">
+            <defs>
+                <!-- 🌊 Хвиля для слогана -->
+                <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="-0.3" stop-color="#999">
+                        <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+                    </stop>
+                    <stop offset="-0.15" stop-color="#666">
+                        <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+                    </stop>
+                    <stop offset="0" stop-color="#999">
+                        <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+                    </stop>
+                </linearGradient>
+                <!-- 🔴 Хвиля для ПРО -->
+                <linearGradient id="pro-wave" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="-0.3" stop-color="#800000">
+                        <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+                    </stop>
+                    <stop offset="-0.15" stop-color="#ff4444">
+                        <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+                    </stop>
+                    <stop offset="0" stop-color="#800000">
+                        <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+                    </stop>
+                </linearGradient>
+                <!-- ⚙️ Хвиля для ЗАХИСТ -->
+                <linearGradient id="zahist-wave" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="-0.3" stop-color="#808080">
+                        <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+                    </stop>
+                    <stop offset="-0.15" stop-color="#e0e0e0">
+                        <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+                    </stop>
+                    <stop offset="0" stop-color="#808080">
+                        <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+                    </stop>
+                </linearGradient>
+            </defs>
+            <!-- ПРО -->
+            <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#pro-wave)">ПРО</text>
+            <!-- ЗАХИСТ -->
+            <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#zahist-wave)">ЗАХИСТ</text>
+            <!-- Слоган -->
+            <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="33" fill="url(#wave-gradient)">БЕЗДРОТОВІ СИСТЕМИ БЕЗПЕКИ</text>
+            <!-- Декор -->
+            <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10" />
+            <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10" />
+            <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10" />
+            <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10" />
+        </svg>
+    </div>
+</header>
 
 <div class="container">
     <h2 class="product-title">Wi-Fi відеокамера Imou IPC-K3DP-5H0WF</h2>
