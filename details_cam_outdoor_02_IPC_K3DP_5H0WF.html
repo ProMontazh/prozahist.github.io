@@ -445,13 +445,41 @@ function updateCarousel() {
 }
 
 function nextImage() {
-    currentIndex = (currentIndex + 1) % totalSlides;
+    const carouselEl = document.getElementById('carousel');
+    currentIndex++;
+    carouselEl.style.transition = 'transform 0.5s ease';
     updateCarousel();
+    
+    // Якщо дійшли до клону (позиція після останнього оригіналу)
+    if (currentIndex === totalSlides) {
+        setTimeout(() => {
+            carouselEl.style.transition = 'none';
+            currentIndex = 0;
+            updateCarousel();
+        }, 500);
+    }
 }
 
 function prevImage() {
-    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-    updateCarousel();
+    const carouselEl = document.getElementById('carousel');
+    
+    // Якщо на першому зображенні - миттєво стрибаємо на клон
+    if (currentIndex === 0) {
+        carouselEl.style.transition = 'none';
+        currentIndex = totalSlides;
+        updateCarousel();
+        
+        // Даємо браузеру час застосувати зміни
+        setTimeout(() => {
+            carouselEl.style.transition = 'transform 0.5s ease';
+            currentIndex--;
+            updateCarousel();
+        }, 20);
+    } else {
+        currentIndex--;
+        carouselEl.style.transition = 'transform 0.5s ease';
+        updateCarousel();
+    }
 }
 
 /* === Модалка === */
@@ -493,15 +521,7 @@ modal.addEventListener("touchend", e => {
     const diff = e.changedTouches[0].clientX - startX;
     if (Math.abs(diff) > 50) diff > 0 ? prevModalImage() : nextModalImage();
 }, { passive: true });
-
-/* === Клавіатурна навігація === */
-document.addEventListener('keydown', (e) => {
-    if (document.getElementById("modal").style.display === "flex") {
-        if (e.key === 'ArrowLeft') prevModalImage();
-        if (e.key === 'ArrowRight') nextModalImage();
-        if (e.key === 'Escape') closeModal();
-    }
-});
 </script>
 </body>
 </html>
+
