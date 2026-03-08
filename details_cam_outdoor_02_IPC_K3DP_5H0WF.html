@@ -364,7 +364,7 @@
             <img src="images/IPC-K3DP-3H0WF.png" alt="IP-Камера IMOU" onclick="openModal('images/IPC-K3DP-3H0WF.png')">
             <img src="images/IPC-K3DP-3H0WF_2.png" alt="IP-Камера IMOU - вид сбоку" onclick="openModal('images/IPC-K3DP-3H0WF_2.png')">
             <img src="images/IPC-K3DP-3H0WF_1.png" alt="IP-Камера IMOU - вид сзади" onclick="openModal('images/IPC-K3DP-3H0WF_1.png')">
-
+            <!-- Клон першого слайду для infinite scroll -->
             <img src="images/IPC-K3DP-3H0WF.png" alt="IP-Камера IMOU" onclick="openModal('images/IPC-K3DP-3H0WF.png')">
         </div>
         <span class="carousel-arrow left" onclick="prevImage()">&#10094;</span>
@@ -420,7 +420,7 @@ const images = [
     "images/IPC-K3DP-3H0WF_1.png"
 ];
 let currentIndex = 0;
-const totalSlides = images.length;
+const totalSlides = images.length; // 3 оригінальні слайди
 
 function showToast(message) {
     const toast = document.getElementById("toast");
@@ -450,7 +450,7 @@ function nextImage() {
     carouselEl.style.transition = 'transform 0.5s ease';
     updateCarousel();
     
-    // Якщо дійшли до клону (позиція після останнього оригіналу)
+    // Якщо дійшли до клону (позиція 3, оскільки індексація з 0)
     if (currentIndex === totalSlides) {
         setTimeout(() => {
             carouselEl.style.transition = 'none';
@@ -463,16 +463,16 @@ function nextImage() {
 function prevImage() {
     const carouselEl = document.getElementById('carousel');
     
-    // Якщо на першому зображенні - миттєво стрибаємо на клон
+    // Якщо на першому зображенні - миттєво стрибаємо на клон (позиція 3)
     if (currentIndex === 0) {
         carouselEl.style.transition = 'none';
-        currentIndex = totalSlides;
+        currentIndex = totalSlides; // 3
         updateCarousel();
         
         // Даємо браузеру час застосувати зміни
         setTimeout(() => {
             carouselEl.style.transition = 'transform 0.5s ease';
-            currentIndex--;
+            currentIndex--; // 2
             updateCarousel();
         }, 20);
     } else {
@@ -521,7 +521,15 @@ modal.addEventListener("touchend", e => {
     const diff = e.changedTouches[0].clientX - startX;
     if (Math.abs(diff) > 50) diff > 0 ? prevModalImage() : nextModalImage();
 }, { passive: true });
+
+/* === Клавіатурна навігація === */
+document.addEventListener('keydown', (e) => {
+    if (document.getElementById("modal").style.display === "flex") {
+        if (e.key === 'ArrowLeft') prevModalImage();
+        if (e.key === 'ArrowRight') nextModalImage();
+        if (e.key === 'Escape') closeModal();
+    }
+});
 </script>
 </body>
 </html>
-
