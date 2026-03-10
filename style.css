@@ -93,15 +93,15 @@ header .logo svg {
 }
 
 /* ======================================================
-   🛒 КОШИК
+   🛒 КОШИК (ОРИГИНАЛЬНЫЙ СТИЛЬ)
    ====================================================== */
 
 .cart {
     position: fixed;
     top: 14px;
     right: 10px;
-    background-color: var(--text-dark);
-    color: var(--white);
+    background-color: #333;
+    color: white;
     padding: 8px 12px;
     border-radius: 8px;
     cursor: pointer;
@@ -129,13 +129,12 @@ header .logo svg {
     position: fixed;
     right: 20px;
     top: 100px;
-    background-color: rgba(255, 255, 255, 0.98);
-    color: var(--text-dark);
+    background-color: rgba(255, 255, 255, 0.95);
+    color: black;
     padding: 20px;
     border-radius: 8px;
     width: 350px;
-    max-width: 90vw;
-    box-shadow: var(--shadow);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 1100;
     max-height: 80vh;
     overflow-y: auto;
@@ -143,36 +142,134 @@ header .logo svg {
 
 .cart-content h2 {
     margin-top: 0;
-    font-size: 1.5em;
     color: var(--text-dark);
 }
 
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.checkout-button, .cancel-button {
+    padding: 10px 16px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    min-width: 100px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.0;
+    display: inline-block;
+    cursor: pointer;
+    flex: 1;
+    transition: var(--transition);
+}
+
+.checkout-button {
+    background-color: #4CAF50;
+}
+
+.checkout-button:hover {
+    background-color: #367c39;
+}
+
+.cancel-button {
+    background-color: #f35363;
+}
+
+.cancel-button:hover {
+    background-color: #d44150;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-btn {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 0 5px;
+}
+
+.quantity-btn:hover {
+    background-color: #0056b3;
+}
+
+.quantity {
+    font-size: 18px;
+    padding: 0 10px;
+}
+
+.total-price {
+    font-weight: bold;
+    font-size: 1.04em;
+    margin-top: 15px;
+}
+
+#discount-message {
+    color: #28a745;
+    font-weight: bold;
+    font-size: 1.0em;
+    margin-left: 10px;
+    display: none;
+}
+
+#stock-warning {
+    color: red;
+    font-weight: bold;
+}
+
+#cart-items {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
 /* ======================================================
-   🔔 TOAST УВЕДОМЛЕНИЯ
+   🔔 TOAST УВЕДОМЛЕНИЯ (ОРИГИНАЛЬНЫЙ СТИЛЬ)
    ====================================================== */
 
-/* ===== Toast ===== */
-        .toast {
-            position: fixed;
-            top: 45%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.4);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 5px;
-            font-size: 1.0em;
-            white-space: nowrap;
-            visibility: hidden;
-            opacity: 0;
-            transition: opacity 0.5s;
-            z-index: 9999;
-        }
+.toast {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 1.0em;
+    white-space: nowrap;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: 9999;
+}
 
-        .toast.show {
-            visibility: visible;
-            opacity: 1;
-        }
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+}
 
 /* ======================================================
    🧭 BREADCRUMBS (ХЛЕБНЫЕ КРОШКИ)
@@ -256,25 +353,23 @@ header .logo svg {
     position: relative;
     overflow: hidden;
     background: var(--white);
-    border-radius: 0;
-    box-shadow: var(--shadow);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     padding: 0;
     text-align: center;
     cursor: pointer;
     flex: 1 1 calc(20% - 20px);
     max-width: calc(20% - 20px);
     min-width: 200px;
-    transition: var(--transition);
+    transition: transform 0.3s;
     text-decoration: none;
     color: inherit;
     display: block;
-    aspect-ratio: 1 / 1;
 }
 
 .category-card:hover,
 .category-card:focus {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    transform: scale(1.05);
     outline: 3px solid var(--primary-color);
     outline-offset: 2px;
 }
@@ -284,11 +379,6 @@ header .logo svg {
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: var(--transition);
-}
-
-.category-card:hover img {
-    transform: scale(1.05);
 }
 
 .category-card span {
@@ -296,22 +386,21 @@ header .logo svg {
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     color: #bbbbbb;
     font-weight: bold;
-    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    background: none;
     text-align: center;
     box-sizing: border-box;
-    font-size: 0.9em;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    font-size: 0.8em;
 }
 
 /* ======================================================
-   📦 ТОВАРЫ
+   📦 ТОВАРЫ — 6 В РЯДУ НА ДЕСКТОПЕ
    ====================================================== */
 
 .products {
-    padding-bottom: 0;
+    padding-bottom: 60px;
     display: none;
 }
 
@@ -321,7 +410,7 @@ header .logo svg {
 
 .category-title {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     margin-top: 80px;
     font-size: 2em;
     color: var(--text-dark);
@@ -330,28 +419,29 @@ header .logo svg {
 
 .seo-text {
     max-width: 900px;
-    margin: 0 auto 40px;
-    padding: 0 20px;
+    margin: 0 auto 30px;
+    padding: 0 15px;
     font-size: 16px;
+    opacity: 0.9;
     line-height: 1.8;
     color: var(--text-light);
     text-align: center;
 }
 
+/* 🔥 ВАЖНО: 6 товаров в ряд на десктопе */
 .products-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 30px;
-    padding: 0 20px;
+    gap: 15px;
+    padding: 0 10px;
 }
 
 .product-item {
-    background-color: var(--white);
-    padding: 20px;
-    border-radius: 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    flex: 0 1 280px;
+    background-color: white;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    flex: 0 1 230px;
     box-sizing: border-box;
     cursor: pointer;
     display: flex;
@@ -359,15 +449,12 @@ header .logo svg {
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    transition: var(--transition);
-    border: 2px solid transparent;
+    transition: transform 0.2s;
 }
 
 .product-item:hover,
 .product-item:focus-within {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-    border-color: transparent;
+    transform: scale(1.03);
 }
 
 .product-item:focus-within {
@@ -377,19 +464,17 @@ header .logo svg {
 
 .product-item img {
     width: 100%;
-    height: 200px;
-    object-fit: contain;
-    border-radius: 0;
-    margin-bottom: 15px;
+    height: auto;
+    object-fit: cover;
 }
 
 .product-item h3 {
-    font-size: 1.1em;
-    margin: 10px 0 8px 0;
+    font-size: 1em;
+    margin: 10px 0 5px 0;
+    min-height: 48px;
     color: var(--text-dark);
     font-weight: 700;
     line-height: 1.3;
-    min-height: 2.6em;
 }
 
 .product-item p {
@@ -401,10 +486,10 @@ header .logo svg {
 }
 
 .product-price {
-    font-size: 1.4em;
-    color: var(--primary-color);
-    font-weight: 700;
-    margin: 15px 0 10px 0;
+    font-size: 1.2em;
+    color: red;
+    font-weight: bold;
+    margin: 10px 0 5px 0;
 }
 
 /* ======================================================
@@ -413,17 +498,15 @@ header .logo svg {
 
 .btn {
     display: inline-block;
-    padding: 12px 24px;
-    background-color: var(--accent-color);
-    color: var(--white);
-    border-radius: 6px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
     border: none;
     cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
     font-size: 1em;
     font-weight: 600;
-    transition: var(--transition);
-    text-decoration: none;
-    text-align: center;
     width: 100%;
     margin-top: 10px;
 }
@@ -431,54 +514,11 @@ header .logo svg {
 .btn:hover {
     background-color: #0056b3;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,123,255,0.3);
 }
 
 .btn:focus-visible {
     outline: 3px solid var(--primary-color);
     outline-offset: 2px;
-}
-
-.btn:active {
-    transform: translateY(0);
-}
-
-/* Кнопки кошика */
-.button-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.checkout-button, .cancel-button {
-    flex: 1;
-    padding: 12px 16px;
-    color: var(--white);
-    text-decoration: none;
-    border-radius: 6px;
-    border: none;
-    text-align: center;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.checkout-button {
-    background-color: #28a745;
-}
-
-.checkout-button:hover {
-    background-color: #218838;
-}
-
-.cancel-button {
-    background-color: #dc3545;
-}
-
-.cancel-button:hover {
-    background-color: #c82333;
 }
 
 /* ======================================================
@@ -492,31 +532,22 @@ header .logo svg {
     margin-top: 90px;
     margin-left: 0;
     margin-bottom: 0;
-    font-size: 1em;
-    color: var(--secondary-color);
-    background: rgba(255,255,255,0.9);
-    padding: 20px;
-    border-radius: 12px;
-    backdrop-filter: blur(5px);
+    font-size: 1.0em;
+    color: #808080;
 }
 
 .contact-link {
-    color: var(--secondary-color);
+    color: #808080;
     text-decoration: none;
-    font-weight: 600;
-    margin-bottom: 10px;
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 8px;
+    transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .contact-link:hover,
 .contact-link:focus {
-    color: var(--accent-color);
-    transform: translateX(5px);
-    outline: none;
+    color: #007bff;
+    transform: translateX(1px);
 }
 
 .contact-link:focus-visible {
@@ -526,86 +557,7 @@ header .logo svg {
 }
 
 /* ======================================================
-   🛒 УПРАВЛЕНИЕ КОЛИЧЕСТВОМ
-   ====================================================== */
-
-.cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-    padding: 10px;
-    background: var(--bg-light);
-    border-radius: 8px;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.quantity-control {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.quantity-btn {
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    background-color: var(--accent-color);
-    color: var(--white);
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: var(--transition);
-    font-weight: 700;
-}
-
-.quantity-btn:hover {
-    background-color: #0056b3;
-    transform: scale(1.1);
-}
-
-.quantity-btn:focus-visible {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
-}
-
-.quantity {
-    font-size: 16px;
-    font-weight: 700;
-    min-width: 30px;
-    text-align: center;
-}
-
-.total-price {
-    font-weight: 700;
-    font-size: 1.2em;
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 2px solid var(--bg-light);
-    color: var(--text-dark);
-}
-
-#discount-message {
-    color: #28a745;
-    font-weight: 700;
-    font-size: 0.9em;
-    margin-left: 10px;
-    display: none;
-}
-
-#stock-warning {
-    color: #dc3545;
-    font-weight: 700;
-    font-size: 0.9em;
-    margin-top: 10px;
-}
-
-/* ======================================================
-   ⭐ ВИДЖЕТ ОТЗЫВОВ
+   ⭐ ВИДЖЕТ ОТЗЫВОВ (ОРИГИНАЛЬНЫЙ СТИЛЬ)
    ====================================================== */
 
 .reviews-widget {
@@ -613,28 +565,24 @@ header .logo svg {
     align-items: center;
     gap: 12px;
     padding: 12px 20px;
-    background: var(--white);
-    border: 2px solid rgba(128, 0, 0, 0.2);
+    background: transparent;
+    border: 2px solid rgba(240, 240, 240, 0.5);
     border-radius: 12px;
     cursor: pointer;
-    transition: var(--transition);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.3s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     margin-bottom: 15px;
-    text-decoration: none;
-    color: inherit;
+    min-width: 210px;
+    max-width: 210px;
+    height: 60px;
+    box-sizing: border-box;
 }
 
-.reviews-widget:hover,
-.reviews-widget:focus {
-    border-color: var(--primary-color);
+.reviews-widget:hover {
+    border-color: rgba(128, 0, 0, 0.8);
     box-shadow: 0 4px 16px rgba(128, 0, 0, 0.15);
-    transform: translateY(-2px);
-    outline: none;
-}
-
-.reviews-widget:focus-visible {
-    outline: 3px solid var(--accent-color);
-    outline-offset: 2px;
+    transform: translateY(0px);
+    background: transparent;
 }
 
 .widget-stars {
@@ -668,18 +616,18 @@ header .logo svg {
 .widget-rating-number {
     font-size: 20px;
     font-weight: 700;
-    color: var(--primary-color);
+    color: #800000;
     line-height: 1;
 }
 
 .widget-rating-count {
     font-size: 12px;
-    color: var(--text-light);
+    color: #999;
     line-height: 1;
 }
 
 /* ======================================================
-   💬 МОДАЛЬНОЕ ОКНО ОТЗЫВОВ
+   💬 МОДАЛЬНОЕ ОКНО ОТЗЫВОВ (ОРИГИНАЛЬНЫЙ СТИЛЬ)
    ====================================================== */
 
 .reviews-modal {
@@ -693,7 +641,6 @@ header .logo svg {
     background-color: rgba(0, 0, 0, 0.6);
     animation: fadeInModal 0.3s;
     overflow-y: auto;
-    backdrop-filter: blur(5px);
 }
 
 .reviews-modal.active {
@@ -701,6 +648,7 @@ header .logo svg {
     justify-content: center;
     align-items: center;
     padding: 20px;
+    transform: translateY(-30px);
 }
 
 @keyframes fadeInModal {
@@ -709,12 +657,13 @@ header .logo svg {
 }
 
 .reviews-modal-content {
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     border-radius: 16px;
     width: 100%;
     max-width: 900px;
-    max-height: 90vh;
+    height: 90vh;
     overflow: hidden;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     animation: slideDown 0.3s;
@@ -735,7 +684,8 @@ header .logo svg {
 
 .reviews-modal-header {
     background: linear-gradient(to right, rgba(7, 7, 7, 0.95), rgba(148, 148, 148, 0.95));
-    color: var(--white);
+    backdrop-filter: blur(10px);
+    color: white;
     padding: 25px 30px;
     border-radius: 16px 16px 0 0;
     display: flex;
@@ -755,7 +705,7 @@ header .logo svg {
 .reviews-modal-close {
     background: none;
     border: none;
-    color: var(--white);
+    color: white;
     font-size: 32px;
     cursor: pointer;
     line-height: 1;
@@ -766,22 +716,16 @@ header .logo svg {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    transition: var(--transition);
+    transition: background 0.3s;
 }
 
-.reviews-modal-close:hover,
-.reviews-modal-close:focus {
+.reviews-modal-close:hover {
     background: rgba(255, 255, 255, 0.2);
-    outline: none;
-}
-
-.reviews-modal-close:focus-visible {
-    outline: 2px solid var(--white);
-    outline-offset: 2px;
 }
 
 .reviews-modal-body {
     padding: 30px;
+    background: transparent;
     flex: 1;
     overflow-y: auto;
 }
@@ -793,7 +737,8 @@ header .logo svg {
     align-items: center;
     gap: 30px;
     padding: 25px;
-    background: rgba(249, 249, 249, 0.8);
+    background: rgba(249, 249, 249, 0.6);
+    backdrop-filter: blur(5px);
     border-radius: 12px;
     margin-bottom: 30px;
 }
@@ -805,7 +750,7 @@ header .logo svg {
 .modal-rating-number {
     font-size: 56px;
     font-weight: 700;
-    color: var(--primary-color);
+    color: #800000;
     line-height: 1;
 }
 
@@ -827,7 +772,7 @@ header .logo svg {
 
 .modal-rating-count {
     font-size: 14px;
-    color: var(--text-light);
+    color: #666;
 }
 
 /* Табы */
@@ -845,21 +790,15 @@ header .logo svg {
     border: none;
     font-size: 16px;
     font-weight: 600;
-    color: var(--text-light);
+    color: #666;
     cursor: pointer;
     position: relative;
-    transition: var(--transition);
+    transition: color 0.3s;
     white-space: nowrap;
-    border-radius: 8px 8px 0 0;
-}
-
-.reviews-tab:hover {
-    background: rgba(128, 0, 0, 0.05);
-    color: var(--primary-color);
 }
 
 .reviews-tab.active {
-    color: var(--primary-color);
+    color: #800000;
 }
 
 .reviews-tab.active::after {
@@ -869,13 +808,7 @@ header .logo svg {
     left: 0;
     right: 0;
     height: 3px;
-    background: var(--primary-color);
-    border-radius: 3px 3px 0 0;
-}
-
-.reviews-tab:focus-visible {
-    outline: 2px solid var(--accent-color);
-    outline-offset: 2px;
+    background: #800000;
 }
 
 .reviews-tab-content {
@@ -884,7 +817,6 @@ header .logo svg {
 
 .reviews-tab-content.active {
     display: block;
-    animation: fadeIn 0.3s;
 }
 
 /* Форма отзывов */
@@ -901,7 +833,7 @@ header .logo svg {
     display: block;
     margin-bottom: 8px;
     font-weight: 600;
-    color: var(--text-dark);
+    color: #333;
     font-size: 15px;
 }
 
@@ -914,17 +846,15 @@ header .logo svg {
     border-radius: 8px;
     font-size: 15px;
     font-family: inherit;
-    transition: var(--transition);
+    transition: border-color 0.3s;
     box-sizing: border-box;
-    background: var(--white);
 }
 
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
     outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(128, 0, 0, 0.1);
+    border-color: #800000;
 }
 
 .form-group textarea {
@@ -941,25 +871,19 @@ header .logo svg {
 .star-input {
     color: #b0b0b0;
     cursor: pointer;
-    transition: var(--transition);
+    transition: color 0.2s;
     user-select: none;
-    line-height: 1;
 }
 
 .star-input:hover,
 .star-input.active {
     color: #ffa500;
-    transform: scale(1.1);
-}
-
-.star-input:focus-visible {
-    outline: 2px solid var(--accent-color);
-    border-radius: 4px;
+    transform: scale(1.0);
 }
 
 .submit-btn {
-    background: var(--primary-color);
-    color: var(--white);
+    background: #800000;
+    color: white;
     padding: 14px 40px;
     border: none;
     border-radius: 8px;
@@ -967,7 +891,7 @@ header .logo svg {
     font-weight: 600;
     cursor: pointer;
     width: 100%;
-    transition: var(--transition);
+    transition: all 0.3s;
 }
 
 .submit-btn:hover:not(:disabled) {
@@ -982,76 +906,55 @@ header .logo svg {
     transform: none;
 }
 
-.submit-btn:focus-visible {
-    outline: 3px solid var(--accent-color);
-    outline-offset: 2px;
-}
-
-/* Сообщения формы */
-.message {
-    padding: 12px 16px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    font-weight: 600;
-}
-
-.message.success {
-    background: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-}
-
-.message.error {
-    background: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-}
-
-/* Список отзывов */
+/* Список отзывов (ОРИГИНАЛЬНЫЙ СТИЛЬ) */
 .reviews-list {
     display: grid;
-    gap: 16px;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    justify-items: center;
     padding: 4px;
 }
 
 .review-card {
-    background: rgba(249, 249, 249, 0.8);
-    border: 2px solid rgba(240, 240, 240, 0.8);
+    background: rgba(249, 249, 249, 0.7);
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(240, 240, 240, 0.6);
     border-radius: 12px;
-    padding: 20px;
+    padding: 15px 18px;
     box-sizing: border-box;
-    transition: var(--transition);
+    width: 100%;
+    max-width: 340px;
+    transition: all 0.3s;
     display: flex;
     flex-direction: column;
     height: 100%;
 }
 
 .review-card:hover {
-    border-color: rgba(128, 0, 0, 0.3);
-    box-shadow: 0 4px 12px rgba(128, 0, 0, 0.1);
-    transform: translateY(-2px);
-    background: var(--white);
+    border-color: rgba(128, 0, 0, 0.8);
+    box-shadow: 0 4px 12px rgba(128, 0, 0, 0.15);
+    transform: translateY(0px);
+    background: rgba(255, 255, 255, 0.9);
 }
 
 .review-header {
     display: flex;
     align-items: center;
     margin-bottom: 12px;
-    gap: 12px;
 }
 
 .review-avatar {
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary-color), #a00000);
-    color: var(--white);
+    background: linear-gradient(135deg, #800000, #a00000);
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 700;
     font-size: 16px;
+    margin-right: 12px;
     flex-shrink: 0;
 }
 
@@ -1062,13 +965,13 @@ header .logo svg {
 .review-name {
     font-weight: 700;
     font-size: 15px;
-    color: var(--text-dark);
+    color: #333;
     margin-bottom: 3px;
 }
 
 .review-date {
     font-size: 12px;
-    color: var(--text-light);
+    color: #999;
 }
 
 .review-stars {
@@ -1088,44 +991,43 @@ header .logo svg {
 
 .review-text {
     font-size: 14px;
-    line-height: 1.6;
-    color: var(--text-light);
-    margin-bottom: 12px;
-    flex-grow: 1;
+    line-height: 1.5;
+    color: #555;
+    margin-bottom: 10px;
+    word-wrap: break-word;
 }
 
 .review-product {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: linear-gradient(to right, #f0f0f0, var(--white));
-    padding: 6px 12px;
-    border-radius: 20px;
+    gap: 4px;
+    background: linear-gradient(to right, #dcdcdc, #ffffff);
+    backdrop-filter: blur(3px);
+    padding: 3px 8px;
+    border-radius: 6px;
     font-size: 12px;
-    color: var(--text-light);
-    border: 1px solid #e0e0e0;
+    color: #666;
+    border: 1px solid rgba(224, 224, 224, 0.6);
     margin-top: auto;
     cursor: pointer;
     transition: var(--transition);
-    text-decoration: none;
 }
 
 .review-product:hover {
-    background: var(--primary-color);
-    color: var(--white);
-    border-color: var(--primary-color);
+    background: linear-gradient(to right, #800000, #a00000);
+    color: white;
 }
 
 .review-product img {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     object-fit: contain;
 }
 
 .loading, .no-reviews {
     text-align: center;
     padding: 40px;
-    color: var(--text-light);
+    color: #666;
     font-size: 16px;
 }
 
@@ -1138,52 +1040,20 @@ header .logo svg {
    ====================================================== */
 
 footer {
-    background: var(--text-dark);
-    color: var(--white);
+    background: #333;
+    color: white;
     text-align: center;
-    padding: 30px 20px;
-    font-size: 0.9em;
+    padding: 8px;
+    font-size: 0.85em;
     margin-top: 0;
 }
 
-.footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 60px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-.footer-links div {
-    text-align: left;
-}
-
-.footer-links h4 {
-    color: var(--white);
-    margin-bottom: 15px;
-    font-size: 1.1em;
-    font-weight: 700;
-}
-
-.footer-links a {
-    display: block;
-    color: #aaa;
-    text-decoration: none;
-    margin-bottom: 8px;
-    transition: var(--transition);
-}
-
-.footer-links a:hover {
-    color: var(--white);
-    transform: translateX(5px);
-}
-
 .red {
-    color: var(--primary-color);
+    color: #800000;
 }
 
 .black {
-    color: var(--secondary-color);
+    color: #808080;
 }
 
 /* ======================================================
@@ -1201,7 +1071,7 @@ footer {
 
 .highlight-product {
     outline: 3px solid #ff4747;
-    border-radius: 0;
+    border-radius: 8px;
     transition: outline 0.2s ease;
 }
 
@@ -1209,10 +1079,37 @@ footer {
    📱 АДАПТИВНОСТЬ
    ====================================================== */
 
+@media (max-width: 1400px) {
+    .product-item {
+        flex: 0 1 calc(16.666% - 20px);
+        max-width: 230px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .product-item {
+        flex: 0 1 calc(20% - 20px);
+        max-width: 230px;
+    }
+}
+
 @media (max-width: 1024px) {
     .category-card {
         flex: 1 1 calc(33.333% - 20px);
         max-width: calc(33.333% - 20px);
+    }
+    
+    .product-item {
+        flex: 0 1 calc(25% - 20px);
+    }
+}
+
+@media (max-width: 900px) and (orientation: landscape) {
+    #main-banner {
+        height: 80px;
+        padding-top: 60px;
+        background-size: cover;
+        background-position: center;
     }
 }
 
@@ -1236,32 +1133,43 @@ footer {
 
     #categories {
         padding: 90px 10px 25px 10px;
-        gap: 10px;
+        gap: 8px;
+    }
+
+    .products-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding: 0 12px;
     }
 
     .product-item {
         width: 100%;
-        max-width: 100%;
-        flex: 1 1 100%;
+        max-width: 360px;
+        margin: 0 auto;
+        padding: 16px 18px;
+        padding-bottom: 25px;
     }
 
     .cart {
         top: 12px;
         right: 10px;
-        padding: 6px 10px;
+        padding: 6px 8px;
         font-size: 0.85em;
     }
 
     .cart-content {
-        width: calc(100% - 40px);
-        right: 20px;
-        left: 20px;
-        top: 70px;
+        width: 90%;
+        max-width: 380px;
+        margin: 0 auto;
+        top: 65px;
+        left: 0;
+        right: 0;
     }
 
     .btn {
-        padding: 10px 18px;
-        font-size: 0.95em;
+        padding: 8px 18px;
+        font-size: 0.9em;
     }
 
     .contacts-block {
@@ -1270,39 +1178,50 @@ footer {
         box-sizing: border-box;
     }
 
-    /* Модальное окно на мобильных */
+    /* Відгуки - мобільна версія */
+    .reviews-widget {
+        padding: 8px 12px;
+        gap: 8px;
+        min-width: auto;
+        max-width: none;
+        height: auto;
+    }
+
+    .widget-star {
+        font-size: 18px;
+    }
+
+    .widget-rating-number {
+        font-size: 16px;
+    }
+
+    .widget-rating-count {
+        font-size: 11px;
+    }
+
     .reviews-modal {
-        padding: 0;
-        align-items: flex-end;
+        padding: 15px 0;
+        align-items: center;
     }
 
     .reviews-modal.active {
-        padding: 0;
-        align-items: flex-end;
+        padding: 40px 0 30px 0;
+        align-items: center;
     }
 
     .reviews-modal-content {
-        height: 90vh;
+        height: auto;
         max-height: 90vh;
-        width: 100%;
-        border-radius: 16px 16px 0 0;
-        animation: slideUp 0.3s;
-    }
-
-    @keyframes slideUp {
-        from {
-            transform: translateY(100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
+        width: 95%;
+        max-width: 900px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
     }
 
     .reviews-modal-header {
-        border-radius: 16px 16px 0 0;
-        padding: 18px 20px;
+        border-radius: 0;
+        padding: 18px 12px;
     }
 
     .reviews-modal-header h2 {
@@ -1310,17 +1229,19 @@ footer {
     }
 
     .reviews-modal-body {
-        padding: 20px;
+        padding: 18px 12px;
+        flex: 1;
+        overflow-y: auto;
     }
 
     .modal-rating-summary {
         flex-direction: column;
-        gap: 15px;
-        padding: 20px;
+        gap: 12px;
+        padding: 18px;
     }
 
     .modal-rating-number {
-        font-size: 40px;
+        font-size: 44px;
     }
 
     .reviews-tabs {
@@ -1328,27 +1249,37 @@ footer {
     }
 
     .reviews-tab {
-        padding: 10px 16px;
-        font-size: 14px;
+        padding: 8px 12px;
+        font-size: 16px;
     }
 
     .star-rating {
-        font-size: 28px;
-        gap: 6px;
+        font-size: 26px;
+        gap: 5px;
     }
 
+    .reviews-form {
+        max-width: 100%;
+    }
+
+    .review-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .review-name {
+        font-size: 16px;
+    }
+
+    .review-text {
+        font-size: 14px;
+    }
+    
     .reviews-list {
-        grid-template-columns: 1fr;
-    }
-
-    .footer-links {
-        flex-direction: column;
-        gap: 30px;
-        text-align: center;
-    }
-
-    .footer-links div {
-        text-align: center;
+        padding: 0;
+        row-gap: 12px;
+        column-gap: 0px;
     }
 }
 
