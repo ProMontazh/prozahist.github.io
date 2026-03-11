@@ -212,31 +212,34 @@ footer {
 .footer-links {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 25px;
+    grid-template-rows: auto auto; /* две строки: заголовок + контент */
+    gap: 0 25px; /* отступ только между столбиками, не строками */
     max-width: 1200px;
     margin: 0 auto 20px auto;
     align-items: start;
-    
-    /* Отступ для общего заголовка */
-    padding-top: 45px;
-    position: relative;
 }
 
 /* Общий заголовок над первыми тремя столбиками */
 .footer-title {
-    position: absolute;
-    top: 0;
-    left: 0;
+    grid-column: 1 / 4; /* первые 3 столбика */
+    grid-row: 1;
     color: var(--white);
     font-size: 1.1em;
     font-weight: 700;
     border-bottom: 1px solid #555;
     padding-bottom: 8px;
-    margin: 0;
-    
-    /* Ширина = 3 столбика + 2 gap */
-    width: calc(60% - 20px);
+    margin: 0 0 15px 0;
     text-align: left;
+}
+
+/* Столбики категорий — вторая строка */
+.footer-links .category-col {
+    grid-row: 2;
+}
+
+/* Столбики инфо и контактов — первая строка (с заголовками) */
+.footer-links > div:not(.category-col) {
+    grid-row: 1 / 3; /* занимают обе строки */
 }
 
 .footer-links > div {
@@ -281,13 +284,19 @@ footer {
 @media (max-width: 1024px) {
     .footer-links {
         grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
         gap: 20px;
-        padding-top: 0;
     }
     
     /* Убираем общий заголовок */
     .footer-title {
         display: none;
+    }
+    
+    /* Сбрасываем grid-row */
+    .footer-links .category-col,
+    .footer-links > div:not(.category-col) {
+        grid-row: auto;
     }
     
     /* Показываем заголовки у всех категорий */
@@ -310,8 +319,8 @@ footer {
 @media (max-width: 768px) {
     .footer-links {
         grid-template-columns: 1fr;
+        grid-template-rows: auto;
         gap: 25px;
-        padding-top: 0;
         text-align: center;
     }
 
@@ -322,6 +331,12 @@ footer {
     /* Убираем общий заголовок */
     .footer-title {
         display: none;
+    }
+    
+    /* Сбрасываем grid-row */
+    .footer-links .category-col,
+    .footer-links > div:not(.category-col) {
+        grid-row: auto;
     }
     
     /* Показываем заголовки у всех категорий */
