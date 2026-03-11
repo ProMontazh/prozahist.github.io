@@ -211,14 +211,37 @@ footer {
 
 .footer-links {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 столбиков на десктопе */
+    grid-template-columns: repeat(5, 1fr); /* 5 столбиков */
     gap: 25px;
     max-width: 1200px;
     margin: 0 auto 20px auto;
+    align-items: start; /* выравнивание по верху */
 }
 
-.footer-links div {
+/* Общий заголовок для первых 3 столбиков */
+.footer-links .categories-group {
+    grid-column: 1 / 4; /* занимает столбики 1-3 */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
     text-align: left;
+}
+
+.footer-links .categories-group h4 {
+    grid-column: 1 / -1; /* заголовок на всю ширину */
+    color: var(--white);
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    font-weight: 700;
+    border-bottom: 1px solid #555;
+    padding-bottom: 8px;
+    margin-top: 0;
+}
+
+/* Одиночные столбики (инфо и контакты) */
+.footer-links > div:not(.categories-group) {
+    text-align: left;
+    margin-top: 0;
 }
 
 .footer-links h4 {
@@ -228,6 +251,7 @@ footer {
     font-weight: 700;
     border-bottom: 1px solid #555;
     padding-bottom: 8px;
+    margin-top: 0;
 }
 
 .footer-links a {
@@ -251,8 +275,13 @@ footer {
 
 @media (max-width: 1024px) {
     .footer-links {
-        grid-template-columns: repeat(3, 1fr); /* 3 столбика на планшетах */
+        grid-template-columns: repeat(3, 1fr);
         gap: 20px;
+    }
+    
+    .footer-links .categories-group {
+        grid-column: 1 / 4;
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
@@ -262,23 +291,25 @@ footer {
 
 @media (max-width: 768px) {
     .footer-links {
-        grid-template-columns: repeat(2, 1fr); /* 2 столбика на мобильных */
-        gap: 20px;
+        grid-template-columns: 1fr;
+        gap: 30px;
         text-align: center;
     }
 
-    .footer-links div {
+    .footer-links .categories-group {
+        grid-column: 1;
+        grid-template-columns: 1fr;
+        gap: 15px;
         text-align: center;
     }
 
-    .footer-links h4 {
+    .footer-links > div:not(.categories-group) {
         text-align: center;
     }
-}
 
-@media (max-width: 480px) {
-    .footer-links {
-        grid-template-columns: 1fr; /* 1 столбик на маленьких экранах */
+    .footer-links h4,
+    .footer-links .categories-group h4 {
+        text-align: center;
     }
 }
 /* ======================================================
