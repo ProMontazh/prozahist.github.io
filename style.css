@@ -211,9 +211,9 @@ footer {
 
 .footer-links {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 столбика на десктопе */
-    gap: 40px;
-    max-width: 900px;
+    grid-template-columns: repeat(5, 1fr); /* 5 столбиков на десктопе */
+    gap: 25px;
+    max-width: 1200px;
     margin: 0 auto 20px auto;
 }
 
@@ -226,6 +226,8 @@ footer {
     margin-bottom: 15px;
     font-size: 1.1em;
     font-weight: 700;
+    border-bottom: 1px solid #555;
+    padding-bottom: 8px;
 }
 
 .footer-links a {
@@ -234,11 +236,50 @@ footer {
     text-decoration: none;
     margin-bottom: 8px;
     transition: var(--transition);
+    font-size: 0.9em;
+    line-height: 1.4;
 }
 
 .footer-links a:hover {
     color: var(--white);
     transform: translateX(5px);
+}
+
+/* ======================================================
+   📱 АДАПТИВНІСТЬ (ПЛАНШЕТИ)
+   ====================================================== */
+
+@media (max-width: 1024px) {
+    .footer-links {
+        grid-template-columns: repeat(3, 1fr); /* 3 столбика на планшетах */
+        gap: 20px;
+    }
+}
+
+/* ======================================================
+   📱 АДАПТИВНІСТЬ (МОБІЛЬНА ВЕРСІЯ)
+   ====================================================== */
+
+@media (max-width: 768px) {
+    .footer-links {
+        grid-template-columns: repeat(2, 1fr); /* 2 столбика на мобильных */
+        gap: 20px;
+        text-align: center;
+    }
+
+    .footer-links div {
+        text-align: center;
+    }
+
+    .footer-links h4 {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-links {
+        grid-template-columns: 1fr; /* 1 столбик на маленьких экранах */
+    }
 }
 /* ======================================================
    🎨 КОЛЬОРИ ДЛЯ ТЕКСТУ
@@ -1063,15 +1104,7 @@ a[href^="mailto:"]:hover {
         font-size: 0.9em;
     }
 
-    .footer-links {
-        flex-direction: column;
-        gap: 30px;
-        text-align: center;
-    }
-
-    .footer-links div {
-        text-align: center;
-    }
+    
 
     .category-card {
         flex: 1 1 calc(50% - 12px);
