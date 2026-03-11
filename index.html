@@ -1377,30 +1377,28 @@
 <!-- Footer -->
 <footer role="contentinfo">
     <div class="footer-links">
-        <!-- Группа из 3 столбиков категорий с общим заголовком -->
-        <div class="categories-group">
+        <!-- Столбик 1: Камери IMOU -->
+        <div class="category-col">
             <h4>Категорії товарів</h4>
-            
-            <!-- Подстолбик 1: Камери IMOU -->
-            <div>
-                <a href="#indoor" onclick="toggleCategory('indoor'); return false;">Внутрішні камери IMOU</a>
-                <a href="#outdoor" onclick="toggleCategory('outdoor'); return false;">Зовнішні камери IMOU</a>
-                <a href="#outdoor_4G" onclick="toggleCategory('outdoor_4G'); return false;">4G камери IMOU</a>
-            </div>
-            
-            <!-- Подстолбик 2: Ajax (часть 1) -->
-            <div>
-                <a href="#alarm" onclick="toggleCategory('alarm'); return false;">Комплекти Ajax</a>
-                <a href="#hub" onclick="toggleCategory('hub'); return false;">Хаби та модулі Ajax</a>
-                <a href="#protect" onclick="toggleCategory('protect'); return false;">Внутрішні датчики Ajax</a>
-            </div>
-            
-            <!-- Подстолбик 3: Ajax (часть 2) -->
-            <div>
-                <a href="#protect_outdoor" onclick="toggleCategory('protect_outdoor'); return false;">Зовнішні датчики Ajax</a>
-                <a href="#waterstop" onclick="toggleCategory('waterstop'); return false;">Захист від потопу Ajax</a>
-                <a href="#fire" onclick="toggleCategory('fire'); return false;">Захист від пожежі Ajax</a>
-            </div>
+            <a href="#indoor" onclick="toggleCategory('indoor'); return false;">Внутрішні камери IMOU</a>
+            <a href="#outdoor" onclick="toggleCategory('outdoor'); return false;">Зовнішні камери IMOU</a>
+            <a href="#outdoor_4G" onclick="toggleCategory('outdoor_4G'); return false;">4G камери IMOU</a>
+        </div>
+        
+        <!-- Столбик 2: Ajax (часть 1) -->
+        <div class="category-col">
+            <h4>Категорії товарів</h4> <!-- скрыт на десктопе -->
+            <a href="#alarm" onclick="toggleCategory('alarm'); return false;">Комплекти Ajax</a>
+            <a href="#hub" onclick="toggleCategory('hub'); return false;">Хаби та модулі Ajax</a>
+            <a href="#protect" onclick="toggleCategory('protect'); return false;">Внутрішні датчики Ajax</a>
+        </div>
+        
+        <!-- Столбик 3: Ajax (часть 2) -->
+        <div class="category-col">
+            <h4>Категорії товарів</h4> <!-- скрыт на десктопе -->
+            <a href="#protect_outdoor" onclick="toggleCategory('protect_outdoor'); return false;">Зовнішні датчики Ajax</a>
+            <a href="#waterstop" onclick="toggleCategory('waterstop'); return false;">Захист від потопу Ajax</a>
+            <a href="#fire" onclick="toggleCategory('fire'); return false;">Захист від пожежі Ajax</a>
         </div>
         
         <!-- Столбик 4: Информация -->
@@ -1428,6 +1426,7 @@
 <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
