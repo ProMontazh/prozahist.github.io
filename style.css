@@ -223,8 +223,7 @@ footer {
 }
 
 /* Общий заголовок над первыми тремя столбиками */
-.footer-links::before {
-    content: "Категорії товарів";
+.footer-title {
     position: absolute;
     top: 0;
     left: 0;
@@ -233,6 +232,7 @@ footer {
     font-weight: 700;
     border-bottom: 1px solid #555;
     padding-bottom: 8px;
+    margin: 0;
     
     /* Ширина = 3 столбика + 2 gap */
     width: calc(60% - 20px);
@@ -286,7 +286,7 @@ footer {
     }
     
     /* Убираем общий заголовок */
-    .footer-links::before {
+    .footer-title {
         display: none;
     }
     
@@ -311,8 +311,8 @@ footer {
     .footer-links {
         grid-template-columns: 1fr;
         gap: 25px;
-        text-align: center;
         padding-top: 0;
+        text-align: center;
     }
 
     .footer-links > div {
@@ -320,7 +320,7 @@ footer {
     }
     
     /* Убираем общий заголовок */
-    .footer-links::before {
+    .footer-title {
         display: none;
     }
     
