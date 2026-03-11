@@ -141,13 +141,49 @@ header .logo svg {
     background-color: #0056b3;
 }
 
+/* ======================================================
+   🦶 FOOTER
+   ====================================================== */
+
 footer {
-    background: #333;
-    color: white;
+    background: var(--text-dark);
+    color: var(--white);
     text-align: center;
-    padding: 8px;
-    font-size: 0.85em;
-    margin-top: 0;
+    padding: 30px 20px;
+    font-size: 0.9em;
+    margin-top: 40px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-links div {
+    text-align: left;
+}
+
+.footer-links h4 {
+    color: var(--white);
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    font-weight: 700;
+}
+
+.footer-links a {
+    display: block;
+    color: #aaa;
+    text-decoration: none;
+    margin-bottom: 8px;
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: var(--white);
+    transform: translateX(5px);
 }
 
 .red {
