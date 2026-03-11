@@ -211,7 +211,7 @@ footer {
 
 .footer-links {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 столбика */
+    grid-template-columns: repeat(3, 1fr); /* 3 столбика на десктопе */
     gap: 40px;
     max-width: 900px;
     margin: 0 auto 20px auto;
@@ -240,7 +240,6 @@ footer {
     color: var(--white);
     transform: translateX(5px);
 }
-
 /* ======================================================
    🎨 КОЛЬОРИ ДЛЯ ТЕКСТУ
    ====================================================== */
