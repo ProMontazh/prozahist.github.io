@@ -216,31 +216,36 @@ footer {
     max-width: 1200px;
     margin: 0 auto 20px auto;
     align-items: start;
+    
+    /* Отступ для общего заголовка */
+    padding-top: 45px;
+    position: relative;
+}
+
+/* Общий заголовок над первыми тремя столбиками */
+.footer-links::before {
+    content: "Категорії товарів";
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--white);
+    font-size: 1.1em;
+    font-weight: 700;
+    border-bottom: 1px solid #555;
+    padding-bottom: 8px;
+    
+    /* Ширина = 3 столбика + 2 gap */
+    width: calc(60% - 20px);
+    text-align: left;
 }
 
 .footer-links > div {
     text-align: left;
 }
 
-/* Первый столбик категорий — с заголовком */
-.footer-links .category-col:first-child h4 {
-    color: var(--white);
-    margin-bottom: 15px;
-    font-size: 1.1em;
-    font-weight: 700;
-    border-bottom: 1px solid #555;
-    padding-bottom: 8px;
-    margin-top: 0;
-}
-
-/* Второй и третий столбики категорий — без заголовка и подчеркивания */
-.footer-links .category-col:not(:first-child) h4 {
-    display: none; /* полностью убираем */
-}
-
-/* Отступ сверху для выравнивания с первым столбиком */
-.footer-links .category-col:not(:first-child) {
-    margin-top: 33px; /* высота заголовка + отступ */
+/* У всех столбиков категорий убираем заголовки */
+.footer-links .category-col h4 {
+    display: none;
 }
 
 .footer-links a {
@@ -277,10 +282,16 @@ footer {
     .footer-links {
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
+        padding-top: 0;
     }
     
-    /* На планшетах показываем заголовки у всех категорий */
-    .footer-links .category-col:not(:first-child) h4 {
+    /* Убираем общий заголовок */
+    .footer-links::before {
+        display: none;
+    }
+    
+    /* Показываем заголовки у всех категорий */
+    .footer-links .category-col h4 {
         display: block;
         color: var(--white);
         margin-bottom: 15px;
@@ -288,10 +299,6 @@ footer {
         font-weight: 700;
         border-bottom: 1px solid #555;
         padding-bottom: 8px;
-        margin-top: 0;
-    }
-    
-    .footer-links .category-col:not(:first-child) {
         margin-top: 0;
     }
 }
@@ -305,25 +312,26 @@ footer {
         grid-template-columns: 1fr;
         gap: 25px;
         text-align: center;
+        padding-top: 0;
     }
 
     .footer-links > div {
         text-align: center;
     }
     
-    /* На мобильных тоже показываем все заголовки */
-    .footer-links .category-col:not(:first-child) h4 {
+    /* Убираем общий заголовок */
+    .footer-links::before {
+        display: none;
+    }
+    
+    /* Показываем заголовки у всех категорий */
+    .footer-links .category-col h4 {
         display: block;
-        color: var(--white);
         margin-bottom: 15px;
         font-size: 1.1em;
         font-weight: 700;
         border-bottom: 1px solid #555;
         padding-bottom: 8px;
-        margin-top: 0;
-    }
-    
-    .footer-links .category-col:not(:first-child) {
         margin-top: 0;
     }
 }
