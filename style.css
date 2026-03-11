@@ -211,39 +211,34 @@ footer {
 
 .footer-links {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 столбиков */
+    grid-template-columns: repeat(5, 1fr); /* 5 равных столбиков */
     gap: 25px;
     max-width: 1200px;
     margin: 0 auto 20px auto;
-    align-items: start; /* выравнивание по верху */
+    align-items: start;
 }
 
-/* Общий заголовок для первых 3 столбиков */
-.footer-links .categories-group {
-    grid-column: 1 / 4; /* занимает столбики 1-3 */
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
+/* Все столбики выравниваются по левому краю */
+.footer-links > div {
     text-align: left;
 }
 
-.footer-links .categories-group h4 {
-    grid-column: 1 / -1; /* заголовок на всю ширину */
-    color: var(--white);
+/* Общий заголовок только для первого столбика категорий */
+.footer-links .category-col:first-child h4 {
+    margin-top: 0;
+}
+
+/* Заголовки остальных столбиков категорий скрыты, но отступ сверху такой же */
+.footer-links .category-col:not(:first-child) h4 {
+    visibility: hidden;
+    margin-top: 0;
     margin-bottom: 15px;
     font-size: 1.1em;
     font-weight: 700;
-    border-bottom: 1px solid #555;
-    padding-bottom: 8px;
-    margin-top: 0;
+    height: 0;
 }
 
-/* Одиночные столбики (инфо и контакты) */
-.footer-links > div:not(.categories-group) {
-    text-align: left;
-    margin-top: 0;
-}
-
+/* Основные заголовки */
 .footer-links h4 {
     color: var(--white);
     margin-bottom: 15px;
@@ -279,9 +274,11 @@ footer {
         gap: 20px;
     }
     
-    .footer-links .categories-group {
-        grid-column: 1 / 4;
-        grid-template-columns: repeat(3, 1fr);
+    /* На планшетах показываем заголовок у всех категорий */
+    .footer-links .category-col:not(:first-child) h4 {
+        visibility: visible;
+        height: auto;
+        margin-bottom: 15px;
     }
 }
 
@@ -292,24 +289,19 @@ footer {
 @media (max-width: 768px) {
     .footer-links {
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 25px;
         text-align: center;
     }
 
-    .footer-links .categories-group {
-        grid-column: 1;
-        grid-template-columns: 1fr;
-        gap: 15px;
+    .footer-links > div {
         text-align: center;
     }
-
-    .footer-links > div:not(.categories-group) {
-        text-align: center;
-    }
-
-    .footer-links h4,
-    .footer-links .categories-group h4 {
-        text-align: center;
+    
+    /* На мобильных тоже показываем все заголовки */
+    .footer-links .category-col:not(:first-child) h4 {
+        visibility: visible;
+        height: auto;
+        margin-bottom: 15px;
     }
 }
 /* ======================================================
