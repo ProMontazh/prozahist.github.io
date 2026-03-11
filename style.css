@@ -211,35 +211,19 @@ footer {
 
 .footer-links {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 равных столбиков */
+    grid-template-columns: repeat(5, 1fr);
     gap: 25px;
     max-width: 1200px;
     margin: 0 auto 20px auto;
     align-items: start;
 }
 
-/* Все столбики выравниваются по левому краю */
 .footer-links > div {
     text-align: left;
 }
 
-/* Общий заголовок только для первого столбика категорий */
+/* Первый столбик категорий — с заголовком */
 .footer-links .category-col:first-child h4 {
-    margin-top: 0;
-}
-
-/* Заголовки остальных столбиков категорий скрыты, но отступ сверху такой же */
-.footer-links .category-col:not(:first-child) h4 {
-    visibility: hidden;
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 1.1em;
-    font-weight: 700;
-    height: 0;
-}
-
-/* Основные заголовки */
-.footer-links h4 {
     color: var(--white);
     margin-bottom: 15px;
     font-size: 1.1em;
@@ -247,6 +231,16 @@ footer {
     border-bottom: 1px solid #555;
     padding-bottom: 8px;
     margin-top: 0;
+}
+
+/* Второй и третий столбики категорий — без заголовка и подчеркивания */
+.footer-links .category-col:not(:first-child) h4 {
+    display: none; /* полностью убираем */
+}
+
+/* Отступ сверху для выравнивания с первым столбиком */
+.footer-links .category-col:not(:first-child) {
+    margin-top: 33px; /* высота заголовка + отступ */
 }
 
 .footer-links a {
@@ -264,6 +258,17 @@ footer {
     transform: translateX(5px);
 }
 
+/* Остальные столбики (инфо и контакты) */
+.footer-links > div:not(.category-col) h4 {
+    color: var(--white);
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    font-weight: 700;
+    border-bottom: 1px solid #555;
+    padding-bottom: 8px;
+    margin-top: 0;
+}
+
 /* ======================================================
    📱 АДАПТИВНІСТЬ (ПЛАНШЕТИ)
    ====================================================== */
@@ -274,11 +279,20 @@ footer {
         gap: 20px;
     }
     
-    /* На планшетах показываем заголовок у всех категорий */
+    /* На планшетах показываем заголовки у всех категорий */
     .footer-links .category-col:not(:first-child) h4 {
-        visibility: visible;
-        height: auto;
+        display: block;
+        color: var(--white);
         margin-bottom: 15px;
+        font-size: 1.1em;
+        font-weight: 700;
+        border-bottom: 1px solid #555;
+        padding-bottom: 8px;
+        margin-top: 0;
+    }
+    
+    .footer-links .category-col:not(:first-child) {
+        margin-top: 0;
     }
 }
 
@@ -299,9 +313,18 @@ footer {
     
     /* На мобильных тоже показываем все заголовки */
     .footer-links .category-col:not(:first-child) h4 {
-        visibility: visible;
-        height: auto;
+        display: block;
+        color: var(--white);
         margin-bottom: 15px;
+        font-size: 1.1em;
+        font-weight: 700;
+        border-bottom: 1px solid #555;
+        padding-bottom: 8px;
+        margin-top: 0;
+    }
+    
+    .footer-links .category-col:not(:first-child) {
+        margin-top: 0;
     }
 }
 /* ======================================================
