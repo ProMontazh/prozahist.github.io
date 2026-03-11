@@ -964,8 +964,14 @@ a[href^="mailto:"]:hover {
         font-size: 0.9em;
     }
 
-    footer {
-        font-size: 0.8em;
+     .footer-links {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .footer-links div {
+        text-align: center;
     }
 
     .category-card {
