@@ -210,11 +210,11 @@ footer {
 }
 
 .footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 60px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 столбика */
+    gap: 40px;
+    max-width: 900px;
+    margin: 0 auto 20px auto;
 }
 
 .footer-links div {
