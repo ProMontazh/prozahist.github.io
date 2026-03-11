@@ -1,8 +1,8 @@
 /* ======================================================
-   🎨 БАЗОВЫЕ СТИЛИ + SEO-ОПТИМИЗАЦИЯ
+   🎨 БАЗОВІ СТИЛИ + SEO-ОПТИМІЗАЦІЯ
    ====================================================== */
 
-/* CSS Variables для консистентности */
+/* CSS Variables для консистентності */
 :root {
     --primary-color: #800000;
     --secondary-color: #808080;
@@ -15,7 +15,7 @@
     --transition: all 0.3s ease;
 }
 
-/* Reset и базовые стили */
+/* Reset та базові стилі */
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -34,7 +34,8 @@ body {
     line-height: 1.6;
     color: var(--text-dark);
 }
-/* Скрытые заголовки для SEO */
+
+/* Приховані заголовки для SEO */
 .visually-hidden {
     position: absolute;
     width: 1px;
@@ -46,6 +47,10 @@ body {
     white-space: nowrap;
     border: 0;
 }
+
+/* ======================================================
+   📌 HEADER (ШАПКА)
+   ====================================================== */
 
 header {
     position: fixed;
@@ -65,7 +70,7 @@ header .logo svg {
     width: auto;
 }
 
-/* SEO: Skip link для доступности */
+/* SEO: Skip link для доступності */
 .skip-link {
     position: absolute;
     top: -40px;
@@ -81,6 +86,10 @@ header .logo svg {
 .skip-link:focus {
     top: 0;
 }
+
+/* ======================================================
+   💬 TOAST (СПОВІЩЕННЯ)
+   ====================================================== */
 
 .toast {
     position: fixed;
@@ -103,6 +112,10 @@ header .logo svg {
     visibility: visible;
     opacity: 1;
 }
+
+/* ======================================================
+   📦 КОНТЕЙНЕР ТА ПРОДУКТИ
+   ====================================================== */
 
 .container {
     margin-top: 0;
@@ -183,7 +196,7 @@ header .logo svg {
 }
 
 /* ======================================================
-   🦶 FOOTER
+   🦶 FOOTER (ПІДВАЛ)
    ====================================================== */
 
 footer {
@@ -227,6 +240,10 @@ footer {
     transform: translateX(5px);
 }
 
+/* ======================================================
+   🎨 КОЛЬОРИ ДЛЯ ТЕКСТУ
+   ====================================================== */
+
 .red {
     color: #800000;
 }
@@ -234,6 +251,10 @@ footer {
 .black {
     color: #808080;
 }
+
+/* ======================================================
+   🛒 КОШИК
+   ====================================================== */
 
 .cart {
     position: fixed;
@@ -271,7 +292,8 @@ footer {
     margin-top: 10px;
 }
 
-.checkout-button, .cancel-button {
+.checkout-button, 
+.cancel-button {
     padding: 10px 16px;
     color: white;
     text-decoration: none;
@@ -338,6 +360,29 @@ footer {
     padding: 0 10px;
 }
 
+#cart-items {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.total-price {
+    font-weight: bold;
+    font-size: 1.04em;
+    margin-top: 15px;
+}
+
+#discount-message {
+    color: #28a745;
+    font-weight: bold;
+    font-size: 1.0em;
+    margin-left: 10px;
+    display: none;
+}
+
+/* ======================================================
+   📂 КАТЕГОРІЇ
+   ====================================================== */
+
 #categories {
     display: flex;
     justify-content: center;
@@ -403,6 +448,10 @@ footer {
     padding-bottom: 60px;
 }
 
+/* ======================================================
+   📞 КОНТАКТИ
+   ====================================================== */
+
 .contacts-block {
     display: flex;
     flex-direction: column;
@@ -431,6 +480,10 @@ a[href^="mailto:"]:hover {
     color: #007bff;
 }
 
+/* ======================================================
+   ✨ АНІМАЦІЇ ТА ЕФЕКТИ
+   ====================================================== */
+
 .highlight-product {
     outline: 3px solid #ff4747;
     border-radius: 8px;
@@ -442,42 +495,19 @@ a[href^="mailto:"]:hover {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { 
+        opacity: 0; 
+        transform: translateY(10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
 }
 
-#cart-items {
-    max-height: 300px;
-    overflow-y: auto;
-}
-
-.total-price {
-    font-weight: bold;
-    font-size: 1.04em;
-    margin-top: 15px;
-}
-
-#discount-message {
-    color: #28a745;
-    font-weight: bold;
-    font-size: 1.0em;
-    margin-left: 10px;
-    display: none;
-}
-
-.reviews-tab-content {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
-
-.reviews-tab-content.active {
-    max-height: 5000px;
-    opacity: 1;
-    visibility: visible;
-}
+/* ======================================================
+   📝 SEO ТЕКСТ
+   ====================================================== */
 
 .seo-text {
     max-width: 900px;
@@ -487,7 +517,10 @@ a[href^="mailto:"]:hover {
     opacity: 0.9;
 }
 
-/* ========== ВІДЖЕТ ВІДГУКІВ ========== */
+/* ======================================================
+   ⭐ ВІДЖЕТ ВІДГУКІВ
+   ====================================================== */
+
 .reviews-widget {
     display: inline-flex;
     align-items: center;
@@ -554,7 +587,10 @@ a[href^="mailto:"]:hover {
     line-height: 1;
 }
 
-/* ========== МОДАЛЬНЕ ВІКНО ========== */
+/* ======================================================
+   🪟 МОДАЛЬНЕ ВІКНО ВІДГУКІВ
+   ====================================================== */
+
 .reviews-modal {
     display: none;
     position: fixed;
@@ -659,7 +695,10 @@ a[href^="mailto:"]:hover {
     overflow-y: auto;
 }
 
-/* ========== СТАТИСТИКА ========== */
+/* ======================================================
+   📊 СТАТИСТИКА РЕЙТИНГУ
+   ====================================================== */
+
 .modal-rating-summary {
     display: flex;
     justify-content: center;
@@ -704,7 +743,10 @@ a[href^="mailto:"]:hover {
     color: #666;
 }
 
-/* ========== ТАБЫ ========== */
+/* ======================================================
+   📑 ТАБИ (ВКЛАДКИ)
+   ====================================================== */
+
 .reviews-tabs {
     display: flex;
     gap: 10px;
@@ -741,14 +783,24 @@ a[href^="mailto:"]:hover {
 }
 
 .reviews-tab-content {
-    display: none;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
 }
 
 .reviews-tab-content.active {
+    max-height: 5000px;
+    opacity: 1;
+    visibility: visible;
     display: block;
 }
 
-/* ========== ФОРМА ========== */
+/* ======================================================
+   📝 ФОРМА ДОДАВАННЯ ВІДГУКУ
+   ====================================================== */
+
 .reviews-form {
     max-width: 600px;
     margin: 0 auto;
@@ -835,7 +887,10 @@ a[href^="mailto:"]:hover {
     transform: none;
 }
 
-/* ========== СПИСОК ВІДГУКІВ ========== */
+/* ======================================================
+   💬 СПИСОК ВІДГУКІВ
+   ====================================================== */
+
 .reviews-list {
     display: grid;
     gap: 12px;
@@ -946,7 +1001,10 @@ a[href^="mailto:"]:hover {
     object-fit: contain;
 }
 
-/* ========== АДАПТИВНІСТЬ ========== */
+/* ======================================================
+   📱 АДАПТИВНІСТЬ (МОБІЛЬНА ВЕРСІЯ)
+   ====================================================== */
+
 @media (max-width: 768px) {
     #main-banner {
         background-image: url('images/fon_for_category.png');
@@ -1005,7 +1063,7 @@ a[href^="mailto:"]:hover {
         font-size: 0.9em;
     }
 
-     .footer-links {
+    .footer-links {
         flex-direction: column;
         gap: 30px;
         text-align: center;
@@ -1134,6 +1192,10 @@ a[href^="mailto:"]:hover {
         column-gap: 0px;
     }
 }
+
+/* ======================================================
+   🖥️ ЛАНДШАФТНА ОРІЄНТАЦІЯ (900px)
+   ====================================================== */
 
 @media (max-width: 900px) and (orientation: landscape) {
     #main-banner {
