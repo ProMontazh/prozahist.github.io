@@ -1,3 +1,25 @@
+/* ======================================================
+   🎨 БАЗОВЫЕ СТИЛИ + SEO-ОПТИМИЗАЦИЯ
+   ====================================================== */
+
+/* CSS Variables для консистентности */
+:root {
+    --primary-color: #800000;
+    --secondary-color: #808080;
+    --accent-color: #007bff;
+    --text-dark: #333;
+    --text-light: #666;
+    --bg-light: #f4f4f4;
+    --white: #ffffff;
+    --shadow: 0 4px 12px rgba(0,0,0,0.1);
+    --transition: all 0.3s ease;
+}
+
+/* Reset и базовые стили */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
