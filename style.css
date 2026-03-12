@@ -288,10 +288,10 @@ footer {
         gap: 20px;
     }
     
-    /* Убираем общий заголовок */
+    /* Убираем общий заголовок 
     .footer-title {
         display: none;
-    }
+    }*/
     
     /* Сбрасываем grid-row */
     .footer-links .category-col,
@@ -328,10 +328,10 @@ footer {
         text-align: center;
     }
     
-    /* Убираем общий заголовок */
+    /* Убираем общий заголовок 
     .footer-title {
         display: none;
-    }
+    }*/
     
     /* Сбрасываем grid-row */
     .footer-links .category-col,
