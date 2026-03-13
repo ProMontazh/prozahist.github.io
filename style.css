@@ -249,7 +249,7 @@ footer {
 /* Опускаем категории 2 и 3 на уровень ссылок первого столбика */
 .footer-links .cat2,
 .footer-links .cat3 {
-    padding-top: 30px;/* высота заголовка + margin-bottom */
+    padding-top: 31px;/* высота заголовка + margin-bottom */
 }
 
 .footer-links a {
@@ -280,7 +280,7 @@ footer {
     /* Убираем отступ на планшете */
     .footer-links .cat2,
     .footer-links .cat3 {
-        padding-top: 30px;
+        padding-top: 32px;
     }
 }
 
