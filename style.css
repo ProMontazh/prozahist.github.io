@@ -280,7 +280,7 @@ footer {
     /* Убираем отступ на планшете */
     .footer-links .cat2,
     .footer-links .cat3 {
-        padding-top: 33,5px;
+        padding-top: 34px;
     }
 }
 
