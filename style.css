@@ -228,7 +228,7 @@ footer {
     margin-top: 0;
 }
 
-/* Все заголовки */
+/* Все заголовки — одна линия */
 .footer-links h4 {
     color: var(--white);
     margin-bottom: 15px;
@@ -240,10 +240,10 @@ footer {
     line-height: 1.2;
 }
 
-/* На десктопе скрываем заголовки у категорий 2 и 3 */
+/* У категорий 2 и 3 убираем заголовки полностью */
 .footer-links .cat2 h4,
 .footer-links .cat3 h4 {
-    visibility: hidden;
+    display: none;
 }
 
 .footer-links a {
@@ -271,10 +271,10 @@ footer {
         gap: 20px;
     }
     
-    /* На планшете показываем все заголовки */
+    /* На планшете тоже убираем лишние заголовки */
     .footer-links .cat2 h4,
     .footer-links .cat3 h4 {
-        visibility: visible;
+        display: none;
     }
 }
 
@@ -293,7 +293,7 @@ footer {
         text-align: center;
     }
     
-    /* На мобильном скрываем заголовки у категорий 2 и 3 */
+    /* На мобильном тоже убираем лишние заголовки */
     .footer-links .cat2 h4,
     .footer-links .cat3 h4 {
         display: none;
