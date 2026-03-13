@@ -218,40 +218,27 @@ footer {
     align-items: start;
 }
 
-/* Общий заголовок — абсолютное позиционирование над первыми 3 столбиками */
-.footer-links {
-    position: relative;
-    padding-top: 30px; /* место для заголовка */
+/* Все столбики на одном уровне */
+.footer-links > div {
+    text-align: left;
+    margin-top: 0;
 }
 
-.footer-title {
-    position: absolute;
-    top: 0;
-    left: 0;
+/* У столбиков категорий убираем внутренние заголовки */
+.footer-links .category-col h4 {
+    display: none;
+}
+
+/* Общий заголовок для категорий — отдельный элемент перед сеткой */
+.footer-links::before {
+    content: "Категорії товарів";
+    display: block;
+    grid-column: 1 / 4;
     color: var(--white);
     font-size: 1.1em;
     font-weight: 700;
-    border-bottom: none;
-    margin: 0;
+    margin-bottom: 15px;
     text-align: left;
-    width: calc(60% - 20px); /* ширина 3 столбиков */
-    line-height: 1.2;
-}
-
-/* Все столбики в одну строку */
-.footer-links .category-col,
-.footer-links > div:not(.category-col) {
-    margin-top: 0;
-    padding-top: 0;
-}
-
-.footer-links > div {
-    text-align: left;
-}
-
-/* У всех столбиков категорий убираем заголовки */
-.footer-links .category-col h4 {
-    display: none;
 }
 
 .footer-links a {
@@ -289,12 +276,10 @@ footer {
     .footer-links {
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
-        padding-top: 0;
-        position: static;
     }
     
     /* Убираем общий заголовок */
-    .footer-title {
+    .footer-links::before {
         display: none;
     }
     
@@ -320,8 +305,6 @@ footer {
         grid-template-columns: 1fr;
         gap: 25px;
         text-align: center;
-        padding-top: 0;
-        position: static;
     }
 
     .footer-links > div {
@@ -329,7 +312,7 @@ footer {
     }
     
     /* Убираем общий заголовок */
-    .footer-title {
+    .footer-links::before {
         display: none;
     }
     
