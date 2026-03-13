@@ -953,119 +953,107 @@ a[href^="mailto:"]:hover {
 }
 
 /* ======================================================
-   💬 СПИСОК ВІДГУКІВ
+   🪟 МОДАЛЬНЕ ВІКНО ВІДГУКІВ
    ====================================================== */
 
-.reviews-list {
-    display: grid;
-    gap: 12px;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    justify-items: center;
-    padding: 4px;
+.reviews-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    animation: fadeInModal 0.3s;
+    overflow-y: auto;
 }
 
-.review-card {
-    background: rgba(249, 249, 249, 0.7);
-    backdrop-filter: blur(5px);
-    border: 2px solid rgba(240, 240, 240, 0.6);
-    border-radius: 12px;
-    padding: 15px 18px;
-    box-sizing: border-box;
+.reviews-modal.active {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px 20px;
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.reviews-modal-content {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
     width: 100%;
-    max-width: 340px;
-    transition: all 0.3s;
+    max-width: 900px;
+    max-height: 85vh;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    animation: slideDown 0.3s;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    margin-top: 20px;
 }
 
-.review-card:hover {
-    border-color: rgba(128, 0, 0, 0.8);
-    box-shadow: 0 4px 12px rgba(128, 0, 0, 0.15);
-    transform: translateY(0px);
-    background: rgba(255, 255, 255, 0.9);
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
-.review-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 12px;
-}
-
-.review-avatar {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #800000, #a00000);
+.reviews-modal-header {
+    background: linear-gradient(
+        to right,
+        rgba(7, 7, 7, 0.95),
+        rgba(148, 148, 148, 0.95)
+    );
+    backdrop-filter: blur(10px);
     color: white;
+    padding: 25px 30px;
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.reviews-modal-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 32px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
-    font-size: 16px;
-    margin-right: 12px;
-    flex-shrink: 0;
+    border-radius: 50%;
+    transition: background 0.3s;
 }
 
-.review-info {
-    flex-grow: 1;
+.reviews-modal-close:hover {
+    background: rgba(255, 255, 255, 0.2);
 }
 
-.review-name {
-    font-weight: 700;
-    font-size: 15px;
-    color: #333;
-    margin-bottom: 3px;
+.reviews-modal-body {
+    padding: 30px;
+    background: transparent;
+    flex: 1;
+    overflow-y: auto;
 }
-
-.review-date {
-    font-size: 12px;
-    color: #999;
-}
-
-.review-stars {
-    display: flex;
-    gap: 2px;
-    margin-bottom: 10px;
-}
-
-.star {
-    color: #ffa500;
-    font-size: 16px;
-}
-
-.star.empty {
-    color: #ddd;
-}
-
-.review-text {
-    font-size: 14px;
-    line-height: 1.5;
-    color: #555;
-    margin-bottom: 10px;
-    word-wrap: break-word;
-}
-
-.review-product {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    background: linear-gradient(to right, #dcdcdc, #ffffff);
-    backdrop-filter: blur(3px);
-    padding: 3px 8px;
-    border-radius: 6px;
-    font-size: 12px;
-    color: #666;
-    border: 1px solid rgba(224, 224, 224, 0.6);
-    margin-top: auto;
-}
-
-.review-product img {
-    width: 30px;
-    height: 30px;
-    object-fit: contain;
-}
-
 /* ======================================================
    📱 АДАПТИВНІСТЬ (МОБІЛЬНА ВЕРСІЯ)
    ====================================================== */
