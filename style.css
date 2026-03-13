@@ -271,7 +271,7 @@ footer {
 /* Остальные столбики (инфо и контакты) — УВЕЛИЧЕННЫЙ отступ */
 .footer-links > div:not(.category-col) h4 {
     color: var(--white);
-    margin-bottom: 35px; /* увеличено для десктопа */
+    margin-bottom: 25px; /* увеличено для десктопа */
     font-size: 1.1em;
     font-weight: 700;
     border-bottom: none;
