@@ -597,10 +597,10 @@ a[href^="mailto:"]:hover {
     cursor: pointer;
     transition: all 0.3s;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    margin-bottom: 15px;
+    margin-bottom: 25px; /* увеличен отступ снизу */
     min-width: 210px;
     max-width: 210px;
-    height: 60px;
+    height: 80px; /* увеличена высота */
     box-sizing: border-box;
 }
 
@@ -617,7 +617,7 @@ a[href^="mailto:"]:hover {
 }
 
 .widget-star {
-    font-size: 24px;
+    font-size: 28px; /* увеличен размер звезд */
     color: #ddd;
     position: relative;
     display: inline-block;
@@ -636,18 +636,18 @@ a[href^="mailto:"]:hover {
 .widget-rating {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px; /* увеличен отступ между числом и текстом */
 }
 
 .widget-rating-number {
-    font-size: 20px;
+    font-size: 24px; /* увеличен размер числа */
     font-weight: 700;
     color: #800000;
     line-height: 1;
 }
 
 .widget-rating-count {
-    font-size: 12px;
+    font-size: 14px; /* увеличен размер текста */
     color: #999;
     line-height: 1;
 }
