@@ -249,7 +249,7 @@ footer {
 /* Опускаем категории 2 и 3 на уровень ссылок первого столбика */
 .footer-links .cat2,
 .footer-links .cat3 {
-    padding-top: 33px; /* высота заголовка + margin-bottom */
+    padding-top: 10px; /* высота заголовка + margin-bottom */
 }
 
 .footer-links a {
