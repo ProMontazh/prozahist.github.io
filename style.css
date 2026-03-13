@@ -246,6 +246,12 @@ footer {
     display: none;
 }
 
+/* Опускаем категории 2 и 3 на уровень ссылок первого столбика */
+.footer-links .cat2,
+.footer-links .cat3 {
+    padding-top: 33px; /* высота заголовка + margin-bottom */
+}
+
 .footer-links a {
     display: block;
     color: #aaa;
@@ -271,10 +277,10 @@ footer {
         gap: 20px;
     }
     
-    /* На планшете тоже убираем лишние заголовки */
-    .footer-links .cat2 h4,
-    .footer-links .cat3 h4 {
-        display: none;
+    /* Убираем отступ на планшете */
+    .footer-links .cat2,
+    .footer-links .cat3 {
+        padding-top: 0;
     }
 }
 
@@ -293,10 +299,10 @@ footer {
         text-align: center;
     }
     
-    /* На мобильном тоже убираем лишние заголовки */
-    .footer-links .cat2 h4,
-    .footer-links .cat3 h4 {
-        display: none;
+    /* Убираем отступ на мобильном */
+    .footer-links .cat2,
+    .footer-links .cat3 {
+        padding-top: 0;
     }
 }
 /* ======================================================
