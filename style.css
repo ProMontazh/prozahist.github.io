@@ -228,7 +228,7 @@ footer {
     margin-top: 0;
 }
 
-/* Все заголовки на одном уровне */
+/* Все заголовки */
 .footer-links h4 {
     color: var(--white);
     margin-bottom: 15px;
@@ -240,8 +240,9 @@ footer {
     line-height: 1.2;
 }
 
-/* На десктопе у всех столбиков категорий кроме первого убираем заголовки */
-.footer-links > .category-col ~ .category-col h4 {
+/* На десктопе скрываем заголовки у категорий 2 и 3 */
+.footer-links .cat2 h4,
+.footer-links .cat3 h4 {
     visibility: hidden;
 }
 
@@ -270,8 +271,9 @@ footer {
         gap: 20px;
     }
     
-    /* На планшете показываем все заголовки категорий */
-    .footer-links > .category-col ~ .category-col h4 {
+    /* На планшете показываем все заголовки */
+    .footer-links .cat2 h4,
+    .footer-links .cat3 h4 {
         visibility: visible;
     }
 }
@@ -291,10 +293,10 @@ footer {
         text-align: center;
     }
     
-    /* На мобильном у всех категорий кроме первого убираем заголовки */
-    .footer-links > .category-col ~ .category-col h4 {
+    /* На мобильном скрываем заголовки у категорий 2 и 3 */
+    .footer-links .cat2 h4,
+    .footer-links .cat3 h4 {
         display: none;
-        visibility: visible;
     }
 }
 /* ======================================================
