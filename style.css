@@ -228,7 +228,7 @@ footer {
     font-weight: 700;
     border-bottom: none;
     padding-bottom: 0;
-    margin: 0 0 5px 0; /* уменьшен отступ снизу */
+    margin: 0 0 5px 0;
     text-align: left;
     line-height: 1.2;
 }
@@ -236,7 +236,7 @@ footer {
 /* Столбики категорий — вторая строка */
 .footer-links .category-col {
     grid-row: 2;
-    margin-top: 0; /* убран лишний отступ */
+    margin-top: 0;
 }
 
 /* Столбики инфо и контактов — первая строка (с заголовками) */
@@ -271,7 +271,7 @@ footer {
 /* Остальные столбики (инфо и контакты) */
 .footer-links > div:not(.category-col) h4 {
     color: var(--white);
-    margin-bottom: 10px; /* уменьшен отступ */
+    margin-bottom: 20px; /* увеличен отступ */
     font-size: 1.1em;
     font-weight: 700;
     border-bottom: none;
@@ -317,6 +317,11 @@ footer {
     .footer-links .category-col {
         margin-top: 0;
     }
+    
+    /* Отступ для инфо и контактов на планшете */
+    .footer-links > div:not(.category-col) h4 {
+        margin-bottom: 15px;
+    }
 }
 
 /* ======================================================
@@ -359,6 +364,11 @@ footer {
     
     .footer-links .category-col {
         margin-top: 0;
+    }
+    
+    /* Отступ для инфо и контактов на мобильном */
+    .footer-links > div:not(.category-col) h4 {
+        margin-bottom: 15px;
     }
 }
 /* ======================================================
