@@ -212,55 +212,37 @@ footer {
 .footer-links {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: auto auto;
-    gap: 0 25px;
+    gap: 25px;
     max-width: 1200px;
     margin: 0 auto 20px auto;
     align-items: start;
 }
 
-/* Общий заголовок над первыми тремя столбиками */
+/* Общий заголовок — абсолютное позиционирование над первыми 3 столбиками */
+.footer-links {
+    position: relative;
+    padding-top: 30px; /* место для заголовка */
+}
+
 .footer-title {
-    grid-column: 1 / 4;
-    grid-row: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
     color: var(--white);
     font-size: 1.1em;
     font-weight: 700;
     border-bottom: none;
-    padding-bottom: 0;
     margin: 0;
     text-align: left;
+    width: calc(60% - 20px); /* ширина 3 столбиков */
     line-height: 1.2;
 }
 
-/* Столбики категорий — вторая строка */
-.footer-links .category-col {
-    grid-row: 2;
-    margin-top: 0;
-}
-
-/* Столбики инфо и контактов — заголовок в первой строке, контент во второй */
+/* Все столбики в одну строку */
+.footer-links .category-col,
 .footer-links > div:not(.category-col) {
-    display: flex;
-    flex-direction: column;
-}
-
-/* Заголовки инфо и контактов — первая строка */
-.footer-links > div:not(.category-col) h4 {
-    color: var(--white);
-    margin-bottom: 0;
-    font-size: 1.1em;
-    font-weight: 700;
-    border-bottom: none;
-    padding-bottom: 0;
     margin-top: 0;
-    line-height: 1.2;
-}
-
-/* Содержимое инфо и контактов — отступ сверху для выравнивания */
-.footer-links > div:not(.category-col) a,
-.footer-links > div:not(.category-col) p {
-    margin-top: 15px; /* отступ для выравнивания с ссылками категорий */
+    padding-top: 0;
 }
 
 .footer-links > div {
@@ -287,6 +269,18 @@ footer {
     transform: translateX(5px);
 }
 
+/* Заголовки инфо и контактов */
+.footer-links > div:not(.category-col) h4 {
+    color: var(--white);
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    font-weight: 700;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-top: 0;
+    line-height: 1.2;
+}
+
 /* ======================================================
    📱 АДАПТИВНІСТЬ (ПЛАНШЕТИ)
    ====================================================== */
@@ -294,19 +288,14 @@ footer {
 @media (max-width: 1024px) {
     .footer-links {
         grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: auto;
         gap: 20px;
+        padding-top: 0;
+        position: static;
     }
     
     /* Убираем общий заголовок */
     .footer-title {
         display: none;
-    }
-    
-    /* Сбрасываем grid-row */
-    .footer-links .category-col,
-    .footer-links > div:not(.category-col) {
-        grid-row: auto;
     }
     
     /* Показываем заголовки у категорий */
@@ -320,20 +309,6 @@ footer {
         padding-bottom: 0;
         margin-top: 0;
     }
-    
-    .footer-links .category-col {
-        margin-top: 0;
-    }
-    
-    /* Сбрасываем отступы для инфо и контактов */
-    .footer-links > div:not(.category-col) a,
-    .footer-links > div:not(.category-col) p {
-        margin-top: 0;
-    }
-    
-    .footer-links > div:not(.category-col) h4 {
-        margin-bottom: 15px;
-    }
 }
 
 /* ======================================================
@@ -343,9 +318,10 @@ footer {
 @media (max-width: 768px) {
     .footer-links {
         grid-template-columns: 1fr;
-        grid-template-rows: auto;
         gap: 25px;
         text-align: center;
+        padding-top: 0;
+        position: static;
     }
 
     .footer-links > div {
@@ -357,12 +333,6 @@ footer {
         display: none;
     }
     
-    /* Сбрасываем grid-row */
-    .footer-links .category-col,
-    .footer-links > div:not(.category-col) {
-        grid-row: auto;
-    }
-    
     /* Показываем заголовки у категорий */
     .footer-links .category-col h4 {
         display: block;
@@ -372,20 +342,6 @@ footer {
         border-bottom: none;
         padding-bottom: 0;
         margin-top: 0;
-    }
-    
-    .footer-links .category-col {
-        margin-top: 0;
-    }
-    
-    /* Сбрасываем отступы для инфо и контактов */
-    .footer-links > div:not(.category-col) a,
-    .footer-links > div:not(.category-col) p {
-        margin-top: 0;
-    }
-    
-    .footer-links > div:not(.category-col) h4 {
-        margin-bottom: 15px;
     }
 }
 /* ======================================================
