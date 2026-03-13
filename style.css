@@ -209,12 +209,25 @@ footer {
     margin-top: 0px;
 }
 
+.footer-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Общий заголовок категорий */
+.footer-categories-title {
+    color: var(--white);
+    font-size: 1.1em;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
 .footer-links {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 25px;
-    max-width: 1200px;
-    margin: 0 auto 20px auto;
+    margin-bottom: 20px;
     align-items: start;
 }
 
@@ -227,18 +240,6 @@ footer {
 /* У столбиков категорий убираем внутренние заголовки */
 .footer-links .category-col h4 {
     display: none;
-}
-
-/* Общий заголовок для категорий — отдельный элемент перед сеткой */
-.footer-links::before {
-    content: "Категорії товарів";
-    display: block;
-    grid-column: 1 / 4;
-    color: var(--white);
-    font-size: 1.1em;
-    font-weight: 700;
-    margin-bottom: 15px;
-    text-align: left;
 }
 
 .footer-links a {
@@ -273,14 +274,13 @@ footer {
    ====================================================== */
 
 @media (max-width: 1024px) {
+    .footer-categories-title {
+        display: none;
+    }
+    
     .footer-links {
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
-    }
-    
-    /* Убираем общий заголовок */
-    .footer-links::before {
-        display: none;
     }
     
     /* Показываем заголовки у категорий */
@@ -301,6 +301,10 @@ footer {
    ====================================================== */
 
 @media (max-width: 768px) {
+    .footer-categories-title {
+        display: none;
+    }
+    
     .footer-links {
         grid-template-columns: 1fr;
         gap: 25px;
@@ -309,11 +313,6 @@ footer {
 
     .footer-links > div {
         text-align: center;
-    }
-    
-    /* Убираем общий заголовок */
-    .footer-links::before {
-        display: none;
     }
     
     /* Показываем заголовки у категорий */
