@@ -204,13 +204,13 @@ footer {
     background: var(--text-dark);
     color: var(--white);
     text-align: center;
-    padding: 20px 20px;
+    padding: 30px 20px;
     font-size: 0.9em;
     margin-top: 0px;
 }
 
 .footer-wrapper {
-    max-width: 1200px;
+    max-width: 1190px;
     margin: 0 auto;
 }
 
