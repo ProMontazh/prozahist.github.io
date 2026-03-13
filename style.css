@@ -270,29 +270,85 @@ footer {
 }
 
 /* ======================================================
+   🦶 FOOTER (ПІДВАЛ)
+   ====================================================== */
+
+footer {
+    background: var(--text-dark);
+    color: var(--white);
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 0.9em;
+    margin-top: 0px;
+}
+
+.footer-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-links {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 25px;
+    margin-bottom: 20px;
+    align-items: start;
+}
+
+/* Все столбики */
+.footer-links > div {
+    text-align: left;
+    margin-top: 0;
+}
+
+/* Заголовки всех столбиков на одном уровне */
+.footer-links h4 {
+    color: var(--white);
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    font-weight: 700;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-top: 0;
+    line-height: 1.2;
+    height: 18px;
+}
+
+/* У столбиков категорий 2 и 3 убираем заголовки на десктопе */
+.footer-links .category-col:nth-child(2) h4,
+.footer-links .category-col:nth-child(3) h4 {
+    display: none;
+}
+
+.footer-links a {
+    display: block;
+    color: #aaa;
+    text-decoration: none;
+    margin-bottom: 8px;
+    transition: var(--transition);
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.footer-links a:hover {
+    color: var(--white);
+    transform: translateX(5px);
+}
+
+/* ======================================================
    📱 АДАПТИВНІСТЬ (ПЛАНШЕТИ)
    ====================================================== */
 
 @media (max-width: 1024px) {
-    .footer-categories-title {
-        display: none;
-    }
-    
     .footer-links {
         grid-template-columns: repeat(3, 1fr);
         gap: 20px;
     }
     
-    /* Показываем заголовки у категорий */
-    .footer-links .category-col h4 {
+    /* Показываем все заголовки */
+    .footer-links .category-col:nth-child(2) h4,
+    .footer-links .category-col:nth-child(3) h4 {
         display: block;
-        color: var(--white);
-        margin-bottom: 15px;
-        font-size: 1.1em;
-        font-weight: 700;
-        border-bottom: none;
-        padding-bottom: 0;
-        margin-top: 0;
     }
 }
 
@@ -301,10 +357,6 @@ footer {
    ====================================================== */
 
 @media (max-width: 768px) {
-    .footer-categories-title {
-        display: none;
-    }
-    
     .footer-links {
         grid-template-columns: 1fr;
         gap: 25px;
@@ -315,15 +367,10 @@ footer {
         text-align: center;
     }
     
-    /* Показываем заголовки у категорий */
-    .footer-links .category-col h4 {
+    /* Показываем все заголовки */
+    .footer-links .category-col:nth-child(2) h4,
+    .footer-links .category-col:nth-child(3) h4 {
         display: block;
-        margin-bottom: 15px;
-        font-size: 1.1em;
-        font-weight: 700;
-        border-bottom: none;
-        padding-bottom: 0;
-        margin-top: 0;
     }
 }
 /* ======================================================
