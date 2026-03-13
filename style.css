@@ -268,10 +268,10 @@ footer {
     transform: translateX(5px);
 }
 
-/* Остальные столбики (инфо и контакты) */
+/* Остальные столбики (инфо и контакты) — УВЕЛИЧЕННЫЙ отступ */
 .footer-links > div:not(.category-col) h4 {
     color: var(--white);
-    margin-bottom: 20px; /* увеличен отступ */
+    margin-bottom: 35px; /* увеличено для десктопа */
     font-size: 1.1em;
     font-weight: 700;
     border-bottom: none;
