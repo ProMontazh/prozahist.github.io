@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ajax DualCurtain Outdoor - двоспрямований датчик штора. 4 ІЧ сенсори, два промені 4.5°×90° для захисту двох зон. IP54, до 4 років роботи, до 1700м зв'язку. Купити">
+    <meta name="keywords" content="ajax dualcurtain outdoor, двоспрямований датчик, датчик штора подвійний, ajax зовнішній датчик, dualcurtain outdoor jeweller, датчик для двох вікон, два промені виявлення, датчик 4 сенсори, ajax вулиця, датчик руху двосторонній, охоронний датчик вікна">
+    <title>Ajax DualCurtain Outdoor — Бездротовий датчик руху «подвійна штора» для вулиці</title>
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "Ajax DualCurtainCurtain Outdoor",
+      "image": [
+        "https://прозахист.pp.ua/images/ajax_dualcurtain_outdoor_1.png",
+        "https://прозахист.pp.ua/images/ajax_dualcurtain_outdoor_2.png",
+        "https://прозахіст.pp.ua/images/ajax_dualcurtain_outdoor_3.png"
+        
+       
+      ],
+      "description": "Ajax DualCurtain Outdoor - двоспрямований датчик штора. 4 ІЧ сенсори, два промені 4.5°×90° для захисту двох зон. IP54, до 4 років роботи, до 1700м зв'язку. Купити",
+      "brand": {
+        "@type": "Brand",
+        "name": "Ajax Systems"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://прозахист.pp.ua/details_protect_outdoor_4_ajax_dualcurtain_outdoor_white.html",
+        "priceCurrency": "UAH",
+        "price": "7400.00",
+        "availability": "https://schema.org/InStock"
+       
+      }
+    }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* ===== ЛОГОТИП ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background: transparent;
+        }
+
+        .logo svg {
+            width: 205px;
+            height: auto;
+        }
+
+        /* ===== Toast ===== */
+        .toast {
+            position: fixed;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 1.0em;
+            white-space: nowrap;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 9999;
+        }
+
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* ===== Контейнер ===== */
+        .container {
+            max-width: 830px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.5s forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .product-title {
+            text-align: center;
+            font-size: 1.6em;
+            margin-top: 0;
+        }
+
+        /* ===== Карусель ===== */
+        .carousel-wrapper {
+            position: relative;
+            overflow: hidden;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel img {
+            flex: 0 0 100%;
+            max-width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            object-fit: contain;
+        }
+
+        /* Стрілки для десктопу */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 2em;
+            padding: 8px 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.3s;
+            z-index: 10;
+            display: none;
+        }
+
+        .carousel-arrow:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .carousel-arrow.left { left: 10px; }
+        .carousel-arrow.right { right: 10px; }
+
+        /* ===== Опис ===== */
+        .product-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 20px 0 30px 20px;
+        }
+
+        .product-description ul {
+            padding-left: 20px;
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+
+        .product-description li {
+            margin-bottom: 6px;
+        }
+
+        .product-price {
+            font-size: 1.8em;
+            color: red;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .btn {
+            display: block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            margin: 20px auto;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* ===== Модалка ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .modal .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+            padding: 10px;
+            z-index: 10001;
+        }
+
+        .modal .arrow.left { left: 20px; }
+        .modal .arrow.right { right: 20px; }
+
+        /* ===== Медіа-запити ===== */
+        @media (min-width: 768px) {
+            .carousel-arrow { display: block; }
+        }
+
+        @media (min-width: 1024px) {
+            .product-description {
+                margin-left: 80px;
+                margin-right: 40px;
+            }
+            .product-description ul {
+                padding-left: 60px;
+            }
+            .product-description li {
+                border-bottom: 1px dotted #ddd;
+                padding-bottom: 5px;
+            }
+            .carousel img {
+                max-height: 420px;
+            }
+        }
+
+        /* Мобільна версія */
+        @media (max-width: 768px) {
+            header {
+                position: static;
+                top: auto;
+                left: auto;
+                padding: 0px;
+                background: transparent;
+            }
+
+            .logo svg {
+                width: 230px;
+            }
+
+            .container {
+                margin: 0;
+                padding: 20px;
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            body {
+                background-color: #fff;
+            }
+
+            .product-title {
+                font-size: 1.3em;
+            }
+
+            .carousel {
+                padding: 5px 0;
+            }
+
+            .product-description {
+                margin-left: 10px;
+            }
+
+            .product-description ul {
+                padding-left: 15px;
+            }
+        }
+
+        /* Дуже маленькі екрани */
+        @media (max-width: 480px) {
+            header {
+                position: static;
+                top: auto;
+                left: auto;
+                padding: 0px;
+                background: transparent;
+            }
+
+            .logo svg {
+                width: 205px;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="180" height="56" viewBox="0 0 600 200">
+            <defs>
+                <!-- 🌊 Хвиля для слогана -->
+                <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="-0.3" stop-color="#999">
+                        <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+                    </stop>
+                    <stop offset="-0.15" stop-color="#666">
+                        <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+                    </stop>
+                    <stop offset="0" stop-color="#999">
+                        <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+                    </stop>
+                </linearGradient>
+                <!-- 🔴 Хвиля для ПРО -->
+                <linearGradient id="pro-wave" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="-0.3" stop-color="#800000">
+                        <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+                    </stop>
+                    <stop offset="-0.15" stop-color="#ff4444">
+                        <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+                    </stop>
+                    <stop offset="0" stop-color="#800000">
+                        <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+                    </stop>
+                </linearGradient>
+                <!-- ⚙️ Хвиля для ЗАХИСТ -->
+                <linearGradient id="zahist-wave" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="-0.3" stop-color="#808080">
+                        <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+                    </stop>
+                    <stop offset="-0.15" stop-color="#e0e0e0">
+                        <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+                    </stop>
+                    <stop offset="0" stop-color="#808080">
+                        <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+                    </stop>
+                </linearGradient>
+            </defs>
+            <!-- ПРО -->
+            <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#pro-wave)">ПРО</text>
+            <!-- ЗАХИСТ -->
+            <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#zahist-wave)">ЗАХИСТ</text>
+            <!-- Слоган -->
+            <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="33" fill="url(#wave-gradient)">БЕЗДРОТОВІ СИСТЕМИ БЕЗПЕКИ</text>
+            <!-- Декор -->
+            <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10" />
+            <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10" />
+            <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10" />
+            <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10" />
+        </svg>
+    </div>
+</header>
+
+<div class="container">
+    <h2 class="product-title">Датчик руху Ajax DualCurtain Outdoor Jeweller типу "подвійна штора"</h2>
+
+    <div class="carousel-wrapper">
+        <div class="carousel" id="carousel">
+            <img src="images/ajax_dualcurtain_outdoor_1.png" alt="Датчик Ajax" onclick="openModal('images/ajax_dualcurtain_outdoor_1.png')">
+            <img src="images/ajax_dualcurtain_outdoor_2.png" alt="Датчик Ajax - вид збоку" onclick="openModal('images/ajax_dualcurtain_outdoor_2.png')">
+            <img src="images/ajax_dualcurtain_outdoor_3.png" alt="Датчик Ajax - вид збоку" onclick="openModal('images/ajax_dualcurtain_outdoor_3.png')">
+           
+            
+            <!-- Клон першого зображення для безшовного циклу -->
+            <img src="images/ajax_dualcurtain_outdoor_1.png" alt="Датчик Ajax" onclick="openModal('images/ajax_dualcurtain_outdoor_1.png')">
+        </div>
+
+        <div class="carousel-arrow left" onclick="prevImage()">&#10094;</div>
+        <div class="carousel-arrow right" onclick="nextImage()">&#10095;</div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+<div class="product-description">
+Бездротовий двоспрямований ІЧ-датчик руху Ajax DualCurtain Outdoor Jeweller типу "штора" призначений для одночасного захисту двох зон або двох протилежних напрямків на вулиці та в приміщенні. Обладнаний чотирма інфрачервоними сенсорами (по 2 на кожну сторону) для створення двох вузьких вертикальних променів виявлення. Кути огляду: 4,5° по горизонталі та 90° по вертикалі для кожної сторони. Дальність виявлення 4-15 метрів для кожної сторони (налаштовується окремо повзунками). Детектування в ближній зоні зменшує сліпу зону біля датчика, відхилення кута огляду на 3° для точного налаштування. Алгоритми SmartDetect та ELSA забезпечують мінімум хибних спрацювань. Імунітет до тварин заввишки до 80 см. Працює при температурах від -25°C до +60°C, захист IP54. Дальність зв'язку з хабом до 1700 м, автономна робота до 4 років від двох батарей CR123A.
+
+<br><br>
+<strong>Основні характеристики:</strong>
+<ul>
+  <li>Двоспрямований датчик "штора" для захисту двох зон одночасно</li>
+  <li>4 інфрачервоні сенсори (по 2 на кожну сторону)</li>
+  <li>Два незалежні вузькі промені: 4,5° × 90° кожен</li>
+  <li>Дальність виявлення: 4-15 метрів для кожної сторони (окреме налаштування)</li>
+  <li>Детектування в ближній зоні (зменшення сліпої зони)</li>
+  <li>Відхилення кута огляду на 3° для точного налаштування</li>
+  <li>Висота встановлення: 0,8-1,3 м (прохід/двері) або 0,5-0,6 м від підвіконня (вікна)</li>
+  <li>Швидкість виявлення: 0,3-2,0 м/с</li>
+  <li>Імунітет до тварин: заввишки до 80 см</li>
+  <li>3 рівні чутливості (налаштовується)</li>
+  <li>Алгоритми SmartDetect та ELSA для захисту від хибних тривог</li>
+  <li>Система антимаскування</li>
+  <li>Температурна компенсація: -25°C до +60°C</li>
+  <li>Дальність зв'язку: до 1700 м</li>
+  <li>Автономна робота: до 4 років від 2 × CR123A</li>
+  <li>Захист IP54</li>
+</ul>
+
+<strong>Двоспрямований датчик — для чого потрібен:</strong>
+<ul>
+  <li>Два незалежні промені виявлення на протилежних сторонах датчика</li>
+  <li>Захист двох зон одночасно одним датчиком</li>
+  <li>Економія на кількості датчиків та батарей</li>
+  <li>Контроль проходу з обох боків (двері, коридор, арка)</li>
+  <li>Захист вікна з двох сторін одночасно</li>
+  <li>Охорона кутового розташування (дві стіни, два вікна)</li>
+  <li>Універсальність встановлення — не потрібно вибирати сторону</li>
+  <li>Окреме налаштування дальності для кожної сторони</li>
+</ul>
+
+<strong>Чотири ІЧ сенсори (2+2):</strong>
+<ul>
+  <li>4 інфрачервоні сенсори в одному корпусі</li>
+  <li>По 2 сенсори на кожну сторону для підвищення точності</li>
+  <li>Подвійна технологія виявлення на кожній стороні</li>
+  <li>Спрацювання тільки при підтвердженні обома сенсорами сторони</li>
+  <li>Різко зменшує ймовірність хибних тривог</li>
+  <li>Високоточне виявлення руху з двох напрямків</li>
+  <li>Незалежна робота кожної сторони</li>
+</ul>
+
+<strong>Вузький промінь виявлення (4,5° × 90°):</strong>
+<ul>
+  <li>Горизонтальний кут: 4,5° (дуже вузький промінь)</li>
+  <li>Вертикальний кут: 90° (висока зона покриття)</li>
+  <li>Ще вужчий промінь ніж у Curtain Outdoor (8°)</li>
+  <li>Максимальна точність виявлення в вузькій зоні</li>
+  <li>Мінімум хибних спрацювань від руху в стороні</li>
+  <li>Ідеально для вузьких проходів, дверей, вікон</li>
+  <li>Вертикальний кут 90° покриває всю висоту від підлоги до стелі</li>
+</ul>
+
+<strong>Налаштування дальності (4-15 метрів для кожної сторони):</strong>
+<ul>
+  <li>Окремі повзунки на задній панелі для кожної сторони</li>
+  <li>Мінімальна дальність: 4 метри</li>
+  <li>Максимальна дальність: 15 метрів</li>
+  <li>Можливість різної дальності для різних сторін</li>
+  <li>Наприклад: 8 метрів для одного вікна, 12 метрів для іншого</li>
+  <li>Точне налаштування під конкретний об'єкт</li>
+  <li>Зменшення хибних спрацювань за межами зони інтересу</li>
+</ul>
+
+<strong>Детектування в ближній зоні:</strong>
+<ul>
+  <li>Унікальна функція для зменшення сліпої зони</li>
+  <li>Верхній ІЧ сенсор отримує додатковий сектор огляду</li>
+  <li>Нахил додаткового сектора: 40° вниз</li>
+  <li>Фіксує рух близько до самого датчика</li>
+  <li>Зменшує сліпу зону під датчиком</li>
+  <li>Увімкнення окремо для кожної сторони повзунками</li>
+  <li>Корисно при низькому встановленні або захисті вікон</li>
+  <li>Виявляє спроби обійти датчик знизу</li>
+</ul>
+
+<strong>Відхилення кута огляду на 3°:</strong>
+<ul>
+  <li>Можливість відхилити сектор огляду горизонтально на 3°</li>
+  <li>Налаштовується окремо для кожної сторони повзунками</li>
+  <li>Точне наведення променя на зону охорони</li>
+  <li>Корисно при нестандартному розташуванні вікон/дверей</li>
+  <li>Компенсація непрямого встановлення</li>
+  <li>Максимальна гнучкість налаштування</li>
+</ul>
+
+<strong>Висота встановлення — дві опції:</strong>
+<ul>
+  <li>Опція 1: 0,8-1,3 метра від землі (для захисту дверей, арок, проходів)</li>
+  <li>Опція 2: 0,5-0,6 метра від підвіконня (для захисту вікон)</li>
+  <li>Вибір висоти залежить від завдання</li>
+  <li>Для дверей/проходів — стандартна висота 0,8-1,3 м</li>
+  <li>Для вікон — встановлення над/під підвіконням</li>
+  <li>Детектування в ближній зоні допомагає при низькому встановленні</li>
+</ul>
+
+<strong>Швидкість виявлення руху (0,3-2,0 м/с):</strong>
+<ul>
+  <li>Виявляє рух від повільної ходьби (0,3 м/с) до швидкого бігу (2,0 м/с)</li>
+  <li>Оптимальний діапазон для виявлення людини</li>
+  <li>Не реагує на дуже повільні рухи (гілки дерев)</li>
+  <li>Не реагує на дуже швидкі рухи (птахи, листя)</li>
+  <li>Направлення лінзи має бути перпендикулярним шляху руху</li>
+  <li>Максимальна ефективність при русі поперек променів</li>
+</ul>
+
+<strong>Імунітет до тварин (зріст до 80 см):</strong>
+<ul>
+  <li>Не реагує на тварин заввишки до 80 см</li>
+  <li>Вага тварини не має значення (на відміну від деяких інших датчиків)</li>
+  <li>Підходить для будинків з собаками середнього розміру</li>
+  <li>Підходить для котів та інших невеликих тварин</li>
+  <li>Розпізнає відмінність між людиною та твариною</li>
+  <li>Аналіз швидкості руху та теплового сліду</li>
+  <li>Зменшення хибних спрацювань від тварин на 99%</li>
+</ul>
+
+<strong>Три рівні чутливості:</strong>
+<ul>
+  <li>Низька чутливість: для зон з можливими завадами</li>
+  <li>Середня чутливість: стандартний режим (рекомендовано)</li>
+  <li>Висока чутливість: для максимальної точності виявлення</li>
+  <li>Налаштовується через застосунок Ajax</li>
+  <li>Можливість налаштування PRO або адміністратором</li>
+  <li>Дозволяє оптимізувати роботу під конкретні умови</li>
+</ul>
+
+<strong>Алгоритми захисту від хибних тривог:</strong>
+<ul>
+  <li>SmartDetect — розумна технологія виявлення від Ajax</li>
+  <li>ELSA — додатковий алгоритм захисту</li>
+  <li>Програмні алгоритми фільтрують помилкові спрацювання</li>
+  <li>Аналіз характеру руху та форми теплового сліду</li>
+  <li>Відсівання сигналів від тварин, птахів, комах</li>
+  <li>Захист від спрацювань на рухомі гілки дерев</li>
+  <li>Захист від впливу дощу, снігу, граду</li>
+  <li>Мінімізація хибних тривог до рівня менше 1%</li>
+</ul>
+
+<strong>Температурна компенсація (-25°C до +60°C):</strong>
+<ul>
+  <li>Ефективне виявлення руху в екстремальних температурах</li>
+  <li>Працює взимку при морозах до -25°C</li>
+  <li>Працює влітку при спеці до +60°C</li>
+  <li>Автоматична компенсація чутливості залежно від температури</li>
+  <li>Стабільна робота при різкій зміні температури</li>
+  <li>Підходить для використання в Україні цілий рік</li>
+  <li>Не потребує сезонного переналаштування</li>
+</ul>
+
+<strong>Технологія зв'язку Jeweller:</strong>
+<ul>
+  <li>Пропрієтарна захищена технологія Ajax для передавання сигналів тривог та подій</li>
+  <li>Дальність зв'язку: до 1700 м (між датчиком і хабом за відсутності перешкод)</li>
+  <li>Двосторонній зв'язок з хабом</li>
+  <li>Блокове шифрування з плаваючим ключем</li>
+  <li>Передовий захист від саботажу</li>
+  <li>Миттєві сповіщення про події</li>
+  <li>Дистанційне налаштування в застосунках Ajax</li>
+  <li>Радіочастотний гопінг для запобігання радіозавадам та глушінню</li>
+  <li>Діапазони радіочастот: 866-926.5 МГц (залежно від регіону)</li>
+  <li>Максимальна потужність: до 20 мВт (автоматичне регулювання)</li>
+  <li>Модуляція: GFSK</li>
+</ul>
+
+<strong>Система антимаскування:</strong>
+<ul>
+  <li>Виявляє різні типи маскування датчика</li>
+  <li>Встановлення перешкоди перед лінзами на відстані до 10 см (залежно від матеріалу)</li>
+  <li>Зафарбовування лінз датчика</li>
+  <li>Заклеювання лінз або сторін датчика</li>
+  <li>Миттєве сповіщення при спробі маскування</li>
+  <li>Захист від фарби, стрічки, плівки на лінзі</li>
+  <li>Важливий елемент професійної системи безпеки</li>
+</ul>
+
+<strong>Захист від саботажу:</strong>
+<ul>
+  <li>Тампер проти злому — повідомляє про спробу відірвати датчик від поверхні або зняти з кріпильної панелі</li>
+  <li>Захист від підміни — автентифікація пристрою</li>
+  <li>Система антимаскування виявляє спроби заблокувати огляд</li>
+  <li>Виявлення втрати зв'язку від 36 секунд</li>
+  <li>Захист від радіозавад через радіочастотний гопінг</li>
+  <li>Сповіщення про низький заряд батареї</li>
+</ul>
+
+<strong>Живлення (батареї):</strong>
+<ul>
+  <li>Батареї: 2 × CR123A (попередньо встановлені)</li>
+  <li>Розрахунковий строк роботи: до 4 років</li>
+  <li>Найдовший термін роботи серед датчиків Ajax Outdoor</li>
+  <li>Економне споживання енергії</li>
+  <li>Сповіщення про низький заряд батареї завчасно</li>
+  <li>Легка заміна батарей без зняття датчика</li>
+</ul>
+
+<strong>Фізичні характеристики:</strong>
+<ul>
+  <li>Розміри: 174 × 123 × 88 мм</li>
+  <li>Вага: 615 г</li>
+  <li>Діапазон робочих температур: від -25°C до +60°C</li>
+  <li>Допустима вологість: до 95%</li>
+  <li>Клас захисту: IP54 (захист від пилу та бризок води)</li>
+  <li>Колір: білий</li>
+  <li>Міцний пластиковий корпус</li>
+  <li>Сучасний дизайн</li>
+</ul>
+
+<strong>Захист IP54:</strong>
+<ul>
+  <li>Захист від пилу (рівень 5) — пило-захищений</li>
+  <li>Захист від води (рівень 4) — бризки води з будь-якого напрямку</li>
+  <li>Працює під дощем (бризки, але не струмені)</li>
+  <li>Стійкість до бруду та пилу</li>
+  <li>Рекомендується встановлення під дашком або навісом</li>
+  <li>Всепогодне використання на вулиці з обережністю</li>
+  <li>Для повного захисту від струменів води використовуйте Curtain Outdoor (IP55)</li>
+</ul>
+
+<strong>Рекомендації з встановлення:</strong>
+<ul>
+  <li>Для захисту дверей/арок/проходів: 0,8-1,3 м від землі</li>
+  <li>Для захисту вікон: 0,5-0,6 м від підвіконня</li>
+  <li>Призначений для використання на вулиці та в приміщенні</li>
+  <li>Направляйте датчик перпендикулярно до шляху руху</li>
+  <li>Використовуйте повзунки для налаштування дальності кожної сторони</li>
+  <li>Увімкніть детектування в ближній зоні при необхідності</li>
+  <li>Використовуйте відхилення кута на 3° для точного наведення</li>
+  <li>Уникайте встановлення поруч з джерелами тепла</li>
+  <li>Рекомендується встановлення під дашком для додаткового захисту</li>
+</ul>
+
+<strong>Застосування:</strong>
+<ul>
+  <li>Захист двох вікон одночасно одним датчиком</li>
+  <li>Охорона дверей/воріт з обох боків</li>
+  <li>Контроль проходу через коридор, арку з двох напрямків</li>
+  <li>Захист кутового розташування (дві стіни)</li>
+  <li>Охорона двох протилежних підходів</li>
+  <li>Контроль входу та виходу одним датчиком</li>
+  <li>Виявлення руху з двох сторін у вузьких зонах</li>
+  <li>Захист по периметру з мінімальною кількістю датчиків</li>
+  <li>Економія на обладнанні — 1 датчик замість 2</li>
+</ul>
+
+<strong>Переваги Ajax DualCurtain Outdoor:</strong>
+<ul>
+  <li>✅ Двоспрямований датчик — два промені в одному корпусі</li>
+  <li>✅ 4 ІЧ сенсори для максимальної точності</li>
+  <li>✅ Дуже вузький промінь 4,5° × 90°</li>
+  <li>✅ Окреме налаштування дальності для кожної сторони (4-15 м)</li>
+  <li>✅ Детектування в ближній зоні — зменшення сліпої зони</li>
+  <li>✅ Відхилення кута огляду на 3° для точного налаштування</li>
+  <li>✅ Імунітет до тварин заввишки до 80 см</li>
+  <li>✅ Алгоритми SmartDetect та ELSA</li>
+  <li>✅ Система антимаскування</li>
+  <li>✅ Температурна компенсація -25°C до +60°C</li>
+  <li>✅ Дальність зв'язку до 1700 м</li>
+  <li>✅ До 4 років автономної роботи</li>
+  <li>✅ Захист IP54</li>
+  <li>✅ Економія — 1 датчик замість 2</li>
+</ul>
+
+<strong>Налаштування через застосунок Ajax:</strong>
+<ul>
+  <li>Додавання датчика до системи за кілька кроків</li>
+  <li>Вибір рівня чутливості (низький, середній, високий)</li>
+  <li>Тестування датчика в режимі реального часу</li>
+  <li>Перевірка спрацювання кожної сторони окремо</li>
+  <li>Перевірка рівня сигналу Jeweller</li>
+  <li>Моніторинг заряду батарей</li>
+  <li>Налаштування часу затримки на вхід/вихід</li>
+  <li>Перегляд історії спрацювань</li>
+  <li>Налаштування сповіщень</li>
+  <li>Віддалене тестування без виїзду на об'єкт</li>
+  <li>Оновлення прошивки онлайн</li>
+</ul>
+
+<strong>Сценарії використання:</strong>
+<ul>
+  <li>Захист двох вікон кутової кімнати одним датчиком</li>
+  <li>Охорона дверей з контролем входу та виходу</li>
+  <li>Контроль проходу через арку з двох боків</li>
+  <li>Захист двох протилежних підходів до будинку</li>
+  <li>Охорона кутового розташування — дві стіни одночасно</li>
+  <li>Економія при великій кількості вікон — 1 датчик на 2 вікна</li>
+  <li>Контроль входу та виходу з приміщення одним датчиком</li>
+</ul>
+
+<strong>Відмінності від Curtain Outdoor (односпрямований):</strong>
+<ul>
+  <li>DualCurtain Outdoor має 2 сторони виявлення (vs 1 у Curtain Outdoor)</li>
+  <li>4 ІЧ сенсори (vs 2 ІЧ + 1 мікрохвильовий у Curtain Outdoor)</li>
+  <li>Ще вужчий промінь: 4,5° (vs 8° у Curtain Outdoor)</li>
+  <li>Детектування в ближній зоні — унікальна функція DualCurtain</li>
+  <li>Відхилення кута на 3° — унікальна функція DualCurtain</li>
+  <li>Довший термін роботи: до 4 років (vs до 3 років у Curtain Outdoor)</li>
+  <li>Захист IP54 (vs IP55 у Curtain Outdoor)</li>
+  <li>Без мікрохвильового сенсора (тільки ІЧ)</li>
+  <li>Без акселерометра (є у Curtain Outdoor)</li>
+  <li>Більші розміри: 174×123×88 мм (vs 155×77×85 мм з навісом)</li>
+  <li>Більша вага: 615 г (vs 299 г з навісом у Curtain Outdoor)</li>
+  <li>Призначення: захист двох зон одночасно (vs одна зона у Curtain Outdoor)</li>
+</ul>
+
+<strong>Комплектація:</strong>
+<ul>
+  <li>DualCurtain Outdoor Jeweller</li>
+  <li>Кріпильна панель SmartBracket</li>
+  <li>Монтажний комплект</li>
+  <li>Дві батареї CR123A (попередньо встановлені)</li>
+  <li>Коротка інструкція</li>
+</ul>
+
+<strong>Сумісність:</strong>
+<ul>
+  <li>Працює з усіма хабами Ajax (Hub, Hub 2, Hub Plus, Hub Hybrid)</li>
+  <li>Підтримка ретрансляторів сигналу (ReX, ReX 2)</li>
+  <li>Інтеграція з застосунками Ajax (iOS, Android, macOS, Windows)</li>
+  <li>Підключення до пультів централізованого спостереження (ПЦС)</li>
+  <li>Підтримка професійного режиму для інсталяторів (PRO)</li>
+  <li>Сумісність з усіма пристроями Ajax</li>
+</ul>
+
+<strong>Чому варто обрати DualCurtain Outdoor:</strong>
+<ul>
+  <li>Унікальний двоспрямований датчик — два промені в одному</li>
+  <li>Економія коштів — 1 датчик замість 2</li>
+  <li>Економія батарей — одна пара на дві зони</li>
+  <li>Дуже вузький промінь 4,5° — максимальна точність</li>
+  <li>Детектування в ближній зоні — мінімум сліпих зон</li>
+  <li>Відхилення кута на 3° — ідеальне налаштування</li>
+  <li>Окреме налаштування кожної сторони</li>
+  <li>До 4 років автономної роботи</li>
+  <li>Надійний захист IP54</li>
+</ul>
+</div>
+    <p class="product-price">7400.00 грн</p>
+    <button class="btn" onclick="addToCartFromProductPage({ id: 'Ajax DualCurtain Outdoor', name: 'Ajax DualCurtain Outdoor', price: 7400, image: 'images/ajax_dualcurtain_outdoor_1.png'})">
+        Додати у кошик
+    </button>
+</div>
+
+<div id="modal" class="modal" onclick="closeModal()">
+    <span class="arrow left" onclick="event.stopPropagation(); prevModalImage()">&#10094;</span>
+    <img id="modal-img" src="" alt="Збільшене зображення">
+    <span class="arrow right" onclick="event.stopPropagation(); nextModalImage()">&#10095;</span>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+const images = [
+    "images/ajax_dualcurtain_outdoor_1.png",
+    "images/ajax_dualcurtain_outdoor_2.png",
+    "images/ajax_dualcurtain_outdoor_3.png"
+   
+   
+];
+let currentIndex = 0;
+const totalSlides = images.length;
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 2500);
+}
+
+function addToCartFromProductPage(item) {
+    cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingItem = cart.find(i => i.id === item.id);
+    if (existingItem) existingItem.quantity++;
+    else { item.quantity = 1; cart.push(item); }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    showToast(`${item.name} додано до кошика!`);
+}
+
+/* === Карусель === */
+function updateCarousel() {
+    const carouselEl = document.getElementById('carousel');
+    carouselEl.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+
+function nextImage() {
+    const carouselEl = document.getElementById('carousel');
+    currentIndex++;
+    carouselEl.style.transition = 'transform 0.5s ease';
+    updateCarousel();
+    
+    // Якщо дійшли до клону (позиція після останнього оригіналу)
+    if (currentIndex === totalSlides) {
+        setTimeout(() => {
+            carouselEl.style.transition = 'none';
+            currentIndex = 0;
+            updateCarousel();
+        }, 500);
+    }
+}
+
+function prevImage() {
+    const carouselEl = document.getElementById('carousel');
+    
+    // Якщо на першому зображенні - миттєво стрибаємо на клон
+    if (currentIndex === 0) {
+        carouselEl.style.transition = 'none';
+        currentIndex = totalSlides;
+        updateCarousel();
+        
+        // Даємо браузеру час застосувати зміни
+        setTimeout(() => {
+            carouselEl.style.transition = 'transform 0.5s ease';
+            currentIndex--;
+            updateCarousel();
+        }, 20);
+    } else {
+        currentIndex--;
+        carouselEl.style.transition = 'transform 0.5s ease';
+        updateCarousel();
+    }
+}
+
+/* === Модалка === */
+function openModal(imageSrc) {
+    const modalIndex = images.indexOf(imageSrc);
+    if (modalIndex !== -1) {
+        currentIndex = modalIndex;
+    }
+    document.getElementById("modal-img").src = imageSrc;
+    document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+function nextModalImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    document.getElementById("modal-img").src = images[currentIndex];
+}
+
+function prevModalImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    document.getElementById("modal-img").src = images[currentIndex];
+}
+
+/* === Свайпи === */
+let startX = 0;
+const carousel = document.getElementById('carousel');
+carousel.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
+carousel.addEventListener('touchend', e => {
+    const diff = e.changedTouches[0].clientX - startX;
+    if (Math.abs(diff) > 50) diff > 0 ? prevImage() : nextImage();
+}, { passive: true });
+
+const modal = document.getElementById("modal");
+modal.addEventListener("touchstart", e => startX = e.touches[0].clientX, { passive: true });
+modal.addEventListener("touchend", e => {
+    const diff = e.changedTouches[0].clientX - startX;
+    if (Math.abs(diff) > 50) diff > 0 ? prevModalImage() : nextModalImage();
+}, { passive: true });
+</script>
+</body>
+</html>
