@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ajax MotionCam Outdoor - Бездротовий ІЧ датчик руху з підтримкою функції фото за тривогою для вулиці. Дальність виявлення до 15м, захист IP55, імунітет до тварин. Купити з доставкою по Україні">
+    <meta name="keywords" content="ajax датчик руху з камерою, motioncam outdoor, датчик руху вулиця, ajax зовнішній датчик з камерою, охоронний датчик з фото">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>Ajax MotionCam Outdoor — Датчик руху з камерою для вулиці</title>
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "Ajax MotionCam Outdoor",
+      "image": [
+        "https://прозахист.pp.ua/images/ajax_motioncam_outdoor_white_1.png",
+        "https://прозахист.pp.ua/images/ajax_motioncam_outdoor_white_2.png",
+        "https://прозахіст.pp.ua/images/ajax_motioncam_outdoor_white_3.png",
+        "https://прозахист.pp.ua/images/ajax_motioncam_outdoor_white_4.png"
+       
+      ],
+      "description": "Бездротовий ІЧ датчик руху Ajax з підтримкою функції фото за тривогою. Для використання на вулиці та в приміщенні. 2 ІЧ сенсори, дальність виявлення до 15м, кут 90°, імунітет до тварин до 80см, LISA та SmartDetect, IP55, до 5 років автономної роботи",
+      "brand": {
+        "@type": "Brand",
+        "name": "Ajax Systems"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://прозахист.pp.ua/details_protect_outdoor_2_ajax_motioncam_outdoor_white.html",
+        "priceCurrency": "UAH",
+        "price": "8800.00",
+        "availability": "https://schema.org/InStock"
+       
+      }
+    }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* ===== ЛОГОТИП ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background: transparent;
+        }
+
+        .logo svg {
+            width: 205px;
+            height: auto;
+        }
+
+        /* ===== Toast ===== */
+        .toast {
+            position: fixed;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 1.0em;
+            white-space: nowrap;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 9999;
+        }
+
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* ===== Контейнер ===== */
+        .container {
+            max-width: 830px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.5s forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .product-title {
+            text-align: center;
+            font-size: 1.6em;
+            margin-top: 0;
+        }
+
+        /* ===== Карусель ===== */
+        .carousel-wrapper {
+            position: relative;
+            overflow: hidden;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel img {
+            flex: 0 0 100%;
+            max-width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            object-fit: contain;
+        }
+
+        /* Стрілки для десктопу */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 2em;
+            padding: 8px 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.3s;
+            z-index: 10;
+            display: none;
+        }
+
+        .carousel-arrow:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .carousel-arrow.left { left: 10px; }
+        .carousel-arrow.right { right: 10px; }
+
+        /* ===== Опис ===== */
+        .product-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 20px 0 30px 20px;
+        }
+
+        .product-description ul {
+            padding-left: 20px;
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+
+        .product-description li {
+            margin-bottom: 6px;
+        }
+
+        .product-price {
+            font-size: 1.8em;
+            color: red;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .btn {
+            display: block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            margin: 20px auto;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* ===== Модалка ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .modal .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+            padding: 10px;
+            z-index: 10001;
+        }
+
+        .modal .arrow.left { left: 20px; }
+        .modal .arrow.right { right: 20px; }
+
+        /* ===== Медіа-запити ===== */
+        @media (min-width: 768px) {
+            .carousel-arrow { display: block; }
+        }
+
+        @media (min-width: 1024px) {
+            .product-description {
+                margin-left: 80px;
+                margin-right: 40px;
+            }
+            .product-description ul {
+                padding-left: 60px;
+            }
+            .product-description li {
+                border-bottom: 1px dotted #ddd;
+                padding-bottom: 5px;
+            }
+            .carousel img {
+                max-height: 420px;
+            }
+        }
+
+        /* Мобільна версія */
+        @media (max-width: 768px) {
+            header {
+                position: static;
+                top: auto;
+                left: auto;
+                padding: 0px;
+                background: transparent;
+            }
+
+            .logo svg {
+                width: 230px;
+            }
+
+            .container {
+                margin: 0;
+                padding: 20px;
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            body {
+                background-color: #fff;
+            }
+
+            .product-title {
+                font-size: 1.3em;
+            }
+
+            .carousel {
+                padding: 5px 0;
+            }
+
+            .product-description {
+                margin-left: 10px;
+            }
+
+            .product-description ul {
+                padding-left: 15px;
+            }
+        }
+
+        /* Дуже маленькі екрани */
+        @media (max-width: 480px) {
+            header {
+                position: static;
+                top: auto;
+                left: auto;
+                padding: 0px;
+                background: transparent;
+            }
+
+            .logo svg {
+                width: 205px;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="180" height="56" viewBox="0 0 600 200">
+            <defs>
+                <!-- 🌊 Хвиля для слогана -->
+                <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="-0.3" stop-color="#999">
+                        <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+                    </stop>
+                    <stop offset="-0.15" stop-color="#666">
+                        <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+                    </stop>
+                    <stop offset="0" stop-color="#999">
+                        <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+                    </stop>
+                </linearGradient>
+                <!-- 🔴 Хвиля для ПРО -->
+                <linearGradient id="pro-wave" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="-0.3" stop-color="#800000">
+                        <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+                    </stop>
+                    <stop offset="-0.15" stop-color="#ff4444">
+                        <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+                    </stop>
+                    <stop offset="0" stop-color="#800000">
+                        <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+                    </stop>
+                </linearGradient>
+                <!-- ⚙️ Хвиля для ЗАХИСТ -->
+                <linearGradient id="zahist-wave" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="-0.3" stop-color="#808080">
+                        <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+                    </stop>
+                    <stop offset="-0.15" stop-color="#e0e0e0">
+                        <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+                    </stop>
+                    <stop offset="0" stop-color="#808080">
+                        <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+                    </stop>
+                </linearGradient>
+            </defs>
+            <!-- ПРО -->
+            <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#pro-wave)">ПРО</text>
+            <!-- ЗАХИСТ -->
+            <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#zahist-wave)">ЗАХИСТ</text>
+            <!-- Слоган -->
+            <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="33" fill="url(#wave-gradient)">БЕЗДРОТОВІ СИСТЕМИ БЕЗПЕКИ</text>
+            <!-- Декор -->
+            <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10" />
+            <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10" />
+            <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10" />
+            <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10" />
+        </svg>
+    </div>
+</header>
+
+<div class="container">
+    <h2 class="product-title">Зовнішній датчик руху з фотокамерою Ajax MotionCam Outdoor</h2>
+
+    <div class="carousel-wrapper">
+        <div class="carousel" id="carousel">
+            <img src="images/ajax_motioncam_outdoor_white_1.png" alt="Датчик Ajax" onclick="openModal('images/ajax_motioncam_outdoor_white_1.png')">
+            <img src="images/ajax_motioncam_outdoor_white_2.png" alt="Датчик Ajax - вид збоку" onclick="openModal('images/ajax_motioncam_outdoor_white_2.png')">
+            <img src="images/ajax_motioncam_outdoor_white_3.png" alt="Датчик Ajax - вид збоку" onclick="openModal('images/ajax_motioncam_outdoor_white_3.png')">
+            <img src="images/ajax_motioncam_outdoor_white_4.png" alt="Датчик Ajax - вид на вулиці" onclick="openModal('images/ajax_motioncam_outdoor_white_4.png')">
+            
+            <!-- Клон першого зображення для безшовного циклу -->
+            <img src="images/ajax_motioncam_outdoor_white_1.png" alt="Датчик Ajax" onclick="openModal('images/ajax_motioncam_outdoor_white_1.png')">
+        </div>
+
+        <div class="carousel-arrow left" onclick="prevImage()">&#10094;</div>
+        <div class="carousel-arrow right" onclick="nextImage()">&#10095;</div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+  <div class="product-description">
+Бездротовий ІЧ датчик руху Ajax MotionCam Outdoor Jeweller з підтримкою фотоверифікації призначений для виявлення руху на вулиці та в приміщенні з автоматичним створенням серії фотографій за тривогою. Обладнаний двома інфрачервоними сенсорами та фотокамерою з ІЧ підсвічуванням для зйомки вночі. Дальність виявлення руху від 3 до 15 метрів (налаштовується повзунком), кут виявлення 90° по горизонталі, кут огляду камери 105° × 50°. Створює від 1 до 5 знімків роздільною здатністю 320×176 або 640×352 пікселів. Технологія Wings забезпечує швидку доставку фото (до 9 секунд), технологія Jeweller — надійний зв'язок до 1700 м. Алгоритми LISA та SmartDetect захищають від хибних спрацювань, імунітет до тварин заввишки до 80 см. Працює при температурах від -25°C до +60°C, захист IP55, автономна робота до 3 років від 4 батарей CR123A. Навіс Hood у комплекті захищає систему антимаскування від дощу та снігу.
+
+<br><br>
+<strong>Основні характеристики:</strong>
+<ul>
+  <li>2 інфрачервоні сенсори + фотокамера з ІЧ підсвічуванням</li>
+  <li>Фотоверифікація: серія з 1-5 знімків за тривогою</li>
+  <li>Роздільна здатність фото: 320×176 або 640×352 пікселів</li>
+  <li>Дальність виявлення: 3-15 метрів (налаштовується)</li>
+  <li>Кут виявлення руху: 90° по горизонталі</li>
+  <li>Кут огляду камери: 105° × 50°</li>
+  <li>Час доставлення фото: 9-20 секунд</li>
+  <li>2 технології зв'язку: Jeweller (команди) + Wings (фото)</li>
+  <li>Дальність зв'язку: до 1700 м</li>
+  <li>Імунітет до тварин: заввишки до 80 см</li>
+  <li>Алгоритми LISA та SmartDetect</li>
+  <li>Система антимаскування</li>
+  <li>Температурна компенсація: -25°C до +60°C</li>
+  <li>Автономна робота: до 3 років від 4 × CR123A</li>
+  <li>Захист IP55 + навіс Hood у комплекті</li>
+</ul>
+
+<strong>Фотоверифікація — візуальне підтвердження тривоги:</strong>
+<ul>
+  <li>Автоматична зйомка при виявленні руху в режимі охорони</li>
+  <li>Серія з 1 до 5 фотографій на вибір</li>
+  <li>Дві роздільності: 320×176 пікселів (швидка доставка) або 640×352 пікселів (висока якість)</li>
+  <li>ІЧ підсвічування для якісних знімків вночі та за умов недостатнього освітлення</li>
+  <li>Миттєве сповіщення з фото на смартфон</li>
+  <li>Можливість відразу побачити, хто або що викликало тривогу</li>
+  <li>Зменшення хибних викликів служби охорони</li>
+  <li>Збереження фото в додатку Ajax для подальшого перегляду</li>
+  <li>Швидка доставка: 9 секунд для 320×176 пікселів, 20 секунд для 640×352 пікселів</li>
+</ul>
+
+<strong>Технологія Wings — передавання фотографій:</strong>
+<ul>
+  <li>Спеціалізована технологія Ajax для передачі зображень</li>
+  <li>Двосторонній захищений зв'язок</li>
+  <li>Блокове шифрування з плаваючим ключем</li>
+  <li>Повторне завантаження пакетів даних у разі збоїв</li>
+  <li>Підтвердження доставлення фото</li>
+  <li>Радіочастотний гопінг для запобігання глушінню</li>
+  <li>Дальність передачі: до 1700 м (як і Jeweller)</li>
+  <li>Оптимізація розміру файлів для швидкої доставки</li>
+</ul>
+
+<strong>Технологія Jeweller — команди та тривоги:</strong>
+<ul>
+  <li>Пропрієтарна технологія Ajax для передавання команд, тривог і подій</li>
+  <li>Дальність зв'язку: до 1700 м (між датчиком і хабом за відсутності перешкод)</li>
+  <li>Двосторонній зв'язок з хабом</li>
+  <li>Блокове шифрування з плаваючим ключем</li>
+  <li>Передовий захист від саботажу</li>
+  <li>Миттєві сповіщення про події</li>
+  <li>Дистанційне керування та налаштування</li>
+  <li>Радіочастотний гопінг для запобігання глушінню</li>
+  <li>Діапазони радіочастот: 866-926.5 МГц (залежно від регіону)</li>
+  <li>Максимальна потужність: до 20 мВт (автоматичне регулювання)</li>
+  <li>Модуляція: GFSK</li>
+</ul>
+
+<strong>Два ІЧ сенсори для максимальної точності:</strong>
+<ul>
+  <li>Подвійна інфрачервона технологія виявлення</li>
+  <li>Два незалежні сенсори аналізують рух одночасно</li>
+  <li>Спрацювання тільки при підтвердженні обома сенсорами</li>
+  <li>Різко зменшує ймовірність хибних тривог</li>
+  <li>Високоточне виявлення людини</li>
+  <li>Чутливість до зміни температури в зоні виявлення</li>
+  <li>Надійна робота в різних погодних умовах</li>
+</ul>
+
+<strong>Фотокамера з ІЧ підсвічуванням:</strong>
+<ul>
+  <li>Кут огляду камери: 105° по горизонталі, 50° по вертикалі</li>
+  <li>Покриває ширшу зону ніж ІЧ датчик (90°)</li>
+  <li>Бочкоподібна TV дисторсія: 17% (стандарт EBU)</li>
+  <li>ІЧ підсвічування для зйомки вночі</li>
+  <li>Автоматична активація підсвічування за умов низького освітлення</li>
+  <li>Якісні знімки навіть у повній темряві</li>
+  <li>Налаштування роздільності: 320×176 або 640×352 пікселів</li>
+  <li>Регулювання кількості фото в серії: від 1 до 5 знімків</li>
+</ul>
+
+<strong>Налаштування дальності виявлення (3-15 метрів):</strong>
+<ul>
+  <li>Регульована дальність за допомогою повзунка на корпусі</li>
+  <li>Мінімальна дальність: 3 метри (для невеликих зон)</li>
+  <li>Максимальна дальність: 15 метрів (для великих територій)</li>
+  <li>Оптимальна висота встановлення: 0,8-1,3 метра</li>
+  <li>Можливість точного калібрування під конкретний об'єкт</li>
+  <li>Зменшення хибних спрацювань за межами зони інтересу</li>
+  <li>Економія енергії при меншій дальності</li>
+</ul>
+
+<strong>Швидкість виявлення руху (0,3-2 м/с):</strong>
+<ul>
+  <li>Виявляє рух від повільної ходьби (0,3 м/с) до швидкого бігу (2 м/с)</li>
+  <li>Оптимальний діапазон для виявлення людини</li>
+  <li>Не реагує на дуже повільні рухи (гілки дерев на вітрі)</li>
+  <li>Не реагує на дуже швидкі рухи (птахи, листя)</li>
+  <li>Направлення лінзи має бути перпендикулярним шляху руху</li>
+  <li>Максимальна ефективність при русі поперек зони виявлення</li>
+</ul>
+
+<strong>Імунітет до тварин (зріст до 80 см):</strong>
+<ul>
+  <li>Не реагує на домашніх тварин заввишки до 80 см</li>
+  <li>Розпізнає відмінність між людиною та твариною</li>
+  <li>Аналіз швидкості руху та теплового сліду</li>
+  <li>Підходить для будинків з собаками середнього розміру</li>
+  <li>Підходить для котів та інших невеликих тварин</li>
+  <li>Зменшення хибних спрацювань від тварин на 99%</li>
+  <li>Фото допомагає підтвердити тип об'єкта</li>
+</ul>
+
+<strong>Алгоритми захисту від хибних тривог:</strong>
+<ul>
+  <li>LISA (Listens to Infrared Sensor Algorithmically) — інтелектуальний аналіз сигналу</li>
+  <li>SmartDetect — розумна технологія виявлення</li>
+  <li>Програмні алгоритми фільтрують помилкові спрацювання</li>
+  <li>Аналіз форми теплового сліду</li>
+  <li>Відсівання сигналів від дрібних тварин, птахів, комах</li>
+  <li>Захист від спрацювань на рухомі гілки дерев</li>
+  <li>Захист від впливу дощу, снігу, граду</li>
+  <li>Мінімізація хибних тривог до рівня менше 1%</li>
+  <li>Фотоверифікація — додатковий захист від помилкових викликів</li>
+</ul>
+
+<strong>Система антимаскування:</strong>
+<ul>
+  <li>Виявляє спроби закрити або заблокувати огляд датчика</li>
+  <li>Контроль наявності перешкод перед лінзою</li>
+  <li>Миттєве сповіщення при спробі маскування</li>
+  <li>Захист від фарби, стрічки, плівки на лінзі</li>
+  <li>Захист від установки перешкод перед датчиком</li>
+  <li>Hood (навіс) у комплекті захищає від дощу та снігу</li>
+  <li>Важливий елемент професійної системи безпеки</li>
+</ul>
+
+<strong>Температурна компенсація (-25°C до +60°C):</strong>
+<ul>
+  <li>Ефективне виявлення руху в екстремальних температурах</li>
+  <li>Працює взимку при морозах до -25°C</li>
+  <li>Працює влітку при спеці до +60°C</li>
+  <li>Автоматична компенсація чутливості залежно від температури</li>
+  <li>Стабільна робота при різкій зміні температури</li>
+  <li>Фотокамера працює в усьому температурному діапазоні</li>
+  <li>Підходить для використання в Україні цілий рік</li>
+</ul>
+
+<strong>Три рівні чутливості:</strong>
+<ul>
+  <li>Низька чутливість: для зон з можливими завадами</li>
+  <li>Середня чутливість: стандартний режим (рекомендовано)</li>
+  <li>Висока чутливість: для максимальної точності виявлення</li>
+  <li>Налаштовується через застосунок Ajax</li>
+  <li>Можливість налаштування PRO або адміністратором</li>
+  <li>Дозволяє оптимізувати роботу під конкретні умови</li>
+</ul>
+
+<strong>Захист від саботажу:</strong>
+<ul>
+  <li>Тривога тампера при спробі відірвати датчик від поверхні або зняти з кріпильної панелі</li>
+  <li>Захист від підміни — автентифікація пристрою</li>
+  <li>Система антимаскування виявляє спроби заблокувати огляд</li>
+  <li>Виявлення втрати зв'язку від 36 секунд</li>
+  <li>Захист від радіозавад через радіочастотний гопінг</li>
+  <li>Сповіщення про низький заряд батареї</li>
+  <li>Фотографії підтверджують справжність тривоги</li>
+</ul>
+
+<strong>Живлення (батареї):</strong>
+<ul>
+  <li>Батареї: 4 × CR123A тип C (попередньо встановлені)</li>
+  <li>Розрахунковий строк роботи: до 3 років (без затримки на вхід)</li>
+  <li>До 2,5 років (з увімкненою затримкою на вхід)</li>
+  <li>Діапазон робочої напруги: 3,8–6,2 В⎓</li>
+  <li>Номінальна робоча напруга: 6 В⎓</li>
+  <li>Споживання в стані спокою: 23 мкА</li>
+  <li>Максимальний струм споживання: 906 мА (при зйомці фото)</li>
+  <li>Повна ємність батареї: 3200 мА·год</li>
+  <li>Напруга низького заряду: 4,65 В⎓</li>
+  <li>Напруга відновлення низького заряду: 5 В⎓</li>
+  <li>Напруга відпрацьованої батареї: 3,8 В⎓ (пристрій вимикається)</li>
+  <li>Виробник батарей: Huiderui або Panasonic</li>
+</ul>
+
+<strong>Фізичні характеристики:</strong>
+<ul>
+  <li>Розміри: 206 × 108 × 93 мм</li>
+  <li>Вага: 470 г</li>
+  <li>Діапазон робочих температур: від -25°C до +60°C</li>
+  <li>Допустима вологість: до 95%</li>
+  <li>Клас захисту: IP55 (захист від пилу та струменів води)</li>
+  <li>Колір: білий</li>
+  <li>Міцний пластиковий корпус</li>
+  <li>Сучасний дизайн</li>
+</ul>
+
+<strong>Захист IP55:</strong>
+<ul>
+  <li>Захист від пилу (рівень 5) — пило-захищений</li>
+  <li>Захист від води (рівень 5) — струмені води з будь-якого напрямку</li>
+  <li>Працює під дощем, снігом, градом</li>
+  <li>Стійкість до бруду та пилу</li>
+  <li>Hood (навіс) у комплекті для додаткового захисту</li>
+  <li>Всепогодне використання на вулиці</li>
+  <li>Тривалий термін служби в зовнішніх умовах</li>
+</ul>
+
+<strong>Рекомендації з встановлення:</strong>
+<ul>
+  <li>Рекомендована висота встановлення: 0,8-1,3 метра</li>
+  <li>Призначений для використання в приміщенні та на вулиці</li>
+  <li>Встановлюйте Hood (навіс) для захисту системи антимаскування</li>
+  <li>Направляйте датчик перпендикулярно до імовірного шляху вторгнення</li>
+  <li>Уникайте встановлення поруч з джерелами тепла</li>
+  <li>Уникайте зон з рухомими об'єктами (дерева, кущі)</li>
+  <li>Налаштуйте дальність виявлення після встановлення</li>
+  <li>Перевірте якість фото вдень та вночі після встановлення</li>
+</ul>
+
+<strong>Застосування:</strong>
+<ul>
+  <li>Охорона периметра приватного будинку з фотофіксацією</li>
+  <li>Захист входу, воріт, дверей з візуальним підтвердженням</li>
+  <li>Контроль території ділянки, саду</li>
+  <li>Охорона паркінгу, гаражу з фото порушників</li>
+  <li>Захист вікон від проникнення</li>
+  <li>Контроль стін будинку, огорожі</li>
+  <li>Охорона господарських будівель</li>
+  <li>Захист комерційних об'єктів з доказами</li>
+  <li>Нагляд за складами на вулиці</li>
+  <li>Будь-які завдання зовнішньої охорони з фотоверифікацією</li>
+</ul>
+
+<strong>Переваги Ajax MotionCam Outdoor:</strong>
+<ul>
+  <li>✅ Фотоверифікація — візуальне підтвердження кожної тривоги</li>
+  <li>✅ Серія з 1-5 знімків на вибір</li>
+  <li>✅ ІЧ підсвічування для якісних фото вночі</li>
+  <li>✅ Швидка доставка фото: 9-20 секунд</li>
+  <li>✅ 2 технології зв'язку: Jeweller + Wings</li>
+  <li>✅ Висока дальність зв'язку — до 1700 м</li>
+  <li>✅ 2 ІЧ сенсори для максимальної точності</li>
+  <li>✅ Налаштування дальності 3-15 м</li>
+  <li>✅ Імунітет до тварин заввишки до 80 см</li>
+  <li>✅ Алгоритми LISA та SmartDetect</li>
+  <li>✅ Система антимаскування</li>
+  <li>✅ Температурна компенсація -25°C до +60°C</li>
+  <li>✅ До 3 років автономної роботи</li>
+  <li>✅ Захист IP55 + Hood у комплекті</li>
+  <li>✅ Зменшення хибних викликів служби охорони</li>
+</ul>
+
+<strong>Налаштування через застосунок Ajax:</strong>
+<ul>
+  <li>Додавання датчика до системи за кілька кроків</li>
+  <li>Вибір рівня чутливості (низький, середній, високий)</li>
+  <li>Налаштування роздільності фото (320×176 або 640×352 пікселів)</li>
+  <li>Вибір кількості знімків у серії (1-5 фотографій)</li>
+  <li>Тестування датчика в режимі реального часу</li>
+  <li>Перегляд тестових фото для перевірки кута огляду</li>
+  <li>Перевірка рівня сигналу Jeweller та Wings</li>
+  <li>Моніторинг заряду батарей</li>
+  <li>Налаштування часу затримки на вхід/вихід</li>
+  <li>Перегляд історії спрацювань з фотографіями</li>
+  <li>Віддалене тестування без виїзду на об'єкт</li>
+  <li>Оновлення прошивки онлайн</li>
+</ul>
+
+<strong>Сценарії використання:</strong>
+<ul>
+  <li>Охорона периметра будинку: отримання фото зловмисників при спробі проникнення</li>
+  <li>Контроль входу: візуальне підтвердження особи, що наближається</li>
+  <li>Захист паркінгу: фото автомобілів та осіб біля гаража</li>
+  <li>Нагляд за господарськими будівлями: доказ проникнення</li>
+  <li>Захист товарів на складі: фотофіксація крадіжок</li>
+  <li>Контроль території: візуальне підтвердження подій</li>
+  <li>Зменшення хибних викликів: можливість побачити причину спрацювання</li>
+  <li>Докази для поліції: фото зловмисників у високій якості</li>
+</ul>
+
+<strong>Відмінності від MotionProtect Outdoor (без камери):</strong>
+<ul>
+  <li>MotionCam Outdoor має фотокамеру з ІЧ підсвічуванням</li>
+  <li>Технологія Wings для передачі фотографій (додаткова)</li>
+  <li>Візуальне підтвердження кожної тривоги</li>
+  <li>Серія фотографій від 1 до 5 знімків</li>
+  <li>4 батареї CR123A замість 2 (для роботи камери)</li>
+  <li>Більші розміри: 206×108×93 мм vs 183×70×65 мм</li>
+  <li>Більша вага: 470 г vs 322 г</li>
+  <li>Термін роботи: до 3 років vs до 5 років</li>
+  <li>Вища вартість (фотокамера та додаткові функції)</li>
+</ul>
+
+<strong>Hood (навіс) — у комплекті:</strong>
+<ul>
+  <li>Захищає систему антимаскування від дощу та снігу</li>
+  <li>Запобігає хибним спрацюванням антимаскування</li>
+  <li>Продовжує термін служби датчика</li>
+  <li>Легке встановлення на корпус датчика</li>
+  <li>Обов'язковий для установки на відкритих ділянках</li>
+  <li>Входить у комплект (не потрібно купувати окремо)</li>
+</ul>
+
+<strong>Комплектація:</strong>
+<ul>
+  <li>MotionCam Outdoor Jeweller</li>
+  <li>Кріпильна панель SmartBracket</li>
+  <li>Навіс Hood</li>
+  <li>Монтажний комплект</li>
+  <li>4 батареї CR123A (попередньо встановлені)</li>
+  <li>Коротка інструкція</li>
+</ul>
+
+<strong>Сумісність:</strong>
+<ul>
+  <li>Працює з усіма хабами Ajax (Hub, Hub 2, Hub Plus, Hub Hybrid)</li>
+  <li>Потрібен хаб з підтримкою фотоверифікації</li>
+  <li>Підтримка ретрансляторів сигналу (ReX, ReX 2)</li>
+  <li>Інтеграція з застосунками Ajax (iOS, Android, macOS, Windows)</li>
+  <li>Підключення до пультів централізованого спостереження (ПЦС)</li>
+  <li>Підтримка професійного режиму для інсталяторів (PRO)</li>
+  <li>Сумісність з усіма пристроями Ajax</li>
+</ul>
+
+<strong>Чому варто обрати MotionCam Outdoor:</strong>
+<ul>
+  <li>Унікальна фотоверифікація — бачите, що викликало тривогу</li>
+  <li>Зменшення хибних викликів служби охорони</li>
+  <li>Докази для поліції у випадку проникнення</li>
+  <li>ІЧ підсвічування для якісних фото вночі</li>
+  <li>Швидка доставка фото за 9-20 секунд</li>
+  <li>Надійний захист IP55 з Hood у комплекті</li>
+  <li>До 3 років автономної роботи</li>
+  <li>Найточніший датчик руху з камерою від Ajax</li>
+  <li>Мінімум хибних спрацювань завдяки LISA та SmartDetect</li>
+</ul>
+</div>
+    <p class="product-price">8800.00 грн</p>
+    <button class="btn" onclick="addToCartFromProductPage({ id: 'Ajax MotionCam Outdoor White', name: 'Ajax MotionCam Outdoor White', price: 8800, image: 'images/ajax_motioncam_outdoor_white_1.png' })">
+        Додати у кошик
+    </button>
+</div>
+
+<div id="modal" class="modal" onclick="closeModal()">
+    <span class="arrow left" onclick="event.stopPropagation(); prevModalImage()">&#10094;</span>
+    <img id="modal-img" src="" alt="Збільшене зображення">
+    <span class="arrow right" onclick="event.stopPropagation(); nextModalImage()">&#10095;</span>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+const images = [
+    "images/ajax_motioncam_outdoor_white_1.png",
+    "images/ajax_motioncam_outdoor_white_2.png",
+    "images/ajax_motioncam_outdoor_white_3.png",
+    "images/ajax_motioncam_outdoor_white_4.png"
+   
+];
+let currentIndex = 0;
+const totalSlides = images.length;
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 2500);
+}
+
+function addToCartFromProductPage(item) {
+    cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingItem = cart.find(i => i.id === item.id);
+    if (existingItem) existingItem.quantity++;
+    else { item.quantity = 1; cart.push(item); }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    showToast(`${item.name} додано до кошика!`);
+}
+
+/* === Карусель === */
+function updateCarousel() {
+    const carouselEl = document.getElementById('carousel');
+    carouselEl.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+
+function nextImage() {
+    const carouselEl = document.getElementById('carousel');
+    currentIndex++;
+    carouselEl.style.transition = 'transform 0.5s ease';
+    updateCarousel();
+    
+    // Якщо дійшли до клону (позиція після останнього оригіналу)
+    if (currentIndex === totalSlides) {
+        setTimeout(() => {
+            carouselEl.style.transition = 'none';
+            currentIndex = 0;
+            updateCarousel();
+        }, 500);
+    }
+}
+
+function prevImage() {
+    const carouselEl = document.getElementById('carousel');
+    
+    // Якщо на першому зображенні - миттєво стрибаємо на клон
+    if (currentIndex === 0) {
+        carouselEl.style.transition = 'none';
+        currentIndex = totalSlides;
+        updateCarousel();
+        
+        // Даємо браузеру час застосувати зміни
+        setTimeout(() => {
+            carouselEl.style.transition = 'transform 0.5s ease';
+            currentIndex--;
+            updateCarousel();
+        }, 20);
+    } else {
+        currentIndex--;
+        carouselEl.style.transition = 'transform 0.5s ease';
+        updateCarousel();
+    }
+}
+
+/* === Модалка === */
+function openModal(imageSrc) {
+    const modalIndex = images.indexOf(imageSrc);
+    if (modalIndex !== -1) {
+        currentIndex = modalIndex;
+    }
+    document.getElementById("modal-img").src = imageSrc;
+    document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+function nextModalImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    document.getElementById("modal-img").src = images[currentIndex];
+}
+
+function prevModalImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    document.getElementById("modal-img").src = images[currentIndex];
+}
+
+/* === Свайпи === */
+let startX = 0;
+const carousel = document.getElementById('carousel');
+carousel.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
+carousel.addEventListener('touchend', e => {
+    const diff = e.changedTouches[0].clientX - startX;
+    if (Math.abs(diff) > 50) diff > 0 ? prevImage() : nextImage();
+}, { passive: true });
+
+const modal = document.getElementById("modal");
+modal.addEventListener("touchstart", e => startX = e.touches[0].clientX, { passive: true });
+modal.addEventListener("touchend", e => {
+    const diff = e.changedTouches[0].clientX - startX;
+    if (Math.abs(diff) > 50) diff > 0 ? prevModalImage() : nextModalImage();
+}, { passive: true });
+</script>
+</body>
+</html>
