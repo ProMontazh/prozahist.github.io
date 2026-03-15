@@ -264,7 +264,7 @@ footer {
 
 .footer-links a:hover {
     color: var(--white);
-    transform: translateX(1px);
+   /*  transform: translateX(1px);*/
 }
 
 /* ======================================================
