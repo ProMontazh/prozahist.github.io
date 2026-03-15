@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ajax StreetSiren White - бездротова зовнішня сирена 113 дБ з LED-підсвічуванням. Jeweller до 1700м, захист IP54, автономна робота до 5 років. Купити з доставкою">
+    <meta name="keywords" content="ajax streetsiren, зовнішня сирена ajax, бездротова сирена, сирена 113 дб, ajax сирена вулиця, streetsiren jeweller, сирена з підсвічуванням, охоронна сирена, ajax зовнішня сирена, сирена ip54, купити ajax сирена">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>Ajax StreetSiren White — Бездротова зовнішня сирена 113 дБ</title>
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "Ajax StreetSiren White",
+      "image": [
+        "https://прозахист.pp.ua/images/ajax_streetsiren_white_1.jpg",
+        "https://прозахист.pp.ua/images/ajax_streetsiren_white_2.jpg",
+        "https://прозахіст.pp.ua/images/ajax_streetsiren_white_3.jpg"
+        
+       
+      ],
+      "description": "Ajax StreetSiren White - бездротова зовнішня сирена 113 дБ з LED-підсвічуванням. Jeweller до 1700м, захист IP54, автономна робота до 5 років. Купити з доставкою",
+      "brand": {
+        "@type": "Brand",
+        "name": "Ajax Systems"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://прозахист.pp.ua/details_protect_outdoor_5_ajax_streetsiren_white.html",
+        "priceCurrency": "UAH",
+        "price": "4350.00",
+        "availability": "https://schema.org/InStock"
+       
+      }
+    }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* ===== ЛОГОТИП ===== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background: transparent;
+        }
+
+        .logo svg {
+            width: 205px;
+            height: auto;
+        }
+
+        /* ===== Toast ===== */
+        .toast {
+            position: fixed;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 1.0em;
+            white-space: nowrap;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.5s;
+            z-index: 9999;
+        }
+
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* ===== Контейнер ===== */
+        .container {
+            max-width: 830px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.5s forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .product-title {
+            text-align: center;
+            font-size: 1.6em;
+            margin-top: 0;
+        }
+
+        /* ===== Карусель ===== */
+        .carousel-wrapper {
+            position: relative;
+            overflow: hidden;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel img {
+            flex: 0 0 100%;
+            max-width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            object-fit: contain;
+        }
+
+        /* Стрілки для десктопу */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 2em;
+            padding: 8px 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.3s;
+            z-index: 10;
+            display: none;
+        }
+
+        .carousel-arrow:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .carousel-arrow.left { left: 10px; }
+        .carousel-arrow.right { right: 10px; }
+
+        /* ===== Опис ===== */
+        .product-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin: 20px 0 30px 20px;
+        }
+
+        .product-description ul {
+            padding-left: 20px;
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+
+        .product-description li {
+            margin-bottom: 6px;
+        }
+
+        .product-price {
+            font-size: 1.8em;
+            color: red;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .btn {
+            display: block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            margin: 20px auto;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* ===== Модалка ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .modal .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+            padding: 10px;
+            z-index: 10001;
+        }
+
+        .modal .arrow.left { left: 20px; }
+        .modal .arrow.right { right: 20px; }
+
+        /* ===== Медіа-запити ===== */
+        @media (min-width: 768px) {
+            .carousel-arrow { display: block; }
+        }
+
+        @media (min-width: 1024px) {
+            .product-description {
+                margin-left: 80px;
+                margin-right: 40px;
+            }
+            .product-description ul {
+                padding-left: 60px;
+            }
+            .product-description li {
+                border-bottom: 1px dotted #ddd;
+                padding-bottom: 5px;
+            }
+            .carousel img {
+                max-height: 420px;
+            }
+        }
+
+        /* Мобільна версія */
+        @media (max-width: 768px) {
+            header {
+                position: static;
+                top: auto;
+                left: auto;
+                padding: 0px;
+                background: transparent;
+            }
+
+            .logo svg {
+                width: 230px;
+            }
+
+            .container {
+                margin: 0;
+                padding: 20px;
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            body {
+                background-color: #fff;
+            }
+
+            .product-title {
+                font-size: 1.3em;
+            }
+
+            .carousel {
+                padding: 5px 0;
+            }
+
+            .product-description {
+                margin-left: 10px;
+            }
+
+            .product-description ul {
+                padding-left: 15px;
+            }
+        }
+
+        /* Дуже маленькі екрани */
+        @media (max-width: 480px) {
+            header {
+                position: static;
+                top: auto;
+                left: auto;
+                padding: 0px;
+                background: transparent;
+            }
+
+            .logo svg {
+                width: 205px;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="180" height="56" viewBox="0 0 600 200">
+            <defs>
+                <!-- 🌊 Хвиля для слогана -->
+                <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="-0.3" stop-color="#999">
+                        <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+                    </stop>
+                    <stop offset="-0.15" stop-color="#666">
+                        <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+                    </stop>
+                    <stop offset="0" stop-color="#999">
+                        <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
+                    </stop>
+                </linearGradient>
+                <!-- 🔴 Хвиля для ПРО -->
+                <linearGradient id="pro-wave" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="-0.3" stop-color="#800000">
+                        <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+                    </stop>
+                    <stop offset="-0.15" stop-color="#ff4444">
+                        <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+                    </stop>
+                    <stop offset="0" stop-color="#800000">
+                        <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
+                    </stop>
+                </linearGradient>
+                <!-- ⚙️ Хвиля для ЗАХИСТ -->
+                <linearGradient id="zahist-wave" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="-0.3" stop-color="#808080">
+                        <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+                    </stop>
+                    <stop offset="-0.15" stop-color="#e0e0e0">
+                        <animate attributeName="offset" values="-0.15; 1.45; 1.45" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+                    </stop>
+                    <stop offset="0" stop-color="#808080">
+                        <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
+                    </stop>
+                </linearGradient>
+            </defs>
+            <!-- ПРО -->
+            <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#pro-wave)">ПРО</text>
+            <!-- ЗАХИСТ -->
+            <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#zahist-wave)">ЗАХИСТ</text>
+            <!-- Слоган -->
+            <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="33" fill="url(#wave-gradient)">БЕЗДРОТОВІ СИСТЕМИ БЕЗПЕКИ</text>
+            <!-- Декор -->
+            <line x1="483" y1="65" x2="523" y2="48" stroke="#800000" stroke-width="10" />
+            <line x1="523" y1="48" x2="563" y2="65" stroke="#800000" stroke-width="10" />
+            <line x1="493" y1="70" x2="493" y2="100" stroke="#808080" stroke-width="10" />
+            <line x1="553" y1="70" x2="553" y2="100" stroke="#808080" stroke-width="10" />
+        </svg>
+    </div>
+</header>
+
+<div class="container">
+    <h2 class="product-title">Вулична сирена Ajax StreetSiren Jeweller - Бездротова сирена для використання в приміщенні й на вулиці</h2>
+
+    <div class="carousel-wrapper">
+        <div class="carousel" id="carousel">
+            <img src="images/ajax_streetsiren_white_1.jpg" alt="Сирена вулична Ajax" onclick="openModal('images/ajax_streetsiren_white_1.jpg')">
+            <img src="images/ajax_streetsiren_white_2.jpg" alt="Сирена вулична Ajax - вид збоку" onclick="openModal('ajax_streetsiren_white_2.jpg')">
+            <img src="images/ajax_streetsiren_white_3.jpg" alt="Сирена вулична Ajax - вид збоку" onclick="openModal('images/ajax_streetsiren_white_3.jpg')">
+           
+            
+            <!-- Клон першого зображення для безшовного циклу -->
+            <img src="images/ajax_streetsiren_white_1.jpg" alt="Сирена вулична Ajax" onclick="openModal('images/ajax_streetsiren_white_1.jpg')">
+        </div>
+
+        <div class="carousel-arrow left" onclick="prevImage()">&#10094;</div>
+        <div class="carousel-arrow right" onclick="nextImage()">&#10095;</div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+<div class="product-description">
+Бездротова зовнішня сирена Ajax StreetSiren White призначена для звукового та візуального оповіщення про тривогу на вулиці. Гучність сигналу 113 дБ чути на відстані до 600 метрів у відкритому просторі. Яскраве LED-підсвічування привертає увагу сусідів та перехожих, відлякує зловмисників. Працює по бездротовій технології Jeweller з дальністю зв'язку до 1700 метрів. Захист IP54 забезпечує роботу під дощем та снігом. Автономна робота до 5 років від 4 батарей CR123A. Захист від саботажу: тампер проти зняття, система антимаскування, виявлення втрати зв'язку. Регульована гучність та тривалість сигналу через застосунок Ajax. Два режими світлодіодів: спалахи або постійне світіння. Миттєва активація при тривозі. Простий монтаж на кріпильну панель SmartBracket. Сучасний дизайн білого кольору.
+
+<br><br>
+<strong>Основні характеристики:</strong>
+<ul>
+  <li>Зовнішня бездротова сирена для звукового та світлового оповіщення</li>
+  <li>Гучність сигналу: 113 дБ (чути до 600 м у відкритому просторі)</li>
+  <li>Яскраве LED-підсвічування (спалахи або постійне світіння)</li>
+  <li>Технологія зв'язку: Jeweller (дальність до 1700 м)</li>
+  <li>Захист: IP54 (від пилу та бризок води)</li>
+  <li>Автономна робота: до 5 років від 4 × CR123A</li>
+  <li>Регульована гучність та тривалість сигналу</li>
+  <li>Два режими LED: спалахи або постійне світіння</li>
+  <li>Захист від саботажу: тампер, антимаскування</li>
+  <li>Миттєва активація при тривозі</li>
+  <li>Налаштування через застосунок Ajax</li>
+  <li>Температурний діапазон: -25°C до +50°C</li>
+  <li>Кріпильна панель SmartBracket у комплекті</li>
+  <li>Колір: білий</li>
+</ul>
+
+<strong>Гучність 113 дБ — потужне оповіщення:</strong>
+<ul>
+  <li>Рівень звуку: 113 дБ на відстані 1 метр</li>
+  <li>Чути на відстані до 600 метрів у відкритому просторі</li>
+  <li>Порівняння: 113 дБ — як гучність працюючої бензопили або відбійного молотка</li>
+  <li>Достатньо гучно для привернення уваги сусідів</li>
+  <li>Відлякує зловмисників потужним звуковим сигналом</li>
+  <li>Регульована гучність через застосунок Ajax (тихіше або голосніше)</li>
+  <li>Ефективно працює навіть у шумному міському середовищі</li>
+</ul>
+
+<strong>LED-підсвічування — візуальне оповіщення:</strong>
+<ul>
+  <li>Яскраві світлодіоди червоного кольору</li>
+  <li>Два режими роботи: спалахи або постійне світіння</li>
+  <li>Режим спалахів: мигає під час тривоги (привертає більше уваги)</li>
+  <li>Режим постійного світіння: світить безперервно під час тривоги</li>
+  <li>Налаштування режиму через застосунок Ajax</li>
+  <li>Видно здалеку вночі та в темний час доби</li>
+  <li>Додатково відлякує зловмисників</li>
+  <li>Допомагає сусідам та перехожим звернути увагу на подію</li>
+</ul>
+
+<strong>Технологія зв'язку Jeweller:</strong>
+<ul>
+  <li>Пропрієтарна бездротова технологія Ajax</li>
+  <li>Дальність зв'язку: до 1700 м (між сиреною і хабом за відсутності перешкод)</li>
+  <li>Двосторонній зв'язок з хабом</li>
+  <li>Блокове шифрування з плаваючим ключем</li>
+  <li>Передовий захист від саботажу</li>
+  <li>Миттєва передача команд активації</li>
+  <li>Дистанційне налаштування через застосунок Ajax</li>
+  <li>Радіочастотний гопінг для запобігання глушінню</li>
+  <li>Діапазони радіочастот: 866-926.5 МГц (залежно від регіону)</li>
+  <li>Максимальна потужність: до 20 мВт (автоматичне регулювання)</li>
+  <li>Модуляція: GFSK</li>
+</ul>
+
+<strong>Регульована гучність та тривалість:</strong>
+<ul>
+  <li>Гучність: налаштовується в діапазоні від тихого до максимального (113 дБ)</li>
+  <li>Тривалість сигналу: від кількох секунд до кількох хвилин</li>
+  <li>Налаштування через застосунок Ajax без зняття сирени</li>
+  <li>Можливість вибрати оптимальну гучність для вашої ситуації</li>
+  <li>Уникнення надмірного шумового забруднення</li>
+  <li>Економія батареї при коротшій тривалості</li>
+  <li>Індивідуальне налаштування для різних типів тривог</li>
+</ul>
+
+<strong>Миттєва активація при тривозі:</strong>
+<ul>
+  <li>Спрацювання одразу після отримання команди від хабу</li>
+  <li>Затримка активації менше 1 секунди</li>
+  <li>Синхронізована робота з іншими сиренами Ajax</li>
+  <li>Одночасне спрацювання звуку та світла</li>
+  <li>Надійна робота навіть при поганій погоді</li>
+  <li>Тестування через застосунок в один клік</li>
+</ul>
+
+<strong>Захист IP54 — всепогодна робота:</strong>
+<ul>
+  <li>Захист від пилу (рівень 5) — пило-захищений</li>
+  <li>Захист від води (рівень 4) — бризки води з будь-якого напрямку</li>
+  <li>Працює під дощем та снігом</li>
+  <li>Стійкість до бруду та пилу</li>
+  <li>Не боїться вологості та конденсату</li>
+  <li>Працює в температурному діапазоні -25°C до +50°C</li>
+  <li>Міцний пластиковий корпус</li>
+  <li>Тривалий термін служби на вулиці</li>
+</ul>
+
+<strong>Автономна робота до 5 років:</strong>
+<ul>
+  <li>Живлення: 4 батареї CR123A (попередньо встановлені)</li>
+  <li>Розрахунковий термін роботи: до 5 років</li>
+  <li>Найдовший термін роботи серед зовнішніх сирен Ajax</li>
+  <li>Економне споживання енергії в режимі очікування</li>
+  <li>Сповіщення про низький заряд батареї завчасно</li>
+  <li>Легка заміна батарей без демонтажу сирени</li>
+  <li>Моніторинг заряду батарей через застосунок Ajax</li>
+</ul>
+
+<strong>Захист від саботажу:</strong>
+<ul>
+  <li>Тампер проти зняття — сповіщення при спробі зняти сирену з поверхні або з кріпильної панелі</li>
+  <li>Система антимаскування — виявляє спроби заблокувати динамік або світлодіоди</li>
+  <li>Виявлення втрати зв'язку від 36 секунд</li>
+  <li>Захист від радіозавад через радіочастотний гопінг</li>
+  <li>Захищений корпус — важко пошкодити або відключити</li>
+  <li>Сповіщення про низький заряд батареї</li>
+  <li>Миттєві push-сповіщення про спроби саботажу</li>
+</ul>
+
+<strong>Сценарії активації:</strong>
+<ul>
+  <li>Спрацювання датчиків руху — сирена включається при виявленні вторгнення</li>
+  <li>Відкриття дверей/вікон — активація при спробі проникнення</li>
+  <li>Тривожна кнопка — включення сирени вручну при небезпеці</li>
+  <li>Пожежні датчики — звуковий та світловий сигнал при виявленні диму/вогню</li>
+  <li>Датчики протоки/затоплення — оповіщення про аварійну ситуацію</li>
+  <li>Ручна активація через застосунок Ajax — тестування або відлякування</li>
+  <li>Сценарії автоматизації — включення за розкладом або умовами</li>
+</ul>
+
+<strong>Налаштування через застосунок Ajax:</strong>
+<ul>
+  <li>Додавання сирени до системи за кілька кроків</li>
+  <li>Регулювання гучності сигналу</li>
+  <li>Налаштування тривалості звукового сигналу</li>
+  <li>Вибір режиму LED: спалахи або постійне світіння</li>
+  <li>Тестування сирени в один клік</li>
+  <li>Перевірка рівня сигналу Jeweller</li>
+  <li>Моніторинг заряду батарей</li>
+  <li>Налаштування сценаріїв активації</li>
+  <li>Перегляд історії спрацювань</li>
+  <li>Віддалене керування без виїзду на об'єкт</li>
+  <li>Оновлення прошивки онлайн</li>
+</ul>
+
+<strong>Монтаж на SmartBracket:</strong>
+<ul>
+  <li>Кріпильна панель SmartBracket у комплекті</li>
+  <li>Швидкий монтаж без зняття кришки корпусу</li>
+  <li>Фіксація сирени на панелі одним рухом</li>
+  <li>Тампер автоматично активується при установці</li>
+  <li>Можливість зняття тільки при роззброєнні системи</li>
+  <li>Надійна фіксація — не спадає від вітру або вібрацій</li>
+  <li>Естетичний зовнішній вигляд після монтажу</li>
+</ul>
+
+<strong>Застосування:</strong>
+<ul>
+  <li>Охорона приватних будинків — звукове та візуальне відлякування</li>
+  <li>Дачі та котеджі — привернення уваги сусідів при тривозі</li>
+  <li>Комерційні об'єкти — магазини, склади, офіси</li>
+  <li>Виробничі приміщення та цеху</li>
+  <li>Паркінги та гаражні кооперативи</li>
+  <li>Господарські будівлі та ангари</li>
+  <li>Будь-які об'єкти з потребою зовнішнього оповіщення</li>
+  <li>Доповнення до внутрішньої сирени HomeSiren</li>
+</ul>
+
+<strong>Переваги Ajax StreetSiren White:</strong>
+<ul>
+  <li>✅ Потужний звук 113 дБ — чути до 600 м</li>
+  <li>✅ Яскраве LED-підсвічування (спалахи/постійне світіння)</li>
+  <li>✅ Бездротова технологія Jeweller до 1700 м</li>
+  <li>✅ До 5 років автономної роботи</li>
+  <li>✅ Регульована гучність та тривалість</li>
+  <li>✅ Два режими світлодіодів</li>
+  <li>✅ Захист IP54 — працює під дощем та снігом</li>
+  <li>✅ Захист від саботажу: тампер, антимаскування</li>
+  <li>✅ Миттєва активація при тривозі</li>
+  <li>✅ Налаштування через застосунок Ajax</li>
+  <li>✅ Простий монтаж на SmartBracket</li>
+  <li>✅ Температурний діапазон -25°C до +50°C</li>
+  <li>✅ Сучасний дизайн білого кольору</li>
+</ul>
+
+<strong>Рекомендації з встановлення:</strong>
+<ul>
+  <li>Встановлюйте на висоті 2-3 метри від землі</li>
+  <li>Розміщуйте на видному місці для максимального ефекту відлякування</li>
+  <li>Уникайте місць з прямим потраплянням струменів води</li>
+  <li>Не встановлюйте під водостічними трубами</li>
+  <li>Перевірте якість сигналу Jeweller перед остаточним монтажем</li>
+  <li>Встановлюйте на стіні фасаду будинку для кращої чутності</li>
+  <li>Рекомендується встановлення під дашком або козирком</li>
+  <li>Проведіть тестування після встановлення</li>
+  <li>Переконайтеся, що звук не заважає сусідам (регулюйте гучність)</li>
+</ul>
+
+<strong>Сценарії використання:</strong>
+<ul>
+  <li>Відлякування зловмисників — гучний звук та яскраве світло змушують злочинців відступити</li>
+  <li>Привернення уваги сусідів — при тривозі сусіди побачать/почують та зможуть викликати поліцію</li>
+  <li>Пожежна тривога — звуковий сигнал попереджає про небезпеку вогню</li>
+  <li>Затоплення — оповіщення про аварійну ситуацію</li>
+  <li>Тривожна кнопка — відлякування при нападі або загрозі</li>
+  <li>Тестування системи — перевірка працездатності охорони</li>
+  <li>Автоматизація — включення за розкладом (наприклад, сигнал о певному часі)</li>
+</ul>
+
+<strong>Відмінності від HomeSiren (внутрішня сирена):</strong>
+<ul>
+  <li>StreetSiren встановлюється зовні (vs HomeSiren всередині приміщення)</li>
+  <li>StreetSiren має захист IP54 (vs HomeSiren без захисту від вологи)</li>
+  <li>StreetSiren гучніша: 113 дБ (vs HomeSiren 105 дБ)</li>
+  <li>StreetSiren має LED-підсвічування (vs HomeSiren тільки звук)</li>
+  <li>StreetSiren до 5 років роботи (vs HomeSiren до 3 років)</li>
+  <li>StreetSiren 4 батареї CR123A (vs HomeSiren 4 батареї AA)</li>
+  <li>StreetSiren для відлякування та привернення уваги ззовні</li>
+  <li>HomeSiren для оповіщення всередині приміщення</li>
+  <li>Рекомендується використовувати обидві сирени разом для максимального ефекту</li>
+</ul>
+
+<strong>Фізичні характеристики:</strong>
+<ul>
+  <li>Розміри: 163 × 123 × 55 мм</li>
+  <li>Вага: 330 г (з батареями)</li>
+  <li>Температурний діапазон: -25°C до +50°C</li>
+  <li>Допустима вологість: до 95%</li>
+  <li>Клас захисту: IP54</li>
+  <li>Колір: білий</li>
+  <li>Матеріал: міцний пластик</li>
+  <li>Дизайн: сучасний, ненав'язливий</li>
+</ul>
+
+<strong>Технічні характеристики:</strong>
+<ul>
+  <li>Гучність сигналу: 113 дБ (на відстані 1 м)</li>
+  <li>Дальність чутності: до 600 м (відкритий простір)</li>
+  <li>LED-підсвічування: червоні світлодіоди</li>
+  <li>Режими LED: спалахи або постійне світіння</li>
+  <li>Технологія зв'язку: Jeweller</li>
+  <li>Дальність зв'язку: до 1700 м</li>
+  <li>Радіочастоти: 866-926.5 МГц (залежно від регіону)</li>
+  <li>Максимальна потужність: до 20 мВт</li>
+  <li>Живлення: 4 × CR123A (3 В)</li>
+  <li>Термін роботи: до 5 років</li>
+</ul>
+
+<strong>Комплектація:</strong>
+<ul>
+  <li>StreetSiren Jeweller</li>
+  <li>Кріпильна панель SmartBracket</li>
+  <li>4 батареї CR123A (попередньо встановлені)</li>
+  <li>Монтажний комплект</li>
+  <li>Коротка інструкція</li>
+</ul>
+
+<strong>Сумісність:</strong>
+<ul>
+  <li>Працює з усіма хабами Ajax (Hub, Hub 2, Hub Plus, Hub Hybrid)</li>
+  <li>Підтримка ретрансляторів сигналу (ReX, ReX 2)</li>
+  <li>Інтеграція з застосунками Ajax (iOS, Android, macOS, Windows)</li>
+  <li>Підключення до пультів централізованого спостереження (ПЦС)</li>
+  <li>Підтримка професійного режиму для інсталяторів (PRO)</li>
+  <li>Сумісність з усіма пристроями Ajax</li>
+  <li>Можливість використання кількох сирен на одному хабі</li>
+</ul>
+
+<strong>Чому варто обрати StreetSiren White:</strong>
+<ul>
+  <li>Потужне звукове та візуальне оповіщення</li>
+  <li>Відлякує зловмисників ще до проникнення</li>
+  <li>Привертає увагу сусідів та перехожих</li>
+  <li>Бездротова — легкий монтаж без проводів</li>
+  <li>До 5 років автономної роботи</li>
+  <li>Всепогодний захист IP54</li>
+  <li>Гнучкі налаштування через застосунок</li>
+  <li>Надійний захист від саботажу</li>
+  <li>Сучасний дизайн білого кольору</li>
+</ul>
+</div>
+    <p class="product-price">4350.00 грн</p>
+    <button class="btn" onclick="addToCartFromProductPage({ id: 'Ajax StreetSiren White', name: 'Ajax StreetSiren White', price: 4350, image: 'images/ajax_streetsiren_white_1.jpg'})">
+        Додати у кошик
+    </button>
+</div>
+
+<div id="modal" class="modal" onclick="closeModal()">
+    <span class="arrow left" onclick="event.stopPropagation(); prevModalImage()">&#10094;</span>
+    <img id="modal-img" src="" alt="Збільшене зображення">
+    <span class="arrow right" onclick="event.stopPropagation(); nextModalImage()">&#10095;</span>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+const images = [
+    "images/ajax_streetsiren_white_1.jpg",
+    "images/ajax_streetsiren_white_2.jpg",
+    "images/ajax_streetsiren_white_3.jpg"
+   
+   
+];
+let currentIndex = 0;
+const totalSlides = images.length;
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 2500);
+}
+
+function addToCartFromProductPage(item) {
+    cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingItem = cart.find(i => i.id === item.id);
+    if (existingItem) existingItem.quantity++;
+    else { item.quantity = 1; cart.push(item); }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    showToast(`${item.name} додано до кошика!`);
+}
+
+/* === Карусель === */
+function updateCarousel() {
+    const carouselEl = document.getElementById('carousel');
+    carouselEl.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+
+function nextImage() {
+    const carouselEl = document.getElementById('carousel');
+    currentIndex++;
+    carouselEl.style.transition = 'transform 0.5s ease';
+    updateCarousel();
+    
+    // Якщо дійшли до клону (позиція після останнього оригіналу)
+    if (currentIndex === totalSlides) {
+        setTimeout(() => {
+            carouselEl.style.transition = 'none';
+            currentIndex = 0;
+            updateCarousel();
+        }, 500);
+    }
+}
+
+function prevImage() {
+    const carouselEl = document.getElementById('carousel');
+    
+    // Якщо на першому зображенні - миттєво стрибаємо на клон
+    if (currentIndex === 0) {
+        carouselEl.style.transition = 'none';
+        currentIndex = totalSlides;
+        updateCarousel();
+        
+        // Даємо браузеру час застосувати зміни
+        setTimeout(() => {
+            carouselEl.style.transition = 'transform 0.5s ease';
+            currentIndex--;
+            updateCarousel();
+        }, 20);
+    } else {
+        currentIndex--;
+        carouselEl.style.transition = 'transform 0.5s ease';
+        updateCarousel();
+    }
+}
+
+/* === Модалка === */
+function openModal(imageSrc) {
+    const modalIndex = images.indexOf(imageSrc);
+    if (modalIndex !== -1) {
+        currentIndex = modalIndex;
+    }
+    document.getElementById("modal-img").src = imageSrc;
+    document.getElementById("modal").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+function nextModalImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    document.getElementById("modal-img").src = images[currentIndex];
+}
+
+function prevModalImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    document.getElementById("modal-img").src = images[currentIndex];
+}
+
+/* === Свайпи === */
+let startX = 0;
+const carousel = document.getElementById('carousel');
+carousel.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
+carousel.addEventListener('touchend', e => {
+    const diff = e.changedTouches[0].clientX - startX;
+    if (Math.abs(diff) > 50) diff > 0 ? prevImage() : nextImage();
+}, { passive: true });
+
+const modal = document.getElementById("modal");
+modal.addEventListener("touchstart", e => startX = e.touches[0].clientX, { passive: true });
+modal.addEventListener("touchend", e => {
+    const diff = e.changedTouches[0].clientX - startX;
+    if (Math.abs(diff) > 50) diff > 0 ? prevModalImage() : nextModalImage();
+}, { passive: true });
+</script>
+</body>
+</html>
