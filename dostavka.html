@@ -6,7 +6,7 @@
     <meta name="description" content="Доставка систем безпеки Ajax та камер Imou по Україні. Нова Пошта, Укрпошта, самовивіз у Харкові. Безкоштовна доставка від 3000 грн">
     <meta name="keywords" content="доставка ajax, доставка imou, нова пошта, укрпошта, самовивіз харків, доставка сигналізації">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="canonical" href="https://прозахист.pp.ua/dostavka.html">
+    <link rel="canonical" href="https://прозахіст.pp.ua/dostavka.html">
     <title>Доставка та Оплата | ПРОЗАХІСТ | Ajax та Imou по Україні</title>
     
     <style>
@@ -42,41 +42,27 @@
         }
 
         /* ===== HEADER ===== */
-       
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 65px;
-    background: linear-gradient(to right, rgba(7, 7, 7, 0.95), rgba(148, 148, 148, 0.95));
-    padding: 0;
-    color: white;
-    text-align: left;
-    z-index: 1000;
-}
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 65px;
+            background: linear-gradient(to right, rgba(7, 7, 7, 0.95), rgba(148, 148, 148, 0.95));
+            padding: 0;
+            color: white;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
 
-header .logo svg {
-    height: 65px;
-    width: auto;
-}
+        header .logo {
+            padding-left: 20px;
+        }
 
-/* SEO: Skip link для доступності */
-.skip-link {
-    position: absolute;
-    top: -40px;
-    left: 0;
-    background: #800000;
-    color: white;
-    padding: 8px;
-    text-decoration: none;
-    z-index: 1001;
-    border-radius: 0 0 4px 0;
-}
-
-.skip-link:focus {
-    top: 0;
-}
+        header .logo svg {
+            height: 65px;
+            width: auto;
+        }
 
         /* ===== MAIN CONTENT ===== */
         main {
@@ -316,127 +302,100 @@ header .logo svg {
             gap: 15px;
             margin-top: 30px;
             flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
         }
-/* ======================================================
-   🎨 КОЛЬОРИ ДЛЯ ТЕКСТУ
-   ====================================================== */
 
-.red {
-    color: #800000;
-}
+        .buttons-row.column {
+            flex-direction: column;
+            align-items: center;
+        }
 
-.black {
-    color: #808080;
-    }
-/* ======================================================
-   🦶 FOOTER (ПІДВАЛ)
-   ====================================================== */
+        .buttons-row.column .btn-primary,
+        .buttons-row.column .btn-secondary {
+            min-width: 280px;
+        }
 
-footer {
-    background: var(--text-dark);
-    color: var(--white);
-    text-align: center;
-    padding: 30px 20px;
-    font-size: 0.9em;
-    margin-top: 0px;
-}
+        /* ===== КОЛЬОРИ ДЛЯ ТЕКСТУ ===== */
+        .red {
+            color: #800000;
+        }
 
-.footer-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-}
+        .black {
+            color: #808080;
+        }
 
-.footer-links {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 25px;
-    margin-bottom: 20px;
-    align-items: start;
-}
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 30px 20px 10px 20px;
+            margin-top: 0;
+        }
 
-/* Все столбики */
-.footer-links > div {
-    text-align: left;
-    margin-top: 0;
-}
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-/* Все заголовки — одна линия */
-.footer-links h4 {
-    color: var(--white);
-    margin-bottom: 15px;
-    font-size: 1.1em;
-    font-weight: 700;
-    border-bottom: none;
-    padding-bottom: 0;
-    margin-top: 0;
-    line-height: 1.2;
-}
+        .footer-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-/* У категорий 2 и 3 убираем заголовки полностью */
-.footer-links .cat2 h4,
-.footer-links .cat3 h4 {
-    display: none;
-}
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 25px;
+            margin-bottom: 20px;
+            align-items: start;
+        }
 
-/* Опускаем категории 2 и 3 на уровень ссылок первого столбика */
-.footer-links .cat2,
-.footer-links .cat3 {
-    padding-top: 33px;/* высота заголовка + margin-bottom */
-}
+        /* Все столбики */
+        .footer-links > div {
+            text-align: left;
+            margin-top: 0;
+        }
 
-.footer-links a {
-    display: block;
-    color: #aaa;
-    text-decoration: none;
-    margin-bottom: 8px;
-    transition: var(--transition);
-    font-size: 0.9em;
-    line-height: 1.4;
-}
+        /* Все заголовки — одна линия */
+        .footer-links h4 {
+            color: var(--white);
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            font-weight: 700;
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-top: 0;
+            line-height: 1.2;
+        }
 
-.footer-links a:hover {
-    color: var(--white);
-    transform: translateX(1px);
-}
+        /* У категорий 2 и 3 убираем заголовки полностью */
+        .footer-links .cat2 h4,
+        .footer-links .cat3 h4 {
+            display: none;
+        }
 
-/* ======================================================
-   📱 АДАПТИВНІСТЬ (ПЛАНШЕТИ)
-   ====================================================== */
+        /* Опускаем категории 2 и 3 на уровень ссылок первого столбика */
+        .footer-links .cat2,
+        .footer-links .cat3 {
+            padding-top: 33px; /* высота заголовка + margin-bottom */
+        }
 
-@media (max-width: 1024px) {
-    .footer-links {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-    }
-    
-    /* Убираем отступ на планшете */
-    .footer-links .cat2,
-    .footer-links .cat3 {
-        padding-top: 34px;
-    }
-}
+        .footer-links a {
+            display: block;
+            color: #aaa;
+            text-decoration: none;
+            margin-bottom: 8px;
+            transition: color 0.3s;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
 
-/* ======================================================
-   📱 АДАПТИВНІСТЬ (МОБІЛЬНА ВЕРСІЯ)
-   ====================================================== */
+        .footer-links a:hover {
+            color: white;
+        }
 
-@media (max-width: 768px) {
-    .footer-links {
-        grid-template-columns: 1fr;
-        gap: 25px;
-        text-align: center;
-    }
-
-    .footer-links > div {
-        text-align: center;
-    }
-    
-    /* Убираем отступ на мобильном */
-    .footer-links .cat2,
-    .footer-links .cat3 {
-        padding-top: 0;
-    }
-}
         /* ===== АДАПТИВНІСТЬ ===== */
         @media (max-width: 768px) {
             header .logo {
@@ -483,14 +442,43 @@ footer {
 
             .buttons-row {
                 flex-direction: column;
+                align-items: center;
             }
 
             .btn-primary,
             .btn-secondary {
                 width: 100%;
+                max-width: 320px;
             }
 
+            .footer-links {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                text-align: center;
+            }
+
+            .footer-links > div {
+                text-align: center;
+            }
+
+            /* Убираем отступ на мобильном */
+            .footer-links .cat2,
+            .footer-links .cat3 {
+                padding-top: 0;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .footer-links {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+            }
             
+            /* Убираем отступ на планшете */
+            .footer-links .cat2,
+            .footer-links .cat3 {
+                padding-top: 34px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -731,8 +719,8 @@ footer {
                 
                 <h3>Офіційна гарантія:</h3>
                 <ul class="feature-list">
-                    <li>Ajax Systems: 12 місяців</li>
-                    <li>Imou камери: 12 місяців</li>
+                    <li>Ajax Systems: 4-7 років (залежно від пристрою)</li>
+                    <li>Imou камери: 12-24 місяці</li>
                     <li>Гарантійний талон в кожній коробці</li>
                     <li>Сервісне обслуговування в Україні</li>
                 </ul>
@@ -759,14 +747,14 @@ footer {
                 
                 <ul class="feature-list">
                     <li><strong>Телефон:</strong> <a href="tel:+380935016040" style="color: #007bff; text-decoration: none;">+380 93 501 60 40</a></li>
-                    <li><strong>Email:</strong> <a href="mailto:prozakhyst@ukr.net" style="color: #007bff; text-decoration: none;">prozakhyst@ukr.net</a></li>
+                    <li><strong>Email:</strong> <a href="/cdn-cgi/l/email-protection#1a73747c755acaa5cb9acaa4caadcaaacb9fcb8ccb9bcb98346a6a346f7b" style="color: #007bff; text-decoration: none;">info@прозахіст.pp.ua</a></li>
                     <li><strong>Viber / Telegram:</strong> +380 93 501 60 40</li>
                     <li><strong>Графік роботи:</strong> Пн-Пт: 9:00-18:00, Сб: 10:00-15:00</li>
-                   
+                    <li><strong>Самовивіз:</strong> Харків (адреса після підтвердження замовлення)</li>
                 </ul>
 
-                <div class="buttons-row">
-                    <a href="index.html" class="btn-primary">🛒 Перейти на головну</a>
+                <div class="buttons-row column">
+                    <a href="index.html" class="btn-primary">🛒 Перейти до каталогу</a>
                     <a href="tel:+380935016040" class="btn-secondary">📞 Зателефонувати</a>
                 </div>
             </section>
@@ -774,52 +762,54 @@ footer {
     </main>
 
     <!-- FOOTER -->
-   <footer role="contentinfo">
-    <div class="footer-wrapper">
-        <div class="footer-links">
-            <!-- Столбик 1: Камери IMOU -->
-            <div class="category-col cat1">
-                <h4>Категорії товарів</h4>
-                <a href="#indoor" onclick="toggleCategory('indoor'); return false;">Внутрішні камери IMOU</a>
-                <a href="#outdoor" onclick="toggleCategory('outdoor'); return false;">Зовнішні камери IMOU</a>
-                <a href="#outdoor_4G" onclick="toggleCategory('outdoor_4G'); return false;">Зовнішні 4G камери IMOU</a>
-            </div>
-            
-            <!-- Столбик 2: Ajax (часть 1) — без заголовка -->
-            <div class="category-col cat2">
-                <a href="#alarm" onclick="toggleCategory('alarm'); return false;">Комплекти сигналізації Ajax</a>
-                <a href="#hub" onclick="toggleCategory('hub'); return false;">Хаби модулі ретранслятори Ajax</a>
-                <a href="#protect" onclick="toggleCategory('protect'); return false;">Датчики клавіатури сирени Ajax</a>
-            </div>
-            
-            <!-- Столбик 3: Ajax (часть 2) — без заголовка -->
-            <div class="category-col cat3">
-                <a href="#protect_outdoor" onclick="toggleCategory('protect_outdoor'); return false;">Зовнішні датчики сирени Ajax</a>
-                <a href="#waterstop" onclick="toggleCategory('waterstop'); return false;">Захист від потопу Ajax</a>
-                <a href="#fire" onclick="toggleCategory('fire'); return false;">Захист від пожежі Ajax</a>
-            </div>
-            
-            <!-- Столбик 4: Информация -->
-            <div class="info-col">
-                <h4>Інформація</h4>
-                <a href="/dostavka.html">Доставка та оплата</a>
-                <a href="/montazh.html">Монтаж та налаштування</a>
-                <a href="/garantiya.html">Гарантія та сервіс</a>
-            </div>
-            
-            <!-- Столбик 5: Контакты -->
-            <div class="contacts-col">
-                <h4>Контакти</h4>
-                <a href="tel:+380935016040">📞 (093) 501-60-40</a>
-                <a href="mailto:prozakhyst@ukr.net">📧 prozakhyst@ukr.net</a>
-                <p style="color: #aaa; margin-top: 10px; font-size: 0.9em; line-height: 1.4;">м. Харків, Україна</p>
+    <footer role="contentinfo">
+        <div class="footer-wrapper">
+            <div class="footer-links">
+                <!-- Столбик 1: Камери IMOU -->
+                <div class="category-col cat1">
+                    <h4>Категорії товарів</h4>
+                    <a href="index.html#indoor">Внутрішні камери IMOU</a>
+                    <a href="index.html#outdoor">Зовнішні камери IMOU</a>
+                    <a href="index.html#outdoor_4G">Зовнішні 4G камери IMOU</a>
+                </div>
+                
+                <!-- Столбик 2: Ajax (часть 1) — без заголовка -->
+                <div class="category-col cat2">
+                    <h4></h4>
+                    <a href="index.html#alarm">Комплекти сигналізації Ajax</a>
+                    <a href="index.html#hub">Хаби модулі ретранслятори Ajax</a>
+                    <a href="index.html#protect">Датчики клавіатури сирени Ajax</a>
+                </div>
+                
+                <!-- Столбик 3: Ajax (часть 2) — без заголовка -->
+                <div class="category-col cat3">
+                    <h4></h4>
+                    <a href="index.html#protect_outdoor">Зовнішні датчики сирени Ajax</a>
+                    <a href="index.html#waterstop">Захист від потопу Ajax</a>
+                    <a href="index.html#fire">Захист від пожежі Ajax</a>
+                </div>
+                
+                <!-- Столбик 4: Информация -->
+                <div class="info-col">
+                    <h4>Інформація</h4>
+                    <a href="dostavka.html">Доставка та оплата</a>
+                    <a href="montazh.html">Монтаж та налаштування</a>
+                    <a href="garantiya.html">Гарантія та сервіс</a>
+                </div>
+                
+                <!-- Столбик 5: Контакты -->
+                <div class="contacts-col">
+                    <h4>Контакти</h4>
+                    <a href="tel:+380935016040">📞 (093) 501-60-40</a>
+                    <a href="mailto:prozakhyst@ukr.net">📧 prozakhyst@ukr.net</a>
+                    <p style="color: #aaa; margin-top: 10px; font-size: 0.9em; line-height: 1.4;">м. Харків, Україна</p>
+                </div>
             </div>
         </div>
-    </div>
-    <p>&copy; 2024-2026 <span class="black">ПРОЗАХИСТ.</span> Всі права захищені.</p>
-    <p style="color: #666; font-size: 0.85em; margin-top: 10px;">
-        Охоронна сигналізація та відеонагляд з доставкою по Україні
-    </p>
-</footer>
+        <p>&copy; 2024-2026 <span class="black">ПРОЗАХІСТ.</span> Всі права захищені.</p>
+        <p style="color: #666; font-size: 0.85em; margin-top: 10px;">
+            Охоронна сигналізація та відеонагляд з доставкою по Україні
+        </p>
+    </footer>
 </body>
-</html>
+</html>                Охоронна сигналізаці�
