@@ -325,77 +325,115 @@
             color: #808080;
         }
 
-        /* ===== FOOTER ===== */
-        footer {
-            background: var(--text-dark);
-            color: white;
-            text-align: center;
-            padding: 30px 20px 10px 20px;
-            margin-top: 0;
-        }
+        /* ======================================================
+   🦶 FOOTER (ПІДВАЛ)
+   ====================================================== */
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+footer {
+    background: var(--text-dark);
+    color: var(--white);
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 0.9em;
+    margin-top: 0px;
+}
 
-        .footer-wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+.footer-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-        .footer-links {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 25px;
-            margin-bottom: 20px;
-            align-items: start;
-        }
+.footer-links {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 25px;
+    margin-bottom: 20px;
+    align-items: start;
+}
 
-        /* Все столбики */
-        .footer-links > div {
-            text-align: left;
-            margin-top: 0;
-        }
+/* Все столбики */
+.footer-links > div {
+    text-align: left;
+    margin-top: 0;
+}
 
-        /* Все заголовки — одна линия */
-        .footer-links h4 {
-            color: var(--white);
-            margin-bottom: 15px;
-            font-size: 1.1em;
-            font-weight: 700;
-            border-bottom: none;
-            padding-bottom: 0;
-            margin-top: 0;
-            line-height: 1.2;
-        }
+/* Все заголовки — одна линия */
+.footer-links h4 {
+    color: var(--white);
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    font-weight: 700;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-top: 0;
+    line-height: 1.2;
+}
 
-        /* У категорий 2 и 3 убираем заголовки полностью */
-        .footer-links .cat2 h4,
-        .footer-links .cat3 h4 {
-            display: none;
-        }
+/* У категорий 2 и 3 убираем заголовки полностью */
+.footer-links .cat2 h4,
+.footer-links .cat3 h4 {
+    display: none;
+}
 
-        /* Опускаем категории 2 и 3 на уровень ссылок первого столбика */
-        .footer-links .cat2,
-        .footer-links .cat3 {
-            padding-top: 33px; /* высота заголовка + margin-bottom */
-        }
+/* Опускаем категории 2 и 3 на уровень ссылок первого столбика */
+.footer-links .cat2,
+.footer-links .cat3 {
+    padding-top: 33px;/* высота заголовка + margin-bottom */
+}
 
-        .footer-links a {
-            display: block;
-            color: #aaa;
-            text-decoration: none;
-            margin-bottom: 8px;
-            transition: color 0.3s;
-            font-size: 0.9em;
-            line-height: 1.4;
-        }
+.footer-links a {
+    display: block;
+    color: #aaa;
+    text-decoration: none;
+    margin-bottom: 8px;
+    transition: var(--transition);
+    font-size: 0.9em;
+    line-height: 1.4;
+}
 
-        .footer-links a:hover {
-            color: white;
-        }
+.footer-links a:hover {
+    color: var(--white);
+    transform: translateX(1px);
+}
 
+/* ======================================================
+   📱 АДАПТИВНІСТЬ (ПЛАНШЕТИ)
+   ====================================================== */
+
+@media (max-width: 1024px) {
+    .footer-links {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    
+    /* Убираем отступ на планшете */
+    .footer-links .cat2,
+    .footer-links .cat3 {
+        padding-top: 34px;
+    }
+}
+
+/* ======================================================
+   📱 АДАПТИВНІСТЬ (МОБІЛЬНА ВЕРСІЯ)
+   ====================================================== */
+
+@media (max-width: 768px) {
+    .footer-links {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        text-align: center;
+    }
+
+    .footer-links > div {
+        text-align: center;
+    }
+    
+    /* Убираем отступ на мобильном */
+    .footer-links .cat2,
+    .footer-links .cat3 {
+        padding-top: 0;
+    }
+}
         /* ===== АДАПТИВНІСТЬ ===== */
         @media (max-width: 768px) {
             header .logo {
@@ -451,21 +489,7 @@
                 max-width: 320px;
             }
 
-            .footer-links {
-                grid-template-columns: 1fr;
-                gap: 25px;
-                text-align: center;
-            }
-
-            .footer-links > div {
-                text-align: center;
-            }
-
-            /* Убираем отступ на мобильном */
-            .footer-links .cat2,
-            .footer-links .cat3 {
-                padding-top: 0;
-            }
+            
         }
 
         @media (max-width: 1024px) {
