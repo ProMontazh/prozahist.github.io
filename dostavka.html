@@ -328,8 +328,11 @@ header .logo svg {
 .black {
     color: #808080;
     }
-        /* ===== FOOTER ===== */
-       footer {
+/* ======================================================
+   🦶 FOOTER (ПІДВАЛ)
+   ====================================================== */
+
+footer {
     background: var(--text-dark);
     color: var(--white);
     text-align: center;
@@ -396,6 +399,44 @@ header .logo svg {
     transform: translateX(1px);
 }
 
+/* ======================================================
+   📱 АДАПТИВНІСТЬ (ПЛАНШЕТИ)
+   ====================================================== */
+
+@media (max-width: 1024px) {
+    .footer-links {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    
+    /* Убираем отступ на планшете */
+    .footer-links .cat2,
+    .footer-links .cat3 {
+        padding-top: 34px;
+    }
+}
+
+/* ======================================================
+   📱 АДАПТИВНІСТЬ (МОБІЛЬНА ВЕРСІЯ)
+   ====================================================== */
+
+@media (max-width: 768px) {
+    .footer-links {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        text-align: center;
+    }
+
+    .footer-links > div {
+        text-align: center;
+    }
+    
+    /* Убираем отступ на мобильном */
+    .footer-links .cat2,
+    .footer-links .cat3 {
+        padding-top: 0;
+    }
+}
         /* ===== АДАПТИВНІСТЬ ===== */
         @media (max-width: 768px) {
             header .logo {
@@ -449,10 +490,7 @@ header .logo svg {
                 width: 100%;
             }
 
-            .footer-links {
-                flex-direction: column;
-                gap: 15px;
-            }
+            
         }
 
         @media (max-width: 480px) {
