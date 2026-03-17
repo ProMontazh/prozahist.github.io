@@ -410,61 +410,115 @@
             margin: 0;
         }
 
-        /* ===== FOOTER ===== */
-        footer {
-            background: var(--text-dark);
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 0;
-        }
+               /* ======================================================
+   🦶 FOOTER (ПІДВАЛ)
+   ====================================================== */
 
-        .footer-wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+footer {
+    background: var(--text-dark);
+    color: var(--white);
+    text-align: center;
+     padding: 30px 20px 5px 20px;  /* top right bottom left */
+    font-size: 0.9em;
+    margin-top: 0px;
+}
 
-        .footer-links {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
-            margin-bottom: 20px;
-            justify-items: center;
-            text-align: left;
-        }
+.footer-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-        .footer-links > div {
-            width: 100%;
-            max-width: 300px;
-        }
+.footer-links {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 25px;
+    margin-bottom: 20px;
+    align-items: start;
+}
 
-        .footer-links h4 {
-            color: var(--white);
-            margin-bottom: 15px;
-            font-size: 1.1em;
-            font-weight: 700;
-            padding-bottom: 0;
-            margin-top: 0;
-        }
+/* Все столбики */
+.footer-links > div {
+    text-align: left;
+    margin-top: 0;
+}
 
-        .footer-links a {
-            display: block;
-            color: #aaa;
-            text-decoration: none;
-            margin-bottom: 8px;
-            transition: color 0.3s;
-            font-size: 0.9em;
-            line-height: 1.4;
-        }
+/* Все заголовки — одна линия */
+.footer-links h4 {
+    color: var(--white);
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    font-weight: 700;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-top: 0;
+    line-height: 1.2;
+}
 
-        .footer-links a:hover {
-            color: var(--white);
-        }
+/* У категорий 2 и 3 убираем заголовки полностью */
+.footer-links .cat2 h4,
+.footer-links .cat3 h4 {
+    display: none;
+}
 
-        footer p {
-            color: #999;
-        }
+/* Опускаем категории 2 и 3 на уровень ссылок первого столбика */
+.footer-links .cat2,
+.footer-links .cat3 {
+    padding-top: 33px;/* высота заголовка + margin-bottom */
+}
 
+.footer-links a {
+    display: block;
+    color: #aaa;
+    text-decoration: none;
+    margin-bottom: 8px;
+    transition: var(--transition);
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.footer-links a:hover {
+    color: var(--white);
+    transform: translateX(1px);
+}
+
+/* ======================================================
+   📱 АДАПТИВНІСТЬ (ПЛАНШЕТИ)
+   ====================================================== */
+
+@media (max-width: 1024px) {
+    .footer-links {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    
+    /* Убираем отступ на планшете */
+    .footer-links .cat2,
+    .footer-links .cat3 {
+        padding-top: 34px;
+    }
+}
+
+/* ======================================================
+   📱 АДАПТИВНІСТЬ (МОБІЛЬНА ВЕРСІЯ)
+   ====================================================== */
+
+@media (max-width: 768px) {
+    .footer-links {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        text-align: center;
+    }
+
+    .footer-links > div {
+        text-align: center;
+    }
+    
+    /* Убираем отступ на мобильном */
+    .footer-links .cat2,
+    .footer-links .cat3 {
+        padding-top: 0;
+    }
+}
         .red {
             color: var(--primary-color);
         }
@@ -538,16 +592,7 @@
                 max-width: 320px;
             }
 
-            .footer-links {
-                grid-template-columns: 1fr;
-                gap: 25px;
-                text-align: center;
-            }
-
-            .footer-links > div {
-                text-align: center;
-            }
-        }
+            
 
         @media (max-width: 480px) {
             header .logo svg {
@@ -882,10 +927,34 @@
     </main>
 
     <!-- FOOTER -->
-    <footer>
+    <footer role="contentinfo">
         <div class="footer-wrapper">
             <div class="footer-links">
-                <!-- Інформація -->
+                <!-- Столбик 1: Камери IMOU -->
+                <div class="category-col cat1">
+                    <h4>Категорії товарів</h4>
+                    <a href="index.html#indoor">Внутрішні камери IMOU</a>
+                    <a href="index.html#outdoor">Зовнішні камери IMOU</a>
+                    <a href="index.html#outdoor_4G">Зовнішні 4G камери IMOU</a>
+                </div>
+                
+                <!-- Столбик 2: Ajax (часть 1) — без заголовка -->
+                <div class="category-col cat2">
+                    <h4></h4>
+                    <a href="index.html#alarm">Комплекти сигналізації Ajax</a>
+                    <a href="index.html#hub">Хаби модулі ретранслятори Ajax</a>
+                    <a href="index.html#protect">Датчики клавіатури сирени Ajax</a>
+                </div>
+                
+                <!-- Столбик 3: Ajax (часть 2) — без заголовка -->
+                <div class="category-col cat3">
+                    <h4></h4>
+                    <a href="index.html#protect_outdoor">Зовнішні датчики сирени Ajax</a>
+                    <a href="index.html#waterstop">Захист від потопу Ajax</a>
+                    <a href="index.html#fire">Захист від пожежі Ajax</a>
+                </div>
+                
+                <!-- Столбик 4: Информация -->
                 <div class="info-col">
                     <h4>Інформація</h4>
                     <a href="dostavka.html">Доставка та оплата</a>
@@ -893,7 +962,7 @@
                     <a href="garantiya.html">Гарантія та сервіс</a>
                 </div>
                 
-                <!-- Контакти -->
+                <!-- Столбик 5: Контакты -->
                 <div class="contacts-col">
                     <h4>Контакти</h4>
                     <a href="tel:+380935016040">📞 (093) 501-60-40</a>
@@ -902,12 +971,10 @@
                 </div>
             </div>
         </div>
-        <p style="margin-top: 30px; color: #999;">&copy; 2024-2026 <span style="color: #808080;">ПРОЗАХИСТ.</span> Всі права захищені.</p>
+        <p>&copy; 2024-2026 <span class="black">ПРОЗАХИСТ.</span> Всі права захищені.</p>
         <p style="color: #666; font-size: 0.85em; margin-top: 10px;">
-         
-        Охоронна сигналізація та відеонагляд з доставкою по Україні
-    </p>
-</footer>
-
+            Охоронна сигналізація та відеонагляд з доставкою по Україні
+        </p>
+    </footer>
 </body>
 </html>
