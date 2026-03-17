@@ -319,36 +319,72 @@ header .logo svg {
         }
 
         /* ===== FOOTER ===== */
-        footer {
-            background: var(--text-dark);
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 0;
-        }
+       footer {
+    background: var(--text-dark);
+    color: var(--white);
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 0.9em;
+    margin-top: 0px;
+}
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+.footer-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
+.footer-links {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 25px;
+    margin-bottom: 20px;
+    align-items: start;
+}
 
-        .footer-links a {
-            color: #aaa;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
+/* Все столбики */
+.footer-links > div {
+    text-align: left;
+    margin-top: 0;
+}
 
-        .footer-links a:hover {
-            color: white;
-        }
+/* Все заголовки — одна линия */
+.footer-links h4 {
+    color: var(--white);
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    font-weight: 700;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-top: 0;
+    line-height: 1.2;
+}
+
+/* У категорий 2 и 3 убираем заголовки полностью */
+.footer-links .cat2 h4,
+.footer-links .cat3 h4 {
+    display: none;
+}
+
+/* Опускаем категории 2 и 3 на уровень ссылок первого столбика */
+.footer-links .cat2,
+.footer-links .cat3 {
+    padding-top: 33px;/* высота заголовка + margin-bottom */
+}
+
+.footer-links a {
+    display: block;
+    color: #aaa;
+    text-decoration: none;
+    margin-bottom: 8px;
+    transition: var(--transition);
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.footer-links a:hover {
+    color: var(--white);
+    transform: translateX(1px);
+}
 
         /* ===== АДАПТИВНІСТЬ ===== */
         @media (max-width: 768px) {
@@ -678,7 +714,7 @@ header .logo svg {
                     <li><strong>Email:</strong> <a href="mailto:prozakhyst@ukr.net" style="color: #007bff; text-decoration: none;">prozakhyst@ukr.net</a></li>
                     <li><strong>Viber / Telegram:</strong> +380 93 501 60 40</li>
                     <li><strong>Графік роботи:</strong> Пн-Пт: 9:00-18:00, Сб: 10:00-15:00</li>
-                    <li><strong>Самовивіз:</strong> Харків (адреса після підтвердження замовлення)</li>
+                   
                 </ul>
 
                 <div class="buttons-row">
@@ -690,17 +726,52 @@ header .logo svg {
     </main>
 
     <!-- FOOTER -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="index.html">Головна</a>
-                <a href="dostavka.html">Доставка та оплата</a>
-                <a href="tel:+380935016040">+380 93 501 60 40</a>
-                <a href="mailto:prozakhyst@ukr.net">prozakhyst@ukr.net</a>
+   <footer role="contentinfo">
+    <div class="footer-wrapper">
+        <div class="footer-links">
+            <!-- Столбик 1: Камери IMOU -->
+            <div class="category-col cat1">
+                <h4>Категорії товарів</h4>
+                <a href="#indoor" onclick="toggleCategory('indoor'); return false;">Внутрішні камери IMOU</a>
+                <a href="#outdoor" onclick="toggleCategory('outdoor'); return false;">Зовнішні камери IMOU</a>
+                <a href="#outdoor_4G" onclick="toggleCategory('outdoor_4G'); return false;">Зовнішні 4G камери IMOU</a>
             </div>
-            <p style="margin-top: 20px; color: #999;">© 2024-2026 ПРОЗАХИСТ. Всі права захищені.</p>
-            <p style="color: #666; font-size: 0.9em;">Охоронна сигналізація та відеонагляд з доставкою по Україні</p>
+            
+            <!-- Столбик 2: Ajax (часть 1) — без заголовка -->
+            <div class="category-col cat2">
+                <a href="#alarm" onclick="toggleCategory('alarm'); return false;">Комплекти сигналізації Ajax</a>
+                <a href="#hub" onclick="toggleCategory('hub'); return false;">Хаби модулі ретранслятори Ajax</a>
+                <a href="#protect" onclick="toggleCategory('protect'); return false;">Датчики клавіатури сирени Ajax</a>
+            </div>
+            
+            <!-- Столбик 3: Ajax (часть 2) — без заголовка -->
+            <div class="category-col cat3">
+                <a href="#protect_outdoor" onclick="toggleCategory('protect_outdoor'); return false;">Зовнішні датчики сирени Ajax</a>
+                <a href="#waterstop" onclick="toggleCategory('waterstop'); return false;">Захист від потопу Ajax</a>
+                <a href="#fire" onclick="toggleCategory('fire'); return false;">Захист від пожежі Ajax</a>
+            </div>
+            
+            <!-- Столбик 4: Информация -->
+            <div class="info-col">
+                <h4>Інформація</h4>
+                <a href="/dostavka.html">Доставка та оплата</a>
+                <a href="/montazh.html">Монтаж та налаштування</a>
+                <a href="/garantiya.html">Гарантія та сервіс</a>
+            </div>
+            
+            <!-- Столбик 5: Контакты -->
+            <div class="contacts-col">
+                <h4>Контакти</h4>
+                <a href="tel:+380935016040">📞 (093) 501-60-40</a>
+                <a href="mailto:prozakhyst@ukr.net">📧 prozakhyst@ukr.net</a>
+                <p style="color: #aaa; margin-top: 10px; font-size: 0.9em; line-height: 1.4;">м. Харків, Україна</p>
+            </div>
         </div>
-    </footer>
+    </div>
+    <p>&copy; 2024-2026 <span class="black">ПРОЗАХИСТ.</span> Всі права захищені.</p>
+    <p style="color: #666; font-size: 0.85em; margin-top: 10px;">
+        Охоронна сигналізація та відеонагляд з доставкою по Україні
+    </p>
+</footer>
 </body>
 </html>
