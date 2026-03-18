@@ -305,8 +305,8 @@ footer {
     color: #333;
     padding: 25px;
     border-radius: 12px;
-    width: 450px;
-    max-width: 450px;
+    width: 600px;
+    max-width: 600px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(0, 0, 0, 0.1);
     z-index: 1100;
