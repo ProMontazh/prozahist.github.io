@@ -1,5 +1,5 @@
 /* ======================================================
-   🎨 БАЗОВІ СТИЛІ + SEO-ОПТИМІЗАЦІЯ
+   🎨 БАЗОВІ СТИЛИ + SEO-ОПТИМІЗАЦІЯ
    ====================================================== */
 
 /* CSS Variables для консистентності */
@@ -154,7 +154,7 @@ header .logo svg {
 
 .product-item:hover {
     transform: scale(1.02);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+   box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
 
 .product-item img {
@@ -204,7 +204,7 @@ footer {
     background: var(--text-dark);
     color: var(--white);
     text-align: center;
-    padding: 30px 20px 5px 20px;
+    padding: 30px 20px 5px 20px;  /* top right bottom left */
     font-size: 0.9em;
     margin-top: 0px;
 }
@@ -222,11 +222,13 @@ footer {
     align-items: start;
 }
 
+/* Все столбики */
 .footer-links > div {
     text-align: left;
     margin-top: 0;
 }
 
+/* Все заголовки — одна линия */
 .footer-links h4 {
     color: var(--white);
     margin-bottom: 15px;
@@ -238,14 +240,16 @@ footer {
     line-height: 1.2;
 }
 
+/* У категорий 2 и 3 убираем заголовки полностью */
 .footer-links .cat2 h4,
 .footer-links .cat3 h4 {
     display: none;
 }
 
+/* Опускаем категории 2 и 3 на уровень ссылок первого столбика */
 .footer-links .cat2,
 .footer-links .cat3 {
-    padding-top: 33px;
+    padding-top: 33px;/* высота заголовка + margin-bottom */
 }
 
 .footer-links a {
@@ -260,8 +264,47 @@ footer {
 
 .footer-links a:hover {
     color: var(--white);
+   /*  transform: translateX(1px);*/
 }
 
+/* ======================================================
+   📱 АДАПТИВНІСТЬ (ПЛАНШЕТИ)
+   ====================================================== */
+
+@media (max-width: 1024px) {
+    .footer-links {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    
+    /* Убираем отступ на планшете */
+    .footer-links .cat2,
+    .footer-links .cat3 {
+        padding-top: 34px;
+    }
+}
+
+/* ======================================================
+   📱 АДАПТИВНІСТЬ (МОБІЛЬНА ВЕРСІЯ)
+   ====================================================== */
+
+@media (max-width: 768px) {
+    .footer-links {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        text-align: center;
+    }
+
+    .footer-links > div {
+        text-align: center;
+    }
+    
+    /* Убираем отступ на мобильном */
+    .footer-links .cat2,
+    .footer-links .cat3 {
+        padding-top: 0;
+    }
+}
 /* ======================================================
    🎨 КОЛЬОРИ ДЛЯ ТЕКСТУ
    ====================================================== */
@@ -275,7 +318,7 @@ footer {
 }
 
 /* ======================================================
-   🛒 КОШИК (ПОКРАЩЕНИЙ)
+   🛒 КОШИК
    ====================================================== */
 
 .cart {
@@ -298,76 +341,35 @@ footer {
     display: none;
     position: fixed;
     right: 20px;
-    top: 80px;
-    background-color: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    color: #333;
-    padding: 25px;
-    border-radius: 12px;
-    width: 600px;
-    max-width: 600px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    z-index: 1100;
-}
-
-.cart-content h2 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 1.4em;
-    color: #800000;
-    border-bottom: 2px solid #800000;
-    padding-bottom: 10px;
-}
-
-#cart-items {
-    max-height: 350px;
-    overflow-y: auto;
-    margin-bottom: 15px;
-}
-
-.cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-    padding: 10px;
-    background: #f8f9fa;
+    top: 100px;
+    background-color: rgba(255, 255, 255, 0.95);
+    color: black;
+    padding: 20px;
     border-radius: 8px;
-    transition: background 0.3s;
-}
-
-.cart-item:hover {
-    background: #e9ecef;
-}
-
-.cart-item img {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-    margin-right: 10px;
+    width: 350px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1100;
 }
 
 .button-row {
     display: flex;
-    gap: 10px;
-    margin-top: 15px;
+    justify-content: space-between;
+    margin-top: 10px;
 }
 
 .checkout-button, 
 .cancel-button {
-    flex: 1;
-    padding: 12px 20px;
+    padding: 10px 16px;
     color: white;
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 5px;
     border: none;
+    min-width: 100px;
     text-align: center;
     font-size: 16px;
-    font-weight: 600;
+    line-height: 1.0;
+    display: inline-block;
     cursor: pointer;
-    transition: all 0.3s;
 }
 
 .checkout-button {
@@ -380,33 +382,38 @@ footer {
 
 .checkout-button:hover {
     background-color: #367c39;
-    transform: translateY(-2px);
 }
 
 .cancel-button:hover {
     background-color: #d44150;
-    transform: translateY(-2px);
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 .quantity-control {
     display: flex;
     align-items: center;
-    gap: 8px;
 }
 
 .quantity-btn {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
+    font-size: 20px;
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 6px;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin: 0 5px;
 }
 
 .quantity-btn:hover {
@@ -414,20 +421,19 @@ footer {
 }
 
 .quantity {
-    font-size: 16px;
-    font-weight: 600;
-    min-width: 30px;
-    text-align: center;
+    font-size: 18px;
+    padding: 0 10px;
+}
+
+#cart-items {
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 .total-price {
-    font-weight: 700;
-    font-size: 1.3em;
-    margin: 20px 0;
-    padding: 15px;
-    background: #f0f0f0;
-    border-radius: 8px;
-    text-align: center;
+    font-weight: bold;
+    font-size: 1.04em;
+    margin-top: 15px;
 }
 
 #discount-message {
@@ -436,13 +442,6 @@ footer {
     font-size: 1.0em;
     margin-left: 10px;
     display: none;
-}
-
-#stock-warning {
-    color: #dc3545;
-    font-weight: bold;
-    font-size: 0.9em;
-    margin-top: 10px;
 }
 
 /* ======================================================
@@ -652,16 +651,16 @@ a[href^="mailto:"]:hover {
     color: #999;
     line-height: 1;
 }
-
 /* ======================================================
    🪟 МОДАЛЬНЕ ВІКНО ВІДГУКІВ
    ====================================================== */
 
+       /* ========== СПИСОК ВІДГУКІВ - ОПТИМІЗИРОВАНО ========== */
 .reviews-list {
     display: grid;
     gap: 12px;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    justify-items: center;
+    justify-items: center; /* центрируем карточки */
     padding: 4px;
 }
 
@@ -673,7 +672,7 @@ a[href^="mailto:"]:hover {
     padding: 15px 18px;
     box-sizing: border-box;
     width: 100%;
-    max-width: 340px;
+    max-width: 340px; /* ограничение ширины карточки */
     transition: all 0.3s;
     display: flex;
     flex-direction: column;
@@ -751,14 +750,14 @@ a[href^="mailto:"]:hover {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    background: linear-gradient(to right,#dcdcdc, #ffffff);
+    background: linear-gradient(to right,#dcdcdc, #ffffff);   /*#f2f2f2;               серый фон */
     backdrop-filter: blur(3px);
     padding: 3px 8px;
     border-radius: 6px;
     font-size: 12px;
     color: #666;
     border: 1px solid rgba(224, 224, 224, 0.6);
-    margin-top: auto;
+    margin-top: auto; /* 🔥 прижимает вниз */
 }
 
 .review-product img {
@@ -1061,30 +1060,6 @@ a[href^="mailto:"]:hover {
     flex: 1;
     overflow-y: auto;
 }
-
-/* ======================================================
-   📱 АДАПТИВНІСТЬ (ПЛАНШЕТИ)
-   ====================================================== */
-
-@media (max-width: 1024px) {
-    .footer-links {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-    }
-    
-    .footer-links .cat2,
-    .footer-links .cat3 {
-        padding-top: 34px;
-    }
-
-    /* Кошик на планшеті */
-    .cart-content {
-        width: 420px;
-        max-width: 420px;
-        right: 15px;
-    }
-}
-
 /* ======================================================
    📱 АДАПТИВНІСТЬ (МОБІЛЬНА ВЕРСІЯ)
    ====================================================== */
@@ -1128,58 +1103,13 @@ a[href^="mailto:"]:hover {
         font-size: 0.85em;
     }
 
-    /* Кошик на мобільному */
     .cart-content {
-        width: 92%;
-        max-width: 400px;
-        right: 0;
-        left: 0;
+        width: 90%;
+        max-width: 380px;
         margin: 0 auto;
-        top: 70px;
-        padding: 20px;
-    }
-
-    .cart-content h2 {
-        font-size: 1.2em;
-        margin-bottom: 15px;
-        padding-bottom: 8px;
-    }
-
-    #cart-items {
-        max-height: 280px;
-    }
-
-    .cart-item {
-        padding: 8px;
-        margin-bottom: 10px;
-    }
-
-    .cart-item img {
-        width: 35px;
-        height: 35px;
-    }
-
-    .quantity-btn {
-        width: 28px;
-        height: 28px;
-        font-size: 16px;
-    }
-
-    .quantity {
-        font-size: 14px;
-        min-width: 25px;
-    }
-
-    .total-price {
-        font-size: 1.1em;
-        padding: 12px;
-        margin: 15px 0;
-    }
-
-    .checkout-button,
-    .cancel-button {
-        padding: 10px 15px;
-        font-size: 14px;
+        top: 65px;
+        left: 0;
+        right: 0;
     }
 
     header h1 {
@@ -1191,6 +1121,8 @@ a[href^="mailto:"]:hover {
         padding: 8px 18px;
         font-size: 0.9em;
     }
+
+    
 
     .category-card {
         flex: 1 1 calc(50% - 12px);
@@ -1309,84 +1241,6 @@ a[href^="mailto:"]:hover {
         padding: 0;
         row-gap: 12px;
         column-gap: 0px;
-    }
-
-    .footer-links {
-        grid-template-columns: 1fr;
-        gap: 25px;
-        text-align: center;
-    }
-
-    .footer-links > div {
-        text-align: center;
-    }
-    
-    .footer-links .cat2,
-    .footer-links .cat3 {
-        padding-top: 0;
-    }
-}
-
-/* ======================================================
-   📱 ДУЖЕ МАЛІ ЕКРАНИ (480px)
-   ====================================================== */
-
-@media (max-width: 480px) {
-    /* Кошик дуже малий екран */
-    .cart-content {
-        width: 95%;
-        max-width: 360px;
-        padding: 15px;
-        top: 65px;
-    }
-
-    .cart-content h2 {
-        font-size: 1.1em;
-        margin-bottom: 12px;
-    }
-
-    #cart-items {
-        max-height: 250px;
-    }
-
-    .cart-item {
-        padding: 6px;
-        font-size: 0.9em;
-    }
-
-    .cart-item img {
-        width: 30px;
-        height: 30px;
-        margin-right: 6px;
-    }
-
-    .quantity-btn {
-        width: 26px;
-        height: 26px;
-        font-size: 14px;
-    }
-
-    .quantity {
-        font-size: 13px;
-        min-width: 22px;
-    }
-
-    .total-price {
-        font-size: 1em;
-        padding: 10px;
-        margin: 12px 0;
-    }
-
-    .button-row {
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .checkout-button,
-    .cancel-button {
-        width: 100%;
-        padding: 10px;
-        font-size: 13px;
     }
 }
 
