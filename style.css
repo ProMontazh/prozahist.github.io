@@ -318,12 +318,12 @@ footer {
 }
 
 /* ======================================================
-   🛒 КОШИК (АДАПТИВНИЙ)
+   🛒 КОШИК
    ====================================================== */
 
 .cart {
     position: fixed;
-    top: 12px;
+    top: 14px;
     right: 10px;
     background-color: #333;
     color: white;
@@ -338,42 +338,33 @@ footer {
 }
 
 .cart-content {
-    display: none; /* ← за замовчуванням приховано */
+    display: none;
     position: fixed;
-    right: 10px;
-    top: 75px;
+    right: 20px;
+    top: 100px;
     background-color: rgba(255, 255, 255, 0.95);
     color: black;
     padding: 20px;
     border-radius: 8px;
-    width: 450px;
-    max-height: calc(100vh - 100px);
+    width: 400px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 1100;
-    overflow: hidden;
-    flex-direction: column;
-}
-
-.cart-content.active {
-    display: flex; /* ← показуємо тільки з класом active */
 }
 
 .button-row {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
-    gap: 10px;
-    flex-shrink: 0;
 }
 
 .checkout-button, 
 .cancel-button {
-    flex: 1;
     padding: 10px 16px;
     color: white;
     text-decoration: none;
     border-radius: 5px;
     border: none;
+    min-width: 100px;
     text-align: center;
     font-size: 16px;
     line-height: 1.0;
@@ -402,43 +393,27 @@ footer {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
-    gap: 8px;
-    padding: 0;
-    flex-shrink: 0;
-}
-
-.cart-item > span:first-child,
-.cart-item .item-name {
-    flex: 1;
-    text-align: left;
-    font-size: 14px;
-    line-height: 1.0;
-    padding-left: 0;
-    margin-left: 0;
 }
 
 .quantity-control {
     display: flex;
     align-items: center;
-    gap: 4px;
-    flex-shrink: 0;
 }
 
 .quantity-btn {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
+    font-size: 20px;
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-    padding: 0;
-    line-height: 1;
+    margin: 0 5px;
 }
 
 .quantity-btn:hover {
@@ -446,26 +421,19 @@ footer {
 }
 
 .quantity {
-    font-size: 14px;
-    padding: 0 6px;
-    min-width: 20px;
-    text-align: center;
-    line-height: 24px;
+    font-size: 18px;
+    padding: 0 10px;
 }
 
 #cart-items {
+    max-height: 300px;
     overflow-y: auto;
-    flex: 1;
-    min-height: 0;
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
 }
 
 .total-price {
     font-weight: bold;
     font-size: 1.04em;
     margin-top: 15px;
-    flex-shrink: 0;
 }
 
 #discount-message {
@@ -474,9 +442,7 @@ footer {
     font-size: 1.0em;
     margin-left: 10px;
     display: none;
-    flex-shrink: 0;
 }
-
 /* ======================================================
    📱 АДАПТИВНІСТЬ
    ====================================================== */
