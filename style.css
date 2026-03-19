@@ -338,7 +338,7 @@ footer {
 }
 
 .cart-content {
-    display: none;
+    display: none; /* ← за замовчуванням приховано */
     position: fixed;
     right: 10px;
     top: 75px;
@@ -351,12 +351,11 @@ footer {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 1100;
     overflow: hidden;
-    display: flex;
     flex-direction: column;
 }
 
 .cart-content.active {
-    display: flex;
+    display: flex; /* ← показуємо тільки з класом active */
 }
 
 .button-row {
@@ -478,6 +477,119 @@ footer {
     flex-shrink: 0;
 }
 
+/* ======================================================
+   📱 АДАПТИВНІСТЬ
+   ====================================================== */
+
+@media (max-width: 768px) {
+    .cart-content {
+        width: calc(100vw - 40px);
+        right: 20px;
+        left: 20px;
+        max-height: calc(100vh - 90px);
+    }
+    
+    .cart-item .item-name {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart {
+        top: 8px;
+        right: 8px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+    
+    .cart-content {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-height: none;
+        height: auto;
+        border-radius: 12px 12px 0 0;
+        padding: 16px;
+        box-sizing: border-box;
+    }
+    
+    .cart-content.active {
+        display: flex; /* ← зберігаємо для мобільної */
+    }
+    
+    .button-row {
+        flex-direction: column;
+        margin-top: 8px;
+        margin-bottom: 0;
+        gap: 8px;
+    }
+    
+    .checkout-button, 
+    .cancel-button {
+        width: 100%;
+        margin-bottom: 0;
+    }
+    
+    .cart-item {
+        gap: 6px;
+        justify-content: flex-start;
+    }
+    
+    .cart-item > span:first-child,
+    .cart-item .item-name {
+        font-size: 13px;
+        flex: 0 1 auto;
+        min-width: 0;
+        margin-right: auto;
+    }
+    
+    .quantity-control {
+        gap: 6px;
+        margin-left: 8px;
+    }
+    
+    .total-price {
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+    
+    #discount-message {
+        margin-bottom: 0;
+    }
+    
+    #cart-items {
+        max-height: 40vh;
+        flex: none;
+    }
+}
+
+@media (max-width: 360px) {
+    .cart-content {
+        padding: 12px;
+    }
+    
+    .quantity-btn {
+        width: 22px;
+        height: 22px;
+        font-size: 14px;
+    }
+    
+    .quantity {
+        font-size: 13px;
+        padding: 0 4px;
+    }
+    
+    .cart-item .item-name {
+        font-size: 12px;
+    }
+    
+    #cart-items {
+        max-height: 45vh;
+    }
+}
 /* ======================================================
    📱 АДАПТИВНІСТЬ
    ====================================================== */
