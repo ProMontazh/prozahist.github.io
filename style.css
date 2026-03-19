@@ -510,6 +510,115 @@ footer {
         left: 0;
         right: 0;
         width: 100%;
+        max-height: none; /* ← прибираємо фіксовану висоту */
+        height: auto; /* ← автоматична висота по контенту */
+        border-radius: 12px 12px 0 0;
+        padding: 16px;
+        box-sizing: border-box;
+    }
+    
+    .button-row {
+        flex-direction: column;
+        margin-top: 8px;
+        margin-bottom: 0;
+        gap: 8px;
+    }
+    
+    .checkout-button, 
+    .cancel-button {
+        width: 100%;
+        margin-bottom: 0;
+    }
+    
+    .cart-item {
+        gap: 6px;
+        justify-content: flex-start;
+    }
+    
+    .cart-item > span:first-child,
+    .cart-item .item-name {
+        font-size: 13px;
+        flex: 0 1 auto;
+        min-width: 0;
+        margin-right: auto;
+    }
+    
+    .quantity-control {
+        gap: 6px;
+        margin-left: 8px;
+    }
+    
+    .total-price {
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+    
+    #discount-message {
+        margin-bottom: 0;
+    }
+    
+    #cart-items {
+        max-height: 40vh; /* ← скрол тільки якщо багато товарів */
+        flex: none; /* ← не розтягується */
+    }
+}
+
+@media (max-width: 360px) {
+    .cart-content {
+        padding: 12px;
+    }
+    
+    .quantity-btn {
+        width: 22px;
+        height: 22px;
+        font-size: 14px;
+    }
+    
+    .quantity {
+        font-size: 13px;
+        padding: 0 4px;
+    }
+    
+    .cart-item .item-name {
+        font-size: 12px;
+    }
+    
+    #cart-items {
+        max-height: 45vh;
+    }
+}
+/* ======================================================
+   📱 АДАПТИВНІСТЬ
+   ====================================================== */
+
+@media (max-width: 768px) {
+    .cart-content {
+        width: calc(100vw - 40px);
+        right: 20px;
+        left: 20px;
+        max-height: calc(100vh - 90px);
+    }
+    
+    .cart-item .item-name {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart {
+        top: 8px;
+        right: 8px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+    
+    .cart-content {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
         max-height: 85vh;
         border-radius: 12px 12px 0 0;
         padding: 16px;
