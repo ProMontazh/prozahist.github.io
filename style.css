@@ -340,7 +340,7 @@ footer {
 .cart-content {
     display: none;
     position: fixed;
-    right: 20px;
+    right: 10px;
     top: 60px;
     background-color: rgba(255, 255, 255, 0.95);
     color: black;
