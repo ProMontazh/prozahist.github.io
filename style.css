@@ -347,12 +347,16 @@ footer {
     padding: 20px;
     border-radius: 8px;
     width: 450px;
+    max-height: calc(100vh - 100px);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 1100;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .cart-content.active {
-    display: block;
+    display: flex;
 }
 
 .button-row {
@@ -360,6 +364,7 @@ footer {
     justify-content: space-between;
     margin-top: 10px;
     gap: 10px;
+    flex-shrink: 0;
 }
 
 .checkout-button, 
@@ -400,6 +405,7 @@ footer {
     margin-bottom: 10px;
     gap: 8px;
     padding: 0;
+    flex-shrink: 0;
 }
 
 .cart-item > span:first-child,
@@ -449,14 +455,18 @@ footer {
 }
 
 #cart-items {
-    max-height: 300px;
     overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
 }
 
 .total-price {
     font-weight: bold;
     font-size: 1.04em;
     margin-top: 15px;
+    flex-shrink: 0;
 }
 
 #discount-message {
@@ -465,8 +475,122 @@ footer {
     font-size: 1.0em;
     margin-left: 10px;
     display: none;
+    flex-shrink: 0;
 }
 
+/* ======================================================
+   📱 АДАПТИВНІСТЬ
+   ====================================================== */
+
+@media (max-width: 768px) {
+    .cart-content {
+        width: calc(100vw - 40px);
+        right: 20px;
+        left: 20px;
+        max-height: calc(100vh - 90px);
+    }
+    
+    .cart-item .item-name {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart {
+        top: 8px;
+        right: 8px;
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+    
+    .cart-content {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-height: 85vh;
+        border-radius: 12px 12px 0 0;
+        padding: 16px;
+        padding-bottom: env(safe-area-inset-bottom, 0px); /* ← прибираємо safe area */
+        box-sizing: border-box;
+    }
+    
+    .button-row {
+        flex-direction: column;
+        margin-top: 8px;
+        margin-bottom: 0;
+        gap: 8px;
+        padding-bottom: 0; /* ← явно прибираємо */
+    }
+    
+    .checkout-button, 
+    .cancel-button {
+        width: 100%;
+        margin-bottom: 0;
+        padding-bottom: 10px; /* ← стандартний padding */
+    }
+    
+    .cart-item {
+        gap: 6px;
+        justify-content: flex-start;
+    }
+    
+    .cart-item > span:first-child,
+    .cart-item .item-name {
+        font-size: 13px;
+        flex: 0 1 auto;
+        min-width: 0;
+        margin-right: auto;
+    }
+    
+    .quantity-control {
+        gap: 6px;
+        margin-left: 8px;
+    }
+    
+    .total-price {
+        margin-top: 10px;
+        margin-bottom: 0; /* ← прибираємо зайве */
+    }
+    
+    #discount-message {
+        margin-bottom: 0;
+    }
+    
+    #cart-items {
+        max-height: 50vh;
+        margin-bottom: 0; /* ← прибираємо */
+    }
+}
+
+@media (max-width: 360px) {
+    .cart-content {
+        padding: 12px;
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+        max-height: 90vh;
+    }
+    
+    .quantity-btn {
+        width: 22px;
+        height: 22px;
+        font-size: 14px;
+    }
+    
+    .quantity {
+        font-size: 13px;
+        padding: 0 4px;
+    }
+    
+    .cart-item .item-name {
+        font-size: 12px;
+    }
+    
+    #cart-items {
+        max-height: 55vh;
+    }
+}
 /* ======================================================
    📱 АДАПТИВНІСТЬ
    ====================================================== */
