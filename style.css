@@ -546,21 +546,25 @@ header .logo svg {
 footer {
     background: #1a1a1a;
     border-top: 2px solid #800000;
-    padding: 40px 20px 20px;
-    margin-top: 60px;
+     padding: 30px 20px 5px 20px;  /* top right bottom left */
+    font-size: 0.9em;
+    margin-top: 0px;
 }
 
 .footer-wrapper {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
+
 .footer-links {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);  /* ⬅️ 5 колонок як в старому */
-    gap: 30px;
-    margin-bottom: 30px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 25px;
+    margin-bottom: 20px;
+    align-items: start;
 }
+
 
 /* Стилі для категорій футера */
 .category-col {
