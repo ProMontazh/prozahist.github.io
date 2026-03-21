@@ -3,95 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-
     <title>ПРОЗАХИСТ | Ajax та Imou своїми руками з доставкою | Харків UA</title>
     <meta name="description" content="Купити системи безпеки Ajax та камери IMOU з доставкою по Україні. Охоронна сигналізація, відеонагляд, автономні 4G камери. Гарантія, сервіс, консультації. Тел: +380935016040.">
     <meta name="author" content="ПРОЗАХИСТ">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://прозахист.pp.ua/">
-
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://прозахист.pp.ua/">
     <meta property="og:title" content="ПРОЗАХИСТ - Бездротові системи">
     <meta property="og:description" content="Магазин систем охоронної сигналізації Ajax та відеокамер IMOU. Доставка по Україні.">
     <meta property="og:image" content="https://прозахист.pp.ua/og-image.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="ПРОЗАХИСТ - Системи безпеки">
     <meta property="og:locale" content="uk_UA">
     <meta property="og:site_name" content="ПРОЗАХИСТ">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://прозахист.pp.ua/">
-    <meta name="twitter:title" content="ПРОЗАХИСТ - Бездротові системи безпеки">
-    <meta name="twitter:description" content="Магазин систем охоронної сигналізації Ajax та відеокамер IMOU">
-    <meta name="twitter:image" content="https://прозахист.pp.ua/og-image.jpg">
-    <meta name="twitter:image:alt" content="ПРОЗАХИСТ - Системи безпеки">
-
-    <link rel="icon" type="image/svg+xml" sizes="16x16" href="/favicon_16.svg">
-    <link rel="icon" type="image/svg+xml" sizes="32x32" href="/favicon_32.svg">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Store",
-      "@id": "https://прозахист.pp.ua/#store",
-      "name": "ПРОЗАХИСТ",
-      "alternateName": "ProZakhyst",
-      "description": "Магазин бездротових систем безпеки Ajax та відеокамер IMOU",
-      "url": "https://прозахист.pp.ua",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://прозахист.pp.ua/favicon_32.svg",
-        "width": "32",
-        "height": "32"
-      },
-      "image": {
-        "@type": "ImageObject",
-        "url": "https://прозахист.pp.ua/og-image.jpg",
-        "width": "1200",
-        "height": "630"
-      },
-      "telephone": "+380935016040",
-      "email": "prozakhyst@ukr.net",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "UA",
-        "addressRegion": "Харківська область",
-        "addressLocality": "Харків"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "49.9935",
-        "longitude": "36.2304"
-      },
-      "priceRange": "$$",
-      "paymentAccepted": "Cash, Credit Card, Debit Card",
-      "currenciesAccepted": "UAH",
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-        "opens": "10:00",
-        "closes": "18:00"
-      },
-      "sameAs": [
-        "https://www.facebook.com/prozakhyst",
-        "https://www.instagram.com/prozakhyst"
-      ],
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Системи безпеки",
-        "itemListElement": [
-          {"@type": "OfferCatalog","name": "Ajax системи охоронної сигналізації"},
-          {"@type": "OfferCatalog","name": "IMOU відеокамери"}
-        ]
-      }
-    }
-    </script>
-
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
@@ -150,7 +74,10 @@
 <div class="cart-content" id="cart-content">
     <h2>Мій кошик</h2>
     <div id="cart-items"></div>
-    <p class="total-price">Сума: <span id="total-price">0</span> грн<span id="discount-message"></span></p>
+    <p class="total-price">
+        Сума: <span id="total-price">0</span> грн
+        <span id="discount-message"></span>
+    </p>
     <p id="stock-warning" style="color:red; font-weight: bold;"></p>
     <div class="button-row">
         <a href="/checkout.html" class="checkout-button">Оформити замовлення</a>
@@ -205,6 +132,7 @@
         <span>Захист від пожежі</span>
     </a>
 
+    <!-- Контакты и виджет отзывов -->
     <div class="contacts-block">
         <div class="reviews-widget" onclick="openReviewsModal()">
             <div class="widget-stars" id="widgetStars"></div>
@@ -213,77 +141,81 @@
                 <div class="widget-rating-count" id="widgetCount">0 відгуків</div>
             </div>
         </div>
+    </div>
+</div>
 
-        <div id="reviewsModal" class="reviews-modal" onclick="closeModalOnOutsideClick(event)">
-            <div class="reviews-modal-content">
-                <div class="reviews-modal-header">
-                    <h2>Відгуки клієнтів</h2>
-                    <button class="reviews-modal-close" onclick="closeReviewsModal()">&times;</button>
+<!-- Модальное окно отзывов -->
+<div id="reviewsModal" class="reviews-modal" onclick="closeModalOnOutsideClick(event)">
+    <div class="reviews-modal-content">
+        <div class="reviews-modal-header">
+            <h2>Відгуки клієнтів</h2>
+            <button class="reviews-modal-close" onclick="closeReviewsModal()">&times;</button>
+        </div>
+        <div class="reviews-modal-body">
+            <div class="modal-rating-summary">
+                <div class="modal-rating-big">
+                    <div class="modal-rating-number" id="modalRating">0.0</div>
+                    <div class="modal-rating-stars" id="modalStars"></div>
+                    <div class="modal-rating-count" id="modalCount">0 відгуків</div>
                 </div>
-                <div class="reviews-modal-body">
-                    <div class="modal-rating-summary">
-                        <div class="modal-rating-big">
-                            <div class="modal-rating-number" id="modalRating">0.0</div>
-                            <div class="modal-rating-stars" id="modalStars"></div>
-                            <div class="modal-rating-count" id="modalCount">0 відгуків</div>
+            </div>
+            <div class="reviews-tabs">
+                <button class="reviews-tab active" onclick="switchTab('read')">📖 Читати відгуки</button>
+                <button class="reviews-tab" onclick="switchTab('write')">✍️ Написати відгук</button>
+            </div>
+            <div id="readTab" class="reviews-tab-content active">
+                <div class="loading" id="loading">Завантаження відгуків...</div>
+                <div class="reviews-list" id="reviewsList" style="display: none;"></div>
+                <div class="no-reviews" id="noReviews" style="display: none;">
+                    📝 Поки що немає відгуків. Будьте першим!
+                </div>
+            </div>
+            <div id="writeTab" class="reviews-tab-content">
+                <div id="formMessage" class="message" style="display: none;"></div>
+                <form class="reviews-form" onsubmit="submitReview(event)">
+                    <div class="form-group">
+                        <label for="reviewName">Ваше ім'я *</label>
+                        <input type="text" id="reviewName" required placeholder="Введіть ваше ім'я">
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewProduct">Яку категорію товару ви купували? *</label>
+                        <select id="reviewProduct" required>
+                            <option value="">Оберіть категорію</option>
+                            <option value="indoor">Внутрішні камери IMOU</option>
+                            <option value="outdoor">Зовнішні камери IMOU</option>
+                            <option value="outdoor_4G">Зовнішні 4G камери IMOU</option>
+                            <option value="alarm">Комплекти сигналізації Ajax</option>
+                            <option value="hub">Хаби, модулі Ajax</option>
+                            <option value="protect">Внутрішня охорона Ajax</option>
+                            <option value="protect_outdoor">Зовнішня охорона Ajax</option>
+                            <option value="waterstop">Захист від потопу Ajax</option>
+                            <option value="fire">Захист від пожежі Ajax</option>
+                            <option value="other">Інше</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Ваша оцінка *</label>
+                        <div class="star-rating" id="starRating">
+                            <span class="star-input" data-rating="1">★</span>
+                            <span class="star-input" data-rating="2">★</span>
+                            <span class="star-input" data-rating="3">★</span>
+                            <span class="star-input" data-rating="4">★</span>
+                            <span class="star-input" data-rating="5">★</span>
                         </div>
+                        <input type="hidden" id="reviewRating" required>
                     </div>
-                    <div class="reviews-tabs">
-                        <button class="reviews-tab active" onclick="switchTab('read')">📖 Читати відгуки</button>
-                        <button class="reviews-tab" onclick="switchTab('write')">✍️ Написати відгук</button>
+                    <div class="form-group">
+                        <label for="reviewText">Ваш відгук *</label>
+                        <textarea id="reviewText" required placeholder="Розкажіть про свій досвід..." minlength="20"></textarea>
                     </div>
-                    <div id="readTab" class="reviews-tab-content active">
-                        <div class="loading" id="loading">Завантаження відгуків...</div>
-                        <div class="reviews-list" id="reviewsList" style="display: none;"></div>
-                        <div class="no-reviews" id="noReviews" style="display: none;">📝 Поки що немає відгуків. Будьте першим!</div>
-                    </div>
-                    <div id="writeTab" class="reviews-tab-content">
-                        <div id="formMessage" class="message" style="display: none;"></div>
-                        <form class="reviews-form" onsubmit="submitReview(event)">
-                            <div class="form-group">
-                                <label for="reviewName">Ваше ім'я *</label>
-                                <input type="text" id="reviewName" required placeholder="Введіть ваше ім'я">
-                            </div>
-                            <div class="form-group">
-                                <label for="reviewProduct">Яку категорію товару ви купували? *</label>
-                                <select id="reviewProduct" required>
-                                    <option value="">Оберіть категорію</option>
-                                    <option value="indoor">Внутрішні камери IMOU</option>
-                                    <option value="outdoor">Зовнішні камери IMOU</option>
-                                    <option value="outdoor_4G">Зовнішні 4G камери IMOU</option>
-                                    <option value="alarm">Комплекти сигналізації Ajax</option>
-                                    <option value="hub">Хаби, модулі Ajax</option>
-                                    <option value="protect">Внутрішня охорона Ajax</option>
-                                    <option value="protect_outdoor">Зовнішня охорона Ajax</option>
-                                    <option value="waterstop">Захист від потопу Ajax</option>
-                                    <option value="fire">Захист від пожежі Ajax</option>
-                                    <option value="other">Інше</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Ваша оцінка *</label>
-                                <div class="star-rating" id="starRating">
-                                    <span class="star-input" data-rating="1">★</span>
-                                    <span class="star-input" data-rating="2">★</span>
-                                    <span class="star-input" data-rating="3">★</span>
-                                    <span class="star-input" data-rating="4">★</span>
-                                    <span class="star-input" data-rating="5">★</span>
-                                </div>
-                                <input type="hidden" id="reviewRating" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="reviewText">Ваш відгук *</label>
-                                <textarea id="reviewText" required placeholder="Розкажіть про свій досвід..." minlength="20"></textarea>
-                            </div>
-                            <button type="submit" class="submit-btn" id="submitBtn">Відправити відгук</button>
-                        </form>
-                    </div>
-                </div>
+                    <button type="submit" class="submit-btn" id="submitBtn">Відправити відгук</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Footer -->
 <footer role="contentinfo">
     <div class="footer-wrapper">
         <div class="footer-links">
@@ -318,7 +250,9 @@
         </div>
     </div>
     <p>&copy; 2024-2026 <span class="black">ПРОЗАХИСТ.</span> Всі права захищені.</p>
-    <p style="color: #666; font-size: 0.85em; margin-top: 10px;">Охоронна сигналізація та відеонагляд з доставкою по Україні</p>
+    <p style="color: #666; font-size: 0.85em; margin-top: 10px;">
+        Охоронна сигналізація та відеонагляд з доставкою по Україні
+    </p>
 </footer>
 <script src="/script.js"></script>
 </body>
