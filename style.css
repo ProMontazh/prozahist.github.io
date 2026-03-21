@@ -186,8 +186,8 @@ header .logo svg {
     padding: 0;
     text-align: center;
     cursor: pointer;
-    flex: 1 1 calc(20% - 20px);
-    max-width: calc(20% - 20px);
+   flex: 1 1 calc(16.666% - 20px);  /* 100% / 6 = 16.666% */
+    max-width: calc(16.666% - 20px);
     transition: transform 0.3s;
     box-sizing: border-box;
     border: 1px solid #444;
@@ -1172,9 +1172,5 @@ footer > p {
     }
 }
 
-@media (max-width: 480px) {
-    .category-card {
-        flex: 1 1 100%;
-        max-width: 100%;
-    }
+
 }
