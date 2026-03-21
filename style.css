@@ -349,7 +349,7 @@ header .logo svg {
 
 .cart:hover {
     background: linear-gradient(145deg, #5a6268, #4e555b);     /* ✅ ТЕМНІШЕ СІРИЙ */
-    transform: scale(1.05);
+    transform: scale(1.00);
 }
 
 .cart-content {
