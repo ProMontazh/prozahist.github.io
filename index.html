@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+
+# Создадим главный index.html - только категории и навигация
+
+main_index_html = '''<!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
@@ -7,33 +10,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Title - SEO -->
-    <title>ПРОЗАХІСТ | Ajax та Imou своїми руками з доставкою | Харків UA</title>
+    <title>ПРОЗАХИСТ | Ajax та Imou своїми руками з доставкою | Харків UA</title>
 
     <!-- Description -->
     <meta name="description" content="Купити системи безпеки Ajax та камери IMOU з доставкою по Україні. Охоронна сигналізація, відеонагляд, автономні 4G камери. Гарантія, сервіс, консультації. Тел: +380935016040.">
-    <meta name="author" content="ПРОЗАХІСТ">
+    <meta name="author" content="ПРОЗАХИСТ">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://прозахіст.pp.ua/">
+    <link rel="canonical" href="https://прозахист.pp.ua/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://прозахіст.pp.ua/">
-    <meta property="og:title" content="ПРОЗАХІСТ - Бездротові системи">
+    <meta property="og:url" content="https://прозахист.pp.ua/">
+    <meta property="og:title" content="ПРОЗАХИСТ - Бездротові системи">
     <meta property="og:description" content="Магазин систем охоронної сигналізації Ajax та відеокамер IMOU. Доставка по Україні.">
-    <meta property="og:image" content="https://прозахіст.pp.ua/og-image.jpg">
+    <meta property="og:image" content="https://прозахист.pp.ua/og-image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="ПРОЗАХІСТ - Системи безпеки">
+    <meta property="og:image:alt" content="ПРОЗАХИСТ - Системи безпеки">
     <meta property="og:locale" content="uk_UA">
-    <meta property="og:site_name" content="ПРОЗАХІСТ">
+    <meta property="og:site_name" content="ПРОЗАХИСТ">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://прозахіст.pp.ua/">
-    <meta name="twitter:title" content="ПРОЗАХІСТ - Бездротові системи безпеки">
+    <meta name="twitter:url" content="https://прозахист.pp.ua/">
+    <meta name="twitter:title" content="ПРОЗАХИСТ - Бездротові системи безпеки">
     <meta name="twitter:description" content="Магазин систем охоронної сигналізації Ajax та відеокамер IMOU">
-    <meta name="twitter:image" content="https://прозахіст.pp.ua/og-image.jpg">
-    <meta name="twitter:image:alt" content="ПРОЗАХІСТ - Системи безпеки">
+    <meta name="twitter:image" content="https://прозахист.pp.ua/og-image.jpg">
+    <meta name="twitter:image:alt" content="ПРОЗАХИСТ - Системи безпеки">
 
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" sizes="16x16" href="/favicon_16.svg">
@@ -45,20 +48,20 @@
     {
       "@context": "https://schema.org",
       "@type": "Store",
-      "@id": "https://прозахіст.pp.ua/#store",
-      "name": "ПРОЗАХІСТ",
+      "@id": "https://прозахист.pp.ua/#store",
+      "name": "ПРОЗАХИСТ",
       "alternateName": "ProZakhyst",
       "description": "Магазин бездротових систем безпеки Ajax та відеокамер IMOU",
-      "url": "https://прозахіст.pp.ua",
+      "url": "https://прозахист.pp.ua",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://прозахіст.pp.ua/favicon_32.svg",
+        "url": "https://прозахист.pp.ua/favicon_32.svg",
         "width": "32",
         "height": "32"
       },
       "image": {
         "@type": "ImageObject",
-        "url": "https://прозахіст.pp.ua/og-image.jpg",
+        "url": "https://прозахист.pp.ua/og-image.jpg",
         "width": "1200",
         "height": "630"
       },
@@ -113,7 +116,7 @@
     }
     </script>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 <header>
@@ -180,55 +183,55 @@
     </p>
     <p id="stock-warning" style="color:red; font-weight: bold;"></p>
     <div class="button-row">
-        <a href="checkout.html" class="checkout-button">Оформити замовлення</a>
+        <a href="/checkout.html" class="checkout-button">Оформити замовлення</a>
         <button class="cancel-button" onclick="clearCart(); toggleCart()">Скасувати</button>
     </div>
 </div>
 
-<audio id="hover-sound1" src="hover_1.mp3" preload="auto"></audio>
-<audio id="hover-sound" src="hover.mp3" preload="auto"></audio>
-<audio id="back-sound" src="hover_2.mp3" preload="auto"></audio>
+<audio id="hover-sound1" src="/hover_1.mp3" preload="auto"></audio>
+<audio id="hover-sound" src="/hover.mp3" preload="auto"></audio>
+<audio id="back-sound" src="/hover_2.mp3" preload="auto"></audio>
 
 <!-- Категории -->
 <div id="categories" class="category-buttons">
     <a href="/vnutrishni/" class="category-card">
-        <img src="images/indoor.png" alt="Внутрішні камери">
+        <img src="/images/indoor.png" alt="Внутрішні камери">
         <span>Внутрішні камери</span>
     </a>
     <a href="/zovnishni/" class="category-card">
-        <img src="images/outdoor.png" alt="Зовнішні камери">
+        <img src="/images/outdoor.png" alt="Зовнішні камери">
         <span>Зовнішні камери</span>
     </a>
     <a href="/4g-avtonomni/" class="category-card">
-        <img src="images/outdoor_4G.png" alt="Зовнішні 4G камери">
+        <img src="/images/outdoor_4G.png" alt="Зовнішні 4G камери">
         <span>Зовнішні 4G камери</span>
     </a>
     <a href="/karty-pamyati/" class="category-card">
-        <img src="images/microSD.png" alt="microSD">
+        <img src="/images/microSD.png" alt="microSD">
         <span>Карти пам'яті</span>
     </a>
-    <a href="/komplekti-signalizacii/" class="category-card">
-        <img src="images/alarm.png" alt="Комплекти сигналізації">
+    <a href="/ajax/komplekti-signalizacii/" class="category-card">
+        <img src="/images/alarm.png" alt="Комплекти сигналізації">
         <span>Комплекти сигналізації</span>
     </a>
-    <a href="/habi-ta-moduli/" class="category-card">
-        <img src="images/hub_white.png" alt="Хаби">
+    <a href="/ajax/habi-ta-moduli/" class="category-card">
+        <img src="/images/hub_white.png" alt="Хаби">
         <span>Хаби, Модулі</span>
     </a>
-    <a href="/vnutrishni-datchyky/" class="category-card">
-        <img src="images/protect_indoor.png" alt="Внутрішня охорона">
+    <a href="/ajax/vnutrishni-datchyky/" class="category-card">
+        <img src="/images/protect_indoor.png" alt="Внутрішня охорона">
         <span>Внутрішні датчики</span>
     </a>
-    <a href="/zovnishni-datchyky/" class="category-card">
-        <img src="images/protect_outdoor.png" alt="Зовнішня охорона">
+    <a href="/ajax/zovnishni-datchyky/" class="category-card">
+        <img src="/images/protect_outdoor.png" alt="Зовнішня охорона">
         <span>Зовнішні датчики</span>
     </a>
-    <a href="/zahyst-vid-potopu/" class="category-card">
-        <img src="images/waterstop.png" alt="Захист від потопу">
+    <a href="/ajax/zahyst-vid-potopu/" class="category-card">
+        <img src="/images/waterstop.png" alt="Захист від потопу">
         <span>Захист від потопу</span>
     </a>
-    <a href="/zahyst-vid-pozhezhi/" class="category-card">
-        <img src="images/fire.png" alt="Захист від пожежі">
+    <a href="/ajax/zahyst-vid-pozhezhi/" class="category-card">
+        <img src="/images/fire.png" alt="Захист від пожежі">
         <span>Захист від пожежі</span>
     </a>
 
@@ -328,16 +331,16 @@
 
             <!-- Столбик 2: Ajax (часть 1) — без заголовка -->
             <div class="category-col cat2">
-                <a href="/komplekti-signalizacii/">Комплекти сигналізації Ajax</a>
-                <a href="/habi-ta-moduli/">Хаби модулі ретранслятори Ajax</a>
-                <a href="/vnutrishni-datchyky/">Датчики клавіатури сирени Ajax</a>
+                <a href="/ajax/komplekti-signalizacii/">Комплекти сигналізації Ajax</a>
+                <a href="/ajax/habi-ta-moduli/">Хаби модулі ретранслятори Ajax</a>
+                <a href="/ajax/vnutrishni-datchyky/">Датчики клавіатури сирени Ajax</a>
             </div>
 
             <!-- Столбик 3: Ajax (часть 2) — без заголовка -->
             <div class="category-col cat3">
-                <a href="/zovnishni-datchyky/">Зовнішні датчики сирени Ajax</a>
-                <a href="/zahyst-vid-potopu/">Захист від потопу Ajax</a>
-                <a href="/zahyst-vid-pozhezhi/">Захист від пожежі Ajax</a>
+                <a href="/ajax/zovnishni-datchyky/">Зовнішні датчики сирени Ajax</a>
+                <a href="/ajax/zahyst-vid-potopu/">Захист від потопу Ajax</a>
+                <a href="/ajax/zahyst-vid-pozhezhi/">Захист від пожежі Ajax</a>
             </div>
 
             <!-- Столбик 4: Информация -->
@@ -357,11 +360,14 @@
             </div>
         </div>
     </div>
-    <p>&copy; 2024-2026 <span class="black">ПРОЗАХІСТ.</span> Всі права захищені.</p>
+    <p>&copy; 2024-2026 <span class="black">ПРОЗАХИСТ.</span> Всі права захищені.</p>
     <p style="color: #666; font-size: 0.85em; margin-top: 10px;">
         Охоронна сигналізація та відеонагляд з доставкою по Україні
     </p>
 </footer>
-<script src="script.js"></script>
+<script src="/script.js"></script>
 </body>
-</html>
+</html>'''
+
+print("Главный index.html создан")
+print(f"Длина: {len(main_index_html)} символов")
