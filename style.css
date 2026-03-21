@@ -1258,3 +1258,211 @@ a[href^="mailto:"]:hover {
         background-position: center;
     }
 }
+/* ======================================================
+   🎨 DARK THEME (как во втором стиле)
+   Только цвета, без изменения геометрии
+   ====================================================== */
+
+:root {
+    --primary-color: #800000;
+    --secondary-color: #444;
+    --accent-color: #a00000;
+
+    --text-dark: #e0e0e0;
+    --text-light: #aaa;
+
+    --bg-light: #1a1a1a;
+    --white: #2a2a2a;
+
+    --shadow: 0 6px 20px rgba(0,0,0,0.5);
+}
+
+/* BODY */
+body {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(180deg, #2a2a2a, #1a1a1a);
+    border-bottom: 2px solid #800000;
+}
+
+/* КАРТОЧКИ ТОВАРОВ */
+.product-item {
+    background: linear-gradient(145deg, #2a2a2a, #333);
+    border: 1px solid #444;
+}
+
+.product-item:hover {
+    border-color: #800000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* ТЕКСТЫ */
+.product-item h3 {
+    color: #fff;
+}
+
+.product-item p {
+    color: #aaa;
+}
+
+.product-price {
+    color: #ff4444;
+}
+
+/* КНОПКИ */
+.btn {
+    background: linear-gradient(145deg, #800000, #a00000);
+}
+
+.btn:hover {
+    background: linear-gradient(145deg, #a00000, #c00000);
+}
+
+/* КАТЕГОРИИ */
+.category-card {
+    background: linear-gradient(145deg, #2a2a2a, #333);
+    border: 1px solid #444;
+}
+
+.category-card:hover {
+    border-color: #800000;
+}
+
+.category-card span {
+    color: #ddd;
+}
+
+/* FOOTER */
+footer {
+    background: #1a1a1a;
+    border-top: 2px solid #800000;
+}
+
+.footer-links a {
+    color: #aaa;
+}
+
+.footer-links a:hover {
+    color: #ff4444;
+}
+
+/* КОРЗИНА */
+.cart {
+    background: linear-gradient(145deg, #800000, #a00000);
+}
+
+.cart-content {
+    background: #2a2a2a;
+    border: 1px solid #444;
+}
+
+.cart-item {
+    border-bottom: 1px solid #444;
+}
+
+/* КНОПКИ В КОРЗИНЕ */
+.checkout-button {
+    background: linear-gradient(145deg, #008000, #00a000);
+}
+
+.checkout-button:hover {
+    background: linear-gradient(145deg, #00a000, #00c000);
+}
+
+.cancel-button {
+    background: #444;
+}
+
+.cancel-button:hover {
+    background: #666;
+}
+
+/* TOAST */
+.toast {
+    background: #800000;
+    color: #fff;
+}
+
+/* SEO TEXT */
+.seo-text {
+    color: #aaa;
+}
+
+/* CONTACTS */
+.contacts-block,
+.contact-link {
+    color: #aaa;
+}
+
+.contact-link:hover {
+    color: #ff4444;
+}
+
+/* ВІДГУКИ */
+.reviews-widget {
+    background: linear-gradient(145deg, #2a2a2a, #333);
+    border: 1px solid #444;
+}
+
+.reviews-widget:hover {
+    border-color: #800000;
+}
+
+.widget-rating-number {
+    color: #fff;
+}
+
+.widget-rating-count {
+    color: #aaa;
+}
+
+/* MODAL */
+.reviews-modal-content {
+    background: #2a2a2a !important;
+    border: 1px solid #444;
+}
+
+.reviews-modal-header {
+    background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+}
+
+.reviews-modal-close:hover {
+    background: #444;
+}
+
+/* FORM */
+.form-group input,
+.form-group textarea,
+.form-group select {
+    background: #333;
+    border: 1px solid #444;
+    color: #fff;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #800000;
+}
+
+/* REVIEW CARDS */
+.review-card {
+    background: rgba(40,40,40,0.9);
+    border: 1px solid #444;
+}
+
+.review-text {
+    color: #ccc;
+}
+
+.review-name {
+    color: #fff;
+}
+
+.review-date {
+    color: #888;
+}
