@@ -186,7 +186,7 @@ header .logo svg {
     padding: 0;
     text-align: center;
     cursor: pointer;
-   flex: 1 1 calc(20% - 20px);      /* 100% / 5 = 20% */
+    flex: 1 1 calc(20% - 20px);          /* ✅ 5 КАТЕГОРІЙ: 100% / 5 = 20% */
     max-width: calc(20% - 20px);
     transition: transform 0.3s;
     box-sizing: border-box;
@@ -246,7 +246,7 @@ header .logo svg {
     flex-wrap: wrap;
     gap: 15px;
     justify-content: center;
-   padding: 0;
+    padding: 0;
 }
 
 .product-item {
@@ -254,7 +254,7 @@ header .logo svg {
     border-radius: 15px;
     padding: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    width: calc(16.666% - 15px); /* 6 в ряд */
+    width: calc(16.666% - 15px);         /* ✅ 6 ТОВАРІВ: 100% / 6 = 16.666% */
     box-sizing: border-box;
     cursor: pointer;
     display: flex;
@@ -1012,7 +1012,7 @@ footer > p {
     }
 
     .category-card {
-        flex: 1 1 calc(50% - 12px);
+        flex: 1 1 calc(50% - 12px);      /* ✅ 2 КАРТКИ НА МОБІЛЬНИХ */
         max-width: calc(50% - 12px);
     }
 
@@ -1025,7 +1025,7 @@ footer > p {
     }
 
     .product-item {
-        width: 100%;
+        width: 100%;                      /* ✅ 1 ТОВАР НА МОБІЛЬНИХ */
         max-width: 360px;
         margin: 0 auto;
         padding: 16px 18px 25px;
@@ -1171,6 +1171,3 @@ footer > p {
         background-position: center;
     }
 }
-
-
-
