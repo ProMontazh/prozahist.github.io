@@ -5,17 +5,24 @@
    ======================================== */
 
 /* Reset та базові стилі */
-* {
-    margin: 0;
-    padding: 0;
+*, *::before, *::after {
     box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
 }
 
 body {
     font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
     background-color: #1a1a1a;
     color: #e0e0e0;
     line-height: 1.6;
+   color: var(--text-dark);
 }
 
 /* ========================================
@@ -37,33 +44,6 @@ header {
     display: inline-block;
 }
 
-/* ========================================
-   BREADCRUMBS (хлібні крихти)
-   ======================================== */
-.breadcrumbs {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;              /* ⬅️ СТАРИЙ РОЗМІР */
-    margin-top: 90px;                 /* ⬅️ СТАРИЙ РОЗМІР */
-    font-size: 0.9em;
-    color: #aaa;
-    background-color: #1a1a1a;
-}
-
-.breadcrumbs a {
-    color: #ff4444;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.breadcrumbs a:hover {
-    color: #fff;
-}
-
-.breadcrumbs span {
-    color: #666;
-}
 
 /* ========================================
    НАВІГАЦІЯ ПО КАТЕГОРІЯХ
