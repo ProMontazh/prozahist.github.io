@@ -252,9 +252,9 @@ header .logo svg {
 .product-item {
     background: linear-gradient(145deg, #2a2a2a, #333);
     border-radius: 15px;
-    padding: 15px;
+    padding: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    flex: 0 1 215px;
+    flex: 0 1 220px;
     box-sizing: border-box;
     cursor: pointer;
     display: flex;
