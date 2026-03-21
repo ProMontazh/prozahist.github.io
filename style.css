@@ -2,7 +2,15 @@
    ПРОЗАХІСТ - Основні стилі
    КОЛЬОРИ: темна тема
    РОЗМІРИ: зі старого CSS
+   БЕЗ ПОМИЛОК
    ======================================== */
+
+/* CSS ЗМІННІ */
+:root {
+    --text-dark: #333;
+    --white: #ffffff;
+    --transition: all 0.3s ease;
+}
 
 /* Reset та базові стилі */
 *, *::before, *::after {
@@ -22,8 +30,8 @@ body {
     background-color: #1a1a1a;
     color: #e0e0e0;
     line-height: 1.6;
-   color: var(--text-dark);
 }
+
 /* Приховані заголовки для SEO */
 .visually-hidden {
     position: absolute;
@@ -47,7 +55,7 @@ header {
     width: 100%;
     height: 65px;
     background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
-   padding: 0;
+    padding: 0;
     color: white;
     text-align: left;
     z-index: 1000;
@@ -76,6 +84,33 @@ header .logo svg {
     top: 0;
 }
 
+/* ========================================
+   BREADCRUMBS (хлібні крихти)
+   ======================================== */
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    margin-top: 90px;
+    font-size: 0.9em;
+    color: #aaa;
+    background-color: #1a1a1a;
+}
+
+.breadcrumbs a {
+    color: #ff4444;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.breadcrumbs a:hover {
+    color: #fff;
+}
+
+.breadcrumbs span {
+    color: #666;
+}
 
 /* ========================================
    НАВІГАЦІЯ ПО КАТЕГОРІЯХ
@@ -84,8 +119,8 @@ header .logo svg {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;                        /* ⬅️ СТАРИЙ РОЗМІР */
-    padding: 15px 20px;               /* ⬅️ СТАРИЙ РОЗМІР */
+    gap: 10px;
+    padding: 15px 20px;
     background-color: #2a2a2a;
     border-bottom: 1px solid #444;
     position: sticky;
@@ -97,8 +132,8 @@ header .logo svg {
 .nav-link {
     color: #ccc;
     text-decoration: none;
-    padding: 8px 16px;                /* ⬅️ СТАРИЙ РОЗМІР (було 8px 15px) */
-    border-radius: 4px;               /* ⬅️ СТАРИЙ РОЗМІР (було 5px) */
+    padding: 8px 16px;
+    border-radius: 4px;
     transition: all 0.3s ease;
     font-size: 0.9em;
     white-space: nowrap;
@@ -128,7 +163,6 @@ header .logo svg {
     flex-wrap: wrap;
     gap: 15px;
     margin: 0;
-    
     background-size: cover;
     background-position: center;
     padding: 116px 20px 40px 20px;
@@ -137,7 +171,7 @@ header .logo svg {
 
 .category-buttons {
     display: flex;
-   justify-content: center;
+    justify-content: center;
     gap: 10px;
     margin: 40px 0;
     flex-wrap: wrap;
@@ -157,7 +191,7 @@ header .logo svg {
     transition: transform 0.3s;
     box-sizing: border-box;
     border: 1px solid #444;
-   }
+}
 
 .category-card:hover {
     transform: scale(1.05);
@@ -184,20 +218,13 @@ header .logo svg {
     font-size: 0.8em;
 }
 
-.products {
-    padding-bottom: 60px;
-}
-
-
 /* ========================================
    ТОВАРИ
    ======================================== */
 .products {
-   display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 20px;
-    justify-content: space-around;
+    padding: 40px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .products h1 {
@@ -235,13 +262,13 @@ header .logo svg {
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    transition: transform 0.1s;
-
+    transition: transform 0.1s, box-shadow 0.3s;
+    border: 1px solid #444;
 }
 
 .product-item:hover {
     transform: scale(1.01);
-   box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
     border-color: #800000;
 }
 
@@ -249,7 +276,7 @@ header .logo svg {
     width: 100%;
     height: auto;
     object-fit: cover;
-   border-radius: 15px;
+    border-radius: 15px;
 }
 
 .product-item h3 {
@@ -257,20 +284,20 @@ header .logo svg {
     font-size: 1em;
     margin: 10px 0 5px 0;
     min-height: 48px;
-
 }
 
 .product-item p {
     color: #aaa;
     font-size: 0.9em;
-    margin-bottom: 10px;
+    margin: 5px 0;
+    flex-grow: 1;
 }
 
 .product-price {
     color: #ff4444;
-    font-size: 1.3em;
+    font-size: 1.2em;
     font-weight: bold;
-    margin: 15px 0;
+    margin: 10px 0 5px 0;
 }
 
 /* ========================================
@@ -287,6 +314,7 @@ header .logo svg {
     font-weight: 600;
     transition: all 0.3s ease;
     width: 100%;
+    display: inline-block;
 }
 
 .btn:hover {
@@ -299,14 +327,14 @@ header .logo svg {
    ======================================== */
 .cart {
     position: fixed;
-    top: 14px;                       /* ⬅️ СТАРИЙ РОЗМІР (було 20px) */
-    right: 10px;                     /* ⬅️ СТАРИЙ РОЗМІР (було 20px) */
+    top: 14px;
+    right: 10px;
     background: linear-gradient(145deg, #800000, #a00000);
     color: #fff;
-    padding: 8px 12px;               /* ⬅️ СТАРИЙ РОЗМІР (було 12px 20px) */
+    padding: 8px 12px;
     border-radius: 8px;
     cursor: pointer;
-    z-index: 1100;                   /* ⬅️ СТАРИЙ (було 1000) */
+    z-index: 1100;
     font-weight: 600;
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     transition: all 0.3s ease;
@@ -325,9 +353,9 @@ header .logo svg {
     display: none;
     position: fixed;
     right: 20px;
-    top: 100px;                      /* ⬅️ СТАРИЙ РОЗМІР (було 70px) */
-    background-color: rgba(255,255,255,0.95);  /* ⬅️ СВІТЛИЙ ФОН для контрасту */
-    color: black;                    /* ⬅️ ТЕМНИЙ ТЕКСТ */
+    top: 100px;
+    background-color: rgba(255,255,255,0.95);
+    color: black;
     padding: 20px;
     border-radius: 8px;
     width: 400px;
@@ -335,13 +363,12 @@ header .logo svg {
     z-index: 1100;
 }
 
-/* Клас active для показу кошика */
 .cart-content.active {
     display: block !important;
 }
 
 .cart-content h2 {
-    color: #000;                     /* ⬅️ ТЕМНИЙ для світлого фону */
+    color: #000;
     margin-bottom: 20px;
     border-bottom: 2px solid #800000;
     padding-bottom: 10px;
@@ -360,7 +387,7 @@ header .logo svg {
 .cart-item .item-name {
     flex: 1;
     text-align: left !important;
-    font-size: 13px !important;      /* ⬅️ СТАРИЙ РОЗМІР */
+    font-size: 13px !important;
     line-height: 1.4;
     padding-left: 0 !important;
     margin-left: 0 !important;
@@ -375,8 +402,8 @@ header .logo svg {
 }
 
 .quantity-btn {
-    width: 24px;                     /* ⬅️ СТАРИЙ РОЗМІР */
-    height: 24px;                    /* ⬅️ СТАРИЙ РОЗМІР */
+    width: 24px;
+    height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -396,7 +423,7 @@ header .logo svg {
 }
 
 .quantity {
-    font-size: 14px;                 /* ⬅️ СТАРИЙ РОЗМІР */
+    font-size: 14px;
     padding: 0 6px;
     min-width: 20px;
     text-align: center !important;
@@ -465,10 +492,9 @@ header .logo svg {
     background-color: #d44150;
 }
 
-/* ======================================================
-   💬 TOAST (СПОВІЩЕННЯ)
-   ====================================================== */
-
+/* ========================================
+   TOAST ПОВІДОМЛЕННЯ
+   ======================================== */
 .toast {
     position: fixed;
     top: 45%;
@@ -490,100 +516,18 @@ header .logo svg {
     visibility: visible;
     opacity: 1;
 }
-/* ======================================================
-   📦 КОНТЕЙНЕР ТА ПРОДУКТИ
-   ====================================================== */
 
-.container {
-    margin-top: 0;
-}
-
-#products {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 20px;
-    justify-content: space-around;
-}
-
-.products-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    padding: 0 10px;
-}
-
-.product-item {
-    background-color: white;
-    padding: 15px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    flex: 0 1 230px;
-    box-sizing: border-box;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    transition: transform 0.2s;
-}
-
-.product-item:hover {
-    transform: scale(1.02);
-   box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-}
-
-.product-item img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-.product-item h3 {
-    font-size: 1em;
-    margin: 10px 0 5px 0;
-    min-height: 48px;
-}
-
-.product-item p {
-    margin: 5px 0;
-    flex-grow: 1;
-}
-
-.product-price {
-    font-size: 1.2em;
-    color: red;
-    font-weight: bold;
-    margin: 10px 0 5px 0;
-}
-
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.3s, background-color 0.3s;
-}
-
-.btn:hover {
-    background-color: #0056b3;
-}
-
-/* ======================================================
-   🦶 FOOTER (ПІДВАЛ)
-   ====================================================== */
-
+/* ========================================
+   FOOTER
+   ======================================== */
 footer {
-    background: var(--text-dark);
+    background: #1a1a1a;
     color: var(--white);
     text-align: center;
-    padding: 30px 20px 5px 20px;  /* top right bottom left */
+    padding: 30px 20px 5px 20px;
     font-size: 0.9em;
     margin-top: 0px;
+    border-top: 2px solid #800000;
 }
 
 .footer-wrapper {
@@ -599,13 +543,11 @@ footer {
     align-items: start;
 }
 
-/* Все столбики */
 .footer-links > div {
     text-align: left;
     margin-top: 0;
 }
 
-/* Все заголовки — одна линия */
 .footer-links h4 {
     color: var(--white);
     margin-bottom: 15px;
@@ -617,16 +559,14 @@ footer {
     line-height: 1.2;
 }
 
-/* У категорий 2 и 3 убираем заголовки полностью */
 .footer-links .cat2 h4,
 .footer-links .cat3 h4 {
     display: none;
 }
 
-/* Опускаем категории 2 и 3 на уровень ссылок первого столбика */
 .footer-links .cat2,
 .footer-links .cat3 {
-    padding-top: 33px;/* высота заголовка + margin-bottom */
+    padding-top: 33px;
 }
 
 .footer-links a {
@@ -641,54 +581,22 @@ footer {
 
 .footer-links a:hover {
     color: var(--white);
-   /*  transform: translateX(1px);*/
 }
 
-/* ======================================================
-   📱 АДАПТИВНІСТЬ (ПЛАНШЕТИ)
-   ====================================================== */
-
-@media (max-width: 1024px) {
-    .footer-links {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-    }
-
-    /* Убираем отступ на планшете */
-    .footer-links .cat2,
-    .footer-links .cat3 {
-        padding-top: 34px;
-    }
+footer > p {
+    text-align: center;
+    color: #666;
+    margin-top: 20px;
 }
 
-/* ======================================================
-   📱 АДАПТИВНІСТЬ (МОБІЛЬНА ВЕРСІЯ)
-   ====================================================== */
-
-@media (max-width: 768px) {
-    .footer-links {
-        grid-template-columns: 1fr;
-        gap: 25px;
-        text-align: center;
-    }
-
-    .footer-links > div {
-        text-align: center;
-    }
-
-    /* Убираем отступ на мобильном */
-    .footer-links .cat2,
-    .footer-links .cat3 {
-        padding-top: 0;
-    }
-}
 .black {
-    color: #808080;                  /* ⬅️ СІРИЙ КОЛІР для ЗАХІСТ */
+    color: #808080;
     font-weight: bold;
 }
 
 .red {
-    color: #800000;                  /* ⬅️ БОРДОВИЙ КОЛІР для ПРО */
+    color: #800000;
+    font-weight: bold;
 }
 
 /* ========================================
@@ -753,7 +661,6 @@ footer {
     color: #aaa;
 }
 
-/* Модальне вікно відгуків */
 .reviews-modal {
     display: none;
     position: fixed;
@@ -767,7 +674,6 @@ footer {
     align-items: center;
 }
 
-/* Клас active для показу модального вікна */
 .reviews-modal.active {
     display: flex !important;
 }
@@ -1079,24 +985,35 @@ footer {
     color: #ff4444;
 }
 
-
-/* ======================================================
-   📱 АДАПТИВНІСТЬ (МОБІЛЬНА ВЕРСІЯ)
-   ====================================================== */
-
-@media (max-width: 768px) {
-    #main-banner {
-        
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-        height: auto;
-        padding-top: 80px;
+/* ========================================
+   АДАПТИВНІСТЬ
+   ======================================== */
+@media (max-width: 1024px) {
+    .footer-links {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
     }
 
-    #products {
-        flex-direction: column;
-        align-items: center;
+    .footer-links .cat2,
+    .footer-links .cat3 {
+        padding-top: 34px;
+    }
+}
+
+@media (max-width: 768px) {
+    .breadcrumbs {
+        margin-top: 70px;
+        font-size: 0.85em;
+    }
+
+    #categories {
+        padding: 90px 10px 25px 10px;
+        gap: 8px;
+    }
+
+    .category-card {
+        flex: 1 1 calc(50% - 12px);
+        max-width: calc(50% - 12px);
     }
 
     .products-container {
@@ -1111,8 +1028,7 @@ footer {
         width: 100%;
         max-width: 360px;
         margin: 0 auto;
-        padding: 16px 18px;
-        padding-bottom: 25px;
+        padding: 16px 18px 25px;
         box-sizing: border-box;
     }
 
@@ -1132,37 +1048,31 @@ footer {
         right: 0;
     }
 
-    header h1 {
-        font-size: 1em;
-        padding: 8px;
-    }
-
     .btn {
         padding: 8px 18px;
         font-size: 0.9em;
     }
 
-
-
-    .category-card {
-        flex: 1 1 calc(50% - 12px);
-        max-width: calc(50% - 12px);
+    .footer-links {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        text-align: center;
     }
 
-    #categories {
-        padding: 90px 10px 25px 10px;
-        gap: 8px;
+    .footer-links > div {
+        text-align: center;
     }
 
-    .products {
-        padding-bottom: 50px;
+    .footer-links .cat2,
+    .footer-links .cat3 {
+        padding-top: 0;
     }
 
-    .product-price {
-        margin-bottom: 10px !important;
+    .footer-links .cat2 h4,
+    .footer-links .cat3 h4 {
+        display: block;
     }
 
-    /* Відгуки - мобільна версія */
     .reviews-widget {
         padding: 8px 12px;
         gap: 8px;
@@ -1239,10 +1149,6 @@ footer {
         gap: 5px;
     }
 
-    .reviews-form {
-        max-width: 100%;
-    }
-
     .review-avatar {
         width: 40px;
         height: 40px;
@@ -1256,24 +1162,19 @@ footer {
     .review-text {
         font-size: 14px;
     }
-
-    .reviews-list {
-        padding: 0;
-        row-gap: 12px;
-        column-gap: 0px;
-    }
 }
 
-/* ======================================================
-   🖥️ ЛАНДШАФТНА ОРІЄНТАЦІЯ (900px)
-   ====================================================== */
-
 @media (max-width: 900px) and (orientation: landscape) {
-    #main-banner {
-        height: 80px;
-        padding-top: 60px;
+    #categories {
+        padding-top: 80px;
         background-size: cover;
         background-position: center;
     }
 }
 
+@media (max-width: 480px) {
+    .category-card {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
