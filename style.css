@@ -457,6 +457,88 @@ header .logo svg {
     visibility: visible;
     opacity: 1;
 }
+/* ======================================================
+   📦 КОНТЕЙНЕР ТА ПРОДУКТИ
+   ====================================================== */
+
+.container {
+    margin-top: 0;
+}
+
+#products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: space-around;
+}
+
+.products-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 0 10px;
+}
+
+.product-item {
+    background-color: white;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    flex: 0 1 230px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.product-item:hover {
+    transform: scale(1.02);
+   box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.product-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.product-item h3 {
+    font-size: 1em;
+    margin: 10px 0 5px 0;
+    min-height: 48px;
+}
+
+.product-item p {
+    margin: 5px 0;
+    flex-grow: 1;
+}
+
+.product-price {
+    font-size: 1.2em;
+    color: red;
+    font-weight: bold;
+    margin: 10px 0 5px 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
 
 /* ========================================
    FOOTER
