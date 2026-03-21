@@ -1,481 +1,243 @@
-/* ======================================================
-   🧩 КАРТА КАТЕГОРИЙ
-   ====================================================== */
-const CATEGORY_MAP = {
-    indoor: {
-        label: 'Внутрішні камери IMOU',
-        icon: 'reviews_png/cam_indoor.png'
-    },
-    outdoor: {
-        label: 'Зовнішні камери IMOU',
-        icon: 'reviews_png/cam_outdoor.png'
-    },
-    outdoor_4G: {
-        label: 'Зовнішні 4G камери IMOU',
-        icon: 'reviews_png/cam_outdoor_4G.png'
-    },
-    alarm: {
-        label: 'Комплекти сигналізації Ajax',
-        icon: 'reviews_png/starterkit.png'
-    },
-    hub: {
-        label: 'Хаби, модулі Ajax',
-        icon: 'reviews_png/hub.png'
-    },
-    protect: {
-        label: 'Внутрішня охорона Ajax',
-        icon: 'reviews_png/motionprotect.png'
-    },
-    protect_outdoor: {
-        label: 'Зовнішня охорона Ajax',
-        icon: 'reviews_png/motioncam_outdoor.png'
-    },
-    waterstop: {
-        label: 'Захист від потопу Ajax',
-        icon: 'reviews_png/waterstop.png'
-    },
-    fire: {
-        label: 'Захист від пожежі Ajax',
-        icon: 'reviews_png/manualcallpoint.png'
-    },
-    other: {
-        label: 'Інше',
-        icon: 'favicon.svg'
-    }
-};
+// ==========================================
+// КОРЗИНА - глобальна для всіх сторінок
+// ==========================================
 
-(() => {
-    // === 🛒 КОШИК ===
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    function updateCart() {
-        const cartItems = document.getElementById('cart-items');
-        const totalPriceElement = document.getElementById('total-price');
-        const cartCountElement = document.getElementById('cart-count');
-        const stockWarning = document.getElementById('stock-warning');
+function saveCart() {
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartUI();
+}
 
-        if (!cartItems || !totalPriceElement || !cartCountElement || !stockWarning) return;
-
-        cartItems.innerHTML = '';
-        let total = 0;
-        let totalQuantity = 0;
-
-        cart.forEach(item => {
-            total += item.price * item.quantity;
-            totalQuantity += item.quantity;
-
-            const cartItem = document.createElement('div');
-            cartItem.className = 'cart-item';
-            cartItem.innerHTML = `
-                <img src="${item.image}" alt="${item.name}" style="width:30px;height:auto;margin-right:5px;">
-                <span>${item.name} - ${item.price} грн</span>
-                <div class="quantity-control">
-                    <button class="quantity-btn" onclick="decreaseQuantity('${item.id}', event)">-</button>
-                    <span class="quantity">${item.quantity}</span>
-                    <button class="quantity-btn" onclick="increaseQuantity('${item.id}', event)">+</button>
+function updateCartUI() {
+    const countEl = document.getElementById('cart-count');
+    const itemsEl = document.getElementById('cart-items');
+    const totalEl = document.getElementById('total-price');
+    const discountMsg = document.getElementById('discount-message');
+    
+    if (!countEl) return; // Якщо елементів немає на сторінці
+    
+    // Оновлюємо лічильник
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    countEl.textContent = totalItems;
+    
+    // Оновлюємо список товарів
+    if (itemsEl) {
+        if (cart.length === 0) {
+            itemsEl.innerHTML = '<p style="text-align: center; color: #666;">Кошик порожній</p>';
+        } else {
+            itemsEl.innerHTML = cart.map((item, index) => `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}" style="width: 50px; height: 50px; object-fit: contain;">
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">${item.price} грн x ${item.quantity}</div>
+                    </div>
+                    <div class="cart-item-controls">
+                        <button onclick="changeQuantity(${index}, -1)" style="padding: 5px 10px;">-</button>
+                        <span style="margin: 0 10px;">${item.quantity}</span>
+                        <button onclick="changeQuantity(${index}, 1)" style="padding: 5px 10px;">+</button>
+                        <button onclick="removeFromCart(${index})" style="padding: 5px 10px; margin-left: 10px; color: red;">🗑</button>
+                    </div>
                 </div>
-            `;
-            cartItems.appendChild(cartItem);
-        });
-
-        totalPriceElement.textContent = total.toFixed(2);
-        cartCountElement.textContent = totalQuantity;
-        stockWarning.textContent = totalQuantity > 10 
-            ? "Увага! Обмежена кількість товару. Наявність уточнюйте" 
-            : "";
-
-        // 💰 Перевірка на знижку
-        const discountMessage = document.getElementById('discount-message');
-        if (discountMessage) {
-            if (total >= 1000) {
-                discountMessage.textContent = "Доступна знижка!";
-                discountMessage.style.display = "inline";
+            `).join('');
+        }
+    }
+    
+    // Оновлюємо суму
+    if (totalEl) {
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        totalEl.textContent = total;
+        
+        // Знижка при замовленні від 10000 грн
+        if (discountMsg) {
+            if (total >= 10000) {
+                const discount = Math.floor(total * 0.05);
+                discountMsg.innerHTML = `<br><span style="color: green;">Знижка 5%: -${discount} грн</span><br><strong>До сплати: ${total - discount} грн</strong>`;
             } else {
-                discountMessage.textContent = "";
-                discountMessage.style.display = "none";
+                discountMsg.innerHTML = total >= 8000 ? `<br><span style="color: #666;">До знижки 5% залишилось: ${10000 - total} грн</span>` : '';
             }
         }
     }
+}
 
-    window.increaseQuantity = function(id, event) {
-        if (event) event.stopPropagation();
-        const item = cart.find(i => i.id === id);
-        if (item) {
-            item.quantity++;
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCart();
-        }
-    };
+function addToCart(event, product) {
+    event.stopPropagation(); // Зупиняємо спливання для кліку на картці товару
+    
+    const existingItem = cart.find(item => item.id === product.id);
+    
+    if (existingItem) {
+        existingItem.quantity++;
+        showToast(`"${product.name}" додано ще одну одиницю`);
+    } else {
+        cart.push({
+            ...product,
+            quantity: 1
+        });
+        showToast(`"${product.name}" додано в кошик`);
+    }
+    
+    saveCart();
+    
+    // Відтворюємо звук
+    const sound = document.getElementById('hover-sound');
+    if (sound) sound.play().catch(e => {});
+}
 
-    window.decreaseQuantity = function(id, event) {
-        if (event) event.stopPropagation();
-        const item = cart.find(i => i.id === id);
-        if (item) {
-            if (item.quantity > 1) {
-                item.quantity--;
-            } else {
-                cart = cart.filter(i => i.id !== id);
-            }
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCart();
-        }
-    };
+function changeQuantity(index, delta) {
+    cart[index].quantity += delta;
+    if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
+    }
+    saveCart();
+}
 
-    function showToast(message) {
-        const toast = document.getElementById('toast');
-        if (!toast) return;
+function removeFromCart(index) {
+    const name = cart[index].name;
+    cart.splice(index, 1);
+    saveCart();
+    showToast(`"${name}" видалено з кошика`);
+}
+
+function clearCart() {
+    if (cart.length === 0) return;
+    if (confirm('Очистити кошик?')) {
+        cart = [];
+        saveCart();
+        showToast('Кошик очищено');
+    }
+}
+
+function toggleCart() {
+    const cartContent = document.getElementById('cart-content');
+    if (cartContent) {
+        cartContent.classList.toggle('active');
+    }
+}
+
+// ==========================================
+// СПІЛЬНІ ФУНКЦІЇ
+// ==========================================
+
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    if (toast) {
         toast.textContent = message;
         toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 3000);
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
     }
+}
 
-    window.addToCart = function(event, item) {
-        if (event && event.stopPropagation) event.stopPropagation();
-        const existingItem = cart.find(ci => ci.id === item.id);
-        if (existingItem) {
-            existingItem.quantity++;
-        } else {
-            item.quantity = 1;
-            cart.push(item);
-        }
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCart();
-        showToast(`${item.name} додано до кошика!`);
-    };
+function openProductDetails(url) {
+    window.location.href = url;
+}
 
-    window.addToCartFromProductPage = function(event, item) {
-        if (event) event.stopPropagation();
-        const existingItem = cart.find(ci => ci.id === item.id);
-        if (existingItem) {
-            existingItem.quantity++;
-        } else {
-            item.quantity = 1;
-            cart.push(item);
-        }
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCart();
-        showToast(`${item.name} додано до кошика!`);
-    };
+// ==========================================
+// ВІДГУКИ
+// ==========================================
 
-    window.clearCart = function() {
-        cart = [];
-        localStorage.removeItem('cart');
-        updateCart();
-        showToast('Кошик очищено');
-    };
+let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+let currentRating = 0;
 
-    window.toggleCart = function() {
-        const cartContent = document.getElementById('cart-content');
-        if (!cartContent) return;
-        const isHidden = getComputedStyle(cartContent).display === 'none';
-        cartContent.style.display = isHidden ? 'block' : 'none';
-    };
-
-    // Закриття кошика при кліку поза ним
-    document.addEventListener('click', (ev) => {
-        const cartContent = document.getElementById('cart-content');
-        const cartButton = document.querySelector('.cart');
-        if (!cartContent || !cartButton) return;
-
-        if (!cartContent.contains(ev.target) && !cartButton.contains(ev.target)) {
-            cartContent.style.display = 'none';
-        }
-    });
-
-    // === 📂 КАТЕГОРІЇ ===
-    let currentCategory = null;
-
-    window.toggleCategory = function(catId, push = true) {
-        // Ховаємо всі категорії товарів
-        document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-
-        const target = document.getElementById(catId);
-        if (!target) return;
-
-        // Показуємо обрану категорію
-        target.style.display = 'block';
-        target.classList.add('fade-in');
-        currentCategory = catId;
-
-        // Ховаємо головну сторінку з категоріями
-        const categories = document.getElementById('categories');
-        const mainBanner = document.getElementById('main-banner');
-        if (categories) categories.style.display = 'none';
-        if (mainBanner) mainBanner.style.display = 'none';
-
-        // SEO: Оновлюємо title при перемиканні категорії
-        const categoryNames = {
-            'indoor': 'Внутрішні камери IMOU',
-            'outdoor': 'Зовнішні камери IMOU',
-            'outdoor_4G': '4G камери IMOU',
-            'microSD': 'Карти пам\'яті microSD',
-            'alarm': 'Комплекти сигналізації Ajax',
-            'hub': 'Хаби та модулі Ajax',
-            'protect': 'Внутрішні датчики Ajax',
-            'protect_outdoor': 'Зовнішні датчики Ajax',
-            'waterstop': 'Захист від потопу Ajax',
-            'fire': 'Захист від пожежі Ajax'
-        };
-        
-        if (categoryNames[catId]) {
-            document.title = `${categoryNames[catId]} — купити в Харкові | ПРОЗАХИСТ`;
-        }
-
-        // Оновлюємо історію браузера та прокручуємо вгору
-        if (push) {
-            setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
-            history.pushState({ category: catId }, '', '#' + catId);
-        }
-    };
-
-    // Витягування ID продукту з URL
-    function extractProductIdFromUrl(url) {
-        if (!url) return '';
-
-        // Витягуємо ID з дужок, наприклад: details_indoor_2(IPC-C32EP).html
-        const match = url.match(/\(([^)]+)\)/);
-        if (match && match[1]) return match[1];
-
-        // Альтернативний спосіб - беремо ім'я файлу без розширення
-        const filename = url.split('/').pop().split('?')[0].split('#')[0];
-        return filename.replace(/\.[^.]+$/, '') || filename;
-    }
-
-    window.openProductDetails = function(pageUrl) {
-        const prodId = extractProductIdFromUrl(pageUrl);
-
-        // Зберігаємо поточну категорію та позицію прокрутки
-        if (currentCategory) {
-            localStorage.setItem('lastCategory', currentCategory);
-        }
-        if (prodId) {
-            localStorage.setItem('lastProductId', prodId);
-        }
-        localStorage.setItem('lastScroll', String(window.scrollY || 0));
-
-        // Ховаємо банер на мобільних пристроях
-        const mainBanner = document.getElementById('main-banner');
-        if (window.innerWidth <= 768 && mainBanner) {
-            mainBanner.style.display = 'none';
-        }
-
-        window.location.href = pageUrl;
-    };
-
-    // Обробка стану (історії браузера)
-    function handleState(state) {
-        const categories = document.getElementById('categories');
-        const mainBanner = document.getElementById('main-banner');
-
-        // Ховаємо всі категорії товарів
-        document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
-
-        const catId = state ? state.category : null;
-
-        if (catId && document.getElementById(catId)) {
-            // Показуємо обрану категорію
-            const target = document.getElementById(catId);
-            target.style.display = 'block';
-            target.classList.add('fade-in');
-            currentCategory = catId;
-
-            if (categories) categories.style.display = 'none';
-            if (mainBanner) mainBanner.style.display = 'none';
-        } else {
-            // Показуємо головну сторінку
-            currentCategory = null;
-            if (categories) categories.style.display = 'flex';
-            if (mainBanner) mainBanner.style.display = 'block';
+function initReviews() {
+    const starContainer = document.getElementById('starRating');
+    if (starContainer) {
+        const stars = starContainer.querySelectorAll('.star-input');
+        stars.forEach((star, index) => {
+            star.addEventListener('click', () => {
+                currentRating = index + 1;
+                document.getElementById('reviewRating').value = currentRating;
+                updateStarDisplay(currentRating);
+            });
             
-            // SEO: Повертаємо головний title
-            document.title = "ПРОЗАХИСТ | Системи безпеки Ajax та камери IMOU — Харків, Україна";
-        }
-
-        // Оновлюємо кошик
-        cart = JSON.parse(localStorage.getItem('cart')) || [];
-        updateCart();
-    }
-
-    // === 🎵 ЗВУК "НАЗАД" ===
-    const backSound = document.getElementById('back-sound');
-    if (backSound) {
-        backSound.volume = 0.35;
-    }
-
-    window.addEventListener('popstate', (e) => {
-        handleState(e.state);
-        if (backSound) {
-            backSound.currentTime = 0;
-            backSound.play().catch(() => {});
-        }
-    });
-
-    window.addEventListener('pageshow', () => {
-        handleState(history.state);
-    });
-
-    // Ініціалізація кошика при завантаженні сторінки
-    updateCart();
-
-    // === 🎵 Звук при наведенні на картки категорій ===
-    const hoverSound = document.getElementById('hover-sound');
-    if (hoverSound) {
-        hoverSound.volume = 0.4;
-
-        document.querySelectorAll('.category-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                hoverSound.currentTime = 0;
-                hoverSound.play().catch(() => {});
+            star.addEventListener('mouseenter', () => {
+                updateStarDisplay(index + 1, true);
             });
         });
+        
+        starContainer.addEventListener('mouseleave', () => {
+            updateStarDisplay(currentRating);
+        });
     }
+    
+    updateWidgetRating();
+}
 
-    // === 📱 Свайпи між категоріями ===
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    document.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-    });
-
-    document.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].clientX;
-
-        // Перевіряємо, чи показується зараз будь-яка категорія товарів
-        const activeProducts = [...document.querySelectorAll('.products')]
-            .find(p => getComputedStyle(p).display === 'block');
-
-        // Якщо на головній сторінці (немає активної категорії) — свайпи ігноруємо
-        if (!activeProducts) return;
-
-        // Отримуємо всі категорії
-        const products = Array.from(document.querySelectorAll('.products'));
-        const currentIndex = products.indexOf(activeProducts);
-
-        const diff = touchEndX - touchStartX;
-
-        // Мінімальна відстань для спрацювання свайпу
-        if (Math.abs(diff) < 50) return;
-
-        // Свайп вліво (наступна категорія)
-        if (diff < 0 && currentIndex < products.length - 1) {
-            products.forEach(p => p.style.display = 'none');
-            products[currentIndex + 1].style.display = 'block';
-            products[currentIndex + 1].classList.add('fade-in');
-
-            // Оновлюємо currentCategory та історію
-            const nextCatId = products[currentIndex + 1].id;
-            currentCategory = nextCatId;
-            history.pushState({ category: nextCatId }, '', '#' + nextCatId);
-        }
-
-        // Свайп вправо (попередня категорія)
-        if (diff > 0 && currentIndex > 0) {
-            products.forEach(p => p.style.display = 'none');
-            products[currentIndex - 1].style.display = 'block';
-            products[currentIndex - 1].classList.add('fade-in');
-
-            // Оновлюємо currentCategory та історію
-            const prevCatId = products[currentIndex - 1].id;
-            currentCategory = prevCatId;
-            history.pushState({ category: prevCatId }, '', '#' + prevCatId);
-        }
-    });
-})();
-
-// ⚠️ ВСТАВТЕ ВАШ GOOGLE SCRIPT URL ТУТ ⚠️
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzhSB-fcDDeBBhRWBBO1h7ocuHFnOlVqqWUv9rsKXBVED_MHxkEbXHoeeH__q090sU1uw/exec ';
-
-let selectedRating = 0;
-let allReviews = [];
-
-// Ініціалізація при завантаженні
-document.addEventListener('DOMContentLoaded', function() {
-    initStarRating();
-    loadReviewsForWidget();
-});
-
-// Завантаження для віджету
-async function loadReviewsForWidget() {
-    try {
-        const response = await fetch(SCRIPT_URL);
-        const data = await response.json();
-
-        if (data.success && data.reviews) {
-            allReviews = data.reviews;
-            updateWidget(data.reviews);
+function updateStarDisplay(rating, isHover = false) {
+    const stars = document.querySelectorAll('.star-input');
+    stars.forEach((star, index) => {
+        if (index < rating) {
+            star.style.color = '#ffc107';
         } else {
-            updateWidget([]);
+            star.style.color = isHover ? '#ddd' : '#ddd';
         }
-    } catch (error) {
-        updateWidget([]);
+    });
+}
+
+function updateWidgetRating() {
+    const widgetRating = document.getElementById('widgetRating');
+    const widgetCount = document.getElementById('widgetCount');
+    const widgetStars = document.getElementById('widgetStars');
+    const modalRating = document.getElementById('modalRating');
+    const modalCount = document.getElementById('modalCount');
+    const modalStars = document.getElementById('modalStars');
+    
+    if (reviews.length === 0) {
+        if (widgetRating) widgetRating.textContent = '0.0';
+        if (widgetCount) widgetCount.textContent = '0 відгуків';
+        if (widgetStars) widgetStars.innerHTML = '★★★★★';
+        if (modalRating) modalRating.textContent = '0.0';
+        if (modalCount) modalCount.textContent = '0 відгуків';
+        if (modalStars) modalStars.innerHTML = '★★★★★';
+        return;
     }
+    
+    const avgRating = (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1);
+    
+    if (widgetRating) widgetRating.textContent = avgRating;
+    if (widgetCount) widgetCount.textContent = `${reviews.length} відгук${getReviewEnding(reviews.length)}`;
+    if (widgetStars) widgetStars.innerHTML = renderStars(avgRating);
+    
+    if (modalRating) modalRating.textContent = avgRating;
+    if (modalCount) modalCount.textContent = `${reviews.length} відгук${getReviewEnding(reviews.length)}`;
+    if (modalStars) modalStars.innerHTML = renderStars(avgRating);
 }
 
-// Оновлення віджету
-function updateWidget(reviews) {
-    const count = reviews.length;
-    const avgRating = count > 0 
-        ? reviews.reduce((sum, r) => sum + r.rating, 0) / count 
-        : 0;
-
-    // Оновити число
-    document.getElementById('widgetRating').textContent = avgRating.toFixed(1);
-
-    // Оновити кількість
-    const countText = count === 0 ? 'Немає відгуків' :
-                     count === 1 ? '1 відгук' :
-                     count < 5 ? `${count} відгуки` :
-                     `${count} відгуків`;
-    document.getElementById('widgetCount').textContent = countText;
-
-    // Оновити зірки
-    renderWidgetStars(avgRating);
+function getReviewEnding(n) {
+    if (n % 10 === 1 && n % 100 !== 11) return '';
+    if ([2, 3, 4].includes(n % 10) && ![12, 13, 14].includes(n % 100)) return 'и';
+    return 'ів';
 }
 
-// Відображення зірок віджету з частковим заповненням
-function renderWidgetStars(rating) {
-    const container = document.getElementById('widgetStars');
-    container.innerHTML = '';
-
+function renderStars(rating) {
+    let html = '';
     for (let i = 1; i <= 5; i++) {
-        const star = document.createElement('span');
-        star.className = 'widget-star';
-        star.innerHTML = '★';
-
-        // Якщо рейтинг більше поточної зірки
-        if (rating >= i) {
-            // Повністю заповнена зірка
-            const filled = document.createElement('span');
-            filled.className = 'widget-star-filled';
-            filled.style.width = '100%';
-            filled.innerHTML = '★';
-            star.appendChild(filled);
-        } else if (rating > i - 1) {
-            // Частково заповнена зірка
-            const filled = document.createElement('span');
-            filled.className = 'widget-star-filled';
-            const percentage = ((rating - (i - 1)) * 100).toFixed(0);
-            filled.style.width = percentage + '%';
-            filled.innerHTML = '★';
-            star.appendChild(filled);
+        if (i <= rating) {
+            html += '<span style="color: #ffc107;">★</span>';
+        } else if (i - 0.5 <= rating) {
+            html += '<span style="color: #ffc107;">★</span>'; // Спрощено
+        } else {
+            html += '<span style="color: #ddd;">★</span>';
         }
+    }
+    return html;
+}
 
-        container.appendChild(star);
+function openReviewsModal() {
+    const modal = document.getElementById('reviewsModal');
+    if (modal) {
+        modal.style.display = 'flex';
+        loadReviews();
     }
 }
 
-// Відкрити модальне вікно
-function openReviewsModal() {
-    document.getElementById('reviewsModal').classList.add('active');
-    document.body.style.overflow = 'hidden';
-    loadReviews();
-}
-
-// Закрити модальне вікно
 function closeReviewsModal() {
-    document.getElementById('reviewsModal').classList.remove('active');
-    document.body.style.overflow = '';
+    const modal = document.getElementById('reviewsModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
 }
 
 function closeModalOnOutsideClick(event) {
@@ -484,240 +246,166 @@ function closeModalOnOutsideClick(event) {
     }
 }
 
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        closeReviewsModal();
-    }
-});
-
-// Перемикання вкладок
 function switchTab(tab) {
+    const readTab = document.getElementById('readTab');
+    const writeTab = document.getElementById('writeTab');
     const tabs = document.querySelectorAll('.reviews-tab');
-    const contents = document.querySelectorAll('.reviews-tab-content');
-
+    
     tabs.forEach(t => t.classList.remove('active'));
-    contents.forEach(c => c.classList.remove('active'));
-
+    
     if (tab === 'read') {
-        tabs[0].classList.add('active');
-        document.getElementById('readTab').classList.add('active');
+        if (readTab) readTab.classList.add('active');
+        if (writeTab) writeTab.classList.remove('active');
+        tabs[0]?.classList.add('active');
+        loadReviews();
     } else {
-        tabs[1].classList.add('active');
-        document.getElementById('writeTab').classList.add('active');
+        if (readTab) readTab.classList.remove('active');
+        if (writeTab) writeTab.classList.add('active');
+        tabs[1]?.classList.add('active');
     }
 }
 
-// Ініціалізація рейтингу форми
-function initStarRating() {
-    const stars = document.querySelectorAll('.star-input');
-    stars.forEach(star => {
-        star.addEventListener('click', function() {
-            selectedRating = parseInt(this.getAttribute('data-rating'));
-            document.getElementById('reviewRating').value = selectedRating;
-            updateStars(selectedRating);
-        });
-    });
+function loadReviews() {
+    const reviewsList = document.getElementById('reviewsList');
+    const loading = document.getElementById('loading');
+    const noReviews = document.getElementById('noReviews');
+    
+    if (!reviewsList) return;
+    
+    if (loading) loading.style.display = 'block';
+    if (reviewsList) reviewsList.style.display = 'none';
+    if (noReviews) noReviews.style.display = 'none';
+    
+    setTimeout(() => {
+        if (loading) loading.style.display = 'none';
+        
+        if (reviews.length === 0) {
+            if (noReviews) noReviews.style.display = 'block';
+        } else {
+            if (reviewsList) {
+                reviewsList.innerHTML = reviews.map(review => `
+                    <div class="review-item" style="border-bottom: 1px solid #eee; padding: 15px 0;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <strong>${review.name}</strong>
+                            <span style="color: #666; font-size: 0.9em;">${review.date}</span>
+                        </div>
+                        <div style="color: #ffc107; margin-bottom: 10px;">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
+                        <div style="color: #666; font-size: 0.9em; margin-bottom: 5px;">Категорія: ${getCategoryName(review.product)}</div>
+                        <p>${review.text}</p>
+                    </div>
+                `).join('');
+                reviewsList.style.display = 'block';
+            }
+        }
+    }, 500);
 }
 
-function updateStars(rating) {
-    const stars = document.querySelectorAll('.star-input');
-    stars.forEach((star, index) => {
-        star.classList.toggle('active', index < rating);
-    });
+function getCategoryName(cat) {
+    const names = {
+        'indoor': 'Внутрішні камери IMOU',
+        'outdoor': 'Зовнішні камери IMOU',
+        'outdoor_4G': 'Зовнішні 4G камери IMOU',
+        'alarm': 'Комплекти сигналізації Ajax',
+        'hub': 'Хаби, модулі Ajax',
+        'protect': 'Внутрішня охорона Ajax',
+        'protect_outdoor': 'Зовнішня охорона Ajax',
+        'waterstop': 'Захист від потопу Ajax',
+        'fire': 'Захист від пожежі Ajax',
+        'other': 'Інше'
+    };
+    return names[cat] || cat;
 }
 
-// Показати повідомлення
-function showFormMessage(text, type) {
-    const msg = document.getElementById('formMessage');
-    msg.textContent = text;
-    msg.className = `message ${type}`;
-    msg.style.display = 'block';
-    setTimeout(() => msg.style.display = 'none', 5000);
-}
-
-// Відправка відгуку
-async function submitReview(event) {
+function submitReview(event) {
     event.preventDefault();
-
-    if (selectedRating === 0) {
-        showFormMessage('Будь ласка, оберіть оцінку!', 'error');
+    
+    const name = document.getElementById('reviewName')?.value;
+    const product = document.getElementById('reviewProduct')?.value;
+    const rating = document.getElementById('reviewRating')?.value;
+    const text = document.getElementById('reviewText')?.value;
+    const formMessage = document.getElementById('formMessage');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    if (!rating) {
+        showToast('Будь ласка, поставте оцінку');
         return;
     }
-
-    const submitBtn = document.getElementById('submitBtn');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Відправка...';
-
+    
     const review = {
-        name: document.getElementById('reviewName').value.trim(),
-        product: document.getElementById('reviewProduct').value,
-        rating: selectedRating,
-        text: document.getElementById('reviewText').value.trim(),
-        date: new Date().toLocaleDateString('uk-UA', { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-        })
+        name,
+        product,
+        rating: parseInt(rating),
+        text,
+        date: new Date().toLocaleDateString('uk-UA')
     };
-
-    try {
-        await fetch(SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(review)
-        });
-
-        showFormMessage('✓ Дякуємо! Ваш відгук успішно додано!', 'success');
-
-        document.getElementById('reviewName').value = '';
-        document.getElementById('reviewProduct').value = '';
-        document.getElementById('reviewText').value = '';
-        selectedRating = 0;
-        updateStars(0);
-
+    
+    reviews.unshift(review);
+    localStorage.setItem('reviews', JSON.stringify(reviews));
+    
+    // Скидаємо форму
+    event.target.reset();
+    currentRating = 0;
+    updateStarDisplay(0);
+    
+    if (formMessage) {
+        formMessage.textContent = 'Дякуємо за відгук!';
+        formMessage.style.display = 'block';
+        formMessage.style.color = 'green';
         setTimeout(() => {
-            switchTab('read');
-            loadReviews();
-            loadReviewsForWidget();
-        }, 2000);
-
-    } catch (error) {
-        showFormMessage('Помилка відправки. Спробуйте ще раз.', 'error');
-    } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Відправити відгук';
+            formMessage.style.display = 'none';
+        }, 3000);
     }
+    
+    showToast('Відгук додано!');
+    updateWidgetRating();
 }
 
-// Завантаження відгуків у модальне вікно
-async function loadReviews() {
-    const loading = document.getElementById('loading');
-    const list = document.getElementById('reviewsList');
-    const noReviews = document.getElementById('noReviews');
+// ==========================================
+// ЗВУКИ
+// ==========================================
 
-    loading.style.display = 'block';
-    list.style.display = 'none';
-    noReviews.style.display = 'none';
-
-    try {
-        const response = await fetch(SCRIPT_URL);
-        const data = await response.json();
-
-        loading.style.display = 'none';
-
-        if (data.success && data.reviews && data.reviews.length > 0) {
-            updateModalStats(data.reviews);
-            displayReviews(data.reviews);
-        } else {
-            updateModalStats([]);
-            noReviews.style.display = 'block';
-        }
-    } catch (error) {
-        loading.style.display = 'none';
-        noReviews.style.display = 'block';
-    }
-}
-
-// Оновлення статистики модального вікна
-function updateModalStats(reviews) {
-    const count = reviews.length;
-    const avgRating = count > 0 
-        ? reviews.reduce((sum, r) => sum + r.rating, 0) / count 
-        : 0;
-
-    document.getElementById('modalRating').textContent = avgRating.toFixed(1);
-
-    const countText = count === 0 ? 'Немає відгуків' :
-                     count === 1 ? '1 відгук' :
-                     count < 5 ? `${count} відгуки` :
-                     `${count} відгуків`;
-    document.getElementById('modalCount').textContent = countText;
-
-    // Зірки в модальному вікні
-    const modalStars = document.getElementById('modalStars');
-    modalStars.innerHTML = '';
-    for (let i = 1; i <= 5; i++) {
-        const star = document.createElement('span');
-        star.className = i <= Math.round(avgRating) ? 'modal-star' : 'modal-star empty';
-        star.textContent = '★';
-        modalStars.appendChild(star);
-    }
-}
-
-// Відображення списку відгуків
-function displayReviews(reviews) {
-    const list = document.getElementById('reviewsList');
-    list.style.display = 'grid';
-    list.innerHTML = '';
-
-    reviews.forEach(review => {
-        if (!review.name || !review.text) return;
-
-        const initials = review.name.split(' ')
-            .map(n => n[0])
-            .join('')
-            .toUpperCase()
-            .substring(0, 2);
-
-        const stars = Array(5).fill(0)
-            .map((_, i) => `<span class="star ${i >= review.rating ? 'empty' : ''}">★</span>`)
-            .join('');
-
-        const cat = CATEGORY_MAP[review.product] || CATEGORY_MAP.other;
-
-        const card = document.createElement('div');
-        card.className = 'review-card';
-        card.innerHTML = `
-            <div class="review-header">
-                <div class="review-avatar">${initials}</div>
-                <div class="review-info">
-                    <div class="review-name">${escapeHtml(review.name)}</div>
-                    <div class="review-date">${escapeHtml(review.date)}</div>
-                </div>
-            </div>
-            <div class="review-stars">${stars}</div>
-            <div class="review-text">${escapeHtml(review.text)}</div>
-            <div class="review-product" onclick="goToCategoryFromReview('${review.product}')">
-                <img src="${cat.icon}" alt="${cat.label}">
-                ${cat.label}
-            </div>
-        `;
-
-        list.appendChild(card);
+function initSounds() {
+    const categoryCards = document.querySelectorAll('.category-card');
+    const productItems = document.querySelectorAll('.product-item');
+    
+    categoryCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            const sound = document.getElementById('hover-sound1');
+            if (sound) {
+                sound.currentTime = 0;
+                sound.play().catch(e => {});
+            }
+        });
+    });
+    
+    productItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            const sound = document.getElementById('hover-sound');
+            if (sound) {
+                sound.currentTime = 0;
+                sound.volume = 0.3;
+                sound.play().catch(e => {});
+            }
+        });
     });
 }
 
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
+// ==========================================
+// ІНІЦІАЛІЗАЦІЯ
+// ==========================================
 
-function goToCategoryFromReview(categoryId) {
-    // 1️⃣ Закрываем модалку
-    const modal = document.querySelector('.reviews-modal');
-    if (modal) {
-        modal.classList.remove('active');
-    }
-
-    // 2️⃣ Возвращаем скролл страницы
-    document.body.style.overflow = '';
-    document.documentElement.style.overflow = '';
-
-    // 3️⃣ Переключаем категорию
-    if (typeof toggleCategory === 'function') {
-        toggleCategory(categoryId);
-    }
-
-    // 4️⃣ Скроллимся к товарам (с задержкой)
-    setTimeout(() => {
-        const productsBlock = document.getElementById('products');
-        if (productsBlock) {
-            productsBlock.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+document.addEventListener('DOMContentLoaded', function() {
+    updateCartUI();
+    initReviews();
+    initSounds();
+    
+    // Закриття корзини при кліку поза нею
+    document.addEventListener('click', function(event) {
+        const cartEl = document.querySelector('.cart');
+        const cartContent = document.getElementById('cart-content');
+        
+        if (cartContent && !cartEl?.contains(event.target) && !cartContent.contains(event.target)) {
+            cartContent.classList.remove('active');
         }
-    }, 300);
-}
+    });
+});
