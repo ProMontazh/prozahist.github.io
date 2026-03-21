@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -7,16 +6,12 @@
    
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Title - SEO -->
     <title>ПРОЗАХИСТ | Ajax та Imou своїми руками з доставкою | Харків UA</title>
-
-    <!-- Description -->
     <meta name="description" content="Купити системи безпеки Ajax та камери IMOU з доставкою по Україні. Охоронна сигналізація, відеонагляд, автономні 4G камери. Гарантія, сервіс, консультації. Тел: +380935016040.">
     <meta name="author" content="ПРОЗАХИСТ">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://прозахист.pp.ua/">
 
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://прозахист.pp.ua/">
     <meta property="og:title" content="ПРОЗАХИСТ - Бездротові системи">
@@ -28,7 +23,6 @@
     <meta property="og:locale" content="uk_UA">
     <meta property="og:site_name" content="ПРОЗАХИСТ">
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://прозахист.pp.ua/">
     <meta name="twitter:title" content="ПРОЗАХИСТ - Бездротові системи безпеки">
@@ -36,12 +30,10 @@
     <meta name="twitter:image" content="https://прозахист.pp.ua/og-image.jpg">
     <meta name="twitter:image:alt" content="ПРОЗАХИСТ - Системи безпеки">
 
-    <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" sizes="16x16" href="/favicon_16.svg">
     <link rel="icon" type="image/svg+xml" sizes="32x32" href="/favicon_32.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
-    <!-- Structured Data - Organization -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -81,15 +73,7 @@
       "currenciesAccepted": "UAH",
       "openingHoursSpecification": {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday"
-        ],
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
         "opens": "10:00",
         "closes": "18:00"
       },
@@ -101,14 +85,8 @@
         "@type": "OfferCatalog",
         "name": "Системи безпеки",
         "itemListElement": [
-          {
-            "@type": "OfferCatalog",
-            "name": "Ajax системи охоронної сигналізації"
-          },
-          {
-            "@type": "OfferCatalog",
-            "name": "IMOU відеокамери"
-          }
+          {"@type": "OfferCatalog","name": "Ajax системи охоронної сигналізації"},
+          {"@type": "OfferCatalog","name": "IMOU відеокамери"}
         ]
       }
     }
@@ -132,7 +110,6 @@
                         <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.5; 1" dur="15s" repeatCount="indefinite" begin="2s" />
                     </stop>
                 </linearGradient>
-
                 <linearGradient id="pro-wave" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="-0.3" stop-color="#800000">
                         <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
@@ -144,7 +121,6 @@
                         <animate attributeName="offset" values="0; 1.6; 1.6" keyTimes="0; 0.25; 1" dur="4.2s" begin="10s; 25s; 40s; 55s; 70s" fill="freeze" />
                     </stop>
                 </linearGradient>
-
                 <linearGradient id="zahist-wave" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="-0.3" stop-color="#808080">
                         <animate attributeName="offset" values="-0.3; 1.3; 1.3" keyTimes="0; 0.25; 1" dur="5s" begin="10.7s; 25.7s; 40.7s; 55.7s; 70.7s" fill="freeze" />
@@ -157,7 +133,6 @@
                     </stop>
                 </linearGradient>
             </defs>
-
             <text x="15" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#pro-wave)">ПРО</text>
             <text x="172" y="100" font-family="Open Sans, sans-serif" font-weight="bold" font-size="74" fill="url(#zahist-wave)">ЗАХИСТ</text>
             <text x="15" y="160" font-family="Arial, sans-serif" font-weight="bold" font-size="33" fill="url(#wave-gradient)">БЕЗДРОТОВІ СИСТЕМИ БЕЗПЕКИ</text>
@@ -175,10 +150,7 @@
 <div class="cart-content" id="cart-content">
     <h2>Мій кошик</h2>
     <div id="cart-items"></div>
-    <p class="total-price">
-        Сума: <span id="total-price">0</span> грн
-        <span id="discount-message"></span>
-    </p>
+    <p class="total-price">Сума: <span id="total-price">0</span> грн<span id="discount-message"></span></p>
     <p id="stock-warning" style="color:red; font-weight: bold;"></p>
     <div class="button-row">
         <a href="/checkout.html" class="checkout-button">Оформити замовлення</a>
@@ -233,7 +205,6 @@
         <span>Захист від пожежі</span>
     </a>
 
-    <!-- Контакты и виджет отзывов -->
     <div class="contacts-block">
         <div class="reviews-widget" onclick="openReviewsModal()">
             <div class="widget-stars" id="widgetStars"></div>
@@ -264,9 +235,7 @@
                     <div id="readTab" class="reviews-tab-content active">
                         <div class="loading" id="loading">Завантаження відгуків...</div>
                         <div class="reviews-list" id="reviewsList" style="display: none;"></div>
-                        <div class="no-reviews" id="noReviews" style="display: none;">
-                            📝 Поки що немає відгуків. Будьте першим!
-                        </div>
+                        <div class="no-reviews" id="noReviews" style="display: none;">📝 Поки що немає відгуків. Будьте першим!</div>
                     </div>
                     <div id="writeTab" class="reviews-tab-content">
                         <div id="formMessage" class="message" style="display: none;"></div>
@@ -315,41 +284,31 @@
     </div>
 </div>
 
-<!-- Footer -->
 <footer role="contentinfo">
     <div class="footer-wrapper">
         <div class="footer-links">
-            <!-- Столбик 1: Камери IMOU -->
             <div class="category-col cat1">
                 <h4>Категорії товарів</h4>
                 <a href="/vnutrishni/">Внутрішні камери IMOU</a>
                 <a href="/zovnishni/">Зовнішні камери IMOU</a>
                 <a href="/4g-avtonomni/">Зовнішні 4G камери IMOU</a>
             </div>
-
-            <!-- Столбик 2: Ajax (часть 1) — без заголовка -->
             <div class="category-col cat2">
                 <a href="/ajax/komplekti-signalizacii/">Комплекти сигналізації Ajax</a>
                 <a href="/ajax/habi-ta-moduli/">Хаби модулі ретранслятори Ajax</a>
                 <a href="/ajax/vnutrishni-datchyky/">Датчики клавіатури сирени Ajax</a>
             </div>
-
-            <!-- Столбик 3: Ajax (часть 2) — без заголовка -->
             <div class="category-col cat3">
                 <a href="/ajax/zovnishni-datchyky/">Зовнішні датчики сирени Ajax</a>
                 <a href="/ajax/zahyst-vid-potopu/">Захист від потопу Ajax</a>
                 <a href="/ajax/zahyst-vid-pozhezhi/">Захист від пожежі Ajax</a>
             </div>
-
-            <!-- Столбик 4: Информация -->
             <div class="info-col">
                 <h4>Інформація</h4>
                 <a href="/dostavka.html">Доставка та оплата</a>
                 <a href="/montazh.html">Монтаж та налаштування</a>
                 <a href="/garantiya.html">Гарантія та сервіс</a>
             </div>
-
-            <!-- Столбик 5: Контакты -->
             <div class="contacts-col">
                 <h4>Контакти</h4>
                 <a href="tel:+380935016040">📞 (093) 501-60-40</a>
@@ -359,9 +318,7 @@
         </div>
     </div>
     <p>&copy; 2024-2026 <span class="black">ПРОЗАХИСТ.</span> Всі права захищені.</p>
-    <p style="color: #666; font-size: 0.85em; margin-top: 10px;">
-        Охоронна сигналізація та відеонагляд з доставкою по Україні
-    </p>
+    <p style="color: #666; font-size: 0.85em; margin-top: 10px;">Охоронна сигналізація та відеонагляд з доставкою по Україні</p>
 </footer>
 <script src="/script.js"></script>
 </body>
