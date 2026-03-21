@@ -68,7 +68,7 @@ const CATEGORY_MAP = {
             cartItem.className = 'cart-item';
             cartItem.innerHTML = `
                 <img src="${item.image}" alt="${item.name}" style="width:30px;height:auto;margin-right:5px;">
-                <span class="item-name">${item.name}</span>
+                <span>${item.name} - ${item.price} грн</span>
                 <div class="quantity-control">
                     <button class="quantity-btn" onclick="decreaseQuantity('${item.id}', event)">-</button>
                     <span class="quantity">${item.quantity}</span>
@@ -182,8 +182,52 @@ const CATEGORY_MAP = {
         }
     });
 
-    // === 📂 НАВІГАЦІЯ (для окремих сторінок) ===
-    
+    // === 📂 КАТЕГОРІЇ ===
+    let currentCategory = null;
+
+    window.toggleCategory = function(catId, push = true) {
+        // Ховаємо всі категорії товарів
+        document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
+
+        const target = document.getElementById(catId);
+        if (!target) return;
+
+        // Показуємо обрану категорію
+        target.style.display = 'block';
+        target.classList.add('fade-in');
+        currentCategory = catId;
+
+        // Ховаємо головну сторінку з категоріями
+        const categories = document.getElementById('categories');
+        const mainBanner = document.getElementById('main-banner');
+        if (categories) categories.style.display = 'none';
+        if (mainBanner) mainBanner.style.display = 'none';
+
+        // SEO: Оновлюємо title при перемиканні категорії
+        const categoryNames = {
+            'indoor': 'Внутрішні камери IMOU',
+            'outdoor': 'Зовнішні камери IMOU',
+            'outdoor_4G': '4G камери IMOU',
+            'microSD': 'Карти пам\'яті microSD',
+            'alarm': 'Комплекти сигналізації Ajax',
+            'hub': 'Хаби та модулі Ajax',
+            'protect': 'Внутрішні датчики Ajax',
+            'protect_outdoor': 'Зовнішні датчики Ajax',
+            'waterstop': 'Захист від потопу Ajax',
+            'fire': 'Захист від пожежі Ajax'
+        };
+        
+        if (categoryNames[catId]) {
+            document.title = `${categoryNames[catId]} — купити в Харкові | ПРОЗАХИСТ`;
+        }
+
+        // Оновлюємо історію браузера та прокручуємо вгору
+        if (push) {
+            setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
+            history.pushState({ category: catId }, '', '#' + catId);
+        }
+    };
+
     // Витягування ID продукту з URL
     function extractProductIdFromUrl(url) {
         if (!url) return '';
@@ -200,15 +244,75 @@ const CATEGORY_MAP = {
     window.openProductDetails = function(pageUrl) {
         const prodId = extractProductIdFromUrl(pageUrl);
 
-        // Зберігаємо позицію прокрутки
+        // Зберігаємо поточну категорію та позицію прокрутки
+        if (currentCategory) {
+            localStorage.setItem('lastCategory', currentCategory);
+        }
         if (prodId) {
             localStorage.setItem('lastProductId', prodId);
         }
         localStorage.setItem('lastScroll', String(window.scrollY || 0));
 
-        // Переходимо на сторінку продукту
+        // Ховаємо банер на мобільних пристроях
+        const mainBanner = document.getElementById('main-banner');
+        if (window.innerWidth <= 768 && mainBanner) {
+            mainBanner.style.display = 'none';
+        }
+
         window.location.href = pageUrl;
     };
+
+    // Обробка стану (історії браузера)
+    function handleState(state) {
+        const categories = document.getElementById('categories');
+        const mainBanner = document.getElementById('main-banner');
+
+        // Ховаємо всі категорії товарів
+        document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
+
+        const catId = state ? state.category : null;
+
+        if (catId && document.getElementById(catId)) {
+            // Показуємо обрану категорію
+            const target = document.getElementById(catId);
+            target.style.display = 'block';
+            target.classList.add('fade-in');
+            currentCategory = catId;
+
+            if (categories) categories.style.display = 'none';
+            if (mainBanner) mainBanner.style.display = 'none';
+        } else {
+            // Показуємо головну сторінку
+            currentCategory = null;
+            if (categories) categories.style.display = 'flex';
+            if (mainBanner) mainBanner.style.display = 'block';
+            
+            // SEO: Повертаємо головний title
+            document.title = "ПРОЗАХИСТ | Системи безпеки Ajax та камери IMOU — Харків, Україна";
+        }
+
+        // Оновлюємо кошик
+        cart = JSON.parse(localStorage.getItem('cart')) || [];
+        updateCart();
+    }
+
+    // === 🎵 ЗВУК "НАЗАД" ===
+    const backSound = document.getElementById('back-sound');
+    if (backSound) {
+        backSound.volume = 0.35;
+    }
+
+    window.addEventListener('popstate', (e) => {
+        handleState(e.state);
+        if (backSound) {
+            backSound.currentTime = 0;
+            backSound.play().catch(() => {});
+        }
+    });
+
+    window.addEventListener('pageshow', () => {
+        handleState(history.state);
+    });
 
     // Ініціалізація кошика при завантаженні сторінки
     updateCart();
@@ -225,10 +329,62 @@ const CATEGORY_MAP = {
             });
         });
     }
+
+    // === 📱 Свайпи між категоріями ===
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+    });
+
+    document.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].clientX;
+
+        // Перевіряємо, чи показується зараз будь-яка категорія товарів
+        const activeProducts = [...document.querySelectorAll('.products')]
+            .find(p => getComputedStyle(p).display === 'block');
+
+        // Якщо на головній сторінці (немає активної категорії) — свайпи ігноруємо
+        if (!activeProducts) return;
+
+        // Отримуємо всі категорії
+        const products = Array.from(document.querySelectorAll('.products'));
+        const currentIndex = products.indexOf(activeProducts);
+
+        const diff = touchEndX - touchStartX;
+
+        // Мінімальна відстань для спрацювання свайпу
+        if (Math.abs(diff) < 50) return;
+
+        // Свайп вліво (наступна категорія)
+        if (diff < 0 && currentIndex < products.length - 1) {
+            products.forEach(p => p.style.display = 'none');
+            products[currentIndex + 1].style.display = 'block';
+            products[currentIndex + 1].classList.add('fade-in');
+
+            // Оновлюємо currentCategory та історію
+            const nextCatId = products[currentIndex + 1].id;
+            currentCategory = nextCatId;
+            history.pushState({ category: nextCatId }, '', '#' + nextCatId);
+        }
+
+        // Свайп вправо (попередня категорія)
+        if (diff > 0 && currentIndex > 0) {
+            products.forEach(p => p.style.display = 'none');
+            products[currentIndex - 1].style.display = 'block';
+            products[currentIndex - 1].classList.add('fade-in');
+
+            // Оновлюємо currentCategory та історію
+            const prevCatId = products[currentIndex - 1].id;
+            currentCategory = prevCatId;
+            history.pushState({ category: prevCatId }, '', '#' + prevCatId);
+        }
+    });
 })();
 
 // ⚠️ ВСТАВТЕ ВАШ GOOGLE SCRIPT URL ТУТ ⚠️
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzhSB-fcDDeBBhRWBBO1h7ocuHFnOlVqqWUv9rsKXBVED_MHxkEbXHoeeH__q090sU1uw/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzhSB-fcDDeBBhRWBBO1h7ocuHFnOlVqqWUv9rsKXBVED_MHxkEbXHoeeH__q090sU1uw/exec ';
 
 let selectedRating = 0;
 let allReviews = [];
@@ -258,26 +414,20 @@ async function loadReviewsForWidget() {
 
 // Оновлення віджету
 function updateWidget(reviews) {
-    const widgetRating = document.getElementById('widgetRating');
-    const widgetCount = document.getElementById('widgetCount');
-    const widgetStars = document.getElementById('widgetStars');
-    
-    if (!widgetRating || !widgetCount || !widgetStars) return;
-    
     const count = reviews.length;
     const avgRating = count > 0 
         ? reviews.reduce((sum, r) => sum + r.rating, 0) / count 
         : 0;
 
     // Оновити число
-    widgetRating.textContent = avgRating.toFixed(1);
+    document.getElementById('widgetRating').textContent = avgRating.toFixed(1);
 
     // Оновити кількість
     const countText = count === 0 ? 'Немає відгуків' :
                      count === 1 ? '1 відгук' :
                      count < 5 ? `${count} відгуки` :
                      `${count} відгуків`;
-    widgetCount.textContent = countText;
+    document.getElementById('widgetCount').textContent = countText;
 
     // Оновити зірки
     renderWidgetStars(avgRating);
@@ -286,8 +436,6 @@ function updateWidget(reviews) {
 // Відображення зірок віджету з частковим заповненням
 function renderWidgetStars(rating) {
     const container = document.getElementById('widgetStars');
-    if (!container) return;
-    
     container.innerHTML = '';
 
     for (let i = 1; i <= 5; i++) {
@@ -319,20 +467,14 @@ function renderWidgetStars(rating) {
 
 // Відкрити модальне вікно
 function openReviewsModal() {
-    const modal = document.getElementById('reviewsModal');
-    if (!modal) return;
-    
-    modal.classList.add('active');
+    document.getElementById('reviewsModal').classList.add('active');
     document.body.style.overflow = 'hidden';
     loadReviews();
 }
 
 // Закрити модальне вікно
 function closeReviewsModal() {
-    const modal = document.getElementById('reviewsModal');
-    if (!modal) return;
-    
-    modal.classList.remove('active');
+    document.getElementById('reviewsModal').classList.remove('active');
     document.body.style.overflow = '';
 }
 
@@ -387,8 +529,6 @@ function updateStars(rating) {
 // Показати повідомлення
 function showFormMessage(text, type) {
     const msg = document.getElementById('formMessage');
-    if (!msg) return;
-    
     msg.textContent = text;
     msg.className = `message ${type}`;
     msg.style.display = 'block';
@@ -405,8 +545,6 @@ async function submitReview(event) {
     }
 
     const submitBtn = document.getElementById('submitBtn');
-    if (!submitBtn) return;
-    
     submitBtn.disabled = true;
     submitBtn.textContent = 'Відправка...';
 
@@ -457,8 +595,6 @@ async function loadReviews() {
     const loading = document.getElementById('loading');
     const list = document.getElementById('reviewsList');
     const noReviews = document.getElementById('noReviews');
-    
-    if (!loading || !list || !noReviews) return;
 
     loading.style.display = 'block';
     list.style.display = 'none';
@@ -485,26 +621,21 @@ async function loadReviews() {
 
 // Оновлення статистики модального вікна
 function updateModalStats(reviews) {
-    const modalRating = document.getElementById('modalRating');
-    const modalCount = document.getElementById('modalCount');
-    const modalStars = document.getElementById('modalStars');
-    
-    if (!modalRating || !modalCount || !modalStars) return;
-    
     const count = reviews.length;
     const avgRating = count > 0 
         ? reviews.reduce((sum, r) => sum + r.rating, 0) / count 
         : 0;
 
-    modalRating.textContent = avgRating.toFixed(1);
+    document.getElementById('modalRating').textContent = avgRating.toFixed(1);
 
     const countText = count === 0 ? 'Немає відгуків' :
                      count === 1 ? '1 відгук' :
                      count < 5 ? `${count} відгуки` :
                      `${count} відгуків`;
-    modalCount.textContent = countText;
+    document.getElementById('modalCount').textContent = countText;
 
     // Зірки в модальному вікні
+    const modalStars = document.getElementById('modalStars');
     modalStars.innerHTML = '';
     for (let i = 1; i <= 5; i++) {
         const star = document.createElement('span');
@@ -517,8 +648,6 @@ function updateModalStats(reviews) {
 // Відображення списку відгуків
 function displayReviews(reviews) {
     const list = document.getElementById('reviewsList');
-    if (!list) return;
-    
     list.style.display = 'grid';
     list.innerHTML = '';
 
@@ -549,7 +678,7 @@ function displayReviews(reviews) {
             </div>
             <div class="review-stars">${stars}</div>
             <div class="review-text">${escapeHtml(review.text)}</div>
-            <div class="review-product">
+            <div class="review-product" onclick="goToCategoryFromReview('${review.product}')">
                 <img src="${cat.icon}" alt="${cat.label}">
                 ${cat.label}
             </div>
@@ -563,4 +692,32 @@ function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
+}
+
+function goToCategoryFromReview(categoryId) {
+    // 1️⃣ Закрываем модалку
+    const modal = document.querySelector('.reviews-modal');
+    if (modal) {
+        modal.classList.remove('active');
+    }
+
+    // 2️⃣ Возвращаем скролл страницы
+    document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+
+    // 3️⃣ Переключаем категорию
+    if (typeof toggleCategory === 'function') {
+        toggleCategory(categoryId);
+    }
+
+    // 4️⃣ Скроллимся к товарам (с задержкой)
+    setTimeout(() => {
+        const productsBlock = document.getElementById('products');
+        if (productsBlock) {
+            productsBlock.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    }, 300);
 }
