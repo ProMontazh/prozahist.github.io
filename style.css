@@ -144,8 +144,8 @@ header .logo svg {
 }
 
 .category-card {
-    display: flex;
-    flex-direction: column;
+    position: relative;
+    overflow: hidden;
     align-items: center;
     background: linear-gradient(145deg, #2a2a2a, #333);
     border-radius: 15px;
