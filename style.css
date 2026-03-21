@@ -246,7 +246,7 @@ header .logo svg {
 }
 
 .product-item img {
-    width: 100%;
+    width: 80%;
     height: auto;
     object-fit: cover;
    border-radius: 15px;
