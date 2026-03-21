@@ -240,24 +240,23 @@ header .logo svg {
 }
 
 .product-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transform: scale(1.01);
+   box-shadow: 0 6px 18px rgba(0,0,0,0.15);
     border-color: #800000;
 }
 
 .product-item img {
     width: 100%;
-    max-width: 250px;
     height: auto;
-    border-radius: 10px;
-    margin-bottom: 15px;
+    object-fit: cover;
 }
 
 .product-item h3 {
     color: #fff;
-    font-size: 1.1em;
-    margin-bottom: 10px;
-    min-height: 50px;
+    font-size: 1em;
+    margin: 10px 0 5px 0;
+    min-height: 48px;
+
 }
 
 .product-item p {
