@@ -262,7 +262,7 @@ header .logo svg {
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    transition: transform 0.1s, box-shadow 0.3s;
+    transition: transform 0.1s, box-shadow 0.1s;
     border: 1px solid #444;
 }
 
