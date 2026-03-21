@@ -54,13 +54,26 @@ header {
     border-bottom: 2px solid #800000;
 }
 
-.logo {
-    display: inline-block;
+header .logo svg {
+    height: 65px;
+    width: auto;
 }
 
-.logo a {
+/* SEO: Skip link для доступності */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #800000;
+    color: white;
+    padding: 8px;
     text-decoration: none;
-    display: inline-block;
+    z-index: 1001;
+    border-radius: 0 0 4px 0;
+}
+
+.skip-link:focus {
+    top: 0;
 }
 
 
@@ -419,27 +432,30 @@ header {
     background-color: #d44150;
 }
 
-/* ========================================
-   TOAST ПОВІДОМЛЕННЯ
-   ======================================== */
+/* ======================================================
+   💬 TOAST (СПОВІЩЕННЯ)
+   ====================================================== */
+
 .toast {
     position: fixed;
-    bottom: 30px;
+    top: 45%;
     left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background: #800000;
-    color: #fff;
-    padding: 15px 30px;
-    border-radius: 8px;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 1.0em;
+    white-space: nowrap;
+    visibility: hidden;
     opacity: 0;
-    transition: all 0.3s ease;
-    z-index: 2000;
-    font-weight: 600;
+    transition: opacity 0.5s;
+    z-index: 9999;
 }
 
 .toast.show {
+    visibility: visible;
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
 }
 
 /* ========================================
