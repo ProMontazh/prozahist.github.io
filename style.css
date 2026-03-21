@@ -602,66 +602,74 @@ footer > p {
     font-weight: bold;
 }
 
-/* ========================================
-   ВІДГУКИ
-   ======================================== */
-.contacts-block {
-    grid-column: 1 / -1;
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
+/* ======================================================
+   ⭐ ВІДЖЕТ ВІДГУКІВ
+   ====================================================== */
 
 .reviews-widget {
-    background: linear-gradient(145deg, #2a2a2a, #333);
-    border-radius: 15px;
-    padding: 20px 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: transparent;
+    border: 2px solid rgba(240, 240, 240, 0.5);
+    border-radius: 12px;
     cursor: pointer;
-    border: 1px solid #444;
-    transition: all 0.3s ease;
-    text-align: center;
+    transition: all 0.3s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 15px;
+    min-width: 210px;
+    max-width: 210px;
+    height: 60px;
+    box-sizing: border-box;
 }
 
 .reviews-widget:hover {
-    border-color: #800000;
+    border-color: rgba(128, 0, 0, 0.8);
+    box-shadow: 0 4px 16px rgba(128, 0, 0, 0.15);
+    transform: translateY(0px);
+    background: transparent;
 }
 
 .widget-stars {
-    color: #ffd700;
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    position: relative;
+    display: flex;
+    gap: 3px;
 }
 
 .widget-star {
+    font-size: 24px;
+    color: #ddd;
     position: relative;
     display: inline-block;
-    color: #444;
+    line-height: 1;
 }
 
 .widget-star-filled {
     position: absolute;
-    left: 0;
     top: 0;
+    left: 0;
     overflow: hidden;
-    color: #ffd700;
+    color: #ffa500;
+    pointer-events: none;
 }
 
 .widget-rating {
     display: flex;
-    align-items: baseline;
-    justify-content: center;
-    gap: 10px;
+    flex-direction: column;
+    gap: 2px;
 }
 
 .widget-rating-number {
-    font-size: 2em;
-    font-weight: bold;
-    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    color: #800000;
+    line-height: 1;
 }
 
 .widget-rating-count {
-    color: #aaa;
+    font-size: 12px;
+    color: #999;
+    line-height: 1;
 }
 
 .reviews-modal {
