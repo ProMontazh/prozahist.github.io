@@ -249,6 +249,7 @@ header .logo svg {
     width: 100%;
     height: auto;
     object-fit: cover;
+   border-radius: 15px;
 }
 
 .product-item h3 {
