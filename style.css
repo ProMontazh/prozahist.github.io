@@ -304,7 +304,7 @@ header .logo svg {
    КНОПКИ
    ======================================== */
 .btn {
-    background: linear-gradient(145deg, #800000, #a00000);
+    background: linear-gradient(145deg, #007bff, #0056b3);     /* ✅ СИНІЙ */
     color: #fff;
     border: none;
     padding: 12px 25px;
@@ -318,7 +318,7 @@ header .logo svg {
 }
 
 .btn:hover {
-    background: linear-gradient(145deg, #a00000, #c00000);
+    background: linear-gradient(145deg, #0056b3, #004085);     /* ✅ ТЕМНІШЕ СИНІЙ */
     transform: scale(1.02);
 }
 
@@ -329,7 +329,7 @@ header .logo svg {
     position: fixed;
     top: 14px;
     right: 10px;
-    background: linear-gradient(145deg, #800000, #a00000);
+    background: linear-gradient(145deg, #6c757d, #5a6268);     /* ✅ СІРИЙ */
     color: #fff;
     padding: 8px 12px;
     border-radius: 8px;
@@ -346,6 +346,7 @@ header .logo svg {
 }
 
 .cart:hover {
+    background: linear-gradient(145deg, #5a6268, #4e555b);     /* ✅ ТЕМНІШЕ СІРИЙ */
     transform: scale(1.05);
 }
 
