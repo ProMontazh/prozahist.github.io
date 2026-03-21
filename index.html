@@ -189,49 +189,49 @@
 <audio id="hover-sound" src="hover.mp3" preload="auto"></audio>
 <audio id="back-sound" src="hover_2.mp3" preload="auto"></audio>
 
-<!-- Категории -->
+<!-- Категории - тепер посилання на папки -->
 <div id="categories" class="category-buttons">
-    <a href="#indoor" class="category-card" onclick="toggleCategory('indoor'); return false;">
-        <img src="images/indoor.png" alt="Внутрішні камери">
+    <a href="/vnutrishni/" class="category-card">
+        <img src="/images/indoor.png" alt="Внутрішні камери">
         <span>Внутрішні камери</span>
     </a>
-    <a href="#outdoor" class="category-card" onclick="toggleCategory('outdoor'); return false;">
-        <img src="images/outdoor.png" alt="Зовнішні камери">
+    <a href="/zovnishni/" class="category-card">
+        <img src="/images/outdoor.png" alt="Зовнішні камери">
         <span>Зовнішні камери</span>
     </a>
-    <a href="#outdoor_4G" class="category-card" onclick="toggleCategory('outdoor_4G'); return false;">
-        <img src="images/outdoor_4G.png" alt="Зовнішні 4G камери">
+    <a href="/4g-avtonomni/" class="category-card">
+        <img src="/images/outdoor_4G.png" alt="Зовнішні 4G камери">
         <span>Зовнішні 4G камери</span>
     </a>
-    <a href="#microSD" class="category-card" onclick="toggleCategory('microSD'); return false;">
-        <img src="images/microSD.png" alt="microSD">
+    <a href="/karty-pamyati/" class="category-card">
+        <img src="/images/microSD.png" alt="microSD">
         <span>Карти пам'яті</span>
     </a>
-    <a href="#alarm" class="category-card" onclick="toggleCategory('alarm'); return false;">
-        <img src="images/alarm.png" alt="Комплекти сигналізації">
+    <a href="/komplekti-signalizacii/" class="category-card">
+        <img src="/images/alarm.png" alt="Комплекти сигналізації">
         <span>Комплекти сигналізації</span>
     </a>
-    <a href="#hub" class="category-card" onclick="toggleCategory('hub'); return false;">
-        <img src="images/hub_white.png" alt="Хаби">
+    <a href="/habi-ta-moduli/" class="category-card">
+        <img src="/images/hub_white.png" alt="Хаби">
         <span>Хаби, Модулі</span>
     </a>
-    <a href="#protect" class="category-card" onclick="toggleCategory('protect'); return false;">
-        <img src="images/protect_indoor.png" alt="Внутрішня охорона">
+    <a href="/vnutrishni-datchyky/" class="category-card">
+        <img src="/images/protect_indoor.png" alt="Внутрішня охорона">
         <span>Внутрішні датчики</span>
     </a>
-    <a href="#protect_outdoor" class="category-card" onclick="toggleCategory('protect_outdoor'); return false;">
-        <img src="images/protect_outdoor.png" alt="Зовнішня охорона">
+    <a href="/zovnishni-datchyky/" class="category-card">
+        <img src="/images/protect_outdoor.png" alt="Зовнішня охорона">
         <span>Зовнішні датчики</span>
     </a>
-    <a href="#waterstop" class="category-card" onclick="toggleCategory('waterstop'); return false;">
-        <img src="images/waterstop.png" alt="Захист від потопу">
+    <a href="/zahyst-vid-potopu/" class="category-card">
+        <img src="/images/waterstop.png" alt="Захист від потопу">
         <span>Захист від потопу</span>
     </a>
-    <a href="#fire" class="category-card" onclick="toggleCategory('fire'); return false;">
-        <img src="images/fire.png" alt="Захист від пожежі">
+    <a href="/zahyst-vid-pozhezhi/" class="category-card">
+        <img src="/images/fire.png" alt="Захист від пожежі">
         <span>Захист від пожежі</span>
     </a>
-
+   
     <!-- Контакты и виджет отзывов -->
     <div class="contacts-block">
         <div class="reviews-widget" onclick="openReviewsModal()">
@@ -1381,26 +1381,21 @@
         <div class="footer-links">
             <!-- Столбик 1: Камери IMOU -->
             <div class="category-col cat1">
-                <h4>Категорії товарів</h4>
-                <a href="#indoor" onclick="toggleCategory('indoor'); return false;">Внутрішні камери IMOU</a>
-                <a href="#outdoor" onclick="toggleCategory('outdoor'); return false;">Зовнішні камери IMOU</a>
-                <a href="#outdoor_4G" onclick="toggleCategory('outdoor_4G'); return false;">Зовнішні 4G камери IMOU</a>
+                <<h4>Категорії товарів</h4>
+                <a href="/vnutrishni/">Внутрішні камери IMOU</a>
+                <a href="/zovnishni/">Зовнішні камери IMOU</a>
+                <a href="/4g-avtonomni/">Зовнішні 4G камери IMOU</a>
             </div>
-
-            <!-- Столбик 2: Ajax (часть 1) — без заголовка -->
             <div class="category-col cat2">
-                <a href="#alarm" onclick="toggleCategory('alarm'); return false;">Комплекти сигналізації Ajax</a>
-                <a href="#hub" onclick="toggleCategory('hub'); return false;">Хаби модулі ретранслятори Ajax</a>
-                <a href="#protect" onclick="toggleCategory('protect'); return false;">Датчики клавіатури сирени Ajax</a>
+                <a href="/komplekti-signalizacii/">Комплекти сигналізації Ajax</a>
+                <a href="/habi-ta-moduli/">Хаби модулі ретранслятори Ajax</a>
+                <a href="/vnutrishni-datchyky/">Датчики клавіатури сирени Ajax</a>
             </div>
-
-            <!-- Столбик 3: Ajax (часть 2) — без заголовка -->
             <div class="category-col cat3">
-                <a href="#protect_outdoor" onclick="toggleCategory('protect_outdoor'); return false;">Зовнішні датчики сирени Ajax</a>
-                <a href="#waterstop" onclick="toggleCategory('waterstop'); return false;">Захист від потопу Ajax</a>
-                <a href="#fire" onclick="toggleCategory('fire'); return false;">Захист від пожежі Ajax</a>
+                <a href="/zovnishni-datchyky/">Зовнішні датчики сирени Ajax</a>
+                <a href="/zahyst-vid-potopu/">Захист від потопу Ajax</a>
+                <a href="/zahyst-vid-pozhezhi/">Захист від пожежі Ajax</a>
             </div>
-
             <!-- Столбик 4: Информация -->
             <div class="info-col">
                 <h4>Інформація</h4>
