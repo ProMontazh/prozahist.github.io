@@ -225,13 +225,18 @@ header .logo svg {
 .product-item {
     background: linear-gradient(145deg, #2a2a2a, #333);
     border-radius: 15px;
-    padding: 20px;
-    text-align: center;
-    transition: all 0.3s ease;
-    border: 1px solid #444;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    flex: 0 1 230px;
+    box-sizing: border-box;
     cursor: pointer;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.1s;
+
 }
 
 .product-item:hover {
