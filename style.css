@@ -146,40 +146,48 @@ header .logo svg {
 .category-card {
     position: relative;
     overflow: hidden;
-    align-items: center;
-    background: linear-gradient(145deg, #2a2a2a, #333);
-    border-radius: 15px;
-    padding: 20px;
-    text-decoration: none;
-    color: #e0e0e0;
-    transition: all 0.3s ease;
-    border: 1px solid #444;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 0;
+    text-align: center;
     cursor: pointer;
-   flex: 1 1 calc(20% - 20px);
+    flex: 1 1 calc(20% - 20px);
     max-width: calc(20% - 20px);
+    transition: transform 0.3s;
     box-sizing: border-box;
-
-}
+    border: 1px solid #444;
+   }
 
 .category-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    border-color: #800000;
+    transform: scale(1.05);
 }
 
 .category-card img {
     width: 100%;
-    max-width: 150px;
-    height: auto;
-    margin-bottom: 15px;
-    border-radius: 10px;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .category-card span {
-    font-weight: 600;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    color: #bbbbbb;
+    font-weight: bold;
+    background: none;
     text-align: center;
-    font-size: 1em;
+    box-sizing: border-box;
+    font-size: 0.8em;
 }
+
+.products {
+    padding-bottom: 60px;
+}
+
 
 /* ========================================
    ТОВАРИ
