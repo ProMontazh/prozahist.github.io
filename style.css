@@ -1,191 +1,245 @@
 /* ======================================================
-   🎨 DARK VERSION (готовый файл)
-   Геометрия: из первого
-   Цвета: из второго
+   🎨 DARK VERSION — ТОЛЬКО ЦВЕТА (БЕЗ ИЗМЕНЕНИЯ ГЕОМЕТРИИ)
    ====================================================== */
 
-/* VARIABLES */
+/* CSS Variables */
 :root {
     --primary-color: #800000;
-    --secondary-color: #444;
+    --secondary-color: #444444;
     --accent-color: #a00000;
-
     --text-dark: #e0e0e0;
-    --text-light: #aaa;
-
+    --text-light: #aaaaaa;
     --bg-light: #1a1a1a;
     --white: #2a2a2a;
-
-    --shadow: 0 6px 20px rgba(0,0,0,0.5);
+    --shadow: 0 4px 12px rgba(0,0,0,0.4);
     --transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* RESET */
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-    font-size: 16px;
-}
-
+/* БАЗА */
 body {
-    font-family: 'Open Sans', sans-serif;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    background-color: var(--bg-light);
-    line-height: 1.6;
-    color: var(--text-dark);
+    background-color: #1a1a1a;
+    color: #e0e0e0;
 }
 
 /* HEADER */
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 65px;
-    background: linear-gradient(180deg, #2a2a2a, #1a1a1a);
-    border-bottom: 2px solid #800000;
-    z-index: 1000;
+    background: linear-gradient(to right, #2a2a2a, #1a1a1a);
 }
 
-/* PRODUCTS */
-.products-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    padding: 0 10px;
+/* TOAST */
+.toast {
+    background-color: rgba(20, 20, 20, 0.9);
 }
 
+/* PRODUCT CARD */
 .product-item {
-    background: linear-gradient(145deg, #2a2a2a, #333);
-    border: 1px solid #444;
-    padding: 15px;
-    flex: 0 1 230px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    transition: var(--transition);
+    background-color: #2a2a2a;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
 }
 
 .product-item:hover {
-    transform: scale(1.02);
-    border-color: #800000;
-    box-shadow: var(--shadow);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.6);
 }
 
 .product-item h3 {
-    color: #fff;
+    color: #ffffff;
 }
 
 .product-item p {
-    color: #aaa;
+    color: #aaaaaa;
 }
 
 .product-price {
     color: #ff4444;
-    font-weight: bold;
 }
 
 /* BUTTON */
 .btn {
-    background: linear-gradient(145deg, #800000, #a00000);
-    color: #fff;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
+    background-color: #800000;
 }
 
 .btn:hover {
-    background: linear-gradient(145deg, #a00000, #c00000);
-}
-
-/* CATEGORY */
-.category-card {
-    background: linear-gradient(145deg, #2a2a2a, #333);
-    border: 1px solid #444;
-}
-
-.category-card:hover {
-    border-color: #800000;
-}
-
-/* CART */
-.cart {
-    background: linear-gradient(145deg, #800000, #a00000);
-}
-
-.cart-content {
-    background: #2a2a2a;
-    border: 1px solid #444;
-}
-
-.cart-item {
-    border-bottom: 1px solid #444;
-}
-
-.checkout-button {
-    background: linear-gradient(145deg, #008000, #00a000);
-}
-
-.cancel-button {
-    background: #444;
+    background-color: #a00000;
 }
 
 /* FOOTER */
 footer {
     background: #1a1a1a;
-    border-top: 2px solid #800000;
+    color: #e0e0e0;
 }
 
 .footer-links a {
-    color: #aaa;
+    color: #aaaaaa;
 }
 
 .footer-links a:hover {
     color: #ff4444;
 }
 
-/* TOAST */
-.toast {
-    background: #800000;
-    color: #fff;
+/* CART */
+.cart {
+    background-color: #800000;
+}
+
+.cart-content {
+    background-color: rgba(30, 30, 30, 0.95);
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+}
+
+.quantity-btn {
+    background-color: #800000;
+}
+
+.quantity-btn:hover {
+    background-color: #a00000;
+}
+
+.checkout-button {
+    background-color: #008000;
+}
+
+.checkout-button:hover {
+    background-color: #00a000;
+}
+
+.cancel-button {
+    background-color: #444;
+}
+
+.cancel-button:hover {
+    background-color: #666;
+}
+
+/* CATEGORY */
+.category-card {
+    background: #2a2a2a;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+.category-card span {
+    color: #dddddd;
+}
+
+/* CONTACTS */
+.contacts-block {
+    color: #aaaaaa;
+}
+
+.contact-link {
+    color: #aaaaaa;
+}
+
+.contact-link:hover {
+    color: #ff4444;
+}
+
+/* SEO TEXT */
+.seo-text {
+    color: #aaaaaa;
 }
 
 /* REVIEWS */
 .reviews-widget {
-    background: linear-gradient(145deg, #2a2a2a, #333);
-    border: 1px solid #444;
+    border: 2px solid rgba(80, 80, 80, 0.5);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
-.reviews-widget:hover {
-    border-color: #800000;
+.widget-star {
+    color: #666;
+}
+
+.widget-rating-number {
+    color: #ffffff;
+}
+
+.widget-rating-count {
+    color: #aaaaaa;
+}
+
+/* REVIEW CARD */
+.review-card {
+    background: rgba(40, 40, 40, 0.9);
+    border: 2px solid rgba(80, 80, 80, 0.6);
+}
+
+.review-card:hover {
+    background: rgba(50, 50, 50, 0.95);
+}
+
+.review-name {
+    color: #ffffff;
+}
+
+.review-date {
+    color: #888;
+}
+
+.review-text {
+    color: #cccccc;
+}
+
+.review-product {
+    background: linear-gradient(to right, #333, #2a2a2a);
+    color: #aaa;
+    border: 1px solid #444;
 }
 
 /* MODAL */
 .reviews-modal-content {
-    background: #2a2a2a !important;
-    border: 1px solid #444;
+    background-color: rgba(40, 40, 40, 0.95) !important;
+}
+
+.reviews-modal-header {
+    background: linear-gradient(to right, #2a2a2a, #1a1a1a);
 }
 
 /* FORM */
+.form-group label {
+    color: #ccc;
+}
+
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select {
     background: #333;
-    border: 1px solid #444;
+    border: 2px solid #444;
     color: #fff;
 }
 
-/* MOBILE */
-@media (max-width: 768px) {
-    .product-item {
-        width: 100%;
-        max-width: 360px;
-    }
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #800000;
+}
+
+/* TABS */
+.reviews-tabs {
+    border-bottom: 2px solid #444;
+}
+
+.reviews-tab {
+    color: #aaa;
+}
+
+.reviews-tab.active {
+    color: #fff;
+}
+
+.reviews-tab.active::after {
+    background: #800000;
+}
+
+/* STARS */
+.star.empty {
+    color: #555;
+}
+
+/* MODAL RATING */
+.modal-rating-summary {
+    background: rgba(40, 40, 40, 0.6);
+}
+
+.modal-rating-count {
+    color: #aaa;
 }
