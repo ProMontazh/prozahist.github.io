@@ -194,7 +194,9 @@ header .logo svg {
 }
 
 .category-card:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
+   box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    border-color: #800000;
 }
 
 .category-card img {
@@ -260,14 +262,14 @@ header .logo svg {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
     text-align: center;
     transition: transform 0.1s, box-shadow 0.1s;
     border: 1px solid #444;
 }
 
 .product-item:hover {
-    transform: scale(1.01);
+    transform: scale(1.0);
     box-shadow: 0 6px 18px rgba(0,0,0,0.15);
     border-color: #800000;
 }
