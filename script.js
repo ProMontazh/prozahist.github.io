@@ -302,7 +302,21 @@ const CATEGORY_MAP = {
         backSound.volume = 0.35;
     }
 
+    // ✅ ОНОВЛЕНИЙ popstate ОБРОБНИК З ПІДТРИМКОЮ АПАРАТНОЇ КНОПКИ "НАЗАД"
     window.addEventListener('popstate', (e) => {
+        // ✅ СПОЧАТКУ ПЕРЕВІРЯЄМО МОДАЛКУ ВІДГУКІВ
+        const modal = document.getElementById('reviewsModal');
+        if (modal && modal.classList.contains('active')) {
+            if (!e.state || !e.state.reviewsModal) {
+                // Закриваємо модалку при натисканні апаратної кнопки "Назад"
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                document.documentElement.style.overflow = '';
+                return; // Виходимо, не обробляємо категорії
+            }
+        }
+        
+        // Обробляємо категорії
         handleState(e.state);
         if (backSound) {
             backSound.currentTime = 0;
@@ -465,17 +479,27 @@ function renderWidgetStars(rating) {
     }
 }
 
-// Відкрити модальне вікно
+// ✅ ОНОВЛЕНА ФУНКЦІЯ: Відкрити модальне вікно з підтримкою апаратної кнопки "Назад"
 function openReviewsModal() {
     document.getElementById('reviewsModal').classList.add('active');
     document.body.style.overflow = 'hidden';
+    
+    // ✅ ДОДАЄМО ЗАПИС В ІСТОРІЮ ДЛЯ АПАРАТНОЇ КНОПКИ "НАЗАД"
+    history.pushState({ reviewsModal: true }, '', '#reviews');
+    
     loadReviews();
 }
 
-// Закрити модальне вікно
+// ✅ ОНОВЛЕНА ФУНКЦІЯ: Закрити модальне вікно з підтримкою апаратної кнопки "Назад"
 function closeReviewsModal() {
     document.getElementById('reviewsModal').classList.remove('active');
     document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
+    
+    // ✅ ВИДАЛЯЄМО ЗАПИС З ІСТОРІЇ
+    if (window.location.hash === '#reviews') {
+        history.back();
+    }
 }
 
 function closeModalOnOutsideClick(event) {
