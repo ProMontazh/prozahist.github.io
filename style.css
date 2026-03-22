@@ -224,7 +224,7 @@ header .logo svg {
    ТОВАРИ
    ======================================== */
 .products {
-    padding: 40px 10px;
+    padding: 40px 20px;
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -244,77 +244,55 @@ header .logo svg {
 }
 
 .products-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
 }
 
 .product-item {
     background: linear-gradient(145deg, #2a2a2a, #333);
     border-radius: 15px;
-    padding: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    width: calc(16.666% - 15px);         /* ✅ 6 ТОВАРІВ: 100% / 6 = 16.666% */
-    box-sizing: border-box;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: stretch;
+    padding: 20px;
     text-align: center;
-    transition: transform 0.1s, box-shadow 0.1s;
+    transition: all 0.3s ease;
     border: 1px solid #444;
+    cursor: pointer;
 }
 
 .product-item:hover {
-    transform: scale(1.0);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     border-color: #800000;
 }
 
 .product-item img {
     width: 100%;
-    height: 180px;              /* фикс высоты = одинаковые карточки */
-    object-fit: cover;
-    border-radius: 12px;        /* чуть меньше — аккуратнее */
+    max-width: 250px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 15px;
 }
 
-/* Название */
 .product-item h3 {
     color: #fff;
-    font-size: 0.95em;
-    margin: 10px 0 6px;
-    min-height: 42px;           /* выравнивание по высоте */
-    line-height: 1.3;
-
-  
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    min-height: 50px;
 }
 
-/* Описание */
 .product-item p {
     color: #aaa;
-    font-size: 0.85em;
-    margin: 5px 0 10px;
-    flex-grow: 1;
-
-    display: -webkit-box;       /* чтобы не растягивало карточку */
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    font-size: 0.9em;
+    margin-bottom: 10px;
 }
 
-/* Цена */
 .product-price {
     color: #ff4444;
-    font-size: 1.25em;
-    font-weight: 700;
-    margin: 10px 0 8px;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin: 20px 0;
 }
+
 
 /* Кнопка всегда внизу */
 .product-item .btn {
