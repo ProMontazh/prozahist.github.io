@@ -268,10 +268,10 @@ header .logo svg {
 
 .product-item img {
     width: 100%;
-    max-width: 250px;
+    max-width: 100%;                    /* ✅ ЗАЙМАЄ ВСЮ ШИРИНУ = РІВНІ ВІДСТУПИ */
     height: auto;
     border-radius: 10px;
-    margin: 0 auto 15px auto;           /* ✅ ЦЕНТРУВАННЯ ЗОБРАЖЕННЯ */
+    margin-bottom: 15px;
 }
 
 .product-item h3 {
