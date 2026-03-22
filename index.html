@@ -172,15 +172,25 @@
 
 <div class="cart" onclick="toggleCart()">🛒 Кошик (<span id="cart-count">0</span>)</div>
 <div class="cart-content" id="cart-content">
-    <h2>Мій кошик</h2>
-    <button class="cart-close" onclick="toggleCart()">×</button>
+    <!-- Заголовок з кнопкою закриття -->
+    <div class="cart-header">
+        <h2>Мій кошик</h2>
+        <button class="cart-close" onclick="toggleCart()">×</button>
     </div>
+    
+    <!-- Список товарів -->
     <div id="cart-items"></div>
+    
+    <!-- Загальна сума -->
     <p class="total-price">
         Сума: <span id="total-price">0</span> грн
         <span id="discount-message"></span>
     </p>
+    
+    <!-- Попередження про наявність -->
     <p id="stock-warning" style="color:red; font-weight: bold;"></p>
+    
+    <!-- Кнопки -->
     <div class="button-row">
         <a href="checkout.html" class="checkout-button">Оформити замовлення</a>
         <button class="cancel-button" onclick="clearCart(); toggleCart()">Скасувати замовлення</button>
