@@ -329,7 +329,7 @@ header .logo svg {
    ======================================== */
 .cart {
     position: fixed;
-    top: 14px;
+    top: 12px;
     right: 10px;
     background-color: #333;
     color: white;
@@ -352,8 +352,8 @@ header .logo svg {
 .cart-content {
     display: none;
     position: fixed;
-    right: 20px;
-    top: 80px;
+    right: 15px;
+    top: 77px;
     background-color: rgba(255,255,255,0.95);
     color: black;
     padding: 20px;
