@@ -269,12 +269,11 @@ header .logo svg {
 }
 
 .product-item img {
-    width: auto;                        /* ✅ ЗБЕРІГАЄ пропорції */
-    max-width: 250px;                   /* ✅ ОБМЕЖЕННЯ ширини (як було) */
+    width: 100%;           /* ✅ Займає всю ширину */
+    max-width: 100%;       /* ✅ Рівні відступи */
     height: auto;
     border-radius: 10px;
     margin-bottom: 15px;
-    object-fit: contain;                /* ✅ ЗБЕРІГАЄ пропорції */
 }
 
 .product-item h3 {
