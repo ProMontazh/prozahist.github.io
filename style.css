@@ -258,6 +258,7 @@ header .logo svg {
     cursor: pointer;
     display: flex;
     flex-direction: column;
+    align-items: center;                /* ✅ ЦЕНТРУВАННЯ ВМІСТУ */
 }
 
 .product-item:hover {
@@ -267,11 +268,12 @@ header .logo svg {
 }
 
 .product-item img {
-    width: 100%;
-    max-width: 100%;                    /* ✅ ЗАЙМАЄ ВСЮ ШИРИНУ = РІВНІ ВІДСТУПИ */
+    width: auto;                        /* ✅ ЗБЕРІГАЄ пропорції */
+    max-width: 250px;                   /* ✅ ОБМЕЖЕННЯ ширини (як було) */
     height: auto;
     border-radius: 10px;
     margin-bottom: 15px;
+    object-fit: contain;                /* ✅ ЗБЕРІГАЄ пропорції */
 }
 
 .product-item h3 {
