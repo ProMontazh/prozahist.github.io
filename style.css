@@ -370,11 +370,42 @@ header .logo svg {
     display: block !important;
 }
 
-.cart-content h2 {
-    color: #000;
+/* Заголовок кошика з кнопкою закриття */
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
     border-bottom: 2px solid #800000;
     padding-bottom: 10px;
+}
+
+.cart-content h2 {
+    color: #000;
+    margin: 0;
+}
+
+/* Кнопка закриття кошика (хрестик) */
+.cart-close {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 2em;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    padding: 0;
+    line-height: 1;
+}
+
+.cart-close:hover {
+    color: #ff4444;
+    background: #f0f0f0;
 }
 
 .cart-item {
@@ -1130,6 +1161,13 @@ footer > p {
     .reviews-modal-header {
         border-radius: 0;
         padding: 18px 12px;
+        position: relative;
+    }
+
+    /* Кнопка назад на мобільних (Android) */
+    .reviews-modal-close {
+        position: relative;
+        z-index: 1;
     }
 
     .reviews-modal-header h2 {
