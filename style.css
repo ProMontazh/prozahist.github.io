@@ -185,24 +185,19 @@ header .logo svg {
     cursor: pointer;
     flex: 1 1 calc(20% - 20px);
     max-width: calc(20% - 20px);
-    transition: all 0.3s; /* ✅ Змінено: all для анімації всіх властивостей */
+    transition: all 0.3s;
     box-sizing: border-box;
-    /* ✅ Додаємо початковий бордер як у віджета */
+    /* ✅ Початковий прозорий бордер */
     border: 2px solid transparent;
-    /* ✅ Тінь як у віджета */
+    /* Тінь як у віджета */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-/* ✅ ПІДСВІЧУВАННЯ ЯК У ВІДЖЕТА ВІДГУКІВ */
+/* ✅ Підсвічування при наведенні як у віджета відгуків */
 .category-card:hover {
-    /* Колір бордера як у віджета */
     border-color: rgba(128, 0, 0, 0.8);
-    /* Тінь як у віджета */
     box-shadow: 0 4px 16px rgba(128, 0, 0, 0.15);
-    /* Прибираємо transform щоб не було конфлікту */
     transform: translateY(0px);
-    /* Фон залишається прозорим/білим як у віджета */
-    background: #fff;
 }
 
 .category-card img {
