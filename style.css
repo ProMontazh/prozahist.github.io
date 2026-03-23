@@ -194,7 +194,8 @@ header .logo svg {
 }
 
 .category-card:hover {
-    transform: scale(1.05);
+    transform: scale(1.0);
+   box-shadow: 0 4px 16px rgba(128, 0, 0, 0.15);
 }
 
 .category-card img {
