@@ -255,15 +255,15 @@ header .logo svg {
 /* DESKTOP - фіксовано 4 товари в ряд */
 @media (min-width: 1200px) {
     .products-container {
-        grid-template-columns: repeat(4, minmax(280px, 320px)); /* ✅ Обмежена ширина колонок */
-        justify-content: center; /* ✅ Центрування при мало товарів */
+        grid-template-columns: repeat(4, minmax(280px, 320px));
+        justify-content: center;
     }
 }
 
 /* Планшети - 2 товари */
 @media (min-width: 768px) and (max-width: 1199px) {
     .products-container {
-        grid-template-columns: repeat(2, minmax(280px, 400px)); /* ✅ Обмежена ширина */
+        grid-template-columns: repeat(2, minmax(280px, 400px));
         justify-content: center;
     }
 }
@@ -271,8 +271,9 @@ header .logo svg {
 /* Мобільні - 1 товар, центрування */
 @media (max-width: 767px) {
     .products-container {
-        grid-template-columns: minmax(280px, 400px); /* ✅ Одна колонка фіксованої ширини */
+        grid-template-columns: minmax(280px, 400px);
         justify-content: center;
+        padding: 0 15px; /* ✅ Замість 0 12px */
     }
 }
 
@@ -287,7 +288,7 @@ header .logo svg {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* ❌ БЕЗ width/max-width — grid сам керує */
+    /* ❌ НІЯКИХ width/max-width тут! Grid сам керує */
 }
 
 .product-item:hover {
@@ -1122,17 +1123,7 @@ footer > p {
         max-width: calc(50% - 12px);
     }
 
-    .products-container {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 0 12px;
-    }
-
-    .product-item {
-        width: 100%;
-        max-width: 360px;
-        padding: 20px;
-    }
+   
 
     .cart {
         top: 12px;
