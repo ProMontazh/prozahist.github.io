@@ -243,9 +243,16 @@ header .logo svg {
 
 .products-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
-    justify-content: center;              /* ✅ ЦЕНТРУВАННЯ КАРТОК */
+    justify-content: center;
+}
+
+/* DESKTOP - фіксовано 4 товари в ряд */
+@media (min-width: 1200px) {
+    .products-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
 .product-item {
