@@ -179,28 +179,21 @@ header .logo svg {
     position: relative;
     overflow: hidden;
     background: #fff;
-    border-radius: 15px; /* ✅ Як у карточок товарів */
+    border-radius: 15px;
     padding: 0;
     text-align: center;
     cursor: pointer;
     flex: 1 1 calc(20% - 20px);
     max-width: calc(20% - 20px);
-    /* ✅ Точно як у карточок товарів */
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
     box-sizing: border-box;
-    /* ✅ Початковий бордер як у карточок */
     border: 1px solid #444;
-    /* ✅ Тінь як у карточок товарів */
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* ✅ Підсвічування ПРИ НАВЕДЕННІ як у карточок товарів */
+/* ✅ Підсвічування ПРИ НАВЕДЕННІ — тільки тінь і бордер, без transform */
 .category-card:hover {
-    /* ✅ Зміщення вгору як у карточок */
-    transform: translateY(-5px);
-    /* ✅ Червона тінь як у карточок */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    /* ✅ Бордовий бордер як у карточок */
     border-color: #800000;
 }
 
