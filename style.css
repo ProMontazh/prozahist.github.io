@@ -185,19 +185,22 @@ header .logo svg {
     cursor: pointer;
     flex: 1 1 calc(20% - 20px);
     max-width: calc(20% - 20px);
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     box-sizing: border-box;
-    /* ✅ Початковий прозорий бордер */
+    /* ✅ Початковий прозорий бордер — невидимий але займає місце */
     border: 2px solid transparent;
-    /* Тінь як у віджета */
+    /* Початкова тінь */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 /* ✅ Підсвічування при наведенні як у віджета відгуків */
 .category-card:hover {
+    /* Бордовий колір бордера */
     border-color: rgba(128, 0, 0, 0.8);
+    /* Червона тінь */
     box-shadow: 0 4px 16px rgba(128, 0, 0, 0.15);
-    transform: translateY(0px);
+    /* Без зміщення */
+    transform: translateY(0);
 }
 
 .category-card img {
