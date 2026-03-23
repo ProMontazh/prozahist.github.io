@@ -1154,6 +1154,7 @@ footer > p {
         align-items: center;
         gap: 20px;
         padding: 0 15px;
+        max-width: 100%; /* Сбрасываем ограничение */
     }
 
     .product-item {
