@@ -279,7 +279,7 @@ header .logo svg {
     flex-direction: column;
     align-items: center;
     width: 300px;
-     /*flex: 0 0 300px;*/
+   flex: 0 0 300px;
     box-sizing: border-box;
     /* ✅ Авто висота — підлаштовується під контент */
     min-height: auto;
