@@ -299,12 +299,28 @@ header .logo svg {
     outline-offset: 2px;
 }
 
-.product-item img {
+/* ✅ ВИПРАВЛЕНО: Контейнер для зображення */
+.product-image-wrapper {
     width: 100%;
     height: 200px;
-    object-fit: cover;
     border-radius: 10px;
+    overflow: hidden;
     margin-bottom: 15px;
+    flex-shrink: 0;
+}
+
+.product-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* ✅ Змінено з cover на contain — не обрізає */
+    object-position: center;
+    display: block;
+}
+
+/* Альтернатива: якщо хочете cover без обрізання важливих частин */
+.product-item img.cover-mode {
+    object-fit: cover;
+    object-position: center;
 }
 
 .product-item h3 {
