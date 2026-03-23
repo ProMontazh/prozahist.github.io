@@ -231,9 +231,9 @@ header .logo svg {
 
 .products h1 {
     color: #fff;
-    font-size: clamp(1.5rem, 4vw, 2rem); /* ✅ Адаптивний розмір */
+    font-size: clamp(1.5rem, 4vw, 2rem);
     margin-bottom: 20px;
-    text-align: center; /* ✅ Додано вирівнювання */
+    text-align: center;
 }
 
 .seo-text {
@@ -242,26 +242,37 @@ header .logo svg {
     margin: 0 auto 40px;
     color: #aaa;
     line-height: 1.8;
-    padding: 0 15px; /* ✅ Додано відступи для мобільних */
+    padding: 0 15px;
 }
 
 .products-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
+    justify-content: center; /* ✅ Центрування колонок */
 }
 
 /* DESKTOP - фіксовано 4 товари в ряд */
 @media (min-width: 1200px) {
     .products-container {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, minmax(280px, 320px)); /* ✅ Обмежена ширина колонок */
+        justify-content: center; /* ✅ Центрування при мало товарів */
     }
 }
 
-/* ✅ Додано проміжний breakpoint для планшетів */
+/* Планшети - 2 товари */
 @media (min-width: 768px) and (max-width: 1199px) {
     .products-container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(280px, 400px)); /* ✅ Обмежена ширина */
+        justify-content: center;
+    }
+}
+
+/* Мобільні - 1 товар, центрування */
+@media (max-width: 767px) {
+    .products-container {
+        grid-template-columns: minmax(280px, 400px); /* ✅ Одна колонка фіксованої ширини */
+        justify-content: center;
     }
 }
 
@@ -270,13 +281,13 @@ header .logo svg {
     border-radius: 15px;
     padding: 20px;
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* ✅ Оптимізовано */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     border: 1px solid #444;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* ❌ ВИДАЛЕНО: width та max-width — grid сам керує розмірами */
+    /* ❌ БЕЗ width/max-width — grid сам керує */
 }
 
 .product-item:hover {
@@ -285,7 +296,6 @@ header .logo svg {
     border-color: #800000;
 }
 
-/* ✅ Додано фокус для доступності */
 .product-item:focus-visible {
     outline: 2px solid #800000;
     outline-offset: 2px;
@@ -293,20 +303,20 @@ header .logo svg {
 
 .product-item img {
     width: 100%;
-    height: 200px; /* ✅ Фіксована висота для вирівнювання */
-    object-fit: cover; /* ✅ Зберігає пропорції */
+    height: 200px;
+    object-fit: cover;
     border-radius: 10px;
     margin-bottom: 15px;
 }
 
 .product-item h3 {
     color: #fff;
-    font-size: 1.1rem; /* ✅ rem замість em для консистентності */
+    font-size: 1.1rem;
     margin-bottom: 10px;
-    min-height: 2.4em; /* ✅ Відносна висота */
+    min-height: 2.4em;
     line-height: 1.2;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* ✅ Обмеження 2 рядки */
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -322,15 +332,14 @@ header .logo svg {
 .product-price {
     color: #ff4444;
     font-size: 1.3rem;
-    font-weight: 700; /* ✅ Числове значення */
+    font-weight: 700;
     margin: 20px 0;
 }
 
-/* Кнопка завжди внизу */
 .product-item .btn {
     margin-top: auto;
-    width: 100%; /* ✅ Розтягується на всю ширину */
-    padding: 12px 20px; /* ✅ Кращі відступи */
+    width: 100%;
+    padding: 12px 20px;
     border: none;
     border-radius: 8px;
     background: #800000;
@@ -345,7 +354,6 @@ header .logo svg {
     transform: scale(1.02);
 }
 
-/* ✅ Додано стилі для disabled стану */
 .product-item .btn:disabled {
     background: #555;
     cursor: not-allowed;
