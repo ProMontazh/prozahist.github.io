@@ -316,7 +316,7 @@ header .logo svg {
 
 /* ✅ Назва — не обрізається */
 .product-item h3 {
-    color:  #757575;
+    color:  #a8a8a8;
     font-size: 1.1rem;
     margin-bottom: 10px;
     /* ✅ Авто висота — підлаштовується */
