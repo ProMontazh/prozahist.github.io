@@ -2,7 +2,6 @@
    ПРОЗАХІСТ - Основні стилі
    КОЛЬОРИ: темна тема
    РОЗМІРИ: зі старого CSS
-   БЕЗ ПОМИЛОК
    ======================================== */
 
 /* CSS ЗМІННІ */
@@ -182,14 +181,12 @@ header .logo svg {
     overflow: hidden;
     background: #fff;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     padding: 0;
     text-align: center;
     cursor: pointer;
-    flex: 1 1 calc(20% - 20px);          /* ✅ 5 КАТЕГОРІЙ: 100% / 5 = 20% */
+    flex: 1 1 calc(20% - 20px);
     max-width: calc(20% - 20px);
-    transition: transform 0.3s;
-    box-sizing: border-box;
+    transition: transform 0.3s, box-shadow 0.3s;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -249,7 +246,7 @@ header .logo svg {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
-    justify-content: center; /* ✅ Центрування колонок */
+    justify-content: center;
 }
 
 /* DESKTOP - фіксовано 4 товари в ряд */
@@ -273,7 +270,8 @@ header .logo svg {
     .products-container {
         grid-template-columns: minmax(280px, 400px);
         justify-content: center;
-        padding: 0 15px; /* ✅ Замість 0 12px */
+        gap: 20px;
+        padding: 0 15px;
     }
 }
 
@@ -288,7 +286,6 @@ header .logo svg {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* ❌ НІЯКИХ width/max-width тут! Grid сам керує */
 }
 
 .product-item:hover {
@@ -360,11 +357,12 @@ header .logo svg {
     cursor: not-allowed;
     transform: none;
 }
+
 /* ========================================
    КНОПКИ
    ======================================== */
 .btn {
-    background: linear-gradient(145deg, #800000, #a00000);     /* ✅ БОРДОВИЙ */
+    background: linear-gradient(145deg, #800000, #a00000);
     color: #fff;
     border: none;
     padding: 12px 25px;
@@ -378,7 +376,7 @@ header .logo svg {
 }
 
 .btn:hover {
-    background: linear-gradient(145deg, #a00000, #c00000);     /* ✅ ТЕМНІШЕ БОРДОВИЙ */
+    background: linear-gradient(145deg, #a00000, #c00000);
     transform: scale(1.02);
 }
 
@@ -404,8 +402,6 @@ header .logo svg {
     gap: 6px;
     font-size: 16px;
 }
-
-
 
 .cart-content {
     display: none;
@@ -695,7 +691,7 @@ footer > p {
     grid-column: 1 / -1;
     display: flex;
     justify-content: center;
-    margin-top: 60px;                    /* ✅ ОПУЩЕНО НИЖЧЕ: 20px → 60px */
+    margin-top: 60px;
 }
 
 /* ======================================================
@@ -1119,11 +1115,9 @@ footer > p {
     }
 
     .category-card {
-        flex: 1 1 calc(50% - 12px);      /* ✅ 2 КАРТКИ НА МОБІЛЬНИХ */
+        flex: 1 1 calc(50% - 12px);
         max-width: calc(50% - 12px);
     }
-
-   
 
     .cart {
         top: 12px;
@@ -1209,7 +1203,6 @@ footer > p {
         position: relative;
     }
 
-    /* Кнопка назад на мобільних (Android) */
     .reviews-modal-close {
         position: relative;
         z-index: 1;
