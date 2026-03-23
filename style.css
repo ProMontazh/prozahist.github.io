@@ -190,7 +190,7 @@ header .logo svg {
     max-width: calc(20% - 20px);
     transition: transform 0.3s;
     box-sizing: border-box;
-    border: 1px solid #444;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .category-card:hover {
