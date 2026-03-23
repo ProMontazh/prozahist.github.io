@@ -820,6 +820,7 @@ footer > p {
 
 .reviews-modal-header {
     display: flex;
+    background:linear-gradient(to right, rgba(7, 7, 7, 0.95), rgba(148, 148, 148, 0.95));
     justify-content: space-between;
     align-items: center;
     padding: 20px;
