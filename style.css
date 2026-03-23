@@ -185,14 +185,24 @@ header .logo svg {
     cursor: pointer;
     flex: 1 1 calc(20% - 20px);
     max-width: calc(20% - 20px);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: all 0.3s; /* ✅ Змінено: all для анімації всіх властивостей */
+    box-sizing: border-box;
+    /* ✅ Додаємо початковий бордер як у віджета */
+    border: 2px solid transparent;
+    /* ✅ Тінь як у віджета */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
+/* ✅ ПІДСВІЧУВАННЯ ЯК У ВІДЖЕТА ВІДГУКІВ */
 .category-card:hover {
-    transform: scale(1.0);
+    /* Колір бордера як у віджета */
     border-color: rgba(128, 0, 0, 0.8);
+    /* Тінь як у віджета */
     box-shadow: 0 4px 16px rgba(128, 0, 0, 0.15);
+    /* Прибираємо transform щоб не було конфлікту */
+    transform: translateY(0px);
+    /* Фон залишається прозорим/білим як у віджета */
+    background: #fff;
 }
 
 .category-card img {
@@ -215,7 +225,6 @@ header .logo svg {
     box-sizing: border-box;
     font-size: 0.8em;
 }
-
 /* ========================================
    ТОВАРИ — ФІКСОВАНІ 4 КОЛОНКИ З ЦЕНТРУВАННЯМ
    ======================================== */
