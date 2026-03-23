@@ -187,13 +187,13 @@ header .logo svg {
     max-width: calc(20% - 20px);
     transition: all 0.3s ease;
     box-sizing: border-box;
-    /* ✅ Початковий прозорий бордер — невидимий але займає місце */
-    border: 2px solid transparent;
+    /* ✅ Обводка в колір фону (білий) — невидима */
+    border: 2px solid #fff;
     /* Початкова тінь */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-/* ✅ Підсвічування при наведенні як у віджета відгуків */
+/* ✅ Підсвічування при наведенні */
 .category-card:hover {
     /* Бордовий колір бордера */
     border-color: rgba(128, 0, 0, 0.8);
