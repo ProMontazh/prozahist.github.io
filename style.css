@@ -273,10 +273,8 @@ header .logo svg {
     width: 280px;
     flex: 0 0 280px;
     box-sizing: border-box;
-    /* ✅ Фіксована висота карточки */
-    min-height: 450px;
-    /* ✅ Розподіл простору між елементами */
-    justify-content: space-between;
+    /* ✅ Авто висота — підлаштовується під контент */
+    min-height: auto;
 }
 
 .product-item:hover {
@@ -308,55 +306,53 @@ header .logo svg {
     display: block;
 }
 
-/* ✅ Назва — фіксована висота, не стрибає */
+/* ✅ Назва — не обрізається */
 .product-item h3 {
     color: #fff;
     font-size: 1.1rem;
     margin-bottom: 10px;
-    /* ✅ Фіксована висота для 2 рядків */
-    height: 2.6em;
+    /* ✅ Авто висота — підлаштовується */
+    height: auto;
+    min-height: 2.6em;
     line-height: 1.3;
     word-wrap: break-word;
     overflow-wrap: break-word;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    /* ✅ Не даємо стискатись */
+    /* ✅ Не обрізаємо */
+    display: block;
+    overflow: visible;
     flex-shrink: 0;
     width: 100%;
 }
 
-/* ✅ Опис — фіксована висота */
+/* ✅ ОПИС — показується ПОВНІСТЮ, не обрізається */
 .product-item p {
     color: #aaa;
     font-size: 0.9rem;
     margin-bottom: 10px;
-    /* ✅ Фіксована висота для 2 рядків */
-    height: 2.7em;
+    /* ✅ Авто висота — весь текст видно */
+    height: auto;
+    min-height: 1.5em;
     line-height: 1.5;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    /* ✅ Не обрізаємо, дозволяємо перенос */
+    overflow: visible;
+    display: block;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
     /* ✅ Не даємо стискатись */
     flex-shrink: 0;
     width: 100%;
 }
 
-/* ✅ ЦІННИК — фіксована позиція, не стрибає */
+/* ✅ ЦІННИК — не стрибає */
 .product-price {
     color: #ff4444;
     font-size: 1.3rem;
     font-weight: 700;
     margin: 15px 0;
-    /* ✅ Фіксована висота */
     height: 1.5em;
     line-height: 1.5em;
-    /* ✅ Не даємо стискатись і не рости */
     flex-shrink: 0;
     flex-grow: 0;
-    /* ✅ Центрування */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -374,18 +370,12 @@ header .logo svg {
     font-weight: 600;
     cursor: pointer;
     transition: background 0.3s ease, transform 0.2s ease;
-    /* ✅ Не даємо стискатись */
     flex-shrink: 0;
 }
 
 .product-item .btn:hover {
     background: #a00000;
     transform: scale(1.02);
-}
-.product-item .btn:disabled {
-    background: #555;
-    cursor: not-allowed;
-    transform: none;
 }
 
 /* ========================================
