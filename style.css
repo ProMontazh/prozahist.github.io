@@ -238,7 +238,7 @@ header .logo svg {
     padding: 20px;
     max-width: 1400px;
     margin: 0 auto;
-    margin-bottom: 40px; /* Увеличиваем отступ секций товаров от футера */
+    margin-bottom: 20px; /* Увеличиваем отступ секций товаров от футера */
 }
 
 .products h1 {
