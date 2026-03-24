@@ -336,7 +336,7 @@ header .logo svg {
 /* ✅ ОПИС — показується ПОВНІСТЮ, не обрізається */
 .product-item p {
     color: #aaa;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     margin-bottom: 10px;
     /* ✅ Авто висота — весь текст видно */
     height: auto;
