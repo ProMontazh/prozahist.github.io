@@ -10,7 +10,7 @@ Disallow: /checkout.html
 Allow: /images/
 Allow: /details_*.html
 
-Sitemap: https://прозахист.pp.ua/sitemap.xml
+Sitemap: https://xn--80anevegliy.pp.ua/sitemap.xml
 
 User-agent: Googlebot
 Allow: /
