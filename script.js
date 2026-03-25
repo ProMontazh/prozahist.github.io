@@ -658,14 +658,39 @@ function updateModalStats(reviews) {
                      `${count} відгуків`;
     document.getElementById('modalCount').textContent = countText;
 
-    // Зірки в модальному вікні
-    const modalStars = document.getElementById('modalStars');
-    modalStars.innerHTML = '';
+    // ⭐ Зірки в модальному вікні — такі ж як у віджеті (з частковим заповненням)
+    renderModalStars(avgRating);
+}
+
+// Нова функція для відображення зірок у модальному вікні
+function renderModalStars(rating) {
+    const container = document.getElementById('modalStars');
+    container.innerHTML = '';
+
     for (let i = 1; i <= 5; i++) {
         const star = document.createElement('span');
-        star.className = i <= Math.round(avgRating) ? 'modal-star' : 'modal-star empty';
-        star.textContent = '★';
-        modalStars.appendChild(star);
+        star.className = 'modal-star';
+        star.innerHTML = '★';
+
+        // Якщо рейтинг більше поточної зірки — повністю заповнена
+        if (rating >= i) {
+            const filled = document.createElement('span');
+            filled.className = 'modal-star-filled';
+            filled.style.width = '100%';
+            filled.innerHTML = '★';
+            star.appendChild(filled);
+        } 
+        // Частково заповнена зірка
+        else if (rating > i - 1) {
+            const filled = document.createElement('span');
+            filled.className = 'modal-star-filled';
+            const percentage = ((rating - (i - 1)) * 100).toFixed(0);
+            filled.style.width = percentage + '%';
+            filled.innerHTML = '★';
+            star.appendChild(filled);
+        }
+
+        container.appendChild(star);
     }
 }
 
