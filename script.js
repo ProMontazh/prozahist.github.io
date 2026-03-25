@@ -185,17 +185,25 @@ const CATEGORY_MAP = {
     // === 📂 КАТЕГОРІЇ ===
     let currentCategory = null;
 
-    window.toggleCategory = function(catId, push = true) {
-        // Ховаємо всі категорії товарів
-        document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
+   window.toggleCategory = function(catId, push = true) {
+    // 🎵 Звук при клике на категорию
+    const hoverSound = document.getElementById('hover-sound');
+    if (hoverSound) {
+        hoverSound.currentTime = 0;
+        hoverSound.volume = 0.4;
+        hoverSound.play().catch(() => {});
+    }
+    
+    // Ховаємо всі категорії товарів
+    document.querySelectorAll('.products').forEach(s => s.style.display = 'none');
 
-        const target = document.getElementById(catId);
-        if (!target) return;
+    const target = document.getElementById(catId);
+    if (!target) return;
 
-        // Показуємо обрану категорію
-        target.style.display = 'block';
-        target.classList.add('fade-in');
-        currentCategory = catId;
+    // Показуємо обрану категорію
+    target.style.display = 'block';
+    target.classList.add('fade-in');
+    currentCategory = catId;
 
         // Ховаємо головну сторінку з категоріями
         const categories = document.getElementById('categories');
@@ -241,26 +249,34 @@ const CATEGORY_MAP = {
         return filename.replace(/\.[^.]+$/, '') || filename;
     }
 
-    window.openProductDetails = function(pageUrl) {
-        const prodId = extractProductIdFromUrl(pageUrl);
+   window.openProductDetails = function(pageUrl) {
+    // 🎵 Звук при клике на товар
+    const hoverSound = document.getElementById('hover-sound');
+    if (hoverSound) {
+        hoverSound.currentTime = 0;
+        hoverSound.volume = 0.4;
+        hoverSound.play().catch(() => {});
+    }
+    
+    const prodId = extractProductIdFromUrl(pageUrl);
 
-        // Зберігаємо поточну категорію та позицію прокрутки
-        if (currentCategory) {
-            localStorage.setItem('lastCategory', currentCategory);
-        }
-        if (prodId) {
-            localStorage.setItem('lastProductId', prodId);
-        }
-        localStorage.setItem('lastScroll', String(window.scrollY || 0));
+    // Зберігаємо поточну категорію та позицію прокрутки
+    if (currentCategory) {
+        localStorage.setItem('lastCategory', currentCategory);
+    }
+    if (prodId) {
+        localStorage.setItem('lastProductId', prodId);
+    }
+    localStorage.setItem('lastScroll', String(window.scrollY || 0));
 
-        // Ховаємо банер на мобільних пристроях
-        const mainBanner = document.getElementById('main-banner');
-        if (window.innerWidth <= 768 && mainBanner) {
-            mainBanner.style.display = 'none';
-        }
+    // Ховаємо банер на мобільних пристроях
+    const mainBanner = document.getElementById('main-banner');
+    if (window.innerWidth <= 768 && mainBanner) {
+        mainBanner.style.display = 'none';
+    }
 
-        window.location.href = pageUrl;
-    };
+    window.location.href = pageUrl;
+};
 
     // Обробка стану (історії браузера)
     function handleState(state) {
@@ -331,19 +347,7 @@ const CATEGORY_MAP = {
     // Ініціалізація кошика при завантаженні сторінки
     updateCart();
 
-    // === 🎵 Звук при наведенні на картки категорій ===
-    const hoverSound = document.getElementById('hover-sound');
-    if (hoverSound) {
-        hoverSound.volume = 0.4;
-
-        document.querySelectorAll('.category-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                hoverSound.currentTime = 0;
-                hoverSound.play().catch(() => {});
-            });
-        });
-    }
-
+   
     // === 📱 Свайпи між категоріями ===
     let touchStartX = 0;
     let touchEndX = 0;
