@@ -249,15 +249,7 @@ const CATEGORY_MAP = {
         return filename.replace(/\.[^.]+$/, '') || filename;
     }
 
-   window.openProductDetails = function(pageUrl) {
-    // 🎵 Звук при клике на товар
-    const hoverSound = document.getElementById('hover-sound');
-    if (hoverSound) {
-        hoverSound.currentTime = 0;
-        hoverSound.volume = 0.4;
-        hoverSound.play().catch(() => {});
-    }
-    
+  window.openProductDetails = function(pageUrl) {
     const prodId = extractProductIdFromUrl(pageUrl);
 
     // Зберігаємо поточну категорію та позицію прокрутки
