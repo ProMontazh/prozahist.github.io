@@ -876,14 +876,30 @@ footer > p {
     color: #fff;
 }
 
+/* Звёзды в модальном окне — такие же как в виджете */
 .modal-rating-stars {
-    color: #ffd700;
+    display: flex;
+    gap: 3px; /* одинаковый gap с виджетом */
+    justify-content: center;
     font-size: 1.5em;
     margin: 10px 0;
 }
 
 .modal-star {
-    color: #ffd700;
+    font-size: 24px; /* такой же размер как в виджете */
+    color: #ddd; /* цвет незаполненной звезды */
+    position: relative;
+    display: inline-block;
+    line-height: 1;
+}
+
+.modal-star-filled {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    color: #ffa500; /* оранжевый цвет как в виджете */
+    pointer-events: none;
 }
 
 .modal-star.empty {
