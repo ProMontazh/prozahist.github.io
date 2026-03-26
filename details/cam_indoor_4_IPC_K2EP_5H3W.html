@@ -179,8 +179,9 @@
     <h2 class="product-title">Поворотна Wi-Fi відеокамера IPC-K2EP-5H3W</h2>
 
     <div class="carousel">
-        <img src="images/IPC-K2EP-3H1W.png" alt="IP-Камера IMOU" onclick="openModal('images/IPC-K2EP-3H1W.png')">
-      <img src="images/IPC-K2EP-3H1W_1.png" alt="IP-Камера IMOU - вид сбоку" onclick="openModal('images/IPC-K2EP-3H1W_1.png')">
+        <img src="images/IPC-K2EP-3H1W_1.png" alt="IP-Камера IMOU" onclick="openModal('images/IPC-K2EP-3H1W_1.png')">
+      <img src="images/IPC-K2EP-3H1W_2.png" alt="IP-Камера IMOU - вид сбоку" onclick="openModal('images/IPC-K2EP-3H1W_2.png')">
+        <img src="images/IPC-K2EP-3H1W_3.png" alt="IP-Камера IMOU - вид сбоку" onclick="openModal('images/IPC-K2EP-3H1W_3.png')">
    </div>
 
     <div id="toast" class="toast"></div>
@@ -214,7 +215,7 @@
     </div>
 
     <p class="product-price">1998.00 грн</p>
-    <button class="btn" onclick="addToCartFromProductPage({ id: 'IPC-K2EP-5H3W', name: 'Камера IPC-K2EP-5H3W', price: 1998.00, image: 'images/IPC-K2EP-3H1W.png' })">Додати у кошик</button>
+    <button class="btn" onclick="addToCartFromProductPage({ id: 'IPC-K2EP-5H3W', name: 'Камера IPC-K2EP-5H3W', price: 1998.00, image: 'images/IPC-K2EP-3H1W_1.png' })">Додати у кошик</button>
 </div>
 
 <div id="modal" class="modal" onclick="closeModal()">
@@ -226,8 +227,9 @@
 <script>
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     const images = [
-        "images/IPC-K2EP-3H1W.png",
-      "images/IPC-K2EP-3H1W_1.png"
+        "images/IPC-K2EP-3H1W_1.png",
+      "images/IPC-K2EP-3H1W_2.png",
+        "images/IPC-K2EP-3H1W_3.png"
     ];
     let currentIndex = 0;
 
