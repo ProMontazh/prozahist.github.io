@@ -190,7 +190,7 @@ const CATEGORY_MAP = {
     const hoverSound = document.getElementById('hover-sound');
     if (hoverSound) {
         hoverSound.currentTime = 0;
-        hoverSound.volume = 0.4;
+        hoverSound.volume = 0.3;
         hoverSound.play().catch(() => {});
     }
     
@@ -307,7 +307,7 @@ const CATEGORY_MAP = {
     // === 🎵 ЗВУК "НАЗАД" ===
     const backSound = document.getElementById('back-sound');
     if (backSound) {
-        backSound.volume = 0.35;
+        backSound.volume = 0.3;
     }
 
     // ✅ ОНОВЛЕНИЙ popstate ОБРОБНИК З ПІДТРИМКОЮ АПАРАТНОЇ КНОПКИ "НАЗАД"
