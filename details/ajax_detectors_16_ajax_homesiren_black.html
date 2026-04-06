@@ -22,10 +22,11 @@
       background: transparent;
     }
 
-    header .logo svg {
-    height: 65px;
-    width: auto;
-}
+    .logo svg {
+      width: 205px;
+      height: auto;
+
+    }
 
     /* ===== Toast ===== */
     .toast {
@@ -85,8 +86,8 @@
     }
 
     .carousel img {
-      flex: 0 0 80%;
-      max-width: 80%;
+      flex: 0 0 100%;
+      max-width: 100%;
       border-radius: 5px;
       cursor: pointer;
       object-fit: contain;
@@ -221,7 +222,7 @@
 
       .logo svg {
         width: 230px;
-        
+
       }
 
       .container {
@@ -626,7 +627,7 @@ const images = [
   "images/ajax_homesiren_black_2.jpg",
   "images/ajax_homesiren_black_3.jpg",
   "images/ajax_homesiren_black_4.jpg"
-  
+
 
 ];
 let currentIndex = 0;
@@ -659,7 +660,7 @@ function nextImage() {
   currentIndex++;
   carouselEl.style.transition = 'transform 0.5s ease';
   updateCarousel();
-  
+
   // Якщо дійшли до клону (позиція після останнього оригіналу)
   if (currentIndex === totalSlides) {
     setTimeout(() => {
@@ -672,13 +673,13 @@ function nextImage() {
 
 function prevImage() {
   const carouselEl = document.getElementById('carousel');
-  
+
   // Якщо на першому зображенні - миттєво стрибаємо на клон
   if (currentIndex === 0) {
     carouselEl.style.transition = 'none';
     currentIndex = totalSlides;
     updateCarousel();
-    
+
     // Даємо браузеру час застосувати зміни
     setTimeout(() => {
       carouselEl.style.transition = 'transform 0.5s ease';
